@@ -12,5 +12,35 @@
   "all_possible_retention_paths_ruled_out": false,
   "failure_logs_qualified": false,
   "device_mode_change": false,
-  "personal_data_read": false
+  "personal_data_read": false,
+  "selected_runtime_dt_reservations": [
+    {
+      "node": "atf-reserved-memory@43000000",
+      "address": "0x43000000",
+      "bytes": 196608
+    },
+    {
+      "node": "ll_log-reserved-memory@46600000",
+      "address": "0x44600000",
+      "bytes": 131072
+    },
+    {
+      "node": "mdump-reserved-memory@4bd00000",
+      "address": "0x4bd00000",
+      "bytes": 3145728
+    },
+    {
+      "node": "ram_console-reserved-memory@44400000",
+      "address": "0x44400000",
+      "bytes": 2097152
+    },
+    {
+      "node": "fb-reserved-memory",
+      "address": "0x98600000",
+      "bytes": 16777216
+    }
+  ],
+  "reg_format": "16 bytes: big-endian64 address +64 length, exact scoped exec-out reads",
+  "reservation_scope": "Observed recovery DT metadata only; no free-memory ownership, reset retention or readable RAM-log backend inferred",
+  "physical_ram_read": false
 }

@@ -85,3 +85,10 @@ it did not prove these image-specific properties.
 This necessary logging source/build prerequisite is recorded under346 before
 implementation. No new microissue or unrelated hardware scope; no firmware load,
 crash, wipe, security weakening or recovery menu operation accompanies it.
+
+Scoped recovery-DT reads confirm the legacy RAM-console reservation at0x44400000/
+2MiB and low-level log reservation at0x44600000/128KiB. These firmware-owned
+reservations are not free space for an arbitrarily placed ramoops region; no RAM
+content was read and no buffer was assigned. The ll_log node name contains46600000
+but observed reg is44600000, preserving the source/runtime distinction. Compatible
+record format, reset survival and independent post-failure readout remain required.
