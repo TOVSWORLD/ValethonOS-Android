@@ -92,3 +92,24 @@ reservations are not free space for an arbitrarily placed ramoops region; no RAM
 content was read and no buffer was assigned. The ll_log node name contains46600000
 but observed reg is44600000, preserving the source/runtime distinction. Compatible
 record format, reset survival and independent post-failure readout remain required.
+
+
+### Legacy reservation is not a compatible ramoops reader
+
+The cached legacy implementation confirms a concrete format obstacle, rather than
+just a missing mount. In `sources/kernel-mt8163/drivers/misc/mediatek/ram_console/
+mtk_ram_console.c`, `ram_console_buffer` has stage offsets, total-buffer size and
+console offsets before its ring position/length. Its `ram_console_init()` saves an
+old copy, then rewrites the stage/console metadata and clears the Linux area.
+By comparison, cached `sources/kernel-mt8163/fs/pstore/ram_core.c` places signature,
+ring start and ring size directly before data. Both cached implementations use
+base signature `0x43474244`; matching that word therefore does not establish
+format compatibility. A ramoops signature can additionally be XOR-adjusted.
+
+Consequently, assigning generic ramoops to the existing legacy console reservation
+cannot be justified by its name, size or signature. A legacy consumer can reinterpret
+or overwrite a different layout. These are source observations, not proof that the
+running recovery enables either path or that any bytes survive its reset route.
+The next load/readout contract must identify a dedicated owned region and a reader
+using the exact writer layout, or explicitly qualify a compatible legacy writer
+and reader. No reservation, kernel load or RAM-content read is selected here.
