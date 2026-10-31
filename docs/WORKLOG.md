@@ -4028,3 +4028,14 @@ the historical config as current-ready. Historical CI audit is explicitly labele
 and uses its original recorded policy; it does not replace a fresh resolved build.
 Exact pinned ACK pstore Kconfig retained with provenance. No physical RAM address
 selected, no reset/readout ownership inferred and no device action performed.
+
+## 2026-10-31 — #346 built-in RAM logging kernel compile passed
+
+Exact sourceb18254b/run41250510504 compiled successfully22:58:42–23:22:35UTC.
+Completed log verifies PSTORE/PSTORE_RAM/PSTORE_CONSOLE=y and block backendn,
+plus config/vmlinux/Image/Image.gz hashes. Sanitized diagnostic-build-result.json
+records exact evidence. Workflow prints hashes but does not retain compiled files;
+a later reviewed package build must explicitly export its artifacts. No boot image
+packed/loaded, RAM region selected or retention/failure-return qualification inferred.
+Tablet remains in existing TWRP; next is bounded load/readout contract, not another
+blind compile or owner trip.
