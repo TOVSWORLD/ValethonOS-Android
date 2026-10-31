@@ -44,3 +44,17 @@ Test absent initial USB identity, wrong/ambiguous interfaces, changed helper has
 travel timeout, reconnect/handshake timeout, one-launch limit and no default execution.
 Dry-run/preflight must not open a serial device or change tablet mode. Actual
 qualification remains pending until observed. Preserve rollback assets and logs.
+
+## StageA observed — 31 October2026
+
+Corrected attempt2 completed original FACTORYM helper with exit0. Owner reported
+the special recovery menu; technical USB ADB independently reports recovery,
+TWRP3.3.1-0, douglas and kernel3.18.19-g51c2c8d5bfb. This demonstrates existing
+recovery entry from the manually powered-off tablet without using Android ADB
+for the transition. No intentional loading failure was introduced. The helper
+receipt does not observe recovery itself; the separate technical observation
+provides that proof. See sanitized attempt2-result.json in evidence/independent-recovery.
+
+Device is left in existing TWRP; no menu action or automatic reboot selected.
+Next is exact failed-load artifact/transport/return-endpoint and retained-log
+review under346 then348. StageA does not close failed-load return or log retention.

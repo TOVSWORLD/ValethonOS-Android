@@ -4006,3 +4006,13 @@ untested. Corrected host design to separate600s travel,300s manual shutdown/reco
 and90s actual helper bounds; one launch/no retry preserved. Eight lifecycle/negative
 tests and repository check pass. Sanitized attempt receipt recorded; raw USB journal
 private. No rearming, reboot, flash, wipe or new physical request performed.
+
+## 2026-10-31 — #346 actual Android-independent recovery entry
+
+Owner performed the corrected one-visit batch; original FACTORYM helper exited0.
+Owner special-menu observation corroborated by ADB recovery/TWRP3.3.1-0/douglas/
+3.18.19-g51c2c8d5bfb. StageA existing recovery-entry path is now observed independent
+of Android for the transition. No failed-load injected, no flashing/wipe/reinstall/
+menu action/automatic reboot, no personal-data read. Tablet left in TWRP. Exact
+sanitized attempt2 receipt recorded;346 failed-load return and348 failure retention
+remain unqualified. Next work is concrete StageB artifact/transport/endpoint/log review.
