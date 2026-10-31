@@ -58,3 +58,30 @@ provides that proof. See sanitized attempt2-result.json in evidence/independent-
 Device is left in existing TWRP; no menu action or automatic reboot selected.
 Next is exact failed-load artifact/transport/return-endpoint and retained-log
 review under346 then348. StageA does not close failed-load return or log retention.
+
+## StageB prerequisite and execution boundary
+
+The existing isolated diagnostic kernel receipt cannot supply retained logs:
+PSTORE_RAM was modular and its initramfs includes no modules or loader. Require
+PSTORE=y, PSTORE_RAM=y and PSTORE_CONSOLE=y in the current resolved configuration;
+keep the block-device backend disabled. Pinned ACK pstore Kconfig defines these
+symbols. A build must pass the current policy; the old compiled configuration
+may only pass an explicitly labeled historical-policy audit.
+
+Recovery metadata observed after StageA: /proc/last_kmsg, /sys/fs/pstore and
+/proc/config.gz absent; /dev/kmsg present/readable. This is not proof of kernel
+configuration or absence of every proprietary logging mechanism. Live kmsg alone
+cannot establish retention across a failed boot.
+
+The remaining concrete inputs before StageB are an exact combined kernel/DT/ramdisk
+artifact and proven nonpersistent loading/placement contract, an isolated RAM-log
+region with observed firmware/loader ownership, and a compatible post-failure
+readout from the reachable recovery. No arbitrary RAM address, guessed DT property,
+stock-DTB substitution, rejection-only fastboot test or deliberate crash of the
+working recovery counts. No test is admitted until those inputs and the single
+return action/timeout are reviewed. StageA demonstrated independent recovery entry;
+it did not prove these image-specific properties.
+
+This necessary logging source/build prerequisite is recorded under346 before
+implementation. No new microissue or unrelated hardware scope; no firmware load,
+crash, wipe, security weakening or recovery menu operation accompanies it.

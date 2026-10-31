@@ -4016,3 +4016,15 @@ of Android for the transition. No failed-load injected, no flashing/wipe/reinsta
 menu action/automatic reboot, no personal-data read. Tablet left in TWRP. Exact
 sanitized attempt2 receipt recorded;346 failed-load return and348 failure retention
 remain unqualified. Next work is concrete StageB artifact/transport/endpoint/log review.
+
+## 2026-10-31 — #346 concrete StageB logging prerequisite
+
+Read-only TWRP diagnostic-interface metadata shows last_kmsg/pstore/config.gz absent,
+live /dev/kmsg available; no user data read. Historical diagnostic Image config
+uses PSTORE_RAM=m with no modules in its isolated initramfs, so it cannot supply
+that retention backend. Recorded prerequisite in346 before code; current policy
+now requires built-in pstore RAM and console, disables block logging and rejects
+the historical config as current-ready. Historical CI audit is explicitly labeled
+and uses its original recorded policy; it does not replace a fresh resolved build.
+Exact pinned ACK pstore Kconfig retained with provenance. No physical RAM address
+selected, no reset/readout ownership inferred and no device action performed.

@@ -1,0 +1,16 @@
+{
+  "issue": 346,
+  "observation_context": "TWRP3.3.1-0/douglas after observed StageA entry",
+  "metadata_only": true,
+  "interfaces": {
+    "/proc/last_kmsg": "absent",
+    "/sys/fs/pstore": "absent",
+    "/proc/config.gz": "absent",
+    "/dev/kmsg": "exists/readable"
+  },
+  "kernel_configuration_inferred": false,
+  "all_possible_retention_paths_ruled_out": false,
+  "failure_logs_qualified": false,
+  "device_mode_change": false,
+  "personal_data_read": false
+}
