@@ -58,7 +58,8 @@ def scan_ports(sys_tty=Path('/sys/class/tty')):
 
 
 def wait_then_launch(present, scan, launch, clock=time.monotonic, sleep=time.sleep):
-    # Initial presence is required; expiry never falls through into a helper call.
+    # Three distinct bounds: travel, manual shutdown/reconnection, then helper.
+    # Manual power-off can exceed90s; do not consume handshake time before USB exists.
     if not present():
         raise ValueError('Expected connected Android USB device is absent')
     deadline = clock() + 600
@@ -66,16 +67,13 @@ def wait_then_launch(present, scan, launch, clock=time.monotonic, sleep=time.sle
         if clock() >= deadline:
             raise TimeoutError('Travel/disconnection window expired')
         sleep(.1)
-    deadline = clock() + 90
+    deadline = clock() + 300
     while clock() < deadline:
         port = scan()
         if port is not None:
-            remaining = deadline - clock()
-            if remaining <= 0:
-                break
-            return launch(port, remaining)  # exactly one call, never retry
+            return launch(port, 90)  # exactly one bounded helper call, never retry
         sleep(.05)
-    raise TimeoutError('Reconnection window expired')
+    raise TimeoutError('Manual shutdown/reconnection window expired')
 
 
 def launch_helper(modules, port, seconds, log):
@@ -153,6 +151,10 @@ def main():
         result.update(status='helper_exited', helper_returncode=rc)
     except (ValueError, TimeoutError, subprocess.TimeoutExpired, OSError) as exc:
         result['error_type'] = type(exc).__name__
+        result['stop_reason'] = (str(exc) if isinstance(exc, (ValueError, TimeoutError))
+                                 else 'Helper deadline expired'
+                                 if isinstance(exc, subprocess.TimeoutExpired)
+                                 else 'Host operation failed')
     finally:
         receipt.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result))

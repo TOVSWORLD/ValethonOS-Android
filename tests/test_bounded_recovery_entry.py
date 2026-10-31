@@ -27,23 +27,24 @@ class RecoveryBounds(unittest.TestCase):
         self.assertGreaterEqual(c.t, 600)
         self.assertLess(c.t, 601)
 
-    def test_reconnect_expiry_is_separate_ninety_seconds(self):
+    def test_reconnect_expiry_allows_manual_shutdown(self):
         c = Clock()
         initial = iter([True, False])
         with self.assertRaises(TimeoutError):
             b.wait_then_launch(lambda: next(initial), lambda: None, lambda *a: self.fail(), c.now, c.sleep)
-        self.assertGreaterEqual(c.t, 90)
-        self.assertLess(c.t, 91)
+        self.assertGreaterEqual(c.t, 300)
+        self.assertLess(c.t, 301)
 
-    def test_one_launch_and_remaining_handshake_deadline(self):
+    def test_one_launch_with_full_handshake_deadline_after_long_shutdown(self):
         c = Clock()
         calls = []
         def present(): return c.t < 123
-        def scan(): return '/dev/ttyACM0' if c.t > 133 else None
+        def scan(): return '/dev/ttyACM0' if c.t > 234 else None
         result = b.wait_then_launch(present, scan, lambda *a: calls.append(a) or 7, c.now, c.sleep)
         self.assertEqual(result, 7)
         self.assertEqual(len(calls), 1)
-        self.assertTrue(79 < calls[0][1] < 81)
+        self.assertEqual(calls[0][1], 90)
+        self.assertGreater(c.t, 234)
 
     def test_identity_and_ambiguity_rejection(self):
         row = {'vendor': '0e8d', 'product': '2000', 'usb_path': '1-2.3', 'port': '/dev/ttyACM0'}

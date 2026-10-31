@@ -9,7 +9,8 @@ is authorized merely by this document or a passed host test.
 Owner chats from a separate desk and cannot reply beside the tablet. Prepare and
 verify the supervisor before asking for a visit. Arm only on an explicit desk-side
 start instruction. Allow up to10minutes for travel and manual disconnection;
-thereafter one90-second total reconnection/handshake window. Never ask for a chat
+then up to5minutes for manual shutdown/reconnection. Only after the verified
+serial interface appears does the single90-second helper window begin. Never ask for a chat
 reply from the server room. No automatic reboot, flashing, wipe or failure injection.
 
 The original v1.2 FACTORYM helper is the only selected device command. Pin its
@@ -26,6 +27,16 @@ technical ADB/recovery metadata after owner returns; no account or user-data rea
 Existing TWRP may write its own logs/header maintenance; no whole-device zero-write
 claim. No intentional failed-load trial is included. StageB artifact, return endpoint
 and attributable retained logs require a separate review after StageA observation.
+
+## Attempt1 timing correction
+
+Owner observed Android home, also verified with technical ADB boot_completed1.
+The original supervisor started90seconds at USB disconnection. Retained Linux
+events show the MediaTek preloader appeared111.33seconds after disconnection,
+after that window expired. The helper never launched. This was a host timing
+design error, not proof that the recovery command failed. Separate the manual
+shutdown/reconnection allowance from the actual helper deadline; no automatic
+retry or new physical attempt is admitted by this correction.
 
 ## Required host verification
 

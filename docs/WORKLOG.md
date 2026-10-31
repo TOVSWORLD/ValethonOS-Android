@@ -3994,3 +3994,15 @@ Eight negative/lifecycle tests plus full505 host tests passed. Dedicated Linux
 staging returned PREFLIGHT_OK; NOT_ARMED with matching source identities and current
 Android USB port. No listener/helper/device action started; actual TWRP entry and
 failed-load return/log retention remain unmeasured. Draft PR453 stays on existing346.
+
+## 2026-10-31 — #346 attempt1 exposed host timing error
+
+Owner authorized one attempt and performed the one-visit batch. Supervisor timed
+out before helper log creation. Owner home screen and ADB device/boot_completed1/
+Android11 verified. Retained host kernel timestamps show preloader enumerated
+111.33seconds after disconnection, beyond the original90second combined reconnect/
+helper window. The FACTORYM helper never launched; protocol compatibility remains
+untested. Corrected host design to separate600s travel,300s manual shutdown/reconnect
+and90s actual helper bounds; one launch/no retry preserved. Eight lifecycle/negative
+tests and repository check pass. Sanitized attempt receipt recorded; raw USB journal
+private. No rearming, reboot, flash, wipe or new physical request performed.
