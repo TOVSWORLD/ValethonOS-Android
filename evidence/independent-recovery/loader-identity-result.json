@@ -1,0 +1,13 @@
+{
+  "scope": "Cached approved original package identity comparison only; no firmware execution or device read",
+  "archive_sha256": "6647dd0b5b9d2c04a2f167f6ccc7a2cfbcaa6f1f93f8251c7a39455db77119b2",
+  "archive_member": "amonet/bin/lk.bin",
+  "member_bytes": 485988,
+  "member_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "historical_stock_lk_bytes": 485552,
+  "historical_stock_lk_sha256": "4ca0cca7ae9af6e959dc848b9ca002624c62e1bb93c83c0ecc89bae8d2186b08",
+  "same_binary": false,
+  "conclusion": "Historical stock fastboot registration/handler audit does not establish command coverage for the installed original-package LK plus runtime payload patches. Exact package LK command registration and boot handoff remain unqualified.",
+  "ram_boot_verified": false,
+  "device_action_performed": false
+}

@@ -113,3 +113,18 @@ running recovery enables either path or that any bytes survive its reset route.
 The next load/readout contract must identify a dedicated owned region and a reader
 using the exact writer layout, or explicitly qualify a compatible legacy writer
 and reader. No reservation, kernel load or RAM-content read is selected here.
+
+
+### Match the loader before selecting a RAM-load command
+
+The approved original archive's `amonet/bin/lk.bin` is485,988bytes,
+SHA256 `7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056`.
+The historical stock LK used by the registration/handler audits is485,552bytes,
+SHA256 `4ca0cca7ae9af6e959dc848b9ca002624c62e1bb93c83c0ecc89bae8d2186b08`.
+They differ. The historical selected registration table therefore neither proves
+nor excludes a RAM-boot command in the original-package LK with its runtime payload
+patches. The payload's enlarged download limit alone is not such a command.
+[Identity receipt](../../evidence/independent-recovery/loader-identity-result.json)
+records this cached-file comparison. Before choosing transport, resolve command
+registration and handoff against this exact package binary and applied patches;
+no device transition or speculative command is needed for that source prerequisite.
