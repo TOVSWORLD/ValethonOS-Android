@@ -16,5 +16,11 @@
   },
   "conclusion": "Current recovery is AArch64, unlike the ARMv7 Android userspace. None of the queried kexec capability interfaces is exposed. No supported direct recovery kexec loading path is established; no ENOSYS/probe syscall, module injection or security bypass attempted.",
   "kernel_loaded": false,
-  "device_rebooted": false
+  "device_rebooted": false,
+  "reader_followup": {
+    "sysfs_kernel_control_present": true,
+    "pstore_listed_in_proc_filesystems": false,
+    "allowlisted_logging_init_lines_observed": 0,
+    "limit": "Empty filtered output is not a full kernel-config proof. No pstore mount or retained-log retrieval performed."
+  }
 }

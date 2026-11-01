@@ -158,3 +158,14 @@ not another generic kernel compile. Neither the selected original fastboot comma
 registrations nor the current recovery capability check provides one. An additional
 loader implementation or an explicitly reviewed alternative loading procedure is
 needed before image placement and retained-reader qualification can be exercised.
+
+
+Follow-up reader metadata: `/sys/kernel/uevent_seqnum` exists, so the missing
+kexec attributes are not simply explained by an absent kernel sysfs directory.
+`/proc/filesystems` lists no pstore filesystem; the narrowly filtered current
+recovery initialization log supplies no ram-console/pstore initialization line.
+No virtual filesystem was mounted. These observations supply no built-in compatible
+reader, while remaining narrower than a complete resolved kernel configuration.
+A manual full power-off, as used in StageA, also cannot establish volatile RAM-log
+survival: StageB must specify a qualified reset/retention lifecycle or a reviewed
+persistent logging mechanism. Repeating StageA cannot close that gap.
