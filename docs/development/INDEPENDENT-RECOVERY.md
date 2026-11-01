@@ -139,3 +139,22 @@ entry appears in this selected region. The receipt pins the windows and individu
 call offsets. This is not a whole-image absence claim or runtime permission test;
 it means the selected exact-binary evidence still provides no nonpersistent boot
 command. Do not substitute `download` plus `continue` without a proven RAM handoff.
+
+
+### Direct recovery loading check — 1 November2026
+
+Read-only ADB reports recovery state and `uname -m=aarch64`. The original TWRP
+kernel also expands from its512-byte MediaTek/gzip wrapper to an ARM64 Image;
+the ARMv7 installed Android userspace must not be used to infer recovery kernel
+architecture. Its embedded configuration was not found. Current recovery exposes
+none of `/sys/kernel/kexec_loaded`, `/sys/kernel/kexec_crash_loaded` or
+`/proc/sys/kernel/kexec_load_disabled`. This establishes no supported kexec route;
+it does not replace a resolved configuration or prove absence of every custom
+loader. No load syscall, module injection, RAM content read or reboot was tried.
+[Capability receipt](../../evidence/independent-recovery/recovery-ram-load-capability.json).
+
+The immediate engineering dependency is therefore a concrete supported transport,
+not another generic kernel compile. Neither the selected original fastboot command
+registrations nor the current recovery capability check provides one. An additional
+loader implementation or an explicitly reviewed alternative loading procedure is
+needed before image placement and retained-reader qualification can be exercised.

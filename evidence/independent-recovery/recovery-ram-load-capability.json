@@ -1,0 +1,20 @@
+{
+  "scope": "Read-only current recovery architecture and capability-interface presence; no syscall/load/reset",
+  "device_state": "recovery",
+  "architecture": "aarch64",
+  "queried_interfaces": {
+    "/sys/kernel/kexec_loaded": "absent",
+    "/sys/kernel/kexec_crash_loaded": "absent",
+    "/proc/sys/kernel/kexec_load_disabled": "absent"
+  },
+  "original_recovery_kernel": {
+    "container": "512-byte MediaTek kernel wrapper, followed by gzip",
+    "expanded_bytes": 16568216,
+    "expanded_sha256": "63c111b2273e486bde0595e16829b0238c3bbc00d39fcb1297b8e1448aa457fe",
+    "arm64_image_magic_at_offset56": true,
+    "embedded_config_found": false
+  },
+  "conclusion": "Current recovery is AArch64, unlike the ARMv7 Android userspace. None of the queried kexec capability interfaces is exposed. No supported direct recovery kexec loading path is established; no ENOSYS/probe syscall, module injection or security bypass attempted.",
+  "kernel_loaded": false,
+  "device_rebooted": false
+}
