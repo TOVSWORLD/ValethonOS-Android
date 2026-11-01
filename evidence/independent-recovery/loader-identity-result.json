@@ -7,7 +7,86 @@
   "historical_stock_lk_bytes": 485552,
   "historical_stock_lk_sha256": "4ca0cca7ae9af6e959dc848b9ca002624c62e1bb93c83c0ecc89bae8d2186b08",
   "same_binary": false,
-  "conclusion": "Historical stock fastboot registration/handler audit does not establish command coverage for the installed original-package LK plus runtime payload patches. Exact package LK command registration and boot handoff remain unqualified.",
+  "conclusion": "Exact original-package selected registration region has thirteen decoded command labels and no boot entry. This does not prove whole-image absence, but supplies no RAM-boot route. Runtime payload enlarged download capacity is insufficient to establish one.",
   "ram_boot_verified": false,
-  "device_action_performed": false
+  "device_action_performed": false,
+  "selected_registration": {
+    "payload_file_offset": 512,
+    "search_start": 260524,
+    "search_end_exclusive": 261292,
+    "registration_function_payload_offset": 259584,
+    "function_window_end_exclusive": 259638,
+    "function_window_sha256": "46a5bf5673b016417975c8e21ab4fe9989d1084f01773426445917349c093c66",
+    "search_window_sha256": "4fb0ab7ada690c904f071564c2ea60120155a1bb6ced18b0f34f405db9213277",
+    "decoder": "Existing scripts/trace_lk_handoff.py thumb_pc_string and thumb_call; same bounded extraction pattern as audit_stock_fastboot_registration.py",
+    "entries": [
+      {
+        "label": "getvar:",
+        "label_load_payload_offset": 260904,
+        "registration_call_payload_offset": 260910
+      },
+      {
+        "label": "oem flags",
+        "label_load_payload_offset": 260948,
+        "registration_call_payload_offset": 260954
+      },
+      {
+        "label": "signature",
+        "label_load_payload_offset": 260962,
+        "registration_call_payload_offset": 260968
+      },
+      {
+        "label": "flash:",
+        "label_load_payload_offset": 260976,
+        "registration_call_payload_offset": 260982
+      },
+      {
+        "label": "erase:",
+        "label_load_payload_offset": 260990,
+        "registration_call_payload_offset": 260996
+      },
+      {
+        "label": "dump:",
+        "label_load_payload_offset": 261004,
+        "registration_call_payload_offset": 261010
+      },
+      {
+        "label": "continue",
+        "label_load_payload_offset": 261018,
+        "registration_call_payload_offset": 261024
+      },
+      {
+        "label": "reboot",
+        "label_load_payload_offset": 261032,
+        "registration_call_payload_offset": 261038
+      },
+      {
+        "label": "reboot-bootloader",
+        "label_load_payload_offset": 261046,
+        "registration_call_payload_offset": 261052
+      },
+      {
+        "label": "download:",
+        "label_load_payload_offset": 261186,
+        "registration_call_payload_offset": 261192
+      },
+      {
+        "label": "oem relock",
+        "label_load_payload_offset": 261226,
+        "registration_call_payload_offset": 261234
+      },
+      {
+        "label": "oem p2u",
+        "label_load_payload_offset": 261242,
+        "registration_call_payload_offset": 261250
+      },
+      {
+        "label": "oem off-mode-charge",
+        "label_load_payload_offset": 261258,
+        "registration_call_payload_offset": 261264
+      }
+    ],
+    "scope_limit": "Selected static registration region only. No whole-binary absence or runtime dispatch/permission claim.",
+    "ram_boot_registered_in_selected_entries": false
+  }
 }

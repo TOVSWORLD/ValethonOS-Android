@@ -128,3 +128,14 @@ patches. The payload's enlarged download limit alone is not such a command.
 records this cached-file comparison. Before choosing transport, resolve command
 registration and handoff against this exact package binary and applied patches;
 no device transition or speculative command is needed for that source prerequisite.
+
+
+The exact original-package registration function matches the historical function's
+instruction window at its new payload offset0x3f600. Applying the existing Thumb
+PC-relative-label/call decoder to its bounded registration region0x3f9ac–0x3fcac
+resolves13 entries: getvar, OEM flags, signature, flash, erase, dump, continue,
+reboot, reboot-bootloader, download, relock, p2u and off-mode-charge. No `boot`
+entry appears in this selected region. The receipt pins the windows and individual
+call offsets. This is not a whole-image absence claim or runtime permission test;
+it means the selected exact-binary evidence still provides no nonpersistent boot
+command. Do not substitute `download` plus `continue` without a proven RAM handoff.
