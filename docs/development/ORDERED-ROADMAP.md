@@ -11,9 +11,11 @@ defines stable ordering, dependencies and acceptance contracts.
 - **Completed milestone:** the approved case-closed software route reached TWRP;
   Android11 LineageOS18.1 and Google services were installed. Owner home screen,
   completed setup and authorized ADB boot_completed=1 are measured under #347/PR452.
-- **Current execution:** #347 entry accepted / PR452 merged. #346 now prepares
-  one bounded independent-recovery check; #348 retained failure logs follows. No
-  device trial is running.
+- **Current execution:** #347 entry accepted / PR452 merged. #346 demonstrated
+  Android-independent existing TWRP entry. Diagnostic kernel compilation passed,
+  but exact nonpersistent loading and compatible retained-log readout remain
+  unresolved under draft PR453. #348 failed-boot retention follows; no device
+  trial or build is running.
 - **Interim versus public OS:** the installed upstream LineageOS build is a lab
   baseline. It is not the finished project-branded OS or a stable/current release
   acceptance. Its patch level is2024-02-05, encryption reports unsupported and

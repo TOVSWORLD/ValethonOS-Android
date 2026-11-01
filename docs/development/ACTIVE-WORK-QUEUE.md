@@ -47,8 +47,11 @@ The board is the source of live state. Do not resume historical peripheral queue
   that final release. Branding covers boot/setup/wallpaper/launcher/About, with
   truthful Android/security-patch fields and upstream notices. No parallel branding
   task or unrelated peripheral off-ramp is opened. Current #347 entry milestone is accepted;
-  phase344 now prepares the bounded one-visit recovery check under reopened#346.
-  Ordinary return remains complete; #348 failure retention remains unqualified.
+  phase344 now has observed Android-independent TWRP entry under reopened#346.
+  Diagnostic kernel compilation passed. Exact original-loader RAM handoff and an
+  owned compatible retained-log writer/reader remain unresolved in draft PR453;
+  no build or device operation is running. Ordinary return remains complete;
+  #348 failure retention remains unqualified.
   #345 is closed not planned because no inspection was needed.
 
 The completed admission decision identified one operational route or state why none is safely
