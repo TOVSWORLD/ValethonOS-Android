@@ -3980,3 +3980,75 @@ ENTRY-ACCEPTANCE.md links exact observation-time receipts and accounts for delib
 disconnect, unaccepted CLI request, stop/retry limits and known security limitations.
 Next phase344 handoff is a concrete independent return/log proposal using retained
 assets; no device action or repeat installation is implied. Phase344 stays open.
+
+## 2026-10-30 — #346 one-visit recovery preparation
+
+Owner clarified that chat desk and server room are separate: no chat reply is
+possible beside the tablet. Added explicit-arm Linux supervisor with10-minute
+travel/disconnection wait followed by one90-second reconnection/helper bound.
+It pins original helper/common/logger sources, rejects wrong/ambiguous MediaTek
+ports, never auto-discovers/opens unrelated serial nodes and kills the helper
+process group on timeout. Exclusive private attempt receipt prevents silent reuse.
+Default preflight opens no serial interface and does not change tablet mode.
+Eight negative/lifecycle tests plus full505 host tests passed. Dedicated Linux
+staging returned PREFLIGHT_OK; NOT_ARMED with matching source identities and current
+Android USB port. No listener/helper/device action started; actual TWRP entry and
+failed-load return/log retention remain unmeasured. Draft PR453 stays on existing346.
+
+## 2026-10-31 — #346 attempt1 exposed host timing error
+
+Owner authorized one attempt and performed the one-visit batch. Supervisor timed
+out before helper log creation. Owner home screen and ADB device/boot_completed1/
+Android11 verified. Retained host kernel timestamps show preloader enumerated
+111.33seconds after disconnection, beyond the original90second combined reconnect/
+helper window. The FACTORYM helper never launched; protocol compatibility remains
+untested. Corrected host design to separate600s travel,300s manual shutdown/reconnect
+and90s actual helper bounds; one launch/no retry preserved. Eight lifecycle/negative
+tests and repository check pass. Sanitized attempt receipt recorded; raw USB journal
+private. No rearming, reboot, flash, wipe or new physical request performed.
+
+## 2026-10-31 — #346 actual Android-independent recovery entry
+
+Owner performed the corrected one-visit batch; original FACTORYM helper exited0.
+Owner special-menu observation corroborated by ADB recovery/TWRP3.3.1-0/douglas/
+3.18.19-g51c2c8d5bfb. StageA existing recovery-entry path is now observed independent
+of Android for the transition. No failed-load injected, no flashing/wipe/reinstall/
+menu action/automatic reboot, no personal-data read. Tablet left in TWRP. Exact
+sanitized attempt2 receipt recorded;346 failed-load return and348 failure retention
+remain unqualified. Next work is concrete StageB artifact/transport/endpoint/log review.
+
+## 2026-10-31 — #346 concrete StageB logging prerequisite
+
+Read-only TWRP diagnostic-interface metadata shows last_kmsg/pstore/config.gz absent,
+live /dev/kmsg available; no user data read. Historical diagnostic Image config
+uses PSTORE_RAM=m with no modules in its isolated initramfs, so it cannot supply
+that retention backend. Recorded prerequisite in346 before code; current policy
+now requires built-in pstore RAM and console, disables block logging and rejects
+the historical config as current-ready. Historical CI audit is explicitly labeled
+and uses its original recorded policy; it does not replace a fresh resolved build.
+Exact pinned ACK pstore Kconfig retained with provenance. No physical RAM address
+selected, no reset/readout ownership inferred and no device action performed.
+
+## 2026-10-31 — #346 built-in RAM logging kernel compile passed
+
+Exact sourceb18254b/run41250510504 compiled successfully22:58:42–23:22:35UTC.
+Completed log verifies PSTORE/PSTORE_RAM/PSTORE_CONSOLE=y and block backendn,
+plus config/vmlinux/Image/Image.gz hashes. Sanitized diagnostic-build-result.json
+records exact evidence. Workflow prints hashes but does not retain compiled files;
+a later reviewed package build must explicitly export its artifacts. No boot image
+packed/loaded, RAM region selected or retention/failure-return qualification inferred.
+Tablet remains in existing TWRP; next is bounded load/readout contract, not another
+blind compile or owner trip.
+
+
+## 2026-11-01 — #346 diagnostic compile outputs retained on future runs
+
+Recorded artifact-retention prerequisite in346 before changing the diagnostic CI
+workflow. Future successful diagnostic builds export Image, Image.gz, resolved
+config, System.map and image-size report with repository/kernel revisions, run
+identity and per-file hashes, retained seven days. Staging was exercised with
+fixture outputs and matching hashes; repository checks pass. No build dispatched,
+combined image packed or device action performed. Completed run41250510504 still
+has no retained compiled bytes; load/placement and compatible log readout remain
+unqualified. Original-package selected command registration supplies no boot entry;
+legacy console and ramoops layouts cannot be treated as interchangeable.

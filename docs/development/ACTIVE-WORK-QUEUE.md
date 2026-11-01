@@ -47,8 +47,11 @@ The board is the source of live state. Do not resume historical peripheral queue
   that final release. Branding covers boot/setup/wallpaper/launcher/About, with
   truthful Android/security-patch fields and upstream notices. No parallel branding
   task or unrelated peripheral off-ramp is opened. Current #347 entry milestone is accepted;
-  phase344 next prepares the independent return/log qualification handoff. Existing
-  #346 closure is not failure-test evidence; #348 failure retention remains unqualified.
+  phase344 now has observed Android-independent TWRP entry under reopened#346.
+  Diagnostic kernel compilation passed. Exact original-loader RAM handoff and an
+  owned compatible retained-log writer/reader remain unresolved in draft PR453;
+  no build or device operation is running. Ordinary return remains complete;
+  #348 failure retention remains unqualified.
   #345 is closed not planned because no inspection was needed.
 
 The completed admission decision identified one operational route or state why none is safely
@@ -71,8 +74,8 @@ LK microtraces or synthetic readiness wrappers. A closed NO-GO does not admit en
 
 Issue#345 is closed not planned; its conditional inspection branch was not selected.
 Normal recovery/current-kernel log capture is complete. Task#348 names only the
-remaining failed-boot retention/retrieval qualification. Issue#346 is closed completed;
-its closed state alone is not failed-load return evidence, which remains explicit
+remaining failed-boot retention/retrieval qualification. Issue#346 is reopened for remaining failed-load qualification;
+ordinary return alone is not failed-load evidence, which remains explicit
 in phase344/release acceptance. Historical phase#106 has100 sub-issues; preserve its source evidence and
 open runtime exit, but put operational work under#344. Do not create more source
 micro-scopes there or mistake completed child counts for recovery qualification.

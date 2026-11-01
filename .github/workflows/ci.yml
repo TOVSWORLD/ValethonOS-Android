@@ -39,8 +39,8 @@ jobs:
         run: python3 scripts/kernel_audit.py
       - name: Verify DT source inputs and patches
         run: python3 scripts/build_douglas_dtb.py --verify-only
-      - name: Check retained resolved diagnostic kernel policy
-        run: python3 scripts/diagnostic_config.py check evidence/diagnostic-kernel/diagnostic.config
+      - name: Audit retained historical diagnostic policy
+        run: python3 scripts/diagnostic_config.py check evidence/diagnostic-kernel/diagnostic.config --historical-report evidence/diagnostic-kernel/resolved-policy.json
       - name: Verify bounded clock and pinctrl reference audits
         run: |
           python3 scripts/audit_clock_references.py --check

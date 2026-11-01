@@ -11,8 +11,11 @@ defines stable ordering, dependencies and acceptance contracts.
 - **Completed milestone:** the approved case-closed software route reached TWRP;
   Android11 LineageOS18.1 and Google services were installed. Owner home screen,
   completed setup and authorized ADB boot_completed=1 are measured under #347/PR452.
-- **Current execution:** #347 entry acceptance review and exact evidence handoff.
-  Then #346 independent failed-load return and #348 retained failure logs, in order.
+- **Current execution:** #347 entry accepted / PR452 merged. #346 demonstrated
+  Android-independent existing TWRP entry. Diagnostic kernel compilation passed,
+  but exact nonpersistent loading and compatible retained-log readout remain
+  unresolved under draft PR453. #348 failed-boot retention follows; no device
+  trial or build is running.
 - **Interim versus public OS:** the installed upstream LineageOS build is a lab
   baseline. It is not the finished project-branded OS or a stable/current release
   acceptance. Its patch level is2024-02-05, encryption reports unsupported and
@@ -27,7 +30,7 @@ defines stable ordering, dependencies and acceptance contracts.
   app installation for QA are deferred until those platform gates pass.
 
 This adds release acceptance requirements to existing ordered issues, not parallel
-branding or peripheral tasks. One active implementation Task remains #347. Existing
+branding or peripheral tasks. One active implementation Task is #346. Existing
 PWM exception#440/PR436 is source-complete, without hardware admission or new scope.
 
 ## Follow phase progress without opening every child task
@@ -37,10 +40,10 @@ Each row shows achieved milestones, **Current work**, the specific next handoff,
 remaining blocker and the concrete phase exit. Queued phases explicitly say no
 implementation is running. Child-issue counts are not the progress measure.
 
-Current phase1 has working interim Android11/recovery/ADB. Entry acceptance review
-is under#347/PR452. Conditional board inspection#345 is closed **not planned**;
+Current phase1 has working interim Android11/recovery/ADB. Entry acceptance passed
+under#347/merged PR452. Conditional board inspection#345 is closed **not planned**;
 no opening was needed. Ordinary/current-boot log capture is complete; remaining
-#348 is explicitly failed-boot retention/retrieval. Issue#346 is closed completed;
+#348 is explicitly failed-boot retention/retrieval. Issue#346 is reopened for remaining failed-load qualification;
 its ordinary stock-return evidence is retained, while phase/release acceptance must
 not infer a demonstrated failed-load return from the issue's closed state.
 
@@ -151,7 +154,7 @@ charging/thermal qualification; no generic invented thresholds are permitted.
   thermal/security failure and no claim of passing an untested runtime gate.
 
 Existing completed scopes#29,#339,#342,#343 remain visible as history. They do not
-stand in for physical gates. The current next outcome is#347 entry acceptance review, followed by#346/#348,
+stand in for physical gates. The current next outcome is#346 independent recovery qualification, followed by#348,
 not app QA or an unrelated peripheral PR.
 
 ## Validation of the roadmap

@@ -1,0 +1,171 @@
+# Issue346 — bounded independent recovery preparation
+
+Current Phase1 work follows accepted entry347. Ordinary return and normal logs
+are complete; failed-load return and348 retention are not. No device operation
+is authorized merely by this document or a passed host test.
+
+## One server-room visit
+
+Owner chats from a separate desk and cannot reply beside the tablet. Prepare and
+verify the supervisor before asking for a visit. Arm only on an explicit desk-side
+start instruction. Allow up to10minutes for travel and manual disconnection;
+then up to5minutes for manual shutdown/reconnection. Only after the verified
+serial interface appears does the single90-second helper window begin. Never ask for a chat
+reply from the server room. No automatic reboot, flashing, wipe or failure injection.
+
+The original v1.2 FACTORYM helper is the only selected device command. Pin its
+original archive and all local Python dependencies; require the physical USB port
+recorded while authorized Android ADB was connected. Reject other or ambiguous
+MediaTek serial interfaces. Never use original ttyACM auto-discovery. Run at most
+one helper with an explicit verified port, kill its process group on deadline,
+and leave private logs on Linux. A host exit0 is not recovery acceptance.
+
+After reconnection, owner waits up to two minutes. If the existing TWRP menu
+appears, leave it alone: no swipe, mount, reboot or install. On unexpected screen
+or absent recovery, stop and return to desk without another attempt. Capture only
+technical ADB/recovery metadata after owner returns; no account or user-data reads.
+Existing TWRP may write its own logs/header maintenance; no whole-device zero-write
+claim. No intentional failed-load trial is included. StageB artifact, return endpoint
+and attributable retained logs require a separate review after StageA observation.
+
+## Attempt1 timing correction
+
+Owner observed Android home, also verified with technical ADB boot_completed1.
+The original supervisor started90seconds at USB disconnection. Retained Linux
+events show the MediaTek preloader appeared111.33seconds after disconnection,
+after that window expired. The helper never launched. This was a host timing
+design error, not proof that the recovery command failed. Separate the manual
+shutdown/reconnection allowance from the actual helper deadline; no automatic
+retry or new physical attempt is admitted by this correction.
+
+## Required host verification
+
+Test absent initial USB identity, wrong/ambiguous interfaces, changed helper hashes,
+travel timeout, reconnect/handshake timeout, one-launch limit and no default execution.
+Dry-run/preflight must not open a serial device or change tablet mode. Actual
+qualification remains pending until observed. Preserve rollback assets and logs.
+
+## StageA observed — 31 October2026
+
+Corrected attempt2 completed original FACTORYM helper with exit0. Owner reported
+the special recovery menu; technical USB ADB independently reports recovery,
+TWRP3.3.1-0, douglas and kernel3.18.19-g51c2c8d5bfb. This demonstrates existing
+recovery entry from the manually powered-off tablet without using Android ADB
+for the transition. No intentional loading failure was introduced. The helper
+receipt does not observe recovery itself; the separate technical observation
+provides that proof. See sanitized attempt2-result.json in evidence/independent-recovery.
+
+Device is left in existing TWRP; no menu action or automatic reboot selected.
+Next is exact failed-load artifact/transport/return-endpoint and retained-log
+review under346 then348. StageA does not close failed-load return or log retention.
+
+## StageB prerequisite and execution boundary
+
+The existing isolated diagnostic kernel receipt cannot supply retained logs:
+PSTORE_RAM was modular and its initramfs includes no modules or loader. Require
+PSTORE=y, PSTORE_RAM=y and PSTORE_CONSOLE=y in the current resolved configuration;
+keep the block-device backend disabled. Pinned ACK pstore Kconfig defines these
+symbols. A build must pass the current policy; the old compiled configuration
+may only pass an explicitly labeled historical-policy audit.
+
+Recovery metadata observed after StageA: /proc/last_kmsg, /sys/fs/pstore and
+/proc/config.gz absent; /dev/kmsg present/readable. This is not proof of kernel
+configuration or absence of every proprietary logging mechanism. Live kmsg alone
+cannot establish retention across a failed boot.
+
+The remaining concrete inputs before StageB are an exact combined kernel/DT/ramdisk
+artifact and proven nonpersistent loading/placement contract, an isolated RAM-log
+region with observed firmware/loader ownership, and a compatible post-failure
+readout from the reachable recovery. No arbitrary RAM address, guessed DT property,
+stock-DTB substitution, rejection-only fastboot test or deliberate crash of the
+working recovery counts. No test is admitted until those inputs and the single
+return action/timeout are reviewed. StageA demonstrated independent recovery entry;
+it did not prove these image-specific properties.
+
+This necessary logging source/build prerequisite is recorded under346 before
+implementation. No new microissue or unrelated hardware scope; no firmware load,
+crash, wipe, security weakening or recovery menu operation accompanies it.
+
+Scoped recovery-DT reads confirm the legacy RAM-console reservation at0x44400000/
+2MiB and low-level log reservation at0x44600000/128KiB. These firmware-owned
+reservations are not free space for an arbitrarily placed ramoops region; no RAM
+content was read and no buffer was assigned. The ll_log node name contains46600000
+but observed reg is44600000, preserving the source/runtime distinction. Compatible
+record format, reset survival and independent post-failure readout remain required.
+
+
+### Legacy reservation is not a compatible ramoops reader
+
+The cached legacy implementation confirms a concrete format obstacle, rather than
+just a missing mount. In `sources/kernel-mt8163/drivers/misc/mediatek/ram_console/
+mtk_ram_console.c`, `ram_console_buffer` has stage offsets, total-buffer size and
+console offsets before its ring position/length. Its `ram_console_init()` saves an
+old copy, then rewrites the stage/console metadata and clears the Linux area.
+By comparison, cached `sources/kernel-mt8163/fs/pstore/ram_core.c` places signature,
+ring start and ring size directly before data. Both cached implementations use
+base signature `0x43474244`; matching that word therefore does not establish
+format compatibility. A ramoops signature can additionally be XOR-adjusted.
+
+Consequently, assigning generic ramoops to the existing legacy console reservation
+cannot be justified by its name, size or signature. A legacy consumer can reinterpret
+or overwrite a different layout. These are source observations, not proof that the
+running recovery enables either path or that any bytes survive its reset route.
+The next load/readout contract must identify a dedicated owned region and a reader
+using the exact writer layout, or explicitly qualify a compatible legacy writer
+and reader. No reservation, kernel load or RAM-content read is selected here.
+
+
+### Match the loader before selecting a RAM-load command
+
+The approved original archive's `amonet/bin/lk.bin` is485,988bytes,
+SHA256 `7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056`.
+The historical stock LK used by the registration/handler audits is485,552bytes,
+SHA256 `4ca0cca7ae9af6e959dc848b9ca002624c62e1bb93c83c0ecc89bae8d2186b08`.
+They differ. The historical selected registration table therefore neither proves
+nor excludes a RAM-boot command in the original-package LK with its runtime payload
+patches. The payload's enlarged download limit alone is not such a command.
+[Identity receipt](../../evidence/independent-recovery/loader-identity-result.json)
+records this cached-file comparison. Before choosing transport, resolve command
+registration and handoff against this exact package binary and applied patches;
+no device transition or speculative command is needed for that source prerequisite.
+
+
+The exact original-package registration function matches the historical function's
+instruction window at its new payload offset0x3f600. Applying the existing Thumb
+PC-relative-label/call decoder to its bounded registration region0x3f9ac–0x3fcac
+resolves13 entries: getvar, OEM flags, signature, flash, erase, dump, continue,
+reboot, reboot-bootloader, download, relock, p2u and off-mode-charge. No `boot`
+entry appears in this selected region. The receipt pins the windows and individual
+call offsets. This is not a whole-image absence claim or runtime permission test;
+it means the selected exact-binary evidence still provides no nonpersistent boot
+command. Do not substitute `download` plus `continue` without a proven RAM handoff.
+
+
+### Direct recovery loading check — 1 November2026
+
+Read-only ADB reports recovery state and `uname -m=aarch64`. The original TWRP
+kernel also expands from its512-byte MediaTek/gzip wrapper to an ARM64 Image;
+the ARMv7 installed Android userspace must not be used to infer recovery kernel
+architecture. Its embedded configuration was not found. Current recovery exposes
+none of `/sys/kernel/kexec_loaded`, `/sys/kernel/kexec_crash_loaded` or
+`/proc/sys/kernel/kexec_load_disabled`. This establishes no supported kexec route;
+it does not replace a resolved configuration or prove absence of every custom
+loader. No load syscall, module injection, RAM content read or reboot was tried.
+[Capability receipt](../../evidence/independent-recovery/recovery-ram-load-capability.json).
+
+The immediate engineering dependency is therefore a concrete supported transport,
+not another generic kernel compile. Neither the selected original fastboot command
+registrations nor the current recovery capability check provides one. An additional
+loader implementation or an explicitly reviewed alternative loading procedure is
+needed before image placement and retained-reader qualification can be exercised.
+
+
+Follow-up reader metadata: `/sys/kernel/uevent_seqnum` exists, so the missing
+kexec attributes are not simply explained by an absent kernel sysfs directory.
+`/proc/filesystems` lists no pstore filesystem; the narrowly filtered current
+recovery initialization log supplies no ram-console/pstore initialization line.
+No virtual filesystem was mounted. These observations supply no built-in compatible
+reader, while remaining narrower than a complete resolved kernel configuration.
+A manual full power-off, as used in StageA, also cannot establish volatile RAM-log
+survival: StageB must specify a qualified reset/retention lifecycle or a reviewed
+persistent logging mechanism. Repeating StageA cannot close that gap.

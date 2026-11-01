@@ -1,0 +1,6 @@
+{
+  "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/fs/pstore/Kconfig?format=TEXT",
+  "sha256": "cdd58e670449c999c23da2f5574c0eb251256e9e7526d6d328b296ed5b9d49a1",
+  "bytes": 6485,
+  "scope": "Pinned source review, not memory ownership or retention qualification"
+}
