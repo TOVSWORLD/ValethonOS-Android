@@ -4039,3 +4039,16 @@ a later reviewed package build must explicitly export its artifacts. No boot ima
 packed/loaded, RAM region selected or retention/failure-return qualification inferred.
 Tablet remains in existing TWRP; next is bounded load/readout contract, not another
 blind compile or owner trip.
+
+
+## 2026-11-01 — #346 diagnostic compile outputs retained on future runs
+
+Recorded artifact-retention prerequisite in346 before changing the diagnostic CI
+workflow. Future successful diagnostic builds export Image, Image.gz, resolved
+config, System.map and image-size report with repository/kernel revisions, run
+identity and per-file hashes, retained seven days. Staging was exercised with
+fixture outputs and matching hashes; repository checks pass. No build dispatched,
+combined image packed or device action performed. Completed run41250510504 still
+has no retained compiled bytes; load/placement and compatible log readout remain
+unqualified. Original-package selected command registration supplies no boot entry;
+legacy console and ramoops layouts cannot be treated as interchangeable.

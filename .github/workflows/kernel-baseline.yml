@@ -97,6 +97,43 @@ jobs:
             bash scripts/build_ack_baseline.sh "$BUILD_MODE"
           fi
 
+      - name: Retain diagnostic kernel bytes and provenance
+        if: steps.scope.outputs.mode == 'diagnostic'
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, shutil, subprocess
+          root = pathlib.Path('work/ack-baseline')
+          destination = pathlib.Path('out/diagnostic-kernel-artifact')
+          destination.mkdir(parents=True, exist_ok=False)
+          files = {}
+          for source, name in [('output/arch/arm64/boot/Image', 'Image'),
+                               ('output/arch/arm64/boot/Image.gz', 'Image.gz'),
+                               ('output/.config', 'resolved.config'),
+                               ('output/System.map', 'System.map'),
+                               ('image-size-report.json', 'image-size-report.json')]:
+              target = destination / name
+              shutil.copyfile(root / source, target)
+              data = target.read_bytes()
+              files[name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+          manifest = {
+              'repository_revision': os.environ['GITHUB_SHA'],
+              'kernel_revision': subprocess.check_output(
+                  ['git', '-C', str(root / 'source'), 'rev-parse', 'HEAD'], text=True).strip(),
+              'run_id': os.environ['GITHUB_RUN_ID'],
+              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'files': files,
+              'qualification': 'Compile outputs only; no combined boot image or device acceptance.'}
+          (destination / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+          PY
+      - name: Upload diagnostic kernel compile outputs
+        if: steps.scope.outputs.mode == 'diagnostic'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: diagnostic-kernel-${{ github.sha }}-${{ github.run_attempt }}
+          path: out/diagnostic-kernel-artifact/
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Generic QEMU virt diagnostic userspace smoke test
         if: steps.scope.outputs.qemu == 'true'
         env:
