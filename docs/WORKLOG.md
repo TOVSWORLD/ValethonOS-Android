@@ -4126,3 +4126,22 @@ existing tmpfs/file-to-p5 transport. Defaults remain read-only/unarmed. Durable
 write-intent receipts and candidate→rollback negative/lifecycle fixtures pass.
 All12 new lab tests pass on actual Linux host, without device port access; the
 full controller suite also passes. No physical write, boot or capture was run.
+
+## 2026-11-02 — #346 exact retained kernel and complete offline candidate
+
+Kernel41528041827/de64394 succeeded; downloaded/verified retained Image15,424,000B,
+gzip6,488,090B and runtime footprint15,925,248B fit the selected loader/memory
+contract. Built corrected v2 PID1 with final durable-host ACK before USB cleanup.
+Packed full16MiBp5 candidate dde5d2bb3151a73b83a823639d3790416ac2321f3194b04ae57ddad731d7b429;
+aligned payload6,531,072B. Private lab copies/hash/receiver unarmed preflight pass.
+Prepared distinct first-normal-trial one-trip capture/return supervisor with normal
+boot guard; no StageA retry, automatic write/reboot/failure, or hardware acceptance.
+Full controller536 tests/repository pass;15 new lab tests pass on Linux. Concrete
+candidate/log/return/rollback sequence recorded for review before physical action.
+
+Independent parser/header-ID/padding/gzip/DT/initramfs checks pass on the actual
+combined bytes. Staged candidate tool default read-only preflight passes against
+real TWRP/current originalp5 and unchangedp6; no write flag selected. All15 new
+lab tests and7 v2 protocol tests pass on Linux. This completes source/package
+preparation for review of the first normal log-bringup trip, not failed-load or
+348 acceptance. No serial capture/helper arm or device reboot occurred.

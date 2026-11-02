@@ -26,7 +26,25 @@ static long call(void *opaque,long nr,long a,long b,long c,long d,long e,long f)
   if(a==7){memcpy((void *)b,"log",3);return 3;}memset((void *)b,'x',c);return c;}
  assert(0);return -5;
 }
+struct stream_fake {int phase,bad;};
+static long empty_log(void *ctx,unsigned char *p,unsigned long n){(void)ctx;(void)p;(void)n;return 0;}
+static int stream_send(void *ctx,const unsigned char *p,unsigned long n){(void)ctx;(void)p;(void)n;return 0;}
+static int stream_ack(void *ctx,unsigned char *p,unsigned long n){
+ struct stream_fake *s=ctx;assert(n==40);s->phase++;
+ memcpy(p,s->phase==1?"VACK0002":"VDON0002",8);
+ for(int i=0;i<32;i++)p[8+i]=(unsigned char)i;
+ if(s->phase==2&&s->bad==1)return -5;
+ if(s->phase==2&&s->bad==2)p[0]^=1;
+ return 0;
+}
+static int stream_deadline(void *ctx){(void)ctx;return 1;}
 int main(void){
+ unsigned char nonce[32];for(int i=0;i<32;i++)nonce[i]=(unsigned char)i;
+ for(int bad=0;bad<3;bad++){
+  struct stream_fake s={0,bad};struct vl_io v={empty_log,stream_send,stream_ack,stream_deadline,&s};
+  int result=vl_stream(&v,nonce);assert(bad?result<0:result==0);assert(s.phase==2);
+ }
+
  struct fake s={0};struct ft_acm_io io={call,&s};
  assert(ll_open_kmsg(&io)==7);s.wrong_device=1;assert(ll_open_kmsg(&io)==-19&&s.closes==1);
  s.wrong_device=0;struct ll_context c={&io,8,7,2000,1900};unsigned char b[16]={0};

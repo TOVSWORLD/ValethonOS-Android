@@ -12,8 +12,9 @@ import struct
 import termios
 import time
 
-MAGIC = b'VLOG0001'
-ACK = b'VACK0001'
+MAGIC = b'VLOG0002'
+ACK = b'VACK0002'
+DONE = b'VDON0002'
 MAX_RECORD = 8192
 MAX_TOTAL = 256 * 1024
 
@@ -136,6 +137,7 @@ is preserved; only the explicit terminal frame returns complete=True.
             raise ValueError('Record sequence or capture limit violated')
         if not length:
             retain(frame)
+            acknowledge(DONE + nonce)
             return {'complete': True, 'records': sequence, 'payload_bytes': total,
                     'wire_sha256': digest.hexdigest(), 'device_qualified': False}
         payload = exact(length)

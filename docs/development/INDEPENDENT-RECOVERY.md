@@ -338,3 +338,59 @@ Default is read-only; explicit candidate writing remains unexecuted on hardware.
 Write intent and final receipts are fsynced. Fixture tests cover candidate→original
 rollback, bad report/hash rejection and no recovery write/reboot. Linux native
 checks for all12 new lab tests pass; this still cannot qualify physical restore.
+
+### Exact assembled candidate and prepared first normal trial
+
+Corrected kernel run41528041827 succeeded at repositoryde64394dea3bd3f07a19170fed0f9a33f7d25fba,
+ACKd9318bdb4c34e8b2d997b4f67ced56b120b22b87. Actual retained bytes were downloaded
+and every manifest hash verified. Image15,424,000B, gzip6,488,090B, runtime footprint
+15,925,248B, text_offset0; release6.18.34-gd9318bdb4c34-dirty. The dirty suffix
+reflects the recorded local source-port overlays, not an unrecorded kernel revision.
+
+The v2 logging component supersedes the earlier component: static init49,944B,
+SHAa77706b167542a14e785dc4cada9d10799b56edc20d2a99a5a44070feb0114e6;
+initramfs12,062B/SHAdabfef5991a447f56fb6b017f5f569bbe48f1ed5c843e2f7e3ea8b62af9e4420.
+VLOG/VACK/VDON0002 adds a final host fsync acknowledgment before device success
+and USB cleanup; missing/wrong final ACK fails the producer. The old version and
+its component remain historical, never silently substituted into this candidate.
+
+Offline packing passed: payload6,531,072B, fullp5 image16,777,216B,
+SHAdde5d2bb3151a73b83a823639d3790416ac2321f3194b04ae57ddad731d7b429.
+Kernel runtime occupies0x40000000..0x40f30000, initramfs placement0x43480000,
+DT destination0x48000000 and bounded staging0x45000000. These regions avoid every
+observed firmware reservation. The new header component ID is calculated, not
+copied from the mismatching old p5. Both existing boot/recovery ramdisks begin
+with plain gzip; the new ramdisk does too. The old p5 tail is explicitly replaced
+by full candidate bytes and preserved exactly in rollback, not assumed understood.
+Candidate and private nonce are copied/hash-verified on Linux and controller;
+receiver input preflight passed unarmed, without a TTY open.
+
+`run_lab_log_trial.py` is a distinct first-normal-trial supervisor, not StageA
+replay. It validates the already-installed exact candidate/recovery and pinned
+original helper, then only explicit arm claims a fresh receipt. It gives600s for
+owner travel/manual TWRP boot, captures once with45s entry/30s transfer bounds,
+ignores the first90s of normal boot, then gives300s for manual power-off/reconnect
+before at most one90s FACTORYM helper. No candidate write, reboot or failure is
+issued by this supervisor. Read-only recovery/candidate checks follow the helper.
+The old StageA receipt remains completed and is never reused.
+
+The concrete review must cover this complete one-trip sequence before any write:
+from the desk, verify the current original p5/p6 and backup copies; explicitly
+write only the full reviewed p5 candidate with fresh receipt and full readbacks;
+check postwrite recovery/p5, then arm the exact private receiver/return plan only
+when the owner is available. At the tablet, select TWRP Reboot→System once, decline
+any installer prompt, wait90s, unplug USB, hold only Power until off (at most40s),
+release, wait5s, reconnect the same cable/port without pressing other buttons.
+Wait up to180s for the existing TWRP/special menu, leave it unchanged and return to
+the desk with the observation. No retry, wipe, reset, install, unlock or new menu
+selection. A frozen old framebuffer is not kernel-entry evidence. If shutdown or
+return does not work, stop and report; do not improvise. The supervisor is unarmed
+until this review/start and does not promise that force-off/failed-return works.
+
+Amazon's [power-button guidance](https://digprjsurvey.amazon.com/csad/help/node/GXM4KLEMVLFM36CB)
+provides a general40s shutdown provision; it is not evidence of this custom-kernel
+return. The factory-reset sequence is not part of the trial. On return, read-only
+receipts/log inspection and actual recovery identity are checked from the desk;
+then explicitly restore the full original p5 and verify both partitions, leaving
+TWRP running. Intended post-handshake failure qualification is a later reviewed
+step after this normal log bringup. Early failures before logging stay uncovered.

@@ -55,7 +55,7 @@ class KernelLogProtocol(unittest.TestCase):
         self.assertEqual(result['records'], 2)
         result, captured, ack = self.receive(encoded)
         self.assertEqual(captured, encoded)
-        self.assertEqual(ack, [protocol.ACK + NONCE])
+        self.assertEqual(ack, [protocol.ACK + NONCE, protocol.DONE + NONCE])
 
     def test_wrong_identity_never_acknowledged(self):
         incoming = io.BytesIO(protocol.MAGIC + bytes(32))
@@ -80,6 +80,21 @@ class KernelLogProtocol(unittest.TestCase):
                                      time.monotonic() - 1 if expired else time.monotonic() + 10)
             self.assertEqual(ack, [])
 
+    def test_terminal_sync_failure_withholds_final_receipt(self):
+        acknowledgments = []
+        incoming = io.BytesIO(wire([]))
+        original_sync = os.fsync
+        calls = []
+        def sync(fd):
+            calls.append(1)
+            if len(calls) == 2:
+                raise OSError('terminal storage failed')
+            original_sync(fd)
+        with tempfile.TemporaryFile() as raw, patch.object(protocol.os, 'fsync', sync):
+            with self.assertRaises(OSError):
+                protocol.receive(incoming.read, acknowledgments.append, raw.fileno(), NONCE, time.monotonic() + 5)
+        self.assertEqual(acknowledgments, [protocol.ACK + NONCE])
+
     def test_actual_nonblocking_pty_adapter_without_device_access(self):
         master, slave = pty.openpty()
         try:
@@ -95,7 +110,7 @@ class KernelLogProtocol(unittest.TestCase):
                 raw.seek(0)
                 self.assertEqual(raw.read(), encoded)
             self.assertTrue(result['complete'])
-            self.assertEqual(os.read(master, 40), protocol.ACK + NONCE)
+            self.assertEqual(os.read(master, 80), protocol.ACK + NONCE + protocol.DONE + NONCE)
             # Empty input must expire rather than block on a TTY read.
             with tempfile.TemporaryFile() as raw, self.assertRaises(ValueError):
                 protocol.receive_fd(slave, raw.fileno(), NONCE, time.monotonic() + .01)

@@ -16,14 +16,14 @@ static inline void vl_u32(unsigned char *out,unsigned long n) {
  out[2]=(unsigned char)(n>>8);out[3]=(unsigned char)n;
 }
 static inline int vl_stream(struct vl_io *io,const unsigned char nonce[32]) {
- unsigned char header[40]={'V','L','O','G','0','0','0','1'},ack[40],buffer[VL_MAX_RECORD],frame[8];
+ unsigned char header[40]={'V','L','O','G','0','0','0','2'},ack[40],buffer[VL_MAX_RECORD],frame[8];
  unsigned long total=0,seq=0;int nonzero=0;
  if(!io||!nonce||!io->read_log||!io->send_all||!io->receive_ack||!io->within_deadline)return -22;
  for(int i=0;i<32;i++){header[8+i]=nonce[i];nonzero|=nonce[i];}
  if(!nonzero)return -22;
  if(!io->within_deadline(io->ctx)||io->send_all(io->ctx,header,40))return -5;
  if(io->receive_ack(io->ctx,ack,40)||!io->within_deadline(io->ctx))return -5;
- const unsigned char prefix[8]={'V','A','C','K','0','0','0','1'};
+ const unsigned char prefix[8]={'V','A','C','K','0','0','0','2'};
  for(int i=0;i<40;i++)if(ack[i]!=(i<8?prefix[i]:nonce[i-8]))return -5;
  /* A zero read is a caller-selected clean snapshot end. EAGAIN/EPIPE are not
   * silently converted to success; live waiting/lost-record policy belongs to
@@ -39,7 +39,13 @@ static inline int vl_stream(struct vl_io *io,const unsigned char nonce[32]) {
   if(io->send_all(io->ctx,frame,8))return -5;
   if(n&&io->send_all(io->ctx,buffer,(unsigned long)n))return -5;
   if(!io->within_deadline(io->ctx))return -110;
-  if(!n)return 0;
+  if(!n){
+   /* Keep the gadget bound until the host has fsynced the terminal record. */
+   if(io->receive_ack(io->ctx,ack,40)||!io->within_deadline(io->ctx))return -5;
+   const unsigned char done[8]={'V','D','O','N','0','0','0','2'};
+   for(int i=0;i<40;i++)if(ack[i]!=(i<8?done[i]:nonce[i-8]))return -5;
+   return 0;
+  }
   total+=(unsigned long)n;seq++;
  }
  return -110;
