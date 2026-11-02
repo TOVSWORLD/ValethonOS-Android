@@ -4145,3 +4145,23 @@ real TWRP/current originalp5 and unchangedp6; no write flag selected. All15 new
 lab tests and7 v2 protocol tests pass on Linux. This completes source/package
 preparation for review of the first normal log-bringup trip, not failed-load or
 348 acceptance. No serial capture/helper arm or device reboot occurred.
+
+## 2026-11-02 — #346 first normal log trial completed; original boot restored
+
+Owner explicitly approved the exact reviewed candidate/rollback procedure and
+confirmed availability. One fullp5 candidate write/readback and unchangedp6
+verification passed; one distinct normal-trial supervisor was armed. Owner reached
+step7. Capture returned incomplete with0 raw bytes. Scoped host USB journal did
+not observe1209:0001; this does not establish whether the new kernel entered.
+One original FACTORYM return helper exited0. Supervisor's first post-return check
+failed ValueError; later read-only ADB confirms recovery/douglas/TWRP3.3.1-0, all
+four aliases, exact candidatep5 and originalp6 full hashes. Owner screen report is
+pending, so no display observation is invented.
+
+Executed the already-approved one-write originalp5 restore with fresh preflight,
+full boot/recovery readback and RAM cleanup. Originalp5 restored exactly; TWRP left
+running, no reboot. Removed only the exact new71 trial TTY rule and reloaded rules
+without trigger; older host rules/ModemManager unchanged. Private receipts/logs
+retained on lab/controller. No deliberate failure, kernel-entry/log pass,346/348
+closure or automatic retry/rebuild. Next is concrete early handoff/USB observability
+diagnosis within346 using this failed trial, not another physical action.
