@@ -321,3 +321,20 @@ records follow durable identity ACK; each record is fsynced on the lab host.
 ACK is not permission for deliberate failure. The first trial is normal log
 bringup; failures preceding initialization remain outside its coverage. No
 physical boot, USB logs, failed-load return or348 retention is claimed yet.
+
+Host-side preparation now includes a separate explicit lab receiver, a default
+read-only candidate-staging preflight and retained-record inspector. The receiver
+requires owned private plan/report/nonce, exact physical USB parent plus ACM
+interface00, one port open, nonblocking raw9600 duplex settings and a fresh private
+output directory. It durably creates the raw file before identity ACK and never
+retries a disconnected trial or issues boot/reboot/failure commands. The retained
+inspector requires nonempty correctly sequenced kmsg records and matching built
+kernel release; missing sequence0/version is reported as an incomplete initial
+prefix, not early-log acceptance.
+
+`write_lab_boot_candidate.py` verifies both the full original rollback and exact
+candidate report before invoking the same tested RAM-staged one-write transport.
+Default is read-only; explicit candidate writing remains unexecuted on hardware.
+Write intent and final receipts are fsynced. Fixture tests cover candidate→original
+rollback, bad report/hash rejection and no recovery write/reboot. Linux native
+checks for all12 new lab tests pass; this still cannot qualify physical restore.

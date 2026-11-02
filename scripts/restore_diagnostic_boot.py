@@ -104,9 +104,25 @@ def memory_staging(adb, backup):
     return folder, destination
 
 
-def restore(adb, backup, manifest, expected_current, receipt_path):
+def update_receipt(path, receipt):
+    # The initial exclusive receipt owns this path; retain durable write intent.
+    import stat
+    fd = os.open(path, os.O_WRONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+    with os.fdopen(fd, 'w') as stream:
+        info = os.fstat(stream.fileno())
+        if (not stat.S_ISREG(info.st_mode) or info.st_uid != os.geteuid()
+                or info.st_nlink != 1 or stat.S_IMODE(info.st_mode) != 0o600):
+            raise ValueError('Owned private operation receipt required')
+        stream.seek(0)
+        json.dump(receipt, stream, indent=2)
+        stream.truncate()
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def restore(adb, backup, manifest, expected_current, receipt_path, *, operation='full boot rollback only'):
     current = preflight(adb, backup, manifest, expected_current)
-    receipt = {'operation': 'full boot rollback only', 'boot_before_sha256': current,
+    receipt = {'operation': operation, 'boot_before_sha256': current,
                'rollback_sha256': sha(backup), 'write_started': False,
                'verified': False, 'rebooted': False, 'recovery_written': False}
     # Exclusive receipt prevents silently reusing a physical operation identity.
@@ -122,7 +138,7 @@ def restore(adb, backup, manifest, expected_current, receipt_path):
             # Recheck both partitions after the upload, before the sole write.
             preflight(adb, backup, manifest, expected_current)
             receipt['write_started'] = True
-            Path(receipt_path).write_text(json.dumps(receipt, indent=2) + '\n')
+            update_receipt(receipt_path, receipt)
             # File-to-block copy avoids unsupported shell-v2 / stdin EOF paths.
             # Full-sized regular RAM file; no short-read pipe or PTY translation.
             adb.run(['exec-out', 'dd', 'if=' + destination, 'of=' + BOOT,
@@ -142,7 +158,7 @@ def restore(adb, backup, manifest, expected_current, receipt_path):
                 raise ValueError('Rollback verified but private RAM cleanup unconfirmed')
             receipt['ram_staging_cleanup_verified'] = True
     finally:
-        Path(receipt_path).write_text(json.dumps(receipt, indent=2) + '\n')
+        update_receipt(receipt_path, receipt)
     return receipt
 
 

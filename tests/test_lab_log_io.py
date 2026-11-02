@@ -10,6 +10,7 @@ class LabLogIO(unittest.TestCase):
         code = r'''
 #include <assert.h>
 #include <string.h>
+#define FT_ACM_HOST_TEST 1
 #include "lab_log_io.h"
 struct fake {unsigned long ms;int fail,read_mode,writes,reads,closes,wrong_device;};
 static long call(void *opaque,long nr,long a,long b,long c,long d,long e,long f){

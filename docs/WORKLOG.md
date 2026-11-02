@@ -4119,3 +4119,10 @@ Disabled unused VT/HID, retained generic PERF_EVENTS with the hardware PMU DT
 node disabled. Linux-host reproduction also caught GCC misleading-indentation in
 a test fixture (Mac clang accepted it); fixed the fixture and portable cc usage.
 No security restriction weakened and no failed compile counted as a device trial.
+
+Added the explicit physical-port/nonce-bound lab log receiver, retained kmsg
+sequence/release inspector, and guarded first-candidate staging wrapper using the
+existing tmpfs/file-to-p5 transport. Defaults remain read-only/unarmed. Durable
+write-intent receipts and candidate→rollback negative/lifecycle fixtures pass.
+All12 new lab tests pass on actual Linux host, without device port access; the
+full controller suite also passes. No physical write, boot or capture was run.
