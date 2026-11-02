@@ -4052,3 +4052,26 @@ combined image packed or device action performed. Completed run41250510504 still
 has no retained compiled bytes; load/placement and compatible log readout remain
 unqualified. Original-package selected command registration supplies no boot entry;
 legacy console and ramoops layouts cannot be treated as interchangeable.
+
+## 2026-11-02 — #346 exact rollback copies and real read-only preflight
+
+Owner directed preparation of reversible boot-partition alternative. Recorded
+necessary prerequisite in346 before code. Actual TWRP aliases boot/boot_x→p5,16MiB;
+recovery/recovery_x→p6,17MiB. Obtained two matching full reads of each, verified
+private lab/controller copies. Initial dd reads had excess transfer-summary bytes
+and were rejected; binary-clean cat reads passed exact size/hash checks. No device
+write, reboot, user-data read or installation replay. Public hashes/limits only.
+
+Added boot-only rollback tool with default read-only mode, pinned full backup and
+recovery identity, exact expected current boot hash, alias checks, exclusive
+receipt, one write/no retry/no reboot and full readback verification. Six host
+negative/lifecycle tests pass; actual Linux→TWRP read-only preflight passed.
+Restore write transport remains device-untested. Existing boot uses unwrapped gzip
+ARM64 plus two DTBs, differs from recovery's MediaTek wrapper, has mismatched
+component/header SHA1 and unclassified partition tail. No arbitrary repack admitted.
+
+Documented concrete alternative sequence and logging limit: durable host stream
+before a selected post-handshake failure; current diagnostic config has no USB or
+storage and73-byte status capture is not a log stream. Candidate placement/format
+and actual log transport remain engineering prerequisites. No source/backup/test
+count is device acceptance;346/344/348 stay open and PR453 remains draft.

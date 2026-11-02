@@ -169,3 +169,89 @@ reader, while remaining narrower than a complete resolved kernel configuration.
 A manual full power-off, as used in StageA, also cannot establish volatile RAM-log
 survival: StageB must specify a qualified reset/retention lifecycle or a reviewed
 persistent logging mechanism. Repeating StageA cannot close that gap.
+
+## Owner-directed boot-partition alternative — 2 November2026
+
+Owner requested concrete preparation of a reversible persistent diagnostic boot
+image after no supported direct RAM route was established. This preparation stays
+inside346/PR453. It does not repeat unlock/ROM/GApps installation, replace recovery,
+write bootloader/security partitions, or admit a physical failure test.
+
+### Actual rollback inputs, not a donor-image assumption
+
+Current recovery readback resolves both boot and boot_x aliases to physical
+mmcblk0p5,16MiB. Recovery and recovery_x resolve to mmcblk0p6,17MiB; the separate
+boot_amonet/recovery_amonet aliases must not be confused with these destinations.
+Two complete binary-clean reads of each selected partition match. Full private
+copies on Linux and the controller match those hashes. Exact sizes/digests and
+limits are in [boot-trial-rollback.json](../../evidence/independent-recovery/boot-trial-rollback.json).
+No personal-data partition was read. Backups are not committed or published.
+
+The first attempted dd reads were rejected because their stdout included transfer
+summaries beyond the expected partition size. No bytes were trimmed or accepted.
+Binary-clean cat reads, exact length and two independent hashes established the
+accepted copies. No tablet write occurred.
+
+The installed boot kernel is gzip ARM64 followed by two DTBs, without the512-byte
+MediaTek wrapper used by the current recovery kernel. Both use2048-byte header
+pages and kernel load address0x40080000, but their ramdisk addresses differ. The
+installed boot's component SHA1 differs from its header ID, and its partition
+contains8,980,480 trailing bytes beyond the aligned components. Their meaning is
+not established. Recovery's component SHA1 matches. Do not blindly clone boot
+metadata, transplant recovery addresses, append a stock DTB or discard an unknown
+trailer as though loader compatibility had been proved. Full rollback preserves
+all bytes, including the current trailer. These findings prevent calling an
+arbitrary v0 repack a reviewed trial image.
+
+### Prepared exact rollback tool
+
+`scripts/restore_diagnostic_boot.py` runs on Linux with an explicit private ADB
+selector file, private full boot backup and pinned manifest. Default execution is
+read-only. It checks recovery transport/douglas/TWRP3.3.1-0, all four aliases,
+full recovery hash, full backup size/hash and the explicitly expected current boot
+hash. Default preflight was run successfully on the real tablet. This is not a
+physical restore execution test.
+
+Only an explicit --restore plus a fresh private receipt selects a single full p5
+write. The expected current hash must be the exact separately reviewed full trial
+partition hash, not a guessed boot-image prefix. The tool never writes p6, stages
+files on userdata, reboots or retries. A write uses binary stdin with PTY disabled,
+then syncs and compares the complete boot readback and independent recovery hash.
+An interrupted or mismatched write leaves a failed receipt and must leave TWRP
+running. The write branch remains device-untested; six host tests cover target and
+backup rejection, exact rollback, interrupted/mismatched write, reused receipt and
+already-restored no-op. Host tests do not qualify the ADB binary-write transport.
+
+### Proposed execution sequence and remaining engineering
+
+1. Resolve one explicit maintained-kernel/board-DT/initramfs/header placement and
+   compressed-image format against the selected loader. The successful generic
+   uncompressed Image is28,645,888bytes, larger than p5; the compressed image is
+   9,204,813bytes, but that alone proves neither full-package fit nor load placement.
+   Produce the actual combined image and its resolved config, component sizes,
+   hashes and exact intended full partition bytes only after the contract is fixed.
+2. Replace speculative volatile retention with a proposed independent host log
+   file. Implement an actual bounded kernel-log stream, attributable to the exact
+   build/trial, and make the host durably store the stream before a deliberate
+   post-handshake failure can be selected. Capture must survive tablet power-off.
+   The existing73-byte ACM status frame is not a kernel-log stream. Current
+   diagnostic config disables USB and all block/storage interfaces, so the completed
+   logging-kernel compile cannot supply this mechanism. Existing denied USB source
+   and fixed-frame fixtures do not grant admission; transport/role/DT/security
+   prerequisites must be resolved within346 as necessary trial prerequisites.
+3. Review the exact boot-only write, tested binary-write transport, independent
+   capture, one bounded failure and one complete owner trip before execution.
+   Preserve recovery, system and userdata. Do not arm StageA again from this text.
+   A future use of its established return mechanism needs a separately prepared
+   one-trip supervisor and an explicit owner availability/start instruction.
+4. Return to existing TWRP, verify its exact identity/hash, restore the full p5
+   backup using a fresh receipt and verify full readback. Booting Android again is
+   a separate explicitly selected action, not an automatic consequence of rollback.
+
+This proposed host capture covers only a failure after an attributable stream
+starts and its evidence is stored. A silent failure before USB/log initialization
+is not covered and cannot be relabeled as retained first-kernel failure logs.
+The intended failure case must meet346's actual acceptance before any test is
+selected; if an earlier failure is required, a separate working early capture
+mechanism remains necessary.346/344/348 stay open. There is no ready candidate,
+new kernel build, physical write or owner trip pending from this preparation.
