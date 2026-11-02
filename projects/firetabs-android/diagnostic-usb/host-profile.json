@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "source_header": "projects/firetabs-android/diagnostic-usb/acm_serial.h",
-  "source_header_sha256": "6a501e131f91c7118d5c9417f67a6292b57d03610371b689f3c07dcedb070a94",
+  "source_header_sha256": "ff314c1bc7579d3e1f107a3fcdcc8558f5f8df4feeda1e2441024e85b2a17b09",
   "frame_sha256": "21bf0d50bb2b8556312fbf576df04928ce3d89aa56651fe4f6a004cfdef00be4",
   "frame_bytes": 73,
   "serial_device_capture_admitted": false,

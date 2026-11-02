@@ -273,3 +273,51 @@ there, two complete RAM readbacks matched the verified backup, and the temporary
 RAM file/directory were removed. The boot partition remained unchanged by full
 hash readback. The final RAM-file-to-block dd operation remains unexecuted. No
 recovery replacement, firmware write, automatic reboot or new owner trip occurred.
+
+## Separate private log-bringup candidate — 2 November
+
+The reversible p5 alternative now has a separate source candidate, not a granted
+legacy admission flag. Its PID1 embeds an exact compiled nonpermissive SELinux
+policy, requires initial enforcement, refuses replacement of an existing policy,
+loads once and remounts selinuxfs read-only. Compiler negative controls reject
+policy reload, enforcement toggle, block reads and reboot capability. No policy
+was loaded on the tablet. Actual kernel policy loading remains a first-trial test.
+
+The current Linux-host component build produced a static ARM64 PID1 (49,832B,
+SHA2561209db3fe7232918cb3ba0ddd65ddecce76346033bb0c78398cf69f943e0089a)
+and12,026B initramfs (SHAbc4d69834385b17698cb22232b2ae441290b677a86734ab750becfa43667352f).
+The private generated nonce and full report remain in private lab output. The
+archive has only the PID1, virtual mount directories, console and readonly kmsg
+nodes; no storage nodes, shell, module loader, failure or reboot interface.
+
+The own-source lab DT compiles without diagnostics and compares all190 nodes;
+artifact27,408B/d58d4b26bc65bebda14067145558625013c9ff3db66978db238d1b7456f4798c.
+It preserves source MMIO/clocks and observed firmware reservations, uses observed
+RAM banks, disables unused device nodes and secondary-CPU entry, and requests one
+CPU. PID1 requires online/possible CPU sets both exactly0 before USB setup. No
+stock DTB substitution, new ramoops address or thermal-threshold change is made.
+
+The original package selected gzip path supplies28MiB decoded capacity. The prior
+41,699,840B USB Image cannot fit. The separate `lab-log` profile combines the
+restricted no-storage diagnostic policy with builtin USB/SELinux, selects only
+the MediaTek platform and size optimization, and disables unrelated device code.
+Security enforcement/bootparam restrictions remain intact. Future exact bytes are
+retained seven days. This is a necessary prerequisite within346, not a new task.
+
+`kernel/lab-log/package-contract.json` and `pack_lab_log_boot.py` define a
+conditional offline candidate: Androidv0/page2048, unwrapped deterministic gzip,
+aligned own hvt DT suffix, and the observed0x43480000 initrd placement. Entry is
+observed RAM base0x40000000 plus the fresh ARM64 header text_offset; never blindly
+copy the old kernel's0x40080000 entry. Decoded file and runtime footprint are
+checked separately against loader capacity, inflate stack, observed RAM,
+reservations and other components. Fullp5 padding replaces the unexplained old
+tail only after concrete review; the full original rollback preserves it.
+
+The private test descriptor1209:0001 is permitted for in-house experimentation
+by [pid.codes](https://pid.codes/1209/0001/), is nonunique, and is forbidden for
+redistribution/manufacture here. The receiver must bind the approved physical USB
+path and exact private nonce, never accept a VID/PID alone. Ten seconds of kmsg
+records follow durable identity ACK; each record is fsynced on the lab host.
+ACK is not permission for deliberate failure. The first trial is normal log
+bringup; failures preceding initialization remain outside its coverage. No
+physical boot, USB logs, failed-load return or348 retention is claimed yet.

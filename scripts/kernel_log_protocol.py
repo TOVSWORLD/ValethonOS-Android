@@ -25,7 +25,8 @@ def receive_fd(transport_fd, raw_fd, nonce, deadline):
     close. Call only under the separately reviewed exact device trial contract.
     """
     flags = fcntl.fcntl(transport_fd, fcntl.F_GETFL)
-    if not os.isatty(transport_fd) or not flags & os.O_NONBLOCK:
+    if (not os.isatty(transport_fd) or not flags & os.O_NONBLOCK
+            or flags & os.O_ACCMODE != os.O_RDWR):
         raise ValueError('Caller-owned nonblocking TTY required')
     attrs = termios.tcgetattr(transport_fd)
     if (attrs[0] or attrs[1] or attrs[3]

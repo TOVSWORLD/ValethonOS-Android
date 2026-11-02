@@ -1,0 +1,17 @@
+{
+  "commit": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "records": [
+    {
+      "path": "security/selinux/include/initial_sid_to_string.h",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/security/selinux/include/initial_sid_to_string.h?format=TEXT",
+      "bytes": 1078,
+      "sha256": "1c6121e1db480c4f2ea9ce01080c9e2342db24dc2eb6a737d7cc3ab340c8bccf"
+    },
+    {
+      "path": "security/selinux/include/classmap.h",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/security/selinux/include/classmap.h?format=TEXT",
+      "bytes": 8948,
+      "sha256": "05f4bb4b1f8b69c2141945234a69bb9c2b4338131479d735a17cf1f40d676ff3"
+    }
+  ]
+}

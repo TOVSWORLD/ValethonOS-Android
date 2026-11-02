@@ -4098,3 +4098,17 @@ software PTY exchange. PID1/kmsg/USB endpoint integration is not implemented by
 these components; existing denied admission and fixed-frame package unchanged.
 This is a source integration prerequisite inside346, not device log acceptance or
 a ready trial. Actual image placement and working runtime capture remain open.
+
+## 2026-11-02 — #346 actual enforcing log PID1, own DT and loader-sized profile
+
+Compiled isolated enforcing policy with four forbidden-privilege negative
+controls and static ARM64 log PID1/initramfs on the Linux lab host. Added actual
+validated kmsg/duplex ACM adapters, single-policy bootstrap and one-CPU runtime
+checks; no reboot/failure/storage interface. Own-source lab DT compiles and190-node
+comparison passes, incorporating observed memory/reservations without stock DTB
+substitution. Exact original selected gzip path capacity is28MiB; prior USB Image
+is too large. Recorded prerequisite on346/344 before adding separate size-focused
+lab-log kernel profile and offline checked boot packer. Old admission flags remain
+denied. Build-script source locks refreshed for explicit additive mode only;
+existing peripheral paths unchanged. Physical first-trial logging/return remains
+unqualified, no device write/reboot and no task closure.

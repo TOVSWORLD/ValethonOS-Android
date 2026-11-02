@@ -1,0 +1,19 @@
+{
+  "ack_commit": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "records": [
+    {
+      "file": "selinuxfs-policy-open.txt",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/security/selinux/selinuxfs.c?format=TEXT",
+      "whole_file_sha256": "552b5988963b75d3ae27fb558cbf0923a5b5a7bf702ff71870396b83e2354ee1",
+      "excerpt_sha256": "f0b580c3b6d4f780b0ea08b3a3d8fae091f8bcacc70b6936009b2ff4c6717bc4",
+      "scope": "Exact function with original file notice; not complete policy-load proof"
+    },
+    {
+      "file": "services-read-policy.txt",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/security/selinux/ss/services.c?format=TEXT",
+      "whole_file_sha256": "c2074b2778efcbc3aef977e1589baa295a81674270a3bcfeb420928c9421513e",
+      "excerpt_sha256": "9d5b49c7c1f08d7e781b472ddf214bf8582c576ae8d70836c2d4de14cb74e29b",
+      "scope": "Exact function with original file notice; not complete policy-load proof"
+    }
+  ]
+}
