@@ -4075,3 +4075,14 @@ before a selected post-handshake failure; current diagnostic config has no USB o
 storage and73-byte status capture is not a log stream. Candidate placement/format
 and actual log transport remain engineering prerequisites. No source/backup/test
 count is device acceptance;346/344/348 stay open and PR453 remains draft.
+
+## 2026-11-02 — #346 rollback transport corrected before any block write
+
+Read-only binary echo showed current legacy recovery refuses shell -T (requires
+PTY); raw EOF-dependent cat timed out. Original restore write command was therefore
+not usable despite default preflight passing. Replaced with exact backup upload
+to confirmed /tmp tmpfs, exclusive random directory, full RAM readback verification
+and second partition preflight before one file-to-block dd. Actual16MiB RAM-only
+upload/two readbacks/cleanup passed; boot full hash unchanged. No block write or
+reboot. Seven rollback tests include corrupt upload rejection before any write.
+Physical dd/restore execution and actual candidate/log transport remain unqualified.

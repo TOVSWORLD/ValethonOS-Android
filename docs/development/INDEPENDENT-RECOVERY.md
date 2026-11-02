@@ -215,12 +215,14 @@ physical restore execution test.
 Only an explicit --restore plus a fresh private receipt selects a single full p5
 write. The expected current hash must be the exact separately reviewed full trial
 partition hash, not a guessed boot-image prefix. The tool never writes p6, stages
-files on userdata, reboots or retries. A write uses binary stdin with PTY disabled,
-then syncs and compares the complete boot readback and independent recovery hash.
+files on userdata, reboots or retries. A write uses an exact full backup first
+uploaded to an exclusively named directory on a confirmed /tmp tmpfs mount. It
+verifies the full RAM copy and both partition preconditions again, then selects
+one file-to-p5 dd copy, sync and full boot/recovery hash readbacks.
 An interrupted or mismatched write leaves a failed receipt and must leave TWRP
-running. The write branch remains device-untested; six host tests cover target and
+running. The write branch remains device-untested; seven host tests cover RAM corruption, target and
 backup rejection, exact rollback, interrupted/mismatched write, reused receipt and
-already-restored no-op. Host tests do not qualify the ADB binary-write transport.
+already-restored no-op. Host tests do not qualify the physical block-write branch.
 
 ### Proposed execution sequence and remaining engineering
 
@@ -255,3 +257,19 @@ The intended failure case must meet346's actual acceptance before any test is
 selected; if an earlier failure is required, a separate working early capture
 mechanism remains necessary.346/344/348 stay open. There is no ready candidate,
 new kernel build, physical write or owner trip pending from this preparation.
+
+### Legacy ADB transport correction — 2 November2026
+
+A no-file-write binary echo test rejected the original --restore command path:
+the running recovery refuses `adb shell -T` because it only supports PTY allocation.
+An EOF-dependent raw cat probe also timed out. Neither was a block write. Do not
+use PTY allocation for binary rollback or label default read-only preflight as
+write-transport qualification. The earlier shell-stdin restore path was removed
+before any physical restore attempt.
+
+The corrected RAM staging path was exercised on the actual tablet: /tmp resolves
+to itself and is explicitly mounted tmpfs; an exact16MiB rollback image uploaded
+there, two complete RAM readbacks matched the verified backup, and the temporary
+RAM file/directory were removed. The boot partition remained unchanged by full
+hash readback. The final RAM-file-to-block dd operation remains unexecuted. No
+recovery replacement, firmware write, automatic reboot or new owner trip occurred.

@@ -10,7 +10,9 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import secrets
 import subprocess
+import tempfile
 
 BOOT = '/dev/block/mmcblk0p5'
 RECOVERY = '/dev/block/mmcblk0p6'
@@ -53,6 +55,13 @@ class Adb:
             raise ValueError('Partition read size mismatch; no trimming permitted')
         return data
 
+    def push(self, data, destination):
+        with tempfile.TemporaryDirectory(prefix='valethonos-rollback-') as folder:
+            source = Path(folder) / 'boot.img'
+            source.write_bytes(data)
+            source.chmod(0o600)
+            self.run(['push', str(source), destination])
+
 
 def preflight(adb, backup, manifest, expected_current):
     validate_backup(backup, manifest)
@@ -75,6 +84,26 @@ def preflight(adb, backup, manifest, expected_current):
     return current
 
 
+def memory_staging(adb, backup):
+    if adb.run(['exec-out', 'readlink', '-f', '/tmp']).strip() != b'/tmp':
+        raise ValueError('Recovery /tmp must not redirect to storage')
+    mounts = adb.run(['exec-out', 'cat', '/proc/mounts']).splitlines()
+    entries = [line.split() for line in mounts]
+    selected = [entry for entry in entries if len(entry) >= 4 and entry[1] == b'/tmp']
+    if len(selected) != 1 or selected[0][2] != b'tmpfs' or b'rw' not in selected[0][3].split(b','):
+        raise ValueError('Explicit writable tmpfs /tmp mount required')
+    folder = '/tmp/valethonos-rollback-' + secrets.token_hex(16)
+    # Legacy recovery lacks shell-v2 status. exec-out merges remote errors into
+    # stdout, so successful mkdir must have empty output; never adopt a path.
+    if adb.run(['exec-out', 'mkdir', '-m', '700', folder]):
+        raise ValueError('Exclusive recovery RAM staging failed')
+    destination = folder + '/boot.img'
+    adb.push(backup, destination)
+    if sha(adb.read(destination, BOOT_BYTES)) != sha(backup):
+        raise ValueError('RAM staging readback mismatch; no block write permitted')
+    return folder, destination
+
+
 def restore(adb, backup, manifest, expected_current, receipt_path):
     current = preflight(adb, backup, manifest, expected_current)
     receipt = {'operation': 'full boot rollback only', 'boot_before_sha256': current,
@@ -88,17 +117,30 @@ def restore(adb, backup, manifest, expected_current, receipt_path):
         os.fsync(stream.fileno())
     try:
         if current != sha(backup):
+            folder, destination = memory_staging(adb, backup)
+            receipt['private_ram_staging'] = folder
+            # Recheck both partitions after the upload, before the sole write.
+            preflight(adb, backup, manifest, expected_current)
             receipt['write_started'] = True
             Path(receipt_path).write_text(json.dumps(receipt, indent=2) + '\n')
-            # -T disables PTY translation. No staging file or userdata mount.
-            # Constant destination; image bytes are stdin, never shell source.
-            adb.run(['shell', '-T', 'cat > /dev/block/mmcblk0p5'], backup)
-            adb.run(['shell', 'sync'])
+            # File-to-block copy avoids unsupported shell-v2 / stdin EOF paths.
+            # Full-sized regular RAM file; no short-read pipe or PTY translation.
+            adb.run(['exec-out', 'dd', 'if=' + destination, 'of=' + BOOT,
+                     'bs=4096', 'count=4096'])
+            adb.run(['exec-out', 'sync'])
         if sha(adb.read(BOOT, BOOT_BYTES)) != sha(backup):
             raise ValueError('Rollback readback mismatch; leave recovery running')
         if sha(adb.read(RECOVERY, RECOVERY_BYTES)) != manifest['recovery']['sha256']:
             raise ValueError('Recovery identity changed; stop')
         receipt['verified'] = True
+        if 'private_ram_staging' in receipt:
+            adb.run(['exec-out', 'rm', destination])
+            adb.run(['exec-out', 'rmdir', folder])
+            # Legacy shell returns no usable remote exit status: require a marker.
+            check = 'if [ -e ' + folder + ' ]; then echo LEFT; else echo RAM_CLEAN; fi'
+            if adb.run(['shell', check]).strip() != b'RAM_CLEAN':
+                raise ValueError('Rollback verified but private RAM cleanup unconfirmed')
+            receipt['ram_staging_cleanup_verified'] = True
     finally:
         Path(receipt_path).write_text(json.dumps(receipt, indent=2) + '\n')
     return receipt

@@ -21,6 +21,12 @@
   "recovery_component_sha1_matches_header": true,
   "diagnostic_capture_blocker": "Current diagnostic config disables USB, storage and display; RAM survival across full power-off is unqualified.",
   "rollback_default_preflight_on_device_passed": true,
-  "rollback_host_tests_passed": 6,
-  "repository_host_tests_passed": 513
+  "rollback_host_tests_passed": 7,
+  "repository_host_tests_passed": 514,
+  "shell_v2_pty_disabled_transport_supported": false,
+  "raw_eof_dependent_echo_timed_out": true,
+  "actual_tmpfs_staging_bytes": 16777216,
+  "actual_tmpfs_staging_two_readbacks_match": true,
+  "boot_unchanged_after_staging": true,
+  "restore_uses_verified_ram_file": true
 }

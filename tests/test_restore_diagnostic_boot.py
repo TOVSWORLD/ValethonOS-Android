@@ -23,6 +23,8 @@ class FakeAdb:
         self.fail_write = False
         self.bad_write = False
         self.alias = None
+        self.staged = {}
+        self.bad_ram = False
 
     def run(self, args, data=None):
         self.calls.append(args)
@@ -34,19 +36,32 @@ class FakeAdb:
             if self.alias:
                 return self.alias
             return (rollback.BOOT if args[2].split('/')[-1].startswith('boot') else rollback.RECOVERY).encode()
-        if args == ['shell', '-T', 'cat > /dev/block/mmcblk0p5']:
+        if args[:2] == ['exec-out', 'readlink']:
+            return b'/tmp\n'
+        if args == ['exec-out', 'cat', '/proc/mounts']:
+            return b'tmpfs /tmp tmpfs rw,seclabel 0 0\n'
+        if args[:2] in [['exec-out', 'mkdir'], ['exec-out', 'rm'], ['exec-out', 'rmdir']]:
+            return b''
+        if args[:2] == ['exec-out', 'dd']:
             self.writes += 1
             if self.fail_write:
                 raise ValueError('Interrupted write')
             if not self.bad_write:
-                self.boot = data
+                self.boot = self.staged[args[2][3:]]
             return b''
-        if args == ['shell', 'sync']:
+        if args == ['exec-out', 'sync']:
             return b''
+        if args[0] == 'shell' and args[1].startswith('if [ -e /tmp/valethonos-rollback-'):
+            return b'RAM_CLEAN'
         raise AssertionError(args)
 
     def read(self, node, size):
+        if node in self.staged:
+            return b'x' * size if self.bad_ram else self.staged[node]
         return self.boot if node == rollback.BOOT else self.recovery
+
+    def push(self, data, destination):
+        self.staged[destination] = data
 
 
 class RollbackTests(unittest.TestCase):
@@ -100,6 +115,14 @@ class RollbackTests(unittest.TestCase):
                 rollback.restore(adb, BACKUP, MANIFEST, rollback.sha(TRIAL), path)
             self.assertEqual(adb.writes, 0)
             self.assertEqual(path.read_text(), 'preserve')
+
+    def test_corrupt_ram_upload_never_writes_boot(self):
+        with tempfile.TemporaryDirectory() as temp:
+            adb = FakeAdb()
+            adb.bad_ram = True
+            with self.assertRaises(ValueError):
+                rollback.restore(adb, BACKUP, MANIFEST, rollback.sha(TRIAL), Path(temp) / 'receipt')
+            self.assertEqual(adb.writes, 0)
 
     def test_already_restored_verifies_without_write(self):
         with tempfile.TemporaryDirectory() as temp:
