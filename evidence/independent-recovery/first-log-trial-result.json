@@ -18,7 +18,7 @@
     "original_recovery_full_hash_matched": true,
     "all_four_aliases_matched": true
   },
-  "owner_screen_observation": "pending",
+  "owner_screen_observation": "TWRP recovery menu, explicitly reported by owner",
   "original_boot_restored_once": true,
   "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
   "recovery_unchanged_verified": true,

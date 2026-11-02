@@ -81,7 +81,9 @@ def capture(plan, nonce, output):
     os.fsync(directory)  # Durable directory entry before any identity ACK.
     port = None
     original = None
-    result = {'complete': False, 'device_qualified': False, 'failure': None, 'cleanup': []}
+    result = {'complete': False, 'device_qualified': False, 'failure': None, 'cleanup': [],
+              'failure_stage': None, 'endpoint_selected': False, 'port_opened': False}
+    stage = 'waiting_for_port'
     try:
         end = time.monotonic() + plan['wait_seconds']
         selected = None
@@ -92,24 +94,34 @@ def capture(plan, nonce, output):
                 raise ValueError('Ambiguous interfaces at selected physical device')
             if matches:
                 selected = matches[0]
+                result['endpoint_selected'] = True
                 break
             time.sleep(0.1)
         if selected is None:
             raise ValueError('Bounded physical-port wait expired')
         # One open only, no retry on disconnect/failed trial.
+        stage = 'opening_port'
         port = os.open(selected['endpoint'], os.O_RDWR | os.O_NONBLOCK | os.O_NOCTTY | os.O_NOFOLLOW | os.O_CLOEXEC)
+        result['port_opened'] = True
+        stage = 'validating_opened_identity'
         s = os.fstat(port)
         after = endpoint_identity(Path(selected['endpoint']).name, plan)
         if not stat.S_ISCHR(s.st_mode) or s.st_rdev != selected['rdev'] or after != selected:
             raise ValueError('Physical endpoint changed during open')
+        stage = 'claiming_exclusive_port'
         fcntl.ioctl(port, termios.TIOCEXCL)
+        stage = 'configuring_raw_tty'
         original = termios.tcgetattr(port)
         termios.tcsetattr(port, termios.TCSANOW, raw_settings(original))
         host_raw_settings(termios.tcgetattr(port))
+        stage = 'receiving_wire'
         result.update(receive_fd(port, raw, nonce, time.monotonic() + 30))
     except (Exception, KeyboardInterrupt) as error:
         result['complete'] = False
         result['failure'] = type(error).__name__
+        result['failure_stage'] = stage
+        if isinstance(error, OSError):
+            result['error_number'] = error.errno
     finally:
         if port is not None:
             if original is not None:

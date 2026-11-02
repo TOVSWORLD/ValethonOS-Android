@@ -101,6 +101,35 @@ class LabCapture(unittest.TestCase):
             os.close(master)
             os.close(slave)
 
+    def test_missing_endpoint_records_stage_without_device_open(self):
+        with tempfile.TemporaryDirectory() as d, \
+             patch.object(receiver.time, 'monotonic', side_effect=[0, 2]), \
+             patch.object(Path, 'glob', return_value=[]):
+            result = receiver.capture({'wait_seconds': 1}, bytes(range(32)), Path(d) / 'timeout')
+            self.assertFalse(result['complete'])
+            self.assertEqual(result['failure_stage'], 'waiting_for_port')
+            self.assertFalse(result['endpoint_selected'])
+            self.assertFalse(result['port_opened'])
+            self.assertEqual((Path(d) / 'timeout/raw.bin').stat().st_size, 0)
+
+    def test_port_open_failure_retains_safe_stage_and_errno(self):
+        selected = {'endpoint': '/dev/ttyACM-fixture', 'rdev': 0, 'sysfs': 'private-fixture'}
+        original_open = os.open
+        def guarded_open(path, *args, **kwargs):
+            if path == selected['endpoint']:
+                raise PermissionError(13, 'private device path must not enter receipt')
+            return original_open(path, *args, **kwargs)
+        with tempfile.TemporaryDirectory() as d, \
+             patch.object(receiver, 'endpoint_identity', return_value=selected), \
+             patch.object(Path, 'glob', return_value=[Path('ttyACM0')]), \
+             patch.object(receiver.os, 'open', side_effect=guarded_open):
+            result = receiver.capture({'wait_seconds': 1}, bytes(range(32)), Path(d) / 'denied')
+            self.assertEqual(result['failure_stage'], 'opening_port')
+            self.assertEqual(result['error_number'], 13)
+            self.assertTrue(result['endpoint_selected'])
+            self.assertFalse(result['port_opened'])
+            self.assertNotIn('private device path', str(result))
+
     def test_host_raw_settings_from_real_software_pty(self):
         master, slave = os.openpty()
         try:

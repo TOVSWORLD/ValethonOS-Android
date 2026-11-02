@@ -4165,3 +4165,19 @@ without trigger; older host rules/ModemManager unchanged. Private receipts/logs
 retained on lab/controller. No deliberate failure, kernel-entry/log pass,346/348
 closure or automatic retry/rebuild. Next is concrete early handoff/USB observability
 diagnosis within346 using this failed trial, not another physical action.
+
+## 2026-11-02 — #346 safe failure-stage receipts after empty-log trial
+
+Recorded necessary host-observability prerequisite on346/344 before code. Capture
+receipts now distinguish waiting for a port, opening, opened-identity validation,
+exclusive claim, raw configuration and wire receipt; record whether an endpoint
+was selected/opened and only numeric errno, never raw exception text/paths.
+Return-supervisor failures now identify their lifecycle stage. No wait/launch/
+write/reboot/retry behavior changed. Added missing-endpoint and denied-open
+negative controls; existing software-TTY end-to-end and lifecycle tests pass.
+These prospective fields do not retroactively explain the first trial's generic
+ValueError or establish a kernel boot stage. No device query, rearm or build.
+
+Owner subsequently explicitly reported the TWRP recovery menu. This corroborates
+the observed recovery return and does not change empty logs/no maintained-kernel
+entry evidence or the separate unpassed intended-failure gates.

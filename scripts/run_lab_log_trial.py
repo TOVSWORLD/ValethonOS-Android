@@ -73,6 +73,7 @@ def main():
     result = {'armed': False, 'recovery_observed': False, 'failed_load_qualified': False,
               'device_write_performed': False, 'automatic_reboot': False}
     claimed = False
+    stage = 'input_and_device_preflight'
     try:
         plan = json.loads(private_bytes(a.plan, 4096))
         report = json.loads(private_bytes(a.candidate_report, 65536))
@@ -116,19 +117,26 @@ def main():
             f.flush()
             os.fsync(f.fileno())
         claimed = True
+        stage = 'owner_boot_capture_and_return'
         result.update(lifecycle(present,
                                lambda: run_capture(a.plan, a.candidate_report, a.nonce, a.output),
                                lambda: choose_port(scan_ports(), identity['path']),
                                lambda port, seconds: launch_helper(a.modules, port, seconds,
                                                                   a.receipt.with_suffix('.helper-private.log'))))
+        stage = 'checking_helper_exit'
         if result['helper_returncode'] != 0:
             raise ValueError('One-shot return helper did not succeed')
+        stage = 'waiting_for_recovery_adb'
         adb.run(['wait-for-recovery'])
+        stage = 'validating_returned_recovery'
         preflight(adb, candidate, manifest, sha(candidate))
         result['recovery_observed'] = True
         result['candidate_still_installed'] = True
     except (ValueError, KeyError, OSError, TimeoutError, subprocess.SubprocessError, KeyboardInterrupt) as error:
         result['failure'] = type(error).__name__
+        result['failure_stage'] = stage
+        if isinstance(error, OSError):
+            result['error_number'] = error.errno
     finally:
         if claimed:
             update_receipt(a.receipt, result)
