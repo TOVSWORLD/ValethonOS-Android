@@ -43,7 +43,7 @@ int main(void){
             source = Path(d) / 'adapter.c'
             source.write_text(code)
             binary = Path(d) / 'adapter'
-            subprocess.run(['clang', '-std=c11', '-fsanitize=address,undefined',
+            subprocess.run(['cc', '-std=c11', '-fsanitize=address,undefined',
                             '-I', str(ROOT / 'projects/firetabs-android/diagnostic-usb'),
                             str(source), '-o', str(binary)], check=True, capture_output=True)
             subprocess.run([str(binary)], check=True, capture_output=True)

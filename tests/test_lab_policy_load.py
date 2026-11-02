@@ -56,8 +56,10 @@ int main(void){
   int used=bad.calls;assert(vp_bootstrap(&io,policy,sizeof(policy),&attempt)==-16&&bad.calls==used);
  }
  for(int mode=0;mode<4;mode++){
-  struct fake bad={0};if(mode==0)bad.probe=30;if(mode==1)bad.probe=-13;
-  if(mode==2)bad.permissive=1;if(mode==3)bad.short_write=1;
+  struct fake bad={0};if(mode==0)bad.probe=30;
+  if(mode==1)bad.probe=-13;
+  if(mode==2)bad.permissive=1;
+  if(mode==3)bad.short_write=1;
   io.ctx=&bad;struct vp_state attempt={0};assert(vp_bootstrap(&io,policy,sizeof(policy),&attempt)<0);
   assert(bad.writes==(mode==3?1:0));assert(!attempt.readonly);
  }

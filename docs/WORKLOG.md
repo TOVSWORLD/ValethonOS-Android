@@ -4112,3 +4112,10 @@ lab-log kernel profile and offline checked boot packer. Old admission flags rema
 denied. Build-script source locks refreshed for explicit additive mode only;
 existing peripheral paths unchanged. Physical first-trial logging/return remains
 unqualified, no device write/reboot and no task closure.
+
+The first loader-sized build41527196222 stopped at resolved-config validation,
+before compilation: VT selected INPUT and generic policy retained PERF_EVENTS.
+Disabled unused VT/HID, retained generic PERF_EVENTS with the hardware PMU DT
+node disabled. Linux-host reproduction also caught GCC misleading-indentation in
+a test fixture (Mac clang accepted it); fixed the fixture and portable cc usage.
+No security restriction weakened and no failed compile counted as a device trial.
