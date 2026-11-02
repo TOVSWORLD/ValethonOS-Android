@@ -56,6 +56,8 @@ def compile_policy(output):
         'policy_reload': '(allow trial_domain security_t (security (load_policy)))',
         'block_read': '(allow trial_domain rootfs_t (blk_file (read)))',
         'reboot_capability': '(allow trial_domain self (capability (sys_boot)))',
+        'pid1_fork': '(allow init_t self (process (fork)))',
+        'pid1_domain_escape': '(allow init_t kernel_t (process (dyntransition)))',
     }.items():
         mutant = output / (name + '.cil')
         mutant.write_text(policy.read_text() + '\n' + rule + '\n')

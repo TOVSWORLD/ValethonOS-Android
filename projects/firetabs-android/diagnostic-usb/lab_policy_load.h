@@ -10,7 +10,7 @@
 #define VP_NR_READ 63
 #define VP_NR_WRITE 64
 #define VP_AT_FDCWD -100
-#define VP_NOFOLLOW 00400000
+#define VP_NOFOLLOW 0100000
 #define VP_CLOEXEC 02000000
 struct vp_io {long (*call)(void *,long,long,long,long,long,long,long);void *ctx;};
 struct vp_state {int attempted,mounted,loaded,readonly;};

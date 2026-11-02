@@ -394,3 +394,55 @@ receipts/log inspection and actual recovery identity are checked from the desk;
 then explicitly restore the full original p5 and verify both partitions, leaving
 TWRP running. Intended post-handshake failure qualification is a later reviewed
 step after this normal log bringup. Early failures before logging stay uncovered.
+
+## Post-trial correction — ARM64 flags, labels and PID1 domain
+
+The empty capture does not prove that the tablet kernel never entered. A generic
+ARM64 VM using the exact retained Image reproduced deterministic software blockers
+inside the trial PID1, independently of the tablet loader/controller:
+
+- The adapter's generic O_DIRECTORY00200000 is ARM64 O_DIRECT, so opening the UDC
+  directory returns EINVAL. ARM64 O_DIRECTORY is0040000; O_NOFOLLOW is0100000,
+  not the generic00400000. The prior ABI validator checked only asm-generic and
+  therefore falsely accepted these values. The exact ARM64 override header is now
+  pinned, checked before generic fallbacks, and former wrong values are negatives.
+- Rootfs/configfs are not in the pinned kernel's per-path GENFS handling list.
+  Preloaded/dev,/dev/console,/dev/kmsg retain rootfs_t, rather than the per-path
+  labels assumed by the first policy. A VM probe observed enforcing denials for
+  kmsg reading and creating the ACM node. PID1 now verifies exact object type and
+  device numbers, labels only these three static objects with valid contexts,
+  and reads their labels back. No forced label/MAC_ADMIN/permissive mode is used.
+- Configfs has a uniform configfs_t label. The corrected policy permits the real
+  required operations on that isolated filesystem; PID1 first requires a USB-only
+  configfs root and an empty gadget namespace. Every mutating adapter still uses
+  its fixed path allowlist, with no arbitrary path or preexisting gadget adoption.
+- A longer VM run caught delayed kernel-worker fork denial. The old compiler's
+  policy lacks userspace_initial_context support, so initial userspace and kernel
+  workers both map to kernel_t. PID1 now uses the pinned LSM self-context API to
+  enter init_t once and verify the returned SELinux context/enforcement. Proc stays
+  read-only. Kernel-worker fork is permitted; PID1 fork, reverse domain transition,
+  setcurrent, policy reload, enforcement toggle, raw/block IO and reboot remain
+  forbidden. Six actual compiler-negative mutations are rejected. No kernel LSM
+  change, new compiler or general proc write permission is introduced.
+
+The reproducible `validate_lab_policy_vm.py` regression runs20s on one emulated
+Cortex-A53/512MiB, no disks/network, bounded logs. It checks enforcing policy and
+PID1 context, corrected directory access, real kmsg reads, real ACM configfs
+creation/attributes/link and cleanup, empty namespace afterward, and the former
+flags' EINVAL negative control. Only the final UDC bind is intercepted in the
+VM-only fixture; this is explicitly not USB hardware/loader acceptance. All
+markers pass and no AVC denial is observed over the full interval. Future lab-log
+kernel workflows run this regression after retaining compiled artifacts.
+
+The revised private fullp5 image is
+4ec14bf8774949ff36ad2173fb9267f6d5dffb2d155f8be485521863dd10741b,
+16,777,216B with6,533,120B aligned payload. Init52,800B and initramfs13,686B
+replace only userspace/policy; the retained kernel and own DT are unchanged.
+Independent header-ID/padding/gzip/DT/initramfs and memory-range checks pass.
+See corrected-candidate-result.json, corrected-policy-build.json and
+abi-label-vm-result.json under evidence/independent-recovery. The failed original
+candidate and receipts remain historical; its old approval/arm receipt must not
+be reused. Revised bytes are offline and unarmed. Any future physical test requires
+review of this changed exact candidate, fresh read-only preflight/receipts and owner
+availability. Tablet remains original boot restored/TWRP running. Physical entry,
+USB capture and intended failed-load/348 acceptance remain open.

@@ -63,7 +63,8 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
             or sha(policy) != report['policy_sha256'] or report['policy_version'] != 33
             or report['permissive_domains'] is not False or report['unknown_permissions'] != 'deny'
             or set(report['forbidden_privilege_mutations_rejected']) != {
-                'enforcement_toggle', 'policy_reload', 'block_read', 'reboot_capability'}
+                'enforcement_toggle', 'policy_reload', 'block_read', 'reboot_capability',
+                'pid1_fork', 'pid1_domain_escape'}
             or not all(report['forbidden_privilege_mutations_rejected'].values())):
         raise ValueError('Exact enforcing policy/negative-control report required')
     for name, expected in report['source_sha256'].items():

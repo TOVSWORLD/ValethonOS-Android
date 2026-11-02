@@ -1,0 +1,34 @@
+{
+  "scope": "Policy compilation and compiler-enforced negative controls only; no policy load",
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "compiler_packages": {
+    "secilc": {
+      "version": "3.5-1",
+      "sha256": "cd5d2128c17083d2433b046ea9312352a8fcc4a73f7b9c421cca25368e753250"
+    },
+    "checkpolicy": {
+      "version": "3.5-1",
+      "sha256": "372f1e328705f4d039042fbf51226e1dd6f828f164906cd924b794c4cf8e48a2"
+    }
+  },
+  "source_sha256": {
+    "ack-abi.cil": "6cc1ad40f0df91a40aa2905ddf984c5e4c59fdd72025ecf30fd0be6a1c9ccec0",
+    "diagnostic.cil": "a43a68456271f4c47ec5b197868abfe28d55af10cb00abd631b1143530afe93d"
+  },
+  "policy_version": 33,
+  "policy_bytes": 33979,
+  "policy_sha256": "5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8",
+  "unknown_permissions": "deny",
+  "permissive_domains": false,
+  "forbidden_privilege_mutations_rejected": {
+    "enforcement_toggle": true,
+    "policy_reload": true,
+    "block_read": true,
+    "reboot_capability": true,
+    "pid1_fork": true,
+    "pid1_domain_escape": true
+  },
+  "kernel_policy_load_tested": false,
+  "runtime_qualified": false,
+  "tablet_security_changed": false
+}

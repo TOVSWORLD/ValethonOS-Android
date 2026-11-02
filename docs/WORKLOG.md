@@ -4181,3 +4181,29 @@ ValueError or establish a kernel boot stage. No device query, rearm or build.
 Owner subsequently explicitly reported the TWRP recovery menu. This corroborates
 the observed recovery return and does not change empty logs/no maintained-kernel
 entry evidence or the separate unpassed intended-failure gates.
+
+## 2026-11-02 — #346 confirmed pre-USB software blockers corrected in VM
+
+Recorded isolation/ABI/label/domain prerequisites on346/344 before code. Exact
+retained kernel + old userspace generic VM reproduces wrong rootfs labels. Pinned
+ARM64 fcntl header proves old O_DIRECTORY was actually O_DIRECT; real VM open
+returns EINVAL. Corrected flags + validator override precedence/negative controls.
+Corrected three verified static dev labels/readbacks and actual configfs type,
+with USB-only/empty namespace and fixed mutating path allowlists retained.
+Longer VM caught kernel-worker fork denial; isolated PID1 into init_t through
+checked LSM self-context API, proc remains readonly. Six compiler controls reject
+PID1 fork/escape and existing forbidden privileges; no enforcement/security bypass.
+
+Reproducible full20s one-core512MiB VM passes context, directory, kmsg and actual
+configfs setup/cleanup with no AVC denials; final bind is VM-intercepted, not USB
+hardware proof. Retained kernel reused, no kernel build or tablet operation.
+Revised offline fullp5 candidate4ec14bf8774949ff36ad2173fb9267f6d5dffb2d155f8be485521863dd10741b
+packs/independently validates; payload6,533,120B, initramfs13,686B. No new arm/write.
+The first physical failure stage is still not observed; these are proven software
+blockers and corrections, not retrospective tablet-entry acceptance.
+
+Final validation:545 controller tests/repository pass;23 current Linux lab tests
+pass, including actual C ABI/labels/domain failure paths. Six policy privilege
+mutations rejected. The regression remains running for its full20-second budget
+to catch delayed worker denials; it does not stop at the first success marker.
+No kernel rebuild, tablet query/write/reboot or new trial arm during diagnosis.

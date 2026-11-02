@@ -24,8 +24,6 @@
 (type proc_t)
 (type sys_t)
 (type configfs_t)
-(type gadget_root_t)
-(type gadget_t)
 (type protected_t)
 (typeattribute trial_domain)
 (typeattributeset trial_domain (kernel_t init_t))
@@ -41,23 +39,17 @@
 (roletype object_r proc_t)
 (roletype object_r sys_t)
 (roletype object_r configfs_t)
-(roletype object_r gadget_root_t)
-(roletype object_r gadget_t)
 (roletype object_r protected_t)
 ; All archive paths are RAM; no block filesystem/node is admitted.
 (genfscon rootfs / (system_u object_r rootfs_t ((s0) (s0))))
-(genfscon rootfs /dev (system_u object_r dev_dir_t ((s0) (s0))))
-(genfscon rootfs /dev/kmsg (system_u object_r kmsg_t ((s0) (s0))))
-(genfscon rootfs /dev/console (system_u object_r console_t ((s0) (s0))))
-(genfscon rootfs /dev/firetabs-acm (system_u object_r tty_t ((s0) (s0))))
+; Rootfs per-path genfs entries are not applied by this kernel.
+; Explicit one-time label/readback uses valid contexts under enforcement.
 (genfscon proc / (system_u object_r proc_t ((s0) (s0))))
 (genfscon proc /sysrq-trigger (system_u object_r protected_t ((s0) (s0))))
 (genfscon proc /kmsg (system_u object_r protected_t ((s0) (s0))))
 (genfscon sysfs / (system_u object_r sys_t ((s0) (s0))))
 (genfscon selinuxfs / (system_u object_r security_t ((s0) (s0))))
 (genfscon configfs / (system_u object_r configfs_t ((s0) (s0))))
-(genfscon configfs /usb_gadget (system_u object_r gadget_root_t ((s0) (s0))))
-(genfscon configfs /usb_gadget/firetabs-diagnostic (system_u object_r gadget_t ((s0) (s0))))
 (allow trial_domain self (capability (sys_admin mknod)))
 (allow trial_domain self (capability2 (syslog)))
 (allow trial_domain kernel_t (system (syslog_read)))
@@ -84,14 +76,6 @@
 (allow trial_domain security_t (filesystem (mount remount unmount getattr)))
 (allow trial_domain configfs_t (filesystem (mount unmount getattr)))
 (allow trial_domain configfs_t (dir (search read open getattr)))
-; Parent name transition grants creation of the one owned gadget subtree.
-(allow trial_domain gadget_root_t (dir (search read open getattr write add_name remove_name)))
-(typetransition kernel_t gadget_root_t dir "firetabs-diagnostic" gadget_t)
-(typetransition init_t gadget_root_t dir "firetabs-diagnostic" gadget_t)
-(allow trial_domain gadget_t (dir (create search read open getattr write add_name remove_name rmdir)))
-(allow trial_domain gadget_t (file (read write open getattr)))
-(allow trial_domain gadget_t (lnk_file (create read getattr unlink)))
-(allow gadget_t configfs_t (filesystem (associate)))
 ; These negative invariants must survive every policy compilation.
 (neverallow trial_domain security_t (security (setenforce load_policy setbool)))
 (neverallow trial_domain self (capability (sys_boot sys_module sys_rawio)))
@@ -99,5 +83,30 @@
 (neverallow trial_domain protected_t (file (read write open append)))
 
 (typeattribute all_trial_types)
-(typeattributeset all_trial_types (kernel_t init_t security_t unlabeled_t rootfs_t dev_dir_t kmsg_t console_t tty_t proc_t sys_t configfs_t gadget_root_t gadget_t protected_t))
+(typeattributeset all_trial_types (kernel_t init_t security_t unlabeled_t rootfs_t dev_dir_t kmsg_t console_t tty_t proc_t sys_t configfs_t protected_t))
 (neverallow trial_domain all_trial_types (blk_file (open read write ioctl create getattr)))
+
+; Only verified static archive objects are relabelled by the bounded PID1.
+(allow kernel_t rootfs_t (dir (relabelfrom)))
+(allow kernel_t rootfs_t (chr_file (getattr relabelfrom)))
+(allow kernel_t dev_dir_t (dir (relabelto)))
+(allow kernel_t console_t (chr_file (relabelto)))
+(allow kernel_t kmsg_t (chr_file (relabelto)))
+(allow dev_dir_t rootfs_t (filesystem (associate)))
+(allow console_t rootfs_t (filesystem (associate)))
+(allow kmsg_t rootfs_t (filesystem (associate)))
+; Configfs is uniformly configfs_t, not path-labelled. PID1 verifies USB-only
+; root + empty gadget namespace and all mutating adapters use fixed path lists.
+(allow trial_domain configfs_t (dir (create write add_name remove_name rmdir)))
+(allow trial_domain configfs_t (file (read write open getattr)))
+(allow trial_domain configfs_t (lnk_file (create read getattr unlink)))
+(allow configfs_t configfs_t (filesystem (associate)))
+
+; Initial userspace maps to kernel_t without a newer policycap. Transition only
+; PID1 through the LSM self-context API, then deny userspace fork/escape.
+(allow kernel_t self (process (fork setcurrent)))
+(allow kernel_t init_t (process (dyntransition)))
+(neverallow init_t self (process (fork setcurrent)))
+(neverallow init_t kernel_t (process (transition dyntransition)))
+(neverallow init_t rootfs_t (dir (relabelfrom)))
+(neverallow init_t rootfs_t (chr_file (relabelfrom)))

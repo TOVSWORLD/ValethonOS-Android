@@ -15,6 +15,24 @@ def integer(value):
     return int(value,0)
 
 
+def file_flags():
+    generic = (EVIDENCE/'fcntl-generic.h').read_text()
+    arm64 = (EVIDENCE/'arm64-fcntl.h').read_text()
+    linux = (EVIDENCE/'fcntl-linux.h').read_text()
+    if '#include <asm-generic/fcntl.h>' not in arm64:
+        raise ValueError('ARM64 fcntl include chain drift')
+    numeric = r'^#define ([A-Z_]+)\s+(-?(?:0x[0-9a-f]+|[0-9]+))\b'
+    flags = dict(re.findall(numeric, generic+'\n'+linux, re.M))
+    overrides = dict(re.findall(numeric, arm64, re.M))
+    if set(overrides) != {'O_DIRECTORY','O_NOFOLLOW','O_DIRECT','O_LARGEFILE'}:
+        raise ValueError('ARM64 fcntl override set drift')
+    for name in overrides:
+        if '#ifndef '+name not in generic:
+            raise ValueError('Generic fallback no longer guarded: '+name)
+    flags.update(overrides)
+    return {name: integer(value) for name,value in flags.items()}
+
+
 def validate():
     receipt=json.loads((EVIDENCE/'sources.json').read_text())
     for entry in receipt['sources']:
@@ -39,10 +57,13 @@ def validate():
             if table.get(syscall)!=integer(value):raise ValueError('Syscall ABI mismatch: '+name)
             checked[syscall]=integer(value)
     if len(checked)!=8:raise ValueError('Unexpected syscall adapter set')
-    flags=(EVIDENCE/'fcntl-generic.h').read_text()+'\n'+(EVIDENCE/'fcntl-linux.h').read_text()
+    flags=file_flags()
     for name in ['O_WRONLY','O_DIRECTORY','O_NOFOLLOW','O_CLOEXEC','AT_FDCWD','AT_REMOVEDIR']:
-        match=re.search(r'^#define '+name+r'\s+(-?(?:0x[0-9a-f]+|[0-9]+))\b',flags,re.M)
-        if not match or integer(match[1])!=integer(macros['FT_'+name]):raise ValueError('File ABI mismatch: '+name)
+        if flags.get(name)!=integer(macros['FT_'+name]):raise ValueError('File ABI mismatch: '+name)
+    policy=(ROOT/'projects/firetabs-android/diagnostic-usb/lab_policy_load.h').read_text()
+    match=re.search(r'^#define VP_NOFOLLOW\s+([0-9]+)$',policy,re.M)
+    if not match or integer(match[1])!=flags['O_NOFOLLOW']:
+        raise ValueError('Policy bootstrap ARM64 nofollow mismatch')
     configfs=(EVIDENCE/'configfs.c').read_text()
     for token in ["if (name[len - 1] == '\\n')", "name[len - 1] = '\\0';", 'if (!gi->composite.gadget_driver.udc_name)', 'return -ENODEV;', 'udc_name ?: ""']:
         if token not in configfs:raise ValueError('Configfs unbind/readback contract drift')
@@ -54,7 +75,7 @@ def validate():
     if 'ALIGN(offsetof(struct linux_dirent64, d_name) + namlen + 1,' not in readdir or 'sizeof(u64)' not in readdir:
         raise ValueError('Dirent alignment contract drift')
     return {'scope':'Pinned source/ABI checks only; no filesystem or gadget execution',
-            'syscalls':checked,'configfs_newline_unbind_and_empty_readback_checked':True,
+            'syscalls':checked,'arm64_file_flags':{n:flags[n] for n in ['O_DIRECTORY','O_NOFOLLOW','O_DIRECT','O_LARGEFILE']},'configfs_newline_unbind_and_empty_readback_checked':True,
             'expected_controller_parent_source_checked':True,'runtime_qualified':False}
 
 

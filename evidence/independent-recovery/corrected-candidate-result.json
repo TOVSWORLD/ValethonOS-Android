@@ -1,0 +1,55 @@
+{
+  "scope": "Revised offline candidate with VM-proven ARM64 flag/SELinux labeling/domain corrections; no physical admission",
+  "supersedes_candidate_for_future_review": "dde5d2bb3151a73b83a823639d3790416ac2321f3194b04ae57ddad731d7b429",
+  "candidate": {
+    "partition_bytes": 16777216,
+    "partition_sha256": "4ec14bf8774949ff36ad2173fb9267f6d5dffb2d155f8be485521863dd10741b",
+    "payload_bytes": 6533120,
+    "component_sha1": "cd880620b492acb37043a4eb36df834241de0317",
+    "entry": 1073741824,
+    "runtime_regions": [
+      [
+        1073741824,
+        15925248
+      ],
+      [
+        1128792064,
+        54272
+      ],
+      [
+        1207959552,
+        1048576
+      ],
+      [
+        1157627904,
+        27408
+      ]
+    ]
+  },
+  "kernel_unchanged": true,
+  "kernel_sha256": "a37997fb2a2590287941d3bfc5e2b4f099e7ed30f94931a3ba138b1a14d57ec7",
+  "kernel_run": 41528041827,
+  "dt_unchanged": true,
+  "initramfs": {
+    "init": {
+      "bytes": 52800,
+      "sha256": "043ec1738ed339bd0f765cede344b10eef6127b37238e663a71ad6e57eadc726"
+    },
+    "initramfs.cpio.gz": {
+      "bytes": 13686,
+      "sha256": "38dba7a3b27a46dfdfbd945c3063f7e66e0ffcabb79d9fd9884c893d44e41abb"
+    }
+  },
+  "policy_sha256": "5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8",
+  "vm_report": "evidence/independent-recovery/abi-label-vm-result.json",
+  "independent_header_id_padding_gzip_components_checked": true,
+  "old_generic_directory_flag_reproduces_einval_in_vm": true,
+  "selinux_enforcing": true,
+  "kernel_rebuilt": false,
+  "device_written": false,
+  "armed": false,
+  "physical_execution_admitted": false,
+  "maintained_kernel_entry_observed": false,
+  "failed_load_return_qualified": false,
+  "retained_failure_logs_qualified": false
+}

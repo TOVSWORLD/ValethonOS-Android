@@ -5,6 +5,8 @@
  */
 #include "lab_log_io.h"
 #include "lab_policy_load.h"
+#include "lab_labels.h"
+#include "lab_domain.h"
 #include "lab_inputs.h" /* Builder-generated immutable policy blob and fresh nonce. */
 static long lab_call(void *ctx,long nr,long a,long b,long c,long d,long e,long f) {
  (void)ctx;
@@ -21,10 +23,13 @@ static void lab_note(struct ft_acm_io *io,const char *text,unsigned long n) {
  ft_call(io,FT_NR_WRITE,fd,(long)text,n,0,0,0);
  ft_call(io,FT_NR_CLOSE,fd,0,0,0,0,0);
 }
-static int lab_run(struct ft_acm_io *io) {
+static int lab_run(struct ft_acm_io *io,int *stage) {
+ *stage=1;
  struct vp_io policy_io={io->call,io->ctx};struct vp_state policy={0};
  int result=vp_bootstrap(&policy_io,lab_policy_blob,sizeof(lab_policy_blob),&policy);
  if(result||!policy.loaded||!policy.readonly)return result?result:-1;
+ *stage=2;
+ result=ll_label_archive(io);if(result)return result;
  /* Existing qualified-output program/gates remain unchanged. This separate
   * candidate performs first-trial provisions/checks rather than claiming that
   * the as-yet-unobserved logging/failed-return milestones have already passed. */
@@ -34,28 +39,39 @@ static int lab_run(struct ft_acm_io *io) {
  long kmsg=-1;
  const char *fs[3]={"proc","sysfs","configfs"};
  const char *paths[3]={"/proc","/sys","/config"};
+ *stage=3;
  for(int i=0;i<2;i++) {
   long r=ft_call(io,VP_NR_MOUNT,(long)fs[i],(long)paths[i],(long)fs[i],15,0,0);
   if(r){result=(int)r;goto finish;}mounts|=1U<<i;
  }
+ *stage=4;
+ result=ll_enter_init(io);if(result)goto finish;
  for(int i=0;i<2;i++) {
   char cpus[4];const char *path=i?"/sys/devices/system/cpu/possible":"/sys/devices/system/cpu/online";
   long n=ft_read_file(io,path,cpus,sizeof(cpus));
   if(n!=2||cpus[0]!='0'||cpus[1]!='\n'){result=-1;goto finish;}
  }
+ *stage=5;
  result=ft_discover_udc(io,udc,sizeof(udc));if(result)goto finish;
+ *stage=6;
  {long r=ft_call(io,VP_NR_MOUNT,(long)fs[2],(long)paths[2],(long)fs[2],14,0,0);
   if(r){result=(int)r;goto finish;}mounts|=4;
  }
+ *stage=7;
+ result=ll_usb_namespace(io);if(result)goto finish;
+ *stage=8;
  result=ft_acm_setup(&ft_acm_filesystem_ops,io,&gadget,udc,"0x1209","0x0001",1);
  if(result)goto finish;
+ *stage=9;
  result=ft_serial_open_duplex_owned(io,1,gadget.bound,&serial);if(result)goto finish;
+ *stage=10;
  kmsg=ll_open_kmsg(io);if(kmsg<0){result=(int)kmsg;goto finish;}
  {
   struct ll_context context={io,serial.fd,kmsg,0,0};unsigned long now=ll_now(&context);
   if(!now||now>~0UL-25000){result=-110;goto finish;}
   context.deadline_ms=now+25000;
   struct vl_io stream={ll_read_log,ll_send,ll_ack,ll_deadline,&context};
+  *stage=11;
   result=vl_stream(&stream,lab_trial_nonce);
  }
 finish:
@@ -72,7 +88,16 @@ finish:
 __attribute__((noreturn)) void _start(void) {
  struct ft_acm_io io={lab_call,0};
  (void)&ft_serial_output; /* Preserve existing fixed-frame API without selecting it. */
- int result=lab_run(&io);
+ int stage=0;
+ int result=lab_run(&io,&stage);
+ char report[]="VALETHON_LAB_STAGE=00 RESULT=+0000000000\n";
+ unsigned int position=sizeof("VALETHON_LAB_STAGE=")-1;
+ report[position]=(char)('0'+stage/10);report[position+1]=(char)('0'+stage%10);
+ position=sizeof("VALETHON_LAB_STAGE=00 RESULT=")-1;
+ report[position]=result<0?'-':'+';
+ unsigned int value=result<0?0U-(unsigned int)result:(unsigned int)result;
+ for(int i=0;i<10;i++){report[position+10-i]=(char)('0'+value%10);value/=10;}
+ lab_note(&io,report,sizeof(report)-1);
  if(result)lab_note(&io,"VALETHON_LAB_LOG_FAILED\n",sizeof("VALETHON_LAB_LOG_FAILED\n")-1);
  else lab_note(&io,"VALETHON_LAB_LOG_SOURCE_DONE\n",sizeof("VALETHON_LAB_LOG_SOURCE_DONE\n")-1);
  for(;;){const long ts[2]={60,0};ft_call(&io,FT_SERIAL_NANOSLEEP,(long)ts,0,0,0,0,0);}

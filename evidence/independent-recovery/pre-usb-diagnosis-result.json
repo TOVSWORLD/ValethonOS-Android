@@ -1,0 +1,46 @@
+{
+  "scope": "Reproduced software blockers in exact-kernel generic VM; physical failed-trial boot stage remains unknown",
+  "physical_trial_receipt": "evidence/independent-recovery/first-log-trial-result.json",
+  "original_candidate_sha256": "dde5d2bb3151a73b83a823639d3790416ac2321f3194b04ae57ddad731d7b429",
+  "unchanged_kernel_sha256": "a37997fb2a2590287941d3bfc5e2b4f099e7ed30f94931a3ba138b1a14d57ec7",
+  "findings": [
+    {
+      "id": "arm64-open-flags",
+      "confirmed": "Generic O_DIRECTORY65536 is ARM64 O_DIRECT; directory open reproducibly returnsEINVAL(-22). Generic O_NOFOLLOW131072 is ARM64 O_LARGEFILE, not nofollow.",
+      "correction": "Pinned ARM64 overrides directory16384/nofollow32768; validator applies override-before-fallback and rejects prior values."
+    },
+    {
+      "id": "preloaded-device-labels",
+      "confirmed": "Exact old policy VM audit denies console write, kmsg read and/dev directory write with rootfs_t labels.",
+      "correction": "Verify three exact static objects/device numbers; set valid explicit labels/readback under enforcing policy, no forced context/MAC_ADMIN."
+    },
+    {
+      "id": "configfs-uniform-label",
+      "confirmed": "Pinned SELinux hooks do not select per-path GENFS handling for configfs. Corrected VM operations use real uniform configfs_t label.",
+      "correction": "Permit required operations on isolated USB-only configfs with empty gadget namespace and unchanged fixed-path mutating adapters."
+    },
+    {
+      "id": "pid1-kernel-domain",
+      "confirmed": "Longer VM sees kernel-worker fork denial under shared kernel_t. Pinned kernel maps initial userspace SID to kernel_t without newer unsupported policycap.",
+      "correction": "One-way checked LSM self-context transition to init_t, readback/enforcement verification; kernel worker fork allowed, PID1 fork/escape forbidden; proc stays read-only."
+    }
+  ],
+  "verification": {
+    "controller_tests_passed": 545,
+    "linux_lab_tests_passed": 23,
+    "full_enforcing_vm_seconds": 20,
+    "vm_report": "evidence/independent-recovery/abi-label-vm-result.json",
+    "compiler_forbidden_privilege_controls": 6,
+    "old_flag_einval_negative": true,
+    "real_kmsg_read": true,
+    "real_configfs_create_configure_link_cleanup": true,
+    "udc_bind_intercepted_in_vm": true
+  },
+  "revised_candidate_receipt": "evidence/independent-recovery/corrected-candidate-result.json",
+  "kernel_rebuilt": false,
+  "tablet_action_during_diagnosis": false,
+  "new_trial_armed": false,
+  "physical_kernel_entry_proven": false,
+  "failed_load_return_qualified": false,
+  "retained_failure_logs_qualified": false
+}

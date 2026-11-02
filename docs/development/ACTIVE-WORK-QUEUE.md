@@ -48,10 +48,13 @@ The board is the source of live state. Do not resume historical peripheral queue
   truthful Android/security-patch fields and upstream notices. No parallel branding
   task or unrelated peripheral off-ramp is opened. Current #347 entry milestone is accepted;
   phase344 now has observed Android-independent TWRP entry under reopened#346.
-  Diagnostic kernel compilation passed. Exact original-loader RAM handoff and an
-  owned compatible retained-log writer/reader remain unresolved in draft PR453;
-  no build or device operation is running. Ordinary return remains complete;
-  #348 failure retention remains unqualified.
+  First normal diagnostic trial produced no kernel logs/diagnostic USB identity.
+  Existing recovery returned and the full original boot image was restored/verified;
+  owner confirms TWRP. No maintained-kernel entry is inferred. Generic enforcing
+  VM tests reproduced and corrected ARM64 open flags, device/configfs labels and
+  PID1/kernel-thread domain handling. A revised image is prepared offline under
+  draft PR453, without kernel rebuild or another tablet action. Ordinary return
+  remains complete; intended failed-load and348 retention remain unqualified.
   #345 is closed not planned because no inspection was needed.
 
 The completed admission decision identified one operational route or state why none is safely
