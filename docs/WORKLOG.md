@@ -4086,3 +4086,15 @@ and second partition preflight before one file-to-block dd. Actual16MiB RAM-only
 upload/two readbacks/cleanup passed; boot full hash unchanged. No block write or
 reboot. Seven rollback tests include corrupt upload rejection before any write.
 Physical dd/restore execution and actual candidate/log transport remain unqualified.
+
+## 2026-11-02 — #346 bounded log protocol and durable receiver implementation
+
+Added actual freestanding C log-stream producer and Python durable host receiver,
+including nonblocking raw TTY fd adapter. Host fsyncs nonce-bound identity before
+ACK, then each sequenced bounded binary record; incomplete/invalid captures cannot
+report complete. No port discovery, termios changes, failure injection or reboot.
+Six tests pass, including real C/Python interoperability with ASan/UBSan and a
+software PTY exchange. PID1/kmsg/USB endpoint integration is not implemented by
+these components; existing denied admission and fixed-frame package unchanged.
+This is a source integration prerequisite inside346, not device log acceptance or
+a ready trial. Actual image placement and working runtime capture remain open.
