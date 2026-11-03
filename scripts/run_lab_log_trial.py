@@ -18,9 +18,12 @@ from bounded_recovery_entry import verify_sources, choose_port, scan_ports, laun
 from capture_lab_kernel_log import private_bytes, validate
 from restore_diagnostic_boot import Adb, preflight, sha, update_receipt
 from write_lab_boot_candidate import candidate_manifest
+import retained_log_mailbox as mailbox
+from pull_retained_mailbox import collect as collect_retained
 
 
-def lifecycle(present, capture, scan, launch, clock=time.monotonic, sleep=time.sleep):
+def lifecycle(present, capture, scan, launch, clock=time.monotonic, sleep=time.sleep, manual_seconds=300):
+    if manual_seconds not in (300,900):raise ValueError("Unreviewed manual window")
     if not present():
         raise ValueError('Expected initial recovery USB identity absent')
     travel_end = clock() + 600
@@ -36,13 +39,26 @@ def lifecycle(present, capture, scan, launch, clock=time.monotonic, sleep=time.s
     # before disconnecting/holding power; only their later reconnection may launch.
     while clock() < boot_started + 90:
         sleep(.1)
-    deadline = clock() + 300
+    deadline = clock() + manual_seconds
     while clock() < deadline:
         port = scan()
         if port is not None:
             return {'capture': captured, 'helper_returncode': launch(port, 90)}
         sleep(.05)
     raise TimeoutError('Manual shutdown/reconnection window expired')
+
+
+def validate_retained(plan, report, nonce, candidate):
+    if plan.get('purpose')!='retained-boot-log' or len(nonce)!=32 or sha(nonce)!=report.get('nonce_sha256'):
+        raise ValueError('Exact retained trial plan/nonce required')
+    if report.get('partition_sha256')!=sha(candidate) or report.get('retained_mailbox',{}).get('format')!='VLOG0001':
+        raise ValueError('Exact retained candidate required')
+    prefix=report['retained_mailbox']['prefix_sha256']
+    state=mailbox.inspect(candidate,nonce,prefix)
+    record=state['latest']
+    if state['invalid_slots'] or not record or record['sequence']!=1 or not record['payload'].startswith(b'VALETHON HOST CONTROL v1\n'):
+        raise ValueError('Fresh host-control-only candidate required')
+    return {'input_preflight':'passed','serial_opened':False,'device_written':False}
 
 
 def run_capture(plan, report, nonce, output):
@@ -100,6 +116,7 @@ def main():
                  'selector-file', 'candidate', 'original-boot', 'rollback-manifest', 'receipt']:
         p.add_argument('--' + name, type=Path, required=True)
     p.add_argument('--arm-once', action='store_true')
+    p.add_argument('--retained-mailbox', action='store_true')
     a = p.parse_args()
     result = {'armed': False, 'recovery_observed': False, 'failed_load_qualified': False,
               'device_write_performed': False, 'automatic_reboot': False}
@@ -109,8 +126,8 @@ def main():
         plan = json.loads(private_bytes(a.plan, 4096))
         report = json.loads(private_bytes(a.candidate_report, 65536))
         nonce = private_bytes(a.nonce, 32)
-        validate(plan, report, nonce)
-        if plan['wait_seconds'] != 45:
+        if not a.retained_mailbox:validate(plan, report, nonce)
+        if not a.retained_mailbox and plan['wait_seconds'] != 45:
             raise ValueError('First-trial entry window must be45 seconds')
         identity = json.loads(private_bytes(a.initial_usb_identity, 4096))
         if (identity.get('path') != plan['physical_usb_path']
@@ -122,6 +139,7 @@ def main():
             if path.is_symlink() or not path.is_file() or path.stat().st_size != 16777216:
                 raise ValueError('Exact full-size regular assets required')
         candidate = a.candidate.read_bytes()
+        if a.retained_mailbox:validate_retained(plan,report,nonce,candidate)
         rollback = json.loads(a.rollback_manifest.read_text())
         manifest = candidate_manifest(candidate, report, a.original_boot.read_bytes(), rollback)
         selector = json.loads(private_bytes(a.selector_file, 4096))['selector']
@@ -150,17 +168,21 @@ def main():
         claimed = True
         stage = 'owner_boot_capture_and_return'
         result.update(lifecycle(present,
-                               lambda: run_capture(a.plan, a.candidate_report, a.nonce, a.output),
+                               lambda: ({'not_requested':'persistent kernel mailbox; no USB logger dependency'} if a.retained_mailbox else run_capture(a.plan, a.candidate_report, a.nonce, a.output)),
                                lambda: choose_port(scan_ports(), identity['path']),
                                lambda port, seconds: launch_helper(a.modules, port, seconds,
-                                                                  a.receipt.with_suffix('.helper-private.log'))))
+                                                                  a.receipt.with_suffix('.helper-private.log')),
+                               manual_seconds=900 if a.retained_mailbox else 300))
         stage = 'checking_helper_exit'
         if result['helper_returncode'] != 0:
             raise ValueError('One-shot return helper did not succeed')
         stage = 'waiting_for_recovery_identity'
         wait_recovery_identity(adb)
         stage = 'validating_returned_recovery'
-        preflight(adb, candidate, manifest, sha(candidate))
+        if a.retained_mailbox:
+            result['retained_readout']=collect_retained(adb,a.original_boot.read_bytes(),rollback,candidate,nonce,a.output)
+        else:
+            preflight(adb, candidate, manifest, sha(candidate))
         result['recovery_observed'] = True
         result['candidate_still_installed'] = True
     except (ValueError, KeyError, OSError, TimeoutError, subprocess.SubprocessError, KeyboardInterrupt) as error:

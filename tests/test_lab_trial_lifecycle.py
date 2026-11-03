@@ -74,3 +74,28 @@ class RecoveryReadiness(unittest.TestCase):
                                        clock=lambda: now[0], sleep=lambda n: now.__setitem__(0, now[0]+n), run=run)
             self.assertEqual(now[0], 30)
             self.assertLessEqual(len(calls), 120)
+
+class PersistentTrial(unittest.TestCase):
+    def test_persistent_window_accepts_late_manual_reconnect_without_usb_capture(self):
+        now=[0.0];launches=[]
+        def sleep(n):now[0]+=n
+        def launch(port,seconds):launches.append((now[0],port,seconds));return 0
+        result=lifecycle(lambda:now[0]<10,lambda:{'not_requested':'persistent'},lambda:'exact-port' if now[0]>=500 else None,launch,lambda:now[0],sleep,manual_seconds=900)
+        self.assertEqual(len(launches),1);self.assertGreaterEqual(launches[0][0],500)
+        self.assertEqual(result['capture'],{'not_requested':'persistent'})
+    def test_unreviewed_budget_and_reused_kernel_record_rejected(self):
+        import hashlib
+        from run_lab_log_trial import validate_retained
+        import retained_log_mailbox as m
+        from pathlib import Path
+        import tempfile
+        nonce=bytes(range(32));candidate,prefix=m.prepare(bytes(m.PARTITION),nonce,b'VALETHON HOST CONTROL v1\nfixture\n')
+        report={'partition_sha256':hashlib.sha256(candidate).hexdigest(),'nonce_sha256':hashlib.sha256(nonce).hexdigest(),'retained_mailbox':{'format':'VLOG0001','prefix_sha256':prefix}}
+        plan={'purpose':'retained-boot-log'}
+        self.assertFalse(validate_retained(plan,report,nonce,candidate)['serial_opened'])
+        with self.assertRaises(ValueError):lifecycle(None,None,None,None,manual_seconds=901)
+        with self.assertRaises(ValueError):validate_retained({'purpose':'wrong'},report,nonce,candidate)
+        with tempfile.TemporaryDirectory() as folder:
+            p=Path(folder)/'fixture';p.write_bytes(candidate);m.write_fixture(p,nonce,prefix,b'VALETHON RETAINED KERNEL LOG v1 release=test\n')
+            changed=p.read_bytes();report['partition_sha256']=hashlib.sha256(changed).hexdigest()
+            with self.assertRaises(ValueError):validate_retained(plan,report,nonce,changed)

@@ -4415,3 +4415,12 @@ p5 hash for existing guarded original restore. Nothing written or armed on table
 Kernel compilation/retained size/VM, fresh nonce package and full concrete physical
 review still required. Failures before storage initialization/first commit remain
 uncovered; this is not a crash/panic handler or hardware acceptance.
+
+Retained compile41573826310 stopped at the new recorder object: a codec local
+named current collided with the kernel current macro. Renamed it and added the
+real macro to the C fixture compilation regression. No firmware/device action;
+this is a source integration correction, not a hardware failure or unchanged retry.
+Added explicit persistent-only supervisor path: no USB capture required, one
+reviewed900s manual-return window, fresh host-control seed validation, recovery
+collector accepts only exact candidate prefix/seed and records mutable-slot hash
+for guarded restore. Old normal trial behavior stays at its existing defaults.

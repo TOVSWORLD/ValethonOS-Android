@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#define current get_current() /* Real kernel macro collision regression. */
 #include "retained_mailbox.h"
 struct context {int fd,fail,operation,writes;};
 static int rd(void *c,unsigned long offset,void *out,unsigned long count){return pread(((struct context *)c)->fd,out,count,(off_t)offset)==(ssize_t)count?0:-1;}

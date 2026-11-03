@@ -48,23 +48,23 @@ static int vm_commit(struct vm_io *io,const unsigned char *nonce,const unsigned 
  if(io->read(io->context,VM_PARTITION-VM_HEADER,scratch,VM_HEADER)||!vm_zero(scratch,VM_HEADER))return -3;
  struct vm_record a={0},b={0};int va=vm_read_record(io,0,nonce,&a,scratch),vb=vm_read_record(io,1,nonce,&b,scratch);
  if(va<0||vb<0||(va&&vb&&a.sequence==b.sequence))return -4;
- struct vm_record current={0};if(va)current=a;if(vb&&b.sequence>current.sequence)current=b;
- if(!current.sequence){
+ struct vm_record latest={0};if(va)latest=a;if(vb&&b.sequence>latest.sequence)latest=b;
+ if(!latest.sequence){
   for(unsigned long at=VM_SLOT_BASE;at<VM_PARTITION-VM_HEADER;at+=VM_HEADER){if(io->read(io->context,at,scratch,VM_HEADER)||!vm_zero(scratch,VM_HEADER))return -4;}
  }
- if(current.sequence==~0ULL)return -4;
- unsigned index=current.sequence?1-current.index:0;unsigned long start=VM_SLOT_BASE+index*VM_SLOT;
+ if(latest.sequence==~0ULL)return -4;
+ unsigned index=latest.sequence?1-latest.index:0;unsigned long start=VM_SLOT_BASE+index*VM_SLOT;
  for(unsigned long i=0;i<VM_HEADER;i++)scratch[i]=0;
  if(io->write(io->context,start,scratch,VM_HEADER)||io->flush(io->context))return -5;
  if(io->write(io->context,start+VM_HEADER,payload,used)||io->flush(io->context))return -5;
  for(unsigned long i=0;i<VM_HEADER;i++)scratch[i]=0;
  for(unsigned i=0;i<8;i++)scratch[i]=((const unsigned char *)"VLOG0001")[i];
- vm_put32(scratch+8,1);vm_put32(scratch+12,VM_HEADER);vm_put64(scratch+16,current.sequence+1);
+ vm_put32(scratch+8,1);vm_put32(scratch+12,VM_HEADER);vm_put64(scratch+16,latest.sequence+1);
  for(unsigned i=0;i<32;i++)scratch[24+i]=nonce[i];
  vm_put32(scratch+56,used);vm_put32(scratch+60,vm_crc(payload,used));vm_put32(scratch+64,vm_crc(scratch,VM_HEADER));
  if(io->write(io->context,start,scratch,VM_HEADER)||io->flush(io->context))return -5;
  int result=vm_read_record(io,index,nonce,committed,scratch);
- if(result!=1||committed->sequence!=current.sequence+1||committed->used!=used)return -6;
+ if(result!=1||committed->sequence!=latest.sequence+1||committed->used!=used)return -6;
  return 0;
 }
 #endif

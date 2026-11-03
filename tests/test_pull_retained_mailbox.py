@@ -32,3 +32,21 @@ class PullMailbox(unittest.TestCase):
                 output=Path(folder)/'capture'
                 with self.assertRaises(ValueError):pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,output)
                 self.assertFalse(output.exists());self.assertEqual(adb.writes,0)
+
+    def test_mutated_log_tail_can_restore_original_only_with_validated_readout(self):
+        import restore_retained_trial as restore
+        nonce=bytes(range(32));candidate,prefix=m.prepare(BACKUP,nonce,b'VALETHON HOST CONTROL v1\nfixture\n')
+        candidate_report={'partition_sha256':r.sha(candidate),'partition_bytes':r.BOOT_BYTES,'scope':'Offline first normal log-bringup candidate; review still required','physical_execution_admitted':False,'failed_load_qualified':False,'recovery_partition_written':False}
+        with tempfile.TemporaryDirectory() as folder:
+            p=Path(folder);image=p/'fixture';image.write_bytes(candidate)
+            m.write_fixture(image,nonce,prefix,b'VALETHON RETAINED KERNEL LOG v1 release=test\nprintk\n')
+            adb=FakeAdb();adb.boot=image.read_bytes()
+            pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,p/'readout')
+            before=adb.boot
+            result=restore.run(adb,BACKUP,MANIFEST,candidate,candidate_report,nonce,p/'readout')
+            self.assertEqual(adb.writes,0);self.assertEqual(adb.boot,before);self.assertFalse(result['device_written'])
+            result=restore.run(adb,BACKUP,MANIFEST,candidate,candidate_report,nonce,p/'readout',p/'restore.json',True)
+            self.assertTrue(result['verified']);self.assertEqual(adb.writes,1);self.assertEqual(adb.boot,BACKUP);self.assertEqual(adb.recovery,RECOVERY)
+            # Reusing the stored expected-current digest cannot rewrite restored boot.
+            with self.assertRaises(ValueError):restore.run(adb,BACKUP,MANIFEST,candidate,candidate_report,nonce,p/'readout',p/'second.json',True)
+            self.assertEqual(adb.writes,1)
