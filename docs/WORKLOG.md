@@ -4380,3 +4380,14 @@ Private lab/controller archive hashes match. No bands is not proof of no entry;
 scanout persistence and DT-gate runtime assumptions remain unobserved. No unchanged
 retry/rebuild. Next narrow exact loader DT/argument handoff against marker gates
 and independent scanout observability.346/344/348 remain open.
+
+Trial4 wrong-place challenge audited: whole-window host journal across ALL USB
+ports has4 identity events, all on the planned path, no diagnostic descriptor;
+2 ACM EINVAL probe errors correlate with preloader, with2 ACM TTY bindings.
+Actual candidate PRINTK and PSTORE are builtin, but a persistent backing/reader is
+not qualified. PID1 only opens /dev/kmsg after gadget setup and duplex serial open;
+earlier notes target /dev/console while lab DT removes stdout-path. Therefore this
+receiver is blind to failures before USB readiness; no export is not absence of
+kernel logs. Recovery uses another kernel, and full poweroff does not preserve a
+qualified ring-buffer readout. See trial4-log-routing-audit.json. Fix independent
+observability contract before any further physical trial/rebuild.
