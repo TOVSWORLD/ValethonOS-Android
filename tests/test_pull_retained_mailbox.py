@@ -41,7 +41,8 @@ class PullMailbox(unittest.TestCase):
             p=Path(folder);image=p/'fixture';image.write_bytes(candidate)
             m.write_fixture(image,nonce,prefix,b'VALETHON RETAINED KERNEL LOG v1 release=test\nprintk\n')
             adb=FakeAdb();adb.boot=image.read_bytes()
-            pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,p/'readout')
+            readout=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,p/'readout')
+            self.assertTrue(readout['kernel_record']);self.assertFalse(readout['host_control_only'])
             before=adb.boot
             result=restore.run(adb,BACKUP,MANIFEST,candidate,candidate_report,nonce,p/'readout')
             self.assertEqual(adb.writes,0);self.assertEqual(adb.boot,before);self.assertFalse(result['device_written'])
@@ -50,3 +51,10 @@ class PullMailbox(unittest.TestCase):
             # Reusing the stored expected-current digest cannot rewrite restored boot.
             with self.assertRaises(ValueError):restore.run(adb,BACKUP,MANIFEST,candidate,candidate_report,nonce,p/'readout',p/'second.json',True)
             self.assertEqual(adb.writes,1)
+
+    def test_host_control_can_never_be_reported_as_kernel_output(self):
+        nonce=bytes(range(32));candidate,_=m.prepare(BACKUP,nonce,b'VALETHON HOST CONTROL v1\nnot kernel\n')
+        with tempfile.TemporaryDirectory() as folder:
+            adb=FakeAdb();adb.boot=candidate
+            report=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,Path(folder)/'capture')
+            self.assertTrue(report['attributable_record']);self.assertTrue(report['host_control_only']);self.assertFalse(report['kernel_record'])

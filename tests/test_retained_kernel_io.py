@@ -23,6 +23,7 @@ class ActualKernelBlockIO(unittest.TestCase):
 #include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/stat.h>
 #include <errno.h>
 #include "retained_mailbox.h"
 typedef unsigned char u8;
@@ -43,7 +44,7 @@ static void bio_put(struct bio *b){free(b);}
 static int blkdev_issue_flush(struct block_device *b){return fsync(b->fd);}
 '''+code+r'''
 static int prefix(void *v,const unsigned char *sha){(void)sha;struct mailbox_context *c=v;unsigned char p[4096];for(unsigned long at=0;at<VM_BASE;at+=4096){assert(!mailbox_read(c,at,p,4096));for(unsigned i=0;i<4096;i++)if(p[i]!=(unsigned char)((at+i)%251))return -1;}return 0;}
-int main(int argc,char **argv){assert(argc==2);struct file f={{open(argv[1],O_RDWR)}};assert(f.b.fd>=0);struct page p;struct mailbox_context c={&f,NULL,&p};struct vm_io io={&c,mailbox_read,mailbox_write,mailbox_flush,prefix};unsigned char nonce[32],scratch[4096],payload[8193];for(unsigned i=0;i<32;i++)nonce[i]=(unsigned char)i;for(unsigned i=0;i<sizeof(payload);i++)payload[i]=(unsigned char)(i%239);struct vm_record record;
+int main(int argc,char **argv){assert(argc==2);struct file f={{open(argv[1],O_RDWR)}};assert(f.b.fd>=0);struct stat st;assert(!fstat(f.b.fd,&st)&&S_ISREG(st.st_mode)&&st.st_size==VM_PARTITION);struct page p;struct mailbox_context c={&f,NULL,&p};struct vm_io io={&c,mailbox_read,mailbox_write,mailbox_flush,prefix};unsigned char nonce[32],scratch[4096],payload[8193];for(unsigned i=0;i<32;i++)nonce[i]=(unsigned char)i;for(unsigned i=0;i<sizeof(payload);i++)payload[i]=(unsigned char)(i%239);struct vm_record record;
 assert(mailbox_write(&c,VM_BASE,payload,4096)==-EINVAL);
 assert(mailbox_write(&c,VM_PARTITION-VM_HEADER,payload,1)==-EINVAL);
 assert(mailbox_write(&c,VM_SLOT_BASE+1,payload,1)==-EINVAL);
