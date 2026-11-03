@@ -2,7 +2,10 @@
 # Generic compile diagnostic only; does not produce douglas firmware.
 set -euo pipefail
 readonly revision=d9318bdb4c34e8b2d997b4f67ced56b120b22b87
-readonly mode="${1:-generic}"
+readonly requested_mode="${1:-generic}"
+readonly mode="${requested_mode/lab-retained/lab-log}"
+retained_args=()
+if [ "$requested_mode" = lab-retained ]; then retained_args=(--retained-mailbox); fi
 [[ "$mode" = generic || "$mode" = clocks || "$mode" = clocks-pinctrl || "$mode" = providers || "$mode" = usb-providers || "$mode" = usb-acm-diagnostic || "$mode" = lab-log || "$mode" = diagnostic ]] || exit 2
 readonly argument_profile="${ARGUMENT_PROFILE:-none}"
 [[ "$argument_profile" = none || "$argument_profile" = generic-force ]] || exit 2
@@ -49,6 +52,7 @@ fi
 if [ "$mode" = lab-log ]; then
   python3 scripts/apply_lab_watchdog.py "$root/source"
   python3 scripts/apply_lab_entry_screen.py "$root/source"
+  if [ "$requested_mode" = lab-retained ]; then python3 scripts/apply_lab_retained.py "$root/source"; fi
 fi
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 defconfig
 if [ "$mode" != generic ]; then
@@ -82,7 +86,7 @@ if [ "$mode" != generic ]; then
     python3 scripts/usb_acm_config.py apply "$output/.config" --source "$root/source"
   fi
   if [ "$mode" = lab-log ]; then
-    python3 scripts/lab_log_config.py apply "$output/.config" --source "$root/source"
+    python3 scripts/lab_log_config.py apply "$output/.config" --source "$root/source" "${retained_args[@]}"
   fi
   make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 olddefconfig
   if [ "$argument_profile" = generic-force ]; then
@@ -101,7 +105,7 @@ if [ "$mode" != generic ]; then
     fi
   fi
   if [ "$mode" = lab-log ]; then
-    python3 scripts/lab_log_config.py check "$output/.config"
+    python3 scripts/lab_log_config.py check "$output/.config" "${retained_args[@]}"
   fi
   for symbol in MTK_MMSYS COMMON_CLK_MT8163 COMMON_CLK_MT8163_AUDSYS COMMON_CLK_MT8163_IMGSYS COMMON_CLK_MT8163_MFGCFG COMMON_CLK_MT8163_MMSYS COMMON_CLK_MT8163_VDECSYS COMMON_CLK_MT8163_VENCSYS; do
     grep -qx "CONFIG_${symbol}=y" "$output/.config"
@@ -146,6 +150,11 @@ if [ "$mode" = lab-log ]; then
   make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$jobs" W=1 drivers/watchdog/mtk_wdt.o drivers/watchdog/watchdog_dev.o
   sha256sum "$output/drivers/watchdog/mtk_wdt.o" "$output/drivers/watchdog/watchdog_dev.o"
   echo LAB_BOOT_WATCHDOG_OBJECT_COMPILE_COMPLETE
+fi
+if [ "$requested_mode" = lab-retained ]; then
+  make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$jobs" W=1 drivers/misc/valethon_mailbox.o drivers/mmc/host/mtk-sd.o
+  sha256sum "$output/drivers/misc/valethon_mailbox.o" "$output/drivers/mmc/host/mtk-sd.o"
+  echo LAB_RETAINED_MAILBOX_EMMC_OBJECT_COMPILE_COMPLETE
 fi
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$jobs" Image vmlinux
 if [[ "$mode" = diagnostic || "$mode" = lab-log ]]; then

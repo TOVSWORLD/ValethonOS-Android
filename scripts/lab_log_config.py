@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / 'projects/firetabs-android/kernel/lab-log'
 
 
-def requirements():
+def requirements(retained=False):
     lock = json.loads((PROFILE / 'profile.json').read_text())
     source = ROOT / lock['platform_source']
     if hashlib.sha256(source.read_bytes()).hexdigest() != lock['platform_sha256']:
@@ -32,6 +32,9 @@ def requirements():
             result[(active or disabled)[1]] = active[2] if active else 'n'
         elif line and not line.startswith('# '):
             raise ValueError('Unsupported lab fragment syntax')
+    if retained:
+        result.update({name:'y' for name in ['BLOCK','MMC','MMC_BLOCK','MMC_MTK','PARTITION_ADVANCED','EFI_PARTITION','REGULATOR_MT6323','CRYPTO_LIB_SHA256']})
+        result.update({'MMC_BLOCK_MINORS':'8','MSDOS_PARTITION':'n','BLK_DEV_LOOP':'n','BLK_DEV_RAM':'n','SCSI':'n','ATA':'n','NVME_CORE':'n','USB_STORAGE':'n','MTD':'n'})
     return result
 
 
@@ -40,8 +43,9 @@ def main():
     p.add_argument('mode', choices=['apply', 'check'])
     p.add_argument('config', type=Path)
     p.add_argument('--source', type=Path)
+    p.add_argument('--retained-mailbox',action='store_true')
     a = p.parse_args()
-    expected = requirements()
+    expected = requirements(a.retained_mailbox)
     if a.mode == 'check':
         diagnostic_config.check(a.config.read_text(), expected)
         usb_acm_config.check(a.config.read_text())

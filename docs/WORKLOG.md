@@ -4391,3 +4391,27 @@ receiver is blind to failures before USB readiness; no export is not absence of
 kernel logs. Recovery uses another kernel, and full poweroff does not preserve a
 qualified ring-buffer readout. See trial4-log-routing-audit.json. Fix independent
 observability contract before any further physical trial/rebuild.
+
+## 2026-11-02 — #346 retained boot-tail path implementation
+
+Necessary346/344 prerequisite recorded/read back before code. Source-identified
+legacy reader paths and raw-memory nodes are absent in exact recovery metadata;
+no contents/RAM read. Implemented separate lab-retained profile: builtin bounded
+kernel printk snapshot worker, no USB/PID1 dependency; exact DT nonce, exclusive
+mmcblk0p5/16MiB, seeded final1MiB and immutable first15MiB SHA256 required. Two
+127-page record slots, CRC/nonce/sequence, invalidate/payload/header-last flushes,
+no failed-write retry, seed/final guard untouched. Standard kernel BIO/flush APIs,
+no credentials/SELinux changes or userspace block interface. Ordinary lab-log
+stays storage disabled. Minimal own DT enables only mmc0/pio/pwrap,26MHz and removes
+HS200/highspeed/hardware-reset caps, preserving other nodes/reservations; compiled
+semantic comparison passed offline. Physical supply/timing/storage unqualified.
+
+Actual C writer and independent Python reader pass regular-disk fixture commits,
+all six write/flush interruptions, stale/corrupt/bounds/prefix controls. Preinstalled
+HOST CONTROL sequence1 is distinct from kernel producer sequence2+, so readout can
+be checked without falsely claiming kernel output. Read-only recovery collector
+checks identity/aliases/fullp6/exact candidate prefix+seed and records current full
+p5 hash for existing guarded original restore. Nothing written or armed on tablet.
+Kernel compilation/retained size/VM, fresh nonce package and full concrete physical
+review still required. Failures before storage initialization/first commit remain
+uncovered; this is not a crash/panic handler or hardware acceptance.

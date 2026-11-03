@@ -41,3 +41,9 @@ The retained source fixture preserves its upstream SPDX license notice; see
 https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/arch/arm64/kernel/head.S.
 Framebuffer metadata interpretation was checked against the retained MT8163 source
 at e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74; this is provenance, not device acceptance.
+
+The private retained-log worker uses the pinned Android Common Kernel block/BIO,
+printk snapshot and SHA256 APIs under its GPL-2.0-only kernel source notice. The
+exact upstream drivers/misc/Makefile fixture retains its upstream notice; provenance
+is in projects/firetabs-android/kernel/lab-retained/inputs.json. The dual-slot record
+codec and host reader are project implementations, not the legacy MTK RAM format.

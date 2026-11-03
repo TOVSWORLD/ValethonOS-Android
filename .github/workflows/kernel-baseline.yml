@@ -5,7 +5,7 @@ on:
       mode:
         description: Compile integration scope
         type: choice
-        options: [lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
+        options: [lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
         default: diagnostic
       argument_profile:
         description: Generic-only forced argument selection (diagnostic mode)
@@ -98,7 +98,7 @@ jobs:
           fi
 
       - name: Retain diagnostic kernel bytes and provenance
-        if: steps.scope.outputs.mode == 'diagnostic' || steps.scope.outputs.mode == 'lab-log'
+        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained')
         run: |
           python3 - <<'PY'
           import hashlib, json, os, pathlib, shutil, subprocess
@@ -106,11 +106,15 @@ jobs:
           destination = pathlib.Path('out/diagnostic-kernel-artifact')
           destination.mkdir(parents=True, exist_ok=False)
           files = {}
-          for source, name in [('output/arch/arm64/boot/Image', 'Image'),
+          sources = [('output/arch/arm64/boot/Image', 'Image'),
                                ('output/arch/arm64/boot/Image.gz', 'Image.gz'),
                                ('output/.config', 'resolved.config'),
                                ('output/System.map', 'System.map'),
-                               ('image-size-report.json', 'image-size-report.json')]:
+                               ('image-size-report.json', 'image-size-report.json')]
+          if '${{ steps.scope.outputs.mode }}' == 'lab-retained':
+              sources += [('output/drivers/misc/valethon_mailbox.o', 'valethon_mailbox.o'),
+                          ('output/drivers/mmc/host/mtk-sd.o', 'mtk-sd.o')]
+          for source, name in sources:
               target = destination / name
               shutil.copyfile(root / source, target)
               data = target.read_bytes()
@@ -126,7 +130,7 @@ jobs:
           (destination / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
           PY
       - name: Upload diagnostic kernel compile outputs
-        if: steps.scope.outputs.mode == 'diagnostic' || steps.scope.outputs.mode == 'lab-log'
+        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: diagnostic-kernel-${{ github.sha }}-${{ github.run_attempt }}
@@ -135,7 +139,7 @@ jobs:
           retention-days: 7
 
       - name: Enforcing lab PID1 ABI and filesystem VM regression
-        if: steps.scope.outputs.mode == 'lab-log'
+        if: (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained')
         run: |
           python3 scripts/install_qemu_for_ci.py --install
           sudo apt-get install --no-install-recommends -y secilc=3.5-1 checkpolicy=3.5-1
