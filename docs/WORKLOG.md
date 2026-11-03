@@ -4493,3 +4493,16 @@ workflow opt-in entry_checkpoint=entry-8s requires lab-retained; default profile
 unchanged. Generic kernel VM will back FB address with1536MiB virtual RAM for this
 profile. Persistent reader/control retained. No tablet write/reboot/helper/arm or
 new kernel build yet. Exact compile/Image checks and full physical review required.
+
+## 2026-11-03 — #346 earliest-entry candidate6 prepared
+
+Run41583240596/source7b519b0 succeeded; retained hashes/gzip/config/size and20s
+enforcing VM verified. Actual Image first primary_entry BL target,296 exact probe
+bytes and8-second literal match independent EL1/EL2/EL3 emulator. Fresh component13/
+own DT4 packed candidate6 SHA8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16.
+Independent image/mailbox checks and fresh actual read-only original TWRP/aliases/
+p5+p6/rollback checks passed. Fresh trial6 receipts unused; no write/arm/helper/TTY
+rule/reboot. Full exact review records earliest physical framebuffer/cache writes,
+counter dwell limitations, persistent storage and currenthash-bound original restore.
+Source569 tests remain historical validation, not hardware acceptance. No reset
+control is changed; visible pattern positive only. Wait exact approval/availability.

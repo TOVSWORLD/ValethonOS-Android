@@ -832,3 +832,75 @@ and owner availability, all work is one trip:
 No new physical operation is authorized by this document or previous approvals.
 Public receipt: retained-candidate-result.json. Private concrete commands are
 lab-log-trial-5/private/execution-private.json; no host/selectors/raw records public.
+
+### Exact earliest-entry candidate6 — complete physical review, UNARMED
+
+This replaces the old late, DT-gated checkpoint with a call as the first
+`primary_entry` instruction, before boot-argument/page-table/exception-level setup.
+Kernel run41583240596 succeeded at7b519b0619e6633194bfbc15515ab773880561a6 and
+ACKd9318bdb4c34e8b2d997b4f67ced56b120b22b87. All retained hashes and gzip roundtrip
+pass. The actual Image first instruction calls the probe; all296 probe bytes and
+its eight-second literal match the independently emulated EL1/EL2/EL3 code.
+The20s enforcing VM passes, with framebuffer addresses backed by virtual RAM;
+this does not establish physical display, timer, storage or kernel entry.
+
+Exact full16,777,216B candidate6 SHA256:
+8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16.
+Image16,912,896B SHA34353b23cfbfa3f28a0a99283583ceb5126d5cafe159231ac58546bf63c7c64f;
+gzip7,252,168B SHAa43e1eb0bff30f7859b82915f48bd366b4a8ee66f13da0c51fa772198fddeb18.
+Runtime17,432,576B, entry40000000/end410a0000; payload7,297,024B precedes15MiB.
+Initrd43480000, tags48000000/1MiB, DT staging45000000 and reservations unchanged.
+Fresh component13 init52,800B SHAd3b956d6858e1fc5b871a96412b37fb607e7f4b4f71c313dbdaf77e70857d4d7;
+initramfs13,687B SHAe304b28e2bf0f9eaebe3b22c29c54acbc8b0260104693429a4f6931d19e188af.
+Own nonce-bound DT27,376B SHA104c4015fc8ab9389b8572c741b003486c908a2e811e14b8c35aae464dc7bad3.
+Independent header-ID/gzip/DT/initramfs/padding/seed/control checks pass.
+Initial enforcing policy, persistent record format and storage prerequisite remain
+as reviewed for candidate5. Fresh tools/assets/unused receipts staged; read-only
+actual TWRP/aliases/full originalp5+p6 and rollback hashes pass. Nothing armed.
+
+**New physical behavior:** with MMU off, the earliest probe writes only the
+corroborated framebuffer allocation98600000..991b8000, alternating64KiB opaque
+black and EL1-white/EL2-green/EL3-magenta bands. Cache-on entry cleans this exact
+span to PoC with validated line size. It preserves entry arguments/x18/SP and
+continues boot after eight architected-counter seconds for valid frequency.
+MMU-on entry skips painting. Invalid frequency skips dwell; a finite iteration
+budget prevents an endless stopped-counter loop but has no calibrated wall bound.
+Counter access or physical memory assumptions can fail on an incompatible handoff.
+EL3 color is diagnostic only, with no security transition or workaround.
+
+No watchdog/reset/thermal/security/credential register writes are introduced.
+An external watchdog can reset during this pause; no promise of delaying that reset
+is made. A visible unique pattern establishes this probe executed and reports EL.
+Absence or a timing change alone remains inconclusive because scanout, timer access
+and early handoff are not yet physically qualified. This trial does not deliberately
+panic or halt. Normal eMMC initialization and bounded persistent slot writes remain
+active; errors could prevent boot/return or damage data despite software bounds.
+Backups do not guarantee recovery access. No kernel-record acceptance from control.
+
+After explicit approval of this exact image, framebuffer/cache/dwell behavior,
+retained storage behavior and full-original rollback, and confirmed availability:
+
+1. At the desk recheck current tools and full originalp5+p6. Guarded fullp5 write
+   once, exact readback and unchangedp6; no retry/recovery write/reboot command.
+2. Run postwrite persistent supervisor preflight; arm once and confirm running
+   before owner leaves,600s travel. No diagnostic TTY rule or live USB dependency.
+3. In TWRP select Reboot→System once; decline installer only if one appears. Watch
+   for white/green/magenta-and-black bands and note color. Wait the full90seconds
+   regardless of Amazon logo, bands or black intervals; do not infer off from black.
+4. Unplug USB; hold ONLY Power40seconds even if black. Release, wait5seconds,
+   reconnect same cable/port without buttons. Do not repeat the sequence.
+5. Wait180seconds, leave TWRP unchanged and return to desk with observed pattern/
+   final screen. Unexpected/no return: stop/report; no improvised reset or menu.
+   Supervisor uses90s initial guard,900s reconnect window, one90s original helper,
+   then30s metadata stability and full collector once. No automatic retry.
+6. Verify actual recovery and collect private currentp5, exact prefix/seed/fullp6
+   and nonce-bound record. Host controlseq1 remains preinstalled; only attributable
+   kernel producerseq2+ establishes a kernel record. Initial collector failure
+   stops; separately reviewed fresh read-only collection can supply rollback.
+7. Fresh read-only restore preflight binds independently collected current hash;
+   explicit approved restore writes full originalp5 once, verifies fullp5+p6,
+   cleans RAM upload and leaves TWRP running without reboot. Preserve private logs.
+
+No firmware operation is authorized by this document or prior candidate approval.
+Private commands: lab-log-trial-6/private/execution-private.json. Public receipt:
+entry-delay-candidate-result.json.346/344/348 remain open pending physical evidence.

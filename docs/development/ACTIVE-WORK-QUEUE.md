@@ -1,11 +1,11 @@
 # Active work queue — ordered delivery
 
-Current346 update: retained candidate5 trial recovered its known HOST CONTROL
-(sequence1,85B), proving that stored record can be pulled after return without
-live USB. No kernel record or changed p5 bytes were observed. Original boot
-restored/fullreadbacks/RAMcleanup verified; owner confirms TWRP. No arm/build.
-Next isolate normal kernel startup/storage reachability; preserve the working
-reader, no unchanged retry.346/344/348 remain open. See retained-trial-result.json.
+Current346 update: earliest-entry candidate6 prepared with verified first-primary_entry
+probe and eight-counter-second dwell. Build41583240596 passed; all retained hashes,
+exact probe bytes, enforcing VM and independent package checks pass. Fresh trial6
+read-only original TWRP/p5+p6 checks passed; nothing written/armed. Complete review
+in INDEPENDENT-RECOVERY.md; explicit exact-image approval/availability required.
+Prior trial5 recovered only HOSTCONTROL; no kernel entry/log acceptance.346/344/348 open.
 
 Owner priority correction,29 October2026. Read the
 [ordered roadmap](ORDERED-ROADMAP.md), [stable task/dependency contract](ordered-roadmap.json)
