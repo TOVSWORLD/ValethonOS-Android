@@ -4302,3 +4302,23 @@ Logo/black screen, owner timing deviations and host events do not establish a
 maintained-kernel entry or watchdog reset cause. Watchdog handoff remains hardware
 unobserved;346/344/348 open. No trial/build/helper running or new physical action.
 See watchdog-trial-result.json. No automatic retry/rearm/rebuild.
+
+## 2026-11-02 — #346 receiver observation audit
+
+Audited retained trial2/3 plans, kernel USB timelines and bounded historical host
+kernel identity events across all ports. Each trial has five identity events, all
+on the planned recovery path; neither1209 vendor nor diagnostic1209:0001 appeared
+elsewhere. Receiver never selected/opened a TTY, so a tty permission failure is not
+established. Capture entry wait45s is narrower than physical sequence. Trial3 next
+preloader arrived69.24s after initial disconnect:24.24s after receiver deadline,
+20.76s before return guard opened at90s. This explains a blind interval and missed
+return opportunity, not a kernel failure. Whole-window journal still has no
+expected diagnostic descriptor. Owner's reported reconnect-before-Power-hold means
+preloader events alone cannot prove spontaneous watchdog reset.
+
+Candidate explicitly disables UART/deletes stdout-path; PID1 failure markers only
+target console, leaving those early markers unobservable through this receiver.
+There is no independent observed early checkpoint. No new device action, timing
+change, kernel build or trial is justified from this audit alone. Concrete loader/
+early-checkpoint observability must be resolved before another trial; no root-cause
+claim. See receiver-observation-audit.json. Original boot/recovery remain restored.

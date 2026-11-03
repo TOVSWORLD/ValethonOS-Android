@@ -1,0 +1,43 @@
+{
+  "scope": "Historical receiver/USB observation audit only; no device action or kernel diagnosis",
+  "trials": [
+    {
+      "trial": 2,
+      "all_port_usb_identity_events": 5,
+      "same_planned_path_identity_events": 5,
+      "test_vendor_events_any_port": 0,
+      "expected_vidpid_events_any_port": 0
+    },
+    {
+      "trial": 3,
+      "all_port_usb_identity_events": 5,
+      "same_planned_path_identity_events": 5,
+      "test_vendor_events_any_port": 0,
+      "expected_vidpid_events_any_port": 0
+    }
+  ],
+  "timing": {
+    "receiver_entry_wait_seconds": 45,
+    "normal_boot_return_guard_seconds": 90,
+    "trial2_next_preloader_after_initial_disconnect_seconds": 49.44,
+    "trial3_next_preloader_after_initial_disconnect_seconds": 69.24,
+    "trial3_next_preloader_after_receiver_deadline_seconds": 24.24,
+    "trial3_next_preloader_before_return_guard_end_seconds": 20.76
+  },
+  "observations": {
+    "plan_path_matches_initial_selected_recovery_path": true,
+    "no_expected_diagnostic_vidpid_in_bounded_all_host_port_identity_events": true,
+    "receiver_never_selected_or_opened_a_tty": true,
+    "permission_failure_not_established": true,
+    "uart_node_disabled_and_stdout_path_removed_in_candidate": true,
+    "pid1_failure_notes_only_target_console": true,
+    "independent_early_checkpoint_observed": false
+  },
+  "limits": [
+    "45-second receiver coverage is narrower than the full owner sequence. Whole-window host identity audit still sees no diagnostic VID/PID.",
+    "Trial3 reported USB reconnection on black screen before completing Power hold. Preloader events cannot alone establish spontaneous watchdog reset.",
+    "No host USB event establishes the stage reached inside the tablet. Source/VM tests intercept UDC binding and do not validate physical board bringup.",
+    "Loader entry/DT/argument lineage is not established by boot-header inspection alone."
+  ],
+  "next": "Resolve actual loader/early-checkpoint observability before another physical trial. No retry/rearm/rebuild from timing changes alone."
+}
