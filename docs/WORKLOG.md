@@ -4280,3 +4280,25 @@ Complete changed-watchdog behavior/risk and one-trip/rollback review recorded;
 owner approval/availability required for this exact new image.550 host tests and
 four Linux readiness/lifecycle controls pass. No prior reset cause, kernel entry,
 USB hardware, intended failure or retention acceptance is inferred.
+
+## 2026-11-02 — #346 candidate3 trial complete, original restored
+
+Owner approved exact reviewed candidate3 with “Just do it”. One fullp5 write/full
+readback and unchangedp6 verified, fresh supervisor armed. Capture0bytes/no endpoint,
+waiting_for_port ValueError. Owner clarified Amazon logo became black and he only
+unplugged/replugged USB, omitting Power hold. Remaining host window was too short
+for another trip; original host wait stopped before any helper launch. A fresh900s
+return-only continuation completed the unperformed manual return step, not another
+boot/capture/write or StageA trial. Exactly one pinned original helper launched,
+exit0. Bounded metadata readiness completed; initial full return validation still
+failed ValueError, so the reason remains unproven despite the host readiness change.
+
+Later fresh TWRP/douglas/aliases/fullcandidatep5+p6 checks passed. Approved original
+fullp5 restore ran once, full boot/recovery readbacks/RAMcleanup verified, no reboot.
+Exact71 trial rule removed/reloaded without trigger; older prep unchanged. Owner
+explicitly confirmed TWRP recovery menu after this return. Private lab/controller
+archives retained;32 scoped host USB events include no diagnostic1209:0001.
+Logo/black screen, owner timing deviations and host events do not establish a
+maintained-kernel entry or watchdog reset cause. Watchdog handoff remains hardware
+unobserved;346/344/348 open. No trial/build/helper running or new physical action.
+See watchdog-trial-result.json. No automatic retry/rearm/rebuild.
