@@ -4307,7 +4307,7 @@ See watchdog-trial-result.json. No automatic retry/rearm/rebuild.
 
 Audited retained trial2/3 plans, kernel USB timelines and bounded historical host
 kernel identity events across all ports. Each trial has five identity events, all
-on the planned recovery path; neitherthe test vendor nor diagnosticthe reviewed test USB identity appeared
+on the planned recovery path; the reviewed diagnostic USB identity did not appear
 elsewhere. Receiver never selected/opened a TTY, so a tty permission failure is not
 established. Capture entry wait45s is narrower than physical sequence. Trial3 next
 preloader arrived69.24s after initial disconnect:24.24s after receiver deadline,
@@ -4327,3 +4327,24 @@ The audit also checked enumeration errors and ACM binds, rather than identity
 lines alone. Each window has three CDC-ACM probe EINVAL(-22) errors associated
 with preloader events, plus three ACM TTY bind events. No error is attributed
 to a diagnostic device. This is not proof of a logging permission failure.
+
+## 2026-11-02 — #346 independent early display checkpoint
+
+Exact original-package LK inspection did not establish an image-format mismatch;
+its selected normal K64 path handles the compressed image/header and board DT.
+This remains conditional source evidence, not proof of runtime entry. Recovery's
+read-only framebuffer GET ioctls and firmware videolfb tag independently agree on
+base0x98600000. API allocation12,288,000B lies within the firmware16MiB display
+reservation;800x1280 visible,3200-byte stride,32bpp. No pixels or physical RAM
+contents read. Temporary metadata helper was hash-verified/removed.
+
+Necessary prerequisite recorded in346/344 before code: a private early ARM64
+checkpoint after init_kernel_el, before CPU setup/USB. Exact-board bounded FDT
+gate precedes alternating64KiB white/black stripes inside only that display
+allocation. It preserves boot arguments and continues boot, with no display
+control/MMIO, halt, storage or deliberate failure interface. Eight negative FDT
+cases, every destination word, adjacent guard words and boot registers passed
+against the actual instructions in emulator RAM. This is not physical scanout
+proof. Observing the unique pattern would prove reaching this checkpoint; absence
+alone remains inconclusive. New kernel bytes and complete concrete review are
+required before any physical trial; original boot remains restored, nothing armed.

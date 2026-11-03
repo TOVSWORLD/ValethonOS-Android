@@ -46,7 +46,10 @@ if [ "$mode" != generic ]; then
     if [[ "$mode" = usb-providers || "$mode" = usb-acm-diagnostic || "$mode" = lab-log ]]; then python3 scripts/apply_usb_port.py "$root/source"; fi
   fi
 fi
-if [ "$mode" = lab-log ]; then python3 scripts/apply_lab_watchdog.py "$root/source"; fi
+if [ "$mode" = lab-log ]; then
+  python3 scripts/apply_lab_watchdog.py "$root/source"
+  python3 scripts/apply_lab_entry_screen.py "$root/source"
+fi
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 defconfig
 if [ "$mode" != generic ]; then
   # ACK forbids a built-in MMSYS with modular CMDQ. Keep this generic parent

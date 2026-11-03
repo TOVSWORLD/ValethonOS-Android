@@ -591,3 +591,30 @@ After approval of this exact candidate/rollback and owner availability:
 Capture45s entry/30s transfer, initial normal-preloader guard90s, manual reconnect
 window300s and at most one90s original FACTORYM helper remain unchanged. No old
 trial/candidate/receipt reuse or StageA replay. See watchdog-candidate-result.json.
+
+### Independent early display checkpoint prerequisite
+
+The three zero-byte captures leave kernel entry unobserved. Exact original-package
+loader inspection found a conditional K64 compressed-image/DT path, without a
+concrete mismatch. The next diagnostic separates entry from USB using the
+firmware-owned display allocation rather than another receiver-timing change.
+
+Read-only FBIOGET_FSCREENINFO/FBIOGET_VSCREENINFO metadata and the firmware
+videolfb tag agree on0x98600000. Only the API's12,288,000B allocation is selected,
+within the16MiB display reservation. No pixel/physical RAM content was read;
+temporary metadata executable was removed. Source and sanitized metadata live in
+`evidence/independent-recovery/entry-screen-source/`.
+
+The lab-log-only source overlay calls a bounded marker after init_kernel_el and
+before __cpu_setup. It requires the expected DT handoff address, FDT bounds and
+exact root board compatible before writing alternating64KiB black/white stripes.
+It preserves x0/x19/x20/x21/SP, issues a store barrier and returns to normal boot.
+It does not enable display rails/clocks, change scanout registers, halt, inject a
+failure or expose storage/security controls. Actual marker instructions passed
+emulator checks of eight negative FDT cases, every buffer word and adjacent guards.
+
+A visible unique pattern is a positive kernel checkpoint only. Whether firmware
+scanout survives the custom boot is not physically qualified; absence cannot
+identify a failed stage. There is no new device-write/boot authorization here.
+The complete new image, logs/rollback procedure and owner availability must be
+reviewed before staging a physical trial. Keep346/344/348 open.

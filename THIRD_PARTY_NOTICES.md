@@ -34,3 +34,10 @@ redistribution approval for any separately obtained vendor firmware.
 source/Kconfig (GPL-2.0+ driver header preserved) and the existing MT8163 legacy
 register header. sources.json records exact upstream revisions and hashes; the
 base-watchdog match adaptation does not relicense those sources.
+
+The private early-entry display checkpoint patch targets Android Common Kernel
+`arch/arm64/kernel/head.S` at d9318bdb4c34e8b2d997b4f67ced56b120b22b87.
+The retained source fixture preserves its upstream SPDX license notice; see
+https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/arch/arm64/kernel/head.S.
+Framebuffer metadata interpretation was checked against the retained MT8163 source
+at e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74; this is provenance, not device acceptance.

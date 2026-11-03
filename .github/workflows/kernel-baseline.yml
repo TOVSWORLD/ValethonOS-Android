@@ -139,6 +139,7 @@ jobs:
         run: |
           python3 scripts/install_qemu_for_ci.py --install
           sudo apt-get install --no-install-recommends -y secilc=3.5-1 checkpolicy=3.5-1
+          python3 scripts/validate_lab_entry_screen_vm.py --output out/lab-entry-screen-vm
           python3 scripts/build_diagnostic_selinux_policy.py --output out/lab-vm-policy
           python3 scripts/build_lab_log_initramfs.py --policy out/lab-vm-policy/policy.33 --policy-report out/lab-vm-policy/report.json --output out/lab-vm-component
           image=work/ack-baseline/output/arch/arm64/boot/Image
