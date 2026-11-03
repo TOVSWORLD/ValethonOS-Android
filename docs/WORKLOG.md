@@ -4207,3 +4207,15 @@ pass, including actual C ABI/labels/domain failure paths. Six policy privilege
 mutations rejected. The regression remains running for its full20-second budget
 to catch delayed worker denials; it does not stop at the first success marker.
 No kernel rebuild, tablet query/write/reboot or new trial arm during diagnosis.
+
+## 2026-11-02 — #346 revised trial2 prepared for review
+
+Fresh private Linux trial2 contains hash-verified revised candidate4ec14bf...,
+component8 nonce and current host tools. Receiver input preflight passed without
+port open. Actual read-only TWRP writer preflight verified original fullp5/p6 and
+all aliases; Linux/controller rollback copies also match. Fresh receipts unused,
+pinned helper verified without launch, exact TTY rule prepared but not applied.
+No device write/reboot/arm/helper or udev change. Complete exact revised trial and
+rollback sequence is recorded in INDEPENDENT-RECOVERY.md for owner review; no old
+approval reuse. Candidate-installed supervisor preflight follows only an approved
+write. Source/VM success still does not qualify physical USB/kernel/failure gates.

@@ -446,3 +446,53 @@ be reused. Revised bytes are offline and unarmed. Any future physical test requi
 review of this changed exact candidate, fresh read-only preflight/receipts and owner
 availability. Tablet remains original boot restored/TWRP running. Physical entry,
 USB capture and intended failed-load/348 acceptance remain open.
+
+### Revised candidate2 — staged review and one-trip procedure
+
+The revised4ec14bf8774949ff36ad2173fb9267f6d5dffb2d155f8be485521863dd10741b
+full16MiB image/component8 is now hash-verified in a fresh private Linux trial2
+directory with current tools and a distinct nonce, capture plan and unused
+stage/trial/restore receipt paths. Receiver input preflight passes without opening
+a port. Candidate-writer default read-only preflight confirms actual TWRP identity,
+all four aliases and complete original p5/p6 hashes. Original full backups match on
+Linux and controller. Original helper sources are verified without launch. The
+exact physical-port USB rule is prepared privately but not installed; no udev
+change, device write, supervisor arm, helper or reboot occurred in this preparation.
+The supervisor's candidate-installed preflight is intentionally deferred until a
+reviewed write has passed. See revised-trial-preparation-result.json.
+
+This review admits only one normal log-bringup trial, not an intentional kernel
+failure. The expected success is attributable kernel logs durably acknowledged on
+the host, manual return to existing TWRP, then full original boot restoration.
+Generic VM validation cannot prove board boot, USB binding or safe return. This
+still writes the boot partition temporarily; a hang or failure before logging is
+possible, and an inaccessible recovery would prevent immediate software restore.
+The separate recovery partition is never written. Existing security policy remains
+enforcing; no storage interface, automatic reboot or failure injection is added.
+
+After owner approval of this exact revised image/rollback and current availability:
+
+1. From the desk, recheck the exact assets/tools and current original p5/p6. Install
+   only the scoped temporary host TTY rule and reload without a broad trigger.
+2. Write the reviewed full p5 once with an exclusive fresh receipt; require full
+   candidate readback and unchanged full p6. Stop on any mismatch, without retry.
+3. Run the supervisor's installed-candidate preflight, then arm its fresh one-shot
+   receipt only when the owner is ready to leave. Confirm armed before the trip.
+4. At the tablet within600s, choose TWRP **Reboot → System** once. Decline any
+   installer prompt. Wait90s; screen appearance alone is not kernel evidence.
+5. Unplug USB, hold only Power until off, at most40s; release, wait5s, reconnect the
+   same cable/port without pressing any other button. Do not repeat this sequence.
+6. Wait up to180s for TWRP/special recovery menu. Leave it unchanged and return to
+   the desk to report the screen. If shutdown/return fails or anything unexpected
+   occurs, stop and report; do not reset, wipe, install or improvise.
+7. From the desk, inspect private capture/return receipts and actual recovery;
+   explicitly restore the entire original p5 once with fresh preflight, full p5/p6
+   readbacks and RAM cleanup, leaving TWRP running. Remove only the exact temporary
+   trial TTY rule and reload without trigger. Preserve private logs and rollback.
+
+Capture has45s entry plus30s transfer bounds, the supervisor ignores the initial
+90s normal-boot preloader and allows300s for the owner's later reconnect, with at
+most one90s original FACTORYM helper. No physical instruction starts until the
+separate armed confirmation. No automatic retries, old trial reuse, recovery write,
+reinstall or StageA replay. Intended failed-load/retention qualification remains a
+later reviewed gate after actual normal logging succeeds.
