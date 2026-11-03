@@ -4219,3 +4219,21 @@ No device write/reboot/arm/helper or udev change. Complete exact revised trial a
 rollback sequence is recorded in INDEPENDENT-RECOVERY.md for owner review; no old
 approval reuse. Candidate-installed supervisor preflight follows only an approved
 write. Source/VM success still does not qualify physical USB/kernel/failure gates.
+
+## 2026-11-02 — #346 revised normal trial2 complete, original restored
+
+Owner approved exact revised trial/rollback and availability with “ok go”. Full
+candidate4ec14bf... written/readback verified, p6 unchanged, postwrite preflight
+passed; distinct trial2 supervisor armed once. Capture0 bytes, waiting_for_port
+ValueError, no endpoint selected/opened.32 scoped host USB events include no
+1209:0001. One original return helperexit0, then supervisor ValueError at
+validating_returned_recovery. Later read-only ADB recovery and exact TWRP identity,
+aliases/fullcandidate/p6 checks passed. Owner reports uncertainty that the screen
+returned; exact observation pending, so no screen-return assertion is made.
+
+Approved original fullp5 restored once after fresh preflight, complete p5/p6
+readbacks and RAM cleanup verified. No reboot after restore; TWRP left running.
+Exact71 trial rule removed/reloaded without trigger; older rules/ModemManager
+unchanged. Private evidence archived on lab/controller. No new trial/retry or
+intended failure. Source/VM fixes did not establish physical kernel/USB entry;
+346/344/348 remain open. See revised-log-trial-result.json.
