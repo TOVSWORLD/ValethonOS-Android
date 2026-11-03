@@ -1,10 +1,10 @@
 # Ordered ValethonOS delivery roadmap
 
-Current346 update: early-screen candidate4 prepared for complete owner review,
-unarmed. Retained kernel41566321777 and exact-marker/enforcing VM checks pass;
-read-only original fullboot/recovery preflight passes. New bounded display bands
-provide a positive-only early entry checkpoint. No physical write/arm or hardware
-acceptance. See INDEPENDENT-RECOVERY.md, Exact early-screen candidate4.
+Current346 update: candidate4 trial completed with no bands and zero logs.
+Return-only continuation used the unused original helper once, exit0; owner
+confirms TWRP. Fresh full partition checks and original boot restore verified,
+trial rule removed, no reboot or remaining arm. Kernel entry remains unproven.
+No unchanged retry/rebuild; see entry-screen-trial-result.json.
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

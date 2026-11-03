@@ -4362,3 +4362,21 @@ Rule prepared not installed, no candidate write/arm/port open/helper/reboot.
 Complete changed framebuffer behavior/positive-only limitation and one-trip
 normal-log/return/full-original-restore review recorded in INDEPENDENT-RECOVERY.
 Wait owner review/availability. No rebuild/retry or hardware acceptance inferred.
+
+## 2026-11-02 — #346 actual early-screen trial4 and rollback
+
+Owner explicitly approved candidate4 after complete changed-image review.
+Fullp5 written/readback once, p6 unchanged; fresh supervisor armed once. Owner
+reports Amazon logo/black intervals without bands. Capture0bytes/waiting_for_port,
+no endpoint selected/opened. Original return window expired without helper launch;
+owner reports full Power40/reconnect/wait180 sequence completed. A separately
+confirmed-ready900s return-only continuation used the still-unused original helper
+exactly once, exit0; owner reports quick TWRP return. Initial full validation again
+failed ValueError, specific cause unproven; later fresh actual recovery/aliases/
+fullcandidate+p6 verification passed before approved original fullp5 restore.
+Originalp5/p6 readbacks and RAM cleanup verified; no reboot, TWRP left running.
+Exact71 rule removed/reload without trigger, older host preparation unchanged.
+Private lab/controller archive hashes match. No bands is not proof of no entry;
+scanout persistence and DT-gate runtime assumptions remain unobserved. No unchanged
+retry/rebuild. Next narrow exact loader DT/argument handoff against marker gates
+and independent scanout observability.346/344/348 remain open.

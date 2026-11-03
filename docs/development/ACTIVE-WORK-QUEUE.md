@@ -1,10 +1,10 @@
 # Active work queue — ordered delivery
 
-Current346 update: early-screen candidate4 prepared for complete owner review,
-unarmed. Retained kernel41566321777 and exact-marker/enforcing VM checks pass;
-read-only original fullboot/recovery preflight passes. New bounded display bands
-provide a positive-only early entry checkpoint. No physical write/arm or hardware
-acceptance. See INDEPENDENT-RECOVERY.md, Exact early-screen candidate4.
+Current346 update: candidate4 trial completed with no bands and zero logs.
+Return-only continuation used the unused original helper once, exit0; owner
+confirms TWRP. Fresh full partition checks and original boot restore verified,
+trial rule removed, no reboot or remaining arm. Kernel entry remains unproven.
+No unchanged retry/rebuild; see entry-screen-trial-result.json.
 
 Owner priority correction,29 October2026. Read the
 [ordered roadmap](ORDERED-ROADMAP.md), [stable task/dependency contract](ordered-roadmap.json)
