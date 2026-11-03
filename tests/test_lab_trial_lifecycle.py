@@ -38,3 +38,39 @@ class TrialLifecycle(unittest.TestCase):
             with self.assertRaises(TimeoutError):
                 lifecycle(lambda: True if not overrun else now[0] < 1, capture, forbidden, forbidden,
                           lambda: now[0], sleep)
+
+class RecoveryReadiness(unittest.TestCase):
+    def test_metadata_only_then_stable_identity_and_no_partition_io(self):
+        from run_lab_log_trial import wait_recovery_identity
+        from types import SimpleNamespace
+        now = [0.0]; calls = []
+        def run(command, capture_output, timeout):
+            self.assertTrue(capture_output); self.assertLessEqual(timeout, 2)
+            calls.append(command)
+            if command[-1] == 'get-state': data = b'recovery'
+            elif command[-1] == 'ro.product.device': data = b'douglas' if now[0] >= .5 else b''
+            else: data = b'3.3.1-0'
+            return SimpleNamespace(returncode=0, stdout=data)
+        wait_recovery_identity(SimpleNamespace(command=['adb', '-s', 'private-fixture']),
+                               clock=lambda: now[0], sleep=lambda n: now.__setitem__(0, now[0]+n), run=run)
+        self.assertGreaterEqual(now[0], .75)
+        self.assertTrue(all('getprop' in c or c[-1] == 'get-state' for c in calls))
+        self.assertFalse(any('exec-out' in c or 'wait-for-recovery' in c for c in calls))
+
+    def test_mismatch_and_hung_probe_exhaust_only_metadata_budget(self):
+        from run_lab_log_trial import wait_recovery_identity
+        from types import SimpleNamespace
+        import subprocess
+        for hang in [False, True]:
+            now = [0.0]; calls = []
+            def run(command, capture_output, timeout):
+                calls.append(command)
+                if hang:
+                    now[0] += timeout
+                    raise subprocess.TimeoutExpired(command, timeout)
+                return SimpleNamespace(returncode=1, stdout=b'wrong')
+            with self.assertRaises(TimeoutError):
+                wait_recovery_identity(SimpleNamespace(command=['adb', '-s', 'private-fixture']),
+                                       clock=lambda: now[0], sleep=lambda n: now.__setitem__(0, now[0]+n), run=run)
+            self.assertEqual(now[0], 30)
+            self.assertLessEqual(len(calls), 120)

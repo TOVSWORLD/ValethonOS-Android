@@ -524,3 +524,12 @@ The build must compile/hash watchdog translation units, retain full kernel bytes
 check the same loader memory/capacity contract and run the enforcing VM regression.
 No old candidate is reusable. No tablet operation is authorized by this source
 change; future exact combined-image/rollback review follows successful compilation.
+
+The prospective host supervisor now waits at most30s for metadata-only recovery
+readiness after helper success, with each probe capped at2s and two stable exact
+recovery/douglas/TWRP observations. It then performs the full existing alias and
+partition validation once. Timeout/mismatch stops; no full-read, helper, write or
+reboot retry is added. Both prior initial failures remain unexplained, rather than
+being retroactively declared readiness races. Synthetic clock/probe tests cover
+delayed readiness, persistent mismatch and hung metadata commands. This host change
+does not alter the kernel build inputs or dispatch another build.

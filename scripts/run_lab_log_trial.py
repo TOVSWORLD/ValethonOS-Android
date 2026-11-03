@@ -63,6 +63,37 @@ def run_capture(plan, report, nonce, output):
             'receipt_exists': (output / 'receipt.json').is_file()}
 
 
+def wait_recovery_identity(adb, clock=time.monotonic, sleep=time.sleep, run=subprocess.run):
+    """Metadata-only bounded readiness; full partition validation still runs once."""
+    deadline = clock() + 30
+    stable = 0
+    probes = [(['get-state'], b'recovery'),
+              (['shell', 'getprop', 'ro.product.device'], b'douglas'),
+              (['shell', 'getprop', 'ro.twrp.version'], b'3.3.1-0')]
+    while clock() < deadline:
+        ready = True
+        for command, expected in probes:
+            remaining = deadline - clock()
+            if remaining <= 0:
+                raise TimeoutError('Recovery identity readiness budget expired')
+            try:
+                result = run(adb.command + command, capture_output=True,
+                             timeout=min(2, remaining))
+            except subprocess.TimeoutExpired:
+                ready = False
+                break
+            if result.returncode or result.stdout.strip() != expected:
+                ready = False
+                break
+        stable = stable + 1 if ready else 0
+        if stable == 2 and clock() < deadline:
+            return
+        remaining = deadline - clock()
+        if remaining > 0:
+            sleep(min(.25, remaining))
+    raise TimeoutError('Recovery identity readiness budget expired')
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ['plan', 'candidate-report', 'nonce', 'output', 'modules', 'initial-usb-identity',
@@ -126,8 +157,8 @@ def main():
         stage = 'checking_helper_exit'
         if result['helper_returncode'] != 0:
             raise ValueError('One-shot return helper did not succeed')
-        stage = 'waiting_for_recovery_adb'
-        adb.run(['wait-for-recovery'])
+        stage = 'waiting_for_recovery_identity'
+        wait_recovery_identity(adb)
         stage = 'validating_returned_recovery'
         preflight(adb, candidate, manifest, sha(candidate))
         result['recovery_observed'] = True

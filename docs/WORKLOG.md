@@ -4252,3 +4252,15 @@ retained.548 host tests and repository check pass. Source is not hardware proof;
 changed kernel object/Image/config/VM validation precedes any new package review.
 AUDSYS/MIPI shared build-script hash locks updated solely for the lab-log branch;
 no peripheral source change or new issue. Original boot remains restored/TWRP.
+
+## 2026-11-02 — #346 bounded post-return readiness
+
+Necessary prerequisite recorded346/344 before host code. Added30s metadata-only
+recovery readiness after one successful helper,2s/probe cap, two stable exact
+observations, then one unchanged full validation. No full-read/helper/write/reboot
+retry. Delayed readiness, mismatch and hung-command tests pass. Prior initial
+validation failures remain unexplained; this is no kernel-entry fix or retrospective
+acceptance. Kernel run41552296163 remains the single changed-source build at18abfbf;
+no second dispatch, tablet query, write, rule or arm for this host change.
+Validation after host readiness change:550 controller tests and repository checks
+pass. Changed kernel compilation/VM result remains pending; no runtime pass claim.
