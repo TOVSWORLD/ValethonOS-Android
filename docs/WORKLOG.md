@@ -4449,3 +4449,26 @@ currenthash-bound full-original-restore review recorded. USB remains supplementa
 persistent readout is the result gate. Host-control-only is not kernel output.
 Wait explicit exact-candidate approval/availability; no further build/prep tests
 while unchanged. Source/fixture/VM checks do not pass346/344/348 hardware exits.
+
+## 2026-11-02 — #346 actual retained trial5: control recovered, no kernel record
+
+Owner approved exact candidate5 and explicitly confirmed readiness. Fullp5 write/
+readback once, p6 unchanged, persistent supervisor armed once. One original return
+helper exit0; owner reports completed trip/back on TWRP. Initial full collector
+failed ValueError at validating_returned_recovery; cause not established. The
+prepared separate read-only collector then passed exact recovery/aliases/fullp6/
+candidate-prefix/seed checks and recovered HOST CONTROL only:sequence1,85bytes,
+no invalid slots. Full posttrialp5 SHA equals the installed candidate, so no
+persisted changed bytes or kernel commit were observed. This proves readout of
+that known stored record after the return procedure, not kernel entry or a kernel
+writer/retained-failure-log pass. USB was not required for this result.
+
+Approved original fullp5 restored once from independently validated readout/current
+hash; fullp5+p6 readbacks/RAMcleanup verified. TWRP left running/no reboot. No TTY
+rule was installed; older host preparation unchanged. Private trial5 archive hashes
+match lab/controller. No helper/supervisor/build or new physical action pending.
+Keep working reader/format; next narrow normal image selection/entry/FDT handoff
+versus kernel storage initialization/guard reachability. Cached LK-payload source
+routes normal header/component reads to boot_x; this is conditional source evidence,
+not proof of runtime path. No repeated USB/format work or unchanged build/trial.
+See retained-trial-result.json;346/344/348 open.
