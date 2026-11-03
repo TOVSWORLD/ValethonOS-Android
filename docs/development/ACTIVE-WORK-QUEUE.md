@@ -54,8 +54,10 @@ The board is the source of live state. Do not resume historical peripheral queue
   VM tests reproduced and corrected ARM64 open flags, device/configfs labels and
   PID1/kernel-thread domain handling. A second normal trial also produced no logs; original boot was again restored.
   The inherited-watchdog handoff correction now has a successful retained kernel
-  build and enforcing VM run. Fresh candidate3 is staged/read-only preflighted
-  for review under draft PR453; no new image write or arm has occurred. Ordinary return
+  build and enforcing VM run. Candidate3 was tested once and also produced no logs/diagnostic endpoint.
+  Its pending manual return step was completed separately without another boot
+  trial; original boot was restored/verified and owner confirms TWRP. Nothing is
+  armed under draft PR453; watchdog hardware handoff remains unobserved. Ordinary return
   remains complete; intended failed-load and348 retention remain unqualified.
   #345 is closed not planned because no inspection was needed.
 

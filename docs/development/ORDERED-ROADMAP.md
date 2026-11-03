@@ -17,8 +17,10 @@ defines stable ordering, dependencies and acceptance contracts.
   evidence identified/corrected ARM64 userspace ABI and enforcing-label/domain
   blockers. Revised trial2 also produced no logs; original boot was restored. A concrete
   inherited-watchdog handoff correction has passed retained kernel compilation/VM
-  validation. Fresh candidate3 is staged/preflighted for owner review, not physically
-  admitted.348 retention/intended-failure return remain open; no build/trial running.
+  validation. Candidate3 trial also yielded no logs. The owner completed the missed manual
+  power-off return step through a return-only continuation; original boot was
+  restored/verified and owner confirms TWRP. No kernel/watchdog hardware pass or
+  intended-failure/348 retention pass. No build/trial/helper running.
 - **Interim versus public OS:** the installed upstream LineageOS build is a lab
   baseline. It is not the finished project-branded OS or a stable/current release
   acceptance. Its patch level is2024-02-05, encryption reports unsupported and
