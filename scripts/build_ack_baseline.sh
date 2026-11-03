@@ -46,6 +46,7 @@ if [ "$mode" != generic ]; then
     if [[ "$mode" = usb-providers || "$mode" = usb-acm-diagnostic || "$mode" = lab-log ]]; then python3 scripts/apply_usb_port.py "$root/source"; fi
   fi
 fi
+if [ "$mode" = lab-log ]; then python3 scripts/apply_lab_watchdog.py "$root/source"; fi
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 defconfig
 if [ "$mode" != generic ]; then
   # ACK forbids a built-in MMSYS with modular CMDQ. Keep this generic parent
@@ -137,6 +138,11 @@ if [ "$mode" != generic ]; then
       echo USB_ACM_BUILTIN_OBJECT_COMPILE_COMPLETE
     fi
   fi
+fi
+if [ "$mode" = lab-log ]; then
+  make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$jobs" W=1 drivers/watchdog/mtk_wdt.o drivers/watchdog/watchdog_dev.o
+  sha256sum "$output/drivers/watchdog/mtk_wdt.o" "$output/drivers/watchdog/watchdog_dev.o"
+  echo LAB_BOOT_WATCHDOG_OBJECT_COMPILE_COMPLETE
 fi
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$jobs" Image vmlinux
 if [[ "$mode" = diagnostic || "$mode" = lab-log ]]; then

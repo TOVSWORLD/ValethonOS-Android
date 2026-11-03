@@ -496,3 +496,31 @@ most one90s original FACTORYM helper. No physical instruction starts until the
 separate armed confirmation. No automatic retries, old trial reuse, recovery write,
 reinstall or StageA replay. Intended failed-load/retention qualification remains a
 later reviewed gate after actual normal logging succeeds.
+
+### Trial2 reset lead and inherited watchdog handoff
+
+The exact scoped host timeline has a further preloader enumeration49.35s after
+normal-boot recovery disconnect, before the instructed90s owner wait. This is a
+reset lead, not a measured reset cause or proof that the maintained kernel entered.
+The tested resolved config disables WATCHDOG. The own-source DT watchdog node
+uses mediatek,mt8163-wdt, absent from the pinned ACK driver's match table.
+
+The next changed kernel contract enables builtin MediaTek watchdog/core and
+WATCHDOG_HANDLE_BOOT_ENABLED with open_timeout0, adding only the exact board
+compatible to the existing base driver (NULL extension data). Pinned legacy/ACK
+MODE/LENGTH/reload offsets, enable bit and keys agree; sources are retained under
+watchdog-source. The upstream init only marks/services an already-enabled timer;
+it does not start a disabled one. The kernel worker services inherited hardware
+until userspace takeover; this PID1 has no watchdog node/open or takeover. There
+is no new userspace permission, raw memory access, SW reset invocation,
+reset-controller variant data, thermal-request write or enforcement relaxation.
+It does not establish the prior reset cause or guarantee entry before the driver.
+Manual shutdown/recovery provisions and subsequent complete review remain required.
+
+The patch applies only in lab-log mode against exact source/output hashes. Tests
+execute the actual upstream init with enabled/disabled register fixtures, reject
+wrong revisions/reapplication and require the explicit builtin handoff config.
+The build must compile/hash watchdog translation units, retain full kernel bytes,
+check the same loader memory/capacity contract and run the enforcing VM regression.
+No old candidate is reusable. No tablet operation is authorized by this source
+change; future exact combined-image/rollback review follows successful compilation.

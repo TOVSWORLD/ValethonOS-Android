@@ -4237,3 +4237,18 @@ Exact71 trial rule removed/reloaded without trigger; older rules/ModemManager
 unchanged. Private evidence archived on lab/controller. No new trial/retry or
 intended failure. Source/VM fixes did not establish physical kernel/USB entry;
 346/344/348 remain open. See revised-log-trial-result.json.
+
+## 2026-11-02 — #346 inherited watchdog prerequisite implemented
+
+Recorded prerequisite346/344 before code. Trial2 host timeline has an additional
+preloader49.35s after boot disconnect, before the planned90s wait; no reset cause
+is inferred. Tested kernel WATCHDOG=n and pinned ACK lacks exact board watchdog
+compatible. Added base-driver mt8163 match with no extension/reset-controller data,
+explicit builtin/core boot-enabled handoff config and lab-log-only pinned patch.
+Actual upstream init tests distinguish disabled hardware from inherited running
+hardware; the latter is serviced, not stopped. No watchdog userspace node, reset
+request, thermal-request change or security bypass. Source register provenance is
+retained.548 host tests and repository check pass. Source is not hardware proof;
+changed kernel object/Image/config/VM validation precedes any new package review.
+AUDSYS/MIPI shared build-script hash locks updated solely for the lab-log branch;
+no peripheral source change or new issue. Original boot remains restored/TWRP.

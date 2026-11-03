@@ -29,3 +29,8 @@ LibreEcho and AOSP source/listing references with original headers and a SHA256 
 These sources retain their file-level terms; source excerpts are not relicensed as
 first-party documentation. Research integration proposals do not establish runtime or
 redistribution approval for any separately obtained vendor firmware.
+
+`evidence/independent-recovery/watchdog-source/` retains pinned ACK watchdog
+source/Kconfig (GPL-2.0+ driver header preserved) and the existing MT8163 legacy
+register header. sources.json records exact upstream revisions and hashes; the
+base-watchdog match adaptation does not relicense those sources.
