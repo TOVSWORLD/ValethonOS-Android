@@ -1,5 +1,11 @@
 # Active work queue — ordered delivery
 
+Current346 update: early-screen candidate4 prepared for complete owner review,
+unarmed. Retained kernel41566321777 and exact-marker/enforcing VM checks pass;
+read-only original fullboot/recovery preflight passes. New bounded display bands
+provide a positive-only early entry checkpoint. No physical write/arm or hardware
+acceptance. See INDEPENDENT-RECOVERY.md, Exact early-screen candidate4.
+
 Owner priority correction,29 October2026. Read the
 [ordered roadmap](ORDERED-ROADMAP.md), [stable task/dependency contract](ordered-roadmap.json)
 and [Project4](https://github.com/users/TOVSWORLD/projects/4) before selecting work.

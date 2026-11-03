@@ -618,3 +618,66 @@ scanout survives the custom boot is not physically qualified; absence cannot
 identify a failed stage. There is no new device-write/boot authorization here.
 The complete new image, logs/rollback procedure and owner availability must be
 reviewed before staging a physical trial. Keep346/344/348 open.
+
+### Exact early-screen candidate4 — complete review before execution
+
+This supersedes prior ready candidates. Run41566321777 at source
+4ef0bc8c1175f548e965286f636001efa6113d48 succeeded, including the exact-marker
+emulator and20s enforcing PID1 VM. All retained manifest hashes verified. Actual
+Image marker459bytes exactly matches the emulator-tested instructions. Image
+15,424,000B SHA2c82fd024682f47b50cdb84abb3aa476801a462a52273e685895eff23fe4e4fa;
+gzip6,500,129B SHA85f5e3c613e8cefb80e2eca364f443b9065576adf658a24a2107434531ce2ccd.
+Runtime15,925,248B fits the selected loader28MiB decoded limit.
+
+Exact full16,777,216B candidate4 SHA256:
+fba4edca641182a77aa385a7b137e8e2834586a53f974d1ddc38aa0f1035cb9e.
+Payload6,545,408B. Own DT/placement unchanged: entry40000000/runtime ends40f30000,
+initrd43480000, tags48000000, bounded DT staging45000000. Fresh component10 has
+init52,800B SHA0c4f0121e9901aa0c1dc0aca2e15f7c3f3928b96e3f8c6a6306bad7dde0ad072,
+initramfs13,686B SHA85184f1d3c9c38db70aa5f127e36dc65cf30d28c1b9c0b4c95dfd4e101b6b50a,
+unchanged enforcing policy and a fresh private nonce. Independent header ID,
+gzip/components/DT suffix/padding/range checks pass. Fresh trial4 assets/tools are
+hash-verified, receiver-input and actual read-only original TWRP/allaliases/fullp5+p6
+checks pass; lab/controller rollback match. Rule is prepared but not installed;
+stage/trial/restore receipts unused. No serial open, write, helper, reboot or arm.
+
+New physical behavior for review: the kernel writes alternating64KiB black/white
+bands into the corroborated intended display allocation98600000..991b8000 after
+MMU-off normalization, before CPU setup and USB. It reads bounded DT metadata,
+never pixels, changes no display-control registers and continues normal boot.
+Firmware scanout could be disabled, replaced or cleared; absent bands do not prove
+failure to enter. Visible distinctive bands prove only reaching this early
+checkpoint, not userspace/logging success. Watchdog inherited-counter servicing
+from candidate3 remains; a hung kernel/userspace may require manual Power hold.
+Recovery return can fail, leaving immediate software rollback unavailable. There
+is no intentional failure, security relaxation, storage interface or acceptance of
+346/344/348. Full original boot tail/partitions remain retained for exact rollback.
+
+After approval of this exact changed image/framebuffer behavior/rollback and owner
+availability, the complete sequence is:
+
+1. At the desk, recheck fresh assets, original fullp5/p6 and tools; install only the
+   exact scoped temporary71 TTY rule, reload without trigger. Write fullp5 once,
+   verify full candidate readback and unchanged fullp6. No retry/recovery write.
+2. Run installed-candidate preflight, arm the fresh one-shot supervisor and confirm
+   armed before the owner leaves. No automatic boot command;600s travel budget.
+3. At TWRP choose Reboot→System once. If any installer prompt appears, decline it;
+   no prompt is expected or required. Watch the screen for the full90seconds from
+   choosing System, noting whether black/white bands appear even briefly and what
+   follows. Amazon logo or black alone are not success/failure indications.
+4. After those90seconds, unplug USB. Hold **only Power for40seconds even if the
+   screen is already black**; release, wait5seconds, reconnect the same cable/port
+   without other buttons. Do not merely reconnect at the first black screen.
+5. Wait180seconds. Leave any TWRP/special menu unchanged and return to the desk to
+   report bands/no bands, final screen and any deviation. If anything unexpected
+   happens or return fails, stop/report; no retry, wipe, install or improvised reset.
+6. At the desk inspect private capture/return and actual recovery. Supervisor has
+   capture45s entry+30s transfer, initial90s normal-preloader guard,300s reconnect
+   window, at most one90s pinned original FACTORYM helper,30s metadata stability
+   then full validation once. No helper/write/boot retry or StageA replay.
+7. After actual recovery verification, restore exact original fullp5 once using
+   fresh guarded preflight/receipt, fullp5+p6 readbacks and RAM cleanup. Leave TWRP
+   running without reboot. Remove only exact71 rule/reload without trigger; retain
+   private logs and original backups. Older host preparation remains tracked.
+
+No step is armed by this document or prior approval. See entry-screen-candidate-result.json.

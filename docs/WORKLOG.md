@@ -4348,3 +4348,17 @@ against the actual instructions in emulator RAM. This is not physical scanout
 proof. Observing the unique pattern would prove reaching this checkpoint; absence
 alone remains inconclusive. New kernel bytes and complete concrete review are
 required before any physical trial; original boot remains restored, nothing armed.
+
+## 2026-11-02 — #346 early-screen candidate4 prepared
+
+Run41566321777/source4ef0bc8 succeeded with retained manifest hashes verified,
+actual Image marker matches459 emulator-tested bytes, exact-marker VM and full20s
+enforcing PID1 VM passed. Fresh component10/candidate4 assembled; independent
+header/gzip/DT/initramfs/padding/memory bounds pass. Candidate fullp5 SHA
+fba4edca641182a77aa385a7b137e8e2834586a53f974d1ddc38aa0f1035cb9e.
+Fresh current tools/receipts staged; receiver-input and actual original
+TWRP/aliases/fullboot+recovery read-only preflight pass, both rollback copies match.
+Rule prepared not installed, no candidate write/arm/port open/helper/reboot.
+Complete changed framebuffer behavior/positive-only limitation and one-trip
+normal-log/return/full-original-restore review recorded in INDEPENDENT-RECOVERY.
+Wait owner review/availability. No rebuild/retry or hardware acceptance inferred.
