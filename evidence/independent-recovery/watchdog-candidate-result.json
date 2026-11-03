@@ -1,0 +1,95 @@
+{
+  "scope": "Changed inherited-watchdog kernel and fresh candidate3 preparation; no physical execution acceptance",
+  "kernel_run": 41552296163,
+  "kernel_build_conclusion": "success",
+  "kernel_repository_revision": "18abfbf3ef3673df14e59c97d7d913811b502cf8",
+  "kernel_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "host_source_revision": "00bef27b80c8f92ddaae89358466c5209e5fcf66",
+  "retained_manifest_files": {
+    "Image": {
+      "bytes": 15424000,
+      "sha256": "994f1dd49e9d5d5a2d65de09c88c13af1ccf81364d41cd383fcb775f060629f9"
+    },
+    "Image.gz": {
+      "bytes": 6500631,
+      "sha256": "a28302975c67e64f024321cb943e42720831c7bbe988e2d8ed72cb57c8f1494a"
+    },
+    "resolved.config": {
+      "bytes": 114106,
+      "sha256": "4722b0ed869153106e2ba012e495333ac662e7953bd51504f853442e31f7faeb"
+    },
+    "System.map": {
+      "bytes": 3252902,
+      "sha256": "efb184530a2a20b682398f3743b96e0463b6656fb0c1acc433f635da5877533d"
+    },
+    "image-size-report.json": {
+      "bytes": 881,
+      "sha256": "d6c975910267498f67c3e9d9f2515e56bf740225e1db75615219fdfd023768b5"
+    }
+  },
+  "watchdog_probe_objects": {
+    "mtk_wdt.o": "ee6563de636c1bf22747e8587782ab3ed6187f0d31cd1b5fe6ef8b40cff5109f",
+    "watchdog_dev.o": "df4bd29c9d24a416d588fcd65d0e2eda13db4776ab942049d336a1b2f32e2e2e"
+  },
+  "final_system_map_watchdog_symbols_present": true,
+  "resolved_builtin_watchdog_and_boot_enabled_handoff": true,
+  "watchdog_open_timeout": 0,
+  "userspace_watchdog_node_or_open": false,
+  "explicit_reset_request_added": false,
+  "thermal_request_writes_added": false,
+  "vm_report": "evidence/independent-recovery/watchdog-vm-result.json",
+  "candidate": {
+    "partition_sha256": "09ca6e2be60cc508fc5b93b7f577e5b0ef861e5c89486c18fda40b078075c3b7",
+    "partition_bytes": 16777216,
+    "payload_bytes": 6545408,
+    "entry": 1073741824,
+    "runtime_regions": [
+      [
+        1073741824,
+        15925248
+      ],
+      [
+        1128792064,
+        54272
+      ],
+      [
+        1207959552,
+        1048576
+      ],
+      [
+        1157627904,
+        27408
+      ]
+    ],
+    "component_sha1": "aa01ff485c0d18483b5ef9d538829cb4e6909bc1"
+  },
+  "component": {
+    "init": {
+      "bytes": 52800,
+      "sha256": "6a468360e002bed308193a8bba5bcd1e2999e02fdf1476dcd589198253066890"
+    },
+    "initramfs.cpio.gz": {
+      "bytes": 13686,
+      "sha256": "2d26dd738b2c610619d568c6625e4117b063f2a5c154c7fe3e0c385edbaa2553"
+    }
+  },
+  "policy_sha256": "5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8",
+  "dt_unchanged": true,
+  "independent_header_gzip_dt_initramfs_padding_checks": true,
+  "linux_staged_assets_and_current_tools_hash_verified": true,
+  "receiver_input_preflight": true,
+  "actual_original_boot_recovery_readonly_preflight": true,
+  "lab_and_controller_rollback_hashes_verified": true,
+  "fresh_unused_receipts": true,
+  "temporary_tty_rule_prepared_not_applied": true,
+  "device_written": false,
+  "armed": false,
+  "owner_approval_pending_for_changed_candidate": true,
+  "tests": {
+    "controller": 550,
+    "linux_new_return_lifecycle": 4,
+    "watchdog_actual_upstream_init_and_patch_controls": 3
+  },
+  "prior_reset_cause_proven": false,
+  "physical_kernel_usb_or_failedload_qualified": false
+}

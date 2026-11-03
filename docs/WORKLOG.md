@@ -4264,3 +4264,19 @@ acceptance. Kernel run41552296163 remains the single changed-source build at18ab
 no second dispatch, tablet query, write, rule or arm for this host change.
 Validation after host readiness change:550 controller tests and repository checks
 pass. Changed kernel compilation/VM result remains pending; no runtime pass claim.
+
+## 2026-11-02 — #346 watchdog candidate3 prepared for review
+
+Run41552296163 at18abfbf/ACKd9318bdb succeeded, including actual watchdog/core object
+compile, final Image/config/size and full20s enforcing VM regression. Retained
+artifact manifest hashes verified. Image15,424,000B SHA994f1dd4..., gzip6,500,631B,
+runtime15,925,248B; final System.map includes watchdog symbols. Source/VM only.
+Fresh component9 nonce plus unchanged ownDT pack into fullp5 candidate09ca6e2be60cc508fc5b93b7f577e5b0ef861e5c89486c18fda40b078075c3b7,
+payload6,545,408B. Independent header-ID/gzip/DT/initramfs/padding/placement checks
+pass. Fresh trial3 assets/current tools staged, receiver input and actual read-only
+original TWRP/fullp5/p6/aliases checks pass. Lab/controller rollback matches, fresh
+receipts unused, scoped TTY rule unapplied. No write/arm/helper/reboot/port open.
+Complete changed-watchdog behavior/risk and one-trip/rollback review recorded;
+owner approval/availability required for this exact new image.550 host tests and
+four Linux readiness/lifecycle controls pass. No prior reset cause, kernel entry,
+USB hardware, intended failure or retention acceptance is inferred.

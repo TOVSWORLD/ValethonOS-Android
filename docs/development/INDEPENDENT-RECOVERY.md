@@ -533,3 +533,61 @@ reboot retry is added. Both prior initial failures remain unexplained, rather th
 being retroactively declared readiness races. Synthetic clock/probe tests cover
 delayed readiness, persistent mismatch and hung metadata commands. This host change
 does not alter the kernel build inputs or dispatch another build.
+
+### Exact watchdog candidate3 — complete review before execution
+
+Changed kernel run41552296163 succeeded at repository18abfbf3ef3673df14e59c97d7d913811b502cf8
+and pinned ACKd9318bdb4c34e8b2d997b4f67ced56b120b22b87. Watchdog/core objects compiled,
+final System.map contains the probe/driver/core symbols; resolved builtin boot-enabled
+handoff config, loader size and full20s enforcing VM checks pass. Retained manifest
+hashes all match. Image15,424,000B, gzip6,500,631B, runtime15,925,248B, text_offset0.
+The VM still intercepts final UDC binding: no board watchdog/USB behavior is proven.
+
+Exact new full16,777,216B boot image SHA256:
+09ca6e2be60cc508fc5b93b7f577e5b0ef861e5c89486c18fda40b078075c3b7.
+Aligned payload6,545,408B. Own hvt DT and placements are unchanged. Fresh component9
+has init52,800B SHA6a468360e002bed308193a8bba5bcd1e2999e02fdf1476dcd589198253066890,
+initramfs13,686B SHA2d26dd738b2c610619d568c6625e4117b063f2a5c154c7fe3e0c385edbaa2553;
+private fresh nonce. Independent header ID, component/gzip/DT suffix, padding and
+memory-range checks pass. Fresh private trial3 assets/current tools/commands are
+staged and hash-verified. Receiver input preflight and actual read-only original
+TWRP/aliases/fullp5+p6 checks pass; Linux/controller rollback copies match. Distinct
+stage/trial/restore receipts are unused. TTY rule is prepared but not applied.
+No candidate write, serial open, helper, arm or reboot occurred in preparation.
+
+The changed behavior is kernel handoff of an already-running firmware watchdog:
+the kernel keeps that counter serviced until userspace takeover, which this PID1
+does not perform. A disabled timer is not started by init. This may prevent an
+inherited timeout reset, but the previous reset cause is unproven. It can also
+leave a hung userspace waiting for manual shutdown rather than an inherited timer
+reset. No thermal-request bits or security enforcement are changed. Failure before
+the driver or USB logger remains uncovered. Recovery could be inaccessible, making
+immediate software rollback impossible. Approval of an older image is not approval
+of this changed exact image/behavior. This is only normal logging, no deliberate
+failure and no closure of346/344/348.
+
+After approval of this exact candidate/rollback and owner availability:
+
+1. From the desk, freshly verify exact assets/tools and original p5/p6; install only
+   the scoped temporary TTY rule and reload without a broad trigger.
+2. Write only fullp5 once with exclusive fresh receipt. Require full candidate
+   readback and unchanged fullp6; stop on mismatch, no retry or recovery write.
+3. Run installed-candidate supervisor preflight; arm the fresh one-shot receipt and
+   confirm it is armed before the owner leaves. No automatic boot command.
+4. At the tablet within600s, choose TWRP Reboot→System once, decline installers,
+   wait90s. Unplug USB; hold only Power until off, at most40s. Release, wait5s,
+   reconnect the same cable/port without pressing any other button. Do not repeat.
+5. Wait up to180s for TWRP/special menu. Leave it unchanged, return to the desk and
+   report the screen. If shutdown/return fails or anything unexpected occurs,
+   stop/report; no reset, wipe, install, unlock or improvised menu sequence.
+6. From the desk, inspect private capture/return and actual recovery. The supervisor
+   allows30s metadata readiness (2s/probe,two stable identities) then full validation
+   once; this is no helper or write retry. Explicitly restore the original fullp5
+   once with fresh preflight, complete p5/p6 readbacks and RAM cleanup. Leave TWRP.
+7. Remove only the exact temporary71 trial rule, reload without trigger and retain
+   private evidence/original rollback. Older host preparation remains separately
+   tracked without disrupting authorized ADB.
+
+Capture45s entry/30s transfer, initial normal-preloader guard90s, manual reconnect
+window300s and at most one90s original FACTORYM helper remain unchanged. No old
+trial/candidate/receipt reuse or StageA replay. See watchdog-candidate-result.json.

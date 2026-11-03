@@ -15,8 +15,10 @@ defines stable ordering, dependencies and acceptance contracts.
   diagnostic trial under346/PR453 yielded no kernel logs/diagnostic USB identity;
   recovery returned and the full original boot was restored/verified. Generic VM
   evidence identified/corrected ARM64 userspace ABI and enforcing-label/domain
-  blockers. Revised candidate is offline, not physically admitted;348 failed-boot
-  retention and intended-failure return remain open. No build/trial is running.
+  blockers. Revised trial2 also produced no logs; original boot was restored. A concrete
+  inherited-watchdog handoff correction has passed retained kernel compilation/VM
+  validation. Fresh candidate3 is staged/preflighted for owner review, not physically
+  admitted.348 retention/intended-failure return remain open; no build/trial running.
 - **Interim versus public OS:** the installed upstream LineageOS build is a lab
   baseline. It is not the finished project-branded OS or a stable/current release
   acceptance. Its patch level is2024-02-05, encryption reports unsupported and

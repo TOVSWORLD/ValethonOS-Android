@@ -52,8 +52,10 @@ The board is the source of live state. Do not resume historical peripheral queue
   Existing recovery returned and the full original boot image was restored/verified;
   owner confirms TWRP. No maintained-kernel entry is inferred. Generic enforcing
   VM tests reproduced and corrected ARM64 open flags, device/configfs labels and
-  PID1/kernel-thread domain handling. A revised image is prepared offline under
-  draft PR453, without kernel rebuild or another tablet action. Ordinary return
+  PID1/kernel-thread domain handling. A second normal trial also produced no logs; original boot was again restored.
+  The inherited-watchdog handoff correction now has a successful retained kernel
+  build and enforcing VM run. Fresh candidate3 is staged/read-only preflighted
+  for review under draft PR453; no new image write or arm has occurred. Ordinary return
   remains complete; intended failed-load and348 retention remain unqualified.
   #345 is closed not planned because no inspection was needed.
 
