@@ -7,6 +7,9 @@ readonly mode="${requested_mode/lab-retained/lab-log}"
 retained_args=()
 if [ "$requested_mode" = lab-retained ]; then retained_args=(--retained-mailbox); fi
 [[ "$mode" = generic || "$mode" = clocks || "$mode" = clocks-pinctrl || "$mode" = providers || "$mode" = usb-providers || "$mode" = usb-acm-diagnostic || "$mode" = lab-log || "$mode" = diagnostic ]] || exit 2
+readonly entry_profile="${ENTRY_CHECKPOINT_PROFILE:-none}"
+[[ "$entry_profile" = none || "$entry_profile" = entry-8s ]] || exit 2
+[[ "$entry_profile" = none || "$requested_mode" = lab-retained ]] || exit 2
 readonly argument_profile="${ARGUMENT_PROFILE:-none}"
 [[ "$argument_profile" = none || "$argument_profile" = generic-force ]] || exit 2
 [[ "$argument_profile" = none || "$mode" = diagnostic ]] || exit 2
@@ -53,6 +56,7 @@ if [ "$mode" = lab-log ]; then
   python3 scripts/apply_lab_watchdog.py "$root/source"
   python3 scripts/apply_lab_entry_screen.py "$root/source"
   if [ "$requested_mode" = lab-retained ]; then python3 scripts/apply_lab_retained.py "$root/source"; fi
+  if [ "$entry_profile" = entry-8s ]; then python3 scripts/apply_lab_entry_delay.py "$root/source"; fi
 fi
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 defconfig
 if [ "$mode" != generic ]; then

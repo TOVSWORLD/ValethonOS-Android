@@ -62,7 +62,7 @@ def generated_header(data, component):
     return data
 
 
-def run(kernel, expected_kernel, component_dir, output):
+def run(kernel, expected_kernel, component_dir, output, entry_framebuffer_ram=False):
     if output.exists() or output.is_symlink():
         raise ValueError('Fresh private VM output required')
     if kernel.is_symlink() or not kernel.is_file() or not 64 <= kernel.stat().st_size <= 32 * 1024 * 1024:
@@ -96,7 +96,7 @@ def run(kernel, expected_kernel, component_dir, output):
     inspect_archive(raw, entries)
     initramfs = output / 'initramfs.cpio.gz'
     initramfs.write_bytes(gzip.compress(raw, mtime=0))
-    command = [qemu, '-machine', 'virt,gic-version=2', '-cpu', 'cortex-a53', '-smp', '1', '-m', '512',
+    command = [qemu, '-machine', 'virt,gic-version=2', '-cpu', 'cortex-a53', '-smp', '1', '-m', '1536' if entry_framebuffer_ram else '512',
                '-nodefaults', '-display', 'none', '-serial', 'stdio', '-monitor', 'none', '-nic', 'none',
                '-no-reboot', '-kernel', str(kernel), '-initrd', str(initramfs), '-append',
                'console=ttyAMA0,115200 earlycon=pl011,0x9000000 rdinit=/init nr_cpus=1 maxcpus=0 loglevel=8 ignore_loglevel panic=-1']
@@ -136,7 +136,7 @@ def run(kernel, expected_kernel, component_dir, output):
               'passed': True, 'kernel_sha256': expected_kernel, 'policy_sha256': component['policy_sha256'],
               'probe_source_sha256': sha(PROBE.read_bytes()), 'runner_sha256': sha(Path(__file__).read_bytes()),
               'vm_initramfs_sha256': sha(initramfs.read_bytes()), 'values': values,
-              'ram_mib': 512, 'cpu_count': 1, 'wall_limit_seconds': 20, 'log_limit_bytes': 2 * 1024 * 1024,
+              'ram_mib': 1536 if entry_framebuffer_ram else 512, 'cpu_count': 1, 'wall_limit_seconds': 20, 'log_limit_bytes': 2 * 1024 * 1024,
               'qemu_version': subprocess.check_output([qemu, '--version'], text=True).splitlines()[0],
               'selinux_enforcing': True, 'udc_bind_intercepted_vm_only': True,
               'disk_attached': False, 'network_attached': False, 'tablet_commands': False,
@@ -152,9 +152,10 @@ def main():
     p.add_argument('--expected-kernel-sha256', required=True)
     p.add_argument('--component-dir', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--entry-framebuffer-ram', action='store_true')
     a = p.parse_args()
     try:
-        print(json.dumps(run(a.kernel, a.expected_kernel_sha256, a.component_dir, a.output), indent=2))
+        print(json.dumps(run(a.kernel, a.expected_kernel_sha256, a.component_dir, a.output, entry_framebuffer_ram=a.entry_framebuffer_ram), indent=2))
     except (OSError, ValueError, KeyError, subprocess.SubprocessError):
         p.exit(2, 'VM regression stopped; inspect private output. No tablet operation.\n')
 

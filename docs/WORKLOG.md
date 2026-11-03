@@ -4472,3 +4472,24 @@ versus kernel storage initialization/guard reachability. Cached LK-payload sourc
 routes normal header/component reads to boot_x; this is conditional source evidence,
 not proof of runtime path. No repeated USB/format work or unchanged build/trial.
 See retained-trial-result.json;346/344/348 open.
+
+## 2026-11-02 — #346 owner-directed earliest checkpoint and bounded dwell
+
+Owner asked to establish kernel execution through a bounded checkpoint/delay.
+Necessary346/344 prerequisite recorded/read back before code. Existing marker was
+AFTER boot-argument/page-table/EL setup and DT-gated; source therefore left an early
+blind interval. New opt-in first-primary_entry leaf precedes record_mmu_state,
+preserves arguments/x18/SP, paints EL1-white/EL2-green/EL3-magenta bands inside only
+the corroborated display allocation with MMU off, handles cache-on exact-span PoC
+clean, waits eight counter seconds for valid architected frequency and continues.
+No watchdog/reset/thermal/security/credential register writes. Reset cause remains
+unproven; this cannot promise to extend an independent watchdog deadline. Absence/
+time-only observations remain inconclusive; visible pattern is positive entry only.
+
+Actual instructions passed EL1/EL2/EL3 emulator span/guard/cache/frequency/request/
+8s/register controls. Pinned boot protocol checked; no EL/security workaround added.
+Stopped-counter wall limit is not qualified; finite instruction budget only. New
+workflow opt-in entry_checkpoint=entry-8s requires lab-retained; default profiles
+unchanged. Generic kernel VM will back FB address with1536MiB virtual RAM for this
+profile. Persistent reader/control retained. No tablet write/reboot/helper/arm or
+new kernel build yet. Exact compile/Image checks and full physical review required.

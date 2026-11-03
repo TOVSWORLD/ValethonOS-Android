@@ -47,3 +47,7 @@ printk snapshot and SHA256 APIs under its GPL-2.0-only kernel source notice. The
 exact upstream drivers/misc/Makefile fixture retains its upstream notice; provenance
 is in projects/firetabs-android/kernel/lab-retained/inputs.json. The dual-slot record
 codec and host reader are project implementations, not the legacy MTK RAM format.
+
+The private earliest-entry probe patches the same pinned ACK head.S listed above;
+its boot-contract reference is that revision's Documentation/arch/arm64/booting.rst.
+No upstream boot/reset/security behavior is claimed qualified by emulator controls.
