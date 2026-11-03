@@ -747,3 +747,88 @@ This contract is implementation groundwork. Actual kernel object/Image/config/
 loader-size/VM checks, fresh seeded combined image, staged read-only preflight and
 complete exact physical collection/rollback review are required before approval.
 Source/fixture successes are not runtime admission;346/344/348 remain open.
+
+### Exact retained candidate5 — complete physical review, UNARMED
+
+Build41574337098 succeeded at source035f197fa4c46f16e53eacdbe1775f09af069278
+and ACKd9318bdb4c34e8b2d997b4f67ced56b120b22b87. Actual recorder/eMMC objects,
+final recorder symbols, all retained manifest hashes, loader-size checks and20s
+enforcing PID1 VM pass. Generic VM does not exercise physical eMMC recording.
+Image16,912,896B SHA940398b2949fae104e3b0db1aa192a3f0b08593b59bccb6ad6f3856819473fea;
+gzip7,251,746B SHA3846e9d6c9de0a170f0acab7175b82538b6b5b686876779b6b456710b2d9a738.
+Runtime17,432,576B, entry40000000/end410a0000, below selected loader28MiB limit.
+
+Exact full16,777,216B candidate5 SHA256:
+423ed64dc2a24e4ffc23c48f4a71246a1694dc98896f6465a8ad3c5357a4099e.
+Aligned boot payload7,297,024B ends before the15MiB mailbox boundary. Initrd43480000,
+tags48000000/1MiB and DT staging45000000 are unchanged and reservation-checked.
+Fresh component12 init52,800B SHA2cd05634dce53bcd7a18b4f3159f4bacb35c7f1482a8acf6d64ae98398ff81b3;
+initramfs13,685B SHA61f0caa4460bb9ce26e0e331bc064bd3e61c98ff4bea4194f88232407105add9.
+Own retained DT27,376B SHAfb4ad1f5b022ba196c9a65d2205a01714f9b1a685808ce2c03f07faa9bed5b6a.
+Initial enforcing policy unchanged. Independent header ID/gzip/component/DT suffix/
+padding/seed/control/nonce/range checks pass. First15MiB prefix SHA256:
+de658015aeb9cf65ab1fec05daf95996fd6b7c3f36e281ee9d277e36e53c8823.
+
+Fresh trial5 assets/current tools and concrete commands are staged/hash-verified.
+Actual original recovery/aliases/fullp5+p6 read-only preflight passes; original full
+rollback copies match lab/controller. Fresh stage/trial/restore/readout receipts
+are unused. No candidate write, helper, arm, new TTY rule or reboot occurred.
+
+**Changed physical behavior requiring this review:** normal eMMC/PMIC/pin/clock
+initialization at the source-described controller,26MHz cap without HS200/
+highspeed/hardware-reset caps; builtin kernel worker reads the experimental p5
+prefix/seed then writes only its record slots with flushes. This is new hardware
+access beyond prior candidates. A source/driver failure could prevent boot/return
+or damage data despite software bounds. Backups do not guarantee recovery access.
+No new kernel userspace storage permissions, filesystem, credential or SELinux
+change is introduced. Original/recovery images are never initialized as mailboxes.
+There is no deliberate panic/failure injection. Twelve snapshots per kernel
+invocation are bounded; a spontaneous firmware restart is not a host retry and
+may start the kernel again. No automatic host reboot/retry is issued.
+
+This trial has an explicit result decision:
+
+- Host control alone: known stored record/readout works; no kernel commit proved.
+  Investigate kernel startup/storage initialization, not another USB logger trial.
+- Kernel producer sequence2+ with attributable printk: kernel/storage recorder and
+  post-return retrieval observed; inspect actual contents before any acceptance.
+- Missing/invalid control or immutable-prefix mismatch: stop, no pass or automatic
+  retry; inspect the exact storage/collection failure before further action.
+
+USB logging remains an additional available kernel/userspace channel. The main
+result does not depend on USB enumeration, live capture or a diagnostic TTY rule.
+This host procedure uses the persistent-only supervisor; it collects after actual
+recovery. No full-log, early-crash or failed-load-retention pass is inferred from
+source, VM, host control or normal return.346/344/348 remain open.
+
+After explicit approval of this exact image/new hardware-write behavior/rollback
+and owner availability, all work is one trip:
+
+1. At the desk freshly recheck hashes/tools and original fullp5/p6. Write only full
+   p5 once with a fresh receipt, require exact full readback and unchanged fullp6.
+   No write retry or recovery write. No diagnostic TTY rule is installed.
+2. Run installed-candidate persistent supervisor preflight. Arm once and confirm
+   running before the owner leaves;600s travel budget, no automatic boot command.
+3. In TWRP select Reboot→System once; decline an installer prompt only if shown.
+   Wait the full90seconds from selecting System regardless of Amazon/black screen.
+   Bands may be noted if seen, but are not required for retained-record collection.
+4. Unplug USB. Hold only Power for40seconds even if black. Release, wait5seconds,
+   reconnect the same cable/port without other buttons. Do not repeat this sequence.
+5. Wait180seconds. Leave TWRP/special menu unchanged and return to the desk to report
+   the final screen. Unexpected/no return: stop/report, no improvised reset/menu.
+   The supervisor has a90s initial guard and900s manual reconnect window, at most
+   one90s original FACTORYM helper,30s metadata readiness and full collection once.
+6. At the desk verify actual recovery and use the read-only collector: identity/
+   aliases/fullp6, exact immutable p5 prefix/seed, best nonce-bound record, private
+   full post-trialp5/hash. Distinguish preinstalled host control from kernel output.
+   If the initial collection fails, stop and diagnose; no automatic read/write
+   retry. A separately verified fresh read-only collection can supply rollback.
+7. `restore_retained_trial.py` validates that independently collected image/hash.
+   Default is read-only fresh device preflight. Explicit approved restore writes
+   exact full originalp5 once with fresh receipt, fullp5+p6 readbacks/RAM cleanup.
+   Leave TWRP running, no reboot. Retain private logs and original backups; older
+   host preparation remains tracked without disrupting authorized ADB.
+
+No new physical operation is authorized by this document or previous approvals.
+Public receipt: retained-candidate-result.json. Private concrete commands are
+lab-log-trial-5/private/execution-private.json; no host/selectors/raw records public.

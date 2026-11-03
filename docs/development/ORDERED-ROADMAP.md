@@ -1,10 +1,11 @@
 # Ordered ValethonOS delivery roadmap
 
-Current346 update: candidate4 trial completed with no bands and zero logs.
-Return-only continuation used the unused original helper once, exit0; owner
-confirms TWRP. Fresh full partition checks and original boot restore verified,
-trial rule removed, no reboot or remaining arm. Kernel entry remains unproven.
-No unchanged retry/rebuild; see entry-screen-trial-result.json.
+Current346 update: persistent candidate5 is prepared for complete owner review,
+unarmed. Retained recorder/eMMC kernel41574337098 and enforcing VM pass; actual
+original fullboot/recovery read-only preflight passes. Seeded host control is
+distinct from kernel records; retrieval after return does not require live USB.
+New eMMC/PMIC/kernel slot-write behavior requires exact review and availability.
+Original boot restored/TWRP;346/344/348 remain open. See INDEPENDENT-RECOVERY.md.
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

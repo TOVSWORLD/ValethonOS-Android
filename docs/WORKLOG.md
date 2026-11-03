@@ -4433,3 +4433,19 @@ rejects altered prefix/seed/recovery/aliases and cannot reuse the stale current 
 to rewrite an already-restored device.566 controller tests/repository pass. Fresh
 component12/DT3 compiled with unused nonce. Corrected build41574337098 is active;
 no hardware action. Persistent-only supervisor needs no diagnostic TTY rule.
+
+## 2026-11-02 — #346 persistent candidate5 prepared for review
+
+Corrected kernel41574337098/source035f197 succeeded. Actual recorder/eMMC objects,
+final symbols, retained manifest hashes, Image/gzip roundtrip/size and20s enforcing
+VM pass. Image16,912,896B/runtime17,432,576B fits selected loader. Fresh component12
+and own retained DT3 assembled into candidate5 SHA
+423ed64dc2a24e4ffc23c48f4a71246a1694dc98896f6465a8ad3c5357a4099e.
+Independent header/gzip/DT/initramfs/padding/seed/HOSTCONTROL/nonce checks pass.
+Fresh tools/unused receipts staged; actual original TWRP/aliases/fullp5+p6 read-only
+preflight passes, lab/controller full rollback hashes match. Nothing written or
+armed, no helper or new TTY rule. Complete exact eMMC/PMIC/slot-write/newcollector/
+currenthash-bound full-original-restore review recorded. USB remains supplemental;
+persistent readout is the result gate. Host-control-only is not kernel output.
+Wait explicit exact-candidate approval/availability; no further build/prep tests
+while unchanged. Source/fixture/VM checks do not pass346/344/348 hardware exits.
