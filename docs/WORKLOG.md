@@ -4307,7 +4307,7 @@ See watchdog-trial-result.json. No automatic retry/rearm/rebuild.
 
 Audited retained trial2/3 plans, kernel USB timelines and bounded historical host
 kernel identity events across all ports. Each trial has five identity events, all
-on the planned recovery path; neither1209 vendor nor diagnostic1209:0001 appeared
+on the planned recovery path; neitherthe test vendor nor diagnosticthe reviewed test USB identity appeared
 elsewhere. Receiver never selected/opened a TTY, so a tty permission failure is not
 established. Capture entry wait45s is narrower than physical sequence. Trial3 next
 preloader arrived69.24s after initial disconnect:24.24s after receiver deadline,
@@ -4322,3 +4322,8 @@ There is no independent observed early checkpoint. No new device action, timing
 change, kernel build or trial is justified from this audit alone. Concrete loader/
 early-checkpoint observability must be resolved before another trial; no root-cause
 claim. See receiver-observation-audit.json. Original boot/recovery remain restored.
+
+The audit also checked enumeration errors and ACM binds, rather than identity
+lines alone. Each window has three CDC-ACM probe EINVAL(-22) errors associated
+with preloader events, plus three ACM TTY bind events. No error is attributed
+to a diagnostic device. This is not proof of a logging permission failure.
