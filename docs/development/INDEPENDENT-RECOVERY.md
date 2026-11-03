@@ -681,3 +681,69 @@ availability, the complete sequence is:
    private logs and original backups. Older host preparation remains tracked.
 
 No step is armed by this document or prior approval. See entry-screen-candidate-result.json.
+
+### Retained boot-tail path — implementation contract, not device approval
+
+This is a separate lab-retained build, not another USB logging/timing trial.
+Original boot/recovery remain restored and nothing is armed. Necessary346/344
+prerequisite was recorded before implementation. Legacy reader/raw-memory path
+metadata checks found no installed endpoint; no RAM/partition contents were read.
+
+The new builtin kernel worker snapshots printk independently of PID1/USB. Root
+board compatible and exact32-byte chosen nonce are required. Target must be
+exclusive mmcblk0p5, partition5,16MiB, writable. Seed nonce/CRC and complete first
+15MiB SHA256 must match before any data write. Normal block BIO/flush APIs are used;
+no credentials, SELinux mode/policy, userspace block interface or generic target
+control is added. Existing PID1 block-device neverallows remain intact.
+
+Proposed on-disk geometry inside the experimental image only:
+
+- Immutable boot prefix:0..0xf00000, SHA256-bound.
+- Offline seed:0xf00000..0xf01000, nonce/prefix digest/checksum, never kernel-written.
+- Slot0:0xf01000..0xf80000; slot1:0xf80000..0xfff000,127pages each.
+- Final guard:0xfff000..0x1000000, zero and never written.
+- Each slot:4KiB header, up to516,096B payload; VLOG0001/version, sequence,
+  nonce, length and independent header/payload CRC32. No filesystem/GPT/other
+  partition writes. Unexplained original tail remains in the full rollback backup.
+
+The inactive slot header is invalidated/flushed, payload written/flushed, then
+header committed/flushed. Writes are4KiB-aligned with zero padding only inside the
+chosen slot. Any failed/partial I/O stops, never retries. Twelve snapshots at
+5-second intervals are proposed after bounded storage discovery. Before first
+successful storage initialization/commit, a failure remains uncovered; this is
+not a panic/crash handler and cannot promise every printk message survives.
+
+A preinstalled HOST CONTROL sequence1 is explicitly not a kernel log. A kernel
+producer/release prefix with sequence2+ is reported separately. Returning only the
+host control proves readout of the known preinstalled record, not kernel execution.
+A newer valid kernel record survives a torn subsequent slot in the offline tests.
+This control distinguishes broken retrieval from no kernel commit.
+
+Minimal own-source DT enables only mmc0/pio/pwrap,26MHz, removes HS200/highspeed/
+hardware-reset caps and adds nonce; exact semantic comparison preserves all other
+nodes/firmware reservations. The config adds block/eMMC/GPT/MT6323 supply
+prerequisites only in the explicit lab-retained mode. This allows normal driver
+pin/clock/rail/card initialization and changes physical behavior. Timing, voltage,
+DMA and power-loss behavior remain device-unqualified and require complete review.
+No MMC feature/hardware task is closed by this necessary logging prerequisite.
+
+Actual C codec and BIO frontend pass regular-disk fixture writes with an independent
+Python decoder, unaligned payload padding, seed/guard/prefix bounds, stale/corrupt
+records and all six write/flush cuts. Kernel compile41573826310 exposed a current
+macro collision; corrected and covered by a real-macro C regression. Corrected
+kernel41574337098/source035f197 is the single current build; no unchanged retry.
+
+The persistent-only host supervisor makes no diagnostic serial capture/open and
+needs no new TTY rule. It retains the90s initial normal-entry guard, allows a
+reviewed900s manual reconnect window and at most one original return helper.
+After actual recovery, the read-only collector verifies identity/aliases/fullp6,
+exact candidate prefix/seed and extracts the best attributable record. It stores
+full post-trialp5 privately and its current hash. `restore_retained_trial.py`
+validates that independent readout; default only fresh device preflight. Explicit
+restore uses that exact current hash with the existing one-write full-originalp5
+transport, full boot/recovery readbacks/RAM cleanup, no reboot or recovery write.
+
+This contract is implementation groundwork. Actual kernel object/Image/config/
+loader-size/VM checks, fresh seeded combined image, staged read-only preflight and
+complete exact physical collection/rollback review are required before approval.
+Source/fixture successes are not runtime admission;346/344/348 remain open.

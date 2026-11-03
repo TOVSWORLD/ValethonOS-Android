@@ -4424,3 +4424,12 @@ Added explicit persistent-only supervisor path: no USB capture required, one
 reviewed900s manual-return window, fresh host-control seed validation, recovery
 collector accepts only exact candidate prefix/seed and records mutable-slot hash
 for guarded restore. Old normal trial behavior stays at its existing defaults.
+
+Persistent backend integration now includes the actual kernel BIO frontend compiled
+against a disk-backed harness and independent decoder, including4KiB padding of
+8193-byte payload, sector bounds and immutable guards. Recovery collector/restore
+fixture verifies a legitimately mutated log tail restores exact original once,
+rejects altered prefix/seed/recovery/aliases and cannot reuse the stale current hash
+to rewrite an already-restored device.566 controller tests/repository pass. Fresh
+component12/DT3 compiled with unused nonce. Corrected build41574337098 is active;
+no hardware action. Persistent-only supervisor needs no diagnostic TTY rule.
