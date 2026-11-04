@@ -10,8 +10,11 @@ No kernel-entry/reset-cause/kernel-record acceptance.346/344/348 remain open.
 Exact installed-LK/candidate audit now complete: package prefix matches and no
 concrete loader-format mismatch found. Collector failure detail was discarded;
 archived byte replay passes, new safe stage/reason diagnostics prevent recurrence
-of opaque errors. Next: prove resident payload equivalence/ownership for a
-loader-owned mode/read/final-SMC observation; no kernel rebuild or trial selected.
+of opaque errors. Resident binary audit passed21 modeled mode/read cases; live globals end at
+0x4bcffbb8, leaving584 zero bytes before LK. Original compiler-level equivalence
+is unproved; use the exact archived binary baseline. Three concrete observation
+sites/replay requirements documented. Next: analysis-only checkpoint stubs with
+register/flag/SP/argument, span, branch and cache controls; no trial selected.
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

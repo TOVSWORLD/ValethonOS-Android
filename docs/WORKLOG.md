@@ -4545,3 +4545,18 @@ collector/rollback/lifecycle tests pass; repository check passes. The historical
 hardware failure remains unproven. Public trial6-loader-contract.json and
 trial6-collector-diagnosis.json preserve limits. Original boot restored/TWRP;
 nothing armed or physical action pending.
+
+## 2026-11-04 — #346 resident payload ownership and modeled execution
+
+Pinned archived resident instructions passed nine mode/flag and twelve read-routing
+emulator cases using existing lab-resident bytes; no device access or firmware
+export. Source hashes pinned. Callee-saved/SP/high-offset/nonredirect controls pass.
+Six live64-bit globals occupy0x4bcffb88..bb8; only584 zero bytes remain before the
+embedded LK prefix, not636 bytes of presumed free code. Original compiler/ELF/map
+provenance is absent, so byte-for-byte rebuilt-source equivalence is not claimed.
+The exact archived binary is the next observation baseline. Review now identifies
+specific selected-mode, post-redirect argument and final-handoff sites, original
+bytes and replay requirements. Next assemble analysis-only stubs and verify replay/
+span/branch/cache conditions before packaging or admitting any observer. Original
+boot/TWRP unchanged; no write/arm/helper/build or physical action pending. See
+resident-loader-payload-result.json and INDEPENDENT-RECOVERY.md.

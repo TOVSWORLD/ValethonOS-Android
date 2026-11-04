@@ -964,3 +964,53 @@ route. Do not patch either chain copy, boot_amonet, recovery_amonet or bootloade
 partitions as an experiment. Any eventual changed bootstrap procedure needs a
 complete exact rollback/review; none is currently ready or armed. This prerequisite
 stays within346; no broader unlock, fastboot or microtrace audit is reopened.
+
+### Resident payload audit and concrete checkpoint sites — 4 November 2026
+
+The pinned original boot.payload SHAe10fdf77 contains the resident code at file
+0xa00, linked at0x4bcff000. Embedded LK begins with its MTK prefix at file0x1800
+(runtime0x4bcffe00); its executable follows atfile0x1a00/runtime0x4bd00000. The
+embedded LK differs from original-package LK only in the eight known pivot bytes.
+Initialized resident bytes end at0x4bcffb84, followed by four alignment bytes and
+six live64-bit globals: recovery_x:b88, boot:b90, misc:b98, lk:ba0, boot_x:ba8,
+recovery:bb0 (offsets from0x4bcff000). Observed BSS ends at0x4bcffbb8. The remaining
+584 zero bytes before the LK prefix are a bounded candidate span, not admitted
+injection space; do not reuse the earlier636-byte zero-tail estimate as free RAM.
+
+`scripts/audit_resident_loader_payload.py` pins the archive member and cached
+source hashes, then executes the actual archived ARM/Thumb instructions in Unicorn
+2.1.3 with modeled firmware services. Nine mode/flag cases and twelve read cases
+passed, including missing boot_x fallback, normal/recovery redirects atbase/base+800,
+nonmatching+1000 and high64-bit offsets, return value, callee-saved registers/SP,
+read-only hook behavior and BSS values/write boundary. Existing MISC flag writes
+are modeled only; no tablet service is called. Source behavior agrees within these
+cases. The archive has no original ELF/map/compiler provenance; compiler-level
+byte-for-byte source equivalence is NOT established. Use the pinned archived binary
+as the observation baseline rather than substituting a rebuilt original.
+
+The next observer now has three specific design sites:
+
+- **Selected mode:** resident+0x330/runtime0x4bcff330 has `00f001fa`, the BL to
+  resident printf for the existing `g_boot_mode %u` message. A reviewed direct call
+  to existing firmware video_printf can expose the selected mode before app entry;
+  it needs no new resident data or reconstructed compiler layout.
+- **Actual read arguments:** resident+0x72/runtime0x4bcff072 has `204b3046`
+  (`ldr r3` of the original_read pointer address, then `mov r0,r6`). This shared
+  continuation reaches the original reader after redirect selection. A future
+  trampoline must report the selected64-bit offset from originalSP+16/+20,
+  preserve the original stack arguments/registers/flags, replay those four bytes,
+  and return to+0x76. Do not replace the two-byte BLX at+0x80 with an oversized
+  branch or report temporary comparison registers as the selected offset.
+- **Final handoff:** original LK code+0x3e524/runtime0x4bd3e524 has `fff7a0fc`,
+  the BL to0x4bd3de68. A future checkpoint must preserve entry/DT arguments and
+  original LR, then tail-forward to that original target. It proves reaching LK's
+  handoff site; it does not prove the secure monitor entered the new kernel.
+
+Before packaging any observer, assemble only analysis stubs and verify exact
+register/flag/SP/argument replay, bounded span, branch encodings and cache visibility
+with positive and negative emulator controls. Preserve every other archived byte,
+including original security/boot-mode behavior; add no security/reset/watchdog or
+persistent writes. No observer image, new firmware write, trial or physical action
+is admitted by this audit. Report: resident-loader-payload-result.json. The Mac
+emulator failed in host cache initialization; controls instead used the exact
+payload already present on the authorized lab host, with no firmware export.
