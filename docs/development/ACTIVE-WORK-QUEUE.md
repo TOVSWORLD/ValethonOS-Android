@@ -1,11 +1,12 @@
 # Active work queue — ordered delivery
 
-Current346 update: earliest-entry candidate6 prepared with verified first-primary_entry
-probe and eight-counter-second dwell. Build41583240596 passed; all retained hashes,
-exact probe bytes, enforcing VM and independent package checks pass. Fresh trial6
-read-only original TWRP/p5+p6 checks passed; nothing written/armed. Complete review
-in INDEPENDENT-RECOVERY.md; explicit exact-image approval/availability required.
-Prior trial5 recovered only HOSTCONTROL; no kernel entry/log acceptance.346/344/348 open.
+Current346 update: actual candidate6 trial complete. Owner saw no colored bands;
+TWRP returned after about90 seconds or slightly longer without manual shutoff.
+One original return helper exited0. Initial full collector failed ValueError;
+separate read-only collection passed, recovering only HOSTCONTROLseq1/85B. Fullp5
+remained exact candidate6. Originalp5 restored once/fullp5+p6/RAMcleanup verified;
+TWRP left running, no reboot. Nothing armed/helper/build or owner action pending.
+No kernel-entry/reset-cause/kernel-record acceptance.346/344/348 remain open.
 
 Owner priority correction,29 October2026. Read the
 [ordered roadmap](ORDERED-ROADMAP.md), [stable task/dependency contract](ordered-roadmap.json)

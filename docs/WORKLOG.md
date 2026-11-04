@@ -4506,3 +4506,22 @@ rule/reboot. Full exact review records earliest physical framebuffer/cache write
 counter dwell limitations, persistent storage and currenthash-bound original restore.
 Source569 tests remain historical validation, not hardware acceptance. No reset
 control is changed; visible pattern positive only. Wait exact approval/availability.
+
+## 2026-11-04 — #346 actual earliest-entry candidate6 trial complete
+
+Owner explicitly approved candidate6 and confirmed availability. Guarded fullp5
+write/readback once, unchangedp6 and postwrite preflight passed; supervisor armed
+once. Owner reports no colored bands; returned to TWRP after approximately90s or
+slightly longer without manual shutoff. One original FACTORYM helper exited0;
+this was a helper-mediated return, not proof of spontaneous recovery. Initial
+collector failed ValueError at validating_returned_recovery, cause unproven.
+Separate prepared read-only collector passed recovery/aliases/fullp6/exact prefix/
+seed: only HOSTCONTROLseq1/85B, no invalid slots. Full posttrialp5 SHA equals
+candidate6. No kernel entry/reset cause/storage writer or kernel record proved.
+
+Approved full originalp5 restored once from validated current hash; fullp5+p6
+readbacks/RAMcleanup passed. TWRP left running/no reboot. Supervisor stopped;
+private archive lab/controller hashes match. No TTY rule installed, older prep
+unchanged. No physical action/rearm/build pending. Preserve reader/format and
+narrow actual load/entry/handoff; diagnose initial collector independently.
+See entry-delay-trial-result.json;346/344/348 remain open.

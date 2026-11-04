@@ -904,3 +904,16 @@ retained storage behavior and full-original rollback, and confirmed availability
 No firmware operation is authorized by this document or prior candidate approval.
 Private commands: lab-log-trial-6/private/execution-private.json. Public receipt:
 entry-delay-candidate-result.json.346/344/348 remain open pending physical evidence.
+
+### Actual candidate6 outcome — complete, original restored
+
+On4 November2026 the owner approved this exact trial and confirmed availability.
+One guarded candidate write/readback and one arm completed. Owner saw no colored
+bands and TWRP returned after about90s or slightly longer without manual power-off.
+The original return helper launched once/exited0; do not infer spontaneous return
+or reset cause. Initial collection failed ValueError; the separate prepared
+read-only collection passed and recovered only preinstalled HOSTCONTROLseq1/85B.
+Fullp5 was unchanged candidate6. No kernel entry or storage-writer pass follows.
+Approved full originalp5 restored once/fullp5+p6 readbacks/RAM cleanup verified;
+TWRP left running/no reboot. Nothing armed or physical action pending. Candidate6
+approval is consumed; no retry/rearm. Public result: entry-delay-trial-result.json.
