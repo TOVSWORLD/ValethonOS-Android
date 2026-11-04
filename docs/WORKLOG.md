@@ -4583,3 +4583,26 @@ return helper, validated collection, original bootstrap and fullp5 restoration.
 Changed bootstrap risk requires new exact review approval and availability; no write,
 arm, reboot or helper performed. See loader-observer-{controls,candidate,range-review,
 preparation}.json and INDEPENDENT-RECOVERY.md exact trial7 review.
+
+## 2026-11-04 — #346 actual loader observer trial7 and original restoration
+
+Owner approved exact bundle/availability; observer+p5 installs and postwrite checks
+passed once, one arm and one original FACTORYM helper exit0. Owner saw different
+lower-left console text approximately mode/reading, exact strings not recalled;
+explicit TWRP confirmation. No exact checkpoint/handoff/kernel-entry acceptance.
+Supervisor failed full_recovery_read_and_hash/partition_read_size_mismatch; first
+failed output size lost, root cause unproved. Prepared independent readonly
+collector passed all recovery/prefix/seed checks: only HOSTCONTROLseq1/85B/no invalid
+slots; fullp5 unchanged candidate6, no kernel record.
+
+Bootstrap restore PRECHECK stopped before write on different current hash. Preserved
+readback was exact ORIGINAL. Unchanged recovery image's fix-bootpatch.sh source and
+actual matching /tmp/restore_bootpatch.log prove existing TWRP repair reported
+copying recovery bootstrap to normal bootstrap. Both original ranges/headers
+verified; agent needed no second bootstrap write. Approved fulloriginalp5 restored
+once/currenthashbound, fullp5+p6/RAMcleanup verified, TWRP left running/no reboot.
+Supervisor/helper inactive; no arm/owner action pending. Private main archive and
+repair-proof supplement lab/controller match. Public loader-observer-trial-result.json
+and twrp-bootstrap-repair-source.json. Keep recovery repair, mailbox reader/format;
+next source contract is attributable durable loader-stage evidence distinct from
+kernel records, not another unchanged boot or kernel rebuild.346/344/348 remain open.

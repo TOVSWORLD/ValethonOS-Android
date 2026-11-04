@@ -1119,3 +1119,49 @@ readback error stops the procedure without retry or reboot. A bootstrap failure
 could obstruct the ordinary return path; an untouched recovery copy and emulator
 success are not a hardware recovery guarantee. Original full unlock/BootROM stages
 remain prohibited. #346/#344/#348 stay open until their actual runtime gates pass.
+
+### Actual trial7 result — originals verified, no further trip
+
+Owner approved the exact observer/kernel bundle and availability. Observer and
+normal candidate were each installed once, verified, and postwrite checks passed;
+one fresh supervisor was armed. Owner reports somewhat different lower-left
+console messages, approximately about mode and reading, but cannot recall exact
+strings; explicitly confirms TWRP menu. This is consistent with changed loader
+output, but no exact checkpoint/address/last handoff or kernel entry is qualified.
+Do not infer the manual power sequence, timing, spontaneous return or reset cause
+from “same outcome.” One original FACTORYM helper exited0.
+
+The supervisor's stopped collection now has a precise stage:
+full_recovery_read_and_hash / partition_read_size_mismatch. The failed output's
+actual byte count was not retained, so the transport/root cause is still unknown;
+this does not retroactively diagnose earlier trials. The separate prepared
+read-only collector passed identity/aliases/fullp6/prefix/seed: HOSTCONTROLseq1,
+85B only, no invalid slots or kernel record. Full posttrialp5 exactly matched the
+installed candidate6. Reader/format/control remain useful; kernel entry/storage
+writer/failed-load-log acceptance do not pass.
+
+The bootstrap restore precheck correctly stopped BEFORE a write because the range
+no longer matched the observer. A single preserved readback instead matched the
+EXACT ORIGINAL sector image, with original recovery bootstrap too. Offline audit
+of unchanged fullp6 found /fix-bootpatch.sh SHA07f4353c, called by /amonet-fixup.sh:
+when normal bootstrap header/payload differ, it copies the recovery header/payload
+back to normal bootstrap and emits /tmp/restore_bootpatch.log. This boot's capped
+status file exactly matched that restoration message. This explains the verified
+original state as existing TWRP repair, not an agent rollback or unexplained
+corruption. TWRP's own script copies its header and payload span; the agent issued
+no second bootstrap write. Do not disable that repair or modify recovery bootstrap
+to retain an observer. Future rollback plans must recognize an already-original
+bootstrap and verify it without a redundant write.
+
+A complete read-only already-original guard passed. Then approved fulloriginalp5
+was restored once via independently validated readout/current hash, fullp5+p6 and
+RAMcleanup verified. TWRP left running/no reboot; no active supervisor/helper,
+no arm or physical action pending. Private trial7 archive and later repair-proof
+supplement have matching lab/controller hashes. Public loader-observer-trial-result.json
+and twrp-bootstrap-repair-source.json retain provenance and limits.346/344/348 open.
+
+The next engineering contract needs attributable durable loader-stage/read/handoff
+evidence using the working mailbox format/reader, with a distinct loader payload
+tag that cannot be called a kernel record. Approximate screen recall is not enough
+to locate the remaining boundary. First design and review the exact normal-only
+writer/guard/recovery contract; no unchanged trial or new kernel build is selected.

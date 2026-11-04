@@ -1,0 +1,68 @@
+{
+  "scope": "One approved normal-only loader observer trial7; no intentional failure injection",
+  "review_head": "b7fcfa47a505daa9e928fd18bcf56b72d24db8fe",
+  "observer_sha256": "6a34b1a55d3b9c6de8e87e21f8b6cc3eaef18576583f66750ef6e012d0d1c10c",
+  "kernel_candidate_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+  "owner_approved_exact_bundle": true,
+  "owner_availability_confirmed": true,
+  "bootstrap_installations": 1,
+  "normal_candidate_installations": 1,
+  "arms": 1,
+  "original_factory_helper_launches": 1,
+  "original_factory_helper_exit_code": 0,
+  "owner_observation": {
+    "lower_left_console_changed": true,
+    "approximate_text": "Something about mode and reading; exact strings not recalled",
+    "twrp_menu_confirmed": true,
+    "exact_checkpoint_identified": false,
+    "last_handoff_identified": false,
+    "manual_power_step_or_timing_confirmed": false
+  },
+  "supervisor_collection": {
+    "failed": true,
+    "failure_stage": "validating_returned_recovery",
+    "collection_failure_stage": "full_recovery_read_and_hash",
+    "collection_failure_reason": "partition_read_size_mismatch",
+    "actual_failed_read_byte_count_retained": false,
+    "root_cause_qualified": false
+  },
+  "independent_readonly_collection": {
+    "passed": true,
+    "full_recovery_original": true,
+    "candidate_prefix_and_seed_verified": true,
+    "full_posttrial_boot_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+    "host_control_only": true,
+    "sequence": 1,
+    "record_bytes": 85,
+    "invalid_slots": [],
+    "kernel_record": false
+  },
+  "bootstrap_return": {
+    "restore_preflight_stopped_before_write": true,
+    "current_range_exactly_original": true,
+    "recovery_bootstrap_original": true,
+    "agent_bootstrap_restore_writes": 0,
+    "twrp_repair_source_report": "twrp-bootstrap-repair-source.json",
+    "known_repair_status_message_observed": true,
+    "explanation": "Unchanged TWRP repair script reported restoring normal bootstrap from recovery; original range and headers verified. No extra agent bootstrap write needed."
+  },
+  "rollback": {
+    "original_full_boot_restored_once": true,
+    "full_boot_and_recovery_readbacks_verified": true,
+    "bootstrap_original_guard_passed": true,
+    "ram_cleanup_verified": true,
+    "rebooted": false,
+    "twrp_left_running": true
+  },
+  "active_supervisor_or_helper": false,
+  "armed": false,
+  "owner_physical_action_pending": false,
+  "kernel_entry_qualified": false,
+  "failed_load_qualified": false,
+  "kernel_storage_writer_qualified": false,
+  "private_archive_sha256": "aaab4f329b929be77fdb02af5c604bb2671170904e4316b4240f04bfd54135ff",
+  "private_archive_lab_controller_match": true,
+  "next": "Preserve reader/format and unchanged recovery repair; design attributable durable loader checkpoints so exact read/handoff evidence does not depend on screen recall. Separately retain future read-size diagnostic counts; do not repeat unchanged trial or kernel build.",
+  "private_repair_proof_supplement_sha256": "a07eb36f14bba133d0da1fad2b8eb13cf7dfe582534bbed4d70f6c034ba8eb34",
+  "private_repair_proof_lab_controller_match": true
+}

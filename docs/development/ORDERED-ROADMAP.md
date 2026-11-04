@@ -1,23 +1,17 @@
 # Ordered ValethonOS delivery roadmap
 
-Current346 update: actual candidate6 trial complete. Owner saw no colored bands;
-TWRP returned after about90 seconds or slightly longer without manual shutoff.
-One original return helper exited0. Initial full collector failed ValueError;
-separate read-only collection passed, recovering only HOSTCONTROLseq1/85B. Fullp5
-remained exact candidate6. Originalp5 restored once/fullp5+p6/RAMcleanup verified;
-TWRP left running, no reboot. Nothing armed/helper/build or owner action pending.
-No kernel-entry/reset-cause/kernel-record acceptance.346/344/348 remain open.
-Exact installed-LK/candidate audit now complete: package prefix matches and no
-concrete loader-format mismatch found. Collector failure detail was discarded;
-archived byte replay passes, new safe stage/reason diagnostics prevent recurrence
-of opaque errors. Resident binary audit passed21 modeled mode/read cases; live globals end at
-0x4bcffbb8, leaving584 zero bytes before LK. Original compiler-level equivalence
-is unproved; use the exact archived binary baseline. Three concrete observation
-sites implemented: normal-only280B observer,71 emulator cases and6 guard tests
-pass. Exact observer6a34b1a5 packaged lab/controller; actual bootstrap/GPT/p5/p6
-read-only preflights pass. Fresh trial7 commands/unused receipts and complete
-install/return/dual-rollback review prepared. Wait new exact owner approval and
-availability: bootstrap payload write is new high-risk scope. Nothing armed.
+Current346 update: actual trial7 complete, ORIGINALS VERIFIED/TWRP running.
+Owner saw different lower-left console text approximately mode/reading; exact
+strings not recalled. One original return helper exit0; no exact handoff/kernel
+entry or kernel record proved. Supervisor stopped at full recovery read size
+mismatch; separate readonly collector passed, HOSTCONTROLseq1/85B only, fullp5
+unchanged. TWRP's unchanged fix-bootpatch.sh reported restoring normal bootstrap
+from recovery; exact original range/headers verified, no second agent bootstrap
+write. Approved original fullp5 restored once/fullp5+p6/RAMcleanup verified, no
+reboot. No supervisor/helper/build/arm or owner physical action pending. Private
+archive/supplement lab/controller match.346/344/348 remain open. Next: attributable
+durable normal-loader checkpoint contract using preserved reader/format and a
+separate loader tag; no unchanged trial/kernel build, no recovery repair bypass.
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are
