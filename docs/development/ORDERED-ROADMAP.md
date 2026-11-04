@@ -13,8 +13,11 @@ archived byte replay passes, new safe stage/reason diagnostics prevent recurrenc
 of opaque errors. Resident binary audit passed21 modeled mode/read cases; live globals end at
 0x4bcffbb8, leaving584 zero bytes before LK. Original compiler-level equivalence
 is unproved; use the exact archived binary baseline. Three concrete observation
-sites/replay requirements documented. Next: analysis-only checkpoint stubs with
-register/flag/SP/argument, span, branch and cache controls; no trial selected.
+sites implemented: normal-only280B observer,71 emulator cases and6 guard tests
+pass. Exact observer6a34b1a5 packaged lab/controller; actual bootstrap/GPT/p5/p6
+read-only preflights pass. Fresh trial7 commands/unused receipts and complete
+install/return/dual-rollback review prepared. Wait new exact owner approval and
+availability: bootstrap payload write is new high-risk scope. Nothing armed.
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

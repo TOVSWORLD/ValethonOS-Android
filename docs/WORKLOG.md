@@ -4560,3 +4560,26 @@ bytes and replay requirements. Next assemble analysis-only stubs and verify repl
 span/branch/cache conditions before packaging or admitting any observer. Original
 boot/TWRP unchanged; no write/arm/helper/build or physical action pending. See
 resident-loader-payload-result.json and INDEPENDENT-RECOVERY.md.
+
+## 2026-11-04 — #346 loader checkpoints implemented and exact trial7 prepared
+
+Implemented normal-only mode/selected-read/final-handoff Thumb observers,280B in
+proved archived span;266 changed bytes across four exact spans.54 hostile-service
+preservation/gating cases plus17 full-path fixtures pass; recovery/fastboot bypass
+added video calls. Exact candidate observer SHA6a34b1a5 built independently on lab/
+controller; no kernel rebuild. Added one-span bootstrap install/restore guard with
+GPT CRC/nonoverlap, original headers/return chain, tmpfs upload, exclusive receipt,
+current-hash recheck, full readbacks and no retry/reboot. Six guard regression tests
+and existing collector/lifecycle controls pass. A read-only guard initially stopped
+on alias-vs-GPT naming; corrected to actual GPTboot/recovery names and fresh actual
+preflights pass. Safe guard stage retained for future failures.
+
+Scoped actual original bootstrap ranges match archive and are retained lab/controller;
+GPT metadata proves proposed span excludes all other entries/userdata. No full
+bootstrap-container or userdata reads. Fresh trial7 inputs/commands/unused receipts
+staged, exact selected recovery USB/helper hashes and retained inputs pass. The
+review explicitly includes normal candidate6 reinstall/seed reset, one original
+return helper, validated collection, original bootstrap and fullp5 restoration.
+Changed bootstrap risk requires new exact review approval and availability; no write,
+arm, reboot or helper performed. See loader-observer-{controls,candidate,range-review,
+preparation}.json and INDEPENDENT-RECOVERY.md exact trial7 review.

@@ -1,0 +1,28 @@
+{
+  "primary_gpt_crc_valid": true,
+  "payload_range_in_bootstrap_container": true,
+  "overlaps_normal_boot_recovery_or_recovery_bootstrap": false,
+  "overlaps_userdata": false,
+  "selected_container_entry": 17,
+  "recovery_container_entry": 18,
+  "write_offset_sectors": 223223,
+  "write_sectors": 962,
+  "actual_scoped_original_ranges": {
+    "boot_amonet": {
+      "header_sha256": "c8a9f89481e871851193ed6e3446a9ba6aaf4ea85c51cd6a21032f94fee4872c",
+      "payload_sector_sha256": "4c6f355c735b9302b0d421ef38f94a9974214d531fa974a41edd8132af7ac092",
+      "payload_prefix_sha256": "e10fdf770a5be2c2adc3cce0d03b8e296eac3b31e18ebdce5b56dc5491f4e7e8",
+      "read_offset_sectors": 223223,
+      "read_sectors": 962,
+      "full_partition_read": false
+    },
+    "recovery_amonet": {
+      "header_sha256": "c8a9f89481e871851193ed6e3446a9ba6aaf4ea85c51cd6a21032f94fee4872c",
+      "payload_sector_sha256": "4c6f355c735b9302b0d421ef38f94a9974214d531fa974a41edd8132af7ac092",
+      "payload_prefix_sha256": "e10fdf770a5be2c2adc3cce0d03b8e296eac3b31e18ebdce5b56dc5491f4e7e8",
+      "read_offset_sectors": 223223,
+      "read_sectors": 962,
+      "full_partition_read": false
+    }
+  }
+}

@@ -1014,3 +1014,108 @@ persistent writes. No observer image, new firmware write, trial or physical acti
 is admitted by this audit. Report: resident-loader-payload-result.json. The Mac
 emulator failed in host cache initialization; controls instead used the exact
 payload already present on the authorized lab host, with no firmware export.
+
+### Exact normal-only loader observer — trial7 review
+
+**Prepared and unarmed.** This changed procedure writes a previously untouched
+bootstrap payload range and therefore needs new exact owner approval and explicit
+availability. Prior candidate6 approval was consumed by trial6. This review does
+not admit a write or arm; all preparation below was read-only or offline.
+
+**Exact bundle.** The observer sector image is492,544B, SHA256
+`6a34b1a55d3b9c6de8e87e21f8b6cc3eaef18576583f66750ef6e012d0d1c10c`.
+Its280-byte Thumb stubs occupy0x4bcffbb8..0x4bcffcd0, leaving304 bytes before the
+embedded LK prefix. Original payload sector SHA is
+`4c6f355c735b9302b0d421ef38f94a9974214d531fa974a41edd8132af7ac092`.
+Only four payload-file spans may change:0xa72/4B,0xd30/4B,0x15b8/280B,
+0x3ff24/4B;266 bytes differ. All remaining payload/sector-tail bytes, live globals,
+headers, original pointer pivots and existing security/boot behavior are retained.
+No new watchdog/reset/security or storage operations exist in the stubs.
+
+The existing normal kernel candidate6 is deliberately reused byte-for-byte:
+SHA8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16.
+No kernel rebuild, new DT/initramfs, or speculative seventh kernel variant was
+made. A new full installation resets its retained slots to the known HOSTCONTROL
+seed before this changed-loader trial. Its existing nonce is not represented as
+new; fresh trial7 operation/output/receipt paths are unused. No old kernel record
+was observed in that candidate's prior trial. New observer plus this exact kernel
+is the approval unit; previous kernel approval is not reused.
+
+**What the checkpoints prove.** Normal mode0 adds the existing `g_boot_mode %u`
+message on the firmware console, the actual selected64-bit read offset as
+`LK read high:low`, and `LK handoff entry=... dt=...` immediately before the original
+handoff wrapper. The read stub uses originalSP+16/+20, replays the overwritten
+ldr/mov and preserves caller state; mode retains original UART printf; handoff
+retains the original LR and tail-forwards to0x4bd3de68. All additional display calls
+are bypassed when mode is not0, preserving the existing recovery/fastboot display
+work. Reaching the handoff checkpoint does not prove SMC completion or kernel entry.
+No pattern, time-only change or absent marker is an acceptance signal.
+
+**Validation completed.** Apple clang21 assembled a relocatable ARM analysis
+object with no unresolved relocations.54 hostile-service preservation/gating cases
+plus4 full-main,12 full-read-hook and1 real-final-call fixture passed in Unicorn:
+r0-r12/LR, arithmetic flags includingGE/Q, original stack arguments and SP are
+preserved, with video-call SP aligned at both incoming alignments. Recovery2 and
+fastboot99 make no added video call. Five altered-anchor/tail/branch controls and
+three package rejection controls passed. Six guard tests cover GPT CRC/overlap,
+changed state after RAM upload, exact one-span copy, and uncertain-write no-retry.
+Existing collector/rollback and lifecycle controls also pass.
+
+Original ROP cache coverage includes the entire new resident span; the existing
+main cache-clean call covers the modified embedded LK call site. These are checked
+address/instruction contracts, not hardware cache/display qualification. New display
+calls can add latency or hang on real hardware; no watchdog deadline extension or
+reliable rendering is promised. Bypassing added display calls in recovery reduces
+risk but does not prove an independent physical return from a broken bootstrap.
+
+**Actual current originals and target.** TWRP recovery/douglas identity, full original
+p5/p6 hashes and selected USB identity pass. Both installed bootstrap payload prefixes
+exactly match the archivede10fdf77 bytes; headers and full962-sector payload ranges
+are backed up privately on both lab and controller. Only each512-byte header and
+source-defined payload range was read; no full115MiB bootstrap container or userdata
+content was read. TWRP aliases boot_amonet/recovery_amonet point atp17/p18, whose
+GPT names areboot/recovery. Primary GPT header/table CRC and exact geometry pass; the write guard also
+requires the kernel partition start/size metadata to match those GPT entries.
+The p17 payload range atsector223223,962 sectors does not overlap p5, p6, p18 or
+any other GPT entry, including userdata. Recovery bootstrap and both headers must
+remain exact originals throughout. No GPT, preloader, LK partition, security
+partition, recovery or userdata write is part of this procedure.
+
+**Prepared execution, after new approval and availability only:**
+
+1. At the desk with TWRP already running, execute the fresh read-only bootstrap
+   preflight, then one guarded observer-range installation. The guard requires
+   original current hashes, an exclusive receipt, verified tmpfs upload, a second
+   complete preflight, one file-to-p17 dd atseek223223/count962, sync, full range/
+   header/p5/p6 readbacks and verified RAM cleanup. No reboot. If it stops, do not
+   retry or arm. If normal-kernel installation cannot proceed after a verified
+   observer install, the prepared current-hash-bound original bootstrap restore
+   is the bounded abort action while TWRP remains running.
+2. Install exact candidate6 once using the existing reviewed fullp5 guard. Run both
+   bootstrap and normal-candidate postwrite preflights. Only then arm the fresh
+   trial7 supervisor once when the owner is available. No helper launches at arm.
+3. One owner trip: use TWRP Reboot/System, note the last visible checkpoint and
+   approximate timing, wait90 seconds. If not already returning to recovery, use
+   the reviewed disconnect/Power40s/off/wait5s/reconnect sequence once. The existing
+   original FACTORYM helper may launch once only; no StageA/unlock/retry. After
+   reconnecting, wait180 seconds for the return. Return to the desk and report the last visible text and recovery state. Do not add timing
+   experiments or intentional failure injection.
+4. Collect retained p5 once after actual recovery validation. If the supervisor
+   stops, use the independently prepared read-only collector, preserving its safe
+   stage/reason. Preserve all private receipts and attributable record bytes before
+   rollback. HOSTCONTROL alone is not a kernel/log qualification.
+5. Restore original p17 payload sectors once through `restore_loader_observer.py`,
+   bound to the validated supervisor readout (or independent manual readout after
+   a supervisor stop) and exact observer current hash. Separate prepared command
+   paths cover both outcomes, including a changed kernel-record tail. Then restore original fullp5 once through the existing validated
+   readout/current-hash guard. Both operations verify unchangedp6 and original
+   recovery bootstrap/headers as applicable. Leave TWRP running; no final reboot.
+
+Private fresh commands are staged underlab-log-trial-7/private/execution-private.json.
+No install/restore receipt exists and no write, arm, supervisor or helper was run.
+`scripts/guard_loader_observer.py` defaults to read-only; its explicit write mode
+and the restore wrapper are not authorization. Any identity/hash/alias/GPT/staging/
+readback error stops the procedure without retry or reboot. A bootstrap failure
+could obstruct the ordinary return path; an untouched recovery copy and emulator
+success are not a hardware recovery guarantee. Original full unlock/BootROM stages
+remain prohibited. #346/#344/#348 stay open until their actual runtime gates pass.

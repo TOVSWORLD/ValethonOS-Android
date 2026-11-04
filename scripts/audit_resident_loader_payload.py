@@ -45,7 +45,7 @@ def payload(path):
     return resident
 
 
-def machine(resident, original_mode=0, lk_mode=0, flag=b'', missing=None):
+def machine(resident, original_mode=0, lk_mode=0, flag=b'', missing=None, suppress=()):
     uc = Uc(UC_ARCH_ARM, UC_MODE_ARM)
     uc.mem_map(0x4bcf0000, 0x180000)
     uc.mem_map(0x41fe0000, 0x20000)
@@ -61,12 +61,15 @@ def machine(resident, original_mode=0, lk_mode=0, flag=b'', missing=None):
         struct.pack_into('<I', gpt, i * 0x80 + 0x20, sector)
         encoded = name.encode('utf-16le') + b'\0\0'
         gpt[i*0x80+0x38:i*0x80+0x38+len(encoded)] = encoded
-    state = {'reads': [], 'writes': [], 'resident_write_end': 0, 'app': False}
+    state = {'reads': [], 'writes': [], 'resident_write_end': 0, 'app': False, 'cache_cleans': []}
     def word(addr): return struct.unpack('<I', uc.mem_read(addr, 4))[0]
     def ret(value=0):
         uc.reg_write(UC_ARM_REG_R0, value)
         uc.reg_write(UC_ARM_REG_PC, uc.reg_read(UC_ARM_REG_LR))
     def hook(u, addr, size, opaque):
+        if addr in suppress: return
+        if addr == 0x4bd3c740:
+            state['cache_cleans'].append([uc.reg_read(UC_ARM_REG_R0),uc.reg_read(UC_ARM_REG_R1)])
         if addr in [BASE + 0x736, 0x4bd44b3c, 0x4bd3c740]:
             ret(); return
         if addr == 0x4bd35e40:
