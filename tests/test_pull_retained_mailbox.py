@@ -58,3 +58,31 @@ class PullMailbox(unittest.TestCase):
             adb=FakeAdb();adb.boot=candidate
             report=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,Path(folder)/'capture')
             self.assertTrue(report['attributable_record']);self.assertTrue(report['host_control_only']);self.assertFalse(report['kernel_record'])
+
+class CollectionDiagnostics(unittest.TestCase):
+    def test_failed_alias_has_exact_safe_stage_and_never_reads_partitions(self):
+        nonce=bytes(range(32));candidate,_=m.prepare(BACKUP,nonce)
+        adb=FakeAdb();adb.boot=candidate;adb.alias=b'/wrong-private-fixture'
+        with tempfile.TemporaryDirectory() as folder:
+            with self.assertRaises(pull.CollectionError) as caught:
+                pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,Path(folder)/'readout')
+            self.assertEqual(caught.exception.stage,'alias_boot')
+            self.assertEqual(caught.exception.reason,'partition_alias_mismatch')
+            self.assertNotIn('wrong-private',str(caught.exception))
+            self.assertFalse(any('exec-out' in call for call in adb.calls))
+            self.assertEqual(adb.writes,0)
+
+    def test_transport_error_is_sanitized_and_never_retried(self):
+        nonce=bytes(range(32));candidate,_=m.prepare(BACKUP,nonce)
+        class Broken(FakeAdb):
+            def read(self,node,size):
+                self.reads=getattr(self,'reads',0)+1
+                raise ValueError('private-selector raw transport output')
+        adb=Broken();adb.boot=candidate
+        with tempfile.TemporaryDirectory() as folder:
+            with self.assertRaises(pull.CollectionError) as caught:
+                pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,Path(folder)/'readout')
+            self.assertEqual(caught.exception.stage,'full_recovery_read_and_hash')
+            self.assertEqual(caught.exception.kind,'ValueError')
+            self.assertNotIn('private-selector',str(caught.exception))
+            self.assertEqual(adb.reads,1);self.assertEqual(adb.writes,0)

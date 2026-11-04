@@ -5,30 +5,72 @@ import hashlib
 import json
 from pathlib import Path
 import os
+import subprocess
 from restore_diagnostic_boot import Adb, BOOT, RECOVERY, BOOT_BYTES, RECOVERY_BYTES, validate_backup
 import retained_log_mailbox as mailbox
 
 
+class CollectionError(ValueError):
+    """Allowlisted validation stage only; never includes transport output/identity."""
+    def __init__(self, stage, kind, reason):
+        self.stage = stage
+        self.kind = kind
+        self.reason = reason
+        super().__init__('Retained collection stopped at ' + stage)
+
+
 def collect(adb, original, manifest, candidate, nonce, output):
+    stage = ['rollback_input']
+    def mark(name):
+        stage[0] = name
+    try:
+        return _collect(adb, original, manifest, candidate, nonce, output, mark)
+    except (ValueError, KeyError, OSError, subprocess.SubprocessError) as error:
+        reasons = {
+            'Selected ADB command failed; stop without retry': 'adb_command_failed',
+            'Partition read size mismatch; no trimming permitted': 'partition_read_size_mismatch',
+            'Recovery required': 'recovery_state_mismatch',
+            'Recovery identity differs': 'recovery_identity_mismatch',
+            'Partition alias differs': 'partition_alias_mismatch',
+            'Recovery partition differs': 'recovery_hash_mismatch',
+            'Candidate seed differs': 'candidate_seed_mismatch',
+            'Exact candidate/nonce and fresh private output required': 'candidate_nonce_or_output_invalid',
+        }
+        reason = ('transport_timeout' if isinstance(error, subprocess.TimeoutExpired)
+                  else reasons.get(str(error), 'validation_or_io_failure'))
+        raise CollectionError(stage[0], type(error).__name__, reason) from error
+
+
+def _collect(adb, original, manifest, candidate, nonce, output, mark):
     validate_backup(original, manifest)
+    mark('candidate_nonce_output')
     if len(candidate)!=BOOT_BYTES or len(nonce)!=32 or output.exists() or output.is_symlink():
         raise ValueError('Exact candidate/nonce and fresh private output required')
     prefix=hashlib.sha256(candidate[:mailbox.BASE]).hexdigest()
+    mark('candidate_seed')
     mailbox.validate_seed(candidate,nonce,prefix)
+    mark('recovery_state')
     if adb.run(['get-state']).strip()!=b'recovery':raise ValueError('Recovery required')
     for prop,want in [('ro.product.device',b'douglas'),('ro.twrp.version',b'3.3.1-0')]:
+        mark('recovery_identity_' + prop.split('.')[-1])
         if adb.run(['shell','getprop',prop]).strip()!=want:raise ValueError('Recovery identity differs')
     base='/dev/block/platform/mtk-msdc.0/by-name/'
     for name,node in [('boot',BOOT),('boot_x',BOOT),('recovery',RECOVERY),('recovery_x',RECOVERY)]:
+        mark('alias_' + name)
         if adb.run(['shell','readlink',base+name]).strip()!=node.encode():raise ValueError('Partition alias differs')
+    mark('full_recovery_read_and_hash')
     if hashlib.sha256(adb.read(RECOVERY,RECOVERY_BYTES)).hexdigest()!=manifest['recovery']['sha256']:
         raise ValueError('Recovery partition differs')
+    mark('full_boot_read')
     image=adb.read(BOOT,BOOT_BYTES)
     # Both immutable prefix and exact per-candidate seed are required, independent
     # of whether the latest log slot was interrupted or USB ever enumerated.
+    mark('returned_candidate_seed')
     if image[mailbox.BASE:mailbox.SLOT_BASE]!=candidate[mailbox.BASE:mailbox.SLOT_BASE]:
         raise ValueError('Candidate seed differs')
+    mark('returned_prefix_and_records')
     state=mailbox.inspect(image,nonce,prefix)
+    mark('private_readout_output')
     output.mkdir(mode=0o700,parents=False)
     for name,data in [('boot-after-trial-private.img',image),('record-private.bin',state['latest']['payload'] if state['latest'] else b'')]:
         fd=os.open(output/name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)

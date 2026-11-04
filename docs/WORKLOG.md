@@ -4525,3 +4525,23 @@ private archive lab/controller hashes match. No TTY rule installed, older prep
 unchanged. No physical action/rearm/build pending. Preserve reader/format and
 narrow actual load/entry/handoff; diagnose initial collector independently.
 See entry-delay-trial-result.json;346/344/348 remain open.
+
+## 2026-11-04 — #346 bounded loader audit and collector diagnostics
+
+Actual read-only GPT-derived LK partition prefix exactly matches original-package
+7637da87; TWRP's lk alias is /dev/null. Reproducible exact instruction/candidate
+checker confirms conditional mode0/header/body/gzip/DT/entry forwarding contract,
+without substituting historical4ca0cca7. No concrete package mismatch; runtime
+mode/read-hook/decompression/secure handoff remain unobserved. No new kernel build,
+firmware write or trial. Next source prerequisite is loader-owned mode/read/final
+SMC checkpoint design with resident payload ownership/equivalence proved first;
+standalone LK write is not a justified route because boot.payload embeds LK too.
+
+Exact archived partition/nonce replay does not reproduce initial collection failure.
+Old receipt lost the ValueError detail; cannot reconstruct missing responses.
+Added safe collection stage/type/reason to supervisor receipts, no extra I/O/retry
+or changed acceptance. Alias/read-failure regression controls and existing retained
+collector/rollback/lifecycle tests pass; repository check passes. The historical
+hardware failure remains unproven. Public trial6-loader-contract.json and
+trial6-collector-diagnosis.json preserve limits. Original boot restored/TWRP;
+nothing armed or physical action pending.

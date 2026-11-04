@@ -7,6 +7,11 @@ separate read-only collection passed, recovering only HOSTCONTROLseq1/85B. Fullp
 remained exact candidate6. Originalp5 restored once/fullp5+p6/RAMcleanup verified;
 TWRP left running, no reboot. Nothing armed/helper/build or owner action pending.
 No kernel-entry/reset-cause/kernel-record acceptance.346/344/348 remain open.
+Exact installed-LK/candidate audit now complete: package prefix matches and no
+concrete loader-format mismatch found. Collector failure detail was discarded;
+archived byte replay passes, new safe stage/reason diagnostics prevent recurrence
+of opaque errors. Next: prove resident payload equivalence/ownership for a
+loader-owned mode/read/final-SMC observation; no kernel rebuild or trial selected.
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

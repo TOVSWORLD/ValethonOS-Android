@@ -917,3 +917,50 @@ Fullp5 was unchanged candidate6. No kernel entry or storage-writer pass follows.
 Approved full originalp5 restored once/fullp5+p6 readbacks/RAM cleanup verified;
 TWRP left running/no reboot. Nothing armed or physical action pending. Candidate6
 approval is consumed; no retry/rearm. Public result: entry-delay-trial-result.json.
+
+### Trial6 unblock audit — exact loader and collection boundary
+
+The read-only named LK alias resolves to /dev/null in TWRP. A bounded primary-GPT
+read uniquely identified the lk partition; its524288B readback contains the exact
+485988B original-package LK prefix, SHA7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056.
+No firmware/device write occurred. The old4ca0cca7 OTA binary was not substituted.
+`audit_trial_loader_contract.py` pins actual instruction anchors/call targets and
+candidate6 SHA, verifies normal-mode0 dispatch, Android component digest, bounded
+gzip output, final aligned FDT suffix and entry/DT SMC forwarding. Compressed
+staging45000000, output40000000 and actual decoded16,912,896B fit the selected
+28MiB capacity/42000000 stack boundary. DT suffix27376B is the last FDT magic in
+the bounded search. Root versionhvt matches retained metadata. No concrete package
+mismatch was found. These are conditional machine-code/byte checks, not execution.
+See trial6-loader-contract.json; no kernel rebuild or unchanged trial follows.
+
+The initial collector receipt discarded the ValueError message and failed check.
+Exact original/candidate/nonce/returnedp5/recovery-byte replay passes with modeled
+valid identity/alias responses for both fresh output paths. It does not reproduce
+or explain the historical transport failure; those original failing responses
+were not retained. The collector now emits safe stage/type/reason codes, including
+alias mismatch versus full-partition read length versus digest mismatch; supervisor
+receipts retain them. No retries, extra reads, weakened validation or physical
+readiness claim were added. Failure injection verifies one read at most/no writes
+and no private transport text in the error. See trial6-collector-diagnosis.json.
+
+**Next implementation decision: loader-owned observations, before another kernel
+candidate.** Required discriminators are (1) chosen normal/recovery mode, (2) actual
+redirected boot_x header/body reads, (3) reaching the last LK→SMC branch with entry
+and DT arguments. A fixed firmware-rendered marker would use existing video_printf
+at4bd44b3d, not new kernel framebuffer/USB/storage initialization. Final selected
+BL at4bd3e524 targets4bd3de68, which forwards to SMC at4bd3c98c/function82000200.
+A proposed observer must preserve r0-r3/SP/LR and replay that exact branch, never
+change bitness/security/reset/watchdog or perform additional storage writes.
+Each marker would prove only that loader checkpoint, not kernel entry. No dwell
+or timing-only success criterion is selected.
+
+This is a source-design decision, not an admitted firmware operation. Before
+creating a runnable observer image, prove resident code/data/BSS ownership and
+space, exact archived payload equivalence and all branch targets; emulate argument
+preservation and reject altered inputs. Zero padding alone is not free space.
+The archived boot.payload embeds a modified LK copy (eight pointer bytes differ),
+so changing the standalone lk partition alone is not a justified instrumentation
+route. Do not patch either chain copy, boot_amonet, recovery_amonet or bootloader
+partitions as an experiment. Any eventual changed bootstrap procedure needs a
+complete exact rollback/review; none is currently ready or armed. This prerequisite
+stays within346; no broader unlock, fastboot or microtrace audit is reopened.

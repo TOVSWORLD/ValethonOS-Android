@@ -19,7 +19,7 @@ from capture_lab_kernel_log import private_bytes, validate
 from restore_diagnostic_boot import Adb, preflight, sha, update_receipt
 from write_lab_boot_candidate import candidate_manifest
 import retained_log_mailbox as mailbox
-from pull_retained_mailbox import collect as collect_retained
+from pull_retained_mailbox import CollectionError, collect as collect_retained
 
 
 def lifecycle(present, capture, scan, launch, clock=time.monotonic, sleep=time.sleep, manual_seconds=300):
@@ -188,6 +188,10 @@ def main():
     except (ValueError, KeyError, OSError, TimeoutError, subprocess.SubprocessError, KeyboardInterrupt) as error:
         result['failure'] = type(error).__name__
         result['failure_stage'] = stage
+        if isinstance(error, CollectionError):
+            result['collection_failure_stage'] = error.stage
+            result['collection_failure_kind'] = error.kind
+            result['collection_failure_reason'] = error.reason
         if isinstance(error, OSError):
             result['error_number'] = error.errno
     finally:
