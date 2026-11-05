@@ -121,3 +121,27 @@ integration route is an owned allocation and PIC module rather than a fixed-addr
 writer in the old small gap. A bounded bootstrap load/integrity/cache bridge and
 real heap lifecycle/driver/clock/card bindings are still required before packaging.
 The4KiB modeled stack is capacity for a control, not a measured worst-case stack bound.
+
+## Bounded allocation/load/integrity/cache bridge
+
+`bridge.c` implements one allocation and one readonly blob load, SHA-256 equality,
+zeroed module state/private stack, then cache synchronization. Callable entries
+are published only after every step succeeds. Invalid sizes/offsets/Thumb entries,
+missing bindings, allocation/read/hash/cache failure and repeated calls stop
+without retry. The bridge never writes its source partition. The548B linked bridge
+still needs descriptor/hook storage and qualified firmware bindings; code size alone
+does not admit placement in the584B gap.
+
+`pack_loader_module.py` produces a4608B standalone module blob from the tested ELF,
+with exact object hashes and Thumb entries. It only inspects the candidate's
+12MiB file interval: that interval is zero and lies after declared normal image
+sections and before the mailbox. It does not change a candidate or select a write.
+A new candidate would require a new prefix digest/seed and complete exact review.
+
+Five native bridge controls pass. Five ARM controls execute the actual bridge,
+archived allocator and loaded PIC module in modeled RAM. The success path uses
+its allocated state/private stack to commit MODE and HANDOFF through the checked
+adapter. Allocation/read/hash/cache failures publish no entries and never retry.
+Driver, clock, storage, hash, cache and IRQ services remain models. No real heap
+lifecycle, firmware hash/cache/timing/card bindings, hook replay or bridge placement
+is yet qualified, and no physical observer is packaged.

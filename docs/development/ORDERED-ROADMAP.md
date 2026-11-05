@@ -24,6 +24,12 @@ RAM. No actual heap/physical address or stack capacity proved. Next implement
 bounded load/integrity/cache bridge and bind real heap/driver/clock/card/target;
 no new owner trip or physical observer selected.
 
+Bounded bridge implemented: one allocation/read, SHA equality, zero state/stack,
+cache synchronization before entries;5 native+5 actual ARM controls pass. Loaded
+module commits MODE/HANDOFF on allocated private stack in modeled RAM. Blob4608B,
+bridge548B; descriptors/hooks and real firmware bindings/placement still required.
+Candidate6 only inspected for zero padding, unchanged; no physical action selected.
+
 Owner saw different lower-left console text approximately mode/reading; exact
 strings not recalled. One original return helper exit0; no exact handoff/kernel
 entry or kernel record proved. Supervisor stopped at full recovery read size

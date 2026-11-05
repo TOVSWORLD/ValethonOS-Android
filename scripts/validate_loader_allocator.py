@@ -8,14 +8,15 @@ BASE,HEAP,POOL,SIZE,COUNTER,STOP=0x4bd00000,0x4bd862fc,0x4c000000,0x100000,0x4bd
 EXPECTED='7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056'
 SAVED=[UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11]
 class Model:
- def __init__(self,blob):
+ def __init__(self,blob,extra_write_regions=()):
+  self.extra_write_regions=list(extra_write_regions)
   self.u=u=Uc(UC_ARCH_ARM,UC_MODE_THUMB);u.mem_map(BASE,0x180000);u.mem_write(BASE,blob[512:]);u.mem_map(POOL,SIZE);u.mem_map(0x41fe0000,0x20000);u.mem_map(STOP,0x1000);head=HEAP+8
-  u.mem_write(head,struct.pack('<II',POOL,POOL));u.mem_write(POOL,struct.pack('<III',head,head,SIZE));u.mem_write(COUNTER,bytes(4));self.irq=[];self.writes=[];u.hook_add(UC_HOOK_CODE,self.hook);u.hook_add(UC_HOOK_MEM_WRITE,self.write)
+  u.mem_write(head,struct.pack('<II',POOL,POOL));u.mem_write(POOL,struct.pack('<III',head,head,SIZE));u.mem_write(COUNTER,bytes(4));self.irq=[];self.memory_writes=[];u.hook_add(UC_HOOK_CODE,self.hook);u.hook_add(UC_HOOK_MEM_WRITE,self.write)
  def hook(self,u,at,size,data):
   if at in [0x4bd3c75c,0x4bd3c76c]:self.irq.append(hex(at));u.reg_write(UC_ARM_REG_PC,u.reg_read(UC_ARM_REG_LR))
  def write(self,u,access,at,n,value,data):
-  assert any(lo<=at and at+n<=hi for lo,hi in [(POOL,POOL+SIZE),(HEAP,HEAP+32),(COUNTER,COUNTER+4),(0x41fe0000,0x42000000)]),(hex(at),n)
-  self.writes.append((at,n))
+  assert any(lo<=at and at+n<=hi for lo,hi in [(POOL,POOL+SIZE),(HEAP,HEAP+32),(COUNTER,COUNTER+4),(0x41fe0000,0x42000000)]+self.extra_write_regions),(hex(at),n)
+  self.memory_writes.append((at,n))
  def alloc(self,size,alignment=16):
   u=self.u
   for i,r in enumerate(SAVED):u.reg_write(r,0xabc00000+i)

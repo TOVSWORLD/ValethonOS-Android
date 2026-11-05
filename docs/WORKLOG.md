@@ -4679,3 +4679,23 @@ Integrated PIC ARM validation also passed12 controls: mode/handoff commits at
 three modeled module bases, plus all9 first-commit raw-command failure boundaries,
 actual archived command wrapper, no retry/extra writes and prior durable record
 preservation. Driver/clock/storage remain models. Public loader-module-result.json.
+
+## 2026-11-04 — #346 bounded module bridge implemented and loaded in emulated owned RAM
+
+Implemented bridge.c: exact bounded prefix offset/size and Thumb-entry guards,
+one aligned allocation, one readonly blob load, expected SHA-256 equality,
+zeroed state/stack and cache synchronization; only then publish callable entries.
+One attempt only, no source-partition writes/free/retry after uncertain failure.
+Five native controls pass. Five actual ARM bridge controls pass using archived
+allocator; positive control executes the loaded module on allocated private stack
+and commits MODE/HANDOFFseq3 through checked persistence, failure controls publish
+no entries. Storage/driver/clock/hash/cache/IRQ are models, no device access.
+
+Standalone4608B module blob packed from exact tested ELF/object set; original
+candidate6 file12MiB interval is zero, after declared image sections and before
+mailbox. Candidate file unchanged; no new prefix/seed/candidate built. Bridge548B
+still needs descriptor/hook placement and actual firmware bindings; code size alone
+is not placement qualification. Public loader-bridge-result.json and
+loader-module-blob-result.json. No device access, physical MMC command, helper/arm/reboot or kernel rebuild.
+Next bind real heap/hash/cache/clock/read/driver/card contracts and place the bridge
+and hook descriptors, then exact replay/integrity proof and changed review bundle.

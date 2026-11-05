@@ -1210,3 +1210,13 @@ actual heap's initialization/capacity or qualify a physical address/stack.
 See loader-checkpoint-relocation-result.json, loader-allocator-result.json and
 loader-status-sideeffect-result.json. A bounded load/integrity/cache bridge and
 real firmware bindings remain required. No physical trial is selected.
+
+Bounded module bridge now implemented and validated: one owned allocation,
+readonly blob load, SHA equality, zeroed state/stack, cache synchronization before
+entry publication. Five native and five ARM controls pass; positive ARM control
+loads the PIC module through the archived allocator and executes MODE/HANDOFF
+records on allocated state/private stack. Firmware/hash/cache/clock/storage remain
+models. Standalone blob4608B; candidate6 file12MiB padding interval verified without
+modifying any candidate. Linked bridge548B excludes descriptors/hooks; no physical
+placement/bindings admission follows from its size. See loader-bridge-result.json
+and loader-module-blob-result.json. No new physical trial is selected.
