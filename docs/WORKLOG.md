@@ -5003,3 +5003,25 @@ explicitly no automatic return helper/restore/reboot. The old supervisor is not
 the new test path. Receiver completion/timeout does not change device state; manual
 return follows observation, and original restoration follows evidence archival.
 Two native preparation controls pass. Kernel/boot-image bytes are unchanged.
+
+
+### Owner Go: exact full-draft test, two visits, manual return
+
+Owner said Go after the completed draft/five-minute capture protocol, then explicitly
+accepted two visits so the return helper remains fully manual. Fresh read-only lab
+identity/aliases/full originalp5/p6 checks passed. Original FACTORYM helper sources
+verified; ModemManager inactive. No device write or helper launch at this point.
+
+Prepared a narrowly pinned first_draft_device.py path for only complete candidate
+af1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365 and the original
+rollback pair. It reuses the already-proven one-file/RAM-hash/single-p5-write/full
+readback transport, fixed exclusive write receipts, read-only collection and
+validated-readout/archive-bound original restore. The old partial-trial gate and
+90-second supervisor remain held. This Go authorizes the exact complete test, not
+a claim of previously qualified target logging or a general admission override.
+
+Capture launcher gives600s owner travel, then begins the full300s endpoint wait only
+after the original recovery USB identity departs. It contains no return/helper/ADB
+or restore call. Manual return is a separate explicit action after owner desk
+report; no kernel/observer rebuild selected. Two timing controls and repository
+checks passed. Tablet install/arm receipts, if executed, are recorded separately.
