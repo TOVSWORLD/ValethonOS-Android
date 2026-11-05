@@ -4,7 +4,8 @@ This is a complete first bring-up kernel/ramdisk/DT package, not the finished
 Android OS or a claim that every board peripheral works. It integrates the pinned
 ACK base and existing MT8163 clock, pinctrl, power, IOMMU, USB, SYM827, MIPI, DSI and
 PWM ports in one final Image. eMMC and retained logging are built in. SELinux stays
-enforcing. No new recovery automation, observer or entry delay is included.
+enforcing. The normal PM/suspend callback core is included to satisfy the pinned
+tracing exports; the ramdisk does not request suspend or CPU hotplug. No new recovery automation, observer or entry delay is included.
 
 The matched own-source DT preserves measured memory/reservations and enables the
 supported USB0 peripheral and conservative eMMC route. Secondary CPUs, display,

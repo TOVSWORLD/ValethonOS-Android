@@ -4952,3 +4952,11 @@ compilation: Binder requires EVENT_TRACING in the pinned drivers/android/Kconfig
 Added visible FTRACE/FTRACE_SYSCALLS selectors and required EVENT_TRACING so the
 real dependency resolves; no hidden-capability override or removed acceptance
 check. Retest is a changed build, not a repeated physical trial.
+
+
+Combined run42089539062 resolved Binder/tracing and compiled the integrated driver
+objects, then stopped at power-traces.c: device_pm_callback exports require the
+CONFIG_PM_SLEEP declarations in power.h. The inherited restricted profile disabled
+SUSPEND. The complete draft now includes normal PM/SUSPEND/PM_SLEEP and its selected
+HOTPLUG_CPU code; the primary-only DT/cmdline and enforcing ramdisk do not invoke
+suspend or secondary CPU operations. No physical PM qualification is inferred.

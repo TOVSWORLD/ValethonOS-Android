@@ -9,7 +9,7 @@ from select_kernel_build_scope import choose
 class Draft(unittest.TestCase):
     def test_logging_and_enforcement_are_not_sacrificed_for_provider_integration(self):
         req=config.requirements()
-        for symbol in ['USB_CONFIGFS_ACM','MMC_MTK','SECURITY_SELINUX','DRM_MEDIATEK','PWM_MTK_DISP','REGULATOR_FAN53555','ANDROID_BINDER_IPC','FTRACE_SYSCALLS','EVENT_TRACING']:
+        for symbol in ['USB_CONFIGFS_ACM','MMC_MTK','SECURITY_SELINUX','DRM_MEDIATEK','PWM_MTK_DISP','REGULATOR_FAN53555','ANDROID_BINDER_IPC','FTRACE_SYSCALLS','EVENT_TRACING','PM_SLEEP','SUSPEND']:
             self.assertEqual(req[symbol],'y')
         self.assertEqual(req['SECURITY_SELINUX_DEVELOP'],'n')
         self.assertEqual(req['LOG_BUF_SHIFT'],'20')
