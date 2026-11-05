@@ -1,0 +1,38 @@
+{
+  "scope": "Actual linked Thumb adapter through exact archived LK command wrapper; hardware driver and clock modeled",
+  "elf_sha256": "5877583e6468e94a893d0d5c5df9713260bc47b65c8113f19a29d08166fa8116",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "cases": [
+    "fresh_ready",
+    "busy_then_ready",
+    "never_ready_even_zero_returns",
+    "cmd6_transport_failure",
+    "status_transport_failure",
+    "switch_error",
+    "status_error",
+    "elapsed_even_ready",
+    "unadmitted"
+  ],
+  "case_count": 9,
+  "actual_wrapper": "0x4bd395f4",
+  "no_original_switch_poll_used": true,
+  "single_cmd6_no_retry": true,
+  "fresh_post_cmd13_required": true,
+  "callee_saved_sp_preserved": true,
+  "bindings_clock_placement_hardware_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "native_tests": 9,
+  "limits": [
+    "Driver command timing/termination and monotonic clock are models, not measured firmware guarantees",
+    "Exact host/card/RCA/cache state and target bindings still require qualification",
+    "Physical memory placement, stack and hook replay/cache visibility remain unqualified",
+    "No physical observer packaged or new trial admitted"
+  ],
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/mmc_flush.h": "8e6ccf27f973f77ed783309ea1a354b255a92dbe4c71b4d63d25ac8ee44dee4a",
+    "projects/firetabs-android/loader-retained/mmc_flush.c": "836ad49d761ed4a1ed0edfcc51fc53dae89110d5540e3d253a28051f4cdbf8d0",
+    "scripts/validate_loader_flush.py": "e7adf1ecf59c37a85bb9774ecb3e3a8f513265debc1f4ae125ac8eaac1e836f7",
+    "tests/test_loader_flush.py": "5484980ecf8e518895d4fc751481a89e42ab99e018eadeddf0a4715f4065f0a0"
+  }
+}

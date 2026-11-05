@@ -16,7 +16,7 @@ CTX,CFG,IO,POINT=0x41100000,0x41110000,0x41111000,0x41112000
 READ,WRITE,FLUSH,PREFIX,STOP=0x50000000,0x50001000,0x50002000,0x50003000,0x50004000
 
 
-def elf(path):
+def elf(path,wanted=('lc_init','lc_emit','lc_context_bytes')):
  b=path.read_bytes()
  if b[:7]!=b'\x7fELF\x01\x01\x01' or struct.unpack_from('<HH',b,16)!=(2,40):raise ValueError('ARM32 analysis ELF required')
  shoff=struct.unpack_from('<I',b,32)[0];ents,count=struct.unpack_from('<HH',b,46)
@@ -26,8 +26,8 @@ def elf(path):
   names=sections[s[6]];names=b[names[4]:names[4]+names[5]]
   for at in range(s[4],s[4]+s[5],s[9]):
    n,value,size,info,other,index=struct.unpack_from('<IIIBBH',b,at);name=names[n:].split(b'\0')[0].decode()
-   if name in ['lc_init','lc_emit','lc_context_bytes']:symbols[name]=value
- if len(symbols)!=3:raise ValueError('Core symbols missing')
+   if name in wanted:symbols[name]=value
+ if len(symbols)!=len(wanted):raise ValueError('Core symbols missing')
  phoff=struct.unpack_from('<I',b,28)[0];ents,count=struct.unpack_from('<HH',b,42);segments=[]
  for i in range(count):
   kind,off,vaddr,paddr,used,total,flags,align=struct.unpack_from('<8I',b,phoff+i*ents)

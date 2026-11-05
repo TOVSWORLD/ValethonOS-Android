@@ -1,7 +1,7 @@
 # Retained loader checkpoint core
 
 Analysis implementation for issue346. This directory is not an installable payload.
-It has no device discovery, firmware adapter, hooks, physical address layout or
+It has no device discovery, qualified firmware bindings, hooks, physical address layout or
 physical admission command. `analysis.ld` addresses belong only to the emulator.
 
 `checkpoint.c` calls the existing VLOG0001 codec unchanged. It emits a distinct
@@ -66,3 +66,30 @@ separate context measured in the ARM report. It cannot fit the old584-byte gap.
 An owned allocation/load span, lifetime, stack and branch/cache visibility must be
 proved before linking an observer. Zero-filled bytes are not ownership evidence.
 TWRP's existing bootstrap repair remains enabled and recovery is unchanged.
+
+## Checked command-completion adapter (analysis only)
+
+`mmc_flush.c` replaces reliance on the flawed SWITCH poll with one raw CMD6 and
+fresh CMD13 status checks. Before CMD6 the card must be selected/ready/clean;
+after it, only fresh ready/TRAN status permits success. Upper status bits,
+SWITCH_ERROR and EXCEPTION_EVENT fail conservatively. Every command has retry=0;
+there are at most eight post-command polls and a1000ms elapsed budget, checked
+even when a command claims ready. Any error latches permanently without retry.
+
+The command structure matches the archived LK constructor: response at+0xc,
+timeout at+0x1c, retries at+0x20. Nine native controls and nine actual Thumb adapter
+controls pass. The latter execute the exact archived command wrapper0x4bd395f4,
+with only its hardware driver and clock modeled. The old SWITCH routine is never
+called. The adapter alone links to356 bytes; this does not include the writer,
+context, hash implementation or required firmware bindings.
+
+Reproduce native controls with `python3 -m unittest discover -s tests -p
+'test_loader_flush.py'`. Compile `mmc_flush.c` with the same flags above and
+`-Wl,-e,lf_flush` (instead oflc_init), then run
+`scripts/validate_loader_flush.py --elf <analysis ELF> --lk <private original LK>
+--output <report>`, using the local Unicorn environment.
+
+**Not physically qualified:** the underlying driver must honor its timeout and
+single-attempt contract, the monotonic clock and exact card/RCA/cache bindings
+must be proved, and memory ownership/stack/hook replay remain open. Admission
+flags cannot establish these facts. No physical MMC command or new trial was run.

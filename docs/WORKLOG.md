@@ -4632,3 +4632,21 @@ runnable observer or new trial selected. Public loader-checkpoint-core-result.js
 and loader-switch-audit.json, reproducible source README. No kernel rebuild,
 bootstrap/boot/recovery writes, arm, helper or reboot. Actual trial7 originals
 remain restored/TWRP;346/344/348 open, no hardware qualification claimed.
+
+## 2026-11-04 — #346 checked cache-completion adapter in local emulation
+
+Implemented analysis-only adapter issuing one raw FLUSH_CACHE CMD6 through the
+pinned LK command structure, requiring a fresh CMD13 ready/TRAN status afterward.
+Initial ready/clean check, conservative R1 error rejection, retry0 per command,
+eight post-command polls,1000ms elapsed budget (including ready-but-late response)
+and permanent error latch. The flawed original SWITCH poll routine is not used.
+Nine native C controls and nine actual linked Thumb controls pass; ARM controls
+execute archived LK command wrapper0x4bd395f4 with modeled hardware driver/clock.
+One raw CMD6 maximum, no transport retry, no writes after failure, SP/callee-saved
+preserved. Adapter alone356B. Public loader-flush-adapter-result.json.
+
+Driver timeout/termination and monotonic clock remain modeled, not physically
+qualified; exact host/card/RCA/cache/target bindings and owned memory/stack/hook
+replay/cache visibility still required before packaging. No physical MMC command,
+source export, boot/bootstrap write, helper, arm, reboot or kernel rebuild. Actual
+trial7 originals remain verified/TWRP. No user trip/action pending.

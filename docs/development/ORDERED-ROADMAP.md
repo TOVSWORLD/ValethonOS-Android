@@ -10,6 +10,13 @@ Next: independently bounded firmware completion adapter and proven owned memory
 layout before packaging/review. Originals/TWRP remain verified, unarmed. See
 loader-checkpoint-core-result.json and loader-switch-audit.json.
 
+Checked adapter source now implemented: one raw CMD6, fresh CMD13 ready/TRAN,
+conservative status errors, retry0, eight polls and elapsed budget.9 native and9
+Thumb controls pass through exact archived LK command wrapper; hardware driver/
+clock modeled. No physical command. Next qualify real driver timing, immutable
+host/card/RCA/cache/target bindings, owned memory and hook replay before packaging.
+See loader-flush-adapter-result.json. Original device state remains unchanged.
+
 Owner saw different lower-left console text approximately mode/reading; exact
 strings not recalled. One original return helper exit0; no exact handoff/kernel
 entry or kernel record proved. Supervisor stopped at full recovery read size

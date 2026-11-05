@@ -1189,3 +1189,12 @@ code/context/stack lifetime and hook replay/cache visibility. The3595B core plus
 context does not fit the old584B gap. No guessed free RAM or no-op flush may satisfy
 these gates. Preserve TWRP repair/recovery and original rollback. No new install,
 arm, helper, kernel build or owner trip is selected by these analysis results.
+
+Checked completion adapter source is now implemented in loader-retained/mmc_flush.c:
+one raw CMD6 with retry0, fresh CMD13 ready/TRAN, conservative status errors,
+bounded polls and elapsed-time rejection.9 native and9 linked ARM controls pass;
+ARM replay uses exact archived LK command wrapper with modeled driver/clock.
+[Adapter result](../../evidence/independent-recovery/loader-flush-adapter-result.json).
+This closes the source-level false-success handling, not hardware persistence.
+Real driver timing/clock/card/target bindings and owned memory remain prerequisites.
+No physical command or new trial is selected.
