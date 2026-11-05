@@ -4,6 +4,28 @@ Owner direction: finish one usable candidate; component test counts are not deli
 Current device baseline is trial7 complete, original bootstrap/full boot/recovery
 verified, TWRP unarmed. No physical step is authorized by this source plan.
 
+## Latest owner constraint — complete candidate and positive logging
+
+The next owner-assisted tablet test must use a complete best-supported kernel
+candidate with logging positively confirmed beforehand. Do not schedule a separate
+partial diagnostic-kernel or observer trial. Trial8 remains held.
+
+Qualify as much of the collection path as possible using existing retained evidence
+and the already-running known recovery, subject to the existing read-only scope.
+Recovery logs can qualify only the exact recovery collection transport; they cannot
+qualify the custom PID1 USB producer or retained-mailbox writer. Do not borrow that
+qualification across backends. A new control boot is not selected by this plan.
+If the intended candidate logging path cannot be positively demonstrated without a
+separate physical boot, record that concrete dependency before proposing a test;
+do not silently substitute a source/model check or another blind trial.
+
+Prepare the complete candidate offline: coherent kernel/config/matched DT, enforcing
+ramdisk/policy, enabled compatible logging transport, exact manifests and guarded
+rollback. Only a complete changed review satisfying the logging prerequisite may
+advance to fresh exact approval and availability. Current logging remains
+unqualified; this owner constraint does not clear the code hold.
+
+
 1. Integrate one runtime frontend. Discover the current device/card binding without
    lazy initialization; initialize once from an immutable descriptor; dispatch mode,
    redirected read and final handoff records on the private module stack.
@@ -87,7 +109,9 @@ Follow this sequence; each step has an observable exit:
    fresh nonce, actual host collector, one-trip instructions and guarded rollback.
    Replace this unconditional hold only with a narrowly scoped control admission
    validator in that review. Fresh exact approval and availability are required.
-3. Run that known-kernel control once through the actual physical collection path.
+3. Historical proposal only, superseded by the latest owner constraint above: a
+   separate known-kernel control boot is not selected. Any eventual qualification
+   must exercise the actual physical collection path.
    Accept only fresh nonce-bound raw kernel output, with a kernel boot record
    matching the selected kernel release. Verify wire framing, sequence, terminal
    completion and raw digest independently. Empty output, host fixtures, loader

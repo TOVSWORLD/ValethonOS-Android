@@ -4890,3 +4890,12 @@ attribution; preseeded HOSTCONTROL no longer sets attributable_record. Failed-si
 reads retain existing bytes privately (32MiB cap), lengths and digest, without any
 extra device read or retry; no failed readout can supply an accepted rollback image.
 No device access, new kernel build, arm, helper, reboot or owner trip occurred.
+
+
+### Owner constraint: complete next candidate, positive logging beforehand
+
+Recorded the latest direction in the active queue, roadmap and unblock plan. A
+separate partial diagnostic/control-kernel boot is no longer selected. Existing
+recovery collection may qualify only its actual backend, never the custom producer
+or mailbox writer. The logging dependency remains open and the code hold remains
+in force. No build, device access, arm, helper, reboot or owner action performed.

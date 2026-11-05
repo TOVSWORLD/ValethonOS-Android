@@ -1,5 +1,10 @@
 # Ordered ValethonOS delivery roadmap
 
+Latest owner requirement: next tablet test uses a complete best-supported kernel
+candidate with logging positively confirmed beforehand. No separate partial
+diagnostic-kernel/observer test is selected. Qualification is still absent;
+see the latest constraint in [the plan](LOADER-UNBLOCK-PLAN.md).
+
 Testing-process correction: physical candidate writes and arming are held until a
 reviewed known-kernel control qualifies the actual logging path. No custom kernel
 boot or kernel log is confirmed. Read-only collection and original rollback remain
