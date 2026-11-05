@@ -9,11 +9,18 @@
   "observer_readback_and_ram_cleanup_verified": true,
   "boot_written_once": true,
   "boot_full_readback_recovery_and_ram_cleanup_verified": true,
-  "installed_preflight": "stopped after full p5 and observer hashes matched; copied guard retained old trial8 prefix/seed constants",
+  "installed_preflight": "passed after correcting host guard pins; original failed receipt preserved",
   "guard_binding_correction": "fixed to independently verified immutable control prefix/seed; no target rewrite",
-  "armed": false,
+  "armed": true,
   "helper_launched": false,
   "rebooted": false,
   "original_boot_restored": false,
-  "hardware_logging_qualified": false
+  "hardware_logging_qualified": false,
+  "guard_correction_head": "d19f37e225451b12619ea6b763a9670b44d32394",
+  "guard_correction_five_required_checks": "SUCCESS",
+  "observation_receipt_verified": true,
+  "watcher_running_at_arm": true,
+  "automatic_return": false,
+  "helper_launches_at_arm": 0,
+  "owner_boot_action_pending": true
 }

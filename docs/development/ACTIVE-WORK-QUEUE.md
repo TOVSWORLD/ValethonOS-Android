@@ -1,5 +1,13 @@
 # Active work queue — ordered delivery
 
+Current actual state: exact approved known-stack control p5+normal observer installed
+once, readbacks/p6/RAM cleanup verified. Copied guard's stale trial8 prefix/seed pins
+were corrected atd19f37e without changing firmware bytes; failed receipt retained,
+all five required checks and corrected-source installed preflight passed. One
+observation-only watcher durably armed/helper0; no automatic return/reboot. Owner
+Reboot/System +≥5min observation/desk report pending. Originals not currently
+restored. No rewrite/rearm or historical approval reuse.
+
 ## Latest selection — known-stack recorder calibration
 
 Owner selected the known-boot capture control after the complete modern draft

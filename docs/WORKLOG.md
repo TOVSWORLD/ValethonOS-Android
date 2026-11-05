@@ -5136,3 +5136,10 @@ independently verified unchanged control bytes/manifest; added artifact-to-guard
 regression (11 calibration controls pass). Corrected source/exact-head checks and
 one new read-only installed validation are required before observation arm. Existing
 approval remains for the same exact firmware pair; no new physical procedure.
+
+Corrected guardd19f37e passed all five distinct exact-head checks. One corrected-source
+read-only installed validation passed; no further block writes. One observation-only
+watcher launched and durable armed receipt/process verified; helper0/no auto return
+or reboot. Owner first visit pending: Reboot/System once, observe≥5min, desk report
+before manual return. Exact control p5+normal observer remain installed; originals
+are not currently restored. Never repeat either install/arm or reuse approval.
