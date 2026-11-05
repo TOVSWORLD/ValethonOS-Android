@@ -4945,3 +4945,10 @@ automation is selected; original rollback stays available. Hardware boot/logging
 remain unconfirmed. First draft is not the completed Android release or a claim
 of peripheral runtime support. Build/pack implementation and config/scope controls
 pass local checks; actual compile and final package are the next delivery steps.
+
+
+Combined draft run42088917336 stopped at resolved-config validation before Image
+compilation: Binder requires EVENT_TRACING in the pinned drivers/android/Kconfig.
+Added visible FTRACE/FTRACE_SYSCALLS selectors and required EVENT_TRACING so the
+real dependency resolves; no hidden-capability override or removed acceptance
+check. Retest is a changed build, not a repeated physical trial.

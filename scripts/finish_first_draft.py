@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import struct
 import subprocess
@@ -41,6 +42,10 @@ def finish(kernel,component,output):
     source.write_text(text);dtb=output/'draft.dtb'
     subprocess.run([str(ROOT/'work/dtb-tool/build/dtc'),'-a','4','-I','dts','-O','dtb','-o',str(dtb),str(source)],check=True,capture_output=True)
     image=(kernel/'Image').read_bytes();compressed=(kernel/'Image.gz').read_bytes()
+    releases=set(re.findall(rb'Linux version ([^\s\x00]+)',image))
+    releases={x for x in releases if x.endswith(b'-valethon-draft1')}
+    if len(releases)!=1:raise ValueError('Exact first-draft kernel release required')
+    release=releases.pop().decode('ascii')
     full,layout=assemble(image,compressed,dtb.read_bytes(),ramdisk,json.loads(CONTRACT.read_text()),json.loads(METADATA.read_text()))
     # v0 cmdline is outside its component ID, but inside immutable prefix hash.
     full=bytearray(full);full[64:576]=bytes(512);full[64:64+len(ARGS)]=ARGS.encode();full=bytes(full)
@@ -48,7 +53,7 @@ def finish(kernel,component,output):
     path=output/'boot-full.img';path.write_bytes(full);path.chmod(0o600)
     result={'scope':'Complete first kernel draft; untested on hardware','kernel_source':manifest['kernel_revision'],
             'repository_revision':manifest['repository_revision'],'build_run':manifest['run_id'],
-            'kernel_manifest_sha256':sha((kernel/'manifest.json').read_bytes()),'component_report_sha256':sha((component/'report.json').read_bytes()),
+            'kernel_release':release,'kernel_manifest_sha256':sha((kernel/'manifest.json').read_bytes()),'component_report_sha256':sha((component/'report.json').read_bytes()),
             'partition_bytes':len(full),'partition_sha256':sha(full),'nonce_sha256':sha(nonce),
             'prefix_sha256':prefix,'dt':inspect_header(dtb.read_bytes()),'layout':layout,
             'bootargs':ARGS,'logging_backends':['USB ACM VLOG0002','kernel boot-tail VLOG0001'],

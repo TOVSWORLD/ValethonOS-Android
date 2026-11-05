@@ -12,7 +12,7 @@ def requirements():
     result = lab_log_config.requirements(retained=True)
     result.update({name:'y' for name in ['I2C','SPI','INPUT','HID','VT','DRM','DRM_MEDIATEK',
         'PHY_MTK_MIPI_DSI','RESET_CONTROLLER','PWM','PWM_MTK_DISP','REGULATOR_FAN53555',
-        'PRINTK_TIME','IKCONFIG','IKCONFIG_PROC','KALLSYMS','ANDROID_BINDER_IPC']})
+        'FTRACE','FTRACE_SYSCALLS','EVENT_TRACING','PRINTK_TIME','IKCONFIG','IKCONFIG_PROC','KALLSYMS','ANDROID_BINDER_IPC']})
     result.update({'LOG_BUF_SHIFT':'20','LOCALVERSION':'"-valethon-draft1"',
                    'LOCALVERSION_AUTO':'n','PANIC_TIMEOUT':'0'})
     return result
