@@ -36,12 +36,17 @@ def main():
     receipt={'armed':True,'automatic_return':False,'automatic_restore':False,'minimum_seconds':300,'candidate_sha256':report['partition_sha256'],'waiting_for_owner_boot':True}
     fd=os.open(base/'capture-arm-receipt.json',os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
     with os.fdopen(fd,'w') as stream:json.dump(receipt,stream);stream.flush();os.fsync(stream.fileno())
-    started=wait_departure(present)
-    receipt.update(waiting_for_owner_boot=False,boot_departure_monotonic=started,minimum_observation_end_monotonic=started+300)
     from restore_diagnostic_boot import update_receipt
-    update_receipt(base/'capture-arm-receipt.json',receipt)
-    result=capture(plan,nonce,base/'usb-capture')
-    receipt.update(capture_finished=True,capture_complete=result['complete'])
+    try:
+        started=wait_departure(present)
+        receipt.update(waiting_for_owner_boot=False,boot_departure_monotonic=started,minimum_observation_end_monotonic=started+300)
+        update_receipt(base/'capture-arm-receipt.json',receipt)
+        result=capture(plan,nonce,base/'usb-capture')
+    except BaseException as error:
+        receipt.update(armed=False,capture_finished=True,capture_complete=False,failure_kind=type(error).__name__)
+        update_receipt(base/'capture-arm-receipt.json',receipt)
+        raise
+    receipt.update(armed=False,capture_finished=True,capture_complete=result['complete'])
     update_receipt(base/'capture-arm-receipt.json',receipt)
     print(json.dumps({'capture_complete':result['complete'],'automatic_return':False,'automatic_restore':False}))
 

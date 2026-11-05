@@ -5025,3 +5025,34 @@ after the original recovery USB identity departs. It contains no return/helper/A
 or restore call. Manual return is a separate explicit action after owner desk
 report; no kernel/observer rebuild selected. Two timing controls and repository
 checks passed. Tablet install/arm receipts, if executed, are recorded separately.
+
+
+### Actual complete first-draft test1 complete; original restored
+
+Owner reported repeated Amazon logo (roughly1–2min), black, logo again; later still
+looping. Capture-only process ran its300s endpoint budget and stopped:0B, no matching
+endpoint selected/opened. Owner desk status was4503s after recovery USB departure;
+no timed return/helper or agent reboot occurred during observation. Screen loop
+does not prove kernel entry or reset cause.
+
+First explicitly manual return waiter hit its own host receipt mode0644 guard
+before any helper launch. Source/log/mode evidence preserved. Guarded return-only
+continuation proved prior helper0/log absent/process stopped, created mode0600
+receipt, and launched exactly one original FACTORYM helper, exit0. No kernel
+rewrite, new boot-capture attempt or StageA repetition. Two stable TWRP identities
+then full collection passed once: aliases/recovery/prefix/seed verified, fullp5
+unchangedaf1dc7e2..., HOSTCONTROLseq1/73B only, no invalid slots/kernel record.
+Prior collector causes remain unproven; success here does not retroactively fix them.
+
+Main evidence27,078,552B SHA8f6cd8ae5a9eba67192fa6bdb806b202f7daa736de92f452cf9dd366b6421c67
+matched lab/controller before original fullp5 restoration ONCE. Fullp5/p6 readbacks
+and RAM cleanup verified, TWRP left running/no reboot. Post-restore/source supplement
+9265B SHA28eae4df6e9af69c167140e8fcc3f447ec4879d5e5a43b42e4da7c0af5088569 also matches
+both machines and preserves exact controller programs/host permission failure.
+Capture/return processes stopped, helper done, no physical action pending. Approval
+consumed;346/344/348 remain open. No unchanged trial/rebuild selected.
+
+Future capture source now clears its armed metadata on completion/exception (two
+regression controls pass); deployed executed source/history remains archived and
+unchanged, no rearm or deployment of that source fix. Actual kernel/retained logs
+remain unconfirmed. First-draft trial-result/state receipts carry terminal truth.

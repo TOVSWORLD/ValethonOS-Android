@@ -1,5 +1,15 @@
 # Active work queue — ordered delivery
 
+Actual first-draft test1 is complete. Original full boot restored once and full
+boot/recovery/RAM cleanup verified; TWRP left running, no reboot, no process armed
+and no owner action pending. USB capture0B/no matching endpoint; returned image
+unchanged from candidate, only HOSTCONTROLseq1/73B, no kernel record. Logo/black
+loop does not prove kernel entry/reset cause. One original FACTORYM helper exit0
+after a host-only receipt-permission failure stopped the first waiter before any
+helper launch; guarded return-only continuation corrected mode600. Evidence
+archives match lab/controller. Approval consumed; no repeat/new trial selected.
+See [actual result](../../evidence/independent-recovery/first-draft-trial-result.json).
+
 Completed first kernel draft: **6.18.34-valethon-draft1+**. Combined build
 42091153900 succeeded at dfdd080; enforcing VM and independent final package
 checks passed. The complete16MiB boot image and private delivery archive are in
