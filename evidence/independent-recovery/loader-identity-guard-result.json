@@ -32,8 +32,25 @@
     "new_integration_case": 1,
     "inherited_cases_repeated_by_test_subclass": 4,
     "arm_compiled": true,
-    "arm_execution_validated": false,
+    "arm_execution_validated": true,
     "failure_before_controller_or_storage_callbacks": true,
     "physical_frontend_bound": false
+  },
+  "arm_start_controls": {
+    "scope": "actual Thumb identity/start/writer instructions; metadata callback, prefix digest, block/controller/counter modeled",
+    "elf_sha256": "fd2c5913feeaead9f852cd788226d4b7a5b40383f93b109e3ba8ab7c75a450df",
+    "cases": [
+      "bound_start_records_0x41000000",
+      "bound_start_records_0x43000000",
+      "mismatch_stops_before_controller_storage_clock_and_no_retry",
+      "unstable_stops_before_controller_storage_clock_and_no_retry",
+      "read_failure_stops_before_controller_storage_clock_and_no_retry"
+    ],
+    "case_count": 5,
+    "state_bytes": 8728,
+    "sp_callee_saved_checked": true,
+    "pinned_frontend_getter_provenance_proved": false,
+    "hardware_acceptance": false,
+    "device_accessed": false
   }
 }

@@ -4804,3 +4804,12 @@ consumes the attempt, preventing a later unchecked-start retry. Native integrate
 case passes alongside inherited controls (9 collected cases); changed Thumb module
 compiles with the new entry/guard included. ARM execution of the new entry and actual
 frontend pointer/getter provenance remain open. No new physical candidate or action.
+
+## 2026-11-04 — #346 bound identity entry executes in ARM model
+
+Five actual Thumb controls pass: bound start at two relocated bases produces
+MODE/HANDOFF sequence3; mismatch, mutated snapshot and read error stop before clock,
+controller or storage callbacks and consume the initialization attempt. SP/callee
+saved checks pass. Metadata callback, prefix digest, block/controller/counter remain
+modeled; pinned frontend getter/pointer provenance is not established. No physical
+access/candidate/arm/helper/reboot or owner action.

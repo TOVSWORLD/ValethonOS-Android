@@ -260,3 +260,11 @@ The original analysis entry remains available for existing emulator controls.
 Native integration passes (9 collected cases, including inherited controls);
 Thumb compilation includes both guard and new entry. The new entry has not yet
 been executed in the ARM emulator or connected to pinned frontend getters.
+
+Bound-start Thumb execution now passes five controls: two relocated module bases
+produce MODE/HANDOFF sequence3; metadata mismatch, mutation and read failure stop
+before clock/controller/storage callbacks and consume the attempt. SP and callee
+saved registers are checked. Metadata callback, prefix digest, counter/controller
+and block hardware remain models. Reproduce with the timed-profile ELF:
+`out/loader-audit-venv/bin/python scripts/validate_loader_identity_start.py --elf out/loader-identity-module/module.elf --lk out/original-package-lk-private.bin --output out/loader-identity-start-report.json`.
+Pinned frontend getter/pointer provenance remains unfinished.
