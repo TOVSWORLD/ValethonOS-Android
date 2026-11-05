@@ -1,5 +1,12 @@
 # Loader retained-checkpoint delivery plan
 
+Latest owner direction: finish the complete first kernel draft and prioritize
+test results/retrievable logs over automatic recovery engineering. A combined
+first-draft build is selected: existing board ports, enforcing PID1, USB streaming
+and retained kernel logs. Existing rollback stays available; no new recovery
+automation, physical trial, install or reboot is selected. Positive hardware
+logging remains unconfirmed. This supersedes older “no build selected” text below.
+
 Owner direction: finish one usable candidate; component test counts are not delivery.
 Current device baseline is trial7 complete, original bootstrap/full boot/recovery
 verified, TWRP unarmed. No physical step is authorized by this source plan.

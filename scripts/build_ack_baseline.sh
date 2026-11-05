@@ -3,9 +3,10 @@
 set -euo pipefail
 readonly revision=d9318bdb4c34e8b2d997b4f67ced56b120b22b87
 readonly requested_mode="${1:-generic}"
-readonly mode="${requested_mode/lab-retained/lab-log}"
+mapped_mode="${requested_mode/lab-retained/lab-log}"
+readonly mode="${mapped_mode/first-draft/lab-log}"
 retained_args=()
-if [ "$requested_mode" = lab-retained ]; then retained_args=(--retained-mailbox); fi
+if [[ "$requested_mode" = lab-retained || "$requested_mode" = first-draft ]]; then retained_args=(--retained-mailbox); fi
 [[ "$mode" = generic || "$mode" = clocks || "$mode" = clocks-pinctrl || "$mode" = providers || "$mode" = usb-providers || "$mode" = usb-acm-diagnostic || "$mode" = lab-log || "$mode" = diagnostic ]] || exit 2
 readonly entry_profile="${ENTRY_CHECKPOINT_PROFILE:-none}"
 [[ "$entry_profile" = none || "$entry_profile" = entry-8s ]] || exit 2
@@ -54,9 +55,12 @@ if [ "$mode" != generic ]; then
 fi
 if [ "$mode" = lab-log ]; then
   python3 scripts/apply_lab_watchdog.py "$root/source"
-  python3 scripts/apply_lab_entry_screen.py "$root/source"
-  if [ "$requested_mode" = lab-retained ]; then python3 scripts/apply_lab_retained.py "$root/source"; fi
+  if [ "$requested_mode" != first-draft ]; then python3 scripts/apply_lab_entry_screen.py "$root/source"; fi
+  if [[ "$requested_mode" = lab-retained || "$requested_mode" = first-draft ]]; then python3 scripts/apply_lab_retained.py "$root/source"; fi
   if [ "$entry_profile" = entry-8s ]; then python3 scripts/apply_lab_entry_delay.py "$root/source"; fi
+fi
+if [ "$requested_mode" = first-draft ]; then
+  for port in sym827 mipi dsi pwm; do python3 "scripts/apply_${port}_port.py" "$root/source"; done
 fi
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 defconfig
 if [ "$mode" != generic ]; then
@@ -92,6 +96,9 @@ if [ "$mode" != generic ]; then
   if [ "$mode" = lab-log ]; then
     python3 scripts/lab_log_config.py apply "$output/.config" --source "$root/source" "${retained_args[@]}"
   fi
+  if [ "$requested_mode" = first-draft ]; then
+    python3 scripts/first_draft_config.py apply "$output/.config" --source "$root/source"
+  fi
   make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 olddefconfig
   if [ "$argument_profile" = generic-force ]; then
     python3 scripts/check_diagnostic_commandline.py "$output/.config" --profile generic-force
@@ -109,7 +116,11 @@ if [ "$mode" != generic ]; then
     fi
   fi
   if [ "$mode" = lab-log ]; then
-    python3 scripts/lab_log_config.py check "$output/.config" "${retained_args[@]}"
+    if [ "$requested_mode" = first-draft ]; then
+      python3 scripts/first_draft_config.py check "$output/.config"
+    else
+      python3 scripts/lab_log_config.py check "$output/.config" "${retained_args[@]}"
+    fi
   fi
   for symbol in MTK_MMSYS COMMON_CLK_MT8163 COMMON_CLK_MT8163_AUDSYS COMMON_CLK_MT8163_IMGSYS COMMON_CLK_MT8163_MFGCFG COMMON_CLK_MT8163_MMSYS COMMON_CLK_MT8163_VDECSYS COMMON_CLK_MT8163_VENCSYS; do
     grep -qx "CONFIG_${symbol}=y" "$output/.config"
@@ -155,7 +166,7 @@ if [ "$mode" = lab-log ]; then
   sha256sum "$output/drivers/watchdog/mtk_wdt.o" "$output/drivers/watchdog/watchdog_dev.o"
   echo LAB_BOOT_WATCHDOG_OBJECT_COMPILE_COMPLETE
 fi
-if [ "$requested_mode" = lab-retained ]; then
+if [[ "$requested_mode" = lab-retained || "$requested_mode" = first-draft ]]; then
   make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$jobs" W=1 drivers/misc/valethon_mailbox.o drivers/mmc/host/mtk-sd.o
   sha256sum "$output/drivers/misc/valethon_mailbox.o" "$output/drivers/mmc/host/mtk-sd.o"
   echo LAB_RETAINED_MAILBOX_EMMC_OBJECT_COMPILE_COMPLETE

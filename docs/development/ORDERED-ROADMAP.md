@@ -1,5 +1,12 @@
 # Ordered ValethonOS delivery roadmap
 
+Latest owner direction: finish the complete first kernel draft and prioritize
+test results/retrievable logs over automatic recovery engineering. A combined
+first-draft build is selected: existing board ports, enforcing PID1, USB streaming
+and retained kernel logs. Existing rollback stays available; no new recovery
+automation, physical trial, install or reboot is selected. Positive hardware
+logging remains unconfirmed. This supersedes older “no build selected” text below.
+
 Latest owner requirement: next tablet test uses a complete best-supported kernel
 candidate with logging positively confirmed beforehand. No separate partial
 diagnostic-kernel/observer test is selected. Qualification is still absent;

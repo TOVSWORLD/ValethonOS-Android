@@ -5,7 +5,7 @@ on:
       mode:
         description: Compile integration scope
         type: choice
-        options: [lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
+        options: [first-draft, lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
         default: diagnostic
       entry_checkpoint:
         description: Private earliest-entry checkpoint (lab-retained only)
@@ -104,7 +104,7 @@ jobs:
           fi
 
       - name: Retain diagnostic kernel bytes and provenance
-        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained')
+        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
         env:
           ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
         run: |
@@ -119,15 +119,23 @@ jobs:
                                ('output/.config', 'resolved.config'),
                                ('output/System.map', 'System.map'),
                                ('image-size-report.json', 'image-size-report.json')]
-          if '${{ steps.scope.outputs.mode }}' == 'lab-retained':
+          if '${{ steps.scope.outputs.mode }}' in ('lab-retained','first-draft'):
               sources += [('output/drivers/misc/valethon_mailbox.o', 'valethon_mailbox.o'),
                           ('output/drivers/mmc/host/mtk-sd.o', 'mtk-sd.o')]
+          if '${{ steps.scope.outputs.mode }}' == 'first-draft':
+              sources += [(f'output/{path}', pathlib.Path(path).name) for path in [
+                  'drivers/regulator/fan53555.o', 'drivers/phy/mediatek/phy-mtk-mipi-dsi.o',
+                  'drivers/phy/mediatek/phy-mtk-mipi-dsi-mt8173.o',
+                  'drivers/gpu/drm/mediatek/mtk_dsi.o', 'drivers/gpu/drm/mediatek/mtk_drm_drv.o',
+                  'drivers/pwm/pwm-mtk-disp.o', 'drivers/usb/musb/mediatek.o',
+                  'drivers/phy/mediatek/phy-mtk-tphy.o', 'drivers/watchdog/mtk_wdt.o']]
           for source, name in sources:
               target = destination / name
               shutil.copyfile(root / source, target)
               data = target.read_bytes()
               files[name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
           manifest = {
+              'build_mode': '${{ steps.scope.outputs.mode }}',
               'repository_revision': os.environ['GITHUB_SHA'],
               'kernel_revision': subprocess.check_output(
                   ['git', '-C', str(root / 'source'), 'rev-parse', 'HEAD'], text=True).strip(),
@@ -139,7 +147,7 @@ jobs:
           (destination / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
           PY
       - name: Upload diagnostic kernel compile outputs
-        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained')
+        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: diagnostic-kernel-${{ github.sha }}-${{ github.run_attempt }}
@@ -148,13 +156,15 @@ jobs:
           retention-days: 7
 
       - name: Enforcing lab PID1 ABI and filesystem VM regression
-        if: (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained')
+        if: (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
         env:
           ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
         run: |
           python3 scripts/install_qemu_for_ci.py --install
           sudo apt-get install --no-install-recommends -y secilc=3.5-1 checkpolicy=3.5-1
-          python3 scripts/validate_lab_entry_screen_vm.py --output out/lab-entry-screen-vm
+          if [ '${{ steps.scope.outputs.mode }}' != first-draft ]; then
+            python3 scripts/validate_lab_entry_screen_vm.py --output out/lab-entry-screen-vm
+          fi
           vm_option=()
           if [ "$ENTRY_CHECKPOINT_PROFILE" = entry-8s ]; then
             python3 scripts/validate_lab_entry_delay_vm.py --output out/lab-entry-delay-vm
@@ -175,3 +185,15 @@ jobs:
           force_option=()
           if [ "$ARGUMENT_PROFILE" = generic-force ]; then force_option=(--force-argument-test); fi
           python3 scripts/run_qemu_diagnostic.py --kernel work/ack-baseline/output/arch/arm64/boot/Image --config work/ack-baseline/output/.config --initramfs out/diagnostic-initramfs/initramfs.cpio.gz --output out/qemu-diagnostic "${force_option[@]}"
+
+      - name: Retain first draft enforcing ramdisk and VM result
+        if: steps.scope.outputs.mode == 'first-draft'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: first-draft-userspace-${{ github.sha }}
+          path: |
+            out/lab-vm-component/
+            out/lab-vm-policy/report.json
+            out/lab-policy-vm/report.json
+          if-no-files-found: error
+          retention-days: 7

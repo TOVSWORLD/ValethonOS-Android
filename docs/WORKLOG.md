@@ -4932,3 +4932,16 @@ counts/digests for future diagnosis; no command/selector/raw text enters public
 error strings, and no failed readout becomes valid rollback input. Two new native
 failure controls plus nine collector/seven rollback controls pass. Source only,
 not deployed; no device access/build/arm/helper/reboot or physical qualification.
+
+
+### Owner: finish the kernel, prioritize retrievable test results
+
+Selected one combined first-draft build with the existing clock/pinctrl/power/IOMMU,
+USB, regulator, MIPI/DSI/PWM ports linked together, retained eMMC logging and an
+enforcing diagnostic PID1. Added timestamped1MiB ring and panic timeout0; removed
+the old entry-screen/delay patch from this new mode. Packaging uses the matched
+own-source DT, existing reservations, USB0 and conservative eMMC. No new recovery
+automation is selected; original rollback stays available. Hardware boot/logging
+remain unconfirmed. First draft is not the completed Android release or a claim
+of peripheral runtime support. Build/pack implementation and config/scope controls
+pass local checks; actual compile and final package are the next delivery steps.
