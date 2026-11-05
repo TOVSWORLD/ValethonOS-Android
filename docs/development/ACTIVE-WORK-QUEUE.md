@@ -1,6 +1,15 @@
 # Active work queue — ordered delivery
 
 Current346 update: actual trial7 complete, ORIGINALS VERIFIED/TWRP running.
+Source update: loader checkpoint C core/reader implemented;10 native writer,8
+collector,5 existing codec and13 linked ARM controls pass. No hardware pass or
+trial bundle. Actual recovery reports1MiB enabled eMMC cache; read-only debugfs
+mount removed. Exact archived SWITCH emulator proves timeout returns zero like
+success; direct flush binding rejected. Core3595B + context cannot fit old584B gap.
+Next: independently bounded firmware completion adapter and proven owned memory
+layout before packaging/review. Originals/TWRP remain verified, unarmed. See
+loader-checkpoint-core-result.json and loader-switch-audit.json.
+
 Owner saw different lower-left console text approximately mode/reading; exact
 strings not recalled. One original return helper exit0; no exact handoff/kernel
 entry or kernel record proved. Supervisor stopped at full recovery read size

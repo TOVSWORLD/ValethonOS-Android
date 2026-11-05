@@ -1165,3 +1165,27 @@ evidence using the working mailbox format/reader, with a distinct loader payload
 tag that cannot be called a kernel record. Approximate screen recall is not enough
 to locate the remaining boundary. First design and review the exact normal-only
 writer/guard/recovery contract; no unchanged trial or new kernel build is selected.
+
+### Durable loader checkpoint integration — analysis result, not trial admission
+
+The C producer and reader now implement mode/header/body/pre-handoff records in
+VLOG0001 with a distinct loader tag. Exact actual selected offsets/arguments are
+metadata; record writes remain pinned to the admitted p5 mailbox. Native10,
+collector8, existing codec5 and linked ARM13 controls pass. See
+[core result](../../evidence/independent-recovery/loader-checkpoint-core-result.json)
+and [source/reproduction](../../projects/firetabs-android/loader-retained/README.md).
+
+The actual recovery eMMC capability read reports a1MiB enabled cache. Its temporary
+read-only debugfs mount was removed; raw capability bytes remain private. No
+physical cache command was issued. Archived SWITCH instruction replay shows its
+timeout returns zero like success, so this routine alone cannot certify a flush.
+[Exact replay result](../../evidence/independent-recovery/loader-switch-audit.json).
+The timeout boundary case reduces its loop counter explicitly; other command and
+status callbacks are models, not runtime hardware evidence.
+
+Physical readiness is false: implement independent bounded completion/error
+checking, bind exact immutable firmware/card/target callbacks, and establish owned
+code/context/stack lifetime and hook replay/cache visibility. The3595B core plus
+context does not fit the old584B gap. No guessed free RAM or no-op flush may satisfy
+these gates. Preserve TWRP repair/recovery and original rollback. No new install,
+arm, helper, kernel build or owner trip is selected by these analysis results.

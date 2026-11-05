@@ -4606,3 +4606,29 @@ repair-proof supplement lab/controller match. Public loader-observer-trial-resul
 and twrp-bootstrap-repair-source.json. Keep recovery repair, mailbox reader/format;
 next source contract is attributable durable loader-stage evidence distinct from
 kernel records, not another unchanged boot or kernel rebuild.346/344/348 remain open.
+
+## 2026-11-04 — #346 loader checkpoint core and concrete persistence blocker
+
+Implemented bounded C loader producer using existing VLOG0001 codec unchanged,
+normal mode/read/pre-handoff metadata and distinct loader tag. Existing reader
+now decodes loader records without claiming kernel entry; malformed producer
+metadata retains validated full readout for rollback. Native writer10, collector8,
+existing codec5 and linked Thumb ARM13 controls pass, including failure/no retry,
+header-last flush order, exact prefix/nonce/seed/final guard and producer transition.
+Owned-file C writer uses actual fsync; ARM storage/flush callbacks are modeled.
+Local only; initial source export to lab was rejected by automatic review and
+was not retried. Local Zig0.14.1/Unicorn2.1.3 resolved compilation/emulation.
+
+Scoped read-only recovery debugfs intake reports cache_size1024KiB/cache_control1;
+private raw EXT_CSD retained, temporary read-only mount removed. This is current
+TWRP state, not a measured LK state. Exact archived LK SWITCH routine replay
+confirmed CMD6 construction and command/status error propagation, but timeout
+expiry returns zero like ready. Counter reduced only for the timeout boundary
+case; no physical MMC command. Direct return-value-only flush binding rejected.
+
+Core3595B plus ARM context exceeds old584B gap. Firmware completion adapter and
+owned memory/stack/lifetime/replay/cache visibility remain prerequisites; no
+runnable observer or new trial selected. Public loader-checkpoint-core-result.json
+and loader-switch-audit.json, reproducible source README. No kernel rebuild,
+bootstrap/boot/recovery writes, arm, helper or reboot. Actual trial7 originals
+remain restored/TWRP;346/344/348 open, no hardware qualification claimed.

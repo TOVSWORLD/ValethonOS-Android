@@ -86,3 +86,26 @@ class CollectionDiagnostics(unittest.TestCase):
             self.assertEqual(caught.exception.kind,'ValueError')
             self.assertNotIn('private-selector',str(caught.exception))
             self.assertEqual(adb.reads,1);self.assertEqual(adb.writes,0)
+
+class LoaderRecordAttribution(unittest.TestCase):
+    def test_loader_record_is_decoded_without_claiming_kernel_entry(self):
+        import loader_checkpoint_record as lc
+        nonce=bytes(range(32));candidate,prefix=m.prepare(BACKUP,nonce)
+        data=lc.TAG+lc.BODY.pack(3,0,0,5,8,0,0,0x40000000,0x44000000,8192,0,0,0,bytes.fromhex(prefix),nonce)
+        with tempfile.TemporaryDirectory() as folder:
+            p=Path(folder);image=p/'fixture';image.write_bytes(candidate)
+            m.write_fixture(image,nonce,prefix,data);adb=FakeAdb();adb.boot=image.read_bytes()
+            report=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,p/'readout')
+            self.assertTrue(report['loader_record']);self.assertFalse(report['kernel_record']);self.assertFalse(report['host_control_only'])
+            self.assertEqual(report['loader_checkpoint']['stage'],'pre_handoff')
+            self.assertEqual(report['loader_checkpoint']['dt_address'],0x44000000)
+            self.assertFalse(report['loader_checkpoint']['kernel_entry_proved']);self.assertEqual(adb.writes,0)
+    def test_bad_loader_metadata_preserves_full_readout_for_rollback(self):
+        import loader_checkpoint_record as lc
+        nonce=bytes(range(32));candidate,prefix=m.prepare(BACKUP,nonce)
+        with tempfile.TemporaryDirectory() as folder:
+            p=Path(folder);image=p/'fixture';image.write_bytes(candidate)
+            m.write_fixture(image,nonce,prefix,lc.TAG+b'incomplete');adb=FakeAdb();adb.boot=image.read_bytes()
+            report=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,p/'readout')
+            self.assertTrue(report['loader_decode_error']);self.assertFalse(report['loader_record']);self.assertFalse(report['kernel_record'])
+            self.assertTrue(report['exact_candidate_prefix_and_seed_verified']);self.assertEqual((p/'readout/boot-after-trial-private.img').read_bytes(),adb.boot);self.assertEqual(adb.writes,0)

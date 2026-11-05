@@ -8,6 +8,7 @@ import os
 import subprocess
 from restore_diagnostic_boot import Adb, BOOT, RECOVERY, BOOT_BYTES, RECOVERY_BYTES, validate_backup
 import retained_log_mailbox as mailbox
+from loader_checkpoint_record import decode as decode_loader_checkpoint
 
 
 class CollectionError(ValueError):
@@ -70,6 +71,14 @@ def _collect(adb, original, manifest, candidate, nonce, output, mark):
         raise ValueError('Candidate seed differs')
     mark('returned_prefix_and_records')
     state=mailbox.inspect(image,nonce,prefix)
+    loader_checkpoint = None
+    loader_decode_error = False
+    if state['latest']:
+        try:
+            loader_checkpoint = decode_loader_checkpoint(state['latest']['payload'], nonce, prefix)
+        except ValueError:
+            # Preserve the full image for rollback even if producer metadata is bad.
+            loader_decode_error = True
     mark('private_readout_output')
     output.mkdir(mode=0o700,parents=False)
     for name,data in [('boot-after-trial-private.img',image),('record-private.bin',state['latest']['payload'] if state['latest'] else b'')]:
@@ -82,7 +91,8 @@ def _collect(adb, original, manifest, candidate, nonce, output, mark):
             'host_control_only':bool(state['latest'] and state['latest']['payload'].startswith(b'VALETHON HOST CONTROL v1\n')),
             'sequence':state['latest']['sequence'] if state['latest'] else None,
             'record_bytes':len(state['latest']['payload']) if state['latest'] else 0,
-            'invalid_slots':state['invalid_slots'],'device_written':False,'rebooted':False}
+            'invalid_slots':state['invalid_slots'],'loader_checkpoint':loader_checkpoint,
+            'loader_record':loader_checkpoint is not None,'loader_decode_error':loader_decode_error,'device_written':False,'rebooted':False}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n');(output/'report.json').chmod(0o600)
     return report
 
