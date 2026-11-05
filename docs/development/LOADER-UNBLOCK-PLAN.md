@@ -127,3 +127,22 @@ with expected/received lengths and its digest, without retrying or trimming it i
 an accepted image. Retention is capped at32MiB. Failed output has no valid report or
 rollback image. This improves future diagnosis; discarded historical responses
 cannot be reconstructed and their causes remain unknown.
+
+## Offline capture acceptance implementation
+
+`scripts/assess_kernel_log_capture.py` independently replays an existing private
+VLOG0002 raw capture through the original bounded receiver. It requires exact fresh
+nonce, frame ordering, terminal completion, receipt counts/digest and a kernel
+facility0 Linux-version record matching the expected release. It rejects host or
+loader text, userspace banners, empty/truncated/trailing captures and stale nonce.
+It opens no device and exports no raw banner. Even a valid synthetic capture returns
+physical_origin_verified=false, device_qualified=false and test_admission=false.
+The physical hold is unchanged. Five synthetic regression controls passed.
+
+Concrete unresolved dependency: neither custom USB PID1 nor retained-mailbox writer
+has actual hardware output in the archived trials. Offline validation can reject
+bad evidence but cannot manufacture positive logging. Recovery ADB logs use a
+different producer/transport and cannot close this dependency. No separate control
+boot or new physical procedure is selected. The complete next candidate cannot be
+presented as meeting the owner's positive-logging prerequisite until attributable
+hardware evidence for its chosen path exists.

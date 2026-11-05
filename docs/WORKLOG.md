@@ -4899,3 +4899,15 @@ separate partial diagnostic/control-kernel boot is no longer selected. Existing
 recovery collection may qualify only its actual backend, never the custom producer
 or mailbox writer. The logging dependency remains open and the code hold remains
 in force. No build, device access, arm, helper, reboot or owner action performed.
+
+
+### Offline raw-log acceptance implementation
+
+Added assess_kernel_log_capture.py, reusing the actual VLOG0002 receiver to validate
+nonce/framing/terminal/counts/digest and a matching kernel-facility boot banner.
+Five synthetic regression controls pass, rejecting host/loader/userspace/empty,
+stale nonce, wrong release, malformed/truncated/trailing and inconsistent receipts.
+Successful integrity assessment explicitly does not verify physical origin or admit
+any test. No real capture was accepted and no hardware qualification changed.
+Recorded the remaining positive-logging dependency without selecting a separate
+control boot. No build, device access, arm/helper/reboot or owner action.
