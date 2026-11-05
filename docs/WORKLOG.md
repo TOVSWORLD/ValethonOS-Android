@@ -4991,3 +4991,15 @@ combined Image actually compiled in42091153900. Updated only those current scrip
 hashes, retained the historical hash and old build receipts explicitly, and linked
 the new combined-build receipt. No binding vectors or rejection checks weakened,
 and no successful kernel rebuild is needed for this evidence-only correction.
+
+
+### Explicit five-minute observation; capture cannot trigger return
+
+Owner asked whether the completed kernel is ready and given enough time. The new
+written protocol had no minimum window; the old blocked supervisor still has its
+90-second path. Added capture-only preparation using the existing receiver with
+300-second endpoint wait, a minimum300-second no-intervention instruction and
+explicitly no automatic return helper/restore/reboot. The old supervisor is not
+the new test path. Receiver completion/timeout does not change device state; manual
+return follows observation, and original restoration follows evidence archival.
+Two native preparation controls pass. Kernel/boot-image bytes are unchanged.

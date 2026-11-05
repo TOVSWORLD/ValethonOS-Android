@@ -8,17 +8,25 @@ reviewed before fresh owner approval and availability. Prior approvals are spent
    its fresh nonce. Retain the original full boot/recovery backups. Confirm the
    actual candidate's logging paths and coverage limits. Source/VM success is not
    positive target logging and must not be labeled as such.
-2. Prepare the existing USB receiver on the selected physical connection, with
+2. Use prepare_first_draft_capture.py to prepare a300-second capture plan for the
+   exact package/physical connection. Use capture_lab_kernel_log.py directly; do
+   not use the historical run_lab_log_trial.py supervisor with its90-second logic.
+   Prepare the existing USB receiver on the selected physical connection, with
    durable private output and the exact candidate nonce. It captures only; it does
    not reboot the tablet, invoke a return helper or trigger an intentional fault.
    A kernel boot record must match the exact draft release. Completed framing and
    matching nonce/counts/digest are checked with assess_kernel_log_capture.py.
 3. Perform one normal full-candidate boot under the final approved procedure.
-   Observe the receiver and allow the logging window to run. The kernel uses
+   Allow at least **five minutes from selecting Reboot/System**, without power
+   holds, USB reconnects, return-helper launch or restoration. A black screen or
+   early capture timeout is not a reason to cut that window short. If useful logs
+   are still arriving, extend observation rather than ending it at five minutes.
+   Receiver completion/timeout closes only capture; it cannot switch to recovery. The kernel uses
    panic timeout0, no explicit failure injection or automatic reboot request.
    The inherited watchdog service remains necessary; no guarantee is made that
    hardware cannot reset. Never infer reset cause from a logo or black screen.
-4. Return to the existing recovery using only the separately reviewed known route
+4. Only after the observation window and an explicit manual return decision,
+   return to the existing recovery using only the separately reviewed known route
    when needed. Recovery is a way to retrieve results, not the measurement goal.
    Do not repeat the boot or rearm after silence. Do not start an automatic return
    loop while useful logs may still be arriving.

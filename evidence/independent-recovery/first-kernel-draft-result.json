@@ -85,5 +85,16 @@
     "Display/touch/audio/wireless operation",
     "Positive on-tablet kernel logging"
   ],
-  "test_protocol": "projects/firetabs-android/kernel/first-draft/TESTING.md"
+  "test_protocol": "projects/firetabs-android/kernel/first-draft/TESTING.md",
+  "timing_revision": {
+    "minimum_observation_seconds": 300,
+    "automatic_return_helper": false,
+    "automatic_restore": false,
+    "kernel_image_unchanged": true,
+    "partition_sha256": "af1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365",
+    "archive": "out/valethon-first-draft-1-timing-revision.tar.gz",
+    "archive_bytes": 30038950,
+    "archive_sha256": "a4b81977ac3fbafd07c94b662b17c30a576b9ac807edfcebfc8a4d7ac82d153c",
+    "armed": false
+  }
 }
