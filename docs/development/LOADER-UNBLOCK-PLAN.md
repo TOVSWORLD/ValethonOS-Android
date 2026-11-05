@@ -65,8 +65,10 @@ vendor-stack positive control, not a claim of working modern mainline support.
 
 Read-only comparison of our actual backup confirms an ARM64 kernel and text_offset
 0x80000. The current mainline Image has text_offset0; its entry must follow its own
-header, not copied legacy constants. The current exact diagnostic DT disables the
-USB controller and PHY, so absent USB is not evidence that the kernel never entered.
+header, not copied legacy constants. Correction: the exact diagnostic DT enables USB0 at11200000 in peripheral mode,
+with the referenced port0 PHY available under the enabled T-PHY. USB1 at11270000
+and port1 are disabled. The earlier claim that diagnostic USB was disabled checked
+the wrong instance. Missing USB remains unattributed; this is not runtime proof.
 The public vendor reference supports SELinux policy30 while our current diagnostic
 policy is33: blindly combining that ramdisk with the legacy profile is invalid.
 The exact policy ceiling of the separately built owned normal kernel is not yet

@@ -47,14 +47,33 @@
     "Known normal kernel is ARM64, not proof that all ARM64 kernels satisfy this firmware contract.",
     "Different text offsets imply different valid entry addresses; copying the legacy address without changing Image placement would be wrong.",
     "Header/cmdline differences are hypotheses, not proved causes.",
-    "Current diagnostic DT builder deliberately disables USB; absent USB does not establish absence of kernel entry."
+    "Correction: exact candidate enables USB0/peripheral and its referenced port0 PHY; only USB1/port1 is disabled. Absent USB still does not locate kernel entry or prove a reset cause."
   ],
-  "recommended_control": "Preserve existing bootstrap; evaluate a self-contained diagnostic control using the already-booted kernel/DT and established USB logging before another mainline/custom-observer trial.",
+  "recommended_control": "Next test must be a complete candidate with prior positive logging; separate diagnostic/control boot is not selected.",
   "no_device_access": true,
   "trial8_selected_for_execution": false,
   "exact_candidate_dt_usb_status": {
-    "/soc/t-phy@11210000/usb-phy@11210900": "disabled",
-    "/soc/usb@11270000": "disabled"
+    "candidate_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+    "dt_sha256": "104c4015fc8ab9389b8572c741b003486c908a2e811e14b8c35aae464dc7bad3",
+    "properties": {
+      "/soc/usb@11200000": {
+        "status": "okay",
+        "dr_mode": "peripheral",
+        "phys": "28 3"
+      },
+      "/soc/usb@11270000": {
+        "status": "disabled",
+        "dr_mode": "otg",
+        "phys": "35 3"
+      },
+      "/soc/t-phy@11210000": {
+        "status": "okay"
+      },
+      "/soc/t-phy@11210000/usb-phy@11210800": {},
+      "/soc/t-phy@11210000/usb-phy@11210900": {
+        "status": "disabled"
+      }
+    }
   },
   "sources": [
     {
@@ -85,5 +104,13 @@
     "current_diagnostic_policy_version": 33,
     "published_vendor_source": "https://github.com/hexdump0815/linux-amazon-mediatek-mt8163-kernel-source/blob/Fire_HD8_7th_Gen-5.3.7.3-20210714/security/selinux/include/security.h",
     "meaning": "Current diagnostic initramfs cannot be assumed compatible with the older vendor profile. Build/verify a matching enforcing policy; do not disable SELinux. Exact policy ceiling of the separately built known-normal binary is not claimed here."
+  },
+  "usb_status_correction": {
+    "previous_claim": "USB disabled based only on USB1 nodes",
+    "corrected": true,
+    "usb0_phy_phandle": 28,
+    "usb0_referenced_phy": "/soc/t-phy@11210000/usb-phy@11210800",
+    "phy_status_absent_means_available": true,
+    "runtime_usb_qualified": false
   }
 }

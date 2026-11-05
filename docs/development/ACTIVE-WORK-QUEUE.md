@@ -17,8 +17,9 @@ Host collector read-size failure remains unexplained. No owner action pending.
 
 Current decision: hold custom-observer trial8 unarmed after owner research request.
 Primary Douglas port evidence reports boot/display/touch/USB networking on vendor
-3.18. Our known-normal backup is ARM64; current diagnostic DT explicitly disables
-USB, so absent USB is inconclusive. Next: offline ABI/compatible-enforcing-policy
+3.18. Our known-normal backup is ARM64. Correction: exact diagnostic DT enables
+USB0/peripheral and its port0 PHY; only USB1/port1 is disabled. Missing USB remains
+unattributed. Next: offline ABI/compatible-enforcing-policy
 profile for a minimal logging control on the already-booted matched kernel/DT and
 existing USB driver. No old OS installation, stock-DT graft into mainline, policy
 bypass, build, device access or new physical trial is selected. Trial8 artifacts

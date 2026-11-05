@@ -4863,7 +4863,7 @@ Found primary Douglas initial-port MR1304: author reports boot/display/touch/USB
 networking on Amazon vendor kernel. Read the actual device/kernel recipes and
 vendor SELinux header. Offline comparison confirms our backed-up normal kernel
 is ARM64; mainline's different text_offset must be respected, not overwritten by
-legacy offsets. Parsed the exact diagnostic DT: USB PHY/controller both disabled;
+legacy offsets. Earlier USB claim corrected below: the disabled nodes were USB1/port1;
 missing USB cannot locate the failure. Published vendor policy ceiling30 also
 prevents blindly reusing our policy33 ramdisk. Exact owned-kernel policy ceiling
 remains to be established; do not disable enforcement to bypass compatibility.
@@ -4911,3 +4911,14 @@ Successful integrity assessment explicitly does not verify physical origin or ad
 any test. No real capture was accepted and no hardware qualification changed.
 Recorded the remaining positive-logging dependency without selecting a separate
 control boot. No build, device access, arm/helper/reboot or owner action.
+
+
+### Correct USB instance in the exact candidate comparison
+
+Found and corrected an erroneous prior research conclusion. Exact candidate6 SHA
+8d3729e6 has USB0@11200000 status=okay/dr_mode=peripheral, phys=<28 3>; phandle28
+is port0@11210800 with no disabled status, under the enabled T-PHY. Only USB1
+@11270000/port1@11210900 are disabled. The earlier comparison checked those second
+instance nodes and incorrectly generalized to all USB. Exact DT hash/properties
+are now retained in the public comparison; queue/roadmap/plan corrected. No runtime
+USB qualification or failure cause follows. No build/device action occurred.
