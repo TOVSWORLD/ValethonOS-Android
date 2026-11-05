@@ -23,7 +23,7 @@ class Fixture:
  def call(self):
   u=self.u
   for i,r in enumerate(SAVED):u.reg_write(r,0xaab00000+i)
-  u.reg_write(UC_ARM_REG_R0,CTX);u.reg_write(UC_ARM_REG_SP,0x41fff000);u.reg_write(UC_ARM_REG_LR,STOP|1);u.emu_start(self.symbols['lf_flush']|1,STOP,count=100000)
+  u.reg_write(UC_ARM_REG_R0,CTX);u.reg_write(UC_ARM_REG_SP,0x41fff000);u.reg_write(UC_ARM_REG_LR,STOP|1);u.emu_start(self.symbols['lf_flush']|1,STOP,count=1000000)
   assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==0x41fff000
   assert all(u.reg_read(r)==0xaab00000+i for i,r in enumerate(SAVED));v=u.reg_read(UC_ARM_REG_R0);return v-(1<<32) if v>>31 else v
 
@@ -33,7 +33,7 @@ def validate(path,lk_path):
  for name,statuses,error,tick,admitted,success,count in [
   ('fresh_ready',[0x900,0,0x900],0,0,1,True,3),
   ('busy_then_ready',[0x900,0,0xe00,0x900],0,0,1,True,4),
-  ('never_ready_even_zero_returns',[0x900,0]+[0xe00]*8,0,0,1,False,10),
+  ('never_ready_even_zero_returns',[0x900,0]+[0xe00]*8,0,0,1,False,1002),
   ('cmd6_transport_failure',[0x900,0],2,0,1,False,2),
   ('status_transport_failure',[0x900,0,0x900],3,0,1,False,3),
   ('switch_error',[0x900,0x80],0,0,1,False,2),

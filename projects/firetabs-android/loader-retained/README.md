@@ -73,7 +73,7 @@ TWRP's existing bootstrap repair remains enabled and recovery is unchanged.
 fresh CMD13 status checks. Before CMD6 the card must be selected/ready/clean;
 after it, only fresh ready/TRAN status permits success. Upper status bits,
 SWITCH_ERROR and EXCEPTION_EVENT fail conservatively. Every command has retry=0;
-there are at most eight post-command polls and a1000ms elapsed budget, checked
+there are at most1000 post-command polls and a1000ms elapsed budget, checked
 even when a command claims ready. Any error latches permanently without retry.
 
 The command structure matches the archived LK constructor: response at+0xc,
@@ -203,3 +203,40 @@ It is5826B with8656B state; the old core-only blob/packer profile is not a new
 firmware-profile trial bundle. Block hardware/DMA, real card/device identity,
 monotonic timing/driver termination and bridge/hook placement remain unqualified.
 No physical read/write or new candidate is selected by these tests.
+
+## Bounded flush-command lane and read-only clock
+
+`clock.c` binds the pinned three-read GPT4 sampler at0x4bd25dfc. It extends32-bit
+13MHz ticks with wrap/remainder handling, rejects missing initial progress or
+backward jumps, and never configures/resets a timer. This pins the LK delay contract;
+real counter values/rate remain a hardware admission assumption.
+
+An exact legacy wait audit found an unbounded R1b DAT0 loop and a reset-failure
+self-loop. An outer deadline cannot preempt these calls. `command.c` therefore
+implements a narrow command-only lane for FLUSH_CACHE/CMD13. It sends CMD6 with an
+R1 response and checks busy completion separately in the existing flush adapter,
+as supported by the Linux MMC R1 fallback. It permits only command argument,
+command and command-interrupt acknowledgment writes, with ARM MMIO ordering.
+No reset, DMA configuration, timer or security register is written. It refuses an
+active DMA engine or enabled command-interrupt consumer, unrelated pending events,
+wrong arguments and retries. Both loops have tick deadlines and65536-iteration
+caps, including a stalled-counter case; every failure latches. Programming-state
+CMD13 replies are paced by at least one clock millisecond with their own finite
+spin/deadline guard; the1000ms outer budget now has1000 polls rather than the early
+eight-poll source prototype, which could end before a real flush completed.
+
+Ten native and fourteen actual ARM clock/command controls pass. Counter/controller
+values are models; archived GPT sampling instructions are executed. The `timed`
+module profile composes this lane with the writer/target adapter:6996B/state8728B,
+four native and nine ARM controls, including two PIC placements and clock/controller
+failure cases. ARM composition explicitly models prefix digest and block hardware;
+separate native full-prefix/actual SHA-stream controls retain their stated scope.
+
+The original raw data read/write driver is still used. Its error paths are not
+termination-qualified, and this command-only lane does not preempt them. A complete
+trial review must disclose that recovery risk; no fully bounded data-I/O guarantee
+is claimed. Real card/device/DMA identity and bridge/descriptors/hooks ownership,
+IRQ lifecycle/replay/cache visibility remain requirements before packaging.
+A possible console-only code reclamation route is only a private analysis proposal,
+not an admitted span. No physical observer, candidate modification or trial follows
+from these source controls.

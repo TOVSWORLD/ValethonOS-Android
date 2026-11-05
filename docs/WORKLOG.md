@@ -4749,3 +4749,38 @@ bridge/descriptors/hooks placement/replay/cache visibility, then complete change
 review bundle. No physical writes/reads, candidate rebuild, source export, helper,
 arm, reboot or kernel rebuild. Originals/TWRP unchanged/unarmed. Historical host
 collector read-size failure remains unexplained; source byte-I/O guards do not fix it.
+
+## 2026-11-04 — #346 real counter binding and bounded flush-command lane implemented
+
+Pinned GPT4 three-read sampler plus13MHz tick extension implemented, including wrap,
+remainder, missing progress/backward rejection; no timer configuration/reset. Exact
+isolated legacy replay confirms an R1b DAT0 loop and event-wait reset-failure self
+loop lack termination; no inference about any actual trial cause. Outer deadlines
+cannot preempt those firmware calls.
+
+Implemented narrow command-only controller lane for exact FLUSH_CACHE and CMD13:
+R1 fallback plus separate ready/TRAN polling, retry0,50ms/request and65536-iteration
+caps, including dynamically frozen counter. ARM ordering and offset allowlists;
+only ARG/CMD/command-event W1C writes. Active DMA or command interrupt consumer,
+unrelated pending events, invalid requests and errors fail closed. No controller
+reset/DMA configuration/timer/security writes. Linux MMC R1 fallback is a protocol
+precedent, not firmware source equivalence or hardware acceptance.
+
+Ten native clock/command controls and fourteen actual ARM driver/sampler controls
+pass with modeled counter/controller values. Timed module wires these to the writer:
+6996B/state8728B, four native full-prefix composition and nine ARM composition
+controls at two PIC bases/short-I/O/stuck clock/controller cases. ARM prefix digest
+and block hardware remain models; separate prefix/actual stream controls preserved.
+Public command-waits/command-driver/timed-module results.
+
+Original raw data driver remains termination-unqualified; command-only replacement
+does not preempt its data-I/O error paths. Remaining preparation is real card/device
+identity and explicit recovery-risk contract plus bridge/descriptors/hooks ownership,
+IRQ lifecycle/replay/cache visibility. Console-only reclamation is an unadmitted
+private proposal, not guessed free RAM. No physical access/write/candidate/helper/
+arm/reboot/kernel build or owner action. Actual trial7 originals remain restored.
+
+Programming replies now pace CMD13 by a clock millisecond under finite spin/time
+guards. The outer flush retains1000ms and now allows1000 polls instead of the early
+eight-poll prototype, avoiding a premature source limit before real cache completion.
+Frozen pacing fails closed; native flush9 controls and timed composition pass.

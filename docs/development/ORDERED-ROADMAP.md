@@ -1,58 +1,17 @@
 # Ordered ValethonOS delivery roadmap
 
-Current346 update: actual trial7 complete, ORIGINALS VERIFIED/TWRP running.
-Source update: loader checkpoint C core/reader implemented;10 native writer,8
-collector,5 existing codec and13 linked ARM controls pass. No hardware pass or
-trial bundle. Actual recovery reports1MiB enabled eMMC cache; read-only debugfs
-mount removed. Exact archived SWITCH emulator proves timeout returns zero like
-success; direct flush binding rejected. Core3595B + context cannot fit old584B gap.
-Next: independently bounded firmware completion adapter and proven owned memory
-layout before packaging/review. Originals/TWRP remain verified, unarmed. See
-loader-checkpoint-core-result.json and loader-switch-audit.json.
+Current346: actual trial7 complete, originals verified/TWRP and unarmed. Only
+HOSTCONTROLseq1/85B retained; no exact kernel entry/handoff or kernel record. TWRP
+repair restored normal bootstrap; approved fullp5 restoration/readbacks verified.
+Host collector read-size failure remains unexplained. No owner action pending.
 
-Checked adapter source now implemented: one raw CMD6, fresh CMD13 ready/TRAN,
-conservative status errors, retry0, eight polls and elapsed budget.9 native and9
-Thumb controls pass through exact archived LK command wrapper; hardware driver/
-clock modeled. No physical command. Next qualify real driver timing, immutable
-host/card/RCA/cache/target bindings, owned memory and hook replay before packaging.
-See loader-flush-adapter-result.json. Original device state remains unchanged.
-
-Module integration implemented: checked adapter drives writer flushes; four native
-integration controls pass. Hidden PIC module4307B/context8584B uses an owned
-allocation route; core relocation and archived allocator controls pass in modeled
-RAM. No actual heap/physical address or stack capacity proved. Next implement
-bounded load/integrity/cache bridge and bind real heap/driver/clock/card/target;
-no new owner trip or physical observer selected.
-
-Bounded bridge implemented: one allocation/read, SHA equality, zero state/stack,
-cache synchronization before entries;5 native+5 actual ARM controls pass. Loaded
-module commits MODE/HANDOFF on allocated private stack in modeled RAM. Blob4608B,
-bridge548B; descriptors/hooks and real firmware bindings/placement still required.
-Candidate6 only inspected for zero padding, unchanged; no physical action selected.
-
-Real hash/cache binding source implemented: generic ARM SHA12 vectors/bounds
-controls; cache wrapper7 order/bounds controls, CP15 effects modeled. Combined968B
-bridge passes5 loaded-module controls with actual blob-hash/cache instructions.
-Next immutable physical read/write/prefix streaming, clock/driver and bridge/hook
-placement. No physical commands or new candidate selected; originals/TWRP unarmed.
-
-Immutable target I/O/prefix streaming implemented and composed with writer/flush.
-9 native I/O,10 ARM byte-wrapper,10 actual SHA stream,4 native+7 ARM composition
-controls pass with explicit hardware/prefix model limits. Current analysis profile
-5826B/state8656B. Next real timing/driver/card-DMA and bridge/hooks placement; no
-new physical observer/candidate or owner trip selected. Originals/TWRP unarmed.
-
-Owner saw different lower-left console text approximately mode/reading; exact
-strings not recalled. One original return helper exit0; no exact handoff/kernel
-entry or kernel record proved. Supervisor stopped at full recovery read size
-mismatch; separate readonly collector passed, HOSTCONTROLseq1/85B only, fullp5
-unchanged. TWRP's unchanged fix-bootpatch.sh reported restoring normal bootstrap
-from recovery; exact original range/headers verified, no second agent bootstrap
-write. Approved original fullp5 restored once/fullp5+p6/RAMcleanup verified, no
-reboot. No supervisor/helper/build/arm or owner physical action pending. Private
-archive/supplement lab/controller match.346/344/348 remain open. Next: attributable
-durable normal-loader checkpoint contract using preserved reader/format and a
-separate loader tag; no unchanged trial/kernel build, no recovery repair bypass.
+Latest source: timed module6996B/state8728B integrates immutable target/prefix,
+checked flush, read-only GPT clock and bounded command-only R1/CMD13 lane.10 native/
+14 ARM command controls and4 native/9 ARM composition controls pass with hardware,
+counter and ARM-prefix model boundaries. No reset/DMA/security writes. Original raw
+data driver remains termination-unqualified. Next: card identity/recovery-risk
+contract and bridge/descriptors/hooks ownership/IRQ/replay/cache visibility. No new
+candidate or physical observer selected; source tests are not hardware acceptance.
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

@@ -1,0 +1,53 @@
+{
+  "scope": "Actual clock/command/flush instructions and archived three-read GPT sampler; timer/controller values modeled",
+  "elf_sha256": "72c230153dd5ae092d49809574c5e1fd0162d9a10d4e3de3feca5a7ca2861888",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "cases": [
+    "exact_r1_cmd6_and_cmd_ack_only",
+    "checked_flush_with_real_gpt_sampler_and_busy_status",
+    "stops_{'event': 512}",
+    "stops_{'event': 1280}",
+    "stops_{'stale': 1}",
+    "stops_{'busy': True}",
+    "stops_{'step': 260000}",
+    "frozen_counter_iteration_cap",
+    "gpt_sampler_and_clock_wrap",
+    "initial_stuck_counter_rejected",
+    "quiescence_guard_{'interrupts': 256}",
+    "quiescence_guard_{'dma': 1}",
+    "programming_reply_paced",
+    "programming_pace_stuck_counter_stops"
+  ],
+  "case_count": 14,
+  "native_tests": 10,
+  "context_bytes": 68,
+  "timer_read_address": "0x10008048",
+  "controller_base": "0x11230000",
+  "controller_writes_only": [
+    "CMD interrupt W1C0x0c",
+    "ARG0x38",
+    "CMD0x34"
+  ],
+  "no_timer_reset_dma_or_security_register_writes": true,
+  "r1_cmd6_with_separate_cmd13_busy_poll": true,
+  "old_unbounded_firmware_command_path_not_used": true,
+  "native_clock_wrap_remainder_backward_cases_passed": true,
+  "ordinary_callee_saved_sp_preserved": true,
+  "raw_data_driver_still_original_and_not_termination_qualified": true,
+  "real_hardware_clock_card_or_mmio_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/clock.c": "9353c815fc241d732f621289a88962d778f46525e6534126daa7fa22a6832163",
+    "projects/firetabs-android/loader-retained/clock.h": "869bb74c0e3460d71620a2cc6fe9599630d45698275df94985ab41d1f1488532",
+    "projects/firetabs-android/loader-retained/command.c": "0c8f9e276648e1fb12e9ee098197458bc356e0076a80b3bbfcd41f610573e4f9",
+    "projects/firetabs-android/loader-retained/command.h": "b80e972abe9cacbf657f4636f38bcbf1a6ee1518bee7891cd77451f1b3456711",
+    "projects/firetabs-android/loader-retained/mmc_flush.c": "5df52897a549ae336d2b3e13c0f4af5392fb4ee58d9ea498f61952ccab6da0f8",
+    "scripts/validate_loader_command.py": "0304097ded899d7870f361e17534e823794719e560782045a27ea299552c5ba4",
+    "tests/test_loader_command.py": "e97adb3fa966f5ae88aece993c180ae44c3b534453e445f820782ad6dd43aa35",
+    "tests/test_loader_flush.py": "ac7ce00a2812c167d7b2a70ca77d58b074aa2aa7e99c352b4c7c8c13d4370c34"
+  },
+  "programming_status_paced_ms": 1,
+  "flush_outer_budget_ms": 1000,
+  "flush_post_status_poll_cap": 1000
+}

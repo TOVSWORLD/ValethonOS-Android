@@ -33,7 +33,7 @@
   "source_sha256": {
     "projects/firetabs-android/loader-retained/checkpoint.h": "1d3a5b8bf998ebf77e8ff8e89881dad301657c355924049a7997fabc08e0ca8c",
     "projects/firetabs-android/loader-retained/analysis.ld": "162443c7ccef42f06c309b6f9c4928d03fbf43dbb2ee351ec035fc5c92a18f32",
-    "projects/firetabs-android/loader-retained/README.md": "238bb7a4630d26cba4c8738eace07ff90097ae230503e7937f9895e3aaa2f015",
+    "projects/firetabs-android/loader-retained/README.md": "3383512c04d14252ab3c998190786e764c536de95ccc20d50feae35e1599258b",
     "projects/firetabs-android/loader-retained/checkpoint.c": "98654aa83e33090f6031ead806bceb4c67798c29e1724ebcb7f68bb653b58497",
     "projects/firetabs-android/loader-retained/freestanding.c": "ead559ffb183565e3fd71fd5401452b7cc6f39594e63f98572cab3f6e95217fd",
     "scripts/loader_checkpoint_record.py": "2723263af67f5b7acbc13162806bc46bbdbe65d54f35ea646401dbda75f10e14",

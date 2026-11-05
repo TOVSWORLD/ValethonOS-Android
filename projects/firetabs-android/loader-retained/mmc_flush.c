@@ -1,7 +1,7 @@
 #include "mmc_flush.h"
 #define LF_BUDGET_MS 1000U
 #define LF_COMMAND_MS 50U
-#define LF_POLLS 8U
+#define LF_POLLS 1000U
 /* Conservative: all upper status bits, SWITCH_ERROR and EXCEPTION_EVENT.
  * R1 bit meanings: pinned kernel include/linux/mmc/mmc.h. */
 #define LF_BAD_STATUS 0xffffe0c0U

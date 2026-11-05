@@ -30,7 +30,7 @@ class LoaderFlush(unittest.TestCase):
  def test_busy_then_ready_requires_fresh_post_command_status(self):
   f=Fixture(self.lib,[0x900,0,0xe00,0xe00,0x900]);self.assertEqual(f.flush(),0);self.assertEqual(len(f.events),5)
  def test_zero_firmware_returns_never_hide_poll_exhaustion(self):
-  f=Fixture(self.lib,[0x900,0]+[0xe00]*9);self.assertLess(f.flush(),0);self.assertEqual(len(f.events),10);self.assertEqual(sum(e[0]==6 for e in f.events),1);n=len(f.events);self.assertLess(f.flush(),0);self.assertEqual(len(f.events),n)
+  f=Fixture(self.lib,[0x900,0]+[0xe00]*9);self.assertLess(f.flush(),0);self.assertEqual(len(f.events),1002);self.assertEqual(sum(e[0]==6 for e in f.events),1);n=len(f.events);self.assertLess(f.flush(),0);self.assertEqual(len(f.events),n)
  def test_command_and_status_transport_failures_latch_without_retry(self):
   for at in [1,2,3]:
    f=Fixture(self.lib,error_at=at);self.assertLess(f.flush(),0);self.assertEqual(len(f.events),at);self.assertLess(f.flush(),0);self.assertEqual(len(f.events),at)

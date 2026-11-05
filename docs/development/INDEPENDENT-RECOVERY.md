@@ -1240,3 +1240,14 @@ analysis profile5826B/state8656B; no new blob/candidate/trial is admitted.
 See loader-physical-binding-result.json, loader-prefix-stream-result.json and
 loader-firmware-module-result.json. Timing/driver/card-DMA identity and placement/
 hook replay remain unqualified; host collector's old read-size cause remains unknown.
+
+Read-only GPT clock and a bounded flush-command lane are implemented. Legacy R1b
+and reset-failure waits have no internal termination; new lane avoids them using
+R1/CMD13, fixed request/iteration bounds and no reset/DMA/security writes. It requires
+DMA idle and no command-interrupt consumer.10 native/14 actual ARM driver controls,
+4 native/9 ARM timed-composition controls pass with explicit model boundaries.
+Current timed analysis profile6996B/state8728B. See loader-command-waits-result.json,
+loader-command-driver-result.json and loader-timed-module-result.json.
+The old raw data-driver error paths remain unbounded/unqualified; no overall data-I/O
+termination guarantee is claimed. Card identity/recovery contract and safe bridge/
+hook placement/IRQ/replay remain open. No physical trial is selected.
