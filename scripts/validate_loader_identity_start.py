@@ -24,11 +24,23 @@ class Bound(Timed):
  def bound_start(self):return self.call('lft_start_bound',[STATE,CFG,PLAN,OPS,HASH,CARD,IP,IR])
 def validate(path,lkpath):
  lk=lkpath.read_bytes();assert hashlib.sha256(lk).hexdigest()==EXPECTED
- names=('lp_init','lp_context_bytes','lp_pinned_ops','lp_read','lp_read_absolute','lp_write','lp_prefix','lh_block','lft_start','lft_start_bound','lft_emit','lft_state_bytes','ld_pinned_services');seg,sym=elf(path,names);cases=[]
+ names=('lp_init','lp_context_bytes','lp_pinned_ops','lp_read','lp_read_absolute','lp_write','lp_prefix','lh_block','lft_start','lft_start_bound','li_memory_read','li_discover','lft_emit','lft_state_bytes','ld_pinned_services');seg,sym=elf(path,names);cases=[]
  for delta in [0,0x2000000]:
   f=Bound(seg,sym,lk,relocation=delta);assert f.bound_start()==0 and len(f.identity_reads)==18 and f.emit(1)==0 and f.emit(3)==0;assert m.inspect(f.stable,f.nonce,f.prefix)['latest']['sequence']==3;cases.append('bound_start_records_'+hex(0x41000000+delta))
  for condition in ['mismatch','unstable','read_failure']:
   f=Bound(seg,sym,lk,**{condition:True});assert f.bound_start()<0 and not f.events and not f.writes and not f.samples;calls=len(f.identity_reads);assert f.bound_start()<0 and len(f.identity_reads)==calls and f.start_module()<0 and f.emit(1)<0;cases.append(condition+'_stops_before_controller_storage_clock_and_no_retry')
- return {'scope':'actual Thumb identity/start/writer instructions; metadata callback, prefix digest, block/controller/counter modeled','elf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'cases':cases,'case_count':len(cases),'state_bytes':f.call('lft_state_bytes',[]),'sp_callee_saved_checked':True,'pinned_frontend_getter_provenance_proved':False,'hardware_acceptance':False,'device_accessed':False}
+ for delta in [0,0x2000000]:
+  f=Bound(seg,sym,lk,relocation=delta)
+  # Populate synthetic firmware RAM, then execute actual volatile byte reads.
+  direct_plan=struct.pack('<4I',DEVICE,0x4bd7e280,0x4bd7edf0,BDEV)
+  f.u.mem_write(IP,direct_plan);f.u.mem_write(IR,struct.pack('<2I',IP,f.symbols['li_memory_read']))
+  fields={(0x4bd7e038,4):DEVICE,(DEVICE+4,4):0,(DEVICE+8,4):BDEV,(0x4bd7e280,4):0x4bd7edf0,(0x4bd7ee18,4):0x11230000,(0x4bd7e298,4):1,(0x4bd7e29c,4):1,(0x4bd7e38c,1):8,(0x4bd7e2ed,1):1,(0x4bd7e3c5,4):1024}
+  for (address,n),value in fields.items():f.u.mem_write(address,value.to_bytes(n,'little'))
+  assert f.call('li_discover',[0x41100800,DEVICE,BDEV,IR])==0
+  assert f.bound_start()==0 and not f.identity_reads and f.emit(1)==0 and f.emit(3)==0
+  assert m.inspect(f.stable,f.nonce,f.prefix)['latest']['sequence']==3
+  before=bytes(f.u.mem_read(0x41100840,16));assert f.call('li_memory_read',[IP,0x4bd7e300,0x41100840,16])<0 and bytes(f.u.mem_read(0x41100840,16))==before
+  cases.append('direct_selected_memory_discovery_start_and_forbidden_read_'+hex(0x41000000+delta))
+ return {'scope':'actual Thumb identity/start/writer instructions; metadata synthetic RAM (first five controls callback-modeled), prefix digest, block/controller/counter modeled','elf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'cases':cases,'case_count':len(cases),'state_bytes':f.call('lft_state_bytes',[]),'sp_callee_saved_checked':True,'pinned_frontend_getter_provenance_proved':False,'hardware_acceptance':False,'device_accessed':False}
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--elf',type=Path,required=True);p.add_argument('--lk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();r=validate(a.elf,a.lk);a.output.write_text(json.dumps(r,indent=2)+'\n');print('Bound identity ARM controls passed:',r['case_count'])

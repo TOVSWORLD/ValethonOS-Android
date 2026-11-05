@@ -4823,3 +4823,12 @@ device before selected-field reads; expected block pointer is independently chec
 Seven native controls pass including positive pinned discovery and wrong-global
 rejection before pointer dereference. Direct memory callback and trusted descriptor
 provenance remain unfinished. No device access or physical action.
+
+## 2026-11-04 — #346 direct selected identity-memory adapter implemented
+
+Implemented volatile byte-read frontend callback restricted to selected fields and
+pinned card/host addresses; forbidden address/width fails without output change.
+Linked callback explicitly retained in timed analysis ELF. New ARM controls use
+synthetic firmware RAM for discovery and bound startup at two relocated bases,
+without the modeled metadata callback. Descriptor ownership/provenance and physical
+hook placement remain open. No device access, physical candidate or owner action.

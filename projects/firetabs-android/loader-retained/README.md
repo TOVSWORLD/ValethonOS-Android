@@ -276,3 +276,10 @@ and write its initialized flag. A descriptor must supply expected device/block
 pointers; a mismatching global stops before any pointer dereference. Seven native
 identity controls pass. Direct firmware-memory read callback and trusted descriptor
 provenance remain unbound; the discovery routine is not a physical admission.
+
+`identity-memory.c` adds the frontend's selected volatile byte-read callback. It
+accepts only exact selected field addresses/widths from a descriptor with pinned
+card/host addresses; other reads fail without changing output. It reads synthetic
+firmware RAM in the local ARM validation, avoiding modeled metadata callbacks for
+the two new discovery/start cases. Trusted descriptor placement/provenance and
+physical pointer ownership remain required; this callback alone admits no trial.
