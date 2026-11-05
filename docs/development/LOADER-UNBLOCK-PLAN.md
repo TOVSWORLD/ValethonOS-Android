@@ -17,6 +17,17 @@ A new read-only control on already-running recovery saw two stable cached snapsh
 and two usbfs interfaces. This qualifies the observer/current port mapping only,
 not custom PID1, USB ACM, kernel entry or retained writes. No flash/reboot occurred.
 
+Owner selected preparation of this calibration with “Do it”. Offline control 1 now
+preserves all 7,796,736 declared original boot bytes exactly, adds the existing
+9,216-byte recorder at verified-zero 12 MiB padding, and binds a fresh loader-only
+nonce/prefix/mailbox seed. No original kernel, appended DT, ramdisk or header was
+rebuilt. Physical deployment is not admitted by packaging. Exact packed ARM replay passed seven controls, and a separate replay preserved
+the original 0x40080000 entry / 0x48000000 DT arguments. All 15 module objects
+passed relative-reference checks. The [complete install/collection/restore review](KNOWN-BOOT-CAPTURE-CONTROL-REVIEW.md)
+and separate exact operation tools are now prepared; these modeled controls do not
+qualify physical logging. Actual read-only lab preflight passed original p5/p6,
+bootstrap ranges/headers, aliases and GPT. No device write or arm occurred.
+
 Next prerequisite is end-to-end recorder calibration on a known-working boot
 stack. Existing original kernel/DT and the prepared loader-checkpoint implementation
 are candidates for offline review; no new control boot is admitted here. Do not
@@ -34,7 +45,9 @@ path that survives the actual return sequence. Ramoops needs reserved persistent
 RAM; the existing legacy ram-console reservation is not automatically a compatible
 or retained backend. Do not guess RAM addresses or assume Power40 preserves data.
 
-No new kernel build, observer package, device write, control boot or trial selected.
+No new kernel build or physical control execution. The separate known-stack
+control package is selected for review; older no-control constraints below are
+historical for this explicit owner-selected calibration only.
 Actual first-draft results remain unchanged and original boot/recovery stay restored.
 Primary references: https://docs.kernel.org/arch/arm64/booting.html and
 https://docs.kernel.org/admin-guide/ramoops.html. The original Douglas vendor-port

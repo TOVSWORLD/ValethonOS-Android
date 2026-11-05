@@ -5080,3 +5080,44 @@ kernel marker storage/return retention remains unproved. No guessed ramoops RAM,
 modern-ramdisk/vendor-policy transplant, new kernel build or physical trial. Any
 control boot requires complete review and explicit owner exception/approval to the
 prior no-separate-control constraint. Original images/TWRP remain unchanged.
+
+
+### Known-boot capture calibration packaging
+
+Implemented a separate exact-original packer; the prior trial8 baseline whitelist
+is unchanged. Control 1 preserves 7,796,736 original declared boot bytes, including
+header/kernel/appended DTs/ramdisk, and places the unchanged 9,216-byte PIC recorder
+in verified-zero 12 MiB padding with a fresh loader-only nonce and mailbox seed.
+No kernel rebuild, source export, device access, write, arm or reboot. Public
+known-boot-capture-control-result.json explicitly leaves logging unqualified.
+Exact packed instruction replay passed all seven controls, including non-normal
+mode, allocation/hash failure, IRQ-disabled decline and no retry. Hardware services
+remain modeled; physical wrappers/review remain.
+Original-stack entry/DT handoff replay also passed at 0x40080000/0x48000000;
+all 15 reused module objects passed allowed relative-reference checks.
+
+
+### Complete known-stack capture-control procedure prepared
+
+Delivered exact install/observe/manual-return/collect/assess/original-restore tools
+and KNOWN-BOOT-CAPTURE-CONTROL-REVIEW.md. The original declared boot stack is unchanged;
+only this exact calibration pair has separate fresh authorization. Legacy diagnostic
+logging hold is unchanged. Five minutes minimum, no automatic return/reset/restore;
+return helper requires a subsequent desk report/request and same-host boot clock.
+Exclusive0600 receipts fix the previously exercised umask failure. TWRP repair is
+preserved; already-original bootstrap is verified without a second write. Changed
+record tails restore only against validated full readout/current hash and archived
+evidence. Assessor rejects HOSTCONTROL/stale/wrong-entry records and never admits
+modern kernel/USB/kernel-side logging from a loader record.
+
+Independent package verifier passed;681 controller tests passed (10 new control
+tests, old diagnostic hold retained). Staged21 source/artifact files on authorized
+Linux and verified hashes. Actual read-only preflight passed original fullp5+p6,
+normal/return bootstrap/header, GPT/aliases. Original helper sources verified;
+selected cached USB metadata present; ModemManager inactive. No source firmware
+bytes published, no device write/arm/helper/reboot or owner action pending. Exact
+approval/availability still required for this complete changed procedure.
+Actual Linux missing-authorization controls passed for observer install, p5 install,
+watch arm and manual helper; no receipts/helper logs created. Durable private receipt
+create/update passed under umask022. Controller archive/hash-match and exclusive
+operation wrappers prepared privately; none executed.

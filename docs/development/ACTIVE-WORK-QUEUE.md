@@ -1,5 +1,20 @@
 # Active work queue — ordered delivery
 
+## Latest selection — known-stack recorder calibration
+
+Owner selected the known-boot capture control after the complete modern draft
+produced no attributable output. The exact control package preserves the original
+header/kernel/appended DTs/ramdisk and adds the existing loader recorder only in
+unused padding plus a fresh mailbox. Separate install/observe/manual-return/collect/
+assess/rollback tools and the [complete review](KNOWN-BOOT-CAPTURE-CONTROL-REVIEW.md)
+are prepared. Actual read-only lab preflight passed full original boot/recovery,
+normal/return bootstrap/header/GPT/aliases. Original images/TWRP remain; no write,
+arm, helper or physical trial. Exact approval and current availability are the
+remaining physical gate. This selection supersedes older no-control selections
+below for this exact calibration only; trial8 and the failed modern draft stay held.
+No loader result qualifies kernel entry, modern USB or kernel-side retention.
+
+
 Actual first-draft test1 is complete. Original full boot restored once and full
 boot/recovery/RAM cleanup verified; TWRP left running, no reboot, no process armed
 and no owner action pending. USB capture0B/no matching endpoint; returned image

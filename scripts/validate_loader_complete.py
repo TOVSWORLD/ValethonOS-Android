@@ -77,8 +77,8 @@ class Complete(Front):
   sp=0x41fff000;u.mem_write(sp,struct.pack('<III',0x41106000,2048,8));u.reg_write(UC_ARM_REG_SP,sp);u.reg_write(UC_ARM_REG_LR,STOP|1);u.emu_start(BASE+9,STOP,count=80000000,timeout=40000000)
   assert u.reg_read(UC_ARM_REG_PC)==STOP and u.reg_read(UC_ARM_REG_SP)==sp and u.reg_read(UC_ARM_REG_R0)==2048
   assert all(u.reg_read(r)==0xabc00000+i for i,r in enumerate(SAVED))
- def final(self,irq_disabled=False):
-  u=self.u;u.reg_write(UC_ARM_REG_CPSR,0x980a00b3 if irq_disabled else 0x980a0033);regs=[0x40000000,0x44000000]+[0xabcdef00+i for i in range(2,13)]
+ def final(self,irq_disabled=False,entry=0x40000000,dt=0x44000000):
+  u=self.u;u.reg_write(UC_ARM_REG_CPSR,0x980a00b3 if irq_disabled else 0x980a0033);regs=[entry,dt]+[0xabcdef00+i for i in range(2,13)]
   for r,v in zip(REGS,regs):u.reg_write(r,v)
   u.reg_write(UC_ARM_REG_SP,0x41fff000);u.reg_write(UC_ARM_REG_LR,STOP|1);u.emu_start(0x4bd3e525,STOP,count=80000000,timeout=40000000)
   assert self.handoff==(regs,0x41fff000,0x980a0080 if irq_disabled else 0x980a0000)
