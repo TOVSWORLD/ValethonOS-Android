@@ -19,4 +19,4 @@ int lm_start(struct lm_state *s,const struct lc_config *c,const struct vm_io *ph
  struct vm_io guarded={s,lm_read,lm_write,lm_flush,lm_prefix};
  return lc_init(&s->log,c,&guarded);
 }
-int lm_emit(struct lm_state *s,const struct lc_point *p){return s?lc_emit(&s->log,p):-1;}
+int lm_emit(struct lm_state *s,const struct lc_point *p){return s&&s->initialized?lc_emit(&s->log,p):-1;}

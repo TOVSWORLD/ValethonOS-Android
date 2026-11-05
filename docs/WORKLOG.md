@@ -4720,3 +4720,32 @@ excluded, so old584B gap is insufficient. Public hash/cache/bridge-services resu
 Next implement immutable physical read/write/prefix streaming and clock/driver
 bindings, then bridge/hook placement/replay and exact changed review. No new candidate,
 source export, device read/write, kernel rebuild, helper/arm/reboot or owner action.
+
+## 2026-11-04 — #346 immutable target adapter/prefix stream and composed writer implemented
+
+Implemented physical.c: freezes device/first/16MiB/GPT5/MMC8, unhooked raw read/write
+bindings, exact count normalization and permanent short/uncertain-I/O latch.32-bit
+raw LBA limit enforced before calls; only aligned mailbox writes. Partial log reads
+use owned4KiB scratch with aligned underlying reads, preserving output canaries and
+avoiding the firmware's global unaligned buffer. Nine native and ten actual ARM byte
+wrapper controls pass, block hardware modeled, no device access.
+
+Implemented block-stream SHA: full15MiB prefix read in4KiB chunks, no extra large
+allocation, exact length/padding and failure latch. Native full-prefix control uses
+modeled compression; ten separate actual generic ARM stream controls match hashlib
+through32KiB/grouping/wrong-digest/bounds. No physical prefix hash claimed.
+
+Firmware-module composition now wires storage/prefix to checked writer/flush and
+requires independently supplied record target equality. Scratch reuses only the
+writer's separate output block. Four native full-composition controls pass; seven
+ARM controls pass at two PIC bases through archived byte/command wrappers, short-I/O
+and non-normal modes. Prefix digest explicitly modeled only in this ARM composition;
+actual stream and full native-prefix tests cover the separate path. Absolute GOT
+function pointers rejected; local relative thunks remove them.5826B/state8656B.
+Also guard emit-before-initialization; five native module controls pass.
+
+Remaining: real monotonic clock/driver termination/card-DMA/device identity and
+bridge/descriptors/hooks placement/replay/cache visibility, then complete changed
+review bundle. No physical writes/reads, candidate rebuild, source export, helper,
+arm, reboot or kernel rebuild. Originals/TWRP unchanged/unarmed. Historical host
+collector read-size failure remains unexplained; source byte-I/O guards do not fix it.

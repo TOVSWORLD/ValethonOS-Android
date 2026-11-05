@@ -1229,3 +1229,14 @@ metadata/hooks;5 end-to-end controls pass with actual blob-hash/cache instructio
 See loader-hash-binding-result.json, loader-cache-binding-result.json and
 loader-bridge-services-result.json. Prefix/physical I/O/clock/driver and placement
 remain unqualified; no physical observer/candidate is admitted.
+
+Immutable target/read/write and full-prefix stream source are integrated in the
+firmware module. Nine native I/O and ten actual ARM byte-wrapper controls pass;
+partial records use owned aligned bounce reads. Ten actual ARM stream controls and
+native full15MiB prefix/padding controls pass with their explicit model boundaries.
+Four native and seven ARM composed controls cover retained records, inconsistent
+mapping, short/uncertain I/O, repeated initialization and non-normal modes. Current
+analysis profile5826B/state8656B; no new blob/candidate/trial is admitted.
+See loader-physical-binding-result.json, loader-prefix-stream-result.json and
+loader-firmware-module-result.json. Timing/driver/card-DMA identity and placement/
+hook replay remain unqualified; host collector's old read-size cause remains unknown.

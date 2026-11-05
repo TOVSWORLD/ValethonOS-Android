@@ -1,0 +1,29 @@
+{
+  "scope": "Actual block-stream C framing and generic archived ARM SHA compression, hashlib comparison",
+  "elf_sha256": "4ce1d05fbff10d35648ecb15d49be7e475c471df3a877d3a2196b665682a19d6",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "cases": [
+    "bytes_0_chunk_64",
+    "bytes_64_chunk_64",
+    "bytes_4096_chunk_4096",
+    "bytes_8192_chunk_8192",
+    "bytes_8192_chunk_4096",
+    "bytes_12288_chunk_4096",
+    "bytes_32768_chunk_8192",
+    "wrong_digest",
+    "unaligned_chunk_latches",
+    "total_extent_guard"
+  ],
+  "case_count": 10,
+  "digest_computation_modeled": false,
+  "writes_only_state_and_stack": true,
+  "no_capability_dispatch_or_global_reads": true,
+  "callee_saved_sp_preserved": true,
+  "full_physical_prefix_read_executed": false,
+  "device_accessed": false,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/hash-stream.c": "513315a00b6ef4924cae11c164f05e7534d14676433d07ce6a50b9af3084a7ce",
+    "projects/firetabs-android/loader-retained/hash-stream.h": "a3b620c131f8401de7801597a862076d5676d491e30fd356096dafc154dca13f",
+    "scripts/validate_loader_stream.py": "af450447dfe61cf98af63665f15a9bc026f882cf800f57f179ce29800ddd9489"
+  }
+}

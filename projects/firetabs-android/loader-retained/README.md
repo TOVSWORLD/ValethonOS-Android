@@ -172,3 +172,34 @@ including loading/committing the module on allocated state/stack. Readonly stora
 driver, clock, IRQ, prefix hash and cache effects remain models. Real card/target
 read/write, prefix streaming, driver timing/clock and bridge/hook placement remain
 required before a physical bundle is admitted.
+
+## Immutable storage target and streamed prefix integration
+
+`physical.c` freezes device/first-sector/size/GPT5/MMC8 and pinned raw byte routines
+at initialization. It normalizes exact byte counts, rejects32-bit-LBA truncation,
+limits writes to aligned mailbox blocks, and latches short/uncertain I/O without
+retry. Partial payload reads use the module's owned4KiB buffer and an aligned raw
+read; they do not depend on the firmware's global partial-read buffer and never
+overrun the requested output. Absolute blob reads stay in the admitted prefix.
+
+`hash-stream.c` hashes fixed-size whole-block chunks with the actual generic
+compression binding and exact final length/padding. The prefix path reads exactly
+15MiB in4KiB chunks without a second large allocation. Its digest must not alias
+the read buffer. Nine native adapter controls include full prefix extent/padding
+with modeled compression; ten ARM stream controls use actual compression through
+32KiB, chunk grouping, wrong digest and bounds. Ten ARM I/O controls execute the
+exact archived byte read/write wrappers with modeled block hardware.
+
+`firmware-module.c` composes these callbacks with the writer and checked flush,
+requiring the independent record target/configuration to agree. It reuses only the
+writer's separate output block for storage scratch. Four native composition controls
+exercise the full prefix loop and retained records; seven ARM composition controls
+exercise pinned byte/command wrappers at two PIC bases, fail-stop and non-normal
+mode guards. Prefix digest is explicitly modeled in that ARM composition and tested
+separately in the native full-prefix and actual ARM stream controls.
+
+Build this analysis profile with `build_loader_module.py --profile firmware`.
+It is5826B with8656B state; the old core-only blob/packer profile is not a new
+firmware-profile trial bundle. Block hardware/DMA, real card/device identity,
+monotonic timing/driver termination and bridge/hook placement remain unqualified.
+No physical read/write or new candidate is selected by these tests.

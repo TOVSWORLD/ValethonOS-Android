@@ -36,4 +36,6 @@ class LoaderModule(unittest.TestCase):
   f=self.fixture();f.state=c.create_string_buffer(self.lib.lm_state_bytes());f.adapter.bindings=0;self.assertLess(self.lib.lm_start(f.state,c.byref(f.config),c.byref(f.io),c.byref(f.adapter)),0);self.assertLess(self.emit(f,1),0);self.assertEqual(f.events,[]);self.assertEqual(f.command_events,[])
  def test_second_initialization_stops_module_without_io(self):
   f=self.fixture();self.assertLess(self.lib.lm_start(f.state,c.byref(f.config),c.byref(f.io),c.byref(f.adapter)),0);self.assertLess(self.emit(f,1),0);self.assertEqual(f.events,[]);self.assertEqual(f.command_events,[])
+ def test_emit_before_initialization_is_no_io(self):
+  f=self.fixture();f.state=c.create_string_buffer(self.lib.lm_state_bytes());self.assertLess(self.emit(f,1),0);self.assertEqual(f.events,[]);self.assertEqual(f.command_events,[])
 if __name__=='__main__':unittest.main()

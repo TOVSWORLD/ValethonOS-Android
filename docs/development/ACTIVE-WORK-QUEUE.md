@@ -36,6 +36,12 @@ bridge passes5 loaded-module controls with actual blob-hash/cache instructions.
 Next immutable physical read/write/prefix streaming, clock/driver and bridge/hook
 placement. No physical commands or new candidate selected; originals/TWRP unarmed.
 
+Immutable target I/O/prefix streaming implemented and composed with writer/flush.
+9 native I/O,10 ARM byte-wrapper,10 actual SHA stream,4 native+7 ARM composition
+controls pass with explicit hardware/prefix model limits. Current analysis profile
+5826B/state8656B. Next real timing/driver/card-DMA and bridge/hooks placement; no
+new physical observer/candidate or owner trip selected. Originals/TWRP unarmed.
+
 Owner saw different lower-left console text approximately mode/reading; exact
 strings not recalled. One original return helper exit0; no exact handoff/kernel
 entry or kernel record proved. Supervisor stopped at full recovery read size
