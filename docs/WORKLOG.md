@@ -4855,3 +4855,23 @@ are prepared, including already-original TWRP repair handling and current-hash-b
 one-shot restores. No old receipt/approval is reused. No upload/source export, device
 preflight, install/arm/helper/reboot or owner trip has occurred. Actual trial7 originals
 remain the latest verified device state.346/344/348 remain open pending hardware.
+
+
+## 2026-11-04 — #346 owner-directed proven-baseline research changes next action
+
+Found primary Douglas initial-port MR1304: author reports boot/display/touch/USB
+networking on Amazon vendor kernel. Read the actual device/kernel recipes and
+vendor SELinux header. Offline comparison confirms our backed-up normal kernel
+is ARM64; mainline's different text_offset must be respected, not overwritten by
+legacy offsets. Parsed the exact diagnostic DT: USB PHY/controller both disabled;
+missing USB cannot locate the failure. Published vendor policy ceiling30 also
+prevents blindly reusing our policy33 ramdisk. Exact owned-kernel policy ceiling
+remains to be established; do not disable enforcement to bypass compatibility.
+
+Held trial8 unarmed; retained all artifacts/rollback assets. Next is a compatible,
+self-contained logging control on the already-booted matched kernel/DT and existing
+USB driver, then controlled kernel/DT changes. This does not select a legacy final
+platform, third-party OS install or stock-DT substitution into mainline. No build,
+device access, flash/arm/helper/reboot or owner trip. Evidence/proven-douglas-baseline
+receipt and revised unblock plan record the bounded conclusions; no root cause or
+hardware acceptance is inferred from the external report or source comparison.

@@ -5,14 +5,14 @@ HOSTCONTROLseq1/85B retained; no exact kernel entry/handoff or kernel record. TW
 repair restored normal bootstrap; approved fullp5 restoration/readbacks verified.
 Host collector read-size failure remains unexplained. No owner action pending.
 
-Latest source: complete trial8 checkpoint candidate and exact recovery review are
-prepared locally and unarmed. Resident bridge/hooks occupy1530 owned console/tail
-bytes, load a9216B module with8744B state and4KiB private stack, and dispatch durable
-mode/read/handoff records. Full linked replay, exact-artifact and guard checks pass
-with explicit hardware model limits. Fresh nonce changes only named PID1 data/DT;
-kernel/PID1 instructions unchanged. Next: exact owner review/availability, then
-fresh Linux preflight and one guarded trial. No physical action or source export
-has occurred. Review: [trial8](LOADER-CHECKPOINT-TRIAL8-REVIEW.md).
+Current decision: hold custom-observer trial8 unarmed after owner research request.
+Primary Douglas port evidence reports boot/display/touch/USB networking on vendor
+3.18. Our known-normal backup is ARM64; current diagnostic DT explicitly disables
+USB, so absent USB is inconclusive. Next: offline ABI/compatible-enforcing-policy
+profile for a minimal logging control on the already-booted matched kernel/DT and
+existing USB driver. No old OS installation, stock-DT graft into mainline, policy
+bypass, build, device access or new physical trial is selected. Trial8 artifacts
+remain retained. See [revised plan](LOADER-UNBLOCK-PLAN.md).
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

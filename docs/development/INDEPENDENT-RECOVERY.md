@@ -4,9 +4,11 @@ Current Phase1 work follows accepted entry347. Ordinary return and normal logs
 are complete; failed-load return and348 retention are not. No device operation
 is authorized merely by this document or a passed host test.
 
-## Latest complete changed review — trial8, unarmed
+## Latest decision — trial8 held; proven-baseline research
 
-[Exact trial8 review](LOADER-CHECKPOINT-TRIAL8-REVIEW.md) supersedes historical
+[Revised plan](LOADER-UNBLOCK-PLAN.md) holds trial8 after the owner requested a
+known/proven baseline. Its completed [review](LOADER-CHECKPOINT-TRIAL8-REVIEW.md) is
+retained as a fallback, not selected for execution. It supersedes historical
 source-prerequisite lists below. The complete checkpoint candidate, local private
 command package, one-arm collection and supervisor/manual rollback paths are prepared.
 Originals were last verified after trial7; no new device/source-export/write/arm or

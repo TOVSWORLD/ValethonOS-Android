@@ -31,3 +31,37 @@ full-path validator and exact fresh-nonce candidate/private command package. The
 trial review records residual hardware risks rather than treating model assumptions
 as qualification. Step5 records final PR/check synchronization, then owner review and
 availability under the standing physical-trial rule. No tablet action has occurred.
+
+## Owner redirection — use a demonstrated baseline before another custom trial
+
+Trial8 is held, unarmed, after the owner requested research into known/proven routes.
+The original [Douglas port report](https://gitlab.com/postmarketOS/pmaports/-/merge_requests/1304)
+explicitly reports boot/display/touch/USB networking with Amazon's vendor kernel.
+The [Douglas device recipe](https://github.com/hexdump0815/pmaports-amazon/blob/main/device-amazon-douglas/deviceinfo)
+uses ARM64 and the established v0/2048-byte boot-image layout. This supports a
+vendor-stack positive control, not a claim of working modern mainline support.
+
+Read-only comparison of our actual backup confirms an ARM64 kernel and text_offset
+0x80000. The current mainline Image has text_offset0; its entry must follow its own
+header, not copied legacy constants. The current exact diagnostic DT disables the
+USB controller and PHY, so absent USB is not evidence that the kernel never entered.
+The public vendor reference supports SELinux policy30 while our current diagnostic
+policy is33: blindly combining that ramdisk with the legacy profile is invalid.
+The exact policy ceiling of the separately built owned normal kernel is not yet
+proved. No enforcement/security bypass or old OS installation is selected.
+
+The next concrete work is an offline compatibility profile for a self-contained
+logging control using the already-booted matched kernel/DT and existing USB driver:
+1. Preserve the known image/DT/loader route and determine its userspace/policy ABI.
+2. Prepare only the minimal compatible enforcing diagnostic ramdisk, reusing the
+   existing host log reader. Mount no system/userdata and preserve recovery.
+3. Demonstrate the control's boot packaging and source/ABI constraints before a
+   complete changed physical review. Do not transplant a stock DT into mainline.
+4. Establish host-captured kernel logs on that positive control; change one kernel/
+   DT dependency at a time toward the maintained branded platform.
+
+The old kernel is a temporary diagnostic reference. It does not meet the final
+supported/updated-platform goal. Trial8 artifacts are retained as a fallback, not
+selected or awaiting an approval request. No build, device access, flash, helper,
+arm or reboot was performed for this research. See the sanitized
+[comparison](../../evidence/independent-recovery/proven-douglas-baseline-result.json).

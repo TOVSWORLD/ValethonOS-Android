@@ -1,5 +1,9 @@
 # Exact retained loader checkpoint trial8 review
 
+**Held after owner redirection to proven-baseline research.** This candidate is
+retained unarmed as a fallback; it is no longer the selected next physical action.
+See [the revised plan](LOADER-UNBLOCK-PLAN.md).
+
 This is the complete changed procedure for owner review. It is unarmed. The last
 actual device state is trial7 complete with original bootstrap/full boot/recovery
 verified and TWRP running. Nothing in this review claims fresh live device state.
