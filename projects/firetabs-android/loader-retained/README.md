@@ -268,3 +268,11 @@ saved registers are checked. Metadata callback, prefix digest, counter/controlle
 and block hardware remain models. Reproduce with the timed-profile ELF:
 `out/loader-audit-venv/bin/python scripts/validate_loader_identity_start.py --elf out/loader-identity-module/module.elf --lk out/original-package-lk-private.bin --output out/loader-identity-start-report.json`.
 Pinned frontend getter/pointer provenance remains unfinished.
+
+Pinned discovery now resolves the device slot0x4bd7e038 and pure host/card index0
+addresses0x4bd7edf0/0x4bd7e280. These follow archived Thumb literal/add sequences.
+It deliberately does not call get_device0x4bd35e41: that getter can call lazy init
+and write its initialized flag. A descriptor must supply expected device/block
+pointers; a mismatching global stops before any pointer dereference. Seven native
+identity controls pass. Direct firmware-memory read callback and trusted descriptor
+provenance remain unbound; the discovery routine is not a physical admission.

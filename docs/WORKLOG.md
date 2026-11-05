@@ -4813,3 +4813,13 @@ controller or storage callbacks and consume the initialization attempt. SP/calle
 saved checks pass. Metadata callback, prefix digest, block/controller/counter remain
 modeled; pinned frontend getter/pointer provenance is not established. No physical
 access/candidate/arm/helper/reboot or owner action.
+
+## 2026-11-04 — #346 pinned identity discovery without lazy initialization
+
+Implemented li_discover using exact archived device-slot and pure host/card0 getter
+address derivations. Inspection found get_device may call lazy initialization and
+write a flag, so it is not invoked. The slot must equal a descriptor-pinned expected
+device before selected-field reads; expected block pointer is independently checked.
+Seven native controls pass including positive pinned discovery and wrong-global
+rejection before pointer dereference. Direct memory callback and trusted descriptor
+provenance remain unfinished. No device access or physical action.

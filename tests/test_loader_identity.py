@@ -32,6 +32,22 @@ class Identity(unittest.TestCase):
    r,b,_=self.run_case(**kwargs);self.assertLess(r,0);self.assertEqual(bytes(b),bytes(c.sizeof(b)))
  def test_cache_disabled_is_reported_without_claiming_flush_admission(self):
   r,b,_=self.run_case({(0x206d,1):0});self.assertEqual(r,0);self.assertEqual(b.enabled,0)
+ def test_pinned_discovery_uses_pure_getter_addresses(self):
+  fields={(0x4bd7e038,4):0x1000,(0x1004,4):0,(0x1008,4):0x4000,(0x4bd7e280,4):0x4bd7edf0,(0x4bd7ee18,4):0x11230000,(0x4bd7e298,4):1,(0x4bd7e29c,4):1,(0x4bd7e38c,1):8,(0x4bd7e2ed,1):1,(0x4bd7e3c5,4):1024};calls=[]
+  def read(_,at,out,n):
+   calls.append((at,n));self.assertIn((at,n),fields)
+   for i,v in enumerate(fields[at,n].to_bytes(n,'little')):out[i]=v
+   return 0
+  cb=READ(read);out=Binding();self.lib.li_discover.argtypes=[c.POINTER(Binding),c.c_uint,c.c_uint,c.POINTER(Reader)]
+  self.assertEqual(self.lib.li_discover(c.byref(out),0x1000,0x4000,c.byref(Reader(None,cb))),0);self.assertEqual((out.card,out.host),(0x4bd7e280,0x4bd7edf0));self.assertEqual(len(calls),19)
+ def test_pinned_discovery_rejects_wrong_global_before_pointer_dereference(self):
+  calls=[]
+  def read(_,at,out,n):
+   calls.append((at,n));self.assertEqual((at,n),(0x4bd7e038,4))
+   for i,v in enumerate((0x5000).to_bytes(4,'little')):out[i]=v
+   return 0
+  cb=READ(read);out=Binding();self.lib.li_discover.argtypes=[c.POINTER(Binding),c.c_uint,c.c_uint,c.POINTER(Reader)]
+  self.assertLess(self.lib.li_discover(c.byref(out),0x1000,0x4000,c.byref(Reader(None,cb))),0);self.assertEqual(calls,[(0x4bd7e038,4)]);self.assertEqual(bytes(out),bytes(c.sizeof(out)))
  def test_unaligned_or_overflowing_plan(self):
   for p in [Plan(0x1001,0x2000,0x3000,0x4000),Plan(0xfffffffc,0x2000,0x3000,0x4000)]:
    r,b,_=self.run_case(plan=p);self.assertLess(r,0);self.assertEqual(bytes(b),bytes(c.sizeof(b)))

@@ -16,3 +16,12 @@ int li_capture(struct li_binding *out,const struct li_plan *p,const struct li_re
  if(a.device!=b.device||a.card!=b.card||a.host!=b.host||a.block_device!=b.block_device||a.rca!=b.rca||a.cache_size_kib!=b.cache_size_kib||a.cache_enabled!=b.cache_enabled)return -1;
  *out=a;return 0;
 }
+/* Pinned archived get_device's global slot, without its lazy-init callback or
+ * initialized-flag write. Host/card zero addresses derive from pure getters. */
+int li_discover(struct li_binding *out,unsigned expected_device,unsigned expected_block,const struct li_reader *reader){
+ if(!out)return -1;*out=(struct li_binding){0};
+ if(!reader||!reader->read||!expected_device||!expected_block||(expected_device|expected_block)&3)return -1;
+ unsigned device;if(field(reader,0x4bd7e038u,0,4,&device)||device!=expected_device)return -1;
+ struct li_plan plan={device,0x4bd7e280u,0x4bd7edf0u,expected_block};
+ return li_capture(out,&plan,reader);
+}

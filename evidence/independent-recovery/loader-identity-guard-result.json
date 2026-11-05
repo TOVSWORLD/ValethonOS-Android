@@ -3,7 +3,7 @@
   "kind": "loader_cached_identity_guard",
   "hardware_acceptance": false,
   "device_accessed": false,
-  "native_controls": 5,
+  "native_controls": 7,
   "reads": "two selected metadata snapshots via caller supplied read callback",
   "firmware_offsets": {
     "device_id": 4,
@@ -23,8 +23,8 @@
     "No CID, serial, userdata, controller writes or physical trial."
   ],
   "sources": {
-    "identity.h": "9c85647ee1a5d079a21f96011190639b05c3d5fe25d44e2cc6f793e4637626c0",
-    "identity.c": "383b61763640d245860f15c700823abab5e55851dda5fc5a8c7bec1a6cd47df5"
+    "identity.c": "3cd3f73a6f18e1be5984329194e2b273d912f424f997c810c0f7e53173dbde39",
+    "identity.h": "51343ab35a743bb7e3d8dabb7fb809433babfbc474dc1408debea9ac9f75c8e2"
   },
   "timed_start_integration": {
     "entry": "lft_start_bound",
@@ -52,5 +52,13 @@
     "pinned_frontend_getter_provenance_proved": false,
     "hardware_acceptance": false,
     "device_accessed": false
+  },
+  "pinned_discovery": {
+    "device_slot": "0x4bd7e038",
+    "host_zero": "0x4bd7edf0",
+    "card_zero": "0x4bd7e280",
+    "lazy_device_getter_not_called": true,
+    "expected_device_and_block_descriptor_still_required": true,
+    "direct_read_callback_not_bound": true
   }
 }
