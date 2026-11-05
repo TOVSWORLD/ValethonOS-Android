@@ -93,3 +93,31 @@ Reproduce native controls with `python3 -m unittest discover -s tests -p
 single-attempt contract, the monotonic clock and exact card/RCA/cache bindings
 must be proved, and memory ownership/stack/hook replay remain open. Admission
 flags cannot establish these facts. No physical MMC command or new trial was run.
+
+## Integrated position-independent module and allocation route
+
+`module.c` connects the writer's flush callback to the checked adapter while
+preserving independently bound physical read/write/prefix callbacks. A fresh zeroed
+exclusive state is initialized once; a second initialization stops the module.
+Four native integration controls cover commits and all nine first-commit command
+failure boundaries. No physical bindings or boot hooks are installed by this API.
+
+Build with `scripts/build_loader_module.py --zig <local Zig0.14.1 path> --out
+out/loader-module`. The resulting `module.elf` is an analysis artifact. Run
+`scripts/validate_loader_module.py --elf out/loader-module/module.elf --object
+out/loader-module/checkpoint.o --object out/loader-module/mmc_flush.o --object
+out/loader-module/module.o --object out/loader-module/freestanding.o --lk <private
+original LK> --output <report>`. The validator checks allocated input relocations
+(R_ARM_REL32, THM_CALL, THM_JUMP24, PREL31 only), then runs real module instructions
+at three modeled addresses through the archived command wrapper. It does not
+establish ownership of any of those physical addresses.
+
+The archived aligned allocator entry0x4bd45bb8 tail-calls the allocation core at
+0x4bd450dc. `validate_loader_allocator.py` runs those exact bytes with an explicitly
+modeled initialized free list, demonstrating distinct aligned module/context/stack
+allocations and fail-closed null returns for exhaustion or invalid alignment.
+IRQ services and heap state are models; no actual free RAM is claimed. The intended
+integration route is an owned allocation and PIC module rather than a fixed-address
+writer in the old small gap. A bounded bootstrap load/integrity/cache bridge and
+real heap lifecycle/driver/clock/card bindings are still required before packaging.
+The4KiB modeled stack is capacity for a control, not a measured worst-case stack bound.

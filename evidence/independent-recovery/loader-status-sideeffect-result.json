@@ -1,0 +1,9 @@
+{
+  "baseline_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "status_helper": "0x4bd3959c",
+  "tail_branch_target": "0x4bd36504",
+  "target_instruction": "bx lr",
+  "target_bytes": "7047",
+  "extra_status_helper_side_effects_in_pinned_bytes": false,
+  "scope": "Static exact archived bytes; no device access or runtime qualification"
+}

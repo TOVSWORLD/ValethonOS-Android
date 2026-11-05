@@ -38,10 +38,11 @@ def elf(path,wanted=('lc_init','lc_emit','lc_context_bytes')):
 
 
 class Machine:
- def __init__(self,segments,symbols,failure=None,durable=1,exclusive=1):
-  self.uc=Uc(UC_ARCH_ARM,UC_MODE_THUMB);self.symbols=symbols;self.failure=failure
+ def __init__(self,segments,symbols,failure=None,durable=1,exclusive=1,relocation=0):
+  self.uc=Uc(UC_ARCH_ARM,UC_MODE_THUMB);self.symbols={k:v+relocation for k,v in symbols.items()};self.failure=failure
   for start,size in [(0x40ff0000,0x20000),(0x41100000,0x20000),(0x41fe0000,0x20000),(0x50000000,0x10000)]:self.uc.mem_map(start,size)
-  for address,data in segments:self.uc.mem_write(address,data)
+  if relocation:self.uc.mem_map(0x40ff0000+relocation,0x20000)
+  for address,data in segments:self.uc.mem_write(address+relocation,data)
   self.nonce=bytes(range(32));image=bytearray(m.PARTITION);image[:8]=b'ANDROID!';image,self.prefix=m.prepare(bytes(image),self.nonce,b'VALETHON HOST CONTROL v1\nThis is a preinstalled retention control, NOT a kernel log.\n');self.original=image;self.image=bytearray(image);self.stable=image;self.events=[];self.writes=0;self.flushes=0;self.hashes=0
   self.uc.mem_write(CFG,struct.pack('<32s32sQQ5I',self.nonce,bytes.fromhex(self.prefix),8192,100000,m.PARTITION,5,8,durable,exclusive)+bytes(4))
   self.uc.mem_write(IO,struct.pack('<5I',0,READ|1,WRITE|1,FLUSH|1,PREFIX|1));self.uc.hook_add(UC_HOOK_CODE,self.hook)
@@ -77,7 +78,7 @@ class Machine:
   result=u.reg_read(UC_ARM_REG_R0);return result-(1<<32) if result&(1<<31) else result
  def emit(self,stage,mode=0,kind=0,size=0,dst=0,entry=0,dt=0,first=0,requested=0,selected=0):
   self.uc.mem_write(POINT,struct.pack('<7I4x3Q',stage,mode,kind,size,dst,entry,dt,first,requested,selected));return self.call('lc_emit',[CTX,POINT])
- def latest(self):return m.inspect(bytes(self.image),self.nonce,self.prefix)['latest']
+ def latest(self,stable=False):return m.inspect(bytes(self.stable if stable else self.image),self.nonce,self.prefix)['latest']
 
 
 def validate(path):

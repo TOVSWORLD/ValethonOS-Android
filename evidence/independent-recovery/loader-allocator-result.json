@@ -1,0 +1,39 @@
+{
+  "scope": "Exact archived allocator with modeled initialized 1MiB free list and IRQ hooks; not actual heap state",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "aligned_allocator_entry": "0x4bd45bb8",
+  "allocation_core": "0x4bd450dc",
+  "modeled_regions": [
+    {
+      "name": "module_capacity",
+      "address": 1275068432,
+      "bytes": 8192,
+      "allocation_header": "0x4c000000",
+      "allocation_bytes": 8220
+    },
+    {
+      "name": "integrated_module_context",
+      "address": 1275076656,
+      "bytes": 8584,
+      "allocation_header": "0x4c00201c",
+      "allocation_bytes": 8612
+    },
+    {
+      "name": "private_stack_capacity",
+      "address": 1275085264,
+      "bytes": 4096,
+      "allocation_header": "0x4c0041c0",
+      "allocation_bytes": 4124
+    }
+  ],
+  "failure_controls": [
+    "exhausted_pool_returns_null",
+    "non_power_of_two_alignment_returns_null"
+  ],
+  "writes_confined_to_modeled_pool_metadata_counter_stack": true,
+  "arm_callee_saved_sp_preserved": true,
+  "irq_operations_modeled": true,
+  "physical_heap_initialized_or_capacity_proved": false,
+  "module_code_loaded": false,
+  "device_accessed": false
+}

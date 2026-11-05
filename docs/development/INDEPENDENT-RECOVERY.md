@@ -1198,3 +1198,15 @@ ARM replay uses exact archived LK command wrapper with modeled driver/clock.
 This closes the source-level false-success handling, not hardware persistence.
 Real driver timing/clock/card/target bindings and owned memory remain prerequisites.
 No physical command or new trial is selected.
+
+Integrated module source now connects the writer to the checked adapter. Four
+native controls pass, including command-boundary failures and repeat-init refusal.
+Hidden PIC builds remove fixed-address references on tested paths; separate
+core relocation controls execute at three modeled bases. The4307B integrated
+module and8584B state use a dynamic allocation route, not the old584B gap.
+Exact archived memalign/allocator controls demonstrate modeled owned regions,
+null-on-exhaustion and invalid-alignment behavior. This does not measure the
+actual heap's initialization/capacity or qualify a physical address/stack.
+See loader-checkpoint-relocation-result.json, loader-allocator-result.json and
+loader-status-sideeffect-result.json. A bounded load/integrity/cache bridge and
+real firmware bindings remain required. No physical trial is selected.

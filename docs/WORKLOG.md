@@ -4650,3 +4650,32 @@ qualified; exact host/card/RCA/cache/target bindings and owned memory/stack/hook
 replay/cache visibility still required before packaging. No physical MMC command,
 source export, boot/bootstrap write, helper, arm, reboot or kernel rebuild. Actual
 trial7 originals remain verified/TWRP. No user trip/action pending.
+
+## 2026-11-04 — #346 integrate checked persistence and remove fixed module addresses
+
+Implemented module.c: writer flushes now go through checked CMD6/CMD13 adapter;
+read/write/prefix callbacks remain separately pinned. Fresh zeroed owned state is
+initialized once, repeat initialization stops it. Four native integrated controls
+pass including all nine first-commit command boundaries and prior record retention.
+Built all module objects as hidden PIC; allocated relocations are PC-relative.
+Core-only mode/read/handoff executes at three modeled allocations. Integrated
+module4307B, context8584B; no longer requires a fixed code address in the584B gap.
+This does not establish a physical allocation or installable bridge.
+
+Exact archived aligned allocator45bb8/core450dc executes against a modeled
+initialized free list: separate aligned8KiB module,8584B context,4KiB stack capacities;
+exhaustion/invalid alignment return null, metadata and callee-saved/SP controls pass.
+Heap/IRQ state modeled; no physical free RAM or worst-case stack claim. Static
+status-side-effect helper3959c branches to36504, exact bx lr; pinned bytes have no
+additional side effect. Public allocator/relocation/status helper reports retained.
+
+Remaining actual integration: bounded bootstrap load/integrity/cache bridge using
+owned allocation; prove real heap lifecycle, firmware driver termination/clock and
+card/target bindings, hook replay/cache visibility. No source export or device
+access, no physical MMC/boot/bootstrap writes, arm, helper, reboot or kernel build.
+Originals/TWRP remain restored/unarmed, no owner action pending.
+
+Integrated PIC ARM validation also passed12 controls: mode/handoff commits at
+three modeled module bases, plus all9 first-commit raw-command failure boundaries,
+actual archived command wrapper, no retry/extra writes and prior durable record
+preservation. Driver/clock/storage remain models. Public loader-module-result.json.

@@ -17,6 +17,13 @@ clock modeled. No physical command. Next qualify real driver timing, immutable
 host/card/RCA/cache/target bindings, owned memory and hook replay before packaging.
 See loader-flush-adapter-result.json. Original device state remains unchanged.
 
+Module integration implemented: checked adapter drives writer flushes; four native
+integration controls pass. Hidden PIC module4307B/context8584B uses an owned
+allocation route; core relocation and archived allocator controls pass in modeled
+RAM. No actual heap/physical address or stack capacity proved. Next implement
+bounded load/integrity/cache bridge and bind real heap/driver/clock/card/target;
+no new owner trip or physical observer selected.
+
 Owner saw different lower-left console text approximately mode/reading; exact
 strings not recalled. One original return helper exit0; no exact handoff/kernel
 entry or kernel record proved. Supervisor stopped at full recovery read size

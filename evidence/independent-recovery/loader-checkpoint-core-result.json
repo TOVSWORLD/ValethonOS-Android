@@ -33,11 +33,11 @@
   "source_sha256": {
     "projects/firetabs-android/loader-retained/checkpoint.h": "1d3a5b8bf998ebf77e8ff8e89881dad301657c355924049a7997fabc08e0ca8c",
     "projects/firetabs-android/loader-retained/analysis.ld": "162443c7ccef42f06c309b6f9c4928d03fbf43dbb2ee351ec035fc5c92a18f32",
-    "projects/firetabs-android/loader-retained/README.md": "ea6a8384dacf386f21c64fd6876d4c2483d2416c61014ed04a2c253752e821cf",
+    "projects/firetabs-android/loader-retained/README.md": "36e2231ab8cc0e40a364979d167856b6207bc3f669e1f6261fa32b9c19e2867d",
     "projects/firetabs-android/loader-retained/checkpoint.c": "98654aa83e33090f6031ead806bceb4c67798c29e1724ebcb7f68bb653b58497",
     "projects/firetabs-android/loader-retained/freestanding.c": "ead559ffb183565e3fd71fd5401452b7cc6f39594e63f98572cab3f6e95217fd",
     "scripts/loader_checkpoint_record.py": "2723263af67f5b7acbc13162806bc46bbdbe65d54f35ea646401dbda75f10e14",
-    "scripts/validate_loader_checkpoint.py": "fc6a70e916f6025a74abbbf92469fdd5f4fd00621385e5fc2439b4984f2ed034",
+    "scripts/validate_loader_checkpoint.py": "bc216991c3169077c27df4581371b778bb97b395e530bfea556d5be5f7f9e726",
     "scripts/audit_loader_switch.py": "cccb81ea828dd0f1338acbf368e3ec50102a3e441b897e55234112ecd65ec2a9",
     "scripts/pull_retained_mailbox.py": "85485f60ad0c5c5cac77c444e50b960b36840b59b39b5bb0d0fd5ee6a2fb62a3",
     "tests/test_loader_checkpoint.py": "be5d6c559904ccbde2e5a285799306d2d468316f64577f9953182720623fb3a5",
