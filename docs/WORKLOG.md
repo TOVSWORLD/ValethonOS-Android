@@ -5056,3 +5056,27 @@ Future capture source now clears its armed metadata on completion/exception (two
 regression controls pass); deployed executed source/history remains archived and
 unchanged, no rearm or deployment of that source fix. Actual kernel/retained logs
 remain unconfirmed. First-draft trial-result/state receipts carry terminal truth.
+
+
+### Capture repair: host enumeration trace and earlier recorder calibration
+
+Owner asked how to fix capture. Actual evidence separates successful readback from
+absent producer output; current USB/PID1 and eMMC/late-init paths cannot observe
+earlier failure. Found host blind spot: unexpected port identities were silently
+filtered with no enumeration history. Added a read-only selected-port observer
+(record numeric IDs/classes/driver/ACM nodes/connect transitions, never serials or
+TTY opens) and future330s parallel metadata capture. Three new controls and two
+existing host completion controls pass. Not deployed/rearmed as a physical trial.
+
+Executed only two cached sysfs snapshots on the already-running recovery: selected
+port present/stable, two usbfs interfaces, no target commands/write/reboot. Private
+evidence retained; sanitized capture-observer-control-result.json labels this
+strictly as host observer/current-port mapping, not custom-kernel logging proof.
+
+Rechecked primary ARM64 boot/ramoops docs and Douglas vendor-port report. Next
+prerequisite is known-working-stack end-to-end recorder calibration, then actual
+pre-handoff/entry checkpoints. Existing loader module covers pre-SMC only; early
+kernel marker storage/return retention remains unproved. No guessed ramoops RAM,
+modern-ramdisk/vendor-policy transplant, new kernel build or physical trial. Any
+control boot requires complete review and explicit owner exception/approval to the
+prior no-separate-control constraint. Original images/TWRP remain unchanged.

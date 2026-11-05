@@ -16,7 +16,7 @@ class Completion(unittest.TestCase):
             case=Path(folder);(case/'private').mkdir()
             data={'capture-plan-private.json':{'wait_seconds':300,'minimum_no_intervention_seconds':300,'automatic_return_helper':False,'automatic_restore':False,'automatic_reboot':False,'physical_usb_path':'1-2'},'candidate-report.json':{'partition_sha256':'0'*64},'install-receipt.json':{'verified':True,'rollback_sha256':'0'*64},'initial-usb-identity.json':{'vendor':'abcd','product':'ef00'}}
             def read(path,maximum):return bytes(range(32)) if path.name=='nonce-private.bin' else json.dumps(data[path.name]).encode()
-            with patch.object(runner,'private_bytes',side_effect=read),patch.object(runner,'validate'),patch.object(runner,'wait_departure',side_effect=error,return_value=123),patch.object(runner,'capture',return_value={'complete':False}),patch.object(sys,'argv',['capture','--case',str(case)]),contextlib.redirect_stdout(io.StringIO()):
+            with patch.object(runner,'private_bytes',side_effect=read),patch.object(runner,'validate'),patch.object(runner,'wait_departure',side_effect=error,return_value=123),patch.object(runner,'capture',return_value={'complete':False}),patch.object(runner,'observe',return_value={'events':1,'kernel_logging_qualified':False}),patch.object(sys,'argv',['capture','--case',str(case)]),contextlib.redirect_stdout(io.StringIO()):
                 if error:
                     with self.assertRaises(TimeoutError):runner.main()
                 else:runner.main()

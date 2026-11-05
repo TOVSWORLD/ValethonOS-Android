@@ -1,5 +1,45 @@
 # Loader retained-checkpoint delivery plan
 
+## Capture repair selected after actual full-draft failure
+
+The host collector succeeded in reading recovery/boot/seed/slots; the target
+produced no new record. USB capture did not select/open a matching endpoint.
+Both target producers are late: USB requires PID1/policy/configfs/UDC; boot-tail
+requires eMMC and late init. Their silence cannot locate an earlier failure.
+
+Implemented the first host repair: observe_selected_usb.py records connect/
+disconnect, numeric descriptor IDs, interface classes, bound driver and ACM node
+names for only the selected physical port. It never opens a TTY, reads serial
+strings, changes udev/USB configuration or issues target commands. Future capture
+runs record this private metadata alongside the wire capture, including unexpected
+identities instead of silently filtering them out. Three native controls pass.
+A new read-only control on already-running recovery saw two stable cached snapshots
+and two usbfs interfaces. This qualifies the observer/current port mapping only,
+not custom PID1, USB ACM, kernel entry or retained writes. No flash/reboot occurred.
+
+Next prerequisite is end-to-end recorder calibration on a known-working boot
+stack. Existing original kernel/DT and the prepared loader-checkpoint implementation
+are candidates for offline review; no new control boot is admitted here. Do not
+put the modern ramdisk/policy onto the vendor kernel without matching its ABI.
+A known-good boot that still produces no checkpoint diagnoses the recorder, rather
+than being misreported as a modern-kernel failure. This calibration may require a
+separately reviewed control boot, an explicit change to the prior no-control-trial
+constraint, and fresh owner approval/availability. No current approval is reusable.
+
+After that control, preserve the complete first draft and use attributable stages:
+image read/decompression, pre-handoff arguments, kernel entry, early init, driver
+init and PID1. The existing loader record covers pre-handoff, not execution after
+SMC. A kernel-side entry marker needs demonstrably owned storage and a retrieval
+path that survives the actual return sequence. Ramoops needs reserved persistent
+RAM; the existing legacy ram-console reservation is not automatically a compatible
+or retained backend. Do not guess RAM addresses or assume Power40 preserves data.
+
+No new kernel build, observer package, device write, control boot or trial selected.
+Actual first-draft results remain unchanged and original boot/recovery stay restored.
+Primary references: https://docs.kernel.org/arch/arm64/booting.html and
+https://docs.kernel.org/admin-guide/ramoops.html. The original Douglas vendor-port
+boot/USB report is https://gitlab.com/postmarketOS/pmaports/-/merge_requests/1304 .
+
 Actual first-draft test1 is complete. Original full boot restored once and full
 boot/recovery/RAM cleanup verified; TWRP left running, no reboot, no process armed
 and no owner action pending. USB capture0B/no matching endpoint; returned image

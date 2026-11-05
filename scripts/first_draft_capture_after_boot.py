@@ -8,6 +8,8 @@ import json
 import os
 from pathlib import Path
 import time
+import threading
+from observe_selected_usb import observe
 from capture_lab_kernel_log import capture,private_bytes,validate
 
 
@@ -41,7 +43,16 @@ def main():
         started=wait_departure(present)
         receipt.update(waiting_for_owner_boot=False,boot_departure_monotonic=started,minimum_observation_end_monotonic=started+300)
         update_receipt(base/'capture-arm-receipt.json',receipt)
+        metadata={}
+        def watch_metadata():
+            try:metadata.update(observe(plan['physical_usb_path'],base/'selected-usb-events-private.jsonl',330))
+            except Exception as error:metadata.update(failure_kind=type(error).__name__)
+        watcher=threading.Thread(target=watch_metadata,daemon=True)
+        watcher.start()
         result=capture(plan,nonce,base/'usb-capture')
+        watcher.join(timeout=335)
+        if watcher.is_alive():metadata.update(failure_kind='MetadataObserverDeadlineExceeded')
+        receipt['usb_metadata_observer']=metadata
     except BaseException as error:
         receipt.update(armed=False,capture_finished=True,capture_complete=False,failure_kind=type(error).__name__)
         update_receipt(base/'capture-arm-receipt.json',receipt)
