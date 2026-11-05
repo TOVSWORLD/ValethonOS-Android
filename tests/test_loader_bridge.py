@@ -8,11 +8,11 @@ class IO(c.Structure):_fields_=[('context',c.c_void_p),('read',READ),('allocate'
 class Result(c.Structure):_fields_=[('attempted',c.c_uint),('loaded',c.c_uint),('code',c.c_void_p),('state',c.c_void_p),('stack',c.c_void_p),('start',c.c_void_p),('emit',c.c_void_p),('bytes',c.c_uint)]
 class Fixture:
  def __init__(self,lib,failure=None):
-  self.lib=lib;self.failure=failure;self.blob=bytes(range(256))*18;self.events=[];self.error=None;self.raw=c.create_string_buffer(32768);self.address=(c.addressof(self.raw)+31)&~15;self.plan=Plan(len(self.blob),8584,4096,1,17,1,(c.c_ubyte*32).from_buffer_copy(hashlib.sha256(self.blob).digest()),8192,12*1024*1024);self.result=Result()
+  self.lib=lib;self.failure=failure;self.blob=bytes(range(256))*18;self.events=[];self.error=None;self.raw=c.create_string_buffer(65536);self.address=(c.addressof(self.raw)+31)&~15;self.plan=Plan(len(self.blob),8584,4096,1,17,1,(c.c_ubyte*32).from_buffer_copy(hashlib.sha256(self.blob).digest()),8192,12*1024*1024);self.result=Result()
   def allocate(alignment,n):
    self.events.append(('allocate',alignment,n));self.size=n
    if failure=='allocation':return 0
-   if alignment!=16 or n>24576:self.error='bad allocation';return 0
+   if alignment!=16 or n>32768:self.error='bad allocation';return 0
    c.memset(self.address,0xa5,n)
    return self.address+1 if failure=='alignment' else self.address
   def read(_,offset,out,n):
@@ -36,8 +36,11 @@ class LoaderBridge(unittest.TestCase):
  def tearDownClass(cls):cls.temp.cleanup()
  def test_verified_load_publishes_owned_entries_and_zeroed_state_stack(self):
   f=Fixture(self.lib);self.assertEqual(f.load(),0);r=f.result;self.assertTrue(r.loaded);self.assertEqual(r.code,f.address);self.assertEqual(r.state,f.address+4608);self.assertEqual(r.stack,f.address+r.bytes);self.assertEqual((r.start,r.emit),(f.address+1,f.address+17));self.assertEqual(c.string_at(r.code,4608),f.blob);self.assertEqual(c.string_at(r.state,r.bytes-4608),bytes(r.bytes-4608));self.assertEqual([e[0] for e in f.events],['allocate','read','sha','cache']);self.assertIsNone(f.error)
+ def test_full_supported_code_extent_uses_one_owned_allocation(self):
+  for size in [9216,16384]:
+   f=Fixture(self.lib);f.blob=bytes(range(256))*(size//256);f.plan.code=size;f.plan.sha=(c.c_ubyte*32).from_buffer_copy(hashlib.sha256(f.blob).digest());self.assertEqual(f.load(),0);self.assertEqual(f.result.state,f.address+size);self.assertIsNone(f.error)
  def test_invalid_plan_prevents_all_callbacks(self):
-  for key,value in [('code',0),('code',8193),('code',513),('state',0),('state',12289),('stack',8192),('start',0),('start',8193),('emit',2),('bindings',0),('first',0),('first',2**64-1),('offset',0),('offset',12*1024*1024+1),('offset',15*1024*1024)]:
+  for key,value in [('code',0),('code',16896),('code',513),('state',0),('state',12289),('stack',8192),('start',0),('start',8193),('emit',2),('bindings',0),('first',0),('first',2**64-1),('offset',0),('offset',12*1024*1024+1),('offset',15*1024*1024)]:
    f=Fixture(self.lib);setattr(f.plan,key,value);self.assertLess(f.load(),0);self.assertEqual(f.events,[]);self.assertFalse(f.result.loaded)
  def test_each_failure_publishes_no_entries_and_never_retries(self):
   for failure,events in [('allocation',1),('alignment',1),('read',2),('sha',3),('cache',4)]:

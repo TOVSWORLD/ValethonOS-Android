@@ -32,9 +32,9 @@ class Cache:
 
 def validate(path,lk_path):
  lk=lk_path.read_bytes();assert hashlib.sha256(lk).hexdigest()==EXPECTED;seg,sym=elf(path,('lb_cache_sync',));f=Cache(seg,sym,lk);cases=[]
- for n in [512,4608,8192]:
+ for n in [512,4608,8192,9216,16384]:
   address=0x43000010;assert f.run(address,n)==0;lines=list(range(address&~63,address+n,64));assert f.events==[('clean_line',a) for a in lines]+[('drain_writes',0),('invalidate_icache',0),('dsb',0),('isb',0)];cases.append('clean_drain_invalidate_dsb_isb_'+str(n))
- for address,n in [(0,512),(0x43000010,0),(0x43000010,8193),(0xfffffff0,512)]:assert f.run(address,n)<0 and not f.events;cases.append('invalid_'+hex(address)+'_'+str(n))
+ for address,n in [(0,512),(0x43000010,0),(0x43000010,16385),(0xfffffff0,512)]:assert f.run(address,n)<0 and not f.events;cases.append('invalid_'+hex(address)+'_'+str(n))
  return {'scope':'Actual binding and archived cache loop; CP15 maintenance effects modeled/recorded','elf_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'lk_sha256':EXPECTED,'firmware_cache_entry':'0x4bd3c740','cases':cases,'case_count':len(cases),'cache_order':'all covered64B lines clean, drain writes, invalidate I-cache, DSB, ISB','callee_saved_sp_preserved':True,'ordinary_memory_writes_only_stack':True,'cache_visibility_on_hardware_proved':False,'device_accessed':False,'physical_cache_operations':False}
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--elf',type=Path,required=True);p.add_argument('--lk',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();r=validate(a.elf,a.lk);a.output.write_text(json.dumps(r,indent=2)+'\n');print('Cache binding/loop controls passed:',r['case_count'])

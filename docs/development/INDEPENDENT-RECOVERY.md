@@ -4,6 +4,15 @@ Current Phase1 work follows accepted entry347. Ordinary return and normal logs
 are complete; failed-load return and348 retention are not. No device operation
 is authorized merely by this document or a passed host test.
 
+## Latest complete changed review — trial8, unarmed
+
+[Exact trial8 review](LOADER-CHECKPOINT-TRIAL8-REVIEW.md) supersedes historical
+source-prerequisite lists below. The complete checkpoint candidate, local private
+command package, one-arm collection and supervisor/manual rollback paths are prepared.
+Originals were last verified after trial7; no new device/source-export/write/arm or
+owner trip has occurred. Exact approval and availability precede fresh Linux
+preflights and physical execution. Source/model checks are not hardware acceptance.
+
 ## One server-room visit
 
 Owner chats from a separate desk and cannot reply beside the tablet. Prepare and

@@ -5,15 +5,14 @@ HOSTCONTROLseq1/85B retained; no exact kernel entry/handoff or kernel record. TW
 repair restored normal bootstrap; approved fullp5 restoration/readbacks verified.
 Host collector read-size failure remains unexplained. No owner action pending.
 
-Latest source: timed module6996B/state8728B integrates immutable target/prefix,
-checked flush, read-only GPT clock and bounded command-only R1/CMD13 lane.10 native/
-14 ARM command controls and4 native/9 ARM composition controls pass with hardware,
-counter and ARM-prefix model boundaries. No reset/DMA/security writes. Original raw
-data driver remains termination-unqualified. Cached identity double-snapshot guard
-now gates a separate timed start entry; native integration and five ARM controls pass.
-Pinned frontend getter/read provenance remains open. Next: card identity/recovery-risk
-contract and bridge/descriptors/hooks ownership/IRQ/replay/cache visibility. No new
-candidate or physical observer selected; source tests are not hardware acceptance.
+Latest source: complete trial8 checkpoint candidate and exact recovery review are
+prepared locally and unarmed. Resident bridge/hooks occupy1530 owned console/tail
+bytes, load a9216B module with8744B state and4KiB private stack, and dispatch durable
+mode/read/handoff records. Full linked replay, exact-artifact and guard checks pass
+with explicit hardware model limits. Fresh nonce changes only named PID1 data/DT;
+kernel/PID1 instructions unchanged. Next: exact owner review/availability, then
+fresh Linux preflight and one guarded trial. No physical action or source export
+has occurred. Review: [trial8](LOADER-CHECKPOINT-TRIAL8-REVIEW.md).
 
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are

@@ -4832,3 +4832,26 @@ Linked callback explicitly retained in timed analysis ELF. New ARM controls use
 synthetic firmware RAM for discovery and bound startup at two relocated bases,
 without the modeled metadata callback. Descriptor ownership/provenance and physical
 hook placement remain open. No device access, physical candidate or owner action.
+
+## 2026-11-04 — #346 complete loader checkpoint trial8 candidate delivered for review
+
+Followed the concrete unblock plan: integrated one runtime frontend/frame dispatcher,
+proved console-only reclamation against original mode/read behavior, linked1530B of
+bridge/hash/cache/descriptors/hooks inside1587 owned resident bytes, and loaded the
+9216B PIC module on allocator-owned8744B state plus4KiB private stack. Original
+integer/flag/SP state and overwritten read/handoff instruction replay are preserved.
+All IRQ-masked calls decline observation; no interrupt enabling is added by hooks.
+
+Complete linked replay covers native64-bit partition redirects, exact blob SHA/cache
+instructions, private-stack writer records and stop/no-retry boundaries. Private
+stack observation is recorded in the final receipt; hardware driver worst-case stack,
+heap state, cache/controller effects and data-driver termination are not qualified.
+Fresh trial nonce is rebound only in named PID1 non-executable data and DT chosen
+property, with kernel/PID1 instructions and policy unchanged; component ID/prefix/seed
+recomputed and independently checked. No kernel build or physical action.
+
+Exact candidate/recovery review and fresh local trial8 supervisor/manual commands
+are prepared, including already-original TWRP repair handling and current-hash-bound
+one-shot restores. No old receipt/approval is reused. No upload/source export, device
+preflight, install/arm/helper/reboot or owner trip has occurred. Actual trial7 originals
+remain the latest verified device state.346/344/348 remain open pending hardware.

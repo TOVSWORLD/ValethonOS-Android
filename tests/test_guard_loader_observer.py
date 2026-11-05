@@ -14,7 +14,7 @@ import guard_loader_observer as g
 def gpt(overlap=False):
     b=bytearray(17408);h=bytearray(512);h[:8]=b'EFI PART';struct.pack_into('<I',h,12,92)
     table=bytearray(16384)
-    for n,a,z,name in [(17,100000,325279,'boot'),(18,500000,725279,'recovery'),(5,323223 if overlap else 10,324184 if overlap else 100,'boot')]:
+    for n,a,z,name in [(17,30325760,30551039,'boot'),(18,30551040,30776319,'recovery'),(5,18432,51199,'boot_x'),(6,51200,86015,'recovery_x'),(7,30548983 if overlap else 90000,30549944 if overlap else 91000,'other')]:
         off=(n-1)*128;table[off]=1;struct.pack_into('<QQ',table,off+32,a,z);text=name.encode('utf-16le');table[off+56:off+56+len(text)]=text
     struct.pack_into('<QIII',h,72,2,128,128,zlib.crc32(table));struct.pack_into('<I',h,16,zlib.crc32(h[:92]));b[512:1024]=h;b[1024:]=table;return bytes(b)
 

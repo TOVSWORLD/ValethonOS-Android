@@ -1,6 +1,6 @@
 .syntax unified
 .thumb
-.text
+.section .text.lh_block,"ax",%progbits
 .global lh_block
 .type lh_block,%function
 .thumb_func

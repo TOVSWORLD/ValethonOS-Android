@@ -9,7 +9,7 @@ int lb_load(struct lb_result *out,const struct lb_plan *plan,const struct lb_io 
  /* Copy immutable inputs before allocating or reading. These flags require
   * separately proved bindings, never discovery or admission by this bridge. */
  struct lb_plan p=*plan;struct lb_io cb=*io;
- if(!p.bindings_verified||p.code_bytes<512||p.code_bytes>8192||(p.code_bytes&511)||
+ if(!p.bindings_verified||p.code_bytes<512||p.code_bytes>16384||(p.code_bytes&511)||
     !p.state_bytes||p.state_bytes>12288||p.stack_bytes!=4096||
     !(p.start_offset&1)||!(p.emit_offset&1)||p.start_offset>=p.code_bytes||p.emit_offset>=p.code_bytes||
     !lb_nonzero(p.sha256)||!p.target_first_sector||p.target_first_sector>(~0ULL-16*1024*1024)/512||

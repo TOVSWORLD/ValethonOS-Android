@@ -1,13 +1,13 @@
 .syntax unified
 .thumb
-.text
+.section .text.lb_cache_sync,"ax",%progbits
 .global lb_cache_sync
 .type lb_cache_sync,%function
 .thumb_func
 lb_cache_sync:
     cbz r1, cache_fail
     cbz r2, cache_fail
-    movw r3, #8192
+    movw r3, #16384
     cmp r2, r3
     bhi cache_fail
     adds r3, r1, r2

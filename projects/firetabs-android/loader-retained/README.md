@@ -283,3 +283,32 @@ card/host addresses; other reads fail without changing output. It reads syntheti
 firmware RAM in the local ARM validation, avoiding modeled metadata callbacks for
 the two new discovery/start cases. Trusted descriptor placement/provenance and
 physical pointer ownership remain required; this callback alone admits no trial.
+
+### Complete trial8 delivery
+
+The complete path now uses `frontend.c`/`frontend-frame.c` for one-time discovery,
+normal-mode observation at the first redirected read, distinct header/body reads
+and pre-SMC call arguments. `bootstrap.c` and `bootstrap-hooks.S` preserve integer
+registers, APSR and native SP, replay overwritten instructions, and dispatch on the
+allocator-owned private stack. Masked IRQs decline observation on every call.
+
+`validate_loader_console_reclaim.py` poisons console formatter/data spans while
+replaying the original nine mode and twelve read controls. `build_loader_bootstrap.py`
+links1530B of bridge/hash/cache/descriptors/hooks solely into those1587 owned bytes;
+it preserves globals and libc/GPT/flag helpers. The old584B tail alone was insufficient.
+The runtime frontend is PIC; the resident bridge is linked to its exact fixed span.
+
+`refresh_loader_trial_nonce.py` rebinds the exact named non-executable PID1 nonce
+constant and DT chosen nonce, preserving instructions/policy/all other payload bytes.
+`pack_loader_checkpoint_candidate.py` packs the9216B module and fresh mailbox seed;
+`verify_loader_checkpoint_candidate.py` independently checks exact bytes, component
+ID, nonce-only deltas, descriptors, prefix/seed and all module object relocations.
+`validate_loader_complete.py --packed ...` executes the exact resident hook -> archived
+allocator -> actual blob SHA/cache instructions -> loaded frontend/writer path,
+including full64-bit logical boot offsets and stop/no-retry controls. Heap/metadata,
+IRQ/cache effects, controller/block hardware and full-prefix digest are explicitly
+modeled; hardware behavior remains unqualified.
+
+See `docs/development/LOADER-CHECKPOINT-TRIAL8-REVIEW.md` and sanitized complete-trial8
+receipts. Private artifacts and one-use command package are local under `out/`.
+No source export, device access, arm, write, helper or reboot is part of these tools.

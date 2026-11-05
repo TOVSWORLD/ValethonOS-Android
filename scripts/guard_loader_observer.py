@@ -23,9 +23,9 @@ OFFSET=223223
 SECTORS=962
 SIZE=SECTORS*512
 ORIGINAL='4c6f355c735b9302b0d421ef38f94a9974214d531fa974a41edd8132af7ac092'
-CANDIDATE='6a34b1a55d3b9c6de8e87e21f8b6cc3eaef18576583f66750ef6e012d0d1c10c'
+CANDIDATE='0db009d6da24a8908df0c49769f3de81d11222ea31c6b42b6547df4bbfd6be41'
 ORIGINAL_BOOT='08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e'
-KERNEL_CANDIDATE='8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16'
+KERNEL_CANDIDATE='891ef137024e9b6712894dcbe1c2e398023b45598f56480b666b001147b1f5b3'
 RECOVERY='3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11'
 
 
@@ -57,7 +57,10 @@ def gpt_range(data):
     recovery=next((e for e in entries if e[0]==18 and e[3]=='recovery'),None)
     if recovery is None or (recovery[2]-recovery[1]+1)*512!=115343360:
         raise ValueError('Independent recovery bootstrap entry absent')
-    return {str(e[0]):(e[1],e[2]-e[1]+1) for e in entries if e[0] in [17,18]}
+    for number,first,size,name in [(5,18432,32768,'boot_x'),(6,51200,34816,'recovery_x'),(17,30325760,225280,'boot'),(18,30551040,225280,'recovery')]:
+        if not any(e[0]==number and e[1]==first and e[2]-e[1]+1==size and e[3]==name for e in entries):
+            raise ValueError('Exact checkpoint descriptor/GPT geometry differs')
+    return {str(e[0]):(e[1],e[2]-e[1]+1) for e in entries if e[0] in [5,6,17,18]}
 
 
 def range_read(adb,node):
@@ -103,8 +106,8 @@ def preflight(adb,originals,current,boot):
     STAGE='normal_boot'
     normal=adb.read('/dev/block/mmcblk0p5',16777216)
     if sha(normal)!=boot:raise ValueError('Normal boot differs')
-    if boot!=ORIGINAL_BOOT and (sha(normal[:15728640])!='aca725664462df3cbf8193a5508c9d79c862f8fb71144a0d28ee14d99fcbd7b1'
-            or sha(normal[15728640:15732736])!='84913fb1123e3dd58182ae1fa5b871fe22a8f2b2fb69beb1cabbb0b210bb87bc'):
+    if boot!=ORIGINAL_BOOT and (sha(normal[:15728640])!='e1154f3b3bffe391c6e3d4da465b31ea113d27882fad724ad56047f89bde0cab'
+            or sha(normal[15728640:15732736])!='478270cc032bee32b862fcb0432502fb92811ddadd32495a80a1385c31349425'):
         raise ValueError('Exact diagnostic boot prefix/seed required')
     STAGE='normal_recovery'
     if sha(adb.read('/dev/block/mmcblk0p6',17825792))!=RECOVERY:raise ValueError('Normal recovery differs')
