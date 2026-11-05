@@ -1,0 +1,35 @@
+{
+  "scope": "Actual SHA framing, Thumb thunk and pinned generic ARM compression instructions; hashlib known-vector comparison only",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "elf_sha256": "13f36bee265e6a097ea6686f0725bf58a3328049fe1693498a4d40273e8e24f1",
+  "generic_entry": "0x4bd15620",
+  "cases": [
+    "empty",
+    "abc",
+    "55_bytes",
+    "56_bytes",
+    "63_bytes",
+    "64_bytes",
+    "65_bytes",
+    "128_bytes",
+    "4608_bytes",
+    "wrong_digest_rejected",
+    "unverified_binding_no_compression",
+    "oversize_no_compression"
+  ],
+  "case_count": 12,
+  "digest_computation_modeled": false,
+  "no_capability_dispatch_or_global_reads": true,
+  "firmware_reads_only_round_constants": true,
+  "writes_only_private_stack": true,
+  "callee_saved_sp_preserved": true,
+  "runtime_code_placement_and_service_admission_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/hash.c": "3798ccda1cdda54a556b6fcc31feb3f5cb37af7de52e9252129edb0bcf7914ec",
+    "projects/firetabs-android/loader-retained/hash.h": "6c8bd0132f931ae04883017d8c5b3ba5fef52d7a146788de7cfb81dc0703cdf6",
+    "projects/firetabs-android/loader-retained/hash-block.S": "7f1886e686914780e353ca45d76aedf5a6eadf73909e05485ff1d79c01f20af9",
+    "scripts/validate_loader_hash.py": "bc15e71c19967791993d6296e2ec103e83c32bbcbead70b9b7cebc1204fd1740"
+  }
+}

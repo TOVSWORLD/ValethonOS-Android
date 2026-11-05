@@ -145,3 +145,30 @@ adapter. Allocation/read/hash/cache failures publish no entries and never retry.
 Driver, clock, storage, hash, cache and IRQ services remain models. No real heap
 lifecycle, firmware hash/cache/timing/card bindings, hook replay or bridge placement
 is yet qualified, and no physical observer is packaged.
+
+## Pinned hash and cache bindings
+
+`hash.c` and `hash-block.S` now bind SHA-256 framing to the archived generic ARM
+compression entry0x4bd15620. The thunk supplies its end-pointer/table-base ABI,
+bypassing only CPU feature dispatch to select the generic integer algorithm. It
+changes no capability/global/security register. Twelve controls execute the actual
+compression instructions against hashlib vectors, including padding boundaries,
+the4608B blob, wrong digest and unadmitted/oversize inputs. Firmware reads are
+confined to round constants; ordinary writes are private stack only. Hashing itself
+is no longer modeled in the bridge's `--actual-hash` profile. Prefix streaming I/O
+still needs its separate immutable target adapter.
+
+`cache.S` bounds the range, calls the pinned0x4bd3c740 clean/drain/I-cache sequence,
+then explicitly executes DSB/ISB and normalizes its void return to success. Seven
+controls execute the wrapper/firmware loop and record CP15 maintenance order; the
+hardware effects remain modeled. This is code visibility maintenance, not a measured
+hardware visibility pass. No physical cache command was executed.
+
+Build both into the analysis bridge with `build_loader_bridge.py --zig <Zig0.14.1>
+--out <output>`. Retain callback roots with `-Wl,-u,lh_equal`, `-Wl,-u,lh_block` and
+`-Wl,-u,lb_cache_sync`. The combined bridge is968B before descriptors/hooks. Replay
+`validate_loader_bridge.py` with `--actual-hash --actual-cache`: five controls pass,
+including loading/committing the module on allocated state/stack. Readonly storage,
+driver, clock, IRQ, prefix hash and cache effects remain models. Real card/target
+read/write, prefix streaming, driver timing/clock and bridge/hook placement remain
+required before a physical bundle is admitted.

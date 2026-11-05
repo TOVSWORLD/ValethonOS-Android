@@ -4699,3 +4699,24 @@ is not placement qualification. Public loader-bridge-result.json and
 loader-module-blob-result.json. No device access, physical MMC command, helper/arm/reboot or kernel rebuild.
 Next bind real heap/hash/cache/clock/read/driver/card contracts and place the bridge
 and hook descriptors, then exact replay/integrity proof and changed review bundle.
+
+## 2026-11-04 — #346 actual generic hash and cache bindings implemented
+
+Implemented SHA framing and Thumb thunk to pinned archived generic ARM compression
+15620, providing end-pointer/table-base ABI without CPU feature dispatch or any
+capability/global/security-register changes.12 actual instruction controls match
+hashlib, padding boundaries through4608B, wrong digest and missing admission/size
+bounds. Firmware data reads confined to round constants; writes private stack only.
+Hash computation is not modeled in these controls. No device access.
+
+Implemented bounded cache wrapper calling pinned3c740 clean/drain/I-cache sequence
+and adding explicitDSB/ISB, normalizing its void return.7 controls execute actual
+wrapper/firmware loop; CP15 effects modeled/recorded, correct line coverage/order,
+no ordinary writes beyond stack. No physical cache operation or visibility pass.
+Five bridge controls also pass with actual blob-hash/cache instruction bindings,
+including allocated module/stack and MODE/HANDOFF records. Storage/driver/clock/IRQ,
+prefix hash and cache effects remain modeled. Combined bridge968B, descriptors/hooks
+excluded, so old584B gap is insufficient. Public hash/cache/bridge-services results.
+Next implement immutable physical read/write/prefix streaming and clock/driver
+bindings, then bridge/hook placement/replay and exact changed review. No new candidate,
+source export, device read/write, kernel rebuild, helper/arm/reboot or owner action.

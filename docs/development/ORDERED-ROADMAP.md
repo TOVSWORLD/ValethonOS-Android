@@ -30,6 +30,12 @@ module commits MODE/HANDOFF on allocated private stack in modeled RAM. Blob4608B
 bridge548B; descriptors/hooks and real firmware bindings/placement still required.
 Candidate6 only inspected for zero padding, unchanged; no physical action selected.
 
+Real hash/cache binding source implemented: generic ARM SHA12 vectors/bounds
+controls; cache wrapper7 order/bounds controls, CP15 effects modeled. Combined968B
+bridge passes5 loaded-module controls with actual blob-hash/cache instructions.
+Next immutable physical read/write/prefix streaming, clock/driver and bridge/hook
+placement. No physical commands or new candidate selected; originals/TWRP unarmed.
+
 Owner saw different lower-left console text approximately mode/reading; exact
 strings not recalled. One original return helper exit0; no exact handoff/kernel
 entry or kernel record proved. Supervisor stopped at full recovery read size

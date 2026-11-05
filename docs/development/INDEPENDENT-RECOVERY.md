@@ -1220,3 +1220,12 @@ models. Standalone blob4608B; candidate6 file12MiB padding interval verified wit
 modifying any candidate. Linked bridge548B excludes descriptors/hooks; no physical
 placement/bindings admission follows from its size. See loader-bridge-result.json
 and loader-module-blob-result.json. No new physical trial is selected.
+
+Pinned SHA/cache wrappers are implemented. Actual generic ARM compression passes12
+vectors/bounds controls without modeled hashing or capability/global writes. Cache
+binding executes archived clean/drain/I-cache loop then explicitDSB/ISB;7 controls
+record correct order, hardware cache effects modeled. Combined bridge968B before
+metadata/hooks;5 end-to-end controls pass with actual blob-hash/cache instructions.
+See loader-hash-binding-result.json, loader-cache-binding-result.json and
+loader-bridge-services-result.json. Prefix/physical I/O/clock/driver and placement
+remain unqualified; no physical observer/candidate is admitted.
