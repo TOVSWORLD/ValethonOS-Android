@@ -148,3 +148,10 @@ different producer/transport and cannot close this dependency. No separate contr
 boot or new physical procedure is selected. The complete next candidate cannot be
 presented as meeting the owner's positive-logging prerequisite until attributable
 hardware evidence for its chosen path exists.
+
+Collection diagnostics also retain existing ADB stdout/stderr for nonzero exits
+and timeouts, privately and without another command. Public error strings exclude
+command/selector/output text. Retention is capped at32MiB stdout and64KiB stderr;
+full byte counts/digests and exit/timeout classification survive. These failed
+captures never produce a valid readout or authorize restoration from partial data.
+This source change is not deployed to the lab and establishes no physical logging.

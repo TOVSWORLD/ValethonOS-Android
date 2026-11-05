@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import os
 import subprocess
-from restore_diagnostic_boot import Adb, BOOT, RECOVERY, BOOT_BYTES, RECOVERY_BYTES, validate_backup, PartitionReadError
+from restore_diagnostic_boot import Adb, BOOT, RECOVERY, BOOT_BYTES, RECOVERY_BYTES, validate_backup, PartitionReadError, AdbCommandError
 import retained_log_mailbox as mailbox
 from loader_checkpoint_record import decode as decode_loader_checkpoint
 
@@ -30,6 +30,7 @@ def collect(adb, original, manifest, candidate, nonce, output):
     except (ValueError, KeyError, OSError, subprocess.SubprocessError) as error:
         reasons = {
             'Selected ADB command failed; stop without retry': 'adb_command_failed',
+            'Selected ADB command timed out; stop without retry': 'transport_timeout',
             'Partition read size mismatch; no trimming permitted': 'partition_read_size_mismatch',
             'Recovery required': 'recovery_state_mismatch',
             'Recovery identity differs': 'recovery_identity_mismatch',
@@ -41,19 +42,23 @@ def collect(adb, original, manifest, candidate, nonce, output):
         reason = ('transport_timeout' if isinstance(error, subprocess.TimeoutExpired)
                   else reasons.get(str(error), 'validation_or_io_failure'))
         details = {}
-        if isinstance(error, PartitionReadError):
+        if isinstance(error, (PartitionReadError, AdbCommandError)):
             details = dict(error.details)
+            responses = ({'failed-partition-read-private.bin': (error.partial_data, 32*1024*1024)}
+                         if isinstance(error, PartitionReadError) else {
+                             'failed-adb-stdout-private.bin': (error.stdout, 32*1024*1024),
+                             'failed-adb-stderr-private.bin': (error.stderr, 65536)})
             # Save the existing response without another read, trimming or retry.
             # No failed partial image is eligible for a restoration readout.
             try:
                 output.mkdir(mode=0o700, parents=False, exist_ok=False)
-                path = output / 'failed-partition-read-private.bin'
-                fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
-                with os.fdopen(fd, 'wb') as stream:
-                    stream.write(error.partial_data[:32*1024*1024]);stream.flush();os.fsync(stream.fileno())
+                for name, (response, maximum) in responses.items():
+                    fd = os.open(output / name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+                    with os.fdopen(fd, 'wb') as stream:
+                        stream.write(response[:maximum]);stream.flush();os.fsync(stream.fileno())
                 details['private_response_retained'] = True
-                details['retained_bytes'] = min(error.received_bytes, 32*1024*1024)
-                details['retention_capped'] = error.received_bytes > 32*1024*1024
+                details['retained_bytes'] = sum(min(len(data), maximum) for data, maximum in responses.values())
+                details['retention_capped'] = any(len(data) > maximum for data, maximum in responses.values())
                 evidence = {'stage': stage[0], 'reason': reason, **details, 'valid_readout': False}
                 path = output / 'collection-failure-private.json'
                 fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)

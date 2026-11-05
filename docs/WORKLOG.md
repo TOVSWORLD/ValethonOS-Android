@@ -4922,3 +4922,13 @@ is port0@11210800 with no disabled status, under the enabled T-PHY. Only USB1
 instance nodes and incorrectly generalized to all USB. Exact DT hash/properties
 are now retained in the public comparison; queue/roadmap/plan corrected. No runtime
 USB qualification or failure cause follows. No build/device action occurred.
+
+
+### Preserve transport-failure evidence without retry
+
+Extended sanitized ADB failures to retain existing stdout/stderr, exit status and
+timeout classification. The private collector preserves capped streams and exact
+counts/digests for future diagnosis; no command/selector/raw text enters public
+error strings, and no failed readout becomes valid rollback input. Two new native
+failure controls plus nine collector/seven rollback controls pass. Source only,
+not deployed; no device access/build/arm/helper/reboot or physical qualification.

@@ -48,16 +48,31 @@ class PartitionReadError(ValueError):
         super().__init__('Partition read size mismatch; no trimming permitted')
 
 
+class AdbCommandError(ValueError):
+    """Sanitized transport failure with bytes reserved for private retention."""
+    def __init__(self, stdout, stderr, returncode=None, timed_out=False):
+        self.stdout = stdout or b''
+        self.stderr = stderr or b''
+        self.details = {'transport_returncode': returncode, 'transport_timed_out': timed_out,
+                        'stdout_bytes': len(self.stdout), 'stdout_sha256': sha(self.stdout),
+                        'stderr_bytes': len(self.stderr), 'stderr_sha256': sha(self.stderr)}
+        super().__init__('Selected ADB command timed out; stop without retry' if timed_out
+                         else 'Selected ADB command failed; stop without retry')
+
+
 class Adb:
     def __init__(self, executable, selector):
         self.command = [executable, '-s', selector]
 
     def run(self, args, data=None):
-        result = subprocess.run(self.command + args, input=data,
-                                capture_output=True, timeout=90)
+        try:
+            result = subprocess.run(self.command + args, input=data,
+                                    capture_output=True, timeout=90)
+        except subprocess.TimeoutExpired as error:
+            raise AdbCommandError(error.stdout, error.stderr, timed_out=True) from None
         if result.returncode:
-            # Raw adb output can include private selectors. Keep it out of reports.
-            raise ValueError('Selected ADB command failed; stop without retry')
+            # Never include command/selector/output text in public error strings.
+            raise AdbCommandError(result.stdout, result.stderr, result.returncode)
         return result.stdout
 
     def read(self, node, size):
