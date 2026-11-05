@@ -71,7 +71,9 @@ def finish(kernel,component,vm_report,output):
             'repository_revision':manifest['repository_revision'],'build_run':manifest['run_id'],
             'kernel_release':release,'kernel_manifest_sha256':sha((kernel/'manifest.json').read_bytes()),'component_report_sha256':sha((component/'report.json').read_bytes()),
             'partition_bytes':len(full),'partition_sha256':sha(full),'nonce_sha256':sha(nonce),
-            'prefix_sha256':prefix,'dt':inspect_header(dtb.read_bytes()),'layout':layout,
+            'prefix_sha256':prefix,'dt':inspect_header(dtb.read_bytes()),
+            'unseeded_assembly_sha256':layout['partition_sha256'],
+            'layout':{key:value for key,value in layout.items() if key!='partition_sha256'},
             'artifacts':{name:{'bytes':len(data),'sha256':sha(data)} for name,data in assets.items()},
             'package_builder_sha256':sha(Path(__file__).read_bytes()),'redistribution_allowed':False,'bootargs':ARGS,'logging_backends':['USB ACM VLOG0002','kernel boot-tail VLOG0001'],
             'automatic_reboot_requested':False,'physical_execution_admitted':False,'kernel_boot_confirmed':False,'hardware_logging_confirmed':False}

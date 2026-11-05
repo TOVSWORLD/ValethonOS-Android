@@ -4960,3 +4960,25 @@ CONFIG_PM_SLEEP declarations in power.h. The inherited restricted profile disabl
 SUSPEND. The complete draft now includes normal PM/SUSPEND/PM_SLEEP and its selected
 HOTPLUG_CPU code; the primary-only DT/cmdline and enforcing ramdisk do not invoke
 suspend or secondary CPU operations. No physical PM qualification is inferred.
+
+
+### Complete first kernel draft delivered
+
+Combined run42091153900 succeeded at dfdd0800db2d0a529b1e4e7d40e14f028974aed9.
+Actual kernel6.18.34-valethon-draft1+ Image26532352B/gzip9274386B/runtime28049408B
+passed loader capacity checks.16 retained kernel/config/map/provider artifacts
+verified; matching enforcing VM passed labels/domain/kmsg/configfs with final UDC
+bind intercepted. That is not physical USB or tablet acceptance.
+
+Assembled the complete first draft with matched own-source DT/ramdisk/fresh nonce,
+USB stream and kernel boot-tail logging,1MiB timestamped ring/initcall tracing and
+panic timeout0. Independent final-byte checks verify23 artifacts, Android component
+ID, Image/DT/ramdisk/nonce, entry/placement, USB0/peripheral/eMMC, seeded HOSTCONTROL
+and absence of old entry-screen/delay symbols. Boot image SHAaf1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365.
+Archive30,038,966B SHA56ed1d97d7bb2a852242c99e2f07addc39dc7b18959f1453692ae4ad393c7cd7.
+
+Results-first TESTING.md requires capture/archive/readout before restoration; no new
+automatic recovery loop/observer selected. This is the first complete kernel
+bring-up draft, not the finished Android OS. Secondary CPU/peripheral behavior and
+positive target logging remain unproved. No device access/write/arm/helper/reboot
+was performed. Existing original rollback and private evidence remain intact.

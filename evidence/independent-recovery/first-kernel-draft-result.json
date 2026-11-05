@@ -1,0 +1,89 @@
+{
+  "scope": "Complete first kernel draft: actual compile, enforcing VM and final boot package; no tablet acceptance",
+  "issue": 346,
+  "primary_pr": 453,
+  "kernel_release": "6.18.34-valethon-draft1+",
+  "kernel_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "repository_revision": "dfdd0800db2d0a529b1e4e7d40e14f028974aed9",
+  "build": {
+    "run": 42091153900,
+    "url": "https://github.com/TOVSWORLD/ValethonOS-Android/actions/runs/42091153900",
+    "conclusion": "success",
+    "retained_files_verified": 16
+  },
+  "kernel": {
+    "bytes": 26532352,
+    "sha256": "0f43c1f91d9c158659f4f4522d44390cdd934074fb57135344e9d20142235930"
+  },
+  "kernel_gzip": {
+    "bytes": 9274386,
+    "sha256": "87eadb63a9e4d9f0856591f9e7be0fa7d6df8d81f505de55eedc3e3a385e0faa"
+  },
+  "runtime_image_bytes": 28049408,
+  "config": {
+    "bytes": 182926,
+    "sha256": "733284da97440ff9251b4a91b97f99475cd2c9a527d05e557237e1751bf6517e"
+  },
+  "dt": {
+    "format_version": 17,
+    "bytes": 27440,
+    "sha256": "55dfd1402eae194bf3e4ffe3a4c92e3ad6d24b8c4993488525473a28de65c6cb"
+  },
+  "initramfs": {
+    "bytes": 13686,
+    "sha256": "738289b97ef8dcf152d4dba55b2073e36a98eba0d24f6788c07a6667a2a71dc7"
+  },
+  "package": {
+    "partition_bytes": 16777216,
+    "partition_sha256": "af1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365",
+    "archive_bytes": 30038966,
+    "archive_sha256": "56ed1d97d7bb2a852242c99e2f07addc39dc7b18959f1453692ae4ad393c7cd7",
+    "local_archive": "out/valethon-first-draft-1.tar.gz"
+  },
+  "enforcing_vm": {
+    "passed": true,
+    "kernel_sha256": "0f43c1f91d9c158659f4f4522d44390cdd934074fb57135344e9d20142235930",
+    "policy_sha256": "5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8",
+    "selinux_enforcing": true,
+    "udc_bind_intercepted_vm_only": true,
+    "physical_usb_test": false
+  },
+  "independent_package_checks": {
+    "scope": "Independent final-byte checks, not physical acceptance",
+    "passed": true,
+    "partition_sha256": "af1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365",
+    "files_verified": 23,
+    "android_component_ID_valid": true,
+    "exact_Image_DT_ramdisk_nonce_binding": true,
+    "USB0_peripheral_and_emmc_enabled": true,
+    "runtime_fits_below_inflate_stack": true,
+    "initial_mailbox_host_control_only": true,
+    "old_entry_instrumentation_absent": true,
+    "physical_access": false
+  },
+  "logging": {
+    "printk_ring_bytes": 1048576,
+    "initcall_trace": true,
+    "backends": [
+      "USB ACM VLOG0002",
+      "kernel boot-tail VLOG0001"
+    ],
+    "initial_mailbox": "HOSTCONTROL only, not kernel output",
+    "kernel_panic_timeout": 0,
+    "hardware_confirmed": false,
+    "coverage_limit": "USB requires PID1/UDC; boot-tail requires eMMC/late init. Earliest entry failure remains outside both."
+  },
+  "kernel_boot_confirmed": false,
+  "physical_execution_admitted": false,
+  "device_accessed": false,
+  "installed": false,
+  "armed": false,
+  "automatic_recovery_engineering_added": false,
+  "provider_integration": "Existing clock, pinctrl, PMIC/power, IOMMU, USB, SYM827, MIPI/DSI and PWM ports linked in one Image. Old entry-screen/delay instrumentation omitted.",
+  "remaining_hardware_limits": [
+    "Secondary CPU firmware contract",
+    "Display/touch/audio/wireless operation",
+    "Positive on-tablet kernel logging"
+  ],
+  "test_protocol": "projects/firetabs-android/kernel/first-draft/TESTING.md"
+}

@@ -1,5 +1,15 @@
 # Active work queue — ordered delivery
 
+Completed first kernel draft: **6.18.34-valethon-draft1+**. Combined build
+42091153900 succeeded at dfdd080; enforcing VM and independent final package
+checks passed. The complete16MiB boot image and private delivery archive are in
+out/valethon-first-draft-1. The source receipt is
+[evidence/independent-recovery/first-kernel-draft-result.json](../../evidence/independent-recovery/first-kernel-draft-result.json).
+USB streaming and retained boot-tail logs are included; no automatic-recovery
+engineering was added. No tablet boot/logging acceptance, installation or trial
+is claimed. The next test must prioritize capture/retrieval before restoration.
+This completed draft supersedes older no-build/minimal-control selections below.
+
 Latest owner direction: finish the complete first kernel draft and prioritize
 test results/retrievable logs over automatic recovery engineering. A combined
 first-draft build is selected: existing board ports, enforcing PID1, USB streaming
