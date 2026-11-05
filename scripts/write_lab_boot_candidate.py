@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 import subprocess
+from logging_test_gate import require_logging_control
 from restore_diagnostic_boot import Adb, BOOT_BYTES, preflight, restore, sha, validate_backup
 
 
@@ -30,6 +31,8 @@ def main():
     p.add_argument('--receipt', type=Path)
     a = p.parse_args()
     try:
+        if a.write_candidate:
+            require_logging_control()
         # Exact full-size regular inputs; do not follow binary asset symlinks.
         for path in [a.candidate, a.original_boot]:
             if path.is_symlink() or not path.is_file() or path.stat().st_size != BOOT_BYTES:

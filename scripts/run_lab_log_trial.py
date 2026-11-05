@@ -14,6 +14,7 @@ import signal
 import subprocess
 import sys
 import time
+from logging_test_gate import require_logging_control
 from bounded_recovery_entry import verify_sources, choose_port, scan_ports, launch_helper
 from capture_lab_kernel_log import private_bytes, validate
 from restore_diagnostic_boot import Adb, preflight, sha, update_receipt
@@ -123,6 +124,8 @@ def main():
     claimed = False
     stage = 'input_and_device_preflight'
     try:
+        if a.arm_once:
+            require_logging_control()
         plan = json.loads(private_bytes(a.plan, 4096))
         report = json.loads(private_bytes(a.candidate_report, 65536))
         nonce = private_bytes(a.nonce, 32)
@@ -192,6 +195,7 @@ def main():
             result['collection_failure_stage'] = error.stage
             result['collection_failure_kind'] = error.kind
             result['collection_failure_reason'] = error.reason
+            result['collection_failure_details'] = error.details
         if isinstance(error, OSError):
             result['error_number'] = error.errno
     finally:

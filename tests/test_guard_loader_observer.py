@@ -44,7 +44,7 @@ class Fake:
 class WriteGuard(unittest.TestCase):
     def run_case(self,preflight,fail=False):
         data=b'X'*g.SIZE;adb=Fake(data,fail)
-        with tempfile.TemporaryDirectory() as f,patch.object(g,'preflight',side_effect=preflight),patch.object(g,'sha',return_value=g.CANDIDATE):
+        with tempfile.TemporaryDirectory() as f,patch.object(g,'require_logging_control'),patch.object(g,'preflight',side_effect=preflight),patch.object(g,'sha',return_value=g.CANDIDATE):
             path=Path(f)/'receipt.json'
             try:r=g.write_once(adb,data,{},g.ORIGINAL,g.ORIGINAL_BOOT,path)
             except ValueError:r=json.loads(path.read_text())

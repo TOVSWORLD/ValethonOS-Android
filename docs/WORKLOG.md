@@ -4875,3 +4875,18 @@ platform, third-party OS install or stock-DT substitution into mainline. No buil
 device access, flash/arm/helper/reboot or owner trip. Evidence/proven-douglas-baseline
 receipt and revised unblock plan record the bounded conclusions; no root cause or
 hardware acceptance is inferred from the external report or source comparison.
+
+
+### Testing-process correction: stop unqualified physical trials
+
+No custom kernel tablet boot or kernel log is confirmed. Added a shared fail-closed
+hold before candidate installation, observer installation and supervisor arming;
+there is no override. Original restoration/read-only collection remain available.
+The next deliverable is a reviewed known-kernel logging control, followed by actual
+fresh attributable output before any new-kernel admission. This hold is not that
+qualification. LOADER-UNBLOCK-PLAN.md defines the four exits and transport limits.
+Mailbox collection now distinguishes record presence from recognized kernel/loader
+attribution; preseeded HOSTCONTROL no longer sets attributable_record. Failed-size
+reads retain existing bytes privately (32MiB cap), lengths and digest, without any
+extra device read or retry; no failed readout can supply an accepted rollback image.
+No device access, new kernel build, arm, helper, reboot or owner trip occurred.

@@ -37,6 +37,17 @@ def validate_backup(data, manifest):
             raise ValueError('Invalid pinned digest')
 
 
+class PartitionReadError(ValueError):
+    """Keep exact failed-read bytes available to the private collector only."""
+    def __init__(self, expected, data):
+        self.expected_bytes = expected
+        self.received_bytes = len(data)
+        self.partial_data = data
+        self.details = {'expected_bytes': expected, 'received_bytes': len(data),
+                        'received_sha256': sha(data)}
+        super().__init__('Partition read size mismatch; no trimming permitted')
+
+
 class Adb:
     def __init__(self, executable, selector):
         self.command = [executable, '-s', selector]
@@ -52,7 +63,7 @@ class Adb:
     def read(self, node, size):
         data = self.run(['exec-out', 'cat', node])
         if len(data) != size:
-            raise ValueError('Partition read size mismatch; no trimming permitted')
+            raise PartitionReadError(size, data)
         return data
 
     def push(self, data, destination):

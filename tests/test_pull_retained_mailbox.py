@@ -16,7 +16,7 @@ class PullMailbox(unittest.TestCase):
             m.write_fixture(disk,nonce,sha,b'attributable prior kernel log\n')
             adb=FakeAdb();adb.boot=disk.read_bytes()
             report=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,p/'capture')
-            self.assertTrue(report['attributable_record']);self.assertEqual(report['current_boot_sha256'],r.sha(adb.boot))
+            self.assertFalse(report['attributable_record']);self.assertTrue(report['record_present']);self.assertEqual(report['current_boot_sha256'],r.sha(adb.boot))
             self.assertEqual((p/'capture/record-private.bin').read_bytes(),b'attributable prior kernel log\n')
             self.assertEqual(adb.writes,0)
             self.assertFalse(any('reboot' in call for call in adb.calls))
@@ -57,7 +57,7 @@ class PullMailbox(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             adb=FakeAdb();adb.boot=candidate
             report=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,Path(folder)/'capture')
-            self.assertTrue(report['attributable_record']);self.assertTrue(report['host_control_only']);self.assertFalse(report['kernel_record'])
+            self.assertFalse(report['attributable_record']);self.assertTrue(report['host_control_only']);self.assertFalse(report['kernel_record'])
 
 class CollectionDiagnostics(unittest.TestCase):
     def test_failed_alias_has_exact_safe_stage_and_never_reads_partitions(self):
@@ -109,3 +109,29 @@ class LoaderRecordAttribution(unittest.TestCase):
             report=pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,p/'readout')
             self.assertTrue(report['loader_decode_error']);self.assertFalse(report['loader_record']);self.assertFalse(report['kernel_record'])
             self.assertTrue(report['exact_candidate_prefix_and_seed_verified']);self.assertEqual((p/'readout/boot-after-trial-private.img').read_bytes(),adb.boot);self.assertEqual(adb.writes,0)
+
+class FailedReadRetention(unittest.TestCase):
+    def test_partial_bytes_and_lengths_retained_once_privately(self):
+        nonce=bytes(range(32));candidate,_=m.prepare(BACKUP,nonce)
+        class Partial(FakeAdb):
+            count=0
+            def read(self,node,size):
+                self.count+=1
+                raise r.PartitionReadError(size,b'private partial fixture')
+        adb=Partial();adb.boot=candidate
+        with tempfile.TemporaryDirectory() as folder:
+            output=Path(folder)/'failed'
+            with self.assertRaises(pull.CollectionError) as raised:
+                pull.collect(adb,BACKUP,MANIFEST,candidate,nonce,output)
+            error=raised.exception
+            self.assertEqual(error.stage,'full_recovery_read_and_hash')
+            self.assertEqual(error.reason,'partition_read_size_mismatch')
+            self.assertEqual(error.details['expected_bytes'],r.RECOVERY_BYTES)
+            self.assertEqual(error.details['received_bytes'],23)
+            self.assertEqual(error.details['received_sha256'],r.sha(b'private partial fixture'))
+            self.assertEqual((output/'failed-partition-read-private.bin').read_bytes(),b'private partial fixture')
+            self.assertEqual((output/'failed-partition-read-private.bin').stat().st_mode & 0o777,0o600)
+            self.assertFalse((output/'report.json').exists())
+            self.assertFalse((output/'boot-after-trial-private.img').exists())
+            self.assertNotIn('private partial',str(error))
+            self.assertEqual(adb.count,1);self.assertEqual(adb.writes,0)

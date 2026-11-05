@@ -1,5 +1,10 @@
 # Ordered ValethonOS delivery roadmap
 
+Testing-process correction: physical candidate writes and arming are held until a
+reviewed known-kernel control qualifies the actual logging path. No custom kernel
+boot or kernel log is confirmed. Read-only collection and original rollback remain
+available. See [measurement repair plan](LOADER-UNBLOCK-PLAN.md).
+
 Current346: actual trial7 complete, originals verified/TWRP and unarmed. Only
 HOSTCONTROLseq1/85B retained; no exact kernel entry/handoff or kernel record. TWRP
 repair restored normal bootstrap; approved fullp5 restoration/readbacks verified.

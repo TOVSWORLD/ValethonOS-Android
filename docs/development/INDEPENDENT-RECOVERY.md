@@ -1,5 +1,10 @@
 # Issue346 — bounded independent recovery preparation
 
+Testing-process correction: physical candidate writes and arming are held until a
+reviewed known-kernel control qualifies the actual logging path. No custom kernel
+boot or kernel log is confirmed. Read-only collection and original rollback remain
+available. See [measurement repair plan](LOADER-UNBLOCK-PLAN.md).
+
 Current Phase1 work follows accepted entry347. Ordinary return and normal logs
 are complete; failed-load return and348 retention are not. No device operation
 is authorized merely by this document or a passed host test.

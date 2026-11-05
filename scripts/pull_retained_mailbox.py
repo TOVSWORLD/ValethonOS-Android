@@ -6,17 +6,18 @@ import json
 from pathlib import Path
 import os
 import subprocess
-from restore_diagnostic_boot import Adb, BOOT, RECOVERY, BOOT_BYTES, RECOVERY_BYTES, validate_backup
+from restore_diagnostic_boot import Adb, BOOT, RECOVERY, BOOT_BYTES, RECOVERY_BYTES, validate_backup, PartitionReadError
 import retained_log_mailbox as mailbox
 from loader_checkpoint_record import decode as decode_loader_checkpoint
 
 
 class CollectionError(ValueError):
     """Allowlisted validation stage only; never includes transport output/identity."""
-    def __init__(self, stage, kind, reason):
+    def __init__(self, stage, kind, reason, details=None):
         self.stage = stage
         self.kind = kind
         self.reason = reason
+        self.details = details or {}
         super().__init__('Retained collection stopped at ' + stage)
 
 
@@ -39,7 +40,33 @@ def collect(adb, original, manifest, candidate, nonce, output):
         }
         reason = ('transport_timeout' if isinstance(error, subprocess.TimeoutExpired)
                   else reasons.get(str(error), 'validation_or_io_failure'))
-        raise CollectionError(stage[0], type(error).__name__, reason) from error
+        details = {}
+        if isinstance(error, PartitionReadError):
+            details = dict(error.details)
+            # Save the existing response without another read, trimming or retry.
+            # No failed partial image is eligible for a restoration readout.
+            try:
+                output.mkdir(mode=0o700, parents=False, exist_ok=False)
+                path = output / 'failed-partition-read-private.bin'
+                fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+                with os.fdopen(fd, 'wb') as stream:
+                    stream.write(error.partial_data[:32*1024*1024]);stream.flush();os.fsync(stream.fileno())
+                details['private_response_retained'] = True
+                details['retained_bytes'] = min(error.received_bytes, 32*1024*1024)
+                details['retention_capped'] = error.received_bytes > 32*1024*1024
+                evidence = {'stage': stage[0], 'reason': reason, **details, 'valid_readout': False}
+                path = output / 'collection-failure-private.json'
+                fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+                with os.fdopen(fd, 'w') as stream:
+                    json.dump(evidence, stream, indent=2);stream.flush();os.fsync(stream.fileno())
+                directory = os.open(output, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+                try:
+                    os.fsync(directory)
+                finally:
+                    os.close(directory)
+            except OSError:
+                details['private_response_retained'] = False
+        raise CollectionError(stage[0], type(error).__name__, reason, details) from error
 
 
 def _collect(adb, original, manifest, candidate, nonce, output, mark):
@@ -84,10 +111,13 @@ def _collect(adb, original, manifest, candidate, nonce, output, mark):
     for name,data in [('boot-after-trial-private.img',image),('record-private.bin',state['latest']['payload'] if state['latest'] else b'')]:
         fd=os.open(output/name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
         with os.fdopen(fd,'wb') as f:f.write(data);f.flush();os.fsync(f.fileno())
+    kernel_record = bool(state['latest'] and state['latest']['sequence'] >= 2 and
+                         state['latest']['payload'].startswith(b'VALETHON RETAINED KERNEL LOG v1 release='))
     report={'exact_candidate_prefix_and_seed_verified':True,'recovery_unchanged':True,
             'current_boot_sha256':hashlib.sha256(image).hexdigest(),
-            'attributable_record':state['latest'] is not None,
-            'kernel_record':bool(state['latest'] and state['latest']['sequence']>=2 and state['latest']['payload'].startswith(b'VALETHON RETAINED KERNEL LOG v1 release=')),
+            'record_present':state['latest'] is not None,
+            'attributable_record':kernel_record or loader_checkpoint is not None,
+            'kernel_record':kernel_record,
             'host_control_only':bool(state['latest'] and state['latest']['payload'].startswith(b'VALETHON HOST CONTROL v1\n')),
             'sequence':state['latest']['sequence'] if state['latest'] else None,
             'record_bytes':len(state['latest']['payload']) if state['latest'] else 0,

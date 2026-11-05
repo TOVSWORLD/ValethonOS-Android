@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from logging_test_gate import require_logging_control
 """Exact bootstrap-range guard. Default read-only; no reboot/helper/trial arm.
 
 Install/restore are separate high-risk reviewed operations, never automatic.
@@ -118,6 +119,8 @@ def write_once(adb,data,originals,current,boot,receipt_path):
     target=sha(data)
     if len(data)!=SIZE or (current,target) not in [(ORIGINAL,CANDIDATE),(CANDIDATE,ORIGINAL)]:
         raise ValueError('Only exact reviewed install or rollback allowed')
+    if target==CANDIDATE:
+        require_logging_control()
     preflight(adb,originals,current,boot)
     receipt={'operation':'bootstrap observer install' if target==CANDIDATE else 'bootstrap original restore','expected_before_sha256':current,'target_sha256':target,'write_started':False,'verified':False,'rebooted':False,'recovery_written':False}
     fd=os.open(receipt_path,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)

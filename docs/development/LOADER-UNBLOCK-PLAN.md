@@ -65,3 +65,41 @@ supported/updated-platform goal. Trial8 artifacts are retained as a fallback, no
 selected or awaiting an approval request. No build, device access, flash, helper,
 arm or reboot was performed for this research. See the sanitized
 [comparison](../../evidence/independent-recovery/proven-douglas-baseline-result.json).
+
+## Measurement repair — required before another kernel trial
+
+No project-built kernel has a confirmed tablet boot or a verified kernel log.
+HOSTCONTROL is a preinstalled fixture, not execution evidence. A loader checkpoint
+cannot qualify kernel entry. Recovery return cannot establish the reset cause.
+
+The physical candidate installer, observer installer and supervisor arm entry points
+now stop before device preflight while the measurement path is unqualified. There
+is no command-line override or receipt boolean that clears this hold. Read-only
+collection and the existing original restoration paths remain usable. Trial8 stays
+held. This is a stop against blind trials, not a completed positive control.
+
+Follow this sequence; each step has an observable exit:
+
+1. Finish the offline compatibility profile for the already-booted matched kernel/DT
+   and minimal enforcing diagnostic ramdisk. Establish the exact policy ABI and USB
+   driver requirements. Do not build another custom kernel to calibrate the test.
+2. Prepare a separate complete control review: exact component hashes, boot layout,
+   fresh nonce, actual host collector, one-trip instructions and guarded rollback.
+   Replace this unconditional hold only with a narrowly scoped control admission
+   validator in that review. Fresh exact approval and availability are required.
+3. Run that known-kernel control once through the actual physical collection path.
+   Accept only fresh nonce-bound raw kernel output, with a kernel boot record
+   matching the selected kernel release. Verify wire framing, sequence, terminal
+   completion and raw digest independently. Empty output, host fixtures, loader
+   records, approximate screen recall and modeled execution all fail qualification.
+4. Bind the accepted qualification to the collector/producer versions and transport.
+   Admit a new kernel only with its observation transport enabled and compatible.
+   USB qualification cannot qualify the retained-mailbox backend. A silent trial is
+   an unobserved measurement and stops kernel iteration; it is not a kernel failure
+   diagnosis. USB output still cannot prove execution before USB initialization.
+
+Failed partition-size validation now preserves the existing response privately,
+with expected/received lengths and its digest, without retrying or trimming it into
+an accepted image. Retention is capped at32MiB. Failed output has no valid report or
+rollback image. This improves future diagnosis; discarded historical responses
+cannot be reconstructed and their causes remain unknown.
