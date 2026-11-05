@@ -13,7 +13,7 @@
     "projects/firetabs-android/kernel/clock-port/overlay/include/dt-bindings/reset/mediatek,mt8163-infracfg.h": "b6bcde0dc42803e783c95313952b8fb50d061d72fecf032e97e1f2a87cfd2317",
     "scripts/build_mipi_provider.sh": "b9c4e84de0cce407482ab19ee3571d0bea89accb5f8e3388874d87f9d08bbc5b",
     "scripts/build_sym827_provider.sh": "b41171108dd124688bab5862cf8ad5984ccff7634698de3d3edf03443d0df176",
-    "scripts/build_ack_baseline.sh": "983a6e7e4048368b1f0a434fa5e95092625bb89b971d7ee50ac94dbb6a3035a9",
+    "scripts/build_ack_baseline.sh": "17044a4116887dc0b8c3f03283c615e6879a9b31b92170ab52ce4efb7aeda30b",
     "scripts/apply_mipi_port.py": "a761c047355ee149c1ba13ad01d17adb047c2e62d76bd4084f9af47f4b2744b5",
     "scripts/validate_mipi_dependencies.py": "55c63405880d165ecdd8dbb7b75974ccc5d2206c1128a5a1d589b34fcc57053b",
     "evidence/mipi-binding/portable-schemas.json": "fa1d277fde0812ed4cfe37e4fc98693e2f856476aa9ad14e2ccb357043a681aa",
@@ -23,5 +23,15 @@
     "projects/firetabs-android/kernel/dtb/bindings/mt8163-mipi-tx.json": "dcaf3fa0c4ddb76b24a5756cfd445844c30617eaa108a0676c016854d71076e5",
     "projects/firetabs-android/kernel/dtb/bindings/mt8163-mipi-tx.patch": "bb8802e0a23bcc6799a718fdd8f13a9e3e046263a97115916fca240a404230ca"
   },
-  "runtime_qualified": false
+  "runtime_qualified": false,
+  "historical_build_script_sha256": "983a6e7e4048368b1f0a434fa5e95092625bb89b971d7ee50ac94dbb6a3035a9",
+  "current_build_script_review": {
+    "scope": "Opt-in first-draft integration; prior named profile branches preserved",
+    "historical_build_receipts_unchanged": true,
+    "provider_sources_unchanged": true,
+    "current_sha256": "17044a4116887dc0b8c3f03283c615e6879a9b31b92170ab52ce4efb7aeda30b",
+    "actual_combined_build_run": 42091153900,
+    "combined_build_repository_revision": "dfdd0800db2d0a529b1e4e7d40e14f028974aed9",
+    "combined_build_receipt": "evidence/independent-recovery/first-kernel-draft-result.json"
+  }
 }

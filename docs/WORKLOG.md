@@ -4982,3 +4982,12 @@ automatic recovery loop/observer selected. This is the first complete kernel
 bring-up draft, not the finished Android OS. Secondary CPU/peripheral behavior and
 positive target logging remain unproved. No device access/write/arm/helper/reboot
 was performed. Existing original rollback and private evidence remain intact.
+
+
+Final source CI found stale build_ack_baseline.sh pins in the AUDSYS and MIPI
+current-source contracts (also consumed by the DSI dependency audit). Reviewed the
+new opt-in first-draft branches: prior profile paths/provider sources preserved;
+combined Image actually compiled in42091153900. Updated only those current script
+hashes, retained the historical hash and old build receipts explicitly, and linked
+the new combined-build receipt. No binding vectors or rejection checks weakened,
+and no successful kernel rebuild is needed for this evidence-only correction.
