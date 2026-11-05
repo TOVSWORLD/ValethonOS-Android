@@ -4795,3 +4795,12 @@ overflow and exact allowed reads. No CID/serial/userdata reads or controller wri
 Caller pointer/getter provenance and pinned read integration remain unfinished;
 cached metadata alone is not fresh card interrogation or physical acceptance.
 No device access, candidate packaging, arm/helper/reboot or owner action.
+
+## 2026-11-04 — #346 identity guard connected to timed start
+
+Implemented lft_start_bound: two matching cached snapshots must agree with immutable
+device/RCA/cache plans before clock/controller/storage initialization. Mismatch
+consumes the attempt, preventing a later unchecked-start retry. Native integrated
+case passes alongside inherited controls (9 collected cases); changed Thumb module
+compiles with the new entry/guard included. ARM execution of the new entry and actual
+frontend pointer/getter provenance remain open. No new physical candidate or action.

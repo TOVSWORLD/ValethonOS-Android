@@ -9,7 +9,7 @@ def build(compiler,output,profile="core"):
  flags=['-target','thumb-freestanding-eabi','-mcpu=cortex_a9','-Oz','-g','-fPIC','-fvisibility=hidden','-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-unwind-tables','-fno-asynchronous-unwind-tables'];objects=[]
  names=['checkpoint.c','mmc_flush.c','module.c','freestanding.c']
  if profile in ['firmware','timed']:names+=['physical.c','hash-stream.c','firmware-module.c','hash-block.S']
- if profile=='timed':names+=['clock.c','command.c','timed-module.c']
+ if profile=='timed':names+=['clock.c','command.c','timed-module.c','identity.c']
  for source in names:
   name=source.rsplit('.',1)[0]
   obj=output/(name+'.o');objects.append(str(obj));subprocess.run([compiler,'cc',*flags,'-c',str(ROOT/'projects/firetabs-android/loader-retained'/source),'-o',str(obj)],env=env,check=True)

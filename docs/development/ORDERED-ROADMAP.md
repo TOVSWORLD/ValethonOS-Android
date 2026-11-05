@@ -9,7 +9,9 @@ Latest source: timed module6996B/state8728B integrates immutable target/prefix,
 checked flush, read-only GPT clock and bounded command-only R1/CMD13 lane.10 native/
 14 ARM command controls and4 native/9 ARM composition controls pass with hardware,
 counter and ARM-prefix model boundaries. No reset/DMA/security writes. Original raw
-data driver remains termination-unqualified. Next: card identity/recovery-risk
+data driver remains termination-unqualified. Cached identity double-snapshot guard
+now gates a separate timed start entry; native integration passes, ARM compiled only.
+Pinned frontend getter/read provenance remains open. Next: card identity/recovery-risk
 contract and bridge/descriptors/hooks ownership/IRQ/replay/cache visibility. No new
 candidate or physical observer selected; source tests are not hardware acceptance.
 

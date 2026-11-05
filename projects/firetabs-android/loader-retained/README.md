@@ -252,3 +252,11 @@ observable; this does not admit it to the timed writer. The supplied pointers an
 read callback are still a frontend responsibility: cached agreement is not fresh
 card interrogation or actual pointer provenance. No physical hook uses this guard.
 Run `python3 -m unittest discover -s tests -p test_loader_identity.py` (5 controls).
+
+`lft_start_bound` connects this guard to timed initialization: selected device,
+RCA and cache fields must match the immutable storage/service plans before any
+controller or storage callback. Mismatch consumes the attempt and stops the writer.
+The original analysis entry remains available for existing emulator controls.
+Native integration passes (9 collected cases, including inherited controls);
+Thumb compilation includes both guard and new entry. The new entry has not yet
+been executed in the ARM emulator or connected to pinned frontend getters.

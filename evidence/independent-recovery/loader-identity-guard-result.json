@@ -25,5 +25,15 @@
   "sources": {
     "identity.h": "9c85647ee1a5d079a21f96011190639b05c3d5fe25d44e2cc6f793e4637626c0",
     "identity.c": "383b61763640d245860f15c700823abab5e55851dda5fc5a8c7bec1a6cd47df5"
+  },
+  "timed_start_integration": {
+    "entry": "lft_start_bound",
+    "native_test_cases": 9,
+    "new_integration_case": 1,
+    "inherited_cases_repeated_by_test_subclass": 4,
+    "arm_compiled": true,
+    "arm_execution_validated": false,
+    "failure_before_controller_or_storage_callbacks": true,
+    "physical_frontend_bound": false
   }
 }
