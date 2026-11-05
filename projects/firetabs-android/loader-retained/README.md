@@ -240,3 +240,15 @@ IRQ lifecycle/replay/cache visibility remain requirements before packaging.
 A possible console-only code reclamation route is only a private analysis proposal,
 not an admitted span. No physical observer, candidate modification or trial follows
 from these source controls.
+
+### Cached identity guard
+
+`identity.c` implements two matching selected-field snapshots before publishing a
+binding. It checks device zero, block/card/host pointer agreement, MMC0 controller
+base, RCA range, MMC flag, supported cached EXT_CSD revision and cache fields.
+Read failure, mutation, pointer arithmetic overflow or mismatch leaves zero output.
+It reads no CID/serial or user data and performs no writes. Cache disabled remains
+observable; this does not admit it to the timed writer. The supplied pointers and
+read callback are still a frontend responsibility: cached agreement is not fresh
+card interrogation or actual pointer provenance. No physical hook uses this guard.
+Run `python3 -m unittest discover -s tests -p test_loader_identity.py` (5 controls).

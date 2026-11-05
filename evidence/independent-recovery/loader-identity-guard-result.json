@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "kind": "loader_cached_identity_guard",
+  "hardware_acceptance": false,
+  "device_accessed": false,
+  "native_controls": 5,
+  "reads": "two selected metadata snapshots via caller supplied read callback",
+  "firmware_offsets": {
+    "device_id": 4,
+    "device_block_pointer": 8,
+    "card_host_pointer": 0,
+    "host_controller_base": 40,
+    "card_rca": 24,
+    "card_flags": 28,
+    "ext_csd_revision": 268,
+    "ext_csd_cache_ctrl": 109,
+    "ext_csd_cache_size": 325
+  },
+  "limits": [
+    "Cached metadata agreement is not fresh card interrogation or independent pointer provenance.",
+    "No pinned getter/read callback or hook integration is admitted.",
+    "Cache disabled is represented, but existing timed writer still rejects it.",
+    "No CID, serial, userdata, controller writes or physical trial."
+  ],
+  "sources": {
+    "identity.h": "9c85647ee1a5d079a21f96011190639b05c3d5fe25d44e2cc6f793e4637626c0",
+    "identity.c": "383b61763640d245860f15c700823abab5e55851dda5fc5a8c7bec1a6cd47df5"
+  }
+}

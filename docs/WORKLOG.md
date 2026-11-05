@@ -4784,3 +4784,14 @@ Programming replies now pace CMD13 by a clock millisecond under finite spin/time
 guards. The outer flush retains1000ms and now allows1000 polls instead of the early
 eight-poll prototype, avoiding a premature source limit before real cache completion.
 Frozen pacing fails closed; native flush9 controls and timed composition pass.
+
+## 2026-11-04 — #346 cached runtime identity guard implemented
+
+Added a selected-field double-snapshot guard for immutable device/card/host binding.
+It validates MMC0 base, device/block pointer agreement, RCA, MMC flag and cached
+EXT_CSD revision/cache fields; failures or changing snapshots publish no binding.
+Five native controls cover mismatch, failed/mutating reads, cache-disabled reporting,
+overflow and exact allowed reads. No CID/serial/userdata reads or controller writes.
+Caller pointer/getter provenance and pinned read integration remain unfinished;
+cached metadata alone is not fresh card interrogation or physical acceptance.
+No device access, candidate packaging, arm/helper/reboot or owner action.
