@@ -1,0 +1,19 @@
+{
+  "scope": "Known-stack capture control1 actual installation; no boot yet",
+  "owner_approved": true,
+  "owner_available": true,
+  "approved_review_head": "d4707fff409feb34feb6fa94b3d9836197ef2865",
+  "candidate_sha256": "77d7453b3fde4764c3a8e8d9a29587ad5d8a2e726388ab411f80356147420a00",
+  "observer_sha256": "21a26da4e5c2baf29f46be3cd417d50abef4b314911775947bc231117be38851",
+  "observer_written_once": true,
+  "observer_readback_and_ram_cleanup_verified": true,
+  "boot_written_once": true,
+  "boot_full_readback_recovery_and_ram_cleanup_verified": true,
+  "installed_preflight": "stopped after full p5 and observer hashes matched; copied guard retained old trial8 prefix/seed constants",
+  "guard_binding_correction": "fixed to independently verified immutable control prefix/seed; no target rewrite",
+  "armed": false,
+  "helper_launched": false,
+  "rebooted": false,
+  "original_boot_restored": false,
+  "hardware_logging_qualified": false
+}

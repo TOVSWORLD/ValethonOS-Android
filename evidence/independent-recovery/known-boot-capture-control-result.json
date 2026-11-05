@@ -37,5 +37,7 @@
   "deployment_archive_bytes": 17868038,
   "deployment_archive_sha256": "ffdc31c2dd58e4778f315a5ba814f86195a104db6fac3ff6bf8ac053e1acd230",
   "linux_missing_authorization_negative_controls": 4,
-  "linux_private_receipt_create_update": "passed"
+  "linux_private_receipt_create_update": "passed",
+  "prefix_sha256": "123e68fcd376d5a90e246dbbd87d66d6f7f6488b640aeea6b947beae30d67ea1",
+  "seed_sha256": "e3cc7e5440f555239be811085ed1f25aa74578737d42b2ec1c74a34ba79acaf8"
 }

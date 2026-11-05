@@ -5121,3 +5121,18 @@ Actual Linux missing-authorization controls passed for observer install, p5 inst
 watch arm and manual helper; no receipts/helper logs created. Durable private receipt
 create/update passed under umask022. Controller archive/hash-match and exclusive
 operation wrappers prepared privately; none executed.
+
+
+### Approved known-stack control installed; guard correction before boot
+
+Owner explicitly approved the exact review and confirmed availability. Observer
+21a26da4 and fullp5 control77d7453b were each written once; exact readbacks, fullp6
+and RAM cleanup passed. No reboot/watcher/helper. Installed preflight matched
+normal/return bootstrap/header/GPT/aliases and fullp5, then rejected stale trial8
+prefix/seed constants accidentally retained in the copied control guard. This is a
+source guard-binding error, not evidence of changed installed bytes. Preserved its
+failed stdout/stderr; no block-write retry. Corrected only those pins against the
+independently verified unchanged control bytes/manifest; added artifact-to-guard
+regression (11 calibration controls pass). Corrected source/exact-head checks and
+one new read-only installed validation are required before observation arm. Existing
+approval remains for the same exact firmware pair; no new physical procedure.

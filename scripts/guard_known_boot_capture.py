@@ -30,6 +30,8 @@ CANDIDATE='21a26da4e5c2baf29f46be3cd417d50abef4b314911775947bc231117be38851'
 ORIGINAL_BOOT='08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e'
 KERNEL_CANDIDATE='77d7453b3fde4764c3a8e8d9a29587ad5d8a2e726388ab411f80356147420a00'
 RECOVERY='3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11'
+CONTROL_PREFIX='123e68fcd376d5a90e246dbbd87d66d6f7f6488b640aeea6b947beae30d67ea1'
+CONTROL_SEED='e3cc7e5440f555239be811085ed1f25aa74578737d42b2ec1c74a34ba79acaf8'
 
 
 def gpt_range(data):
@@ -109,9 +111,9 @@ def preflight(adb,originals,current,boot):
     STAGE='normal_boot'
     normal=adb.read('/dev/block/mmcblk0p5',16777216)
     if sha(normal)!=boot:raise ValueError('Normal boot differs')
-    if boot!=ORIGINAL_BOOT and (sha(normal[:15728640])!='e1154f3b3bffe391c6e3d4da465b31ea113d27882fad724ad56047f89bde0cab'
-            or sha(normal[15728640:15732736])!='478270cc032bee32b862fcb0432502fb92811ddadd32495a80a1385c31349425'):
-        raise ValueError('Exact diagnostic boot prefix/seed required')
+    if boot!=ORIGINAL_BOOT and (sha(normal[:15728640])!=CONTROL_PREFIX
+            or sha(normal[15728640:15732736])!=CONTROL_SEED):
+        raise ValueError('Exact known-stack control prefix/seed required')
     STAGE='normal_recovery'
     if sha(adb.read('/dev/block/mmcblk0p6',17825792))!=RECOVERY:raise ValueError('Normal recovery differs')
     return {'preflight':'passed','device_written':False,'rebooted':False}

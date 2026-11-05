@@ -24,6 +24,14 @@ def authorization():
 
 
 class Admission(unittest.TestCase):
+    def test_guard_matches_independently_verified_control_manifest(self):
+        path = Path(__file__).resolve().parents[1]/'evidence/independent-recovery/known-boot-capture-control-result.json'
+        package = json.loads(path.read_text())
+        self.assertEqual(guard.KERNEL_CANDIDATE, package['candidate_sha256'])
+        self.assertEqual(guard.CANDIDATE, package['observer_sha256'])
+        self.assertEqual(guard.CONTROL_PREFIX, package['prefix_sha256'])
+        self.assertEqual(guard.CONTROL_SEED, package['seed_sha256'])
+
     def test_exact_pair_only(self):
         guard.authorize(authorization())
         for key, value in [('owner_available', False), ('owner_approved', False),
