@@ -1,5 +1,11 @@
 # Active work queue — ordered delivery
 
+Current actual control2: owner Go/exact8789e1c review approved; observer3313d00c and
+p5e1f2a73b each installed once/readbacks/p6/RAM cleanup and installed preflight PASS.
+Observation-only watcher durably armed/live/helper0; no automatic return/reboot.
+Owner Reboot/System +>=5min observation/desk report pending. Exact control remains
+installed, originals not currently restored. No rewrite/rearm or approval reuse.
+
 Current source work: recorder repair implemented after the failed known-stack
 control. Cache-off now has checked status-only completion. The new durable snapshot
 is before archived IRQ masking/later shutdown, with a distinct pre_shutdown stage

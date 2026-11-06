@@ -5211,3 +5211,15 @@ candidate/observer/prefix/seed hashes and a unique control2 scope; independent
 binding regression prevents the prior stale-pin mistake. Approval/availability
 false, no export/lab staging/device action/kernel build. Complete changed review
 in KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md; approval1 consumed, never reusable.
+
+
+### Actual control2 installed and observation armed after owner Go
+
+Owner Go accepted exact reviewed control2 and current availability at8789e1c, with
+all five distinct checks SUCCESS. Staged20 files/verified; fresh actual original
+p5/p6/normal-return bootstrap/header/GPT/alias preflight passed. One observer3313d00c
+range write/readback/RAM cleanup, one fullp5e1f2a73b write/readback/fullp6/RAM cleanup
+passed; installed preflight passed with generated exact prefix/seed pins. One
+observation-only watcher launched/durable receipt/live process verified, helper0,
+no automatic return/restore/reboot. Owner first visit pending; originals are not
+currently restored. No kernel build or repeated trial; fresh approval consumed.
