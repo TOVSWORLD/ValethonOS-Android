@@ -1,0 +1,23 @@
+{
+  "scope": "Offline replay of exact archived trial6 original/candidate/nonce/posttrialp5 with modeled valid recovery identity/alias responses and exact retained recovery bytes; no tablet access",
+  "archived_failure_reason_retained": false,
+  "historical_failure_reproduced": false,
+  "same_collector_passes_with_valid_recovery_responses": true,
+  "replays": {
+    "supervisor": {
+      "passed": true,
+      "host_control_only": true,
+      "sequence": 1,
+      "device_writes": 0,
+      "calls": 7
+    },
+    "manual": {
+      "passed": true,
+      "host_control_only": true,
+      "sequence": 1,
+      "device_writes": 0,
+      "calls": 7
+    }
+  },
+  "conclusion": "Receipt discarded detailed ValueError; data-only deterministic mismatch is not reproduced. Actual failing transport/identity/alias/read result was not retained and cannot be recovered retroactively. New stage diagnostics prevent another opaque failure; no readiness fix or hardware pass claimed."
+}

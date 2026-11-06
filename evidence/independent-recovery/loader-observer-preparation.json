@@ -1,0 +1,21 @@
+{
+  "fresh_trial7_receipts_unused": true,
+  "bootstrap_readonly_preflight": "passed",
+  "normal_candidate_readonly_preflight": "passed",
+  "retained_inputs_and_original_helper_sources": "passed",
+  "initial_selected_usb_identity_matches": true,
+  "observer_sha256": "6a34b1a55d3b9c6de8e87e21f8b6cc3eaef18576583f66750ef6e012d0d1c10c",
+  "device_written": false,
+  "armed": false,
+  "rebooted": false,
+  "scope": "Actual readonly exact observer/trial7 preparation, not hardware acceptance",
+  "guard_unit_tests": 6,
+  "emulator_cases": 71,
+  "observer_sector_bytes": 492544,
+  "normal_kernel_candidate_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+  "kernel_rebuilt": false,
+  "new_owner_review_pending": true,
+  "prior_candidate_approval_reusable": false,
+  "readonly_bootstrap_preflight": "passed",
+  "kernel_partition_geometry_matches_gpt": true
+}

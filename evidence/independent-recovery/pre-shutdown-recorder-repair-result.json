@@ -1,0 +1,93 @@
+{
+  "scope": "Offline recorder repair after actual known-boot control1 failed to produce records",
+  "actual_control1_cause_proved": false,
+  "findings": {
+    "cache_on_only_admission_rejected_valid_off_state": true,
+    "actual_control1_loader_cache_state_known": false,
+    "archived_irq_mask_helper": "0x4bd3c76c",
+    "archived_call_before_old_hook": "0x4bd3e3f8",
+    "old_final_site": "0x4bd3e524",
+    "old_guard_declines_masked_irq": true,
+    "new_site": "0x4bd3e3e8",
+    "new_stage": "pre_shutdown",
+    "old_final_smc_call_unchanged": true,
+    "skipped_unsafe_read_does_not_consume_initialization": true,
+    "failed_real_io_still_not_retried": true
+  },
+  "primary_reference": "https://raw.githubusercontent.com/torvalds/linux/v3.18/drivers/mmc/core/core.c",
+  "implementation": {
+    "cache_off_no_cmd6": true,
+    "cache_off_fresh_before_and_after_status": true,
+    "no_cache_mode_change": true,
+    "no_interrupt_enable_change": true,
+    "device_global_zero_alignment_overflow_guard": true,
+    "mailbox_format": "VLOG0001 unchanged",
+    "loader_body_stage_extension": 4,
+    "historical_stage_decoding_preserved": true,
+    "kernel_entry_proved": false
+  },
+  "validation": {
+    "native_repository_tests": 691,
+    "actual_adapter_arm_controls": 15,
+    "relocated_frontend_arm_controls": 12,
+    "exact_packed_bridge_arm_controls": 8,
+    "packed_cases": [
+      "late_first_initialization_cache_0",
+      "late_first_initialization_cache_1",
+      "unsafe_read_no_io_then_one_safe_late_initialization",
+      "earlier_read_then_pre_shutdown_without_reinitialization",
+      "masked_pre_shutdown_still_no_io",
+      "invalid_device_global_stops_before_blob_read",
+      "invalid_identity_cache_latches_without_storage_writes",
+      "module_hash_failure_not_retried"
+    ],
+    "independent_byte_descriptor_seed_code_and_branch_verification": "passed",
+    "relative_objects_checked": 15,
+    "bootstrap_bytes": 1572,
+    "owned_console_bytes": 1587,
+    "bootstrap_no_guessed_ram": true,
+    "r0_r12_sp_apsr_replayed_except_original_r3_load": true,
+    "inline_bl_lr_dead_before_next_original_call": true
+  },
+  "modeled": [
+    "controller/block storage",
+    "clock and initialized heap",
+    "IRQ services and CP15/cache effects",
+    "full-prefix digest in combined ARM replay"
+  ],
+  "remaining_limits": [
+    "Control1 missing initial MODE/READ record not explained by final-site ordering alone",
+    "actual driver termination/heap capacity/worst-case stack/cache visibility/durability remain unqualified",
+    "pre_shutdown is before later shutdown and SMC, never kernel-entry proof"
+  ],
+  "candidate_sha256": "e1f2a73bb1fef09605b938b42993ad93b5fe5de7d681e62211816944741722e6",
+  "observer_sha256": "3313d00c51d9960a3f24c8f4a87c3ee532119f4f48113512ad5deda0d8cdd20f",
+  "prefix_sha256": "d91f9f2286f1a9b69361dfd1c74bbb80bed876c9d91b400504781a5485837b02",
+  "seed_sha256": "42dc066c45ab29b86aa3f6e453d55cea14fb6eff7e1276f9a1458f36c0832813",
+  "module_blob_sha256": "00107923cb05986f5bec26b0c90fc2ce0cd44d183c5a15fcfabb6ebbb1b6925b",
+  "module_bytes": 9216,
+  "module_elf_sha256": "42c5e5c72ee168338c734b50c7ea3e03cead06df114ed7407ffc95396f82050e",
+  "bootstrap_elf_sha256": "2fdd589f6c9b5c19256fc4348538c6d42ca57424f1088217eff755ea7b43e19d",
+  "original_declared_boot_bytes_preserved": true,
+  "declared_image_bytes": 7796736,
+  "private_bundle": {
+    "files": 20,
+    "archive_bytes": 17868230,
+    "archive_sha256": "dd3ba8e579cb2dc114c912dfb340ff65d0cb02fd527990748e8f7cf1fee1d96a",
+    "guard_all_four_artifact_hashes_verified": true,
+    "owner_approved": false,
+    "owner_available": false,
+    "source_exported": false,
+    "device_accessed": false,
+    "armed": false
+  },
+  "review": "docs/development/KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md",
+  "source_exported": false,
+  "device_accessed": false,
+  "firmware_installed": false,
+  "armed": false,
+  "owner_approved": false,
+  "owner_available": false,
+  "modern_kernel_test_admitted": false,
+  "hardware_acceptance": false
+}

@@ -1,0 +1,33 @@
+{
+  "revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "path": "security/selinux/hooks.c",
+  "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/security/selinux/hooks.c?format=TEXT",
+  "local": "evidence/independent-recovery/selinux-source/hooks.c",
+  "bytes": 205075,
+  "sha256": "f8353944bb3c2a6dedff5e8966dfbaf248933d0c95bd05d182b82c1a0638aed7",
+  "finding": "rootfs/configfs are not included in the SE_SBGENFS per-path handling list; rootfs is explicitly eligible for in-core setxattr labeling. No kernel change proposed.",
+  "additional_sources": [
+    {
+      "path": "include/uapi/linux/lsm.h",
+      "local": "evidence/independent-recovery/selinux-source/lsm.h",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/include/uapi/linux/lsm.h?format=TEXT",
+      "bytes": 2646,
+      "sha256": "a19a8afbe91fbc57d8245a23c6e37ebd11b3cfc068771288beace8b24f3c09bb"
+    },
+    {
+      "path": "security/lsm_syscalls.c",
+      "local": "evidence/independent-recovery/selinux-source/lsm_syscalls.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/security/lsm_syscalls.c?format=TEXT",
+      "bytes": 3827,
+      "sha256": "784020c87b40f1cec72dbac4a599b6c42b7b3a154b48ac520b6902c662ffb01b"
+    },
+    {
+      "path": "security/selinux/ss/policydb.c",
+      "local": "evidence/independent-recovery/selinux-source/policydb.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/security/selinux/ss/policydb.c?format=TEXT",
+      "bytes": 79964,
+      "sha256": "c7bccd55f16ff7d5468f08620c193fe3ad6e569202f51f06febe4c4e72c80798"
+    }
+  ],
+  "initial_sid_finding": "Without userspace_initial_context capability, initial userspace SID is mapped to kernel_t. Pinned compiler3.5 rejects the newer policycap. A one-way checked LSM self-context transition separates init_t without proc writes or compiler upgrade."
+}

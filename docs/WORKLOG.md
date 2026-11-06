@@ -3980,3 +3980,1276 @@ ENTRY-ACCEPTANCE.md links exact observation-time receipts and accounts for delib
 disconnect, unaccepted CLI request, stop/retry limits and known security limitations.
 Next phase344 handoff is a concrete independent return/log proposal using retained
 assets; no device action or repeat installation is implied. Phase344 stays open.
+
+## 2026-10-30 — #346 one-visit recovery preparation
+
+Owner clarified that chat desk and server room are separate: no chat reply is
+possible beside the tablet. Added explicit-arm Linux supervisor with10-minute
+travel/disconnection wait followed by one90-second reconnection/helper bound.
+It pins original helper/common/logger sources, rejects wrong/ambiguous MediaTek
+ports, never auto-discovers/opens unrelated serial nodes and kills the helper
+process group on timeout. Exclusive private attempt receipt prevents silent reuse.
+Default preflight opens no serial interface and does not change tablet mode.
+Eight negative/lifecycle tests plus full505 host tests passed. Dedicated Linux
+staging returned PREFLIGHT_OK; NOT_ARMED with matching source identities and current
+Android USB port. No listener/helper/device action started; actual TWRP entry and
+failed-load return/log retention remain unmeasured. Draft PR453 stays on existing346.
+
+## 2026-10-31 — #346 attempt1 exposed host timing error
+
+Owner authorized one attempt and performed the one-visit batch. Supervisor timed
+out before helper log creation. Owner home screen and ADB device/boot_completed1/
+Android11 verified. Retained host kernel timestamps show preloader enumerated
+111.33seconds after disconnection, beyond the original90second combined reconnect/
+helper window. The FACTORYM helper never launched; protocol compatibility remains
+untested. Corrected host design to separate600s travel,300s manual shutdown/reconnect
+and90s actual helper bounds; one launch/no retry preserved. Eight lifecycle/negative
+tests and repository check pass. Sanitized attempt receipt recorded; raw USB journal
+private. No rearming, reboot, flash, wipe or new physical request performed.
+
+## 2026-10-31 — #346 actual Android-independent recovery entry
+
+Owner performed the corrected one-visit batch; original FACTORYM helper exited0.
+Owner special-menu observation corroborated by ADB recovery/TWRP3.3.1-0/douglas/
+3.18.19-g51c2c8d5bfb. StageA existing recovery-entry path is now observed independent
+of Android for the transition. No failed-load injected, no flashing/wipe/reinstall/
+menu action/automatic reboot, no personal-data read. Tablet left in TWRP. Exact
+sanitized attempt2 receipt recorded;346 failed-load return and348 failure retention
+remain unqualified. Next work is concrete StageB artifact/transport/endpoint/log review.
+
+## 2026-10-31 — #346 concrete StageB logging prerequisite
+
+Read-only TWRP diagnostic-interface metadata shows last_kmsg/pstore/config.gz absent,
+live /dev/kmsg available; no user data read. Historical diagnostic Image config
+uses PSTORE_RAM=m with no modules in its isolated initramfs, so it cannot supply
+that retention backend. Recorded prerequisite in346 before code; current policy
+now requires built-in pstore RAM and console, disables block logging and rejects
+the historical config as current-ready. Historical CI audit is explicitly labeled
+and uses its original recorded policy; it does not replace a fresh resolved build.
+Exact pinned ACK pstore Kconfig retained with provenance. No physical RAM address
+selected, no reset/readout ownership inferred and no device action performed.
+
+## 2026-10-31 — #346 built-in RAM logging kernel compile passed
+
+Exact sourceb18254b/run41250510504 compiled successfully22:58:42–23:22:35UTC.
+Completed log verifies PSTORE/PSTORE_RAM/PSTORE_CONSOLE=y and block backendn,
+plus config/vmlinux/Image/Image.gz hashes. Sanitized diagnostic-build-result.json
+records exact evidence. Workflow prints hashes but does not retain compiled files;
+a later reviewed package build must explicitly export its artifacts. No boot image
+packed/loaded, RAM region selected or retention/failure-return qualification inferred.
+Tablet remains in existing TWRP; next is bounded load/readout contract, not another
+blind compile or owner trip.
+
+
+## 2026-11-01 — #346 diagnostic compile outputs retained on future runs
+
+Recorded artifact-retention prerequisite in346 before changing the diagnostic CI
+workflow. Future successful diagnostic builds export Image, Image.gz, resolved
+config, System.map and image-size report with repository/kernel revisions, run
+identity and per-file hashes, retained seven days. Staging was exercised with
+fixture outputs and matching hashes; repository checks pass. No build dispatched,
+combined image packed or device action performed. Completed run41250510504 still
+has no retained compiled bytes; load/placement and compatible log readout remain
+unqualified. Original-package selected command registration supplies no boot entry;
+legacy console and ramoops layouts cannot be treated as interchangeable.
+
+## 2026-11-02 — #346 exact rollback copies and real read-only preflight
+
+Owner directed preparation of reversible boot-partition alternative. Recorded
+necessary prerequisite in346 before code. Actual TWRP aliases boot/boot_x→p5,16MiB;
+recovery/recovery_x→p6,17MiB. Obtained two matching full reads of each, verified
+private lab/controller copies. Initial dd reads had excess transfer-summary bytes
+and were rejected; binary-clean cat reads passed exact size/hash checks. No device
+write, reboot, user-data read or installation replay. Public hashes/limits only.
+
+Added boot-only rollback tool with default read-only mode, pinned full backup and
+recovery identity, exact expected current boot hash, alias checks, exclusive
+receipt, one write/no retry/no reboot and full readback verification. Six host
+negative/lifecycle tests pass; actual Linux→TWRP read-only preflight passed.
+Restore write transport remains device-untested. Existing boot uses unwrapped gzip
+ARM64 plus two DTBs, differs from recovery's MediaTek wrapper, has mismatched
+component/header SHA1 and unclassified partition tail. No arbitrary repack admitted.
+
+Documented concrete alternative sequence and logging limit: durable host stream
+before a selected post-handshake failure; current diagnostic config has no USB or
+storage and73-byte status capture is not a log stream. Candidate placement/format
+and actual log transport remain engineering prerequisites. No source/backup/test
+count is device acceptance;346/344/348 stay open and PR453 remains draft.
+
+## 2026-11-02 — #346 rollback transport corrected before any block write
+
+Read-only binary echo showed current legacy recovery refuses shell -T (requires
+PTY); raw EOF-dependent cat timed out. Original restore write command was therefore
+not usable despite default preflight passing. Replaced with exact backup upload
+to confirmed /tmp tmpfs, exclusive random directory, full RAM readback verification
+and second partition preflight before one file-to-block dd. Actual16MiB RAM-only
+upload/two readbacks/cleanup passed; boot full hash unchanged. No block write or
+reboot. Seven rollback tests include corrupt upload rejection before any write.
+Physical dd/restore execution and actual candidate/log transport remain unqualified.
+
+## 2026-11-02 — #346 bounded log protocol and durable receiver implementation
+
+Added actual freestanding C log-stream producer and Python durable host receiver,
+including nonblocking raw TTY fd adapter. Host fsyncs nonce-bound identity before
+ACK, then each sequenced bounded binary record; incomplete/invalid captures cannot
+report complete. No port discovery, termios changes, failure injection or reboot.
+Six tests pass, including real C/Python interoperability with ASan/UBSan and a
+software PTY exchange. PID1/kmsg/USB endpoint integration is not implemented by
+these components; existing denied admission and fixed-frame package unchanged.
+This is a source integration prerequisite inside346, not device log acceptance or
+a ready trial. Actual image placement and working runtime capture remain open.
+
+## 2026-11-02 — #346 actual enforcing log PID1, own DT and loader-sized profile
+
+Compiled isolated enforcing policy with four forbidden-privilege negative
+controls and static ARM64 log PID1/initramfs on the Linux lab host. Added actual
+validated kmsg/duplex ACM adapters, single-policy bootstrap and one-CPU runtime
+checks; no reboot/failure/storage interface. Own-source lab DT compiles and190-node
+comparison passes, incorporating observed memory/reservations without stock DTB
+substitution. Exact original selected gzip path capacity is28MiB; prior USB Image
+is too large. Recorded prerequisite on346/344 before adding separate size-focused
+lab-log kernel profile and offline checked boot packer. Old admission flags remain
+denied. Build-script source locks refreshed for explicit additive mode only;
+existing peripheral paths unchanged. Physical first-trial logging/return remains
+unqualified, no device write/reboot and no task closure.
+
+The first loader-sized build41527196222 stopped at resolved-config validation,
+before compilation: VT selected INPUT and generic policy retained PERF_EVENTS.
+Disabled unused VT/HID, retained generic PERF_EVENTS with the hardware PMU DT
+node disabled. Linux-host reproduction also caught GCC misleading-indentation in
+a test fixture (Mac clang accepted it); fixed the fixture and portable cc usage.
+No security restriction weakened and no failed compile counted as a device trial.
+
+Added the explicit physical-port/nonce-bound lab log receiver, retained kmsg
+sequence/release inspector, and guarded first-candidate staging wrapper using the
+existing tmpfs/file-to-p5 transport. Defaults remain read-only/unarmed. Durable
+write-intent receipts and candidate→rollback negative/lifecycle fixtures pass.
+All12 new lab tests pass on actual Linux host, without device port access; the
+full controller suite also passes. No physical write, boot or capture was run.
+
+## 2026-11-02 — #346 exact retained kernel and complete offline candidate
+
+Kernel41528041827/de64394 succeeded; downloaded/verified retained Image15,424,000B,
+gzip6,488,090B and runtime footprint15,925,248B fit the selected loader/memory
+contract. Built corrected v2 PID1 with final durable-host ACK before USB cleanup.
+Packed full16MiBp5 candidate dde5d2bb3151a73b83a823639d3790416ac2321f3194b04ae57ddad731d7b429;
+aligned payload6,531,072B. Private lab copies/hash/receiver unarmed preflight pass.
+Prepared distinct first-normal-trial one-trip capture/return supervisor with normal
+boot guard; no StageA retry, automatic write/reboot/failure, or hardware acceptance.
+Full controller536 tests/repository pass;15 new lab tests pass on Linux. Concrete
+candidate/log/return/rollback sequence recorded for review before physical action.
+
+Independent parser/header-ID/padding/gzip/DT/initramfs checks pass on the actual
+combined bytes. Staged candidate tool default read-only preflight passes against
+real TWRP/current originalp5 and unchangedp6; no write flag selected. All15 new
+lab tests and7 v2 protocol tests pass on Linux. This completes source/package
+preparation for review of the first normal log-bringup trip, not failed-load or
+348 acceptance. No serial capture/helper arm or device reboot occurred.
+
+## 2026-11-02 — #346 first normal log trial completed; original boot restored
+
+Owner explicitly approved the exact reviewed candidate/rollback procedure and
+confirmed availability. One fullp5 candidate write/readback and unchangedp6
+verification passed; one distinct normal-trial supervisor was armed. Owner reached
+step7. Capture returned incomplete with0 raw bytes. Scoped host USB journal did
+not observe1209:0001; this does not establish whether the new kernel entered.
+One original FACTORYM return helper exited0. Supervisor's first post-return check
+failed ValueError; later read-only ADB confirms recovery/douglas/TWRP3.3.1-0, all
+four aliases, exact candidatep5 and originalp6 full hashes. Owner screen report is
+pending, so no display observation is invented.
+
+Executed the already-approved one-write originalp5 restore with fresh preflight,
+full boot/recovery readback and RAM cleanup. Originalp5 restored exactly; TWRP left
+running, no reboot. Removed only the exact new71 trial TTY rule and reloaded rules
+without trigger; older host rules/ModemManager unchanged. Private receipts/logs
+retained on lab/controller. No deliberate failure, kernel-entry/log pass,346/348
+closure or automatic retry/rebuild. Next is concrete early handoff/USB observability
+diagnosis within346 using this failed trial, not another physical action.
+
+## 2026-11-02 — #346 safe failure-stage receipts after empty-log trial
+
+Recorded necessary host-observability prerequisite on346/344 before code. Capture
+receipts now distinguish waiting for a port, opening, opened-identity validation,
+exclusive claim, raw configuration and wire receipt; record whether an endpoint
+was selected/opened and only numeric errno, never raw exception text/paths.
+Return-supervisor failures now identify their lifecycle stage. No wait/launch/
+write/reboot/retry behavior changed. Added missing-endpoint and denied-open
+negative controls; existing software-TTY end-to-end and lifecycle tests pass.
+These prospective fields do not retroactively explain the first trial's generic
+ValueError or establish a kernel boot stage. No device query, rearm or build.
+
+Owner subsequently explicitly reported the TWRP recovery menu. This corroborates
+the observed recovery return and does not change empty logs/no maintained-kernel
+entry evidence or the separate unpassed intended-failure gates.
+
+## 2026-11-02 — #346 confirmed pre-USB software blockers corrected in VM
+
+Recorded isolation/ABI/label/domain prerequisites on346/344 before code. Exact
+retained kernel + old userspace generic VM reproduces wrong rootfs labels. Pinned
+ARM64 fcntl header proves old O_DIRECTORY was actually O_DIRECT; real VM open
+returns EINVAL. Corrected flags + validator override precedence/negative controls.
+Corrected three verified static dev labels/readbacks and actual configfs type,
+with USB-only/empty namespace and fixed mutating path allowlists retained.
+Longer VM caught kernel-worker fork denial; isolated PID1 into init_t through
+checked LSM self-context API, proc remains readonly. Six compiler controls reject
+PID1 fork/escape and existing forbidden privileges; no enforcement/security bypass.
+
+Reproducible full20s one-core512MiB VM passes context, directory, kmsg and actual
+configfs setup/cleanup with no AVC denials; final bind is VM-intercepted, not USB
+hardware proof. Retained kernel reused, no kernel build or tablet operation.
+Revised offline fullp5 candidate4ec14bf8774949ff36ad2173fb9267f6d5dffb2d155f8be485521863dd10741b
+packs/independently validates; payload6,533,120B, initramfs13,686B. No new arm/write.
+The first physical failure stage is still not observed; these are proven software
+blockers and corrections, not retrospective tablet-entry acceptance.
+
+Final validation:545 controller tests/repository pass;23 current Linux lab tests
+pass, including actual C ABI/labels/domain failure paths. Six policy privilege
+mutations rejected. The regression remains running for its full20-second budget
+to catch delayed worker denials; it does not stop at the first success marker.
+No kernel rebuild, tablet query/write/reboot or new trial arm during diagnosis.
+
+## 2026-11-02 — #346 revised trial2 prepared for review
+
+Fresh private Linux trial2 contains hash-verified revised candidate4ec14bf...,
+component8 nonce and current host tools. Receiver input preflight passed without
+port open. Actual read-only TWRP writer preflight verified original fullp5/p6 and
+all aliases; Linux/controller rollback copies also match. Fresh receipts unused,
+pinned helper verified without launch, exact TTY rule prepared but not applied.
+No device write/reboot/arm/helper or udev change. Complete exact revised trial and
+rollback sequence is recorded in INDEPENDENT-RECOVERY.md for owner review; no old
+approval reuse. Candidate-installed supervisor preflight follows only an approved
+write. Source/VM success still does not qualify physical USB/kernel/failure gates.
+
+## 2026-11-02 — #346 revised normal trial2 complete, original restored
+
+Owner approved exact revised trial/rollback and availability with “ok go”. Full
+candidate4ec14bf... written/readback verified, p6 unchanged, postwrite preflight
+passed; distinct trial2 supervisor armed once. Capture0 bytes, waiting_for_port
+ValueError, no endpoint selected/opened.32 scoped host USB events include no
+1209:0001. One original return helperexit0, then supervisor ValueError at
+validating_returned_recovery. Later read-only ADB recovery and exact TWRP identity,
+aliases/fullcandidate/p6 checks passed. Owner reports uncertainty that the screen
+returned; exact observation pending, so no screen-return assertion is made.
+
+Approved original fullp5 restored once after fresh preflight, complete p5/p6
+readbacks and RAM cleanup verified. No reboot after restore; TWRP left running.
+Exact71 trial rule removed/reloaded without trigger; older rules/ModemManager
+unchanged. Private evidence archived on lab/controller. No new trial/retry or
+intended failure. Source/VM fixes did not establish physical kernel/USB entry;
+346/344/348 remain open. See revised-log-trial-result.json.
+
+## 2026-11-02 — #346 inherited watchdog prerequisite implemented
+
+Recorded prerequisite346/344 before code. Trial2 host timeline has an additional
+preloader49.35s after boot disconnect, before the planned90s wait; no reset cause
+is inferred. Tested kernel WATCHDOG=n and pinned ACK lacks exact board watchdog
+compatible. Added base-driver mt8163 match with no extension/reset-controller data,
+explicit builtin/core boot-enabled handoff config and lab-log-only pinned patch.
+Actual upstream init tests distinguish disabled hardware from inherited running
+hardware; the latter is serviced, not stopped. No watchdog userspace node, reset
+request, thermal-request change or security bypass. Source register provenance is
+retained.548 host tests and repository check pass. Source is not hardware proof;
+changed kernel object/Image/config/VM validation precedes any new package review.
+AUDSYS/MIPI shared build-script hash locks updated solely for the lab-log branch;
+no peripheral source change or new issue. Original boot remains restored/TWRP.
+
+## 2026-11-02 — #346 bounded post-return readiness
+
+Necessary prerequisite recorded346/344 before host code. Added30s metadata-only
+recovery readiness after one successful helper,2s/probe cap, two stable exact
+observations, then one unchanged full validation. No full-read/helper/write/reboot
+retry. Delayed readiness, mismatch and hung-command tests pass. Prior initial
+validation failures remain unexplained; this is no kernel-entry fix or retrospective
+acceptance. Kernel run41552296163 remains the single changed-source build at18abfbf;
+no second dispatch, tablet query, write, rule or arm for this host change.
+Validation after host readiness change:550 controller tests and repository checks
+pass. Changed kernel compilation/VM result remains pending; no runtime pass claim.
+
+## 2026-11-02 — #346 watchdog candidate3 prepared for review
+
+Run41552296163 at18abfbf/ACKd9318bdb succeeded, including actual watchdog/core object
+compile, final Image/config/size and full20s enforcing VM regression. Retained
+artifact manifest hashes verified. Image15,424,000B SHA994f1dd4..., gzip6,500,631B,
+runtime15,925,248B; final System.map includes watchdog symbols. Source/VM only.
+Fresh component9 nonce plus unchanged ownDT pack into fullp5 candidate09ca6e2be60cc508fc5b93b7f577e5b0ef861e5c89486c18fda40b078075c3b7,
+payload6,545,408B. Independent header-ID/gzip/DT/initramfs/padding/placement checks
+pass. Fresh trial3 assets/current tools staged, receiver input and actual read-only
+original TWRP/fullp5/p6/aliases checks pass. Lab/controller rollback matches, fresh
+receipts unused, scoped TTY rule unapplied. No write/arm/helper/reboot/port open.
+Complete changed-watchdog behavior/risk and one-trip/rollback review recorded;
+owner approval/availability required for this exact new image.550 host tests and
+four Linux readiness/lifecycle controls pass. No prior reset cause, kernel entry,
+USB hardware, intended failure or retention acceptance is inferred.
+
+## 2026-11-02 — #346 candidate3 trial complete, original restored
+
+Owner approved exact reviewed candidate3 with “Just do it”. One fullp5 write/full
+readback and unchangedp6 verified, fresh supervisor armed. Capture0bytes/no endpoint,
+waiting_for_port ValueError. Owner clarified Amazon logo became black and he only
+unplugged/replugged USB, omitting Power hold. Remaining host window was too short
+for another trip; original host wait stopped before any helper launch. A fresh900s
+return-only continuation completed the unperformed manual return step, not another
+boot/capture/write or StageA trial. Exactly one pinned original helper launched,
+exit0. Bounded metadata readiness completed; initial full return validation still
+failed ValueError, so the reason remains unproven despite the host readiness change.
+
+Later fresh TWRP/douglas/aliases/fullcandidatep5+p6 checks passed. Approved original
+fullp5 restore ran once, full boot/recovery readbacks/RAMcleanup verified, no reboot.
+Exact71 trial rule removed/reloaded without trigger; older prep unchanged. Owner
+explicitly confirmed TWRP recovery menu after this return. Private lab/controller
+archives retained;32 scoped host USB events include no diagnostic1209:0001.
+Logo/black screen, owner timing deviations and host events do not establish a
+maintained-kernel entry or watchdog reset cause. Watchdog handoff remains hardware
+unobserved;346/344/348 open. No trial/build/helper running or new physical action.
+See watchdog-trial-result.json. No automatic retry/rearm/rebuild.
+
+## 2026-11-02 — #346 receiver observation audit
+
+Audited retained trial2/3 plans, kernel USB timelines and bounded historical host
+kernel identity events across all ports. Each trial has five identity events, all
+on the planned recovery path; the reviewed diagnostic USB identity did not appear
+elsewhere. Receiver never selected/opened a TTY, so a tty permission failure is not
+established. Capture entry wait45s is narrower than physical sequence. Trial3 next
+preloader arrived69.24s after initial disconnect:24.24s after receiver deadline,
+20.76s before return guard opened at90s. This explains a blind interval and missed
+return opportunity, not a kernel failure. Whole-window journal still has no
+expected diagnostic descriptor. Owner's reported reconnect-before-Power-hold means
+preloader events alone cannot prove spontaneous watchdog reset.
+
+Candidate explicitly disables UART/deletes stdout-path; PID1 failure markers only
+target console, leaving those early markers unobservable through this receiver.
+There is no independent observed early checkpoint. No new device action, timing
+change, kernel build or trial is justified from this audit alone. Concrete loader/
+early-checkpoint observability must be resolved before another trial; no root-cause
+claim. See receiver-observation-audit.json. Original boot/recovery remain restored.
+
+The audit also checked enumeration errors and ACM binds, rather than identity
+lines alone. Each window has three CDC-ACM probe EINVAL(-22) errors associated
+with preloader events, plus three ACM TTY bind events. No error is attributed
+to a diagnostic device. This is not proof of a logging permission failure.
+
+## 2026-11-02 — #346 independent early display checkpoint
+
+Exact original-package LK inspection did not establish an image-format mismatch;
+its selected normal K64 path handles the compressed image/header and board DT.
+This remains conditional source evidence, not proof of runtime entry. Recovery's
+read-only framebuffer GET ioctls and firmware videolfb tag independently agree on
+base0x98600000. API allocation12,288,000B lies within the firmware16MiB display
+reservation;800x1280 visible,3200-byte stride,32bpp. No pixels or physical RAM
+contents read. Temporary metadata helper was hash-verified/removed.
+
+Necessary prerequisite recorded in346/344 before code: a private early ARM64
+checkpoint after init_kernel_el, before CPU setup/USB. Exact-board bounded FDT
+gate precedes alternating64KiB white/black stripes inside only that display
+allocation. It preserves boot arguments and continues boot, with no display
+control/MMIO, halt, storage or deliberate failure interface. Eight negative FDT
+cases, every destination word, adjacent guard words and boot registers passed
+against the actual instructions in emulator RAM. This is not physical scanout
+proof. Observing the unique pattern would prove reaching this checkpoint; absence
+alone remains inconclusive. New kernel bytes and complete concrete review are
+required before any physical trial; original boot remains restored, nothing armed.
+
+## 2026-11-02 — #346 early-screen candidate4 prepared
+
+Run41566321777/source4ef0bc8 succeeded with retained manifest hashes verified,
+actual Image marker matches459 emulator-tested bytes, exact-marker VM and full20s
+enforcing PID1 VM passed. Fresh component10/candidate4 assembled; independent
+header/gzip/DT/initramfs/padding/memory bounds pass. Candidate fullp5 SHA
+fba4edca641182a77aa385a7b137e8e2834586a53f974d1ddc38aa0f1035cb9e.
+Fresh current tools/receipts staged; receiver-input and actual original
+TWRP/aliases/fullboot+recovery read-only preflight pass, both rollback copies match.
+Rule prepared not installed, no candidate write/arm/port open/helper/reboot.
+Complete changed framebuffer behavior/positive-only limitation and one-trip
+normal-log/return/full-original-restore review recorded in INDEPENDENT-RECOVERY.
+Wait owner review/availability. No rebuild/retry or hardware acceptance inferred.
+
+## 2026-11-02 — #346 actual early-screen trial4 and rollback
+
+Owner explicitly approved candidate4 after complete changed-image review.
+Fullp5 written/readback once, p6 unchanged; fresh supervisor armed once. Owner
+reports Amazon logo/black intervals without bands. Capture0bytes/waiting_for_port,
+no endpoint selected/opened. Original return window expired without helper launch;
+owner reports full Power40/reconnect/wait180 sequence completed. A separately
+confirmed-ready900s return-only continuation used the still-unused original helper
+exactly once, exit0; owner reports quick TWRP return. Initial full validation again
+failed ValueError, specific cause unproven; later fresh actual recovery/aliases/
+fullcandidate+p6 verification passed before approved original fullp5 restore.
+Originalp5/p6 readbacks and RAM cleanup verified; no reboot, TWRP left running.
+Exact71 rule removed/reload without trigger, older host preparation unchanged.
+Private lab/controller archive hashes match. No bands is not proof of no entry;
+scanout persistence and DT-gate runtime assumptions remain unobserved. No unchanged
+retry/rebuild. Next narrow exact loader DT/argument handoff against marker gates
+and independent scanout observability.346/344/348 remain open.
+
+Trial4 wrong-place challenge audited: whole-window host journal across ALL USB
+ports has4 identity events, all on the planned path, no diagnostic descriptor;
+2 ACM EINVAL probe errors correlate with preloader, with2 ACM TTY bindings.
+Actual candidate PRINTK and PSTORE are builtin, but a persistent backing/reader is
+not qualified. PID1 only opens /dev/kmsg after gadget setup and duplex serial open;
+earlier notes target /dev/console while lab DT removes stdout-path. Therefore this
+receiver is blind to failures before USB readiness; no export is not absence of
+kernel logs. Recovery uses another kernel, and full poweroff does not preserve a
+qualified ring-buffer readout. See trial4-log-routing-audit.json. Fix independent
+observability contract before any further physical trial/rebuild.
+
+## 2026-11-02 — #346 retained boot-tail path implementation
+
+Necessary346/344 prerequisite recorded/read back before code. Source-identified
+legacy reader paths and raw-memory nodes are absent in exact recovery metadata;
+no contents/RAM read. Implemented separate lab-retained profile: builtin bounded
+kernel printk snapshot worker, no USB/PID1 dependency; exact DT nonce, exclusive
+mmcblk0p5/16MiB, seeded final1MiB and immutable first15MiB SHA256 required. Two
+127-page record slots, CRC/nonce/sequence, invalidate/payload/header-last flushes,
+no failed-write retry, seed/final guard untouched. Standard kernel BIO/flush APIs,
+no credentials/SELinux changes or userspace block interface. Ordinary lab-log
+stays storage disabled. Minimal own DT enables only mmc0/pio/pwrap,26MHz and removes
+HS200/highspeed/hardware-reset caps, preserving other nodes/reservations; compiled
+semantic comparison passed offline. Physical supply/timing/storage unqualified.
+
+Actual C writer and independent Python reader pass regular-disk fixture commits,
+all six write/flush interruptions, stale/corrupt/bounds/prefix controls. Preinstalled
+HOST CONTROL sequence1 is distinct from kernel producer sequence2+, so readout can
+be checked without falsely claiming kernel output. Read-only recovery collector
+checks identity/aliases/fullp6/exact candidate prefix+seed and records current full
+p5 hash for existing guarded original restore. Nothing written or armed on tablet.
+Kernel compilation/retained size/VM, fresh nonce package and full concrete physical
+review still required. Failures before storage initialization/first commit remain
+uncovered; this is not a crash/panic handler or hardware acceptance.
+
+Retained compile41573826310 stopped at the new recorder object: a codec local
+named current collided with the kernel current macro. Renamed it and added the
+real macro to the C fixture compilation regression. No firmware/device action;
+this is a source integration correction, not a hardware failure or unchanged retry.
+Added explicit persistent-only supervisor path: no USB capture required, one
+reviewed900s manual-return window, fresh host-control seed validation, recovery
+collector accepts only exact candidate prefix/seed and records mutable-slot hash
+for guarded restore. Old normal trial behavior stays at its existing defaults.
+
+Persistent backend integration now includes the actual kernel BIO frontend compiled
+against a disk-backed harness and independent decoder, including4KiB padding of
+8193-byte payload, sector bounds and immutable guards. Recovery collector/restore
+fixture verifies a legitimately mutated log tail restores exact original once,
+rejects altered prefix/seed/recovery/aliases and cannot reuse the stale current hash
+to rewrite an already-restored device.566 controller tests/repository pass. Fresh
+component12/DT3 compiled with unused nonce. Corrected build41574337098 is active;
+no hardware action. Persistent-only supervisor needs no diagnostic TTY rule.
+
+## 2026-11-02 — #346 persistent candidate5 prepared for review
+
+Corrected kernel41574337098/source035f197 succeeded. Actual recorder/eMMC objects,
+final symbols, retained manifest hashes, Image/gzip roundtrip/size and20s enforcing
+VM pass. Image16,912,896B/runtime17,432,576B fits selected loader. Fresh component12
+and own retained DT3 assembled into candidate5 SHA
+423ed64dc2a24e4ffc23c48f4a71246a1694dc98896f6465a8ad3c5357a4099e.
+Independent header/gzip/DT/initramfs/padding/seed/HOSTCONTROL/nonce checks pass.
+Fresh tools/unused receipts staged; actual original TWRP/aliases/fullp5+p6 read-only
+preflight passes, lab/controller full rollback hashes match. Nothing written or
+armed, no helper or new TTY rule. Complete exact eMMC/PMIC/slot-write/newcollector/
+currenthash-bound full-original-restore review recorded. USB remains supplemental;
+persistent readout is the result gate. Host-control-only is not kernel output.
+Wait explicit exact-candidate approval/availability; no further build/prep tests
+while unchanged. Source/fixture/VM checks do not pass346/344/348 hardware exits.
+
+## 2026-11-02 — #346 actual retained trial5: control recovered, no kernel record
+
+Owner approved exact candidate5 and explicitly confirmed readiness. Fullp5 write/
+readback once, p6 unchanged, persistent supervisor armed once. One original return
+helper exit0; owner reports completed trip/back on TWRP. Initial full collector
+failed ValueError at validating_returned_recovery; cause not established. The
+prepared separate read-only collector then passed exact recovery/aliases/fullp6/
+candidate-prefix/seed checks and recovered HOST CONTROL only:sequence1,85bytes,
+no invalid slots. Full posttrialp5 SHA equals the installed candidate, so no
+persisted changed bytes or kernel commit were observed. This proves readout of
+that known stored record after the return procedure, not kernel entry or a kernel
+writer/retained-failure-log pass. USB was not required for this result.
+
+Approved original fullp5 restored once from independently validated readout/current
+hash; fullp5+p6 readbacks/RAMcleanup verified. TWRP left running/no reboot. No TTY
+rule was installed; older host preparation unchanged. Private trial5 archive hashes
+match lab/controller. No helper/supervisor/build or new physical action pending.
+Keep working reader/format; next narrow normal image selection/entry/FDT handoff
+versus kernel storage initialization/guard reachability. Cached LK-payload source
+routes normal header/component reads to boot_x; this is conditional source evidence,
+not proof of runtime path. No repeated USB/format work or unchanged build/trial.
+See retained-trial-result.json;346/344/348 open.
+
+## 2026-11-02 — #346 owner-directed earliest checkpoint and bounded dwell
+
+Owner asked to establish kernel execution through a bounded checkpoint/delay.
+Necessary346/344 prerequisite recorded/read back before code. Existing marker was
+AFTER boot-argument/page-table/EL setup and DT-gated; source therefore left an early
+blind interval. New opt-in first-primary_entry leaf precedes record_mmu_state,
+preserves arguments/x18/SP, paints EL1-white/EL2-green/EL3-magenta bands inside only
+the corroborated display allocation with MMU off, handles cache-on exact-span PoC
+clean, waits eight counter seconds for valid architected frequency and continues.
+No watchdog/reset/thermal/security/credential register writes. Reset cause remains
+unproven; this cannot promise to extend an independent watchdog deadline. Absence/
+time-only observations remain inconclusive; visible pattern is positive entry only.
+
+Actual instructions passed EL1/EL2/EL3 emulator span/guard/cache/frequency/request/
+8s/register controls. Pinned boot protocol checked; no EL/security workaround added.
+Stopped-counter wall limit is not qualified; finite instruction budget only. New
+workflow opt-in entry_checkpoint=entry-8s requires lab-retained; default profiles
+unchanged. Generic kernel VM will back FB address with1536MiB virtual RAM for this
+profile. Persistent reader/control retained. No tablet write/reboot/helper/arm or
+new kernel build yet. Exact compile/Image checks and full physical review required.
+
+## 2026-11-03 — #346 earliest-entry candidate6 prepared
+
+Run41583240596/source7b519b0 succeeded; retained hashes/gzip/config/size and20s
+enforcing VM verified. Actual Image first primary_entry BL target,296 exact probe
+bytes and8-second literal match independent EL1/EL2/EL3 emulator. Fresh component13/
+own DT4 packed candidate6 SHA8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16.
+Independent image/mailbox checks and fresh actual read-only original TWRP/aliases/
+p5+p6/rollback checks passed. Fresh trial6 receipts unused; no write/arm/helper/TTY
+rule/reboot. Full exact review records earliest physical framebuffer/cache writes,
+counter dwell limitations, persistent storage and currenthash-bound original restore.
+Source569 tests remain historical validation, not hardware acceptance. No reset
+control is changed; visible pattern positive only. Wait exact approval/availability.
+
+## 2026-11-04 — #346 actual earliest-entry candidate6 trial complete
+
+Owner explicitly approved candidate6 and confirmed availability. Guarded fullp5
+write/readback once, unchangedp6 and postwrite preflight passed; supervisor armed
+once. Owner reports no colored bands; returned to TWRP after approximately90s or
+slightly longer without manual shutoff. One original FACTORYM helper exited0;
+this was a helper-mediated return, not proof of spontaneous recovery. Initial
+collector failed ValueError at validating_returned_recovery, cause unproven.
+Separate prepared read-only collector passed recovery/aliases/fullp6/exact prefix/
+seed: only HOSTCONTROLseq1/85B, no invalid slots. Full posttrialp5 SHA equals
+candidate6. No kernel entry/reset cause/storage writer or kernel record proved.
+
+Approved full originalp5 restored once from validated current hash; fullp5+p6
+readbacks/RAMcleanup passed. TWRP left running/no reboot. Supervisor stopped;
+private archive lab/controller hashes match. No TTY rule installed, older prep
+unchanged. No physical action/rearm/build pending. Preserve reader/format and
+narrow actual load/entry/handoff; diagnose initial collector independently.
+See entry-delay-trial-result.json;346/344/348 remain open.
+
+## 2026-11-04 — #346 bounded loader audit and collector diagnostics
+
+Actual read-only GPT-derived LK partition prefix exactly matches original-package
+7637da87; TWRP's lk alias is /dev/null. Reproducible exact instruction/candidate
+checker confirms conditional mode0/header/body/gzip/DT/entry forwarding contract,
+without substituting historical4ca0cca7. No concrete package mismatch; runtime
+mode/read-hook/decompression/secure handoff remain unobserved. No new kernel build,
+firmware write or trial. Next source prerequisite is loader-owned mode/read/final
+SMC checkpoint design with resident payload ownership/equivalence proved first;
+standalone LK write is not a justified route because boot.payload embeds LK too.
+
+Exact archived partition/nonce replay does not reproduce initial collection failure.
+Old receipt lost the ValueError detail; cannot reconstruct missing responses.
+Added safe collection stage/type/reason to supervisor receipts, no extra I/O/retry
+or changed acceptance. Alias/read-failure regression controls and existing retained
+collector/rollback/lifecycle tests pass; repository check passes. The historical
+hardware failure remains unproven. Public trial6-loader-contract.json and
+trial6-collector-diagnosis.json preserve limits. Original boot restored/TWRP;
+nothing armed or physical action pending.
+
+## 2026-11-04 — #346 resident payload ownership and modeled execution
+
+Pinned archived resident instructions passed nine mode/flag and twelve read-routing
+emulator cases using existing lab-resident bytes; no device access or firmware
+export. Source hashes pinned. Callee-saved/SP/high-offset/nonredirect controls pass.
+Six live64-bit globals occupy0x4bcffb88..bb8; only584 zero bytes remain before the
+embedded LK prefix, not636 bytes of presumed free code. Original compiler/ELF/map
+provenance is absent, so byte-for-byte rebuilt-source equivalence is not claimed.
+The exact archived binary is the next observation baseline. Review now identifies
+specific selected-mode, post-redirect argument and final-handoff sites, original
+bytes and replay requirements. Next assemble analysis-only stubs and verify replay/
+span/branch/cache conditions before packaging or admitting any observer. Original
+boot/TWRP unchanged; no write/arm/helper/build or physical action pending. See
+resident-loader-payload-result.json and INDEPENDENT-RECOVERY.md.
+
+## 2026-11-04 — #346 loader checkpoints implemented and exact trial7 prepared
+
+Implemented normal-only mode/selected-read/final-handoff Thumb observers,280B in
+proved archived span;266 changed bytes across four exact spans.54 hostile-service
+preservation/gating cases plus17 full-path fixtures pass; recovery/fastboot bypass
+added video calls. Exact candidate observer SHA6a34b1a5 built independently on lab/
+controller; no kernel rebuild. Added one-span bootstrap install/restore guard with
+GPT CRC/nonoverlap, original headers/return chain, tmpfs upload, exclusive receipt,
+current-hash recheck, full readbacks and no retry/reboot. Six guard regression tests
+and existing collector/lifecycle controls pass. A read-only guard initially stopped
+on alias-vs-GPT naming; corrected to actual GPTboot/recovery names and fresh actual
+preflights pass. Safe guard stage retained for future failures.
+
+Scoped actual original bootstrap ranges match archive and are retained lab/controller;
+GPT metadata proves proposed span excludes all other entries/userdata. No full
+bootstrap-container or userdata reads. Fresh trial7 inputs/commands/unused receipts
+staged, exact selected recovery USB/helper hashes and retained inputs pass. The
+review explicitly includes normal candidate6 reinstall/seed reset, one original
+return helper, validated collection, original bootstrap and fullp5 restoration.
+Changed bootstrap risk requires new exact review approval and availability; no write,
+arm, reboot or helper performed. See loader-observer-{controls,candidate,range-review,
+preparation}.json and INDEPENDENT-RECOVERY.md exact trial7 review.
+
+## 2026-11-04 — #346 actual loader observer trial7 and original restoration
+
+Owner approved exact bundle/availability; observer+p5 installs and postwrite checks
+passed once, one arm and one original FACTORYM helper exit0. Owner saw different
+lower-left console text approximately mode/reading, exact strings not recalled;
+explicit TWRP confirmation. No exact checkpoint/handoff/kernel-entry acceptance.
+Supervisor failed full_recovery_read_and_hash/partition_read_size_mismatch; first
+failed output size lost, root cause unproved. Prepared independent readonly
+collector passed all recovery/prefix/seed checks: only HOSTCONTROLseq1/85B/no invalid
+slots; fullp5 unchanged candidate6, no kernel record.
+
+Bootstrap restore PRECHECK stopped before write on different current hash. Preserved
+readback was exact ORIGINAL. Unchanged recovery image's fix-bootpatch.sh source and
+actual matching /tmp/restore_bootpatch.log prove existing TWRP repair reported
+copying recovery bootstrap to normal bootstrap. Both original ranges/headers
+verified; agent needed no second bootstrap write. Approved fulloriginalp5 restored
+once/currenthashbound, fullp5+p6/RAMcleanup verified, TWRP left running/no reboot.
+Supervisor/helper inactive; no arm/owner action pending. Private main archive and
+repair-proof supplement lab/controller match. Public loader-observer-trial-result.json
+and twrp-bootstrap-repair-source.json. Keep recovery repair, mailbox reader/format;
+next source contract is attributable durable loader-stage evidence distinct from
+kernel records, not another unchanged boot or kernel rebuild.346/344/348 remain open.
+
+## 2026-11-04 — #346 loader checkpoint core and concrete persistence blocker
+
+Implemented bounded C loader producer using existing VLOG0001 codec unchanged,
+normal mode/read/pre-handoff metadata and distinct loader tag. Existing reader
+now decodes loader records without claiming kernel entry; malformed producer
+metadata retains validated full readout for rollback. Native writer10, collector8,
+existing codec5 and linked Thumb ARM13 controls pass, including failure/no retry,
+header-last flush order, exact prefix/nonce/seed/final guard and producer transition.
+Owned-file C writer uses actual fsync; ARM storage/flush callbacks are modeled.
+Local only; initial source export to lab was rejected by automatic review and
+was not retried. Local Zig0.14.1/Unicorn2.1.3 resolved compilation/emulation.
+
+Scoped read-only recovery debugfs intake reports cache_size1024KiB/cache_control1;
+private raw EXT_CSD retained, temporary read-only mount removed. This is current
+TWRP state, not a measured LK state. Exact archived LK SWITCH routine replay
+confirmed CMD6 construction and command/status error propagation, but timeout
+expiry returns zero like ready. Counter reduced only for the timeout boundary
+case; no physical MMC command. Direct return-value-only flush binding rejected.
+
+Core3595B plus ARM context exceeds old584B gap. Firmware completion adapter and
+owned memory/stack/lifetime/replay/cache visibility remain prerequisites; no
+runnable observer or new trial selected. Public loader-checkpoint-core-result.json
+and loader-switch-audit.json, reproducible source README. No kernel rebuild,
+bootstrap/boot/recovery writes, arm, helper or reboot. Actual trial7 originals
+remain restored/TWRP;346/344/348 open, no hardware qualification claimed.
+
+## 2026-11-04 — #346 checked cache-completion adapter in local emulation
+
+Implemented analysis-only adapter issuing one raw FLUSH_CACHE CMD6 through the
+pinned LK command structure, requiring a fresh CMD13 ready/TRAN status afterward.
+Initial ready/clean check, conservative R1 error rejection, retry0 per command,
+eight post-command polls,1000ms elapsed budget (including ready-but-late response)
+and permanent error latch. The flawed original SWITCH poll routine is not used.
+Nine native C controls and nine actual linked Thumb controls pass; ARM controls
+execute archived LK command wrapper0x4bd395f4 with modeled hardware driver/clock.
+One raw CMD6 maximum, no transport retry, no writes after failure, SP/callee-saved
+preserved. Adapter alone356B. Public loader-flush-adapter-result.json.
+
+Driver timeout/termination and monotonic clock remain modeled, not physically
+qualified; exact host/card/RCA/cache/target bindings and owned memory/stack/hook
+replay/cache visibility still required before packaging. No physical MMC command,
+source export, boot/bootstrap write, helper, arm, reboot or kernel rebuild. Actual
+trial7 originals remain verified/TWRP. No user trip/action pending.
+
+## 2026-11-04 — #346 integrate checked persistence and remove fixed module addresses
+
+Implemented module.c: writer flushes now go through checked CMD6/CMD13 adapter;
+read/write/prefix callbacks remain separately pinned. Fresh zeroed owned state is
+initialized once, repeat initialization stops it. Four native integrated controls
+pass including all nine first-commit command boundaries and prior record retention.
+Built all module objects as hidden PIC; allocated relocations are PC-relative.
+Core-only mode/read/handoff executes at three modeled allocations. Integrated
+module4307B, context8584B; no longer requires a fixed code address in the584B gap.
+This does not establish a physical allocation or installable bridge.
+
+Exact archived aligned allocator45bb8/core450dc executes against a modeled
+initialized free list: separate aligned8KiB module,8584B context,4KiB stack capacities;
+exhaustion/invalid alignment return null, metadata and callee-saved/SP controls pass.
+Heap/IRQ state modeled; no physical free RAM or worst-case stack claim. Static
+status-side-effect helper3959c branches to36504, exact bx lr; pinned bytes have no
+additional side effect. Public allocator/relocation/status helper reports retained.
+
+Remaining actual integration: bounded bootstrap load/integrity/cache bridge using
+owned allocation; prove real heap lifecycle, firmware driver termination/clock and
+card/target bindings, hook replay/cache visibility. No source export or device
+access, no physical MMC/boot/bootstrap writes, arm, helper, reboot or kernel build.
+Originals/TWRP remain restored/unarmed, no owner action pending.
+
+Integrated PIC ARM validation also passed12 controls: mode/handoff commits at
+three modeled module bases, plus all9 first-commit raw-command failure boundaries,
+actual archived command wrapper, no retry/extra writes and prior durable record
+preservation. Driver/clock/storage remain models. Public loader-module-result.json.
+
+## 2026-11-04 — #346 bounded module bridge implemented and loaded in emulated owned RAM
+
+Implemented bridge.c: exact bounded prefix offset/size and Thumb-entry guards,
+one aligned allocation, one readonly blob load, expected SHA-256 equality,
+zeroed state/stack and cache synchronization; only then publish callable entries.
+One attempt only, no source-partition writes/free/retry after uncertain failure.
+Five native controls pass. Five actual ARM bridge controls pass using archived
+allocator; positive control executes the loaded module on allocated private stack
+and commits MODE/HANDOFFseq3 through checked persistence, failure controls publish
+no entries. Storage/driver/clock/hash/cache/IRQ are models, no device access.
+
+Standalone4608B module blob packed from exact tested ELF/object set; original
+candidate6 file12MiB interval is zero, after declared image sections and before
+mailbox. Candidate file unchanged; no new prefix/seed/candidate built. Bridge548B
+still needs descriptor/hook placement and actual firmware bindings; code size alone
+is not placement qualification. Public loader-bridge-result.json and
+loader-module-blob-result.json. No device access, physical MMC command, helper/arm/reboot or kernel rebuild.
+Next bind real heap/hash/cache/clock/read/driver/card contracts and place the bridge
+and hook descriptors, then exact replay/integrity proof and changed review bundle.
+
+## 2026-11-04 — #346 actual generic hash and cache bindings implemented
+
+Implemented SHA framing and Thumb thunk to pinned archived generic ARM compression
+15620, providing end-pointer/table-base ABI without CPU feature dispatch or any
+capability/global/security-register changes.12 actual instruction controls match
+hashlib, padding boundaries through4608B, wrong digest and missing admission/size
+bounds. Firmware data reads confined to round constants; writes private stack only.
+Hash computation is not modeled in these controls. No device access.
+
+Implemented bounded cache wrapper calling pinned3c740 clean/drain/I-cache sequence
+and adding explicitDSB/ISB, normalizing its void return.7 controls execute actual
+wrapper/firmware loop; CP15 effects modeled/recorded, correct line coverage/order,
+no ordinary writes beyond stack. No physical cache operation or visibility pass.
+Five bridge controls also pass with actual blob-hash/cache instruction bindings,
+including allocated module/stack and MODE/HANDOFF records. Storage/driver/clock/IRQ,
+prefix hash and cache effects remain modeled. Combined bridge968B, descriptors/hooks
+excluded, so old584B gap is insufficient. Public hash/cache/bridge-services results.
+Next implement immutable physical read/write/prefix streaming and clock/driver
+bindings, then bridge/hook placement/replay and exact changed review. No new candidate,
+source export, device read/write, kernel rebuild, helper/arm/reboot or owner action.
+
+## 2026-11-04 — #346 immutable target adapter/prefix stream and composed writer implemented
+
+Implemented physical.c: freezes device/first/16MiB/GPT5/MMC8, unhooked raw read/write
+bindings, exact count normalization and permanent short/uncertain-I/O latch.32-bit
+raw LBA limit enforced before calls; only aligned mailbox writes. Partial log reads
+use owned4KiB scratch with aligned underlying reads, preserving output canaries and
+avoiding the firmware's global unaligned buffer. Nine native and ten actual ARM byte
+wrapper controls pass, block hardware modeled, no device access.
+
+Implemented block-stream SHA: full15MiB prefix read in4KiB chunks, no extra large
+allocation, exact length/padding and failure latch. Native full-prefix control uses
+modeled compression; ten separate actual generic ARM stream controls match hashlib
+through32KiB/grouping/wrong-digest/bounds. No physical prefix hash claimed.
+
+Firmware-module composition now wires storage/prefix to checked writer/flush and
+requires independently supplied record target equality. Scratch reuses only the
+writer's separate output block. Four native full-composition controls pass; seven
+ARM controls pass at two PIC bases through archived byte/command wrappers, short-I/O
+and non-normal modes. Prefix digest explicitly modeled only in this ARM composition;
+actual stream and full native-prefix tests cover the separate path. Absolute GOT
+function pointers rejected; local relative thunks remove them.5826B/state8656B.
+Also guard emit-before-initialization; five native module controls pass.
+
+Remaining: real monotonic clock/driver termination/card-DMA/device identity and
+bridge/descriptors/hooks placement/replay/cache visibility, then complete changed
+review bundle. No physical writes/reads, candidate rebuild, source export, helper,
+arm, reboot or kernel rebuild. Originals/TWRP unchanged/unarmed. Historical host
+collector read-size failure remains unexplained; source byte-I/O guards do not fix it.
+
+## 2026-11-04 — #346 real counter binding and bounded flush-command lane implemented
+
+Pinned GPT4 three-read sampler plus13MHz tick extension implemented, including wrap,
+remainder, missing progress/backward rejection; no timer configuration/reset. Exact
+isolated legacy replay confirms an R1b DAT0 loop and event-wait reset-failure self
+loop lack termination; no inference about any actual trial cause. Outer deadlines
+cannot preempt those firmware calls.
+
+Implemented narrow command-only controller lane for exact FLUSH_CACHE and CMD13:
+R1 fallback plus separate ready/TRAN polling, retry0,50ms/request and65536-iteration
+caps, including dynamically frozen counter. ARM ordering and offset allowlists;
+only ARG/CMD/command-event W1C writes. Active DMA or command interrupt consumer,
+unrelated pending events, invalid requests and errors fail closed. No controller
+reset/DMA configuration/timer/security writes. Linux MMC R1 fallback is a protocol
+precedent, not firmware source equivalence or hardware acceptance.
+
+Ten native clock/command controls and fourteen actual ARM driver/sampler controls
+pass with modeled counter/controller values. Timed module wires these to the writer:
+6996B/state8728B, four native full-prefix composition and nine ARM composition
+controls at two PIC bases/short-I/O/stuck clock/controller cases. ARM prefix digest
+and block hardware remain models; separate prefix/actual stream controls preserved.
+Public command-waits/command-driver/timed-module results.
+
+Original raw data driver remains termination-unqualified; command-only replacement
+does not preempt its data-I/O error paths. Remaining preparation is real card/device
+identity and explicit recovery-risk contract plus bridge/descriptors/hooks ownership,
+IRQ lifecycle/replay/cache visibility. Console-only reclamation is an unadmitted
+private proposal, not guessed free RAM. No physical access/write/candidate/helper/
+arm/reboot/kernel build or owner action. Actual trial7 originals remain restored.
+
+Programming replies now pace CMD13 by a clock millisecond under finite spin/time
+guards. The outer flush retains1000ms and now allows1000 polls instead of the early
+eight-poll prototype, avoiding a premature source limit before real cache completion.
+Frozen pacing fails closed; native flush9 controls and timed composition pass.
+
+## 2026-11-04 — #346 cached runtime identity guard implemented
+
+Added a selected-field double-snapshot guard for immutable device/card/host binding.
+It validates MMC0 base, device/block pointer agreement, RCA, MMC flag and cached
+EXT_CSD revision/cache fields; failures or changing snapshots publish no binding.
+Five native controls cover mismatch, failed/mutating reads, cache-disabled reporting,
+overflow and exact allowed reads. No CID/serial/userdata reads or controller writes.
+Caller pointer/getter provenance and pinned read integration remain unfinished;
+cached metadata alone is not fresh card interrogation or physical acceptance.
+No device access, candidate packaging, arm/helper/reboot or owner action.
+
+## 2026-11-04 — #346 identity guard connected to timed start
+
+Implemented lft_start_bound: two matching cached snapshots must agree with immutable
+device/RCA/cache plans before clock/controller/storage initialization. Mismatch
+consumes the attempt, preventing a later unchecked-start retry. Native integrated
+case passes alongside inherited controls (9 collected cases); changed Thumb module
+compiles with the new entry/guard included. ARM execution of the new entry and actual
+frontend pointer/getter provenance remain open. No new physical candidate or action.
+
+## 2026-11-04 — #346 bound identity entry executes in ARM model
+
+Five actual Thumb controls pass: bound start at two relocated bases produces
+MODE/HANDOFF sequence3; mismatch, mutated snapshot and read error stop before clock,
+controller or storage callbacks and consume the initialization attempt. SP/callee
+saved checks pass. Metadata callback, prefix digest, block/controller/counter remain
+modeled; pinned frontend getter/pointer provenance is not established. No physical
+access/candidate/arm/helper/reboot or owner action.
+
+## 2026-11-04 — #346 pinned identity discovery without lazy initialization
+
+Implemented li_discover using exact archived device-slot and pure host/card0 getter
+address derivations. Inspection found get_device may call lazy initialization and
+write a flag, so it is not invoked. The slot must equal a descriptor-pinned expected
+device before selected-field reads; expected block pointer is independently checked.
+Seven native controls pass including positive pinned discovery and wrong-global
+rejection before pointer dereference. Direct memory callback and trusted descriptor
+provenance remain unfinished. No device access or physical action.
+
+## 2026-11-04 — #346 direct selected identity-memory adapter implemented
+
+Implemented volatile byte-read frontend callback restricted to selected fields and
+pinned card/host addresses; forbidden address/width fails without output change.
+Linked callback explicitly retained in timed analysis ELF. New ARM controls use
+synthetic firmware RAM for discovery and bound startup at two relocated bases,
+without the modeled metadata callback. Descriptor ownership/provenance and physical
+hook placement remain open. No device access, physical candidate or owner action.
+
+## 2026-11-04 — #346 complete loader checkpoint trial8 candidate delivered for review
+
+Followed the concrete unblock plan: integrated one runtime frontend/frame dispatcher,
+proved console-only reclamation against original mode/read behavior, linked1530B of
+bridge/hash/cache/descriptors/hooks inside1587 owned resident bytes, and loaded the
+9216B PIC module on allocator-owned8744B state plus4KiB private stack. Original
+integer/flag/SP state and overwritten read/handoff instruction replay are preserved.
+All IRQ-masked calls decline observation; no interrupt enabling is added by hooks.
+
+Complete linked replay covers native64-bit partition redirects, exact blob SHA/cache
+instructions, private-stack writer records and stop/no-retry boundaries. Private
+stack observation is recorded in the final receipt; hardware driver worst-case stack,
+heap state, cache/controller effects and data-driver termination are not qualified.
+Fresh trial nonce is rebound only in named PID1 non-executable data and DT chosen
+property, with kernel/PID1 instructions and policy unchanged; component ID/prefix/seed
+recomputed and independently checked. No kernel build or physical action.
+
+Exact candidate/recovery review and fresh local trial8 supervisor/manual commands
+are prepared, including already-original TWRP repair handling and current-hash-bound
+one-shot restores. No old receipt/approval is reused. No upload/source export, device
+preflight, install/arm/helper/reboot or owner trip has occurred. Actual trial7 originals
+remain the latest verified device state.346/344/348 remain open pending hardware.
+
+
+## 2026-11-04 — #346 owner-directed proven-baseline research changes next action
+
+Found primary Douglas initial-port MR1304: author reports boot/display/touch/USB
+networking on Amazon vendor kernel. Read the actual device/kernel recipes and
+vendor SELinux header. Offline comparison confirms our backed-up normal kernel
+is ARM64; mainline's different text_offset must be respected, not overwritten by
+legacy offsets. Earlier USB claim corrected below: the disabled nodes were USB1/port1;
+missing USB cannot locate the failure. Published vendor policy ceiling30 also
+prevents blindly reusing our policy33 ramdisk. Exact owned-kernel policy ceiling
+remains to be established; do not disable enforcement to bypass compatibility.
+
+Held trial8 unarmed; retained all artifacts/rollback assets. Next is a compatible,
+self-contained logging control on the already-booted matched kernel/DT and existing
+USB driver, then controlled kernel/DT changes. This does not select a legacy final
+platform, third-party OS install or stock-DT substitution into mainline. No build,
+device access, flash/arm/helper/reboot or owner trip. Evidence/proven-douglas-baseline
+receipt and revised unblock plan record the bounded conclusions; no root cause or
+hardware acceptance is inferred from the external report or source comparison.
+
+
+### Testing-process correction: stop unqualified physical trials
+
+No custom kernel tablet boot or kernel log is confirmed. Added a shared fail-closed
+hold before candidate installation, observer installation and supervisor arming;
+there is no override. Original restoration/read-only collection remain available.
+The next deliverable is a reviewed known-kernel logging control, followed by actual
+fresh attributable output before any new-kernel admission. This hold is not that
+qualification. LOADER-UNBLOCK-PLAN.md defines the four exits and transport limits.
+Mailbox collection now distinguishes record presence from recognized kernel/loader
+attribution; preseeded HOSTCONTROL no longer sets attributable_record. Failed-size
+reads retain existing bytes privately (32MiB cap), lengths and digest, without any
+extra device read or retry; no failed readout can supply an accepted rollback image.
+No device access, new kernel build, arm, helper, reboot or owner trip occurred.
+
+
+### Owner constraint: complete next candidate, positive logging beforehand
+
+Recorded the latest direction in the active queue, roadmap and unblock plan. A
+separate partial diagnostic/control-kernel boot is no longer selected. Existing
+recovery collection may qualify only its actual backend, never the custom producer
+or mailbox writer. The logging dependency remains open and the code hold remains
+in force. No build, device access, arm, helper, reboot or owner action performed.
+
+
+### Offline raw-log acceptance implementation
+
+Added assess_kernel_log_capture.py, reusing the actual VLOG0002 receiver to validate
+nonce/framing/terminal/counts/digest and a matching kernel-facility boot banner.
+Five synthetic regression controls pass, rejecting host/loader/userspace/empty,
+stale nonce, wrong release, malformed/truncated/trailing and inconsistent receipts.
+Successful integrity assessment explicitly does not verify physical origin or admit
+any test. No real capture was accepted and no hardware qualification changed.
+Recorded the remaining positive-logging dependency without selecting a separate
+control boot. No build, device access, arm/helper/reboot or owner action.
+
+
+### Correct USB instance in the exact candidate comparison
+
+Found and corrected an erroneous prior research conclusion. Exact candidate6 SHA
+8d3729e6 has USB0@11200000 status=okay/dr_mode=peripheral, phys=<28 3>; phandle28
+is port0@11210800 with no disabled status, under the enabled T-PHY. Only USB1
+@11270000/port1@11210900 are disabled. The earlier comparison checked those second
+instance nodes and incorrectly generalized to all USB. Exact DT hash/properties
+are now retained in the public comparison; queue/roadmap/plan corrected. No runtime
+USB qualification or failure cause follows. No build/device action occurred.
+
+
+### Preserve transport-failure evidence without retry
+
+Extended sanitized ADB failures to retain existing stdout/stderr, exit status and
+timeout classification. The private collector preserves capped streams and exact
+counts/digests for future diagnosis; no command/selector/raw text enters public
+error strings, and no failed readout becomes valid rollback input. Two new native
+failure controls plus nine collector/seven rollback controls pass. Source only,
+not deployed; no device access/build/arm/helper/reboot or physical qualification.
+
+
+### Owner: finish the kernel, prioritize retrievable test results
+
+Selected one combined first-draft build with the existing clock/pinctrl/power/IOMMU,
+USB, regulator, MIPI/DSI/PWM ports linked together, retained eMMC logging and an
+enforcing diagnostic PID1. Added timestamped1MiB ring and panic timeout0; removed
+the old entry-screen/delay patch from this new mode. Packaging uses the matched
+own-source DT, existing reservations, USB0 and conservative eMMC. No new recovery
+automation is selected; original rollback stays available. Hardware boot/logging
+remain unconfirmed. First draft is not the completed Android release or a claim
+of peripheral runtime support. Build/pack implementation and config/scope controls
+pass local checks; actual compile and final package are the next delivery steps.
+
+
+Combined draft run42088917336 stopped at resolved-config validation before Image
+compilation: Binder requires EVENT_TRACING in the pinned drivers/android/Kconfig.
+Added visible FTRACE/FTRACE_SYSCALLS selectors and required EVENT_TRACING so the
+real dependency resolves; no hidden-capability override or removed acceptance
+check. Retest is a changed build, not a repeated physical trial.
+
+
+Combined run42089539062 resolved Binder/tracing and compiled the integrated driver
+objects, then stopped at power-traces.c: device_pm_callback exports require the
+CONFIG_PM_SLEEP declarations in power.h. The inherited restricted profile disabled
+SUSPEND. The complete draft now includes normal PM/SUSPEND/PM_SLEEP and its selected
+HOTPLUG_CPU code; the primary-only DT/cmdline and enforcing ramdisk do not invoke
+suspend or secondary CPU operations. No physical PM qualification is inferred.
+
+
+### Complete first kernel draft delivered
+
+Combined run42091153900 succeeded at dfdd0800db2d0a529b1e4e7d40e14f028974aed9.
+Actual kernel6.18.34-valethon-draft1+ Image26532352B/gzip9274386B/runtime28049408B
+passed loader capacity checks.16 retained kernel/config/map/provider artifacts
+verified; matching enforcing VM passed labels/domain/kmsg/configfs with final UDC
+bind intercepted. That is not physical USB or tablet acceptance.
+
+Assembled the complete first draft with matched own-source DT/ramdisk/fresh nonce,
+USB stream and kernel boot-tail logging,1MiB timestamped ring/initcall tracing and
+panic timeout0. Independent final-byte checks verify23 artifacts, Android component
+ID, Image/DT/ramdisk/nonce, entry/placement, USB0/peripheral/eMMC, seeded HOSTCONTROL
+and absence of old entry-screen/delay symbols. Boot image SHAaf1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365.
+Archive30,038,966B SHA56ed1d97d7bb2a852242c99e2f07addc39dc7b18959f1453692ae4ad393c7cd7.
+
+Results-first TESTING.md requires capture/archive/readout before restoration; no new
+automatic recovery loop/observer selected. This is the first complete kernel
+bring-up draft, not the finished Android OS. Secondary CPU/peripheral behavior and
+positive target logging remain unproved. No device access/write/arm/helper/reboot
+was performed. Existing original rollback and private evidence remain intact.
+
+
+Final source CI found stale build_ack_baseline.sh pins in the AUDSYS and MIPI
+current-source contracts (also consumed by the DSI dependency audit). Reviewed the
+new opt-in first-draft branches: prior profile paths/provider sources preserved;
+combined Image actually compiled in42091153900. Updated only those current script
+hashes, retained the historical hash and old build receipts explicitly, and linked
+the new combined-build receipt. No binding vectors or rejection checks weakened,
+and no successful kernel rebuild is needed for this evidence-only correction.
+
+
+### Explicit five-minute observation; capture cannot trigger return
+
+Owner asked whether the completed kernel is ready and given enough time. The new
+written protocol had no minimum window; the old blocked supervisor still has its
+90-second path. Added capture-only preparation using the existing receiver with
+300-second endpoint wait, a minimum300-second no-intervention instruction and
+explicitly no automatic return helper/restore/reboot. The old supervisor is not
+the new test path. Receiver completion/timeout does not change device state; manual
+return follows observation, and original restoration follows evidence archival.
+Two native preparation controls pass. Kernel/boot-image bytes are unchanged.
+
+
+### Owner Go: exact full-draft test, two visits, manual return
+
+Owner said Go after the completed draft/five-minute capture protocol, then explicitly
+accepted two visits so the return helper remains fully manual. Fresh read-only lab
+identity/aliases/full originalp5/p6 checks passed. Original FACTORYM helper sources
+verified; ModemManager inactive. No device write or helper launch at this point.
+
+Prepared a narrowly pinned first_draft_device.py path for only complete candidate
+af1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365 and the original
+rollback pair. It reuses the already-proven one-file/RAM-hash/single-p5-write/full
+readback transport, fixed exclusive write receipts, read-only collection and
+validated-readout/archive-bound original restore. The old partial-trial gate and
+90-second supervisor remain held. This Go authorizes the exact complete test, not
+a claim of previously qualified target logging or a general admission override.
+
+Capture launcher gives600s owner travel, then begins the full300s endpoint wait only
+after the original recovery USB identity departs. It contains no return/helper/ADB
+or restore call. Manual return is a separate explicit action after owner desk
+report; no kernel/observer rebuild selected. Two timing controls and repository
+checks passed. Tablet install/arm receipts, if executed, are recorded separately.
+
+
+### Actual complete first-draft test1 complete; original restored
+
+Owner reported repeated Amazon logo (roughly1–2min), black, logo again; later still
+looping. Capture-only process ran its300s endpoint budget and stopped:0B, no matching
+endpoint selected/opened. Owner desk status was4503s after recovery USB departure;
+no timed return/helper or agent reboot occurred during observation. Screen loop
+does not prove kernel entry or reset cause.
+
+First explicitly manual return waiter hit its own host receipt mode0644 guard
+before any helper launch. Source/log/mode evidence preserved. Guarded return-only
+continuation proved prior helper0/log absent/process stopped, created mode0600
+receipt, and launched exactly one original FACTORYM helper, exit0. No kernel
+rewrite, new boot-capture attempt or StageA repetition. Two stable TWRP identities
+then full collection passed once: aliases/recovery/prefix/seed verified, fullp5
+unchangedaf1dc7e2..., HOSTCONTROLseq1/73B only, no invalid slots/kernel record.
+Prior collector causes remain unproven; success here does not retroactively fix them.
+
+Main evidence27,078,552B SHA8f6cd8ae5a9eba67192fa6bdb806b202f7daa736de92f452cf9dd366b6421c67
+matched lab/controller before original fullp5 restoration ONCE. Fullp5/p6 readbacks
+and RAM cleanup verified, TWRP left running/no reboot. Post-restore/source supplement
+9265B SHA28eae4df6e9af69c167140e8fcc3f447ec4879d5e5a43b42e4da7c0af5088569 also matches
+both machines and preserves exact controller programs/host permission failure.
+Capture/return processes stopped, helper done, no physical action pending. Approval
+consumed;346/344/348 remain open. No unchanged trial/rebuild selected.
+
+Future capture source now clears its armed metadata on completion/exception (two
+regression controls pass); deployed executed source/history remains archived and
+unchanged, no rearm or deployment of that source fix. Actual kernel/retained logs
+remain unconfirmed. First-draft trial-result/state receipts carry terminal truth.
+
+
+### Capture repair: host enumeration trace and earlier recorder calibration
+
+Owner asked how to fix capture. Actual evidence separates successful readback from
+absent producer output; current USB/PID1 and eMMC/late-init paths cannot observe
+earlier failure. Found host blind spot: unexpected port identities were silently
+filtered with no enumeration history. Added a read-only selected-port observer
+(record numeric IDs/classes/driver/ACM nodes/connect transitions, never serials or
+TTY opens) and future330s parallel metadata capture. Three new controls and two
+existing host completion controls pass. Not deployed/rearmed as a physical trial.
+
+Executed only two cached sysfs snapshots on the already-running recovery: selected
+port present/stable, two usbfs interfaces, no target commands/write/reboot. Private
+evidence retained; sanitized capture-observer-control-result.json labels this
+strictly as host observer/current-port mapping, not custom-kernel logging proof.
+
+Rechecked primary ARM64 boot/ramoops docs and Douglas vendor-port report. Next
+prerequisite is known-working-stack end-to-end recorder calibration, then actual
+pre-handoff/entry checkpoints. Existing loader module covers pre-SMC only; early
+kernel marker storage/return retention remains unproved. No guessed ramoops RAM,
+modern-ramdisk/vendor-policy transplant, new kernel build or physical trial. Any
+control boot requires complete review and explicit owner exception/approval to the
+prior no-separate-control constraint. Original images/TWRP remain unchanged.
+
+
+### Known-boot capture calibration packaging
+
+Implemented a separate exact-original packer; the prior trial8 baseline whitelist
+is unchanged. Control 1 preserves 7,796,736 original declared boot bytes, including
+header/kernel/appended DTs/ramdisk, and places the unchanged 9,216-byte PIC recorder
+in verified-zero 12 MiB padding with a fresh loader-only nonce and mailbox seed.
+No kernel rebuild, source export, device access, write, arm or reboot. Public
+known-boot-capture-control-result.json explicitly leaves logging unqualified.
+Exact packed instruction replay passed all seven controls, including non-normal
+mode, allocation/hash failure, IRQ-disabled decline and no retry. Hardware services
+remain modeled; physical wrappers/review remain.
+Original-stack entry/DT handoff replay also passed at 0x40080000/0x48000000;
+all 15 reused module objects passed allowed relative-reference checks.
+
+
+### Complete known-stack capture-control procedure prepared
+
+Delivered exact install/observe/manual-return/collect/assess/original-restore tools
+and KNOWN-BOOT-CAPTURE-CONTROL-REVIEW.md. The original declared boot stack is unchanged;
+only this exact calibration pair has separate fresh authorization. Legacy diagnostic
+logging hold is unchanged. Five minutes minimum, no automatic return/reset/restore;
+return helper requires a subsequent desk report/request and same-host boot clock.
+Exclusive0600 receipts fix the previously exercised umask failure. TWRP repair is
+preserved; already-original bootstrap is verified without a second write. Changed
+record tails restore only against validated full readout/current hash and archived
+evidence. Assessor rejects HOSTCONTROL/stale/wrong-entry records and never admits
+modern kernel/USB/kernel-side logging from a loader record.
+
+Independent package verifier passed;681 controller tests passed (10 new control
+tests, old diagnostic hold retained). Staged21 source/artifact files on authorized
+Linux and verified hashes. Actual read-only preflight passed original fullp5+p6,
+normal/return bootstrap/header, GPT/aliases. Original helper sources verified;
+selected cached USB metadata present; ModemManager inactive. No source firmware
+bytes published, no device write/arm/helper/reboot or owner action pending. Exact
+approval/availability still required for this complete changed procedure.
+Actual Linux missing-authorization controls passed for observer install, p5 install,
+watch arm and manual helper; no receipts/helper logs created. Durable private receipt
+create/update passed under umask022. Controller archive/hash-match and exclusive
+operation wrappers prepared privately; none executed.
+
+
+### Approved known-stack control installed; guard correction before boot
+
+Owner explicitly approved the exact review and confirmed availability. Observer
+21a26da4 and fullp5 control77d7453b were each written once; exact readbacks, fullp6
+and RAM cleanup passed. No reboot/watcher/helper. Installed preflight matched
+normal/return bootstrap/header/GPT/aliases and fullp5, then rejected stale trial8
+prefix/seed constants accidentally retained in the copied control guard. This is a
+source guard-binding error, not evidence of changed installed bytes. Preserved its
+failed stdout/stderr; no block-write retry. Corrected only those pins against the
+independently verified unchanged control bytes/manifest; added artifact-to-guard
+regression (11 calibration controls pass). Corrected source/exact-head checks and
+one new read-only installed validation are required before observation arm. Existing
+approval remains for the same exact firmware pair; no new physical procedure.
+
+Corrected guardd19f37e passed all five distinct exact-head checks. One corrected-source
+read-only installed validation passed; no further block writes. One observation-only
+watcher launched and durable armed receipt/process verified; helper0/no auto return
+or reboot. Owner first visit pending: Reboot/System once, observe≥5min, desk report
+before manual return. Exact control p5+normal observer remain installed; originals
+are not currently restored. Never repeat either install/arm or reuse approval.
+
+
+Known-stack control1 owner confirms home screen. Fresh host-only continuation
+preserved the expired unbooted window; no firmware rewrite or duplicate trial.
+Observation completed with actual USB departure and >5min elapsed; helper0. After
+owner desk report, approved return-only waiter launched once with durable receipt,
+helper0 at launch; second visit pending. No normal reboot/write/capture rearm;
+record retrieval/qualification still pending. Owner screen confirms only baseline
+boot, not modern-kernel entry or a retained log.
+
+
+### Actual known-stack capture control1 complete — recorder still unqualified
+
+Owner confirms original-stack home screen. Original return window expired without
+helper launch and owner reported home screen again; preserved it and executed a
+return-only continuation, one original FACTORYM helper total/exit0. No new firmware
+write or capture/trial rearm for that continuation. Read-only collection passed
+identity/aliases/fullp6/exact prefix/seed/slots. Full returned p5 still77d7453b,
+only HOSTCONTROLseq1/85B, no invalid slots, no loader or kernel record. This is a
+failed recorder control on a booting baseline; specific recorder cause is unknown.
+It does not diagnose the modern kernel or qualify kernel entry/logging.
+
+Private archive26478962B SHA5f48b89f906e793de426d263b168a4023c0762889b600dfd4ebeafece5a6792a
+matched lab/controller before restoration. Normal bootstrap already matched
+original4c6f355c, so no agent bootstrap restore write. Approved original fullp5
+restored once/current-hash bound; fullp5/p6, normal/return bootstrap/header/GPT/aliases
+and RAM cleanup verified. TWRP left running/no reboot; watcher/return waiter stopped,
+no helper or owner physical action pending. Post-restore private supplement11412B
+SHAe3b2d4400f75e70324778c8a7967715e9ef78f5636b0f9299e4da66985579d3c matched
+lab/controller. Preserve all receipts/rollback. Approval consumed; no unchanged
+control or modern-kernel build/trial selected.346/344/348 remain open.
+
+
+### Recorder repair implemented and complete changed review prepared offline
+
+Traced actual no-record control back through recorder entry gates and archived LK
+instructions. Cache-on-only admission was an unsupported-state gap; Linux3.18
+mmc_flush_cache issues FLUSH_CACHE only when cache is enabled. Added cache-off
+completion with fresh clean/ready CMD13 before/after, no CMD6/cache-mode change,
+retaining deadlines/error/identity/no-retry guards. Actual control1 LK cache state
+remains unknown; TWRP cache-on observation is not borrowed across phases.
+
+Archived call4bd3e3f8 invokes ARM IRQ-mask helper4bd3c76c before old hook4bd3e524;
+actual helper replay sets CPSR.I while old observer declines masked I/O. This
+explains a bad final-site contract, not all absent earlier records. Replaced it
+with distinct pre_shutdown snapshot at4bd3e3e8, before masking/later shutdown;
+original final SMC call unchanged. Capture r11/SP+8 proposed entry/DT, replay original
+r3 PC-relative literal and all other r0-r12/SP/APSR. Inline BL LR is dead until the
+next original BL/BLX on both original paths. Skipped masked reads perform no I/O
+and do not consume the sole initialization; one safe late initialization allowed.
+Real load/hash/identity/command/write failures still latch without retry. Invalid
+device globals stop before blob read. Bootstrap1572B fits proven1587B console spans;
+no guessed RAM/global overwrite. VLOG0001 body/layout preserved, loader decoder
+adds explicit stage4; no pre_shutdown/kernel-entry conflation.
+
+691 native tests,15 final adapter ARM,12 two-base frontend and8 exact final packed
+bridge controls passed. Independent verifier checks allocated bootstrap code bytes,
+actual branch targets, descriptors/seed/15 objects and preserved original final
+call. Full hardware/controller/clock/heap/cache effects and prefix digest remain
+modeled; raw data termination/physical ownership/durability remain unqualified.
+
+Fresh unexecuted control2: fullp5e1f2a73b, observer3313d00c, all7796736 original
+declared header/kernel/DT/ramdisk bytes unchanged. Fresh nonce/seed, module9216B,
+state8744B/private stack4096B. Generated20-file private profile binds all four exact
+candidate/observer/prefix/seed hashes and a unique control2 scope; independent
+binding regression prevents the prior stale-pin mistake. Approval/availability
+false, no export/lab staging/device action/kernel build. Complete changed review
+in KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md; approval1 consumed, never reusable.
+
+
+### Actual control2 installed and observation armed after owner Go
+
+Owner Go accepted exact reviewed control2 and current availability at8789e1c, with
+all five distinct checks SUCCESS. Staged20 files/verified; fresh actual original
+p5/p6/normal-return bootstrap/header/GPT/alias preflight passed. One observer3313d00c
+range write/readback/RAM cleanup, one fullp5e1f2a73b write/readback/fullp6/RAM cleanup
+passed; installed preflight passed with generated exact prefix/seed pins. One
+observation-only watcher launched/durable receipt/live process verified, helper0,
+no automatic return/restore/reboot. Owner first visit pending; originals are not
+currently restored. No kernel build or repeated trial; fresh approval consumed.
+
+### Actual control2 completed; originals verified
+
+Actual control2 complete: owner confirmed original home screen, but collection
+passed with only HOSTCONTROL seq1/85B, no loader/kernel record or invalid slot.
+One original FACTORYM helper exited0. Evidence archive and supplement matched
+lab/controller. Normal bootstrap already original: no agent bootstrap restore write.
+Original fullp5 restored once; fullp5/p6, bootstrap/header/GPT/alias/RAM cleanup
+verified. TWRP left running, no reboot; all workers stopped, no owner action pending.
+One bounded /proc/last_kmsg read returned No such file; no fallback log recovered.
+Exact approval consumed. No repeat trial, new kernel build or control3 selected.
+Next: establish active bootstrap reachability and expose the first rejected gate
+before another mailbox writer test. Logging and custom kernel entry remain unproved.
+[Actual control2 result](../evidence/independent-recovery/pre-shutdown-control2-trial-result.json).
+
+### Independent arrival/first-rejection diagnostics implemented offline
+
+Offline source delta: independent arrival/first-rejection witness implemented.
+New analysis-only late profile uses1547/1587 proven console bytes and preserves
+original read redirection. Eleven actual ARM controls pass, including exact
+resident main and archived formatter, register/SP/APSR replay and distinct failure
+codes. Display pixels/hardware remain modeled. Native display update can reach
+an uncapped tick-dependent wait: actual wait replay returns with advancing samples
+and remains in the loop with frozen samples. Both physical packers reject this
+profile pending independent display-path qualification. No candidate/device action
+or new kernel build; originals remain verified/TWRP/unarmed.
+
+Frontend negative returns now identify device/block/redirect/handoff/identity/start/MODE/not-ready/device-change failures rather than flattening all to-1. No extra I/O, weakened guard, retry or mailbox-format change. Native video formatter executes; final display sink is modeled. The concrete display-wait dependency is not claimed as any historical trial cause. Full source/reproduction and phase interpretation: LOADER-UNBLOCK-PLAN.md / loader-retained README.
+
+Changed frontend regression:12 actual ARM controls PASS, including existing redirected-read and late checkpoint cases. Both physical packers rejected the analysis profile before candidate inputs/output;2 rejection controls PASS. Python syntax and git diff whitespace checks PASS. No whole unchanged test/build rerun.

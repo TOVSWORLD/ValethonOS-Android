@@ -1,0 +1,32 @@
+{
+  "scope": "Exact existing full-partition rollback inputs; not trial admission",
+  "boot": {
+    "bytes": 16777216,
+    "sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e"
+  },
+  "recovery": {
+    "bytes": 17825792,
+    "sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11"
+  },
+  "device_reads": 2,
+  "independent_device_reads_match": true,
+  "lab_and_controller_copies_verified": true,
+  "private_image_bytes_committed": false,
+  "boot_partition_bytes": 16777216,
+  "recovery_partition_bytes": 17825792,
+  "device_write_performed": false,
+  "restore_execution_tested": false,
+  "current_boot_component_sha1_matches_header": false,
+  "current_boot_unclassified_tail_bytes": 8980480,
+  "recovery_component_sha1_matches_header": true,
+  "diagnostic_capture_blocker": "Current diagnostic config disables USB, storage and display; RAM survival across full power-off is unqualified.",
+  "rollback_default_preflight_on_device_passed": true,
+  "rollback_host_tests_passed": 7,
+  "repository_host_tests_passed": 514,
+  "shell_v2_pty_disabled_transport_supported": false,
+  "raw_eof_dependent_echo_timed_out": true,
+  "actual_tmpfs_staging_bytes": 16777216,
+  "actual_tmpfs_staging_two_readbacks_match": true,
+  "boot_unchanged_after_staging": true,
+  "restore_uses_verified_ram_file": true
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "Standalone source module blob and readonly file-padding proof; no candidate modification/install",
+  "elf_sha256": "5f22b4f63e903f6c63d7df9f9fe45752264b12332f7575c1cccfa125cb31bac9",
+  "blob_sha256": "1aad55589212ad423ff51b8bc4dbf48d134117a718111640a5a93ee879d265d1",
+  "blob_bytes": 4608,
+  "linked_bytes": 4307,
+  "state_bytes": 8584,
+  "stack_capacity": 4096,
+  "entry_offsets": {
+    "lm_start": 3689,
+    "lm_emit": 4037
+  },
+  "candidate_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+  "candidate_declared_image_bytes": 7297024,
+  "proposed_blob_offset": 12582912,
+  "proposed_file_interval_zero": true,
+  "physical_memory_or_load_admitted": false,
+  "boot_image_modified": false,
+  "device_accessed": false
+}

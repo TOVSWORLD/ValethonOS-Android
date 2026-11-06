@@ -1,5 +1,92 @@
 # Ordered ValethonOS delivery roadmap
 
+Offline source delta: independent arrival/first-rejection witness implemented.
+New analysis-only late profile uses1547/1587 proven console bytes and preserves
+original read redirection. Eleven actual ARM controls pass, including exact
+resident main and archived formatter, register/SP/APSR replay and distinct failure
+codes. Display pixels/hardware remain modeled. Native display update can reach
+an uncapped tick-dependent wait: actual wait replay returns with advancing samples
+and remains in the loop with frozen samples. Both physical packers reject this
+profile pending independent display-path qualification. No candidate/device action
+or new kernel build; originals remain verified/TWRP/unarmed.
+
+
+Actual control2 complete: owner confirmed original home screen, but collection
+passed with only HOSTCONTROL seq1/85B, no loader/kernel record or invalid slot.
+One original FACTORYM helper exited0. Evidence archive and supplement matched
+lab/controller. Normal bootstrap already original: no agent bootstrap restore write.
+Original fullp5 restored once; fullp5/p6, bootstrap/header/GPT/alias/RAM cleanup
+verified. TWRP left running, no reboot; all workers stopped, no owner action pending.
+One bounded /proc/last_kmsg read returned No such file; no fallback log recovered.
+Exact approval consumed. No repeat trial, new kernel build or control3 selected.
+Next: establish active bootstrap reachability and expose the first rejected gate
+before another mailbox writer test. Logging and custom kernel entry remain unproved.
+[Actual control2 result](../../evidence/independent-recovery/pre-shutdown-control2-trial-result.json).
+
+
+Latest actual result: known-stack capture control1 is complete. Owner confirms home
+screen with unchanged original header/kernel/DT/ramdisk, but full collection found
+only HOSTCONTROLseq1/85B and no target record. This fails recorder qualification;
+prior silence cannot locate a modern-kernel failure. One original FACTORYM helper
+exit0; expired pre-helper return window preserved with0 launches. Original normal
+bootstrap was already original, so no agent bootstrap restore write. Original fullp5
+restored once; fullp5/p6, headers/ranges/GPT/aliases/RAM cleanup verified. TWRP left
+running/no reboot; no watcher/helper/owner action pending. Exact approval consumed;
+no unchanged control/kernel build/trial or rearm selected.
+[Actual control result](../../evidence/independent-recovery/known-boot-capture-control-trial-result.json).
+
+Actual first-draft test1 is complete. Original full boot restored once and full
+boot/recovery/RAM cleanup verified; TWRP left running, no reboot, no process armed
+and no owner action pending. USB capture0B/no matching endpoint; returned image
+unchanged from candidate, only HOSTCONTROLseq1/73B, no kernel record. Logo/black
+loop does not prove kernel entry/reset cause. One original FACTORYM helper exit0
+after a host-only receipt-permission failure stopped the first waiter before any
+helper launch; guarded return-only continuation corrected mode600. Evidence
+archives match lab/controller. Approval consumed; no repeat/new trial selected.
+See [actual result](../../evidence/independent-recovery/first-draft-trial-result.json).
+
+Completed first kernel draft: **6.18.34-valethon-draft1+**. Combined build
+42091153900 succeeded at dfdd080; enforcing VM and independent final package
+checks passed. The complete16MiB boot image and private delivery archive are in
+out/valethon-first-draft-1. The source receipt is
+[evidence/independent-recovery/first-kernel-draft-result.json](../../evidence/independent-recovery/first-kernel-draft-result.json).
+USB streaming and retained boot-tail logs are included; no automatic-recovery
+engineering was added. No tablet boot/logging acceptance, installation or trial
+is claimed. The next test must prioritize capture/retrieval before restoration.
+This completed draft supersedes older no-build/minimal-control selections below.
+
+Latest owner direction: finish the complete first kernel draft and prioritize
+test results/retrievable logs over automatic recovery engineering. A combined
+first-draft build is selected: existing board ports, enforcing PID1, USB streaming
+and retained kernel logs. Existing rollback stays available; no new recovery
+automation, physical trial, install or reboot is selected. Positive hardware
+logging remains unconfirmed. This supersedes older “no build selected” text below.
+
+Latest owner requirement: next tablet test uses a complete best-supported kernel
+candidate with logging positively confirmed beforehand. No separate partial
+diagnostic-kernel/observer test is selected. Qualification is still absent;
+see the latest constraint in [the plan](LOADER-UNBLOCK-PLAN.md).
+
+Testing-process correction: physical candidate writes and arming are held until a
+reviewed known-kernel control qualifies the actual logging path. No custom kernel
+boot or kernel log is confirmed. Read-only collection and original rollback remain
+available. See [measurement repair plan](LOADER-UNBLOCK-PLAN.md).
+
+Current346: actual trial7 complete, originals verified/TWRP and unarmed. Only
+HOSTCONTROLseq1/85B retained; no exact kernel entry/handoff or kernel record. TWRP
+repair restored normal bootstrap; approved fullp5 restoration/readbacks verified.
+Host collector read-size failure remains unexplained. No owner action pending.
+
+Current decision: hold custom-observer trial8 unarmed after owner research request.
+Primary Douglas port evidence reports boot/display/touch/USB networking on vendor
+3.18. Our known-normal backup is ARM64. Correction: exact diagnostic DT enables
+USB0/peripheral and its port0 PHY; only USB1/port1 is disabled. Missing USB remains
+unattributed. Next: offline ABI/compatible-enforcing-policy
+profile for a minimal logging control on the already-booted matched kernel/DT and
+existing USB driver. No old OS installation, stock-DT graft into mainline, policy
+bypass, build, device access or new physical trial is selected. Trial8 artifacts
+remain retained. See [revised plan](LOADER-UNBLOCK-PLAN.md).
+
 Owner correction,29 October2026. The objective is a recoverable diagnostic boot
 with useful logs, followed by a coherent Android beta. Source/PR/test counts are
 not a completion percentage. [Project4](https://github.com/users/TOVSWORLD/projects/4)
@@ -11,8 +98,16 @@ defines stable ordering, dependencies and acceptance contracts.
 - **Completed milestone:** the approved case-closed software route reached TWRP;
   Android11 LineageOS18.1 and Google services were installed. Owner home screen,
   completed setup and authorized ADB boot_completed=1 are measured under #347/PR452.
-- **Current execution:** #347 entry acceptance review and exact evidence handoff.
-  Then #346 independent failed-load return and #348 retained failure logs, in order.
+- **Current execution:** #347 entry accepted / PR452 merged. The first normal
+  diagnostic trial under346/PR453 yielded no kernel logs/diagnostic USB identity;
+  recovery returned and the full original boot was restored/verified. Generic VM
+  evidence identified/corrected ARM64 userspace ABI and enforcing-label/domain
+  blockers. Revised trial2 also produced no logs; original boot was restored. A concrete
+  inherited-watchdog handoff correction has passed retained kernel compilation/VM
+  validation. Candidate3 trial also yielded no logs. The owner completed the missed manual
+  power-off return step through a return-only continuation; original boot was
+  restored/verified and owner confirms TWRP. No kernel/watchdog hardware pass or
+  intended-failure/348 retention pass. No build/trial/helper running.
 - **Interim versus public OS:** the installed upstream LineageOS build is a lab
   baseline. It is not the finished project-branded OS or a stable/current release
   acceptance. Its patch level is2024-02-05, encryption reports unsupported and
@@ -27,7 +122,7 @@ defines stable ordering, dependencies and acceptance contracts.
   app installation for QA are deferred until those platform gates pass.
 
 This adds release acceptance requirements to existing ordered issues, not parallel
-branding or peripheral tasks. One active implementation Task remains #347. Existing
+branding or peripheral tasks. One active implementation Task is #346. Existing
 PWM exception#440/PR436 is source-complete, without hardware admission or new scope.
 
 ## Follow phase progress without opening every child task
@@ -37,10 +132,10 @@ Each row shows achieved milestones, **Current work**, the specific next handoff,
 remaining blocker and the concrete phase exit. Queued phases explicitly say no
 implementation is running. Child-issue counts are not the progress measure.
 
-Current phase1 has working interim Android11/recovery/ADB. Entry acceptance review
-is under#347/PR452. Conditional board inspection#345 is closed **not planned**;
+Current phase1 has working interim Android11/recovery/ADB. Entry acceptance passed
+under#347/merged PR452. Conditional board inspection#345 is closed **not planned**;
 no opening was needed. Ordinary/current-boot log capture is complete; remaining
-#348 is explicitly failed-boot retention/retrieval. Issue#346 is closed completed;
+#348 is explicitly failed-boot retention/retrieval. Issue#346 is reopened for remaining failed-load qualification;
 its ordinary stock-return evidence is retained, while phase/release acceptance must
 not infer a demonstrated failed-load return from the issue's closed state.
 
@@ -151,7 +246,7 @@ charging/thermal qualification; no generic invented thresholds are permitted.
   thermal/security failure and no claim of passing an untested runtime gate.
 
 Existing completed scopes#29,#339,#342,#343 remain visible as history. They do not
-stand in for physical gates. The current next outcome is#347 entry acceptance review, followed by#346/#348,
+stand in for physical gates. The current next outcome is#346 independent recovery qualification, followed by#348,
 not app QA or an unrelated peripheral PR.
 
 ## Validation of the roadmap

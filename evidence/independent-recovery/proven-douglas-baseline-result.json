@@ -1,0 +1,116 @@
+{
+  "scope": "Offline existing artifact comparison, not a new device test",
+  "known_normal": {
+    "partition_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "kernel_entry": "0x40080000",
+    "image_text_offset": "0x80000",
+    "image_size": 16363520,
+    "page_bytes": 2048,
+    "tags_address": "0x48000000",
+    "ramdisk_header_address": "0x69244e00",
+    "decoded_kernel_sha256": "ccd93b6c9daa3107f03e1633b0de3f609bc1a546f62779f92f29e77cb1855c08",
+    "cmdline": "bootopt=64S3,32N2,64N2 console=ttyMT0,921600n1 firmware_class.path=/vendor/firmware androidboot.selinux=permissive buildvariant=userdebug",
+    "appended_data_bytes": 177674,
+    "embedded_config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "embedded_config_selected": {
+      "CONFIG_ARM64": "y",
+      "CONFIG_USB_MTK_HDRC": "y",
+      "CONFIG_USB_CONFIGFS": "y",
+      "CONFIG_USB_CONFIGFS_ACM": "y",
+      "CONFIG_PSTORE": "y",
+      "CONFIG_PSTORE_RAM": "y",
+      "CONFIG_SECURITY_SELINUX": "y"
+    }
+  },
+  "mainline_diagnostic": {
+    "partition_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+    "kernel_entry": "0x40000000",
+    "image_text_offset": "0x0",
+    "image_size": 17432576,
+    "page_bytes": 2048,
+    "tags_address": "0x48000000",
+    "ramdisk_header_address": "0x43480000",
+    "decoded_kernel_sha256": "34353b23cfbfa3f28a0a99283583ceb5126d5cafe159231ac58546bf63c7c64f",
+    "cmdline": "nr_cpus=1 maxcpus=0 clk_ignore_unused regulator_ignore_unused rdinit=/init",
+    "appended_data_bytes": 27376,
+    "embedded_config_sha256": "8ec3566dbe7b134f41699cb8b6fe053c7b68a7ccd06cdb6cc3821a10d8674b45",
+    "embedded_config_selected": {
+      "CONFIG_ARM64": "y",
+      "CONFIG_USB_CONFIGFS": "y",
+      "CONFIG_USB_CONFIGFS_ACM": "y",
+      "CONFIG_PSTORE": "y",
+      "CONFIG_PSTORE_RAM": "y",
+      "CONFIG_SECURITY_SELINUX": "y"
+    }
+  },
+  "interpretation": [
+    "Known normal kernel is ARM64, not proof that all ARM64 kernels satisfy this firmware contract.",
+    "Different text offsets imply different valid entry addresses; copying the legacy address without changing Image placement would be wrong.",
+    "Header/cmdline differences are hypotheses, not proved causes.",
+    "Correction: exact candidate enables USB0/peripheral and its referenced port0 PHY; only USB1/port1 is disabled. Absent USB still does not locate kernel entry or prove a reset cause."
+  ],
+  "recommended_control": "Next test must be a complete candidate with prior positive logging; separate diagnostic/control boot is not selected.",
+  "no_device_access": true,
+  "trial8_selected_for_execution": false,
+  "exact_candidate_dt_usb_status": {
+    "candidate_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+    "dt_sha256": "104c4015fc8ab9389b8572c741b003486c908a2e811e14b8c35aae464dc7bad3",
+    "properties": {
+      "/soc/usb@11200000": {
+        "status": "okay",
+        "dr_mode": "peripheral",
+        "phys": "28 3"
+      },
+      "/soc/usb@11270000": {
+        "status": "disabled",
+        "dr_mode": "otg",
+        "phys": "35 3"
+      },
+      "/soc/t-phy@11210000": {
+        "status": "okay"
+      },
+      "/soc/t-phy@11210000/usb-phy@11210800": {},
+      "/soc/t-phy@11210000/usb-phy@11210900": {
+        "status": "disabled"
+      }
+    }
+  },
+  "sources": [
+    {
+      "url": "https://gitlab.com/postmarketOS/pmaports/-/merge_requests/1304",
+      "evidence": "Original Douglas porter explicitly reports boot/display/touch/USB networking with Amazon vendor kernel."
+    },
+    {
+      "url": "https://github.com/hexdump0815/pmaports-amazon/blob/main/device-amazon-douglas/deviceinfo",
+      "evidence": "ARM64 device recipe, standard v0/2048-byte boot image, vendor-compatible offsets and bootopt."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/hexdump0815/pmaports-amazon/main/linux-amazon-douglas/APKBUILD",
+      "evidence": "Downstream3.18.19 ARM64 vendor source/config and compiler recipe, not a mainline support claim."
+    },
+    {
+      "url": "https://docs.kernel.org/arch/arm64/booting.html",
+      "evidence": "Entry must follow each Image text_offset and CPU/DT/cache contract; copied legacy addresses are not automatically correct."
+    },
+    {
+      "url": "https://docs.kernel.org/admin-guide/ramoops.html",
+      "evidence": "Needs retained reserved RAM; does not promise retention through full power-off."
+    }
+  ],
+  "decision": "Hold custom observer trial8; prioritize an offline compatibility assessment for a minimal diagnostic control using the already-booted matched kernel/DT and its established USB driver. No new build/flash/OS installation selected.",
+  "policy_compatibility": {
+    "published_vendor_reference_max_policy_version": 30,
+    "published_vendor_config_max_override": false,
+    "current_diagnostic_policy_version": 33,
+    "published_vendor_source": "https://github.com/hexdump0815/linux-amazon-mediatek-mt8163-kernel-source/blob/Fire_HD8_7th_Gen-5.3.7.3-20210714/security/selinux/include/security.h",
+    "meaning": "Current diagnostic initramfs cannot be assumed compatible with the older vendor profile. Build/verify a matching enforcing policy; do not disable SELinux. Exact policy ceiling of the separately built known-normal binary is not claimed here."
+  },
+  "usb_status_correction": {
+    "previous_claim": "USB disabled based only on USB1 nodes",
+    "corrected": true,
+    "usb0_phy_phandle": 28,
+    "usb0_referenced_phy": "/soc/t-phy@11210000/usb-phy@11210800",
+    "phy_status_absent_means_available": true,
+    "runtime_usb_qualified": false
+  }
+}

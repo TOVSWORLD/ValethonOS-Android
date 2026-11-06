@@ -1,0 +1,30 @@
+{
+  "scope": "Exact display-delay instructions and call anchors; tick helper samples modeled. No display/controller or device execution.",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "display_to_wait_path": [
+    "0x4bd44b3c",
+    "0x4bd44b08",
+    "0x4bd2266c",
+    "0x4bd25f8c",
+    "0x4bd25eb8"
+  ],
+  "loop_backedge": "0x4bd25f02 -> 0x4bd25ef8",
+  "cases": [
+    {
+      "modeled_tick_step": 0,
+      "returned": false,
+      "samples": 588,
+      "instruction_cap": 10000
+    },
+    {
+      "modeled_tick_step": 13000,
+      "returned": true,
+      "samples": 32,
+      "instruction_cap": 10000
+    }
+  ],
+  "frozen_tick_independent_iteration_limit": false,
+  "historical_trial_cause_proved": false,
+  "physical_visibility_proved": false,
+  "device_accessed": false
+}
