@@ -10,6 +10,7 @@
 #define LC_MODE 1
 #define LC_READ 2
 #define LC_HANDOFF 3
+#define LC_PRE_SHUTDOWN 4
 struct lc_config {
  unsigned char nonce[32],prefix[32];
  unsigned long long target_first_sector,logical_boot_first_sector;

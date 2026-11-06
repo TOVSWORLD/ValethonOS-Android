@@ -1,5 +1,26 @@
 # Retained loader checkpoint core
 
+
+## Current repair after actual known-stack control
+
+Control1 booted to home but retained only HOSTCONTROL. The new source profile
+handles observed cache-off with two fresh status checks and no CMD6, and puts a
+distinct pre_shutdown snapshot before archived IRQ masking/later shutdown at
+4bd3e3e8. It preserves the original final call. A skipped unsafe read does no I/O
+and does not consume the one possible safe late initialization; actual failures
+still latch. Old first-record failure cause remains unproved.
+
+`build_loader_bootstrap.py --pre-shutdown` selects this separate profile; the old
+profile remains the default for historical reproduction. `validate_loader_pre_shutdown.py`
+executes the archived mask helper and full linked path, optionally `--packed` for
+exact private bytes. `verify_loader_checkpoint_candidate.py` checks branch targets,
+allocated code/descriptor/seed bytes and unchanged final call independently.
+`prepare_pre_shutdown_control.py` generates exact profile guard pins/scope and a
+false-authorization private bundle; it has no deployment/device interface.
+See the [complete review](../../../docs/development/KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md)
+and [source/analysis receipt](../../../evidence/independent-recovery/pre-shutdown-recorder-repair-result.json).
+No source/model result, VLOG stage or control1 approval admits a new physical test.
+
 Analysis implementation for issue346. This directory is not an installable payload.
 It has no device discovery, qualified firmware bindings, hooks, physical address layout or
 physical admission command. `analysis.ld` addresses belong only to the emulator.

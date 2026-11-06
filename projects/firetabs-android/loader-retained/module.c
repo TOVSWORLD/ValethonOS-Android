@@ -14,7 +14,7 @@ int lm_start(struct lm_state *s,const struct lc_config *c,const struct vm_io *ph
   * initialization after a failed checkpoint. No device operation during setup. */
  if(!physical->read||!physical->write||!physical->prefix_sha256||adapter->stopped||
     !adapter->command||!adapter->now_ms||!adapter->bindings_verified||!adapter->clock_verified||
-    !adapter->rca||adapter->rca>0xffffU||!adapter->cache_size_kib||adapter->cache_enabled!=1)return -1;
+    !adapter->rca||adapter->rca>0xffffU||!adapter->cache_size_kib||adapter->cache_enabled>1)return -1;
  s->physical=*physical;s->persistence=*adapter;
  struct vm_io guarded={s,lm_read,lm_write,lm_flush,lm_prefix};
  return lc_init(&s->log,c,&guarded);

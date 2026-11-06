@@ -49,8 +49,28 @@ class LoaderFlush(unittest.TestCase):
   f=Fixture(self.lib,time_after=400);self.assertLess(f.flush(),0);self.assertEqual(len(f.events),3)
   f=Fixture(self.lib,time_after=1,start=0xfffffffe);self.assertEqual(f.flush(),0)
  def test_missing_admission_or_bindings_stops_before_commands(self):
-  for field,value in [('rca',0),('rca',0x10000),('cache_size',0),('cache_enabled',0),('bindings',0),('clock_verified',0)]:
+  for field,value in [('rca',0),('rca',0x10000),('cache_size',0),('cache_enabled',2),('bindings',0),('clock_verified',0)]:
    f=Fixture(self.lib);setattr(f.a,field,value);self.assertLess(f.flush(),0);self.assertEqual(f.events,[])
   for field,callback in [('command',CALL()),('clock',CLOCK())]:
    f=Fixture(self.lib);setattr(f.a,field,callback);self.assertLess(f.flush(),0);self.assertEqual(f.events,[])
+ def test_cache_off_still_requires_two_fresh_statuses_and_never_switches(self):
+  f=Fixture(self.lib,[0x900,0x900]);f.a.cache_enabled=0
+  self.assertEqual(f.flush(),0);self.assertEqual(f.events,[(13,0x10000,1,50,0)]*2)
+  self.assertEqual(f.a.cache_enabled,0)
+ def test_cache_off_busy_post_status_is_bounded_without_any_switch(self):
+  f=Fixture(self.lib,[0x900]+[0xe00]*1000);f.a.cache_enabled=0
+  self.assertLess(f.flush(),0);self.assertEqual(len(f.events),1001)
+  self.assertTrue(all(e[0]==13 for e in f.events));n=len(f.events)
+  self.assertLess(f.flush(),0);self.assertEqual(len(f.events),n)
+ def test_cache_off_errors_latch_at_either_status_without_retry(self):
+  for at in [1,2]:
+   f=Fixture(self.lib,[0x900,0x900],error_at=at);f.a.cache_enabled=0
+   self.assertLess(f.flush(),0);self.assertEqual(len(f.events),at)
+   self.assertLess(f.flush(),0);self.assertEqual(len(f.events),at)
+  for at in [0,1]:
+   s=[0x900,0x900];s[at]|=0x80;f=Fixture(self.lib,s);f.a.cache_enabled=0
+   self.assertLess(f.flush(),0);self.assertEqual(len(f.events),at+1)
+ def test_cache_off_deadline_rejects_even_ready(self):
+  f=Fixture(self.lib,[0x900,0x900],time_after=500);f.a.cache_enabled=0
+  self.assertLess(f.flush(),0);self.assertEqual(len(f.events),2)
 if __name__=='__main__':unittest.main()

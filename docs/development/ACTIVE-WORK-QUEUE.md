@@ -1,5 +1,15 @@
 # Active work queue — ordered delivery
 
+Current source work: recorder repair implemented after the failed known-stack
+control. Cache-off now has checked status-only completion. The new durable snapshot
+is before archived IRQ masking/later shutdown, with a distinct pre_shutdown stage
+and safe late initialization only after skipped no-I/O reads. New exact package/
+[review](KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md) prepared offline:691 native,15 adapter ARM,
+12 relocated frontend and8 exact packed-path controls passed. No source export,
+device access/install/arm or new kernel build; originals/TWRP remain unchanged.
+Next physical action requires fresh exact approval/availability after PR checks.
+The missing initial MODE/READ record's actual cause remains unproven.
+
 Latest actual result: known-stack capture control1 is complete. Owner confirms home
 screen with unchanged original header/kernel/DT/ramdisk, but full collection found
 only HOSTCONTROLseq1/85B and no target record. This fails recorder qualification;

@@ -22,7 +22,7 @@ class TimedModule(base.FirmwareModule):
    original(context,off,value)
   def read(context,off):
    value=original_read(context,off)
-   if off==0x40 and f.native_opcode==13 and f.pending and value==0x900:f.stable=bytes(f.image);f.pending=False
+   if off==0x40 and f.native_opcode==13 and (f.pending or not f.services.cache_enabled) and value==0x900:f.stable=bytes(f.image);f.pending=False
    return value
   f.command_read=READ(read);f.controller.plan.read=f.command_read
   f.command_write=WRITE(record);f.original_command_write=original;f.controller.plan.write=f.command_write;f.services=ServicePlan(f.controller.plan,1024,1);return f
@@ -32,9 +32,10 @@ class BoundIdentity(TimedModule):
  def test_identity_match_starts_and_mismatch_consumes_attempt_before_io(self):
   from test_loader_identity import Plan as IdentityPlan,Reader,READ as IdentityRead
   self.lib.lft_start_bound.argtypes=self.lib.lft_start.argtypes+[c.POINTER(IdentityPlan),c.POINTER(Reader)]
-  for mismatch in [False,True]:
+  for mismatch,cache_enabled in [(False,1),(True,1),(False,0),(True,0)]:
    f=self.fixture();p=IdentityPlan(0x1234,0x2000,0x3000,0x4000)
-   fields={(0x1238,4):0,(0x123c,4):0x4000,(0x2000,4):0x3000,(0x3028,4):0x11230000,(0x2018,4):2 if mismatch else 1,(0x201c,4):1,(0x210c,1):8,(0x206d,1):1,(0x2145,4):1024}
+   f.services.cache_enabled=cache_enabled
+   fields={(0x1238,4):0,(0x123c,4):0x4000,(0x2000,4):0x3000,(0x3028,4):0x11230000,(0x2018,4):2 if mismatch else 1,(0x201c,4):1,(0x210c,1):8,(0x206d,1):cache_enabled,(0x2145,4):1024}
    def read(_,at,out,n):
     if (at,n) not in fields:return -1
     v=fields[at,n]

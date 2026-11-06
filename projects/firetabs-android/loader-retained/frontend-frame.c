@@ -17,6 +17,7 @@ int lfo_frame_dispatch(struct lfo_state *state,const struct lfo_descriptor *desc
   event.point.selected_first_sector=desc->config.target_first_sector;
   event.device=frame[8];
  }else if(kind==LC_HANDOFF){event.point.stage=LC_HANDOFF;event.point.entry=frame[2];event.point.dt=frame[3];}
+ else if(kind==LC_PRE_SHUTDOWN){event.point.stage=LC_PRE_SHUTDOWN;event.point.entry=frame[13];event.point.dt=frame[18];event.device=*(volatile unsigned *)0x4bd7e038;}
  else return 1;
  return lfo_dispatch(state,desc,&event);
 }

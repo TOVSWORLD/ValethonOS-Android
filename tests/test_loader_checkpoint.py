@@ -74,6 +74,14 @@ class LoaderCheckpoint(unittest.TestCase):
   f=Fixture(self.lib)
   for mode in [2,6,99]:self.assertEqual(f.emit(1,mode=mode),1)
   self.assertEqual(f.emit(2,kind=1,requested=7),1);self.assertEqual(f.events,[])
+ def test_pre_shutdown_is_distinct_terminal_loader_stage_not_kernel_entry(self):
+  f=Fixture(self.lib);self.assertEqual(f.emit(1),0)
+  self.assertEqual(f.emit(4,entry=0x40080000,dt=0x48000000),0)
+  r=f.checkpoint();self.assertEqual(r['stage'],'pre_shutdown')
+  self.assertEqual(r['kernel_entry'],0x40080000);self.assertEqual(r['dt_address'],0x48000000)
+  self.assertFalse(r['kernel_entry_proved']);self.assertFalse(r['kernel_record'])
+  before=(len(f.events),f.writes);self.assertEqual(f.emit(3),1)
+  self.assertEqual((len(f.events),f.writes),before)
  def test_missing_target_or_durability_admission_stops_before_io(self):
   for field,value in [('durable',0),('exclusive',0),('bytes',17*1024*1024),('partition',6),('hardware',1),('target',0),('target',2**64-1)]:
    with self.subTest(field=field,value=value):

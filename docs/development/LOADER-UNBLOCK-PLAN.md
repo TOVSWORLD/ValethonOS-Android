@@ -1,5 +1,23 @@
 # Loader retained-checkpoint delivery plan
 
+## Recorder repair action plan — source implementation complete
+
+1. Use actual control1 evidence to keep boot success separate from recorder failure.
+2. Implement valid cache-off completion without switching cache mode; retain checked
+   cache-on flush, identity, timeout/error and no-retry guards. Done in source.
+3. Move the final durable snapshot before the archived IRQ-mask/later shutdown path,
+   name it pre_shutdown, and permit one safe late initialization only when earlier
+   hooks performed no I/O. Done in source; no interrupt re-enable or failed-I/O retry.
+4. Compile/link only in proven owned spans; replay exact instructions/arguments and
+   fresh package; generate all guard hashes from the manifest. Done locally.
+5. Synchronize PR/board, pass five exact-head checks, then obtain approval and current
+   availability for the complete [changed review](KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md).
+   No new physical work or kernel build is authorized by source/model results.
+
+The old control's exact reason for producing no MODE/READ record remains unproved.
+The IRQ-mask ordering explains why its final site was unsuitable on that path; it
+is not proof that this was the only runtime failure. Kernel logging remains held.
+
 Latest actual result: known-stack capture control1 is complete. Owner confirms home
 screen with unchanged original header/kernel/DT/ramdisk, but full collection found
 only HOSTCONTROLseq1/85B and no target record. This fails recorder qualification;

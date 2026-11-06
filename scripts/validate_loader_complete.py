@@ -47,7 +47,9 @@ class Complete(Front):
   if packed:
    folder=Path(packed);manifest=json.loads((folder/'manifest.json').read_text());self.nonce=(folder/'nonce.bin').read_bytes();self.image=bytearray((folder/'boot-full.img').read_bytes());self.stable=bytes(self.image);self.prefix=manifest['prefix_sha256'];self.first=manifest['target_first_sector'];self.logical=manifest['logical_boot_first_sector'];r=bytearray((folder/'observer-payload-sectors-private.bin').read_bytes()[0xa00:0x1800])
    for off,value in [(0xb90,self.logical),(0xba8,self.first),(0xb98,0),(0xb88,51200),(0xbb0,30551040),(0xba0,7000)]:struct.pack_into('<Q',r,off,value)
-  u.mem_write(BASE,bytes(r));u.mem_write(0x4bd3e524,bl(0x4bd3e524,self.bs['lbo_handoff']&~1));u.mem_write(0x4bd7c3a0,bytes(4));u.hook_add(UC_HOOK_CODE,self.integration)
+  u.mem_write(BASE,bytes(r))
+  site,name=(0x4bd3e3e8,'lbo_pre_shutdown') if 'lbo_pre_shutdown' in self.bs else (0x4bd3e524,'lbo_handoff')
+  u.mem_write(site,bl(site,self.bs[name]&~1));u.mem_write(0x4bd7c3a0,bytes(4));u.hook_add(UC_HOOK_CODE,self.integration)
  def write(self,u,access,at,n,value,data):
   if getattr(self,'private_stack',None):
    lo,hi=self.private_stack;sp=u.reg_read(UC_ARM_REG_SP)

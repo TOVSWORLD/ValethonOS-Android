@@ -43,11 +43,19 @@ def pack(module,bootstrap,objects,execution_report,base_image,base_report,nonce_
  for name,data in [('lbo_load_plan',load),('lbo_frontend',config)]:
   at=bs[name]-BASE;r[at:at+len(data)]=data
  r[0x72:0x76]=bl(BASE+0x72,bs['lbo_read']&~1);sectors[0xa00:0x1800]=r
- final=0x1a00+0x3e524;assert sectors[final:final+4]==bytes.fromhex('fff7a0fc');sectors[final:final+4]=bl(0x4bd3e524,bs['lbo_handoff']&~1)
+ pre_shutdown=execution.get('snapshot_stage')=='pre_shutdown'
+ site,name,expected=(0x4bd3e3e8,'lbo_pre_shutdown','dff82037') if pre_shutdown else (0x4bd3e524,'lbo_handoff','fff7a0fc')
+ if pre_shutdown:assert execution['new_site']==hex(site) and execution['original_irq_mask_helper_executed']
+ final=0x1a00+site-0x4bd00000;assert sectors[final:final+4]==bytes.fromhex(expected);sectors[final:final+4]=bl(site,bs[name]&~1)
  before=original_sectors.read_bytes();changed={i for i,(a,b) in enumerate(zip(before,sectors)) if a!=b};allowed={i for a,b in SPANS for i in range(0xa00+a,0xa00+b)}|set(range(0xa00+0x736,0xa00+0x73a))|set(range(0xa00+0x778,0xa00+0x77c))|set(range(0xa72,0xa76))|set(range(final,final+4));assert changed<=allowed
  assert sectors[0xa00+0xb84:0xa00+0xbb8]==before[0xa00+0xb84:0xa00+0xbb8]
  base.update(partition_sha256=sha(image),loader_checkpoint_blob={'offset':offset,'bytes':len(blob),'sha256':sha(blob),'source_module_sha256':sha(module.read_bytes())});base['retained_mailbox']['prefix_sha256']=prefix
  report={'scope':'Known-boot-stack capture calibration; review and physical approval pending','candidate_sha256':sha(image),'observer_sha256':sha(sectors),'base_candidate_sha256':base_hash,'kernel_source_candidate_sha256':BASE_CANDIDATE,'fresh_nonce_rebinding':proof,'original_bootstrap_sha256':ORIGINAL_SECTORS,'module_blob_sha256':sha(blob),'module_bytes':len(blob),'state_bytes':state,'stack_bytes':4096,'base_declared_bytes_preserved':True,'kernel_instructions_unchanged':True,'declared_image_bytes':declared,'module_file_padding_offset':offset,'nonce_contract':'Fresh loader-only nonce and mailbox seed; original header, kernel, appended DTs and ramdisk unchanged','prefix_sha256':prefix,'seed_sha256':sha(image[m.BASE:m.SLOT_BASE]),'nonce_sha256':sha(nonce),'target_first_sector':18432,'logical_boot_first_sector':30325760,'changed_bootstrap_bytes':len(changed),'only_owned_console_read_and_handoff_spans_changed':True,'live_globals_unchanged':True,'headers_return_bootstrap_gpt_and_security_patch_bytes_unchanged':True,'only_embedded_lk_handoff_call_changed':True,'physical_execution_admitted':False,'hardware_acceptance':False,'review_limitations':['raw data-driver termination unqualified','real allocator initialization/capacity not observed; allocation failure returns without observer retry','IRQ-disabled first read declines observation','cache/controller effects and durability not hardware-qualified','MODE records normal mode at first redirected image read, not earlier mode-hook execution','final hook records call arguments, not SMC completion or kernel entry']}
+ if pre_shutdown:
+  original_final=0x1a00+0x3e524
+  report.update(snapshot_stage='pre_shutdown',checkpoint_site=hex(site),original_smc_call_unchanged=sectors[original_final:original_final+4]==before[original_final:original_final+4],only_embedded_lk_handoff_call_changed=False,only_embedded_lk_pre_shutdown_load_changed=True,only_owned_console_read_and_handoff_spans_changed=False,only_owned_console_read_and_pre_shutdown_spans_changed=True)
+  report['review_limitations'][-2:]=['MODE is sampled at an eligible read or pre-shutdown initialization; not earlier mode-hook or kernel-entry proof','pre_shutdown snapshots registers before interrupt masking/later teardown; not SMC completion or kernel entry']
+  assert report['original_smc_call_unchanged']
  output.mkdir(mode=0o700)
  for name,data in [('boot-full.img',image),('observer-payload-sectors-private.bin',bytes(sectors)),('module.bin',bytes(blob)),('nonce.bin',nonce),('report.json',(json.dumps(base,indent=2)+'\n').encode()),('manifest.json',(json.dumps(report,indent=2)+'\n').encode())]:
   p=output/name;p.write_bytes(data);p.chmod(0o600)

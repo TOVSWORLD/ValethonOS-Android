@@ -7,6 +7,7 @@ from validate_loader_console_reclaim import SPANS
 from validate_loader_complete import raw_elf,BASE
 from validate_loader_relocation import relative_references
 from validate_loader_checkpoint import elf
+from capstone import Cs,CS_ARCH_ARM,CS_MODE_THUMB
 
 def sha(b):return hashlib.sha256(b).hexdigest()
 def components(image):
@@ -45,7 +46,22 @@ def verify(folder,base,original,bootstrap,module,parent=None):
  sections,symbols=raw_elf(bootstrap);at=0xa00+symbols['lbo_load_plan']-BASE;plan=struct.unpack_from('<6I32sQQ',obs,at)
  assert plan[:3]==(len(blob),manifest['state_bytes'],4096) and plan[3]==plan[4] and plan[5]==1 and plan[6]==hashlib.sha256(blob).digest() and plan[7:]==(18432,offset)
  at=0xa00+symbols['lbo_frontend']-BASE;config=struct.unpack_from('<32s32sQQ5I4xI',obs,at);assert config==(nonce,bytes.fromhex(manifest['prefix_sha256']),18432,30325760,m.PARTITION,5,8,1,1,BASE+9)
- allowed={i for lo,hi in SPANS for i in range(0xa00+lo,0xa00+hi)}|set(range(0x1136,0x113a))|set(range(0x1178,0x117c))|set(range(0xa72,0xa76))|set(range(0x1a00+0x3e524,0x1a00+0x3e528))
+ pre_shutdown=manifest.get('snapshot_stage')=='pre_shutdown'
+ site=0x3e3e8 if pre_shutdown else 0x3e524
+ md=Cs(CS_ARCH_ARM,CS_MODE_THUMB)
+ for file_at,address,target in [(0xa72,BASE+0x72,symbols['lbo_read']&~1),
+                               (0x1a00+site,0x4bd00000+site,symbols['lbo_pre_shutdown' if pre_shutdown else 'lbo_handoff']&~1)]:
+  decoded=list(md.disasm(obs[file_at:file_at+4],address))
+  assert len(decoded)==1 and decoded[0].size==4 and decoded[0].mnemonic=='bl' and int(decoded[0].op_str.removeprefix('#'),16)==target
+ for address,data in sections:
+  expected=bytearray(data)
+  for name,size in [('lbo_load_plan',72),('lbo_frontend',112)]:
+   start=symbols[name]
+   if address<=start and start+size<=address+len(data):
+    offset=start-address;file_at=0xa00+start-BASE;expected[offset:offset+size]=obs[file_at:file_at+size]
+  assert obs[0xa00+address-BASE:0xa00+address-BASE+len(data)]==bytes(expected)
+ allowed={i for lo,hi in SPANS for i in range(0xa00+lo,0xa00+hi)}|set(range(0x1136,0x113a))|set(range(0x1178,0x117c))|set(range(0xa72,0xa76))|set(range(0x1a00+site,0x1a00+site+4))
+ if pre_shutdown:assert obs[0x1a00+0x3e524:0x1a00+0x3e528]==orig[0x1a00+0x3e524:0x1a00+0x3e528]
  assert {i for i,(a,b) in enumerate(zip(orig,obs)) if a!=b}<=allowed and len(obs)==len(orig)==492544
  kinds={};objects={}
  for p in module.parent.glob('*.o'):

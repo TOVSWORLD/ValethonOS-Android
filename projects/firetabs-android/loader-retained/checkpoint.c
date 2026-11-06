@@ -66,14 +66,14 @@ int lc_emit(struct lc_context *c,const struct lc_point *p){
   unsigned long long logical=c->config.logical_boot_first_sector*512;
   if(!((p->kind==1&&p->requested_offset==logical)||(p->kind==2&&p->requested_offset==logical+2048)))return 1;
  }
- if(p->stage<LC_MODE||p->stage>LC_HANDOFF||(!c->commits&&p->stage!=LC_MODE)||
+ if(p->stage<LC_MODE||p->stage>LC_PRE_SHUTDOWN||(!c->commits&&p->stage!=LC_MODE)||
     (c->commits&&p->stage==LC_MODE)||c->commits>=LC_MAX_COMMITS){c->stopped=1;return -2;}
  if((!c->commits&&lc_fresh(c))||(c->commits&&lc_previous(c))){c->stopped=1;return -3;}
  unsigned char *out=c->payload;unsigned tag=sizeof(LC_TAG)-1;
  lc_copy(out,(const unsigned char*)LC_TAG,tag);out+=tag;
  unsigned fields[]={p->stage,p->mode,p->stage==LC_READ?p->kind:0,5,8,
                     p->stage==LC_READ?p->read_bytes:0,p->stage==LC_READ?p->destination:0,
-                    p->stage==LC_HANDOFF?p->entry:0,p->stage==LC_HANDOFF?p->dt:0};
+                    (p->stage==LC_HANDOFF||p->stage==LC_PRE_SHUTDOWN)?p->entry:0,(p->stage==LC_HANDOFF||p->stage==LC_PRE_SHUTDOWN)?p->dt:0};
  for(unsigned i=0;i<9;i++){vm_put32(out,fields[i]);out+=4;}
  vm_put64(out,c->config.target_first_sector);out+=8;
  vm_put64(out,p->stage==LC_READ?p->selected_first_sector:0);out+=8;
@@ -84,6 +84,6 @@ int lc_emit(struct lc_context *c,const struct lc_point *p){
  int ret=vm_commit(&c->guarded,c->config.nonce,c->payload,LC_BYTES,c->scratch,&committed);
  if(ret||committed.sequence!=c->commits+2){c->stopped=1;return ret?ret:-4;}
  c->commits++;c->last_stage=p->stage;
- if(p->stage==LC_HANDOFF)c->finished=1;
+ if(p->stage==LC_HANDOFF||p->stage==LC_PRE_SHUTDOWN)c->finished=1;
  return 0;
 }

@@ -5174,3 +5174,40 @@ no helper or owner physical action pending. Post-restore private supplement11412
 SHAe3b2d4400f75e70324778c8a7967715e9ef78f5636b0f9299e4da66985579d3c matched
 lab/controller. Preserve all receipts/rollback. Approval consumed; no unchanged
 control or modern-kernel build/trial selected.346/344/348 remain open.
+
+
+### Recorder repair implemented and complete changed review prepared offline
+
+Traced actual no-record control back through recorder entry gates and archived LK
+instructions. Cache-on-only admission was an unsupported-state gap; Linux3.18
+mmc_flush_cache issues FLUSH_CACHE only when cache is enabled. Added cache-off
+completion with fresh clean/ready CMD13 before/after, no CMD6/cache-mode change,
+retaining deadlines/error/identity/no-retry guards. Actual control1 LK cache state
+remains unknown; TWRP cache-on observation is not borrowed across phases.
+
+Archived call4bd3e3f8 invokes ARM IRQ-mask helper4bd3c76c before old hook4bd3e524;
+actual helper replay sets CPSR.I while old observer declines masked I/O. This
+explains a bad final-site contract, not all absent earlier records. Replaced it
+with distinct pre_shutdown snapshot at4bd3e3e8, before masking/later shutdown;
+original final SMC call unchanged. Capture r11/SP+8 proposed entry/DT, replay original
+r3 PC-relative literal and all other r0-r12/SP/APSR. Inline BL LR is dead until the
+next original BL/BLX on both original paths. Skipped masked reads perform no I/O
+and do not consume the sole initialization; one safe late initialization allowed.
+Real load/hash/identity/command/write failures still latch without retry. Invalid
+device globals stop before blob read. Bootstrap1572B fits proven1587B console spans;
+no guessed RAM/global overwrite. VLOG0001 body/layout preserved, loader decoder
+adds explicit stage4; no pre_shutdown/kernel-entry conflation.
+
+691 native tests,15 final adapter ARM,12 two-base frontend and8 exact final packed
+bridge controls passed. Independent verifier checks allocated bootstrap code bytes,
+actual branch targets, descriptors/seed/15 objects and preserved original final
+call. Full hardware/controller/clock/heap/cache effects and prefix digest remain
+modeled; raw data termination/physical ownership/durability remain unqualified.
+
+Fresh unexecuted control2: fullp5e1f2a73b, observer3313d00c, all7796736 original
+declared header/kernel/DT/ramdisk bytes unchanged. Fresh nonce/seed, module9216B,
+state8744B/private stack4096B. Generated20-file private profile binds all four exact
+candidate/observer/prefix/seed hashes and a unique control2 scope; independent
+binding regression prevents the prior stale-pin mistake. Approval/availability
+false, no export/lab staging/device action/kernel build. Complete changed review
+in KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md; approval1 consumed, never reusable.

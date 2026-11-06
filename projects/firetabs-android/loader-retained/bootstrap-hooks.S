@@ -38,10 +38,19 @@ hook lbo_read,2
  mov r0,r6
  bx lr
 .size lbo_read,.-lbo_read
+#ifdef LBO_PRE_SHUTDOWN
+hook lbo_pre_shutdown,4
+ /* Replay the original PC-relative load at pinned LK 0x4bd3e3e8. */
+ ldr r3,=0x4bd3eb0c
+ ldr r3,[r3]
+ bx lr
+.size lbo_pre_shutdown,.-lbo_pre_shutdown
+#else
 hook lbo_handoff,3
  /* Replay the original call with the existing return LR. */
  b.w lbo_original_handoff
 .size lbo_handoff,.-lbo_handoff
+#endif
 
 .section .rodata.lbo_load_plan,"a",%progbits
 .balign 8

@@ -7,19 +7,20 @@ int lfo_dispatch(struct lfo_state *s,const struct lfo_descriptor *d,const struct
  if(!s||!d||!e)return -1;
  const struct lc_point *p=&e->point;
  if(p->mode)return 1;
- if(p->stage!=LC_READ&&p->stage!=LC_HANDOFF)return 1;
+ if(p->stage!=LC_READ&&p->stage!=LC_HANDOFF&&p->stage!=LC_PRE_SHUTDOWN)return 1;
  if(!s->attempted){
-  /* Initialize only from an actual redirected normal read. Recovery/fastboot
-   * never allocate through this module or issue record/cache commands. */
-  if(p->stage!=LC_READ)return 1;
+  /* Initialize at an eligible normal read or the bound pre-shutdown site.
+   * Recovery/fastboot never allocate here or issue record/cache commands. */
+  if(p->stage!=LC_READ&&p->stage!=LC_PRE_SHUTDOWN)return 1;
   s->attempted=1;
   if(!e->device||(e->device&3)||e->device>0xffffffe7u||d->resident_read_entry!=0x4bcff009u||
      lfo_word(0x4bd7e038)!=e->device||lfo_word(e->device+16)!=d->resident_read_entry||lfo_word(e->device+20)!=0x4bd35a89u)return -1;
   unsigned block=lfo_word(e->device+8);
   if(!block||(block&3)||block>0xffffffebu||lfo_word(block+4)!=512)return -1;
-  if(p->selected_first_sector!=d->config.target_first_sector||
+  if(p->stage==LC_READ&&(p->selected_first_sector!=d->config.target_first_sector||
      (p->requested_offset!=d->config.logical_boot_first_sector*512&&p->requested_offset!=d->config.logical_boot_first_sector*512+2048)||
-     p->selected_offset!=d->config.target_first_sector*512+(p->requested_offset-d->config.logical_boot_first_sector*512))return -1;
+     p->selected_offset!=d->config.target_first_sector*512+(p->requested_offset-d->config.logical_boot_first_sector*512)))return -1;
+  if(p->stage==LC_PRE_SHUTDOWN&&(!p->entry||!p->dt||(p->entry|p->dt)&3))return -1;
   struct li_plan identity={e->device,0x4bd7e280,0x4bd7edf0,block};
   struct li_reader reader={&identity,lfo_read};struct li_binding binding;
   if(li_discover(&binding,e->device,block,&reader))return -1;
@@ -28,8 +29,8 @@ int lfo_dispatch(struct lfo_state *s,const struct lfo_descriptor *d,const struct
   struct lft_plan timing={0};ld_pinned_services(&timing.command);timing.command.rca=binding.rca;timing.command.block_bytes=512;timing.command.verified=1;timing.cache_size_kib=binding.cache_size_kib;timing.cache_enabled=binding.cache_enabled;
   if(lft_start_bound(&s->writer,&d->config,&target,&ops,&hash,&timing,&identity,&reader))return -1;
   struct lc_point mode={0};mode.stage=LC_MODE;
-  /* MODE means observed normal mode at first redirected read, not proof that
-   * an earlier mode-hook executed or the kernel entered. */
+  /* MODE is sampled at this eligible read/pre-shutdown observation. It is not
+   * proof that an earlier mode-hook executed or that the kernel entered. */
   if(lft_emit(&s->writer,&mode))return -1;
   s->device=e->device;s->ready=1;
  }

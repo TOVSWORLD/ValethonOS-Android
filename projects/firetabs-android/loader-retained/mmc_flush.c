@@ -19,13 +19,16 @@ int lf_flush(void *opaque){
  struct lf_adapter *a=opaque;unsigned status=0;
  if(!a||a->stopped)return -1;
  if(!a->command||!a->now_ms||!a->bindings_verified||!a->clock_verified||
-    !a->cache_size_kib||a->cache_enabled!=1||!a->rca||a->rca>0xffffU){a->stopped=1;return -1;}
+    !a->cache_size_kib||a->cache_enabled>1||!a->rca||a->rca>0xffffU){a->stopped=1;return -1;}
  unsigned start=a->now_ms(a->context);
  /* Refuse to issue a write-class command unless the card is already selected,
   * ready and clean. This status is never reused as post-flush completion. */
  if(lf_issue(a,start,13,a->rca<<16,1,&status)||!lf_ready(status))goto fail;
- /* WRITE_BYTE, EXT_CSD_FLUSH_CACHE=32, value=1, command set=1. One CMD6 only. */
- if(lf_issue(a,start,6,0x03200101U,8,&status))goto fail;
+ /* Linux v3.18 mmc_flush_cache issues FLUSH_CACHE only when CACHE_CTRL is on.
+  * Cache-off is an immutable observed binding, never a request to disable it.
+  * Still require a second fresh clean/ready status after the completed write;
+  * do not replace completion with success based on the cached flag alone. */
+ if(a->cache_enabled&&lf_issue(a,start,6,0x03200101U,8,&status))goto fail;
  for(unsigned i=0;i<LF_POLLS;i++){
   if(lf_issue(a,start,13,a->rca<<16,1,&status))goto fail;
   if(lf_ready(status))return 0;

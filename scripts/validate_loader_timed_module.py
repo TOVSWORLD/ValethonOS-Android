@@ -14,7 +14,7 @@ import retained_log_mailbox as m
 class Timed(Firmware):
  def __init__(self,segments,symbols,lk,**kw):
   super().__init__(segments,symbols,lk,**kw)
-  self.busy=False;self.interrupts=0;self.dma=0;self.event=0x100;self.freeze_after=0;self.step=13000;self.ticks=0;self.samples=0;self.pending=0;self.active=False;self.op=0;self.programming=0;self.writes=[];self.reads={};self.cache_pending=False
+  self.busy=False;self.interrupts=0;self.dma=0;self.event=0x100;self.freeze_after=0;self.step=13000;self.ticks=0;self.samples=0;self.pending=0;self.active=False;self.op=0;self.programming=0;self.writes=[];self.reads={};self.cache_pending=False;self.cache_enabled=1
   self.u.mem_map(0x10008000,0x1000);self.u.mem_map(MMC,0x1000);self.u.hook_add(UC_HOOK_MEM_READ,self.read)
   self.u.mem_write(CARD,struct.pack('<10I',0,0,0,0,0,1,512,1,1024,1));self.call('ld_pinned_services',[CARD])
  def services(self,u,at,size,data):
@@ -22,7 +22,7 @@ class Timed(Firmware):
   super().services(u,at,size,data)
  def read(self,u,access,at,n,value,data):
   Controller.read(self,u,access,at,n,value,data)
-  if at==MMC+0x40 and self.op==13 and self.cache_pending and int.from_bytes(u.mem_read(at,4),'little')==0x900:self.stable=bytes(self.image);self.cache_pending=False
+  if at==MMC+0x40 and self.op==13 and (self.cache_pending or not self.cache_enabled) and int.from_bytes(u.mem_read(at,4),'little')==0x900:self.stable=bytes(self.image);self.cache_pending=False
  def write(self,u,access,at,n,value,data):
   if MMC<=at<MMC+0x1000:
    Controller.write(self,u,access,at,n,value,data)
