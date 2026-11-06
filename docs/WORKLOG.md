@@ -5223,3 +5223,17 @@ passed; installed preflight passed with generated exact prefix/seed pins. One
 observation-only watcher launched/durable receipt/live process verified, helper0,
 no automatic return/restore/reboot. Owner first visit pending; originals are not
 currently restored. No kernel build or repeated trial; fresh approval consumed.
+
+### Actual control2 completed; originals verified
+
+Actual control2 complete: owner confirmed original home screen, but collection
+passed with only HOSTCONTROL seq1/85B, no loader/kernel record or invalid slot.
+One original FACTORYM helper exited0. Evidence archive and supplement matched
+lab/controller. Normal bootstrap already original: no agent bootstrap restore write.
+Original fullp5 restored once; fullp5/p6, bootstrap/header/GPT/alias/RAM cleanup
+verified. TWRP left running, no reboot; all workers stopped, no owner action pending.
+One bounded /proc/last_kmsg read returned No such file; no fallback log recovered.
+Exact approval consumed. No repeat trial, new kernel build or control3 selected.
+Next: establish active bootstrap reachability and expose the first rejected gate
+before another mailbox writer test. Logging and custom kernel entry remain unproved.
+[Actual control2 result](../evidence/independent-recovery/pre-shutdown-control2-trial-result.json).

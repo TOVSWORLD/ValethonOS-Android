@@ -1,20 +1,19 @@
 # Active work queue — ordered delivery
 
-Current actual control2: owner Go/exact8789e1c review approved; observer3313d00c and
-p5e1f2a73b each installed once/readbacks/p6/RAM cleanup and installed preflight PASS.
-Observation-only watcher durably armed/live/helper0; no automatic return/reboot.
-Owner Reboot/System +>=5min observation/desk report pending. Exact control remains
-installed, originals not currently restored. No rewrite/rearm or approval reuse.
+Actual control2 complete: owner confirmed original home screen, but collection
+passed with only HOSTCONTROL seq1/85B, no loader/kernel record or invalid slot.
+One original FACTORYM helper exited0. Evidence archive and supplement matched
+lab/controller. Normal bootstrap already original: no agent bootstrap restore write.
+Original fullp5 restored once; fullp5/p6, bootstrap/header/GPT/alias/RAM cleanup
+verified. TWRP left running, no reboot; all workers stopped, no owner action pending.
+One bounded /proc/last_kmsg read returned No such file; no fallback log recovered.
+Exact approval consumed. No repeat trial, new kernel build or control3 selected.
+Next: establish active bootstrap reachability and expose the first rejected gate
+before another mailbox writer test. Logging and custom kernel entry remain unproved.
+[Actual control2 result](../../evidence/independent-recovery/pre-shutdown-control2-trial-result.json).
 
-Current source work: recorder repair implemented after the failed known-stack
-control. Cache-off now has checked status-only completion. The new durable snapshot
-is before archived IRQ masking/later shutdown, with a distinct pre_shutdown stage
-and safe late initialization only after skipped no-I/O reads. New exact package/
-[review](KNOWN-BOOT-PRE-SHUTDOWN-REVIEW.md) prepared offline:691 native,15 adapter ARM,
-12 relocated frontend and8 exact packed-path controls passed. No source export,
-device access/install/arm or new kernel build; originals/TWRP remain unchanged.
-Next physical action requires fresh exact approval/availability after PR checks.
-The missing initial MODE/READ record's actual cause remains unproven.
+
+Historical control1 result follows.
 
 Latest actual result: known-stack capture control1 is complete. Owner confirms home
 screen with unchanged original header/kernel/DT/ramdisk, but full collection found

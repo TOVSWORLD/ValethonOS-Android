@@ -1,5 +1,18 @@
 # Ordered ValethonOS delivery roadmap
 
+Actual control2 complete: owner confirmed original home screen, but collection
+passed with only HOSTCONTROL seq1/85B, no loader/kernel record or invalid slot.
+One original FACTORYM helper exited0. Evidence archive and supplement matched
+lab/controller. Normal bootstrap already original: no agent bootstrap restore write.
+Original fullp5 restored once; fullp5/p6, bootstrap/header/GPT/alias/RAM cleanup
+verified. TWRP left running, no reboot; all workers stopped, no owner action pending.
+One bounded /proc/last_kmsg read returned No such file; no fallback log recovered.
+Exact approval consumed. No repeat trial, new kernel build or control3 selected.
+Next: establish active bootstrap reachability and expose the first rejected gate
+before another mailbox writer test. Logging and custom kernel entry remain unproved.
+[Actual control2 result](../../evidence/independent-recovery/pre-shutdown-control2-trial-result.json).
+
+
 Latest actual result: known-stack capture control1 is complete. Owner confirms home
 screen with unchanged original header/kernel/DT/ramdisk, but full collection found
 only HOSTCONTROLseq1/85B and no target record. This fails recorder qualification;
