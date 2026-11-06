@@ -1,5 +1,16 @@
 # Ordered ValethonOS delivery roadmap
 
+Offline source delta: independent arrival/first-rejection witness implemented.
+New analysis-only late profile uses1547/1587 proven console bytes and preserves
+original read redirection. Eleven actual ARM controls pass, including exact
+resident main and archived formatter, register/SP/APSR replay and distinct failure
+codes. Display pixels/hardware remain modeled. Native display update can reach
+an uncapped tick-dependent wait: actual wait replay returns with advancing samples
+and remains in the loop with frozen samples. Both physical packers reject this
+profile pending independent display-path qualification. No candidate/device action
+or new kernel build; originals remain verified/TWRP/unarmed.
+
+
 Actual control2 complete: owner confirmed original home screen, but collection
 passed with only HOSTCONTROL seq1/85B, no loader/kernel record or invalid slot.
 One original FACTORYM helper exited0. Evidence archive and supplement matched

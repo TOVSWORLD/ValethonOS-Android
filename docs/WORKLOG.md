@@ -5237,3 +5237,19 @@ Exact approval consumed. No repeat trial, new kernel build or control3 selected.
 Next: establish active bootstrap reachability and expose the first rejected gate
 before another mailbox writer test. Logging and custom kernel entry remain unproved.
 [Actual control2 result](../evidence/independent-recovery/pre-shutdown-control2-trial-result.json).
+
+### Independent arrival/first-rejection diagnostics implemented offline
+
+Offline source delta: independent arrival/first-rejection witness implemented.
+New analysis-only late profile uses1547/1587 proven console bytes and preserves
+original read redirection. Eleven actual ARM controls pass, including exact
+resident main and archived formatter, register/SP/APSR replay and distinct failure
+codes. Display pixels/hardware remain modeled. Native display update can reach
+an uncapped tick-dependent wait: actual wait replay returns with advancing samples
+and remains in the loop with frozen samples. Both physical packers reject this
+profile pending independent display-path qualification. No candidate/device action
+or new kernel build; originals remain verified/TWRP/unarmed.
+
+Frontend negative returns now identify device/block/redirect/handoff/identity/start/MODE/not-ready/device-change failures rather than flattening all to-1. No extra I/O, weakened guard, retry or mailbox-format change. Native video formatter executes; final display sink is modeled. The concrete display-wait dependency is not claimed as any historical trial cause. Full source/reproduction and phase interpretation: LOADER-UNBLOCK-PLAN.md / loader-retained README.
+
+Changed frontend regression:12 actual ARM controls PASS, including existing redirected-read and late checkpoint cases. Both physical packers rejected the analysis profile before candidate inputs/output;2 rejection controls PASS. Python syntax and git diff whitespace checks PASS. No whole unchanged test/build rerun.

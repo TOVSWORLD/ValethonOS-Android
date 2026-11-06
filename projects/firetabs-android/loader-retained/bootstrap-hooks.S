@@ -32,12 +32,14 @@ lbo_call:
  msr APSR_nzcvqg,r0
  pop.w {r0-r12,lr}
 .endm
+#ifndef LBO_SCREEN_WITNESS
 hook lbo_read,2
  /* Replay the original two overwritten instructions. */
  ldr r3,=0x4bcffb64
  mov r0,r6
  bx lr
 .size lbo_read,.-lbo_read
+#endif
 #ifdef LBO_PRE_SHUTDOWN
 hook lbo_pre_shutdown,4
  /* Replay the original PC-relative load at pinned LK 0x4bd3e3e8. */

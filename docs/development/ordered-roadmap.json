@@ -864,5 +864,13 @@
     "legacy_last_kmsg": "One bounded read: No such file; no retry",
     "cause": "Unproven; no runtime proof observer reached",
     "next": "Trace active bootstrap reachability and rejection visibility before another writer or physical test"
+  },
+  "latest_source_witness": {
+    "result": "evidence/independent-recovery/loader-screen-witness-result.json",
+    "controls": 11,
+    "display_wait_result": "evidence/independent-recovery/loader-display-wait-result.json",
+    "candidate_packaged": false,
+    "physical_execution_admitted": false,
+    "next": "Qualify independent display path before a changed physical review"
   }
 }

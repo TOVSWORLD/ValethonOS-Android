@@ -37,7 +37,7 @@ class Complete(Front):
   for at,data in self.boot_sections:
    assert any(BASE+l<=at and at+len(data)<=BASE+h for l,h in SPANS),(hex(at),len(data))
    r[at-BASE:at-BASE+len(data)]=data
-  r[0x72:0x76]=bl(BASE+0x72,self.bs['lbo_read']&~1)
+  if 'lbo_read' in self.bs:r[0x72:0x76]=bl(BASE+0x72,self.bs['lbo_read']&~1)
   entry=(symbols['lfo_frame_dispatch']-0x41000000)|1
   load=struct.pack('<6I32sQQ',len(blob),self.state_size,4096,entry,entry,1,hashlib.sha256(blob).digest(),8192,12*1024*1024)
   at=self.bs['lbo_load_plan']-BASE;r[at:at+len(load)]=load

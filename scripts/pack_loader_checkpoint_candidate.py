@@ -13,6 +13,8 @@ BASE_CANDIDATE='8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16
 ORIGINAL_SECTORS='4c6f355c735b9302b0d421ef38f94a9974214d531fa974a41edd8132af7ac092'
 def sha(b):return hashlib.sha256(b).hexdigest()
 def pack(module,bootstrap,objects,execution_report,base_image,base_report,nonce_file,original_sectors,output,nonce_rebinding=None):
+ _,profile_symbols=raw_elf(bootstrap)
+ if 'lbo_arrival' in profile_symbols:raise ValueError('Analysis-only screen witness is not admitted to physical packaging')
  if output.exists():raise ValueError('Fresh private candidate directory required')
  execution=json.loads(execution_report.read_text());assert execution['module_sha256']==sha(module.read_bytes()) and execution['bootstrap_sha256']==sha(bootstrap.read_bytes()) and execution['case_count']>=6
  for obj in objects:relative_references(obj.read_bytes())

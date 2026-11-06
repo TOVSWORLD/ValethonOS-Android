@@ -333,3 +333,69 @@ modeled; hardware behavior remains unqualified.
 See `docs/development/LOADER-CHECKPOINT-TRIAL8-REVIEW.md` and sanitized complete-trial8
 receipts. Private artifacts and one-use command package are local under `out/`.
 No source export, device access, arm, write, helper or reboot is part of these tools.
+
+## Independent arrival and first-rejection witness — offline implementation
+
+Control2 did not establish that the patched observer was reached. Its loader-side
+errors were also collapsed or silent. A further mailbox-only control would leave
+that ambiguity intact. The next source work is a separate visible witness, without
+changing the mailbox reader/format or pretending that it is a retained kernel log.
+
+Implemented `bootstrap-witness.c` and the explicitly analysis-only
+`--pre-shutdown --screen-witness` builder profile. It fits1547B in the already
+proved1587B console spans. The original resident read hook is preserved, with no
+new read observer. An arrival call replaces the dead-output printf at4bcff386,
+after original read-hook installation and before original cache clean/app. The
+late hook remains4bd3e3e8; registers/SP/APSR and the original literal load replay.
+It keeps the incoming IRQ-mask decision, no interrupt-enable change, no failed-I/O
+retry, unchanged storage limits and exact blob SHA check.
+
+The fixed `VREC phase value CPSR` line distinguishes:
+
+- 1: resident reached the point before original cache clean/app; value is mode.
+- 2: pre-shutdown observer entered; value is checkpoint kind.
+- 3/4/5: non-normal mode / incoming IRQ mask / invalid device global.
+- 6: bridge result; -4 allocation, -6 blob read, -7 hash, -8 cache publication.
+- 7: recorder result. New negative frontend codes distinguish device(-102),
+  block layout(-103), redirect(-104), handoff arguments(-105), identity(-106),
+  timed start(-107), first MODE commit(-108), not-ready(-109), device change(-110).
+  These only replace generic negative returns; no extra I/O/relaxed guard/retry.
+- 8: attempt already consumed; value is the loaded flag. No new initialization.
+
+The new local execution checks run exact resident startup and the actual archived
+LK video_printf variadic formatter. Only the final display sink is modeled; this
+proves formatted arguments and distinct outcomes, not visible tablet pixels.
+Positive composition still reaches modeled MODE/pre_shutdown sequence3; no claim
+of actual kernel entry, durable logging or historical failure cause follows.
+
+A concrete remaining dependency is the display sink itself. The archived sink
+4bd44b08 calls display update4bd2266c, which can reach a timer wait through25f8c /
+25eb8; the counter-based loop has no independent iteration cap. Hardware/display
+initialization, maximum stack, IRQ effects and visibility are not yet qualified.
+Do not export/boot this diagnostic merely because the formatter replay passes.
+Both physical packers explicitly reject this profile. No candidate packaged,
+new physical trial selected, device accessed or previous approval reused.
+
+Next action: close that independent display-path contract or use a proven existing
+capture channel before completing a changed physical review. If display evidence
+is selected, an exact captured phase/value is required; approximate remembered text
+cannot qualify the writer. A phase1-only observation would narrow reachability,
+not prove why the later hook was absent. Kernel testing remains held until an
+attributable target record is retrieved. Originals remain verified/TWRP/unarmed.
+
+Reproduce locally (no device commands):
+
+```sh
+out/loader-audit-venv/bin/python scripts/build_loader_bootstrap.py \
+  --zig out/loader-local-tools/zig-package/ziglang/zig \
+  --out out/loader-screen-witness-analysis --pre-shutdown --screen-witness
+python3 scripts/build_loader_module.py \
+  --zig out/loader-local-tools/zig-package/ziglang/zig \
+  --out out/loader-screen-witness-module --profile frontend
+out/loader-audit-venv/bin/python scripts/validate_loader_screen_witness.py \
+  --module out/loader-screen-witness-module/module.elf \
+  --bootstrap out/loader-screen-witness-analysis/bootstrap.elf \
+  --lk out/original-package-lk-private.bin \
+  --payload out/loader-observer-device-original-private/boot_amonet-payload-sectors.bin \
+  --output out/loader-screen-witness-result.json
+```
