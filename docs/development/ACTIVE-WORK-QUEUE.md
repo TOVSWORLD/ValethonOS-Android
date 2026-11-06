@@ -1,6 +1,17 @@
 # Active work queue — ordered delivery
 
-Current actual state: exact approved known-stack control p5+normal observer installed
+Latest actual result: known-stack capture control1 is complete. Owner confirms home
+screen with unchanged original header/kernel/DT/ramdisk, but full collection found
+only HOSTCONTROLseq1/85B and no target record. This fails recorder qualification;
+prior silence cannot locate a modern-kernel failure. One original FACTORYM helper
+exit0; expired pre-helper return window preserved with0 launches. Original normal
+bootstrap was already original, so no agent bootstrap restore write. Original fullp5
+restored once; fullp5/p6, headers/ranges/GPT/aliases/RAM cleanup verified. TWRP left
+running/no reboot; no watcher/helper/owner action pending. Exact approval consumed;
+no unchanged control/kernel build/trial or rearm selected.
+[Actual control result](../../evidence/independent-recovery/known-boot-capture-control-trial-result.json).
+
+Historical installation snapshot (superseded by completed result above): exact approved known-stack control p5+normal observer installed
 once, readbacks/p6/RAM cleanup verified. Copied guard's stale trial8 prefix/seed pins
 were corrected atd19f37e without changing firmware bytes; failed receipt retained,
 all five required checks and corrected-source installed preflight passed. One

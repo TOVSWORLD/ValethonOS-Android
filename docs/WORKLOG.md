@@ -5143,3 +5143,34 @@ watcher launched and durable armed receipt/process verified; helper0/no auto ret
 or reboot. Owner first visit pending: Reboot/System once, observe≥5min, desk report
 before manual return. Exact control p5+normal observer remain installed; originals
 are not currently restored. Never repeat either install/arm or reuse approval.
+
+
+Known-stack control1 owner confirms home screen. Fresh host-only continuation
+preserved the expired unbooted window; no firmware rewrite or duplicate trial.
+Observation completed with actual USB departure and >5min elapsed; helper0. After
+owner desk report, approved return-only waiter launched once with durable receipt,
+helper0 at launch; second visit pending. No normal reboot/write/capture rearm;
+record retrieval/qualification still pending. Owner screen confirms only baseline
+boot, not modern-kernel entry or a retained log.
+
+
+### Actual known-stack capture control1 complete — recorder still unqualified
+
+Owner confirms original-stack home screen. Original return window expired without
+helper launch and owner reported home screen again; preserved it and executed a
+return-only continuation, one original FACTORYM helper total/exit0. No new firmware
+write or capture/trial rearm for that continuation. Read-only collection passed
+identity/aliases/fullp6/exact prefix/seed/slots. Full returned p5 still77d7453b,
+only HOSTCONTROLseq1/85B, no invalid slots, no loader or kernel record. This is a
+failed recorder control on a booting baseline; specific recorder cause is unknown.
+It does not diagnose the modern kernel or qualify kernel entry/logging.
+
+Private archive26478962B SHA5f48b89f906e793de426d263b168a4023c0762889b600dfd4ebeafece5a6792a
+matched lab/controller before restoration. Normal bootstrap already matched
+original4c6f355c, so no agent bootstrap restore write. Approved original fullp5
+restored once/current-hash bound; fullp5/p6, normal/return bootstrap/header/GPT/aliases
+and RAM cleanup verified. TWRP left running/no reboot; watcher/return waiter stopped,
+no helper or owner physical action pending. Post-restore private supplement11412B
+SHAe3b2d4400f75e70324778c8a7967715e9ef78f5636b0f9299e4da66985579d3c matched
+lab/controller. Preserve all receipts/rollback. Approval consumed; no unchanged
+control or modern-kernel build/trial selected.346/344/348 remain open.

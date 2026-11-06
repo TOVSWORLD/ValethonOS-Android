@@ -1,5 +1,16 @@
 # Ordered ValethonOS delivery roadmap
 
+Latest actual result: known-stack capture control1 is complete. Owner confirms home
+screen with unchanged original header/kernel/DT/ramdisk, but full collection found
+only HOSTCONTROLseq1/85B and no target record. This fails recorder qualification;
+prior silence cannot locate a modern-kernel failure. One original FACTORYM helper
+exit0; expired pre-helper return window preserved with0 launches. Original normal
+bootstrap was already original, so no agent bootstrap restore write. Original fullp5
+restored once; fullp5/p6, headers/ranges/GPT/aliases/RAM cleanup verified. TWRP left
+running/no reboot; no watcher/helper/owner action pending. Exact approval consumed;
+no unchanged control/kernel build/trial or rearm selected.
+[Actual control result](../../evidence/independent-recovery/known-boot-capture-control-trial-result.json).
+
 Actual first-draft test1 is complete. Original full boot restored once and full
 boot/recovery/RAM cleanup verified; TWRP left running, no reboot, no process armed
 and no owner action pending. USB capture0B/no matching endpoint; returned image
