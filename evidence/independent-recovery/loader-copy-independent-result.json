@@ -1,0 +1,16 @@
+{
+  "scope": "Independent exact candidate/nonce/seed/module/bootstrap/descriptor/ROP/copy verifier; no candidate mutation or device access",
+  "candidate_sha256": "b9377fdb1c8ca78e627d19db0d0eee7fc84228acc54f248edc98ebec3e05ea1f",
+  "observer_sha256": "2dd2de6bb6b07b5c616621cd4ed65f1a4a023cb695a41c896496cc67f1229188",
+  "payload_ram_start": "0x4bcfe600",
+  "kernel_copy_end": "0x4bd003c8",
+  "embedded_lk_bytes_copied": 968,
+  "all_original_declared_boot_bytes_preserved": true,
+  "all_embedded_lk_bytes_unchanged": true,
+  "late_hook_requires_runtime_installer": true,
+  "all_executable_bytes_within_proven_copy_and_cache_span": true,
+  "headers_gpt_return_bootstrap_and_live_globals_unchanged": true,
+  "fresh_seed_only_hostcontrol": true,
+  "physical_execution_admitted": false,
+  "device_accessed": false
+}

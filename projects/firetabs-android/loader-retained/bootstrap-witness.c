@@ -12,6 +12,9 @@ extern int lbo_call(void *,void *,const void *,const unsigned *,void *);
 struct witness_context {int (*compress)(unsigned *,const void *,unsigned);unsigned verified,device;};
 static struct lb_result loaded;
 static struct witness_context context={lh_block,1,0};
+#ifdef LBO_RUNTIME_INSTALL
+extern int lw_screen(unsigned,unsigned,unsigned);
+#endif
 __attribute__((noinline)) static void witness(unsigned phase,unsigned value){
  unsigned status;__asm__ volatile("mrs %0,cpsr":"=r"(status));
  /* Fixed format: no reclaimed original format pointers and no arbitrary string.
@@ -19,9 +22,18 @@ __attribute__((noinline)) static void witness(unsigned phase,unsigned value){
   * 4 masked; 5 invalid device; 6 bridge result; 7 dispatcher result;
   * 8 already consumed (value is loaded flag).
   * The final word is CPSR, including the original I bit. */
+#ifdef LBO_RUNTIME_INSTALL
+ (void)lw_screen(phase,value,status);
+#else
  ((int (*)(const char *,...))0x4bd44b3d)("VREC %u %08x %08x\n",phase,value,status);
+#endif
 }
+#ifdef LBO_RUNTIME_INSTALL
+extern int lbo_install_hook(void);
+void lbo_arrival(void){witness(1,(unsigned)lbo_install_hook());}
+#else
 void lbo_arrival(void){witness(1,*(volatile unsigned *)0x4bd7c3a0);}
+#endif
 static int read_blob(void *opaque,unsigned long long address,void *out,unsigned count){
  struct witness_context *c=opaque;
  unsigned (*read)(void *,unsigned long long,void *,unsigned,unsigned)=(void *)0x4bd358e9;

@@ -1,0 +1,16 @@
+{
+  "scope": "Exact header and archived payload sparse copy replay. Pre-existing LK bytes supplied from pinned package, not an observation of physical RAM.",
+  "header_sha256": "c8a9f89481e871851193ed6e3446a9ba6aaf4ea85c51cd6a21032f94fee4872c",
+  "original_lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "old_observer_sha256": "3313d00c51d9960a3f24c8f4a87c3ee532119f4f48113512ad5deda0d8cdd20f",
+  "payload_ram_start": "0x4bcfe600",
+  "kernel_copy_end": "0x4bd003c8",
+  "embedded_lk_bytes_copied": 968,
+  "old_embedded_hook_site": "0x4bd3e3e8",
+  "old_hook_copied_to_ram": false,
+  "resident_main_calls_app_without_reloading_full_lk": true,
+  "corrective_action": "Install late BL from resident main before its original whole-LK cache clean/app; validate the copy model, not a direct synthetic RAM hook.",
+  "explains_all_missing_earlier_records": false,
+  "kernel_entry_or_runtime_cause_proved": false,
+  "device_accessed": false
+}

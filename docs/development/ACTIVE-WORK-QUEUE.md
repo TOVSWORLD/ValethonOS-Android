@@ -1,5 +1,60 @@
 # Active work queue — ordered delivery
 
+## Copy-corrected capture control — recovered November 7, 2026
+
+The former tail-hook model was invalid for physical delivery: the bootstrap copies
+only 968 bytes of embedded LK. The late hook is outside that span. This explains
+the placement error, not every historical missing record or a kernel boot failure.
+The corrected resident code installs the exact branch before the original LK cache
+clean/app. All linked bootstrap bytes fit in the copied prefix (1898/2304 bytes).
+The native timer-dependent display routine is replaced by bounded mirrored pixel
+writes. Framebuffer visibility and cache/controller effects remain hardware assumptions.
+
+Recovery validation: source rebuild is byte-identical to the packaged bootstrap;
+12 exact-copy/execution controls, eight pixel phases, ten synthetic photo controls,
+five decoder/guard unit tests and independent artifact verification pass. On this
+Mac the sandbox terminates ARM emulation with signal 4; the same replay passes
+outside the sandbox. Pillow is required for the controller photo decoder.
+
+Exact review pair:
+- Boot: `b9377fdb1c8ca78e627d19db0d0eee7fc84228acc54f248edc98ebec3e05ea1f`
+- Observer: `2dd2de6bb6b07b5c616621cd4ed65f1a4a023cb695a41c896496cc67f1229188`
+- Screen token: `d73d`; scope: `known-boot-copy-control-3`.
+
+The private local bundle contains original rollback images, exact hash guards,
+collection/restore scripts and the camera decoder. It is unapproved, unexported and
+unarmed. Earlier approvals are consumed. Historical embedded-tail packers now reject
+use. No new custom-kernel boot or claim of qualified physical logging follows.
+
+The remaining dependency is a physical observation of this changed known-stack
+control, with the owner available for recovery and a camera recording the entire
+screen from before boot through the observation. This is a separate calibration
+boot; the standing restriction against separate diagnostic trials must be explicitly
+resolved before installation. Do not treat the general request to make progress as
+exact approval or owner availability. First read-only preflight must confirm the
+current original hashes, recovery identity and partition geometry; old TWRP state
+is historical, not a fresh device observation.
+
+If explicitly selected: install the exact observer and known-stack boot once using
+the bundled guards, verify readbacks, and have the owner perform the agreed boot.
+Capture the screen continuously; decode still frames locally with the exact token.
+Collect the full mailbox before restoration, then restore and verify originals with
+the existing scripts. No automatic reboot/return or retry is authorized here.
+Phase 1 establishes resident arrival/install result; phase 2 establishes late-hook
+arrival; later rows identify rejection/recorder results. A screen record alone does
+not qualify durable logging or prove kernel entry. A blank/unreadable capture cannot
+locate execution. If no attributable screen or mailbox record is recovered, stop
+this capture approach and reassess the boot route rather than repeat it unchanged.
+
+Local decoder:
+```sh
+out/loader-audit-venv/bin/python scripts/decode_loader_screen_photo.py \
+  --image /absolute/path/to/frame.png --token d73d \
+  --quad TL_X TL_Y TR_X TR_Y BR_X BR_Y BL_X BL_Y
+```
+Corners are in logical portrait order. Private images/nonces stay out of git.
+
+
 Offline source delta: independent arrival/first-rejection witness implemented.
 New analysis-only late profile uses1547/1587 proven console bytes and preserves
 original read redirection. Eleven actual ARM controls pass, including exact

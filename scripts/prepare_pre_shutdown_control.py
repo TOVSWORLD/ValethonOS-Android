@@ -17,7 +17,8 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def profile_guard(template, manifest):
+def profile_guard(template, manifest, scope=None):
+    scope = SCOPE if scope is None else scope
     if manifest.get('snapshot_stage') != 'pre_shutdown' or manifest.get('checkpoint_site') != '0x4bd3e3e8':
         raise ValueError('Exact pre-shutdown profile required')
     bindings = {'CANDIDATE': manifest['observer_sha256'], 'KERNEL_CANDIDATE': manifest['candidate_sha256'],
@@ -35,7 +36,7 @@ def profile_guard(template, manifest):
     if found != set(bindings) or template.count("'known-boot-capture-control-1'") != 1:
         raise ValueError('Unexpected guard template')
     result = '\n'.join(lines)+'\n'
-    result = result.replace("'known-boot-capture-control-1'", repr(SCOPE))
+    result = result.replace("'known-boot-capture-control-1'", repr(scope))
     checked = {n.targets[0].id:ast.literal_eval(n.value) for n in ast.parse(result).body
                if isinstance(n,ast.Assign) and len(n.targets)==1 and isinstance(n.targets[0],ast.Name)
                and n.targets[0].id in bindings}
@@ -44,7 +45,8 @@ def profile_guard(template, manifest):
     return result
 
 
-def prepare(folder, output):
+def prepare(folder, output, additional_files=None, scope=None):
+    scope = SCOPE if scope is None else scope
     manifest = json.loads((folder/'manifest.json').read_text())
     image = (folder/'boot-full.img').read_bytes(); observer = (folder/'observer-payload-sectors-private.bin').read_bytes()
     nonce = (folder/'nonce.bin').read_bytes()
@@ -59,7 +61,7 @@ def prepare(folder, output):
                'pull_retained_mailbox.py','retained_log_mailbox.py','loader_checkpoint_record.py',
                'observe_selected_usb.py','bounded_recovery_entry.py']
     files = {'scripts/'+name:(ROOT/'scripts'/name).read_bytes() for name in sources}
-    files['scripts/guard_known_boot_capture.py'] = profile_guard(files['scripts/guard_known_boot_capture.py'].decode(),manifest).encode()
+    files['scripts/guard_known_boot_capture.py'] = profile_guard(files['scripts/guard_known_boot_capture.py'].decode(),manifest,scope).encode()
     assessor = files['scripts/assess_known_boot_control.py'].decode()
     if assessor.count("record['stage'] == 'pre_handoff'")!=1 or assessor.count("latest['sequence'] >= 4")!=1:
         raise ValueError('Unexpected assessor template')
@@ -77,7 +79,9 @@ def prepare(folder, output):
         files['private/'+name] = path.read_bytes()
     if digest(files['private/original-boot.img'])!='08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e' or image[:7796736]!=files['private/original-boot.img'][:7796736]:
         raise ValueError('Original declared boot stack must remain identical')
-    auth={'scope':SCOPE,'candidate_sha256':manifest['candidate_sha256'],'observer_sha256':manifest['observer_sha256'],
+    if additional_files:
+        files.update(additional_files)
+    auth={'scope':scope,'candidate_sha256':manifest['candidate_sha256'],'observer_sha256':manifest['observer_sha256'],
           'owner_approved':False,'owner_available':False,'minimum_seconds':300,'automatic_return':False}
     files['private/owner-authorization.template.json'] = (json.dumps(auth,indent=2)+'\n').encode()
     deployed = {name:{'bytes':len(data),'sha256':digest(data)} for name,data in files.items()}

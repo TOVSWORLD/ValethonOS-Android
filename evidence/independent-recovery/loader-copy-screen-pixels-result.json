@@ -1,0 +1,17 @@
+{
+  "scope": "Actual linked bounded pixel writer and cache loop; CP15 effects modeled. Every written framebuffer word, canary, mirrored surface and independent decoded record checked.",
+  "bootstrap_sha256": "cadaf97dd1b30477e869c812bbb10d15ebbc361e4f9e6588274f8c86f0042d18",
+  "candidate_sha256": "b9377fdb1c8ca78e627d19db0d0eee7fc84228acc54f248edc98ebec3e05ea1f",
+  "phase_count": 8,
+  "pixel_writes_per_phase": 24576,
+  "max_emulated_instructions_per_phase": 257644,
+  "cache_lines_per_phase": 6000,
+  "invalid_phase_zero_writes": true,
+  "wrong_token_rejected": true,
+  "corrupt_data_bit_checksum_rejected": true,
+  "all_unselected_pixels_canaries_preserved": true,
+  "no_timer_heap_storage_or_lcd_driver_calls": true,
+  "irq_mask_preserved": true,
+  "device_accessed": false,
+  "physical_visibility_proved": false
+}

@@ -62,3 +62,9 @@ lbo_load_plan: .space 72
 .balign 8
 .global lbo_frontend
 lbo_frontend: .space 112
+
+/* Filled by the offline packer with the exact linked BL instruction. */
+.section .rodata.lbo_hook_word,"a",%progbits
+.balign 4
+.global lbo_hook_word
+lbo_hook_word: .word 0
