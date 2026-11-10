@@ -5710,3 +5710,24 @@ admit this Image to a hardware boot/handoff test. Independent failed-load recove
 remains open under #346.
 
 [Full build, failed-attempt trail and retained-artifact receipt](../../evidence/independent-recovery/kexec-source-integration-build-result.json).
+
+## Existing-kernel console survives orderly reboot — November 10, 2026
+
+One owner-approved run of runner SHA-256
+`4c4e56c06ffdd8c8ec73a23dd4d7532bd2486ec8365257400ae46fdc3e0b8388`
+wrote one unique console marker and requested one ordinary reboot into the same
+installed4.9 kernel. Exactly one retained console-ramoops line matched the source
+line byte-for-byte. Boot identity changed, normal Android returned, original full
+boot/config hashes and backend geometry matched again, and UID2000 ADB restored.
+No boot-image write, module load, experimental jump, failure injection, pstore
+record deletion or nonmatching/PMSG/account-log collection. Approval consumed;
+no automatic repeat. Private marker-only result/approval archive retained with hashes.
+
+This qualifies console retention through this exact orderly software-reboot route,
+not failure/power-loss retention, target early-entry coverage or the older TWRP
+reader/layout. Keep #346/#348 open. Next engineering remains final CPU gate wiring
+under serialization, partial-shutdown recovery/readout, and preservation of this
+existing writer region in source/target RAM layouts alongside DMA/cache/MMU/EL
+and early logging contracts. No new hardware test selected by this result.
+
+[Actual retained-marker result](../../evidence/independent-recovery/pstore-warm-reboot-runtime-result.json).

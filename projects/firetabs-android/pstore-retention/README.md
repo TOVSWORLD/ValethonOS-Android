@@ -47,3 +47,14 @@ exec-out path can return host status zero for a failing target command. Twelve
 mocked controls cover no-write preflight, one-shot success, missing marker,
 write failure, failed unroot, wrong source/target, reboot-transport uncertainty,
 return timeout, invalid/reused approval and bad status trailers.
+
+## Hardware result — November 10, 2026
+
+The approved test passed once: one marker write, one ordinary reboot, exactly one
+retained line byte-identical to the source marker. Boot identity changed; normal
+Android returned; full original boot/config and backend geometry reverified;
+UID2000 ADB restored. Approval consumed. No new Image/module or kernel jump.
+See `evidence/independent-recovery/pstore-warm-reboot-runtime-result.json` for
+marker-only evidence and private-archive hashes. Failure/power-loss retention and
+independent older-recovery readout remain unqualified; do not rerun this baseline
+without a new reason and exact approval.
