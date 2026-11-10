@@ -1,3 +1,6 @@
+> Completed successfully November 10, 2026. Original boot is restored on flash;
+> native kernel runs in RAM. [Next: first experimental jump](NATIVE-KEXEC-FIRST-JUMP.md).
+
 # Next test: temporary native kexec source kernel
 
 Prepared November 10, 2026. No experimental jump has run. Failed-jump logging

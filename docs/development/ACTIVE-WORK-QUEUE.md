@@ -1,3 +1,13 @@
+# Current state — successful native source boot, November 10, 2026
+
+Owner-approved temporary native source boot PASSED: Android home screen, native
+config verified, original full boot restored on flash, recovery unchanged, normal
+ADB restored. First experimental jump bundle/client and read-only live preflight
+are prepared; no jump/load yet. Await owner approval for the actual jump.
+Failed-jump logging remains post-failure follow-up, not a prerequisite.
+
+[Exact first-jump scope and evidence](NATIVE-KEXEC-FIRST-JUMP.md).
+
 # Current direction — November 10, 2026
 
 Native kexec handoff kernel built and linked gates verified. Temporary source-boot

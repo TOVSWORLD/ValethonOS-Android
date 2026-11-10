@@ -1,0 +1,14 @@
+{
+  "scope": "native-kexec-first-jump-1",
+  "runner_sha256": "8a7352db1a21c49890ff43935eac263b3345be30ff59cb7020d1871785ed8e7c",
+  "manifest_sha256": "4dbad93795f031bbfc3745ae9cfd976dff50518e876970c24b2e8ac53761473e",
+  "client_sha256": "29ac890a9e9311550a2ece519d75d540aa180ee69c15b381613ce4db4aa43210",
+  "trial_id": "809683f6fad0ab2d040e83928c355377",
+  "owner_approved": false,
+  "owner_available": false,
+  "maximum_loads": 1,
+  "maximum_jump_requests": 1,
+  "boot_writes_allowed": false,
+  "recovery_writes_allowed": false,
+  "automatic_reboot_allowed": false
+}
