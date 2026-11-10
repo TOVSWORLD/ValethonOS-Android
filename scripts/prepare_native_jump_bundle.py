@@ -25,12 +25,20 @@ def ranges_ok(segments,ram,reserved):
   if not any(lo<=a and z<=hi for lo,hi in ram):raise ValueError('Segment outside current System RAM')
   if any(overlaps((a,z),r) for r in reserved):raise ValueError('Segment intersects reserved memory')
   if any(overlaps((a,z),r) for r in segments[:i]):raise ValueError('Segments overlap')
-def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None):
+def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None,target_image=None,usb_linked=None):
  if sha(boot)!=BOOT_SHA:raise ValueError('Pinned original boot required')
  token=token or secrets.token_hex(16)
  if not re.fullmatch('[0-9a-f]{32}',token):raise ValueError('Exact unique hexadecimal trial ID required')
  layout=inspect(boot,len(boot));k,rd,_=layout['components']
  image,_,_=split_kernel(boot[k['offset']:k['offset']+k['bytes']]);initrd=boot[rd['offset']:rd['offset']+rd['bytes']]
+ if (target_image is None)!=(usb_linked is None):raise ValueError('USB target Image and linked profile must be supplied together')
+ if target_image is not None:
+  from verify_usb_console_build import ALLOWED,SERIAL_SHA
+  if usb_linked.get('usb_console_linked') is not True or usb_linked.get('serial_bind_is_opt_in') is not True or usb_linked.get('serial_source_sha256')!=SERIAL_SHA:raise ValueError('Verified opt-in USB console profile required')
+  if set(usb_linked.get('usb_profile_config_changes',{}))!=ALLOWED or any(v!={'before':'n','after':'y'} for v in usb_linked['usb_profile_config_changes'].values()):raise ValueError('USB console configuration drift')
+  if sha(target_image)!=usb_linked['artifacts']['arch/arm64/boot/Image']['sha256']:raise ValueError('USB target Image differs from linked profile')
+  image=target_image
+
  out.mkdir(mode=0o700);base=out/'source-private.dtb';base.write_bytes(dtb)
  before=snapshot(fdtget,base)
  if raw(before['/']['compatible']).find(b'mediatek,mt8163\0')<0:raise ValueError('Wrong board')
@@ -41,7 +49,16 @@ def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None):
  if start!=0x69244e00 or end-start!=len(initrd):raise ValueError('Original initrd DT extent differs')
  target=out/'target-private.dtb';target.write_bytes(dtb)
  subprocess.run([str(fdtput),'-t','s',str(target),'/chosen',key,token],check=True)
+ if target_image is not None:
+  oldargs=raw(chosen['bootargs'])
+  if not oldargs.endswith(b'\0') or b'\0' in oldargs[:-1]:raise ValueError('Single terminated source bootargs required')
+  oldargs=oldargs[:-1]
+  if b'g_serial.' in oldargs or b'console=ttyGS' in oldargs:raise ValueError('Do not layer over existing USB console boot parameters')
+  prefix=('console=ttyGS0 g_serial.ft_bind=1 g_serial.ft_trial='+token+' ').encode()
+  if len(prefix+oldargs)>=1024:raise ValueError('Conservative kernel bootargs capacity exceeded')
+  subprocess.run([str(fdtput),'-t','s',str(target),'/chosen','bootargs',(prefix+oldargs).decode('ascii')],check=True)
  after=snapshot(fdtget,target);expected={n:dict(p) for n,p in before.items()};expected['/chosen'][key]=' '.join(format(v,'x') for v in token.encode()+b'\0')
+ if target_image is not None:expected['/chosen']['bootargs']=' '.join(format(v,'x') for v in prefix+oldargs+b'\0')
  if after!=expected:raise ValueError('Unexpected DT property change')
  # Preserve the FDT memory reservation map byte-for-byte, including terminator.
  def reservations(b):
@@ -71,6 +88,8 @@ def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None):
  segments=[('image.bin',image,IMAGE,(extent+PAGE-1)&-PAGE),('metadata.bin',meta,META,(len(meta)+PAGE-1)&-PAGE),('initrd.bin',initrd_payload,initrd_base,(len(initrd_payload)+PAGE-1)&-PAGE)]
  ranges_ok([(a,a+m) for _,_,a,m in segments],ram,reserved)
  report={'scope':'First experimental native kexec jump bundle; not executed','trial_id':token,'original_boot_sha256':BOOT_SHA,'entry':ENTRY,'target_image_sha256':sha(image),'target_dtb_sha256':sha(target.read_bytes()),'source_dtb_sha256':sha(dtb),'target_ramdisk_sha256':sha(initrd),'dt_changes_only':['/chosen/valethon,kexec-trial'],'initrd_addresses_unchanged':[start,end],'pstore_preserved':True,'native_allocator_owns_source_and_relocation_pages':True,'segments':[],'experimental_jump_executed':False,'unqualified':['hardware kexec transition','device/DMA shutdown sufficiency','target entry and normal Android return','failed-jump log retrieval']}
+ if target_image is not None:
+  report.update(scope='USB kernel-console target bundle; not executed',target_config_sha256=usb_linked['artifacts']['.config']['sha256'],source_config_sha256=usb_linked['artifacts']['.config']['sha256'],dt_changes_only=['/chosen/valethon,kexec-trial','/chosen/bootargs'],bootargs_prefix=['console=ttyGS0','g_serial.ft_bind=1','g_serial.ft_trial='+token],original_bootargs_suffix_preserved=True,target_usb_descriptors={'vendor':'0525','product':'a4a7'})
  for name,b,addr,memsz in segments:
   q=out/name;q.write_bytes(b);q.chmod(0o600);report['segments'].append({'file':name,'sha256':sha(b),'bytes':len(b),'address':addr,'memory_bytes':memsz})
  for f in [base,target]:f.chmod(0o600)
@@ -79,4 +98,4 @@ def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None):
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__)
  for n in ['original-boot','live-dtb','iomem','out','fdtget','fdtput']:p.add_argument('--'+n,type=Path,required=True)
- a=p.parse_args();print(json.dumps(prepare(a.original_boot.read_bytes(),a.live_dtb.read_bytes(),a.iomem.read_text(),a.out,a.fdtget,a.fdtput),indent=2))
+ p.add_argument('--target-image',type=Path);p.add_argument('--usb-linked-report',type=Path);a=p.parse_args();print(json.dumps(prepare(a.original_boot.read_bytes(),a.live_dtb.read_bytes(),a.iomem.read_text(),a.out,a.fdtget,a.fdtput,target_image=a.target_image.read_bytes() if a.target_image else None,usb_linked=json.loads(a.usb_linked_report.read_text()) if a.usb_linked_report else None),indent=2))

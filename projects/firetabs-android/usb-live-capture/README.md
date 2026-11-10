@@ -57,10 +57,12 @@ explicit guard. Console support can replay kernel messages without waiting for
 Android init to start a logging daemon. It cannot emit before USB hardware/driver
 initialization, and host receipt still requires a hardware test.
 
-The isolated USB-console native kernel build is in progress. Required config
+The isolated USB-console native kernel build completed and passed linked checks. Required config
 changes are USB_G_SERIAL, U_SERIAL_CONSOLE, and selected USB_F_OBEX only. Existing
 native CPU gates/orderly route and security configuration are preserved. No new
 watchdog/timer change is part of this build. No console-enabled Image has booted.
+
+[Ready two-stage hardware test](../../../docs/development/USB-CONSOLE-NEXT-TEST.md).
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_live_acm_capture.py'

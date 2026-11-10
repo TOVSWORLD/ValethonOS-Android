@@ -1,3 +1,14 @@
+# Current state — USB console test ready, November 10, 2026
+
+Live kernel→USB serial→host capture is working. Console-enabled native kernel
+built; syscall/CPU gates and builtin console verified in linked Image. Original
+source ramdisk/DTs/args preserved; exact source-boot read-only preflight passed.
+Ready for one owner-approved two-stage sequence: source boot with original-flash
+restoration, then one fresh USB-captured console-target jump. No new boot/jump
+has run. Retention/watchdog work is not the critical path.
+
+[Exact two-stage test, limits and physical return](USB-CONSOLE-NEXT-TEST.md).
+
 # Current priority — USB capture, November 10, 2026
 
 Owner correction: prioritize USB logging/capture for faster boot/handoff diagnosis.

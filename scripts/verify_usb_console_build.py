@@ -10,7 +10,7 @@ def values(text):
  result={}
  for line in text.splitlines():
   if line.startswith('CONFIG_') and '=' in line:k,v=line.split('=',1);result[k]=v
-  elif m:=re.fullmatch('# (CONFIG_\w+) is not set',line):result[m[1]]='n'
+  elif m:=re.fullmatch(r'# (CONFIG_\w+) is not set',line):result[m[1]]='n'
  return result
 def verify(build,baseline,source):
  old=baseline.read_bytes();new=(build/'.config').read_bytes()

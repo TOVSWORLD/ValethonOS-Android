@@ -34,13 +34,13 @@ def split_kernel(data):
     return image,suffix,dtbs
 
 
-def assemble(original,image,linked,expected_original=BOOT_SHA):
+def assemble(original,image,linked,expected_original=BOOT_SHA,expected_config_sha256=CONFIG_SHA):
     if len(original)!=PARTITION or sha(original)!=expected_original:raise ValueError('Pinned full original boot required')
     layout=inspect(original,PARTITION);kernel,ramdisk,second=layout['components']
     if layout['page_size']!=2048 or second['bytes'] or not ramdisk['bytes']:raise ValueError('Unreviewed original boot layout')
     for field in ['arm64_syscall_104_is_kexec_load','handoff_gate_wired','orderly_reboot_namespace_linked']:
         if linked.get(field) is not True:raise ValueError('Native linked validation required: '+field)
-    if linked['artifacts']['arch/arm64/boot/Image']['sha256']!=sha(image) or linked['artifacts']['.config']['sha256']!=CONFIG_SHA:
+    if linked['artifacts']['arch/arm64/boot/Image']['sha256']!=sha(image) or linked['artifacts']['.config']['sha256']!=expected_config_sha256:
         raise ValueError('Image/config differs from native validation')
     old_kernel=original[kernel['offset']:kernel['offset']+kernel['bytes']]
     old_image,suffix,dtbs=split_kernel(old_kernel)
@@ -73,7 +73,7 @@ def assemble(original,image,linked,expected_original=BOOT_SHA):
     report={'scope':'Offline native-source boot candidate; no hardware admission',
       'original_boot_sha256':sha(original),'candidate_sha256':sha(candidate),'partition_bytes':len(candidate),
       'image_sha256':sha(image),'image_file_bytes':len(image),'image_memory_bytes':size,
-      'resolved_config_sha256':CONFIG_SHA,'appended_dtbs':dtbs,'original_dt_suffix_preserved':True,
+      'resolved_config_sha256':expected_config_sha256,'appended_dtbs':dtbs,'original_dt_suffix_preserved':True,
       'original_ramdisk_sha256':sha(rd),'original_ramdisk_and_header_addresses_preserved':True,
       'original_header_changes_only_kernel_size_and_id':True,'new_declared_end':len(payload),
       'original_declared_end':second['padded_end'],'original_tail_after_new_declared_end_preserved':True,
