@@ -1,3 +1,9 @@
+> Trial executed November 10: native load verified, one orderly jump request,
+> no target Android observed within five minutes. ADB absent afterward; owner
+> screen observation/recovery needed. No partition writes or automatic retry.
+> [Runtime result](../../evidence/independent-recovery/native-first-jump-runtime-result.json).
+> Historical preparation protocol follows; its approval is consumed.
+
 # First experimental native kexec jump
 
 ## Current state — November 10, 2026

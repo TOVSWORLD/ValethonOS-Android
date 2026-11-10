@@ -1,3 +1,14 @@
+# Current state — first jump trial stopped, November 10, 2026
+
+Native load succeeded and one orderly kexec request was issued. Target Android
+was not observed within 300 seconds; ADB is absent afterward. No partition
+writes or automatic retry. Original boot was verified restored on flash before
+the trial; post-trial readback and target entry are unverified. Owner screen
+observation and recovery are needed. Next: post-failure logging/readout diagnosis.
+Earlier pending-approval/preparation status below is historical and superseded.
+
+[Actual trial receipt](../../evidence/independent-recovery/native-first-jump-runtime-result.json).
+
 # Current state — successful native source boot, November 10, 2026
 
 Owner-approved temporary native source boot PASSED: Android home screen, native
