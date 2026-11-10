@@ -1,3 +1,15 @@
+# Current priority — USB capture, November 10, 2026
+
+Owner correction: prioritize USB logging/capture for faster boot/handoff diagnosis.
+Live working-kernel kernel→ACM→host capture PASSED (390 bytes, exact kernel
+marker, synced private capture). Initial host serial-open permission failure
+fixed without group/ACL changes. Both tests restored ADB-only and normal adbd;
+no reboot or boot/recovery write. Next: builtin USB kernel console for early
+target boot; isolated build in progress. Watchdog/retention work is not the
+critical path. Earlier reset-first scope below is superseded as a priority.
+
+[Working capture path and evidence](../../projects/firetabs-android/usb-live-capture/README.md).
+
 # Current state — manually recovered, November 10, 2026
 
 Original Android, full boot/config and recovery verified after owner-assisted

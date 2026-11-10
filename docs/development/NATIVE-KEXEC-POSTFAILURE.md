@@ -1,3 +1,7 @@
+> Owner priority correction: USB logging/capture first. Live kernel→ACM→host
+> capture now passes. The reset/retention proposal below is historical and does
+> not block USB console integration. [Current path](../../projects/firetabs-android/usb-live-capture/README.md).
+
 # First-jump recovery and post-failure logging
 
 November 10, 2026: owner reported a black screen and no response to ordinary

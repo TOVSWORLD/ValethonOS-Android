@@ -25,9 +25,9 @@ def mapped_bytes(elf,address,size):
     return matches[0]
 
 
-def check(build):
+def check(build, expected_config_sha256=CONFIG_SHA):
     result=verify(build)
-    if result['artifacts']['.config']['sha256']!=CONFIG_SHA:raise ValueError('Exact native configuration required')
+    if result['artifacts']['.config']['sha256']!=expected_config_sha256:raise ValueError('Exact native configuration required')
     elf=(build/'vmlinux').read_bytes()
     nm=subprocess.run(['aarch64-linux-gnu-nm','--defined-only',str(build/'vmlinux')],capture_output=True,text=True,check=True).stdout
     syms={f[2]:int(f[0],16) for l in nm.splitlines() if len(f:=l.split())==3}
