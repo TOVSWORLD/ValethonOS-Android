@@ -1,3 +1,13 @@
+# Current state — manually recovered, November 10, 2026
+
+Original Android, full boot/config and recovery verified after owner-assisted
+recovery. Normal ADB restored. Pstore mounted/enabled but record directory empty;
+handoff stage remains unknown. Next work is post-failure recovery timer and phase
+logging/readout: exact watchdog driver can stop its timer during device_shutdown.
+No new jump, boot write or automatic reboot; approvals consumed.
+
+[Recovery evidence and next implementation scope](NATIVE-KEXEC-POSTFAILURE.md).
+
 # Current state — first jump trial stopped, November 10, 2026
 
 Native load succeeded and one orderly kexec request was issued. Target Android

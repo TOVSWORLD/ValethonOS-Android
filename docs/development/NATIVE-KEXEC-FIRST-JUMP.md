@@ -1,3 +1,6 @@
+> Owner-assisted recovery completed; original boot/config/recovery verified.
+> Pstore record directory empty. [Post-failure findings](NATIVE-KEXEC-POSTFAILURE.md).
+
 > Trial executed November 10: native load verified, one orderly jump request,
 > no target Android observed within five minutes. ADB absent afterward; owner
 > screen observation/recovery needed. No partition writes or automatic retry.
