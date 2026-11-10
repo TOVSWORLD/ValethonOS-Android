@@ -1,0 +1,13 @@
+{
+  "scope": "native-kexec-source-boot-1",
+  "runner_sha256": "da06b41356139dc6bdf32214c02bf9b765d89731ce304ab45a112bc2dd0cd237",
+  "candidate_sha256": "43ac32df0cf0b8195e70b0bc596b9a9b33750d1a6a14305640ff05cf12501327",
+  "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+  "owner_approved": false,
+  "owner_available": false,
+  "maximum_candidate_writes": 1,
+  "maximum_restore_writes": 1,
+  "maximum_reboots": 1,
+  "recovery_writes_allowed": false,
+  "experimental_jump_allowed": false
+}

@@ -1,3 +1,13 @@
+# Current direction — November 10, 2026
+
+Native kexec handoff kernel built and linked gates verified. Temporary source-boot
+package and corrected live read-only preflight complete; awaiting owner-attended
+source-kernel boot test. This enables subsequent experimental jump preparation.
+Failed-jump logging follows a failed experimental jump, per owner direction,
+and is no longer a prerequisite. Historical stricter sequencing below is superseded.
+
+[Exact next test, rollback and evidence](NATIVE-KEXEC-NEXT-TEST.md).
+
 # Active work queue — ordered delivery
 
 ## Existing-kernel console survives orderly reboot — November 10, 2026
