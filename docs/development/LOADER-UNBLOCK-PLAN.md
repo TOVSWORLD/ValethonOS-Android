@@ -1,5 +1,265 @@
 # Loader retained-checkpoint delivery plan
 
+## Bounded MT8163 secondary-off candidate compiled — November 9, 2026
+
+Implemented the matched secondary shutdown core/adapter, pinned patch generator,
+compile verifier and final read-only off-state gate. Unlike the old wrapper, the
+candidate requires explicit firmware OFF, retains failures, checks regmap return
+codes, uses nonblocking acquisition of the existing MTCMOS lock, and caps total
+steps plus elapsed time across WFI/SRAM/power-status waits. Rechecks WFI under
+lock before any write, preserves the vendor register sequence/other bits, and
+requires both power-status banks OFF. No rollback/retry after partial power-down.
+The final gate requires exactly four possible CPUs, CPU0 alone online, firmware
+OFF for all three secondaries, both status banks OFF, and no sticky prior failure.
+Its I/O adapter has no writer; it cannot initiate power sequencing.
+
+Compiled actual ARM64 mtcmos.o/mt_psci.o and combined object against unchanged
+source72940eb733af and exact configb0871996…f3859/release4.9.337-g72940eb733af.
+Disassembly confirms the kill callback calls the bounded path and final gate exists.
+Fifteen native C fault tests pass (frozen/backward clock, busy lock, WFI loss,
+SRAM/status timeout, every successful-path read/write failure, every step-boundary
+exhaustion, topology/sticky/final-gate errors). Linux suite24 entry/shutdown tests
+passes including actual ARM64 entry emulation. Local kexec suite52 tests passes
+with one local emulator skip independently passed on Linux. Original vendor source
+hashes verified unchanged. Candidate objects are compile-only: the external-module
+build emits15 unresolved-symbol warnings with the partial symvers table; its .ko
+wrapper is NOT a loadable/runtime-qualified deliverable. No tablet operations.
+
+Remaining integration: call the final gate while hotplug remains serialized through
+relocation; preserve the source-memory ownership until then; bind survivor/masks,
+handle partial-shutdown abort/recovery, and integrate device/DMA/filesystem/EL/cache
+state and target logging. The core's4096-step/100ms policy is not calibrated hardware
+timing. Poll budgets cannot interrupt a stuck firmware call, regmap/bus transaction,
+or clock callback, nor bound the entire generic cpu_down lifecycle. A working
+replacement source-kernel build/qualification remains necessary; this patch is not
+an approved runtime module for the existing kernel. No kernel jump admitted.
+
+[Compile/source/fault-test receipt](../../evidence/independent-recovery/kexec-cpu-off-build-result.json).
+
+
+## Linux Image entry candidate implemented — November 9, 2026
+
+Implemented a separate 40-byte/six-instruction ARM64 argument trampoline for the
+matched relocator's zeroed x0-x3 entry. It loads the selected physical DTB into x0,
+zeros x1-x3 and branches to the Image entry without stack use or memory writes.
+It is not linked into the hardware-tested staging module and has no device runner.
+Offline builder verifies exact assembled code/no unresolved relocations, ARM64
+Image header/text_offset/full image_size, FDT header bounds, alignments and mutual
+nonoverlap. It does not qualify the FDT tree, RAM ownership or a boot-ready layout.
+
+Nine Linux tests pass, including actual GNU-assembled ARM64 instructions emulated
+at six combinations of relocation/Image addresses (including above4GiB), poisoned
+incoming registers, unmapped stack/DTB, no writes and exact branch/argument checks.
+Local host suite37 tests passes with the emulator test skipped; local Unicorn
+crashed before a result, so instruction execution was verified on Linux instead.
+The real known-good Image/first appended DTB were extracted from hash-matched
+original boot08fcf345…aa1e using bounded gzip/EOF checks. Builder exercised against
+those actual bytes with hypothetical, explicitly unqualified addresses. The Image
+file15137280B declares16363520B memory extent; collision checks reserve the latter.
+
+Read-only live CPU nodes all select mt-boot; exact config enables MTK_PSCI and
+HOTPLUG_CPU. Traced actual mt_cpu_psci_ops to MT8163 mt_psci.c/mtcmos.c: kill logs
+PSCI failure then returns MTCMOS result, and WFI/SRAM/power-status busy waits have
+no timeout. Generic affinity_info absence also permits success without off proof.
+Do not use generic PSCI assumptions or call this unbounded path as a qualified
+handoff. Next implement/review bounded failure-propagating secondary shutdown
+against the matched power-controller contract; bind observed power status before
+relocation and preserve source-memory ownership until every secondary is proven
+released. Cache/MMU/EL, DMA/device/filesystem shutdown and independent target
+logging/failure retrieval remain open. No CPU hotplug, firmware call or jump ran.
+
+[Entry build/validation receipt](../../evidence/independent-recovery/kexec-entry-build-result.json).
+[Live CPU/source audit](../../evidence/independent-recovery/kexec-cpu-shutdown-audit.json).
+
+
+## Prepare-only staging passed on hardware — November 9, 2026
+
+One exact approved module insertion and one client run passed on the installed
+4.9 kernel. Three segments totaling 16 KiB matched independent CRCs including zero
+padding; seven owned pages returned to zero. Execute stayed disabled. Module
+unload, misc node/class removal and both RAM-file removals were verified. Normal
+shell UID was restored. No reboot, flash or kernel handoff. Complete private
+logs/approval receipts were archived on lab/controller with matching SHA256.
+Approval consumed; no module/helper/test remains armed.
+
+Fresh preflight also passed. It initially stopped before device access because
+lab runner/verifier copies lacked the committed client-ELF and node-removal checks;
+reviewed differences and synchronized those two scripts, preserving exact approved
+module/client bytes. Runtime receipt qualifies allocation/copy/CRC/discard only.
+
+Next source work: resolve matched handoff and independent target logging/recovery.
+Further exact-source review confirms cpu_soft_restart's EL2 switch is conditional
+on is_kernel_in_hyp_mode/is_hyp_mode_available; observing CurrentEL1 alone does
+not select an HVC route. In arch/arm64/kernel/smp.c, op_cpu_kill returns success
+without a callback, and __cpu_die logs some shutdown failures rather than returning
+a veto. Therefore one online CPU alone is insufficient proof that firmware has
+released every secondary CPU before overwriting source memory. Bind actual CPU
+operations and validate a failure-propagating parking contract; do not inherit the
+upstream false stuck-CPU stub. DTB/x0 trampoline, Image placement, cache/MMU,
+device/DMA shutdown and filesystem quiescing remain open. Source ADB ends at
+handoff; no target early/failure log or retention route is yet qualified.
+
+[Actual hardware staging receipt](../../evidence/independent-recovery/kexec-stage-runtime-result.json).
+
+
+## Prepare-only kexec loader port built — November 8, 2026
+
+Continued source work beyond the successful logging probe. Ported the generic
+kexec allocation/copy machinery to the exact tested4.9 kernel. The19,960B module
+b2113b08…e3b9 contains no restart/relocation/hypervisor module, links no shutdown
+callback, and its unused execute stub is exact return-EOPNOTSUPP. All30 required
+symbol CRCs match exact-source providers; compiled instruction/import checks pass.
+Repaired an orphan source-page allocation failure edge and added bounded copied
+segment checks,3-segment/32MiB payload caps,24,592 owned-page hard cap and actual
+copied-page CRC/zero-padding reports with count-to-zero discard/close cleanup.
+
+Built a native static client4eea0326…290d for one16KiB three-segment staging cycle,
+independent checksum comparison, blocked execute/duplicate-prepare requests and
+verified discard. Guarded runner requires fresh module/client/boot-bound approval,
+exact current release/config/boot, root adbd, executable RAM /dev, clean staging
+state and available memory; no flash/reboot/CPU shutdown/handoff.28 tests pass
+including the earlier probe suite. These checks are source/build/preflight evidence,
+not actual hardware RAM-staging acceptance.
+
+Read-only live preflight passed with631800KiB MemAvailable. No module insertion,
+client execution or RAM file upload occurred; temporary root adbd ended and normal
+shell UID restored. New stage runtime approval is pending separately; the prior
+logging-probe approval is consumed. No actual kernel jump is admitted.
+
+Further source review found the native4.9 relocator clears x0 before kimage_start;
+a direct Linux Image branch therefore needs the appropriate DTB-carrying entry
+trampoline. CPU parking, EL/HVC behavior, device/DMA shutdown and clean filesystem
+quiescing still require explicit handoff contracts. No new jump binary selected.
+
+[Build review receipt](../../evidence/independent-recovery/kexec-stage-build-result.json).
+[Exact module/client/procedure](../../projects/firetabs-android/kexec-stage/README.md).
+
+
+## Actual Linux compatibility probe succeeded — November 8, 2026
+
+The exact logging-only module371fe33c…e889 loaded once into the installed
+4.9.337-g72940eb733af kernel, passed normal ABI/version checks, produced all ten
+fresh kernel records over ADB, and unloaded successfully. Runtime observations:
+EL1,4KB pages,3 online CPUs at the sample instant; all8 queried symbols present,
+including set_cpu_boot_mode_flag. This is actual hardware execution/log capture,
+not a model result. It qualifies this module ABI and current-kernel printk/ADB
+transport only, not kexec, CPU parking, firmware state, new-kernel entry or logs.
+
+The first preflight stopped with rooted debugging disabled; owner enabled it.
+Two exec-out stream staging attempts timed out with0 module insertions and verified
+RAM cleanup. Standard adb push into verified RAM-backed /dev solved the host
+transfer problem without changing module bytes. One actual insmod, no force-load,
+verified unload/module absence and RAM cleanup.13 runner/verifier tests pass.
+Private evidence archives match lab/controller. Original boot/recovery/bootstrap
+were verified before the one approved normal boot; no flash or handoff occurred.
+LineageOS remains running; temporary root adbd ended, user shell restored. No
+watcher/helper/module remains armed, no owner action is pending, approval consumed.
+
+Next source stage: adapt a matched4.9 kexec loader, keeping execution disabled
+until allocation, CPU/DMA shutdown and entry contracts are independently reviewed.
+Do not reuse the probe approval for a handoff or an additional module execution.
+
+[Actual hardware receipt](../../evidence/independent-recovery/kexec-probe-runtime-result.json).
+
+
+## Linux-to-Linux stage1 probe built — November 7, 2026
+
+The actual original normal boot image runs 4.9.337-g72940eb733af, not the 3.18
+TWRP kernel. Extracted its embedded config (b0871996…f3859) and located exact public
+source commit72940eb733af8df948cc216cb977cd8be9cba5a9 in amazon-oss. A stale cached
+3.18 vendor config is not the installed normal kernel configuration. No attempt
+was made to load a module into the unmatched TWRP kernel.
+
+Built a6144B logging-only ARM64 probe with exact release/ABI flags and zero config
+option changes. Six CRC providers were generated from individual exact-source
+objects; the partial table is not a complete kernel build's Module.symvers.
+Controller/lab artifact hashes match; all required CRCs/imports pass verification.
+Actual disassembly has40 instructions, one CurrentEL read and no privileged write,
+SMC/HVC, indirect jump or cache/MMU maintenance opcode. External calls are limited
+to the reviewed logging/read helpers. GCC13.3 differs from the original GCC6.3.1;
+runtime module-version checks remain mandatory and no force-loading is permitted.
+
+Thirteen verifier/runtime boundary tests pass, covering wrong architecture/release,
+missing/mismatched CRCs, handoff imports, current TWRP rejection, wrong live config,
+wrong approval, preflight-only behavior, rejected insertion with no retry, complete
+fresh-report attribution, RAM cleanup and unload. The runner performs no reboot,
+flash or kernel handoff. Execution requires fresh exact approval/current availability
+and a live normal-kernel release/config/fullboot hash match with existing root.
+Probe staging is only in RAM-backed /dev; a rejected module is never forced.
+
+This is a completed compatibility-test artifact, not a working kexec implementation.
+No new image, module insertion or reboot has occurred. Next is one separately
+approved boot of existing LineageOS and one probe load/unload, then a matched kexec
+port using the observed compatibility report. The initial probe cannot establish
+DMA shutdown, stopped secondary CPUs, firmware entry or target logging.
+
+[Build receipt](../../evidence/independent-recovery/kexec-probe-build-result.json).
+[Source and concrete review](../../projects/firetabs-android/kexec-probe/README.md).
+
+
+## New investigation: Linux-to-Linux handoff, November 7, 2026
+
+Owner rejected further development of the failed LK mailbox/screen avenue.
+Selected a distinct source investigation: use the running 64-bit Linux recovery
+as the image loader, with a matched ARM64 kexec port. This bypasses custom LK
+hooks, LK allocation/storage services, and its 32-bit-to-64-bit entry transition.
+It does not replace secure firmware or establish PSCI/SMP compatibility.
+
+Read-only live facts: recovery 3.18.19-g51c2c8d5bfb is aarch64 with root access;
+modules_disabled is 0. Captured 130938 bytes of current dmesg over existing ADB;
+this qualifies that live recovery read path only. Kexec core symbols are absent.
+Pinned and Git-blob/SHA256-verified 21 upstream module files at
+4ba956fd60b29d2fea324515596b392afdcfa2c5. All seven named dynamic dependencies
+are present in live kallsyms, and kallsyms_lookup_name has an export symbol.
+This is symbol-name evidence, not compatible signatures or a working module ABI.
+
+Do not load upstream unchanged: its default detect_el2 path dereferences the
+missing set_cpu_boot_mode_flag helper; it stubs the stuck-CPU test false, has
+unqualified CPU-mode decoding/identity mappings, and lacks a matched recovery
+build configuration here. Missing source/config provenance must be resolved or
+a reproducible matched first-stage kernel built before module qualification.
+
+Next milestones are distinct: (1) resolve build ABI and compile a no-handoff
+compatibility probe; (2) audit memory placement, CPU parking, cache/MMU state,
+DMA/device shutdown and firmware entry; (3) if admitted, chainload an already
+working kernel before changing to the modern kernel. Preparation/load errors
+must be retrieved over the source Linux's working host log connection. That
+connection will disconnect at handoff; target early logs, reserved-memory ownership
+and failure retrieval still require independent qualification. No claim of
+continuous ADB across kexec, retained RAM across power-off or guaranteed target logs.
+No physical test, module insertion, boot-image change or reboot selected.
+
+Upstream: https://github.com/fabianishere/kexec-mod . Latest MT8163 upstream work
+also explicitly requires custom TF-A/U-Boot/OP-TEE for its Echo Dot target; it is
+not a drop-in douglas firmware alternative. Do not transplant its firmware or
+reserved memory to this tablet.
+
+[Read-only source/compatibility receipt](../../evidence/independent-recovery/recovery-linux-kexec-route.json).
+
+
+## Actual copy-control3 result — November 7, 2026
+
+The approved corrected known-stack control reached the home screen, but full
+collection again returned HOSTCONTROL only (sequence 1, 85 bytes), with no loader
+record or invalid slot. No attributable screen pattern was captured; the owner
+was not watching closely, so physical absence is not established. Hardware capture
+acceptance failed. Do not repeat this method unchanged or admit a custom-kernel
+trial on these results. The cause of missing loader records remains unresolved.
+
+The single original FACTORYM return helper exited 0 after USB reseating. Complete
+readout and receipts were archived on lab/controller with matching SHA256. Normal
+bootstrap was already original; no bootstrap restore write was needed. Original
+full boot restored once, readback and final boot/bootstrap/recovery/header/GPT/alias
+checks passed, RAM staging cleanup verified. TWRP remains running, no reboot,
+watcher/helper running, pending owner action or armed test. Exact approval consumed.
+
+The next decision is whether to change the boot/observability approach or end the
+modern-kernel port effort. This failed capture is not proof that the hardware is
+incapable of a port. No further physical test is selected.
+
+[Actual trial receipt](../../evidence/independent-recovery/loader-copy-control3-trial-result.json).
+
+
 ## Copy-corrected capture control — recovered November 7, 2026
 
 The former tail-hook model was invalid for physical delivery: the bootstrap copies

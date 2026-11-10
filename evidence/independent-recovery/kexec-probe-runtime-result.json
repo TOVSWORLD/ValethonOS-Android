@@ -1,0 +1,45 @@
+{
+  "scope": "kexec-compatibility-probe-1",
+  "module_sha256": "371fe33c9b98515cac131f4c03a4208486aada660146b8b66ac41d44e7c3e889",
+  "module_load_attempts": 1,
+  "module_loaded": true,
+  "module_unloaded": true,
+  "boot_written": false,
+  "handoff_attempted": false,
+  "rebooted": false,
+  "complete": true,
+  "preflight": "passed",
+  "insmod_exit_code": 0,
+  "probe": {
+    "release": "4.9.337-g72940eb733af",
+    "page_shift": 12,
+    "current_el": 1,
+    "online_cpus": 3,
+    "symbol_presence": {
+      "machine_shutdown": true,
+      "migrate_to_reboot_cpu": true,
+      "kernel_restart_prepare": true,
+      "cpu_hotplug_enable": true,
+      "cpu_do_switch_mm": true,
+      "__flush_dcache_area": true,
+      "__hyp_set_vectors": true,
+      "set_cpu_boot_mode_flag": true
+    }
+  },
+  "probe_complete_record": true,
+  "ram_cleanup_verified": true,
+  "archive": {
+    "bytes": 127957,
+    "sha256": "bd5a226a959aa68cb313cb6a0172047b147f56ef21ee8218ea999235db9382f2"
+  },
+  "prior_preflight_stops": {
+    "root_disabled": 1,
+    "adb_exec_out_staging_timeouts": 2,
+    "module_insertions_in_prior_stops": 0
+  },
+  "approval_consumed": true,
+  "target_module_abi_accepted": true,
+  "physical_logging_proved": "Fresh printk report from this probe over the working 4.9 kernel/ADB only",
+  "target_kernel_logging_qualified": false,
+  "kexec_handoff_qualified": false
+}

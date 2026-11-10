@@ -1,0 +1,46 @@
+{
+  "scope": "Actual matched 4.9 prepare-only RAM staging hardware test",
+  "module_sha256": "b2113b08c2b940f31594f346e8f139f37dd78689f8b58afc739493577c4ee3b9",
+  "client_sha256": "4eea03266cfb9a7eae532e7acdf4f4ee56f3380473fc624f449294518408290d",
+  "module_load_attempts": 1,
+  "client_runs": 1,
+  "module_loaded": true,
+  "module_unloaded": true,
+  "handoff_attempted": false,
+  "boot_written": false,
+  "rebooted": false,
+  "complete": true,
+  "mem_available_kib": 697744,
+  "preflight": "passed",
+  "insmod_exit_code": 0,
+  "client": {
+    "complete": true,
+    "prepare_attempted": true,
+    "segments": 3,
+    "requested_bytes": 16384,
+    "staged_bytes": 16384,
+    "owned_pages_prepared": 7,
+    "owned_pages_after": 0,
+    "crc32": [
+      "f7903e96",
+      "6914382c",
+      "4a157387"
+    ],
+    "execute_disabled": true,
+    "handoff_attempted": false,
+    "phase": "complete",
+    "errno": 0
+  },
+  "device_node_removed": true,
+  "ram_cleanup_verified": true,
+  "date": "2026-11-09",
+  "normal_shell_restored": true,
+  "approval_consumed": true,
+  "archive": {
+    "sha256": "3a6e20b3b9b24ea958774e77e04c9a3d48d22d0618779b3c4205957c90f67b05",
+    "bytes": 32141
+  },
+  "lab_controller_archive_match": true,
+  "kernel_handoff_qualified": false,
+  "target_logging_qualified": false
+}

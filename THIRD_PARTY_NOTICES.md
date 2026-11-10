@@ -51,3 +51,29 @@ codec and host reader are project implementations, not the legacy MTK RAM format
 The private earliest-entry probe patches the same pinned ACK head.S listed above;
 its boot-contract reference is that revision's Documentation/arch/arm64/booting.rst.
 No upstream boot/reset/security behavior is claimed qualified by emulator controls.
+
+The prepare-only kexec staging recipe derives four generic kernel files from
+fabianishere/kexec-mod at4ba956fd60b29d2fea324515596b392afdcfa2c5, retaining its
+GPLv2 headers and the original Linux/Eric Biederman notices. The generated source
+and adaptation patch stay in ignored build output; source-manifest.json records
+all inputs/changes. The exact working4.9 kernel source donor is amazon-oss at
+72940eb733af8df948cc216cb977cd8be9cba5a9. Kernel-facing wrapper files retain their
+file-level notices; none changes the repository-wide license policy.
+
+The bounded secondary-off candidate follows the CPU1–3 MTCMOS ordering/definitions
+in amazon-oss72940eb733af8df948cc216cb977cd8be9cba5a9,
+`drivers/misc/mediatek/base/power/mt8163/mtcmos.[ch]` and `mt_psci.c`.
+Generated vendor files/patches preserve original MediaTek GPL notices in ignored
+build output. Kernel-facing candidate files carry GPL-2.0 notices; exact source
+hashes are recorded in kexec-cpu-shutdown-audit.json and kexec-cpu-off-build-result.json.
+
+The legacy affinity patch generator targets `drivers/firmware/psci.c` from the
+same amazon-oss72940eb733af source. Generated patched source preserves the original
+ARM GPL notices in ignored output. The query module/policy are GPL-2.0 kernel-facing
+sources; no source-kernel binding is installed by the query test.
+
+The isolated full source-kernel recipe also applies pinned compiler-compatibility
+corrections to seven existing amazon-oss files (audio, CPU frequency, boot getters,
+sensor batching, USB and display declarations) at the same72940eb733af revision.
+Generated files and the private combined patch preserve their original MediaTek
+GPL notices. The recipe does not change repository-wide licensing.

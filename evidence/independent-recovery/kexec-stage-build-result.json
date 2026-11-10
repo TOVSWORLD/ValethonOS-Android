@@ -1,0 +1,287 @@
+{
+  "scope": "Prepare-only kexec staging source/build review; no hardware staging execution",
+  "build": {
+    "scope": "Prepare-only generic kexec staging build, not runtime execution",
+    "module_sha256": "b2113b08c2b940f31594f346e8f139f37dd78689f8b58afc739493577c4ee3b9",
+    "module_bytes": 19960,
+    "vermagic": "4.9.337-g72940eb733af SMP preempt mod_unload modversions aarch64",
+    "imports": [
+      "__alloc_pages_nodemask",
+      "__arch_copy_from_user",
+      "__arch_copy_to_user",
+      "__check_object_size",
+      "__free_pages",
+      "__stack_chk_fail",
+      "__stack_chk_guard",
+      "capable",
+      "clear_bit",
+      "clear_page",
+      "contig_page_data",
+      "copy_page",
+      "crc32_le",
+      "kfree",
+      "kmalloc_caches",
+      "kmem_cache_alloc_trace",
+      "memcpy",
+      "memset",
+      "memstart_addr",
+      "misc_deregister",
+      "misc_register",
+      "mutex_lock",
+      "mutex_trylock",
+      "mutex_unlock",
+      "preempt_schedule",
+      "printk",
+      "security_kernel_read_file",
+      "set_bit",
+      "totalram_pages"
+    ],
+    "providers": {
+      "kmalloc_caches": {
+        "crc": 176929453,
+        "object": "mm/slab_common.o",
+        "object_sha256": "ee0400ff6864a373df66233a9a2fca84c7c1a2bee5f941430332fbe1c1db2c42"
+      },
+      "kfree": {
+        "crc": 58330298,
+        "object": "mm/slub.o",
+        "object_sha256": "2947b4edb6090816a39b6d5637df45c0c57a0fff5b20497c761ea3ef18c6e023"
+      },
+      "kmem_cache_alloc_trace": {
+        "crc": 1995453328,
+        "object": "mm/slub.o",
+        "object_sha256": "2947b4edb6090816a39b6d5637df45c0c57a0fff5b20497c761ea3ef18c6e023"
+      },
+      "__check_object_size": {
+        "crc": 2296094536,
+        "object": "mm/usercopy.o",
+        "object_sha256": "ecc9956048d412dd75d02c155e4d5f462b536072dbde75ee1000bd46088582a3"
+      },
+      "contig_page_data": {
+        "crc": 3099238479,
+        "object": "mm/nobootmem.o",
+        "object_sha256": "f28e399027969f4c16743e7e3811523584d327e5492307d20976f6c8e0b710fd"
+      },
+      "__free_pages": {
+        "crc": 2988875499,
+        "object": "mm/page_alloc.o",
+        "object_sha256": "fdc31407a407c5ae7c249a533a1d9ab7a5aedc8295adf910be9e75e2db932376"
+      },
+      "__alloc_pages_nodemask": {
+        "crc": 1198033895,
+        "object": "mm/page_alloc.o",
+        "object_sha256": "fdc31407a407c5ae7c249a533a1d9ab7a5aedc8295adf910be9e75e2db932376"
+      },
+      "totalram_pages": {
+        "crc": 3734200506,
+        "object": "mm/page_alloc.o",
+        "object_sha256": "fdc31407a407c5ae7c249a533a1d9ab7a5aedc8295adf910be9e75e2db932376"
+      },
+      "crc32_le": {
+        "crc": 960318953,
+        "object": "lib/crc32.o",
+        "object_sha256": "93bcc8640f36785603ed54658b1170b7b7fadb9ee2bdb062dada18d0c95abead"
+      },
+      "capable": {
+        "crc": 3335240841,
+        "object": "kernel/capability.o",
+        "object_sha256": "548114c8b07e9b955003a9108946d88d10fc366b79124d681cfa6a9cdea73c10"
+      },
+      "__stack_chk_fail": {
+        "crc": 3681748385,
+        "object": "kernel/panic.o",
+        "object_sha256": "9896a5dd0d2f0c9dac87e2e4f35aa70403321a0d9f181ccb2da128663a07ac4b"
+      },
+      "module_layout": {
+        "crc": 2853544346,
+        "object": "kernel/module.o",
+        "object_sha256": "36dceaab11441bfd86cf39c23e420466e3721c2f1bacd95ecfbebf254df58572"
+      },
+      "security_kernel_read_file": {
+        "crc": 2138628159,
+        "object": "security/security.o",
+        "object_sha256": "43915b35fc1196367667df178a34ecb5aff743893892f7f6de2932a2e1816ef6"
+      },
+      "printk": {
+        "crc": 669098057,
+        "object": "kernel/printk/printk.o",
+        "object_sha256": "78d20963b625963efe2250b4d884680ee57f273f48b0579920cd2a1edc3bbf3c"
+      },
+      "preempt_schedule": {
+        "crc": 1135659459,
+        "object": "kernel/sched/core.o",
+        "object_sha256": "31425db33095a0e0183de0fe1b15f67cc9ddfe5c1e4d60a8a3582e30a8533a7b"
+      },
+      "mutex_lock": {
+        "crc": 1080406275,
+        "object": "kernel/locking/mutex.o",
+        "object_sha256": "1824b19137d3f62d15675e16e8f0c361d87955bdcb02e4e2f0621c065e8859a9"
+      },
+      "mutex_trylock": {
+        "crc": 2622668871,
+        "object": "kernel/locking/mutex.o",
+        "object_sha256": "1824b19137d3f62d15675e16e8f0c361d87955bdcb02e4e2f0621c065e8859a9"
+      },
+      "mutex_unlock": {
+        "crc": 268518841,
+        "object": "kernel/locking/mutex.o",
+        "object_sha256": "1824b19137d3f62d15675e16e8f0c361d87955bdcb02e4e2f0621c065e8859a9"
+      },
+      "__stack_chk_guard": {
+        "crc": 2405927687,
+        "object": "arch/arm64/kernel/process.o",
+        "object_sha256": "af03b3013cb330bff4183e8450a4374017e55ba9833fdc07dd60e8f91418d69f"
+      },
+      "__arch_copy_to_user": {
+        "crc": 3009276559,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "clear_page": {
+        "crc": 1033824752,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "clear_bit": {
+        "crc": 2826761235,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "__arch_copy_from_user": {
+        "crc": 2226952011,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "memset": {
+        "crc": 3703006381,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "copy_page": {
+        "crc": 1292703293,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "memstart_addr": {
+        "crc": 4208927798,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "memcpy": {
+        "crc": 1210688638,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "set_bit": {
+        "crc": 2928430348,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "misc_register": {
+        "crc": 2839474839,
+        "object": "drivers/char/misc.o",
+        "object_sha256": "e0b797a02f88e354367f6f94ecba9f1251b2cba761111a678e87a721076d36ba"
+      },
+      "misc_deregister": {
+        "crc": 3346203308,
+        "object": "drivers/char/misc.o",
+        "object_sha256": "e0b797a02f88e354367f6f94ecba9f1251b2cba761111a678e87a721076d36ba"
+      }
+    },
+    "config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "all_required_crcs_present": true,
+    "kernel_handoff_implemented": false,
+    "loaded_on_tablet": false
+  },
+  "artifact_verification": {
+    "scope": "Prepare-only staging artifact verification; not hardware acceptance",
+    "module_sha256": "b2113b08c2b940f31594f346e8f139f37dd78689f8b58afc739493577c4ee3b9",
+    "module_bytes": 19960,
+    "client_sha256": "4eea03266cfb9a7eae532e7acdf4f4ee56f3380473fc624f449294518408290d",
+    "client_bytes": 143392,
+    "vermagic": "4.9.337-g72940eb733af SMP preempt mod_unload modversions aarch64",
+    "imports": [
+      "__alloc_pages_nodemask",
+      "__arch_copy_from_user",
+      "__arch_copy_to_user",
+      "__check_object_size",
+      "__free_pages",
+      "__stack_chk_fail",
+      "__stack_chk_guard",
+      "capable",
+      "clear_bit",
+      "clear_page",
+      "contig_page_data",
+      "copy_page",
+      "crc32_le",
+      "kfree",
+      "kmalloc_caches",
+      "kmem_cache_alloc_trace",
+      "memcpy",
+      "memset",
+      "memstart_addr",
+      "misc_deregister",
+      "misc_register",
+      "mutex_lock",
+      "mutex_trylock",
+      "mutex_unlock",
+      "preempt_schedule",
+      "printk",
+      "security_kernel_read_file",
+      "set_bit",
+      "totalram_pages"
+    ],
+    "versioned_symbols": 30,
+    "all_crcs_match_provider": true,
+    "execution_stub_returns_eopnotsupp": true,
+    "restart_or_shutdown_symbols_linked": false,
+    "forbidden_privileged_or_indirect_instructions": [],
+    "instruction_count": 1380,
+    "client_static_aarch64": true,
+    "loaded_on_tablet": false,
+    "kernel_handoff_implemented": false
+  },
+  "source": {
+    "upstream_commit": "4ba956fd60b29d2fea324515596b392afdcfa2c5",
+    "scope": "Prepare-only generic staging port; no restart code linked",
+    "source_sha256": {
+      "stage_limits.h": "239d457cbde82583239109a71044a2b2fa547608c7fba55eca6f7a200f427af3",
+      "kexec_core.c": "1ad78eb6f582ab18c7760c92f77da54b5c24144f8975cb5a2f8816a1d2d66b80",
+      "adaptation.patch": "8335a084a5c7e763e7af6a45bfd2192eb3fbed1fc1ce68030d804b68fc8dd771",
+      "Makefile": "7674ac859408cbcaad0f5cb9f6dc1bd2e6cfff677af7d947d11c6f795f53ef58",
+      "kexec.c": "ee098aa22e3a562d035781c451147cb2845877163982f0c070342fea56773b6e",
+      "kexec_internal.h": "09042ada99945a3850a9cb161bbca8e5eeff3fc55267b1b42e704006362f078e",
+      "stage_uapi.h": "cbb0f138e99ef122480f561d9688c3092b4e6555724ee3e72a1b4597caed862f",
+      "stage_driver.c": "a9977683fb70044042e8bfe41b4271a60b53310d43d9779a8c826e809d2f84c6",
+      "kexec.h": "222e861f7cc46b93919434d9f1cd6670f38ceb136d89d7203e4a1910a28bdc42",
+      "stage_arch.c": "be8d4063f3b396ba48019b99b96ac7ca1e95358e7726c8ea30618634f1a3ee38"
+    },
+    "max_staged_bytes": 33554432,
+    "max_segments": 3,
+    "max_owned_pages": 24592,
+    "kernel_handoff_implemented": false,
+    "loaded_on_tablet": false
+  },
+  "read_only_preflight": {
+    "scope": "kexec-prepare-only-1",
+    "module_sha256": "b2113b08c2b940f31594f346e8f139f37dd78689f8b58afc739493577c4ee3b9",
+    "client_sha256": "4eea03266cfb9a7eae532e7acdf4f4ee56f3380473fc624f449294518408290d",
+    "module_load_attempts": 0,
+    "client_runs": 0,
+    "module_loaded": false,
+    "module_unloaded": false,
+    "handoff_attempted": false,
+    "boot_written": false,
+    "rebooted": false,
+    "complete": true,
+    "ram_paths": [],
+    "mem_available_kib": 631800,
+    "preflight": "passed"
+  },
+  "tests": {
+    "staging": 15,
+    "including_prior_probe": 28
+  },
+  "hardware_staging_test_selected": false,
+  "kernel_handoff_admitted": false
+}

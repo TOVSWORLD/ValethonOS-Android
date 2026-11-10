@@ -1,0 +1,199 @@
+{
+  "scope": "Read-only live CPU-method binding and exact-source shutdown audit; no CPU hotplug or firmware calls",
+  "source_commit": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+  "live_cpu_enable_methods": [
+    "mt-boot",
+    "mt-boot",
+    "mt-boot",
+    "mt-boot"
+  ],
+  "live_method_read_exit": 0,
+  "config": {
+    "HOTPLUG_CPU": true,
+    "MTK_PSCI": true,
+    "ARM_PSCI_FW": true
+  },
+  "files": {
+    "arch/arm64/kernel/cpu_ops.c": {
+      "sha256": "f5fb6d65dfa7075332f61e94634de0d4ab2bb390c8323f846ef9855e1a07d426",
+      "bytes": 3143,
+      "anchors": []
+    },
+    "arch/arm64/kernel/psci.c": {
+      "sha256": "ed756bfb3883dd701f94dec6dd7d6545c3dc494bbd9e7cd66053b8485531be25",
+      "bytes": 3016,
+      "anchors": [
+        {
+          "line": 87,
+          "text": "if (!psci_ops.affinity_info)"
+        }
+      ]
+    },
+    "arch/arm64/kernel/smp.c": {
+      "sha256": "70dea9950094e649aef20eac2ffc163e718ae839502b20d729dcd98e715e34ab",
+      "bytes": 22347,
+      "anchors": [
+        {
+          "line": 338,
+          "text": "if (!cpu_ops[cpu]->cpu_kill)"
+        },
+        {
+          "line": 364,
+          "text": "err = op_cpu_kill(cpu);"
+        }
+      ]
+    },
+    "arch/arm64/kernel/cpu-reset.h": {
+      "sha256": "6f8873558cb62ac5403af15f25493ecab5b73bf803b835e449712e7dcbde0666",
+      "bytes": 916,
+      "anchors": [
+        {
+          "line": 25,
+          "text": "el2_switch = el2_switch && !is_kernel_in_hyp_mode() &&"
+        }
+      ]
+    },
+    "drivers/misc/mediatek/base/power/mt8163/mt_psci.c": {
+      "sha256": "e453f34345d538c5ec484659ac2eb822f770a4dea420819ef4e6c24c65e79f5b",
+      "bytes": 2304,
+      "anchors": [
+        {
+          "line": 58,
+          "text": "static int mt_psci_cpu_kill(unsigned int cpu)"
+        },
+        {
+          "line": 62,
+          "text": "ret = cpu_psci_ops.cpu_kill(cpu);"
+        },
+        {
+          "line": 66,
+          "text": "return spm_mtcmos_ctrl_cpu(cpu, STA_POWER_DOWN, 1);"
+        },
+        {
+          "line": 93,
+          "text": ".name = \"mt-boot\","
+        },
+        {
+          "line": 100,
+          "text": ".cpu_kill = mt_psci_cpu_kill,"
+        }
+      ]
+    },
+    "drivers/misc/mediatek/base/power/mt8163/mtcmos.c": {
+      "sha256": "47b9347717374b2884fe984e9e337e76ca90a90fa5727a45f63525e137f4de14",
+      "bytes": 14414,
+      "anchors": [
+        {
+          "line": 118,
+          "text": "while ((spm_read(SPM_SLEEP_TIMER_STA) &"
+        },
+        {
+          "line": 134,
+          "text": "while ((spm_read(SPM_CA7_CPU0_L1_PDN) & L1_PDN_ACK)"
+        },
+        {
+          "line": 148,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU0) != 0)"
+        },
+        {
+          "line": 163,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU0) !="
+        },
+        {
+          "line": 175,
+          "text": "while ((spm_read(SPM_CA7_CPU0_L1_PDN) & L1_PDN_ACK) != 0)"
+        },
+        {
+          "line": 205,
+          "text": "while ((spm_read(SPM_SLEEP_TIMER_STA) &"
+        },
+        {
+          "line": 221,
+          "text": "while ((spm_read(SPM_CA7_CPU1_L1_PDN) & L1_PDN_ACK) !="
+        },
+        {
+          "line": 235,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU1) != 0)"
+        },
+        {
+          "line": 250,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU1) != CA7_CPU1)"
+        },
+        {
+          "line": 261,
+          "text": "while ((spm_read(SPM_CA7_CPU1_L1_PDN) & L1_PDN_ACK) != 0)"
+        },
+        {
+          "line": 291,
+          "text": "while ((spm_read(SPM_SLEEP_TIMER_STA) &"
+        },
+        {
+          "line": 307,
+          "text": "while ((spm_read(SPM_CA7_CPU2_L1_PDN) & L1_PDN_ACK) !="
+        },
+        {
+          "line": 321,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU2) != 0)"
+        },
+        {
+          "line": 336,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU2) != CA7_CPU2)"
+        },
+        {
+          "line": 347,
+          "text": "while ((spm_read(SPM_CA7_CPU2_L1_PDN) & L1_PDN_ACK) != 0)"
+        },
+        {
+          "line": 377,
+          "text": "while ((spm_read(SPM_SLEEP_TIMER_STA) &"
+        },
+        {
+          "line": 393,
+          "text": "while ((spm_read(SPM_CA7_CPU3_L1_PDN) & L1_PDN_ACK) !="
+        },
+        {
+          "line": 407,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU3) != 0)"
+        },
+        {
+          "line": 422,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPU3) != CA7_CPU3)"
+        },
+        {
+          "line": 433,
+          "text": "while ((spm_read(SPM_CA7_CPU3_L1_PDN) & L1_PDN_ACK) != 0)"
+        },
+        {
+          "line": 464,
+          "text": "while ((spm_read(SPM_SLEEP_TIMER_STA) &"
+        },
+        {
+          "line": 480,
+          "text": "while ((spm_read(SPM_CA7_CPUTOP_L2_PDN) & L2_SRAM_PDN_ACK) !="
+        },
+        {
+          "line": 495,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPUTOP) != 0)"
+        },
+        {
+          "line": 510,
+          "text": "while (((spm_read(SPM_PWR_STATUS) & CA7_CPUTOP) != CA7_CPUTOP)"
+        },
+        {
+          "line": 521,
+          "text": "while ((spm_read(SPM_CA7_CPUTOP_L2_PDN) & L2_SRAM_PDN_ACK) != 0)"
+        }
+      ]
+    }
+  },
+  "findings": [
+    "Live mt-boot selects mt_cpu_psci_ops rather than generic psci",
+    "mt_psci_cpu_kill logs PSCI kill failure then returns MTCMOS result instead of that error",
+    "MT8163 MTCMOS power-down has WFI, SRAM and power-status busy waits without timeout",
+    "Generic affinity-info absence can return success without firmware off confirmation",
+    "One online CPU and generic kernel shutdown completion are insufficient independent off proofs"
+  ],
+  "device_hotplug_performed": false,
+  "handoff_admitted": false,
+  "next_implementation": "Bound/prove secondary power-down and propagate failure before relocation; do not call unbounded vendor shutdown from a proposed handoff"
+}

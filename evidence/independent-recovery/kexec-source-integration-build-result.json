@@ -1,0 +1,348 @@
+{
+  "scope": "Isolated full-kernel source integration; no boot or handoff acceptance",
+  "date": "2026-11-09",
+  "source_manifest": {
+    "scope": "Isolated affinity/CPU-off source integration; no deployment",
+    "source_commit": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+    "original_source_hashes": {
+      "drivers/firmware/psci.c": "142416b4d183500269fc8fa3adfb78183ac889be29cdd9f9eee4fdae8fd4b781",
+      "drivers/misc/mediatek/base/power/mt8163/mtcmos.c": "47b9347717374b2884fe984e9e337e76ca90a90fa5727a45f63525e137f4de14",
+      "drivers/misc/mediatek/base/power/mt8163/mt_psci.c": "e453f34345d538c5ec484659ac2eb822f770a4dea420819ef4e6c24c65e79f5b",
+      "drivers/misc/mediatek/base/power/mt8163/mtcmos.h": "3430b5449722792c331adc4ed6d57686f614eea16f9e10dd020c799c9f3752db",
+      "drivers/misc/mediatek/base/power/mt8163/mt_cpu_psci_ops.h": "3da30319721715c1671b896941c4e9b897947e915f158ca0536ea976958aa5f3",
+      "sound/soc/mediatek/mt_soc_audio_8163/mt_soc_pcm_dl1_bt.c": "125fdb038f21ca6c70c21e5ddec1ae0f98dbe40476a97eeb493762f5d8517c8d",
+      "drivers/misc/mediatek/base/power/mt8163/mt_cpufreq.c": "5f45f1713b7e14bf7b2983efcc62444e4fe862ff9e1708af168b291ada776403",
+      "drivers/misc/mediatek/boot/mtk_boot_common.c": "f561690bd9d8826615589c07dc4af8a0635c1dbec7578bb9858804c9b8359d96",
+      "drivers/misc/mediatek/boot/mtk_boot.c": "eeb3ebe9841466f1134424cb4a85ccd9682ee35e0bf893c286dbecd3518ccf8c",
+      "drivers/misc/mediatek/hwmon/batchsen/batch.c": "9a749a631e6aa61406bd416eaa3d3c5c959df59afdcfa948eee0d66441d48f02",
+      "drivers/misc/mediatek/usb20/musb_gadget_ep0.c": "395ae5f9e87d28dd0b521db6756c46d871576f875f2a2578154984cd3ad68bc3",
+      "drivers/misc/mediatek/video/mt8163/videox/debug.h": "50a22eb8abdba63fd18e085b444a232fb80247fbcd344fa7040bf313d8d315b1",
+      "drivers/misc/mediatek/include/mt-plat/mtk_boot_common.h": "c0409b3dc4df93bcd219c947f0bbe522f1cb741a2743bc9a8e8e1548d44857ad",
+      "drivers/misc/mediatek/include/mt-plat/mtk_boot.h": "28c502ed5d1ac14a687cc3b0f2c4ba8a23528ec562892d014284e36e94555caa",
+      "drivers/misc/mediatek/video/mt8163/videox/disp_assert_layer.h": "81d22dfdcd10e3714a0851a6fdc132d687edbab49c01632b232cf9b6867ae64e"
+    },
+    "overlay_sha256": {
+      "drivers/misc/mediatek/base/power/mt8163/mtcmos.c": "b83923c7a06ba88489f9228b4f9f52dd50227797fcd50efced6ab6df6766a732",
+      "drivers/misc/mediatek/base/power/mt8163/mtcmos.h": "9a6b7b402f1fe0c1fd73b2e29348ad7bf46d9b3748c3847772518bd5b435a1b9",
+      "drivers/misc/mediatek/base/power/mt8163/mt_psci.c": "2f3a96a814e2c3603fb823e66acd7b90190c6d41cee89a93e0f1780aa5d2c5e2",
+      "drivers/misc/mediatek/base/power/mt8163/bounded_secondary_off.h": "2a249086adbe6b052810675650725261794f1249f887d0777ebc1dfab1a93085",
+      "drivers/misc/mediatek/base/power/mt8163/bounded_secondary_adapter.inc": "ee0207f7dba94fbb28469b395e8075cf9734486a69d4b01cc37daab4c5463410",
+      "drivers/firmware/psci.c": "c52aa352263e0777a38d12ec6eda0958b1738c1d9c7ad75a9f5be411c463d9e4",
+      "drivers/firmware/legacy_affinity_policy.h": "8c046643fa7e4986184ceac82b531f8767ca7192bb09a36f9789e9351330e041",
+      "sound/soc/mediatek/mt_soc_audio_8163/mt_soc_pcm_dl1_bt.c": "7a3997790114de8d1015f74efa0233402a54057b0b649ba9df61ac6734b730db",
+      "drivers/misc/mediatek/base/power/mt8163/mt_cpufreq.c": "e528b3b8a790c0c8da117c8c96229d6cf9dcebd57a71691015f3769e6ba4c491",
+      "drivers/misc/mediatek/boot/mtk_boot_common.c": "39f15536115d722cb8bf5b031e7ca7a6bf221a1c50b39f39e5ba176fc6969b55",
+      "drivers/misc/mediatek/boot/mtk_boot.c": "29c502bcea461a72977f7d49f8d45d22bc1f6ed5b585cf300a9ee1556abfeafd",
+      "drivers/misc/mediatek/hwmon/batchsen/batch.c": "6a3ad0735f39353d2f896f44c1a82f34affef73d28abe625cb02c0618d2d3926",
+      "drivers/misc/mediatek/usb20/musb_gadget_ep0.c": "4c59a31ac0c5e56b287b0bf971183081585b997254814adf10fb3690040bc424",
+      "drivers/misc/mediatek/video/mt8163/videox/debug.h": "be71825b6c4c1825b9b146d8ab0e97932b878a02761241376d75da02e27a16d9"
+    },
+    "gcc13_compat": true,
+    "compiler_compatibility_fix": "Whitespace-only indentation repairs and enum declarations matched to existing interfaces; no warning suppression",
+    "config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "original_release": "4.9.337-g72940eb733af",
+    "original_source_unchanged": true,
+    "original_build_config_unchanged": true,
+    "make_command": [
+      "make",
+      "-C",
+      "<isolated source>",
+      "O=<isolated build>",
+      "-j4",
+      "Image"
+    ],
+    "hardware_execution": false,
+    "handoff_gate_wired": false,
+    "handoff_admitted": false
+  },
+  "build": {
+    "scope": "Isolated combined full-kernel compile; no deployment",
+    "build_exit_code": 0,
+    "compiler_compatibility_fix": "Whitespace-only indentation repairs and enum declarations matched to existing interfaces; no warning suppression",
+    "original_source_unchanged": true,
+    "original_build_config_unchanged": true,
+    "config_unchanged": true,
+    "final_build_log_sha256": "1c15ca01989187b68bd872f17ea4a29da4a4c0e8b9076351b0bc8895a48b51dd",
+    "hardware_execution": false,
+    "handoff_gate_wired": false,
+    "handoff_admitted": false,
+    "image_sha256": "3df1bd6cd206b102b20c302b976db85a4103bdbad9e7e88c1f2f2ce45caf292b",
+    "image_bytes": 15266304
+  },
+  "linked_verification": {
+    "scope": "Linked Image/symbol/call-target verification only; not boot acceptance",
+    "artifacts": {
+      "arch/arm64/boot/Image": {
+        "sha256": "3df1bd6cd206b102b20c302b976db85a4103bdbad9e7e88c1f2f2ce45caf292b",
+        "bytes": 15266304
+      },
+      "vmlinux": {
+        "sha256": "6ddb4f0161c08cd20db4e32fac72acc7b42a0fcb65cec7bc700540729e892975",
+        "bytes": 20695744
+      },
+      "System.map": {
+        "sha256": "b7017013a04aef77a980f456af53840de678da7466f1d3444cdc03f837b8e375",
+        "bytes": 3851942
+      },
+      ".config": {
+        "sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+        "bytes": 128445
+      }
+    },
+    "image_header": {
+      "text_offset": 524288,
+      "image_size": 16490496,
+      "flags": 10
+    },
+    "kernel_release": "4.9.337-g72940eb733af",
+    "required_linked_symbols": [
+      "mt8163_legacy_affinity_info",
+      "mt_kexec_secondary_off_gate",
+      "mt_psci_cpu_kill",
+      "spm_mtcmos_secondary_off_bounded",
+      "spm_mtcmos_secondary_off_check",
+      "psci_ops"
+    ],
+    "kill_calls_bounded_off": true,
+    "final_gate_calls_off_state_check": true,
+    "legacy_callback_uses_selected_conduit": true,
+    "handoff_gate_wired": false,
+    "hardware_qualified": false,
+    "handoff_admitted": false
+  },
+  "source_admission_controls": {
+    "scope": "Actual artifact admission fault controls; temporary metadata copies only",
+    "cases": [
+      {
+        "case": "matched-overlay",
+        "passed": true
+      },
+      {
+        "case": "reject-corrupt-psci.c",
+        "passed": true
+      },
+      {
+        "case": "reject-corrupt-bounded_secondary_off.h",
+        "passed": true
+      },
+      {
+        "case": "reject-corrupt-.config",
+        "passed": true
+      },
+      {
+        "case": "reject-corrupt-mtk_boot_common.c",
+        "passed": true
+      },
+      {
+        "case": "reject-output-inside-original-source",
+        "passed": true
+      }
+    ],
+    "kernel_compiles_started": 0,
+    "hardware_execution": false
+  },
+  "patch_check": {
+    "scope": "Combined patch dry-run against original pinned source",
+    "patch_applies_cleanly": true,
+    "original_source_unchanged": true,
+    "patch_sha256": "deb946cfb50e41a956b7fb10a80e050be2358753f072e08bca3f6b4cb43ac518",
+    "hardware_execution": false
+  },
+  "compiler": {
+    "compiler": "aarch64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "bit_reproducibility_qualified": false,
+    "build_timestamp_and_identity_metadata_frozen": false,
+    "hardware_execution": false
+  },
+  "enum_abi_controls": [
+    {
+      "scope": "ARM64 compiler ABI static assertions for existing boot-mode enum",
+      "enum_width_matches_unsigned_int": true,
+      "enum_underlying_type_compatible_with_unsigned_int": true,
+      "behavior_body_unchanged": true,
+      "module_crc_compatibility_qualified": false,
+      "hardware_execution": false
+    },
+    {
+      "scope": "Actual metadata-port enum extracted from pinned header; ARM64 compiler static assertions",
+      "enum_width_matches_unsigned_int": true,
+      "enum_underlying_type_compatible_with_unsigned_int": true,
+      "behavior_body_unchanged": true,
+      "module_crc_compatibility_qualified": false,
+      "hardware_execution": false
+    },
+    {
+      "scope": "Actual display-status enum from pinned primary header; ARM64 compiler static assertions",
+      "enum_width_matches_int": true,
+      "enum_underlying_type_compatible_with_int": true,
+      "function_bodies_unchanged": true,
+      "module_crc_compatibility_qualified": false,
+      "hardware_execution": false
+    }
+  ],
+  "historical_failed_builds": [
+    {
+      "log": "build-private.log",
+      "sha256": "25b519f8f48352fec599b18d99474299e0d1edda3a832df2d99330047ab1cd7d",
+      "errors": [
+        "sound/soc/mediatek/mt_soc_audio_8163/mt_soc_pcm_dl1_bt.c:241:9: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]",
+        "drivers/misc/mediatek/base/power/mt8163/mt_cpufreq.c:1646:9: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]"
+      ]
+    },
+    {
+      "log": "continuation-build-private.log",
+      "sha256": "c2ba53c8d866e43e9ee6d52931dca6431f188cde165c5400126c84a6fa088c99",
+      "errors": [
+        "drivers/misc/mediatek/boot/mtk_boot_common.c:118:14: error: conflicting types for \u2018get_boot_mode\u2019 due to enum/integer mismatch; have \u2018unsigned int(void)\u2019 [-Werror=enum-int-mismatch]"
+      ]
+    },
+    {
+      "log": "continuation2-build-private.log",
+      "sha256": "c5c7354ab68376bde6dcda15b88ce0106adc21e89c43e20c62c11709cfea0f5d",
+      "errors": [
+        "drivers/misc/mediatek/boot/mtk_boot.c:88:14: error: conflicting types for \u2018get_meta_com_type\u2019 due to enum/integer mismatch; have \u2018unsigned int(void)\u2019 [-Werror=enum-int-mismatch]"
+      ]
+    },
+    {
+      "log": "continuation3-build-private.log",
+      "sha256": "d4171316e59f2b1a84c204583c06c614b14f27a3c5d4897c6348b97be63bc20a",
+      "errors": [
+        "drivers/misc/mediatek/hwmon/batchsen/batch.c:130:27: error: this \u2018else\u2019 clause does not guard... [-Werror=misleading-indentation]"
+      ]
+    },
+    {
+      "log": "continuation4-build-private.log",
+      "sha256": "7c10b65d0beb3a81802bb2ebc6b204462800e906c53e0014f0a84cc8a4b8c368",
+      "errors": [
+        "drivers/misc/mediatek/usb20/musb_gadget_ep0.c:340:41: error: this \u2018if\u2019 clause does not guard... [-Werror=misleading-indentation]",
+        "drivers/misc/mediatek/video/mt8163/videox/debug.h:49:12: error: conflicting types for \u2018DAL_Clean\u2019 due to enum/integer mismatch; have \u2018int(void)\u2019 [-Werror=enum-int-mismatch]",
+        "drivers/misc/mediatek/video/mt8163/videox/debug.h:50:12: error: conflicting types for \u2018DAL_Printf\u2019 due to enum/integer mismatch; have \u2018int(const char *, ...)\u2019 [-Werror=enum-int-mismatch]"
+      ]
+    }
+  ],
+  "retained_archive": {
+    "bytes": 15928406,
+    "sha256": "5b168b1c3eea28e9c25053d5a68cea7287a20e021da8a0a279a82b36befe4f37",
+    "local_copy_hash_verified": true,
+    "all_archived_files_hash_verified": true,
+    "files": {
+      "build/arch/arm64/boot/Image": {
+        "sha256": "3df1bd6cd206b102b20c302b976db85a4103bdbad9e7e88c1f2f2ce45caf292b",
+        "bytes": 15266304
+      },
+      "build/vmlinux": {
+        "sha256": "6ddb4f0161c08cd20db4e32fac72acc7b42a0fcb65cec7bc700540729e892975",
+        "bytes": 20695744
+      },
+      "build/System.map": {
+        "sha256": "b7017013a04aef77a980f456af53840de678da7466f1d3444cdc03f837b8e375",
+        "bytes": 3851942
+      },
+      "build/.config": {
+        "sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+        "bytes": 128445
+      },
+      "build/include/generated/compile.h": {
+        "sha256": "187af8646d47368db2138684ad990712f750fc66fb01bbfe47f98bdac67d05d4",
+        "bytes": 306
+      },
+      "source-manifest.json": {
+        "sha256": "4fbbd00aa18a3bcfea70ec6629173bc09a2d59613518e294bcbe88772fabb60c",
+        "bytes": 4386
+      },
+      "linked-verification.json": {
+        "sha256": "8b160de510444e4bd919cfea1c702eb64e9d20f1320aada370bc4460fe3fffbf",
+        "bytes": 1233
+      },
+      "admission-controls.json": {
+        "sha256": "f5a9c7b40c65116fba65a8af6898d3b66b4f877ab038155074a3918b73b4b641",
+        "bytes": 646
+      },
+      "combined-source.patch": {
+        "sha256": "deb946cfb50e41a956b7fb10a80e050be2358753f072e08bca3f6b4cb43ac518",
+        "bytes": 18915
+      },
+      "compiler-info.json": {
+        "sha256": "d7deb796130c51566e3b8b5ac6d9820816da0f0cadece091b3452aff1b10c17d",
+        "bytes": 212
+      },
+      "bootmode-abi-control.json": {
+        "sha256": "e32499b51b4c9f55f6441fb152384ccb37b6b0a7cd776a7ead1af865c1f0a081",
+        "bytes": 284
+      },
+      "metatype-abi-control.json": {
+        "sha256": "07c5bbd1f549b2500dc9c3af7beb98aafc7ca872aeb41530f05efd69c0f16008",
+        "bytes": 308
+      },
+      "dal-abi-control.json": {
+        "sha256": "23927166d81781d39ad3c3cba61f7c2a25fb8314aabec9ef703c4f1b49085092",
+        "bytes": 291
+      },
+      "build-result.json": {
+        "sha256": "c2237fed37ec0ca49100c7c0d2c2f228618a36066e537de39e8cc16b7f67f755",
+        "bytes": 957
+      },
+      "continuation-build-result.json": {
+        "sha256": "a5554b39a12d1c4cb57131bfa00d2123d3f990dbe5f5557d140a639922d26dc6",
+        "bytes": 627
+      },
+      "continuation2-build-result.json": {
+        "sha256": "d70dc39e1ca38b8fbe1f4d86bb55bbe1514342a95cc4049460505bd43804feaa",
+        "bytes": 556
+      },
+      "continuation3-build-result.json": {
+        "sha256": "656558c7f87a9247e94ccb85c7d90e141367d579fd40268900dd41b1728c6d9e",
+        "bytes": 578
+      },
+      "continuation4-build-result.json": {
+        "sha256": "3216e4550614da0a1f37e1032478b33243560d5dc94b7a5123d01722bbc3e1b1",
+        "bytes": 572
+      },
+      "continuation5-build-result.json": {
+        "sha256": "e37192259923bf2e68eb8ab00e873d0ca018a58e650f182d4ea2bce2b093f95a",
+        "bytes": 650
+      },
+      "build-private.log": {
+        "sha256": "25b519f8f48352fec599b18d99474299e0d1edda3a832df2d99330047ab1cd7d",
+        "bytes": 90210
+      },
+      "continuation-build-private.log": {
+        "sha256": "c2ba53c8d866e43e9ee6d52931dca6431f188cde165c5400126c84a6fa088c99",
+        "bytes": 12031
+      },
+      "continuation2-build-private.log": {
+        "sha256": "c5c7354ab68376bde6dcda15b88ce0106adc21e89c43e20c62c11709cfea0f5d",
+        "bytes": 18700
+      },
+      "continuation3-build-private.log": {
+        "sha256": "d4171316e59f2b1a84c204583c06c614b14f27a3c5d4897c6348b97be63bc20a",
+        "bytes": 32097
+      },
+      "continuation4-build-private.log": {
+        "sha256": "7c10b65d0beb3a81802bb2ebc6b204462800e906c53e0014f0a84cc8a4b8c368",
+        "bytes": 38132
+      },
+      "continuation5-build-private.log": {
+        "sha256": "1c15ca01989187b68bd872f17ea4a29da4a4c0e8b9076351b0bc8895a48b51dd",
+        "bytes": 4758
+      }
+    }
+  },
+  "local_host_tests": {
+    "run": 63,
+    "skipped": 1,
+    "failures": 0
+  },
+  "boot_image_packaged": false,
+  "hardware_execution": false,
+  "handoff_gate_wired": false,
+  "handoff_admitted": false,
+  "remaining": [
+    "Final gate while CPU hotplug stays serialized through relocation",
+    "Partial-shutdown recovery with independent attributable logs",
+    "Source-memory ownership and cache/MMU/EL protocol",
+    "Device/DMA/filesystem quiescing",
+    "Target early/failure log capture and retained-memory ownership/readout",
+    "Full candidate boot and module ABI qualification"
+  ]
+}

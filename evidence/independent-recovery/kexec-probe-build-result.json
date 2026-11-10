@@ -1,0 +1,80 @@
+{
+  "scope": "Linux-to-Linux stage1 no-handoff compatibility probe, offline build complete",
+  "build": {
+    "scope": "Offline no-handoff probe build; six exact source-object CRC providers, no complete kernel image",
+    "kernel_commit": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+    "baseline_config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "resolved_config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "config_option_differences": 0,
+    "compiler": "aarch64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "provider_object_sha256": {
+      "kernel/printk/printk.o": "78d20963b625963efe2250b4d884680ee57f273f48b0579920cd2a1edc3bbf3c",
+      "kernel/kallsyms.o": "828668779206d88eb6bcafa867802cd6f87260c547fbc3e3d8ecc33a9424df72",
+      "kernel/module.o": "36dceaab11441bfd86cf39c23e420466e3721c2f1bacd95ecfbebf254df58572",
+      "init/version.o": "cc8acb60c55eab153f7eb753a96ca6481d87c8fa552ecee0826849694c9002e0",
+      "kernel/cpu.o": "25694d20dc7fdd502784add1d65b43af22ed2e4d47564dada570073d6e9f01ed",
+      "lib/hweight.o": "13512dc5312d97d3ace91598a1fdca0d02e2866b115f0e147928d063bbeda58d"
+    },
+    "provider_crc": {
+      "__cpu_online_mask": "921b07b1",
+      "__sw_hweight64": "9f46ced8",
+      "init_uts_ns": "01b103c6",
+      "kallsyms_lookup_name": "e007de41",
+      "module_layout": "aa15a19a",
+      "printk": "27e1a049"
+    },
+    "probe_source_sha256": "256f9b61d56e5b0c84d0a6e8145c5c0be427e723984939f10a111e970acdf168",
+    "module_sha256": "371fe33c9b98515cac131f4c03a4208486aada660146b8b66ac41d44e7c3e889",
+    "loaded_on_tablet": false,
+    "target_runtime_abi_verified": false,
+    "handoff_attempted": false,
+    "physical_test_admitted": false
+  },
+  "artifact_verification": {
+    "scope": "Compiled probe import/release/source-generated CRC verification; not hardware execution",
+    "module_sha256": "371fe33c9b98515cac131f4c03a4208486aada660146b8b66ac41d44e7c3e889",
+    "bytes": 6144,
+    "vermagic": "4.9.337-g72940eb733af SMP preempt mod_unload modversions aarch64",
+    "imports": [
+      "__cpu_online_mask",
+      "__sw_hweight64",
+      "init_uts_ns",
+      "kallsyms_lookup_name",
+      "printk"
+    ],
+    "versioned_symbols": [
+      "__cpu_online_mask",
+      "__sw_hweight64",
+      "init_uts_ns",
+      "kallsyms_lookup_name",
+      "module_layout",
+      "printk"
+    ],
+    "all_required_crcs_match_provider": true,
+    "target_release": "4.9.337-g72940eb733af",
+    "current_twrp_compatible": false,
+    "loaded_on_tablet": false,
+    "handoff_attempted": false,
+    "target_runtime_abi_verified": false,
+    "physical_test_admitted": false
+  },
+  "disassembly": {
+    "scope": "Actual compiled probe disassembly: read CurrentEL only; external calls separately allowlisted",
+    "instructions": 40,
+    "mrs_count": 1,
+    "forbidden_privileged_write_or_handoff_opcodes": [],
+    "module_sha256": "371fe33c9b98515cac131f4c03a4208486aada660146b8b66ac41d44e7c3e889",
+    "hardware_execution": false
+  },
+  "source_download": {
+    "commit": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+    "url": "https://codeload.github.com/amazon-oss/android_kernel_amazon_mt8163/tar.gz/72940eb733af8df948cc216cb977cd8be9cba5a9",
+    "bytes": 153846525,
+    "sha256": "cef365b5ae5d2d337a72b904f79f05347dba8501b438b5771d8dca175ab4d225"
+  },
+  "negative_and_runtime_boundary_tests": 13,
+  "runtime_runner_defaults_to_preflight": true,
+  "module_loaded_on_tablet": false,
+  "owner_test_approval_recorded": false,
+  "kernel_handoff_admitted": false
+}

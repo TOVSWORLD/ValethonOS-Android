@@ -1,0 +1,31 @@
+{
+  "scope": "Offline source/live symbol-name compatibility screen, not module ABI or runtime acceptance",
+  "upstream_commit": "4ba956fd60b29d2fea324515596b392afdcfa2c5",
+  "source_files_verified": 21,
+  "dynamic_symbol_presence": {
+    "__flush_dcache_area": true,
+    "__hyp_set_vectors": true,
+    "cpu_do_switch_mm": true,
+    "cpu_hotplug_enable": true,
+    "kernel_restart_prepare": true,
+    "machine_shutdown": true,
+    "migrate_to_reboot_cpu": true
+  },
+  "kallsyms_lookup_name_export_symbol_present": true,
+  "default_cpu_mode_probe_references_missing_symbol": true,
+  "upstream_stuck_cpu_check_is_stubbed": true,
+  "matching_recovery_build_configuration_established": false,
+  "module_abi_qualified": false,
+  "module_load_admitted": false,
+  "handoff_admitted": false,
+  "target_kernel_logging_qualified": false,
+  "device_written": false,
+  "next": "Resolve exact recovery source/config ABI; build a non-handoff compatibility probe before porting the loader. Do not load unchanged upstream module.",
+  "live_recovery_log_capture": {
+    "bytes": 130938,
+    "sha256": "288c8ae3074124b80f2f9353fda4a7ca37396c586fda9acd63d4a209ea227939",
+    "transport": "existing recovery ADB exec-out dmesg",
+    "qualifies_target_kernel": false
+  },
+  "upstream_source": "https://github.com/fabianishere/kexec-mod/tree/4ba956fd60b29d2fea324515596b392afdcfa2c5"
+}
