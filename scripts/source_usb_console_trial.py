@@ -52,9 +52,19 @@ class SourceCapture:
     def collect(self):
         if self.process is None:return {'source_console_proven':False}
         stdout,stderr=self.process.communicate(timeout=255)
-        result=json.loads(stdout.splitlines()[-1])
-        if result.get('capture_bytes',0):
+        lines=stdout.splitlines()
+        result=json.loads(lines[-1]) if lines else {'collector_receipt_missing':True}
+        if result.get('capture_bytes',0) or result.get('collector_receipt_missing'):
             raw=self.d.host(['cat',self.remote+'/source-console-private.bin'],timeout=30).stdout
+            if result.get('collector_receipt_missing'):
+                expected=marker(self.trial);phases=raw.split(expected,1)[1] if expected in raw else b''
+                result.update(capture_bytes=len(raw),capture_sha256=digest(raw),source_console_proven=expected in raw,
+                              init_reboot_route_seen=b'KXHANDOFF init_reboot_route=1 kexec_requested=1' in phases,
+                              starting_new_kernel_seen=b'Starting new kernel' in phases,
+                              final_cpu_gate_seen=b'KXHANDOFF final_cpu_gate=passed survivor=0' in phases)
+                # Obtain an independent host digest before accepting a salvaged copy.
+                code='import hashlib,pathlib;print(hashlib.sha256(pathlib.Path('+repr(self.remote+'/source-console-private.bin')+').read_bytes()).hexdigest())'
+                if self.d.host(['python3','-c',code],timeout=30).stdout.strip().decode()!=digest(raw):raise ValueError('Salvaged source capture copy differs')
             if digest(raw)!=result['capture_sha256']:raise ValueError('Source capture copy differs')
             f=self.output/'source-console-private.bin';f.write_bytes(raw);f.chmod(0o600)
         return result

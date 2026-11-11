@@ -10,6 +10,8 @@ from prepare_source_acm_hold import prepare
 import test_usb_console_jump as jump_fixture
 from test_usb_console_jump import Fake,Process,runner,CFG
 import run_source_usb_trial as driver
+import capture_source_usb_console as source_receiver
+from source_usb_console_trial import SourceCapture
 
 class Packaging(unittest.TestCase):
  def boot(self,args=b'console=ttyMT0 original=1'):
@@ -26,8 +28,15 @@ class Packaging(unittest.TestCase):
  def test_target_replaces_only_reviewed_source_prefix(self):
   prefix,args=usb_bootargs(PREFIX+b'console=ttyMT0 original=1','1'*32)
   self.assertEqual(args,b'console=ttyMT0 original=1');self.assertEqual((prefix+args).count(b'console=ttyGS0'),1)
-  for args in [b'g_serial.ft_bind=1',b'console=ttyMT0 console=ttyGS0',PREFIX+PREFIX+b'foo']:
+  for args in [b'g_serial.ft_bind=1',b'console=ttyMT0 console=ttyGS1',PREFIX+PREFIX+b'foo']:
    with self.assertRaises(ValueError):usb_bootargs(args,'1'*32)
+ def test_bootloader_prefix_preserves_every_other_argument_and_spacing(self):
+  source=b'loader=1  console=ttyGS0 console=ttyMT0 original=1'
+  prefix,args=usb_bootargs(source,'1'*32)
+  self.assertEqual(args,b'loader=1  console=ttyMT0 original=1')
+  self.assertEqual((prefix+args).count(b'console=ttyGS0'),1)
+  for bad in [b'loader=1 console=ttyGS00',b'loader=1 console=ttyGS0 console=ttyGS0',b'loader=1 g_serial.ft_bind=1 console=ttyGS0']:
+   with self.assertRaises(ValueError):usb_bootargs(bad,'1'*32)
  def test_hold_source_is_exact_and_retains_restore(self):
   source=Path('projects/firetabs-android/usb-live-capture/acm_trial.c').read_text();out=prepare(source)
   self.assertIn('static int restore(int owned)',out);self.assertNotIn('kernel_frame',out)
@@ -53,6 +62,20 @@ class ActualFd(unittest.TestCase):
   r,_=self.capture([b'KXHANDOFF final_cpu_gate=passed survivor=0\n',marker('2'*32),marker('1'*32)],marker('1'*32))
   self.assertFalse(r['final_cpu_gate_seen'])
   r,c=self.capture([marker('2'*32)],marker('1'*32));self.assertFalse(r['source_console_proven']);self.assertEqual(c,[])
+ def test_disconnected_tty_restore_keeps_capture_receipt(self):
+  master,slave=pty.openpty();self.addCleanup(os.close,master);self.addCleanup(os.close,slave)
+  chosen={'path':os.ttyname(slave),'rdev':os.fstat(slave).st_rdev}
+  with tempfile.TemporaryDirectory() as tmp,patch.object(Path,'glob',return_value=[Path('ttyACM0')]),patch.object(source_receiver,'identity',return_value=chosen),patch.object(source_receiver,'open_serial',return_value=os.dup(slave)),patch.object(source_receiver.termios,'tcsetattr',side_effect=[None,source_receiver.termios.error(5,'disconnected')]),patch.object(source_receiver,'read_console',return_value={'source_console_proven':True,'capture_bytes':0}):
+   out=Path(tmp)/'capture';r=source_receiver.capture({'trial':'1'*32,'physical_path':'1-2','vendor':'1949','product':'0338'},out)
+   self.assertTrue(r['tty_restore_unconfirmed']);self.assertTrue(r['source_console_proven']);self.assertTrue((out/'result.json').exists())
+ def test_missing_collector_receipt_salvages_and_hash_verifies_raw_capture(self):
+  raw=marker('1'*32)+b'\nsource bytes\n'
+  class Device:
+   def host(self,args,**kwargs):
+    return SimpleNamespace(stdout=raw if args[0]=='cat' else (hashlib.sha256(raw).hexdigest()+'\n').encode())
+  with tempfile.TemporaryDirectory() as tmp:
+   c=SourceCapture(Device(),'/lab',{},'1'*32,'1-2',Path(tmp));c.process=SimpleNamespace(communicate=lambda **kw:(b'',b'disconnected'))
+   r=c.collect();self.assertTrue(r['collector_receipt_missing']);self.assertTrue(r['source_console_proven']);self.assertEqual((Path(tmp)/'source-console-private.bin').read_bytes(),raw)
 
 class Ordering(unittest.TestCase):
  setUp=jump_fixture.Tests.setUp

@@ -1,5 +1,15 @@
 # Next test: source shutdown and target USB console in one trial
 
+> Completed trial, November 10, 2026: source boot passed and original boot was
+> restored on flash. A fresh USB kernel-console challenge passed before loading;
+> one load verified and one jump was requested. Source capture retained 20,957
+> bytes proving Android init received the exact target and entered shutdown.
+> No kernel-handoff checkpoint or target USB console was observed. The source
+> collector's final receipt failed; the raw bytes were separately preserved and
+> hash-verified. Physical return and post-return verification are pending.
+> [Actual runtime receipt](../../evidence/independent-recovery/source-usb-handoff-runtime-result.json).
+> This trial's approval is consumed. The preparation and procedure below are history.
+
 November 10, 2026. Prepared; not executed. The previous target-only USB trial
 loaded once and requested one jump. The source USB disappeared; no target USB
 endpoint appeared in five minutes. The owner recovered from a black screen by

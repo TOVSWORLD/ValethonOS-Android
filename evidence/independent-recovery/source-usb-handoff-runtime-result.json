@@ -1,0 +1,94 @@
+{
+  "status": "Source USB console captured init shutdown; target absent; physical return pending",
+  "date": "2026-11-10",
+  "source_boot": {
+    "complete": true,
+    "candidate_write_attempts": 1,
+    "restore_write_attempts": 1,
+    "reboot_requests": 1,
+    "native_kernel_running": true,
+    "original_boot_restored": true,
+    "normal_shell_restored": true,
+    "recovery_written": false
+  },
+  "jump": {
+    "scope": "native-usb-source-target-console-jump-1",
+    "runner_sha256": "0778379cf2985d46848054abf4aaa2be9c28b9584a9ba8f267ded68f3ff22e58",
+    "manifest_sha256": "575841ff8aed605c73bcf5d66851e403d7fe71a7b754208db4e6bc31f9c95778",
+    "target_image_sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+    "native_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "source_console_proven_before_load": true,
+    "native_load_verified": true,
+    "load_attempts": 1,
+    "unload_attempts": 0,
+    "jump_requests": 1,
+    "complete": false,
+    "target_entry_proven": false,
+    "original_boot_verified_before_jump": true,
+    "recovery_verified_before_jump": true,
+    "boot_written": false,
+    "recovery_written": false,
+    "source_capture_collection_failure": "IndexError"
+  },
+  "source_capture": {
+    "capture_bytes": 20957,
+    "capture_sha256": "a44e06a9d2c1c6cc155aa1f42de4bccaafa0b511b524bdcd1717eb95a8a765f8",
+    "verified_copy": true,
+    "fresh_source_marker": true,
+    "bytes_after_marker": 12619,
+    "init_reboot_route_seen": false,
+    "starting_new_kernel_seen": false,
+    "final_cpu_gate_seen": false,
+    "normal_collector_finalization_failed": true,
+    "android_init_received_requested_target": true,
+    "android_init_entered_shutdown": true,
+    "kernel_handoff_entry_unproven": true
+  },
+  "target_capture": {
+    "scope": "Target kernel USB console; no boot/flash/device-write commands",
+    "complete": false,
+    "endpoint_selected": false,
+    "target_marker_received": false,
+    "target_entry_proven": false,
+    "normal_android_boot_qualified": false,
+    "device_commands_sent": false,
+    "failure_kind": "TimeoutError",
+    "failure_stage": "waiting_for_target_usb",
+    "usb_port_event_count": 2,
+    "usb_port_observer": "Best-effort selected-port metadata polls; no serial strings"
+  },
+  "usb_trace_summary": {
+    "source_disconnected": true,
+    "target_not_observed": true
+  },
+  "preparation_correction": {
+    "scope": "source-usb-two-stage-trial-1",
+    "correction": "Bootloader prepends arguments before the controlled source console token; remove exactly that token without changing any remaining byte or argument order",
+    "builder_previous_sha256": "59cd41c75519ee7c50c95c333b87fd7d92e33e0ae0e05dfd32a599cfb0c96d80",
+    "builder_current_sha256": "8c0fa3c0f2d9c853245facd71c647c26b9f986bd6d4bbd37852bf4b9ad41ff6d",
+    "source_boot_not_repeated": true,
+    "previous_loads": 0,
+    "previous_jumps": 0,
+    "maximum_remaining_loads": 1,
+    "maximum_remaining_jumps": 1,
+    "regression_checks_passed": 28,
+    "manifest_sha256": "575841ff8aed605c73bcf5d66851e403d7fe71a7b754208db4e6bc31f9c95778"
+  },
+  "post_trial_collector_fix": {
+    "disconnect_restore_error_preserves_receipt": true,
+    "missing_receipt_salvages_and_independently_verifies_raw": true,
+    "regression_controls_passed": 30,
+    "hardware_trial_repeated": false
+  },
+  "return_status": {
+    "owner_return_requested": true,
+    "adb_transport_absent_at_last_host_check": true,
+    "post_return_original_boot_config_recovery_not_yet_verified": true
+  },
+  "limits": [
+    "Captured source bytes prove Android init received the exact target and began shutdown; they do not establish kernel_kexec or a failed phase",
+    "Target entry remains unproven; no target console appeared in 300 seconds",
+    "Collector final receipt failed; raw source capture was separately retained, fsynced and hash-verified",
+    "The one source boot and one jump budget is consumed; no automatic retry"
+  ]
+}

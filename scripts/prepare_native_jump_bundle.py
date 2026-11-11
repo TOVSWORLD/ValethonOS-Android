@@ -13,7 +13,15 @@ META=0x42000000
 ENTRY=0x42018000
 
 def usb_bootargs(oldargs,token):
- if oldargs.startswith(b'console=ttyGS0 '):oldargs=oldargs[len(b'console=ttyGS0 '):]
+ # The bootloader can put its own arguments before the boot-header cmdline.
+ # Remove exactly the controlled console token wherever that header was joined;
+ # retain every other byte, including spacing and argument order.
+ matches=list(re.finditer(rb'(?<!\S)console=ttyGS0(?= |$)',oldargs))
+ if len(matches)>1:raise ValueError('Duplicate source USB console arguments')
+ if matches:
+  match=matches[0];end=match.end()
+  if end<len(oldargs):end+=1
+  oldargs=oldargs[:match.start()]+oldargs[end:]
  if b'g_serial.' in oldargs or b'console=ttyGS' in oldargs:raise ValueError('Unreviewed source USB console parameters')
  prefix=('console=ttyGS0 g_serial.ft_bind=1 g_serial.ft_trial='+token+' ').encode()
  if len(prefix+oldargs)>=1024:raise ValueError('Conservative kernel bootargs capacity exceeded')

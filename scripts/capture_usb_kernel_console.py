@@ -73,7 +73,7 @@ def capture(profile,out):
   if fd is not None:
    try:
     if old is not None:termios.tcsetattr(fd,termios.TCSANOW,old)
-   except OSError:result['tty_restore_unconfirmed']=True
+   except (OSError,termios.error):result['tty_restore_unconfirmed']=True
    os.close(fd)
   result['usb_port_event_count']=len(events);result['usb_port_observer']='Best-effort selected-port metadata polls; no serial strings'
   with (out/'usb-port-events-private.json').open('w') as h:os.fchmod(h.fileno(),0o600);json.dump(events,h,indent=2);h.flush();os.fsync(h.fileno())

@@ -1,4 +1,28 @@
-# Current state — source shutdown capture prepared, November 10, 2026
+# Current state — source shutdown captured; owner return pending, November 10, 2026
+
+The source-plus-target trial ran. Source boot passed and original boot was
+restored/read back on flash. A fresh kernel-only USB marker arrived before
+loading. One native load verified and one jump was requested. Source capture
+retained 20,957 bytes, including Android init receiving the exact kexec target
+and entering shutdown. No kernel-handoff checkpoint or target USB console was
+observed. The five-minute target wait ended; no retry was made. Collector final
+receipt failed, but the raw source file was separately preserved and hash-verified.
+
+The bootloader placed the source-console argument after its own parameters;
+the initial builder refused before any load. Position handling was corrected
+without changing remaining arguments, Image or layout; source boot was not
+repeated. Separate disconnect/final-receipt robustness fixes pass controls and
+have not triggered another hardware test. Thirty focused Python controls pass.
+
+Owner physical return was requested; post-return boot/config/recovery verification
+is pending. Keep target entry and independent return unqualified. Next: verify
+return, then examine source-console buffering/verbosity and USB teardown around
+the missing kernel-route messages before selecting another discriminating test.
+Do not repeat this experiment unchanged or claim a failed phase from silence.
+
+[Actual receipt and capture limits](../../evidence/independent-recovery/source-usb-handoff-runtime-result.json).
+
+# Historical state — source shutdown capture prepared, November 10, 2026
 
 The target-only USB trial finished: source boot passed, original flash restored,
 one native load verified and one jump requested. Source USB disconnected; no

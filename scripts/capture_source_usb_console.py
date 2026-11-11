@@ -64,7 +64,7 @@ def capture(profile,out):
         if fd is not None:
             try:
                 if old is not None:termios.tcsetattr(fd,termios.TCSANOW,old)
-            except OSError:pass
+            except (OSError,termios.error):result['tty_restore_unconfirmed']=True
             os.close(fd)
         (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
         (out/'result.json').chmod(0o600)
