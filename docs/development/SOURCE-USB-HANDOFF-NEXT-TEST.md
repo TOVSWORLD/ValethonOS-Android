@@ -6,7 +6,9 @@
 > bytes proving Android init received the exact target and entered shutdown.
 > No kernel-handoff checkpoint or target USB console was observed. The source
 > collector's final receipt failed; the raw bytes were separately preserved and
-> hash-verified. Physical return and post-return verification are pending.
+> hash-verified. Owner-assisted return and original boot/config/recovery were
+> verified November 11; normal ADB was restored. Work is now paused at owner
+> request. [Resume checkpoint](FIRETABS-RESUME-2026-11-11.md).
 > [Actual runtime receipt](../../evidence/independent-recovery/source-usb-handoff-runtime-result.json).
 > This trial's approval is consumed. The preparation and procedure below are history.
 

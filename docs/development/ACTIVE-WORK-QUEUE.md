@@ -1,4 +1,20 @@
-# Current state — source shutdown captured; owner return pending, November 10, 2026
+# Paused checkpoint — verified return and offline capture audit, November 11, 2026
+
+Paused at owner request for a gear switch. Android boot complete, original full
+boot/config, unchanged recovery and normal unprivileged ADB were verified after
+hard-boot return. No new hardware trial or background operation is running.
+Latest capture proves init entered shutdown; target entry remains unproven.
+
+Offline audit found a concrete FunctionFS path that can unregister the entire
+ADB+ACM gadget when ADB closes, an 8 KB lossy console buffer, and a potential
+completion-ordering race needing reproduction. None proves the hang location.
+No new kernel patch, build or test is ready. Resume the audit before choosing a
+small follow-up; prior trial approvals are consumed. Earlier pending-return and
+readiness statements below are historical.
+
+[Full resume checkpoint, evidence and remaining work](FIRETABS-RESUME-2026-11-11.md).
+
+# Historical state — source shutdown captured; owner return pending, November 10, 2026
 
 The source-plus-target trial ran. Source boot passed and original boot was
 restored/read back on flash. A fresh kernel-only USB marker arrived before

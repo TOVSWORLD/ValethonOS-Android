@@ -1,5 +1,5 @@
 {
-  "status": "Source USB console captured init shutdown; target absent; physical return pending",
+  "status": "Source USB console captured init shutdown; target absent; owner-assisted original-state return verified",
   "date": "2026-11-10",
   "source_boot": {
     "complete": true,
@@ -81,14 +81,19 @@
     "hardware_trial_repeated": false
   },
   "return_status": {
-    "owner_return_requested": true,
-    "adb_transport_absent_at_last_host_check": true,
-    "post_return_original_boot_config_recovery_not_yet_verified": true
+    "owner_reported_hard_boot_return": true,
+    "verification_date": "2026-11-11",
+    "android_boot_complete": true,
+    "original_boot_verified": true,
+    "original_kernel_config_verified": true,
+    "recovery_unchanged": true,
+    "normal_unprivileged_adb_restored": true
   },
   "limits": [
     "Captured source bytes prove Android init received the exact target and began shutdown; they do not establish kernel_kexec or a failed phase",
     "Target entry remains unproven; no target console appeared in 300 seconds",
     "Collector final receipt failed; raw source capture was separately retained, fsynced and hash-verified",
     "The one source boot and one jump budget is consumed; no automatic retry"
-  ]
+  ],
+  "work_paused_by_owner": "2026-11-11"
 }
