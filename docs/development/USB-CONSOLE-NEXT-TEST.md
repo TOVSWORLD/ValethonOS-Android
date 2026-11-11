@@ -1,5 +1,11 @@
 # USB console: next hardware test
 
+> Historical test: completed November 10, 2026. Source boot passed; the target
+> console did not appear after the one jump. Owner-assisted return to Android
+> home and original boot/config/recovery were verified. That approval is consumed.
+> [Actual result](../../evidence/independent-recovery/usb-console-jump-runtime-result.json).
+> [Current source-plus-target capture test](SOURCE-USB-HANDOFF-NEXT-TEST.md).
+
 November 10, 2026. USB kernel-marker→ACM→host capture already passed on the
 working 4.9 kernel: 390 bytes received and synced. The initial host permission
 failure was fixed; ADB-only and normal adbd restored in both tests. This is an

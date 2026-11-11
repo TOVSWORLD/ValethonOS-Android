@@ -1,4 +1,22 @@
-# Current state — USB console test ready, November 10, 2026
+# Current state — source shutdown capture prepared, November 10, 2026
+
+The target-only USB trial finished: source boot passed, original flash restored,
+one native load verified and one jump requested. Source USB disconnected; no
+target console appeared in five minutes. Target entry remains unproven. Owner
+held Power after a black screen and confirms Android home; original boot/config,
+unchanged recovery and normal ADB verified. Prior approval is consumed.
+
+Next candidate retains the same Image and CPU/relocation code, enabling ttyGS0
+on the source. Before loading, a fresh kernel-only marker must arrive over
+source USB ACM. Capture source shutdown and target enumeration in one bounded
+trial. Offline controls and source-package read-only preflight passed; new
+source-console boot/capture/jump has not run. This needs one new owner-attended
+test approval. USB teardown limits later source-phase visibility; no hang phase
+has been proven. Earlier pending-test statements below are historical.
+
+[Exact next test](SOURCE-USB-HANDOFF-NEXT-TEST.md).
+
+# Historical state — USB console test ready, November 10, 2026
 
 Live kernel→USB serial→host capture is working. Console-enabled native kernel
 built; syscall/CPU gates and builtin console verified in linked Image. Original

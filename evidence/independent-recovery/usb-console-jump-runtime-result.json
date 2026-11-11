@@ -1,0 +1,48 @@
+{
+  "status": "Target USB absent after one jump; owner-assisted stock return verified",
+  "date": "2026-11-10",
+  "source_boot": {
+    "complete": true,
+    "candidate_write_attempts": 1,
+    "restore_write_attempts": 1,
+    "reboot_requests": 1,
+    "native_kernel_running": true,
+    "original_boot_restored": true,
+    "recovery_written": false
+  },
+  "jump": {
+    "runner_sha256": "107486f090234fc8c4f126a930735c6481cd8af1064254380f7902d6991ce268",
+    "manifest_sha256": "5687c0a041ce5e678dcb97b2e133dc891c315a6cb07fd1ce4ac16273b391bd82",
+    "target_image_sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+    "native_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "load_attempts": 1,
+    "unload_attempts": 0,
+    "jump_requests": 1,
+    "native_load_verified": true,
+    "original_boot_verified_before_jump": true,
+    "recovery_verified_before_jump": true,
+    "boot_written": false,
+    "recovery_written": false,
+    "target_entry_proven": false,
+    "complete": false
+  },
+  "usb_observations": {
+    "source_disconnected": true,
+    "target_endpoint_selected": false,
+    "captured_console_bytes": 0,
+    "wait_seconds": 300,
+    "hang_phase_unknown": true
+  },
+  "return_verification": {
+    "owner_reported_black_screen": true,
+    "owner_held_power": true,
+    "owner_home_screen_confirmed": true,
+    "android_boot_complete": true,
+    "original_boot_verified": true,
+    "original_kernel_config_verified": true,
+    "recovery_unchanged": true,
+    "normal_unprivileged_adb_restored": true,
+    "automatic_recovery_qualified": false
+  },
+  "prior_approval_consumed": true
+}

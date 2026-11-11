@@ -12,6 +12,13 @@ IMAGE=0x40080000
 META=0x42000000
 ENTRY=0x42018000
 
+def usb_bootargs(oldargs,token):
+ if oldargs.startswith(b'console=ttyGS0 '):oldargs=oldargs[len(b'console=ttyGS0 '):]
+ if b'g_serial.' in oldargs or b'console=ttyGS' in oldargs:raise ValueError('Unreviewed source USB console parameters')
+ prefix=('console=ttyGS0 g_serial.ft_bind=1 g_serial.ft_trial='+token+' ').encode()
+ if len(prefix+oldargs)>=1024:raise ValueError('Conservative kernel bootargs capacity exceeded')
+ return prefix,oldargs
+
 def sha(b):return hashlib.sha256(b).hexdigest()
 def raw(s):return bytes(int(v,16) for v in s.split())
 def cells(s):
@@ -53,9 +60,7 @@ def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None,target_image=None,usb_li
   oldargs=raw(chosen['bootargs'])
   if not oldargs.endswith(b'\0') or b'\0' in oldargs[:-1]:raise ValueError('Single terminated source bootargs required')
   oldargs=oldargs[:-1]
-  if b'g_serial.' in oldargs or b'console=ttyGS' in oldargs:raise ValueError('Do not layer over existing USB console boot parameters')
-  prefix=('console=ttyGS0 g_serial.ft_bind=1 g_serial.ft_trial='+token+' ').encode()
-  if len(prefix+oldargs)>=1024:raise ValueError('Conservative kernel bootargs capacity exceeded')
+  prefix,oldargs=usb_bootargs(oldargs,token)
   subprocess.run([str(fdtput),'-t','s',str(target),'/chosen','bootargs',(prefix+oldargs).decode('ascii')],check=True)
  after=snapshot(fdtget,target);expected={n:dict(p) for n,p in before.items()};expected['/chosen'][key]=' '.join(format(v,'x') for v in token.encode()+b'\0')
  if target_image is not None:expected['/chosen']['bootargs']=' '.join(format(v,'x') for v in prefix+oldargs+b'\0')
