@@ -1,0 +1,115 @@
+{
+  "status": "Milestone passed: accepted native kexec entry; target absent; owner return pending",
+  "date": "2026-11-12",
+  "milestone_passed": true,
+  "milestone_scope": "kernel_kexec acquired its image mutex and accepted a loaded image on the diagnostic MT8163/PID1 path",
+  "source_boot": {
+    "candidate_write_attempts": 1,
+    "restore_write_attempts": 1,
+    "reboot_requests": 1,
+    "complete": true,
+    "native_kernel_running": true,
+    "original_boot_restored": true,
+    "recovery_written": false
+  },
+  "first_gate": {
+    "load_attempts": 0,
+    "jump_requests": 0,
+    "fresh_host_marker_received": false,
+    "probe_present_in_kernel_log": true,
+    "hold_observed_during_initial_usb_setup": true,
+    "initial_capture_bytes": 8191,
+    "cleanup_initially_unconfirmed": true,
+    "operator_cleanup": {
+      "hold_disabled_and_nonce_cleared": true,
+      "source_still_booted": true,
+      "load_attempts": 0,
+      "jump_requests": 0,
+      "console_level_restored_to_nominal": 7,
+      "previous_level_not_journaled_by_first_controller": true,
+      "no_reboot_or_partition_write": true
+    }
+  },
+  "controller_correction": {
+    "scope": "ffs-native-entry-two-stage-trial-1",
+    "guard_correction": "Arm FunctionFS hold and quieting only after live USB proof; journal settings before writes and poll through USB restoration",
+    "previous_load_attempts": 0,
+    "previous_jump_requests": 0,
+    "source_boot_not_repeated": true,
+    "remaining_loads": 1,
+    "remaining_jumps": 1,
+    "guard_correction_attempt": 1,
+    "previous_manager_sha256": "2b97f779d16859b0e76281071302bf89db213057ba4e3d99873c1a4ff259ab06",
+    "corrected_manager_sha256": "80ea1c22421a0eaa8dcc125d50b54a5c992605aad79f66c68d0bb40f1fb96f01",
+    "focused_checks_passed": 50
+  },
+  "actual_jump": {
+    "scope": "native-usb-source-target-console-jump-1",
+    "runner_sha256": "0778379cf2985d46848054abf4aaa2be9c28b9584a9ba8f267ded68f3ff22e58",
+    "manifest_sha256": "045b9b2c81c3f73689cba07c11e182321c98dbd554bf8b67357e4bc6ce8d60f7",
+    "target_image_sha256": "b999644ae295c8f177c29460469d9ec3e57eeb289658b7f696c1eb4d89e2c287",
+    "native_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "source_console_proven_before_load": true,
+    "native_load_verified": true,
+    "load_attempts": 1,
+    "unload_attempts": 0,
+    "jump_requests": 1,
+    "original_boot_verified_before_jump": true,
+    "recovery_verified_before_jump": true,
+    "boot_written": false,
+    "recovery_written": false,
+    "complete": false,
+    "target_entry_proven": false
+  },
+  "source_capture": {
+    "source_console_proven": true,
+    "capture_bytes": 8600,
+    "capture_sha256": "4744a5fede00e753b1cea363106fc01981489725804f68410eb4058cf27cedab",
+    "end_reason": "disconnect",
+    "capture_fsynced": true,
+    "ffs_last_close_retained": true,
+    "init_reboot_route_seen": true,
+    "native_entry_seen": true,
+    "starting_new_kernel_seen": false,
+    "final_cpu_gate_seen": false,
+    "tty_restore_unconfirmed": true
+  },
+  "source_capture_verified_local_copy": true,
+  "target_capture": {
+    "scope": "Target kernel USB console; no boot/flash/device-write commands",
+    "complete": false,
+    "endpoint_selected": false,
+    "target_marker_received": false,
+    "target_entry_proven": false,
+    "normal_android_boot_qualified": false,
+    "device_commands_sent": false,
+    "failure_kind": "TimeoutError",
+    "failure_stage": "waiting_for_target_usb",
+    "usb_port_event_count": 2,
+    "usb_port_observer": "Best-effort selected-port metadata polls; no serial strings"
+  },
+  "post_return": {
+    "owner_return_requested": true,
+    "original_boot_on_flash_before_jump": true,
+    "verification_pending": true
+  },
+  "qualified": [
+    "Fresh source USB kernel-console capture",
+    "Nonce-bound FunctionFS last-close hold observed on hardware",
+    "Namespace route reached in kernel",
+    "Native kexec image/mutex admission observed"
+  ],
+  "unqualified": [
+    "Completion of device shutdown",
+    "Secondary CPU shutdown and final CPU gate",
+    "Relocation/target entry",
+    "Complete target Android boot",
+    "Independent automatic return"
+  ],
+  "limits": [
+    "Missing post-teardown console messages do not locate a failed phase",
+    "The original printk value was not journaled by the first gate; operator restored a documented nominal level, and the corrected controller now journals before changes",
+    "New kernel/source boot was not repeated; total native loads and jump requests are one each",
+    "Initial guard stopped safely without loading; controller changes used the remaining unused one-jump stage"
+  ]
+}

@@ -53,5 +53,7 @@
     "scripts/pack_native_kexec_boot.py": "23de7b4fe314a2f0de6038dc58cfc4c9afd1a33d74fdf46b5db261eb1b2d9482"
   },
   "fresh_target_manifest_policy": "After source boot and verified original-flash restoration only: fresh source DT/iomem and nonce, fixed Image and original initrd, existing three-segment layout with all memory reservations preserved. Replace only the controlled source ttyGS0 token when forming target prefix; change only chosen bootargs and trial property. Bind resulting manifest/client hashes into the child approval. Require a fresh source USB kernel challenge before any load and helper handoff acknowledgement before the single jump. An offline preview is never loadable.",
-  "maximum_cleanup_unloads": 1
+  "maximum_cleanup_unloads": 1,
+  "trial_status": "consumed_native_entry_proven_2026-11-12",
+  "actual_result": "ffs-native-entry-runtime-result.json"
 }

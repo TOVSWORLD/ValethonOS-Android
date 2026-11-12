@@ -1,4 +1,30 @@
-# Current milestone — native-entry test prepared, November 12, 2026
+# Milestone passed — accepted native kexec entry, November 12, 2026
+
+Host capture positively proves the kernel entered kernel_kexec with its mutex
+acquired and a loaded image accepted. Fresh source USB proof, nonce-bound
+FunctionFS last-close retention, namespace route and the native-entry marker
+were all captured. The 8,600-byte source file was synced and independently
+hash-verified. This passes the requested next milestone beyond init shutdown.
+
+One source boot succeeded; original boot was restored/read back on flash and
+recovery verified unchanged before the one actual load/jump. Initial source
+capture gate failed with zero loads/jumps. Ordering/cleanup corrections passed
+50 controls; the corrected gate passed on the same source boot, then one load
+verified and one jump was requested. No source-boot or jump retry.
+
+The target USB console did not appear in five minutes. Device shutdown, CPU-off,
+relocation and target entry are still unqualified. Do not infer a specific failed
+phase from missing messages after USB teardown. The next engineering interval
+is **after accepted native entry**, rather than init routing or a live logging
+baseline. Independent automatic return is still unqualified.
+
+Owner physical return was requested. Original boot is on flash; post-return
+boot/config/recovery and normal ADB verification are pending. The trial budget
+is consumed. No further load, jump or reboot is running.
+
+[Actual result and limits](../../evidence/independent-recovery/ffs-native-entry-runtime-result.json).
+
+# Historical milestone — native-entry test prepared, November 12, 2026
 
 Resumed at owner request. New diagnostic kernel built and passed linked native
 checks. Default-off nonce-guarded FunctionFS hold addresses the concrete ADB

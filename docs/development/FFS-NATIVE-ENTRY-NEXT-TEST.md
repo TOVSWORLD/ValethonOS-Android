@@ -1,5 +1,24 @@
 # Next milestone: positively observe accepted native kexec entry
 
+> **Milestone passed November 12, 2026.** Host capture contains the fresh
+> FunctionFS retention, namespace-route and accepted native-entry checkpoints.
+> The 8,600-byte source capture was synced and hash-verified. Target USB did not
+> appear in five minutes; CPU shutdown/relocation/target entry remain unproven.
+> Original boot was restored on flash before the one actual jump. Owner return
+> was requested; post-return verification is pending.
+> [Actual result](../../evidence/independent-recovery/ffs-native-entry-runtime-result.json).
+> This trial is consumed. The procedure below is retained as history.
+
+The first capture gate stopped before any load/jump: its probe appeared in the
+kernel log but not the host stream, and the hold had activated during initial
+USB setup. The controller was corrected to arm hold/quieting only **after** live
+USB proof. Cleanup now polls across re-enumeration and journals settings before
+changing them. Operator cleanup disabled/cleared the first hold and restored a
+documented nominal console level; its original value had not been journaled.
+The corrected gate passed on the same booted kernel. Total: one source boot,
+one original-flash restore, one native load and one jump. No source boot or jump
+was repeated. Fifty focused controls passed after the controller correction.
+
 November 12, 2026. Built, linked and checked offline. Read-only tablet preflight
 passed. This new Image, FunctionFS hold and jump have not run on the tablet.
 
@@ -47,9 +66,10 @@ This does not guarantee real-time delivery or independent recovery.
    fixed Image/original initrd, check all memory reservations, and bind the
    resulting manifest/client hashes under the same approval. Do not load the
    offline preview; the runner refuses it.
-3. Arm the nonce-bound FunctionFS hold only in its default unowned state, save
-   printk settings and set level 1. Arm source capture and require a fresh
-   kernel-only USB marker **before loading**. If a check fails, stop without
+3. Arm source capture and require a fresh kernel-only USB marker first. Only
+   after that proof, arm the nonce-bound FunctionFS hold in its default unowned
+   state, journal/save printk settings and set level 1, all **before loading**.
+   If a check fails, stop without
    jumping; the helper restores ADB-only and the controller disables/clears
    its hold and restores printk before unrooting. Do not overwrite foreign state.
 4. Arm target capture, load once, verify loaded state and original flash/recovery

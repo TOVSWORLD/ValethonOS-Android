@@ -152,7 +152,9 @@ class HoldSettings(unittest.TestCase):
    if name=='printk' and value.startswith('1 ') and self.fail_quiet:raise RuntimeError('write failed')
    self.writes.append((name,value));self.values[name]=('Y' if value=='1' else 'N') if name=='ft_hold_adb' else value
    return b''
- def source(self,d):return SourceCapture(d,'/lab',{'functionfs_hold':True},'1'*32,'1-2',Path('/unused'))
+ def source(self,d):
+  t=tempfile.TemporaryDirectory();self.addCleanup(t.cleanup)
+  return SourceCapture(d,'/lab',{'functionfs_hold':True},'1'*32,'1-2',Path(t.name))
  def test_arm_reads_back_hold_nonce_and_quiet_level_then_restores_all_values(self):
   d=self.Device();c=self.source(d);c.arm_ffs_hold()
   self.assertEqual(d.values,{'ft_hold_adb':'Y','ft_hold_trial':'1'*32,'printk':'1 4 1 7'})
@@ -175,3 +177,33 @@ class HoldSettings(unittest.TestCase):
   d=self.Device();c=self.source(d);c.arm_ffs_hold();d.values['ft_hold_trial']='f'*32;before=list(d.writes)
   with self.assertRaises(ValueError):c.restore_settings()
   self.assertEqual(d.writes,before)
+ def test_cleanup_polls_across_read_only_transport_loss(self):
+  class D:
+   def __init__(self):self.reads=0;self.commands=[]
+   def shell(self,cmd,**kw):
+    self.commands.append(cmd)
+    if cmd.startswith('cat '):
+     self.reads+=1
+     if self.reads==1:raise RuntimeError('USB reconnecting')
+     return b'restore_verified errno=0\nfinished errno=0\n'
+    return b''
+  d=D();c=self.source(d);c.folder='/dev/owned';c.helper_maybe_started=True
+  with patch('source_usb_console_trial.time.sleep'):c.abort()
+  self.assertEqual(d.reads,2);self.assertTrue(all(x.startswith(('cat ','test ')) for x in d.commands))
+ def test_settings_journal_precedes_first_setting_change(self):
+  d=self.Device();c=self.source(d);c.arm_ffs_hold()
+  r=json.loads((c.output/'source-settings-private.json').read_text())
+  self.assertEqual(r['previous_printk'],'7 4 1 7');self.assertEqual(r['trial'],'1'*32)
+ def test_hold_is_armed_only_after_fresh_usb_proof(self):
+  class D:
+   args=[]
+   def host(self,args,**kw):return SimpleNamespace(stdout=((('a' if args[-1].endswith('source-acm-hold') else 'b')*64)+' file\n').encode())
+   def adb(self,*args,**kw):pass
+   def shell(self,cmd,**kw):
+    if cmd=='cat /proc/consoles':return b'ttyGS0 -W- (E p) 241:0\n'
+    if cmd.startswith('sha256sum '):return ('a'*64+' file\n').encode()
+    return b''
+  c=self.source(D());c.report.update(helper_sha256='a'*64,receiver_sha256='b'*64);events=[]
+  def arm():self.assertEqual(events[-1],b'SOURCE_CONSOLE_PROVEN')
+  with patch('source_usb_console_trial.subprocess.Popen'),patch.object(c,'line',side_effect=lambda expected,seconds:events.append(expected)),patch.object(c,'arm_ffs_hold',side_effect=arm) as hold:
+   c.start();hold.assert_called_once()

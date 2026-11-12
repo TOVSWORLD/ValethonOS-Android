@@ -1,5 +1,5 @@
 """Source-side USB console proof and capture for one bounded handoff trial."""
-import hashlib,json,os,selectors,shlex,subprocess
+import hashlib,json,os,selectors,shlex,subprocess,time
 from pathlib import Path
 from capture_source_usb_console import marker
 
@@ -21,6 +21,10 @@ class SourceCapture:
         levels=self.d.shell('cat /proc/sys/kernel/printk').split()
         if len(levels)!=4 or any(not value.isdigit() for value in levels):raise ValueError('Unreviewed printk state')
         self.saved_printk=' '.join(str(int(x)) for x in levels)
+        with (self.output/'source-settings-private.json').open('x') as f:
+            os.fchmod(f.fileno(),0o600)
+            json.dump({'trial':self.trial,'previous_printk':self.saved_printk,'hold_initially_disabled':True},f)
+            f.flush();os.fsync(f.fileno())
         # Mark ownership before either write so a partial arm is cleaned up.
         self.ffs_hold_armed=True
         self.d.shell('printf %s '+self.trial+' > '+base+'ft_hold_trial')
@@ -58,7 +62,6 @@ class SourceCapture:
         consoles=self.d.shell('cat /proc/consoles').splitlines()
         if not any(line.startswith(b'ttyGS0 ') and b'E' in line.split(b'(')[-1] for line in consoles):
             raise ValueError('Source ttyGS0 kernel console is not enabled')
-        if self.report.get('functionfs_hold') is True:self.arm_ffs_hold()
         self.folder='/dev/kxusb-acm-'+self.trial
         self.d.shell('mkdir -m 700 '+self.folder)
         self.d.adb('push',self.package+'/source-acm-hold',self.folder+'/hold')
@@ -76,6 +79,9 @@ class SourceCapture:
         payload=b'<0>'+marker(self.trial)+b'\n'
         self.d.shell('printf %s '+shlex.quote(payload.decode())+' > /dev/kmsg')
         self.line(b'SOURCE_CONSOLE_PROVEN',15)
+        # Do not alter FunctionFS lifetime while the initial gadget rebind runs.
+        # Prove the stream first, then arm the hold/quieting for shutdown only.
+        if self.report.get('functionfs_hold') is True:self.arm_ffs_hold()
 
     def intent(self):
         self.d.shell('umask 077; printf %s '+self.trial+' > '+self.folder+'/handoff-intent')
@@ -111,8 +117,16 @@ class SourceCapture:
         # Never force unbind an uncertain owner or issue commands after a jump.
         try:
             if self.folder and self.helper_maybe_started:
-                self.d.adb('wait-for-device',timeout=195)
-                self.d.shell('i=0; while [ "$i" -lt 190 ]; do if grep -q finished '+self.folder+'/receipt; then break; fi; i=$((i+1)); sleep 1; done; test ! -e /config/usb_gadget/g1/configs/b.1/f2; test "$(cat /config/usb_gadget/g1/UDC)" = musb-hdrc',timeout=195)
+                end=time.monotonic()+200
+                while time.monotonic()<end:
+                    try:
+                        receipt=self.d.shell('cat '+self.folder+'/receipt',timeout=5)
+                        if b'finished errno=0' in receipt and b'restore_verified errno=0' in receipt:
+                            self.d.shell('test ! -e /config/usb_gadget/g1/configs/b.1/f2; test "$(cat /config/usb_gadget/g1/UDC)" = musb-hdrc',timeout=5)
+                            break
+                    except RuntimeError:pass # Read-only polling tolerates re-enumeration.
+                    time.sleep(.5)
+                else:raise RuntimeError('ACM restoration not confirmed before deadline')
         finally:
             try:self.restore_settings()
             finally:
