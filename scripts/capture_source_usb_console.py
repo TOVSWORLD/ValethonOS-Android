@@ -30,7 +30,9 @@ def read_console(fd, output, expected, deadline, proof=lambda:None):
     return {'source_console_proven':proven,'capture_bytes':len(data),
             'capture_sha256':hashlib.sha256(data).hexdigest(),'end_reason':reason,
             'capture_fsynced':True,
+            'ffs_last_close_retained':b'KXUSB_FFS trial='+expected.split(b'trial=',1)[1].split(b' ',1)[0]+b' adb_last_close=retained' in phases,
             'init_reboot_route_seen':b'KXHANDOFF init_reboot_route=1 kexec_requested=1' in phases,
+            'native_entry_seen':b'KXHANDOFF native_entry=1 image_present=1' in phases,
             'starting_new_kernel_seen':b'Starting new kernel' in phases,
             'final_cpu_gate_seen':b'KXHANDOFF final_cpu_gate=passed survivor=0' in phases}
 

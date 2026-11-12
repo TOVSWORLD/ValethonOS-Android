@@ -10,7 +10,7 @@ from prepare_native_jump_bundle import prepare
 from build_native_load_client import build
 
 ROOT=Path(__file__).resolve().parents[1]
-POLICY=ROOT/'evidence/independent-recovery/source-usb-two-stage-authorization-template.json'
+POLICY=ROOT/'evidence/independent-recovery/ffs-console-two-stage-authorization-template.json'
 def sha(f):return hashlib.sha256(f.read_bytes()).hexdigest()
 def read(f):return json.loads(f.read_text())
 def private(f,value):
@@ -24,12 +24,16 @@ def validate(policy,package,linked,image,capture,helper,authorization):
         if sha(f)!=policy[key]:raise ValueError('Reviewed trial asset differs: '+key)
     if read(capture)['helper_sha256']!=sha(helper) or read(capture)['receiver_sha256']!=sha(ROOT/'scripts/capture_source_usb_console.py'):
         raise ValueError('Capture report does not bind actual helper/receiver')
+    if read(capture).get('functionfs_hold') is True:
+        profile=read(linked)
+        if profile.get('ffs_console_hold_linked') is not True or profile.get('console_queue_ownership_before_submit') is not True or profile.get('diagnostic_route_console_dwell_ms')!=1000 or profile.get('native_entry_checkpoint_linked') is not True:
+            raise ValueError('FunctionFS hold requires its exact linked kernel profile')
     if authorization:
         expected={**policy,'owner_approved':True,'owner_available':True}
         if read(authorization)!=expected:raise ValueError('Exact two-stage approval and owner availability required')
 
 def run(a):
-    policy=read(POLICY)
+    policy=read(getattr(a,'policy',None) or POLICY)
     validate(policy,a.source_package,a.linked_report,a.image,a.capture_report,a.helper,a.authorization)
     a.output.mkdir(mode=0o700)
     if a.authorization:
@@ -80,7 +84,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ['ssh-args','source-package','linked-report','image','capture-report','helper','output','fdtget','fdtput']:
         p.add_argument('--'+name,type=Path,required=True)
-    p.add_argument('--lab-package',required=True);p.add_argument('--authorization',type=Path)
+    p.add_argument('--lab-package',required=True);p.add_argument('--authorization',type=Path);p.add_argument('--policy',type=Path)
     a=p.parse_args()
     try:
         result=run(a);print(json.dumps(result,indent=2))

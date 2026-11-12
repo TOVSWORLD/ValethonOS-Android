@@ -1,5 +1,9 @@
 # FireTabs resume checkpoint — November 11, 2026
 
+> Resumed November 12. [Current native-entry test](FFS-NATIVE-ENTRY-NEXT-TEST.md)
+> supersedes the pending implementation steps below. This dated checkpoint is
+> retained as history; its consumed-approval and original-state facts still apply.
+
 Paused at the owner's request for a gear switch. No new hardware test is ready
 or authorized. No background build, capture, load or reboot was started during
 the final audit. Resume with offline analysis, not another tablet jump.

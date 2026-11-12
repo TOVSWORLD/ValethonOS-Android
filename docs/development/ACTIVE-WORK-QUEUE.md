@@ -1,4 +1,22 @@
-# Paused checkpoint — verified return and offline capture audit, November 11, 2026
+# Current milestone — native-entry test prepared, November 12, 2026
+
+Resumed at owner request. New diagnostic kernel built and passed linked native
+checks. Default-off nonce-guarded FunctionFS hold addresses the concrete ADB
+last-close path that removes sibling ACM. Actual C controls reproduced/fixed the
+console completion race. The controller quiets printk reversibly. A new marker
+inside kernel_kexec, after mutex/image admission, gets a one-second drain
+opportunity before device shutdown. The existing dispatcher and CPU/relocation
+logic are unchanged. This tests native entry, beyond the captured init shutdown.
+
+Source-package read-only preflight passed with zero writes/reboots and normal
+ADB restored. New kernel/hold/jump has not run. Offline target preview is marked
+non-loadable; actual target metadata must be regenerated after source boot.
+Ready for one owner-attended approval covering source boot/restore and at most
+one captured jump. Target entry and automatic return remain unqualified.
+
+[Concrete milestone test and return procedure](FFS-NATIVE-ENTRY-NEXT-TEST.md).
+
+# Historical paused checkpoint — verified return and offline capture audit, November 11, 2026
 
 Paused at owner request for a gear switch. Android boot complete, original full
 boot/config, unchanged recovery and normal unprivileged ADB were verified after

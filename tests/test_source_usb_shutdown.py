@@ -1,4 +1,4 @@
-import hashlib,json,os,pty,sys,tempfile,threading,time,tty,unittest
+import hashlib,json,os,pty,shlex,sys,tempfile,threading,time,tty,unittest
 from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
@@ -126,9 +126,52 @@ class ParentPolicy(unittest.TestCase):
  def test_default_stops_after_read_only_source_preflight(self):
   with patch.object(driver,'POLICY',self.policyfile),patch.object(driver,'LabADB'),patch.object(driver,'source_boot',return_value={'complete':True}) as source,patch.object(driver,'jump') as jump:
    self.assertTrue(driver.run(self.args)['read_only_preflight']['complete']);self.assertIsNone(source.call_args.args[-1]);jump.assert_not_called()
+ def test_hold_report_cannot_use_an_unqualified_kernel_profile(self):
+  report=json.loads(self.args.capture_report.read_text());report['functionfs_hold']=True
+  self.args.capture_report.write_text(json.dumps(report));self.policy['capture_report_sha256']=driver.sha(self.args.capture_report);self.policyfile.write_text(json.dumps(self.policy))
+  with patch.object(driver,'POLICY',self.policyfile),patch.object(driver,'LabADB') as connection:
+   with self.assertRaises(ValueError):driver.run(self.args)
+   connection.assert_not_called()
  def test_source_failure_does_not_prepare_or_jump_and_approval_is_single_use(self):
   self.args.authorization=self.p/'authorization';self.args.authorization.write_text(json.dumps({**self.policy,'owner_approved':True,'owner_available':True}))
   with patch.object(driver,'POLICY',self.policyfile),patch.object(driver,'LabADB'),patch.object(driver,'source_boot',return_value={'complete':False}),patch.object(driver,'prepare') as prepare,patch.object(driver,'jump') as jump:
    self.assertFalse(driver.run(self.args)['jump_executed']);prepare.assert_not_called();jump.assert_not_called()
    self.args.output=self.p/'out2'
    with self.assertRaises(FileExistsError):driver.run(self.args)
+
+class HoldSettings(unittest.TestCase):
+ class Device:
+  def __init__(self):
+   self.values={'ft_hold_adb':'N','ft_hold_trial':'','printk':'7 4 1 7'};self.writes=[];self.fail_quiet=False
+  def shell(self,cmd,**kw):
+   args=shlex.split(cmd);name=args[-1].rsplit('/',1)[-1]
+   if args[0]=='cat':return (self.values[name]+'\n').encode()
+   assert args[0]=='printf' and args[-2]=='>'
+   value=args[2] if args[1]=='%s' else args[1]
+   if value==r'\n':value=''
+   if name=='printk' and value.startswith('1 ') and self.fail_quiet:raise RuntimeError('write failed')
+   self.writes.append((name,value));self.values[name]=('Y' if value=='1' else 'N') if name=='ft_hold_adb' else value
+   return b''
+ def source(self,d):return SourceCapture(d,'/lab',{'functionfs_hold':True},'1'*32,'1-2',Path('/unused'))
+ def test_arm_reads_back_hold_nonce_and_quiet_level_then_restores_all_values(self):
+  d=self.Device();c=self.source(d);c.arm_ffs_hold()
+  self.assertEqual(d.values,{'ft_hold_adb':'Y','ft_hold_trial':'1'*32,'printk':'1 4 1 7'})
+  c.restore_settings();self.assertEqual(d.values,{'ft_hold_adb':'N','ft_hold_trial':'','printk':'7 4 1 7'})
+ def test_foreign_hold_or_nonce_refused_without_writes(self):
+  for field,value in [('ft_hold_adb','Y'),('ft_hold_trial','foreign')]:
+   d=self.Device();d.values[field]=value
+   with self.assertRaises(ValueError):self.source(d).arm_ffs_hold()
+   self.assertEqual(d.writes,[])
+ def test_bad_printk_state_refused_before_any_write(self):
+  d=self.Device();d.values['printk']='unreviewed'
+  with self.assertRaises(ValueError):self.source(d).arm_ffs_hold()
+  self.assertEqual(d.writes,[])
+ def test_partial_arm_failure_is_owned_and_cleaned_up(self):
+  d=self.Device();d.fail_quiet=True;c=self.source(d)
+  with self.assertRaises(RuntimeError):c.arm_ffs_hold()
+  self.assertTrue(c.ffs_hold_armed);d.fail_quiet=False;c.restore_settings()
+  self.assertEqual(d.values,{'ft_hold_adb':'N','ft_hold_trial':'','printk':'7 4 1 7'})
+ def test_abort_refuses_to_clear_someone_elses_nonce(self):
+  d=self.Device();c=self.source(d);c.arm_ffs_hold();d.values['ft_hold_trial']='f'*32;before=list(d.writes)
+  with self.assertRaises(ValueError):c.restore_settings()
+  self.assertEqual(d.writes,before)
