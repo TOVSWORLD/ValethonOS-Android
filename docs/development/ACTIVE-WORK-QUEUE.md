@@ -5,8 +5,11 @@ owner-assisted return. The next candidate changes source handoff ordering,
 parking secondaries while platform drivers are still running. Existing final
 CPU gates and relocation remain in place; target startup returns to its normal
 CPU configuration. This is a hypothesis under test, not a proven fix. Seven
-actual-C controls pass; the isolated kernel build is in progress. Hardware
-execution remains unqualified and actual target USB entry is still required.
+actual-C controls and five distinct-scope controls pass. The isolated ARM64
+Image, linked gates and read-only preflight passed; only kernel/kexec_core.c
+differs from the boot-tested source. Owner availability for the prepared test
+is pending. Hardware execution remains unqualified and target USB entry is
+still required.
 
 [Scope and validation](EARLY-CPU-SHUTDOWN-TEST.md).
 

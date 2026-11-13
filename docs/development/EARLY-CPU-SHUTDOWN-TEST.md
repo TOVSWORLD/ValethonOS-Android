@@ -26,12 +26,19 @@ so the failed CPU0-only target experiment is not combined with this change.
 The existing console gives the early gate one second to drain before teardown.
 
 The actual generated C sequence passed seven host controls covering ordering,
-hotplug balance and fail-closed paths. The complete Python suite passed 883 of
-884 tests, with one optional Unicorn test skipped. An isolated ARM64 Image build
-is in progress. Hardware execution and target boot are still unqualified.
+hotplug balance and fail-closed paths. Five trial controls require the distinct
+scope, source capture and normal target CPU startup. The complete Python suite
+passed 888 of 889 tests, with one optional Unicorn test skipped. The isolated
+ARM64 Image and linked syscall/USB/final CPU gate checks passed. Full source-tree
+comparison confirms only kernel/kexec_core.c changed. Read-only source preflight
+passed with zero writes/reboots and normal ADB restored. Hardware execution and
+target boot are still unqualified.
 
 The hardware sequence requires one protected ordinary source boot, restoration
 and readback of original boot, fresh source capture, one native load and one
 orderly jump. Existing trial budgets remain consumed. The success criterion is
 the fresh target nonce on its own USB console; an early CPU gate marker alone
 does not satisfy it. Recovery remains owner-assisted if the target hangs.
+
+[Exact prepared artifact receipt](../../evidence/independent-recovery/early-cpu-shutdown-preparation-result.json).
+[Bounded trial policy](../../evidence/independent-recovery/early-cpu-shutdown-two-stage-authorization-template.json).

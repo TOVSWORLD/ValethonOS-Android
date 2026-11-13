@@ -10,7 +10,7 @@ from prepare_native_jump_bundle import prepare,target_prefix
 from build_native_load_client import build
 
 ROOT=Path(__file__).resolve().parents[1]
-POLICY=ROOT/'evidence/independent-recovery/single-cpu-target-two-stage-authorization-template.json'
+POLICY=ROOT/'evidence/independent-recovery/early-cpu-shutdown-two-stage-authorization-template.json'
 def sha(f):return hashlib.sha256(f.read_bytes()).hexdigest()
 def read(f):return json.loads(f.read_text())
 def private(f,value):
@@ -19,6 +19,9 @@ def private(f,value):
 
 def validate(policy,package,linked,image,capture,helper,authorization):
     target_prefix('0'*32,policy.get('target_cpu_limit'))
+    early_cpu=read(linked).get('early_cpu_shutdown_before_devices') is True
+    if early_cpu != (policy.get('source_cpu_shutdown_before_devices') is True) or (early_cpu and policy.get('target_cpu_limit') is not None):
+        raise ValueError('Exact early CPU handoff policy with normal target startup required')
     if policy.get('target_cpu_limit') is not None and read(capture).get('functionfs_hold') is not True:
         raise ValueError('CPU0-only target requires proven source capture')
     if not all(sha(ROOT/f)==digest for f,digest in policy['code_sha256'].items()):
@@ -82,6 +85,7 @@ def run(a):
     auth=a.output/'jump-authorization-private.json'
     child=dict(scope='native-usb-source-target-console-jump-1',runner_sha256=sha(ROOT/'scripts/run_usb_console_jump.py'),manifest_sha256=sha(bundle/'report.json'),client_sha256=c['client_sha256'],target_image_sha256=policy['target_image_sha256'],native_config_sha256=policy['native_config_sha256'],receiver_sha256=sha(ROOT/'scripts/capture_usb_kernel_console.py'),shared_receiver_sha256=sha(ROOT/'scripts/capture_live_acm_probe.py'),owner_approved=True,owner_available=True,maximum_loads=1,maximum_jump_requests=1,boot_writes_allowed=False,automatic_reboot_allowed=False,source_capture_report_sha256=hashlib.sha256(json.dumps(capture,sort_keys=True).encode()).hexdigest(),source_capture_manager_sha256=sha(ROOT/'scripts/source_usb_console_trial.py'))
     if policy.get('target_cpu_limit') is not None:child.update(scope='native-single-cpu-usb-source-target-console-jump-1',target_cpu_limit=1)
+    if policy.get('source_cpu_shutdown_before_devices') is True:child.update(scope='native-early-cpu-usb-source-target-console-jump-1',source_cpu_shutdown_before_devices=True)
     private(auth,child)
     return {'source_boot':first,'jump':jump(d,dest,bundle/'report.json',client/'build-result.json',linked,a.output/'jump',auth,capture)}
 

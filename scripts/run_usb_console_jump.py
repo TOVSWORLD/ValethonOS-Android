@@ -15,6 +15,8 @@ def run(device,lab_package,manifest,client_report,linked,output,authorization=No
  if any(v!={'before':'n','after':'y'} for v in linked['usb_profile_config_changes'].values()):raise ValueError('Config drift')
  if not re.fullmatch('[0-9a-f]{32}',trial) or m.get('source_config_sha256')!=config or m.get('target_config_sha256')!=config or m['target_image_sha256']!=image or m['original_boot_sha256']!=BOOT_SHA:raise ValueError('Exact source/target profile required')
  cpu_limit=m.get('target_cpu_limit')
+ early_cpu=linked.get('early_cpu_shutdown_before_devices') is True
+ if early_cpu and (cpu_limit is not None or source_report is None or source_report.get('functionfs_hold') is not True or linked.get('native_entry_checkpoint_linked') is not True):raise ValueError('Early CPU handoff requires source capture and normal target CPU startup')
  if m['bootargs_prefix']!=target_prefix(trial,cpu_limit) or m['entry']!=0x42018000 or [s['file'] for s in m['segments']]!=['image.bin','metadata.bin','initrd.bin']:raise ValueError('Reviewed target parameters/layout required')
  if cpu_limit is not None and (source_report is None or source_report.get('functionfs_hold') is not True or linked.get('native_entry_checkpoint_linked') is not True):raise ValueError('CPU0-only target requires the proven source capture profile')
  if c['manifest_sha256']!=sha(manifest.read_bytes()) or c['execute_implemented'] is not False:raise ValueError('Bound load-only client required')
@@ -24,6 +26,7 @@ def run(device,lab_package,manifest,client_report,linked,output,authorization=No
   expected.update(scope='native-usb-source-target-console-jump-1',source_capture_report_sha256=sha(json.dumps(source_report,sort_keys=True).encode()),source_capture_manager_sha256=sha((here/'source_usb_console_trial.py').read_bytes()))
   if source_report.get('receiver_sha256')!=sha((here/'capture_source_usb_console.py').read_bytes()):raise ValueError('Exact source receiver required')
  if cpu_limit is not None:expected.update(scope='native-single-cpu-usb-source-target-console-jump-1',target_cpu_limit=1)
+ if early_cpu:expected.update(scope='native-early-cpu-usb-source-target-console-jump-1',source_cpu_shutdown_before_devices=True)
  if authorization is not None:
   a=json.loads(authorization.read_text())
   if any(type(a.get(k)) is not type(v) or a.get(k)!=v for k,v in expected.items()):raise ValueError('Exact USB console jump approval required')
@@ -32,6 +35,7 @@ def run(device,lab_package,manifest,client_report,linked,output,authorization=No
   f=os.open(str(authorization)+'.consumed',os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600);os.close(f)
  r={'scope':expected['scope'],'runner_sha256':runner,'manifest_sha256':expected['manifest_sha256'],'target_image_sha256':image,'native_config_sha256':config,'trial_id':trial,'load_attempts':0,'unload_attempts':0,'jump_requests':0,'complete':False,'target_entry_proven':False,'boot_written':False,'recovery_written':False,'owner_return_required':False,'normal_shell_restored':False};folder=None;receiver=None;source_capture=None
  if cpu_limit is not None:r['target_cpu_limit']=1
+ if early_cpu:r['source_cpu_shutdown_before_devices']=True
  def save():
   with (output/'result.json').open('w') as h:os.fchmod(h.fileno(),0o600);json.dump(r,h,indent=2);h.write('\n');h.flush();os.fsync(h.fileno())
  def loaded():return device.shell('cat /sys/kernel/kexec_loaded').strip()
