@@ -12,7 +12,13 @@ IMAGE=0x40080000
 META=0x42000000
 ENTRY=0x42018000
 
-def usb_bootargs(oldargs,token):
+def target_prefix(token,cpu_limit=None):
+ if cpu_limit is not None and (type(cpu_limit) is not int or cpu_limit!=1):raise ValueError('Only the reviewed CPU0-only target is supported')
+ words=['console=ttyGS0','g_serial.ft_bind=1','g_serial.ft_trial='+token]
+ if cpu_limit is not None:words+=['nr_cpus=1','maxcpus=1']
+ return words
+
+def usb_bootargs(oldargs,token,cpu_limit=None):
  # The bootloader can put its own arguments before the boot-header cmdline.
  # Remove exactly the controlled console token wherever that header was joined;
  # retain every other byte, including spacing and argument order.
@@ -23,7 +29,8 @@ def usb_bootargs(oldargs,token):
   if end<len(oldargs):end+=1
   oldargs=oldargs[:match.start()]+oldargs[end:]
  if b'g_serial.' in oldargs or b'console=ttyGS' in oldargs:raise ValueError('Unreviewed source USB console parameters')
- prefix=('console=ttyGS0 g_serial.ft_bind=1 g_serial.ft_trial='+token+' ').encode()
+ if cpu_limit is not None and any(x in oldargs for x in [b'nr_cpus',b'maxcpus',b'nosmp']):raise ValueError('Existing CPU boot controls require separate review')
+ prefix=(' '.join(target_prefix(token,cpu_limit))+' ').encode()
  if len(prefix+oldargs)>=1024:raise ValueError('Conservative kernel bootargs capacity exceeded')
  return prefix,oldargs
 
@@ -40,7 +47,9 @@ def ranges_ok(segments,ram,reserved):
   if not any(lo<=a and z<=hi for lo,hi in ram):raise ValueError('Segment outside current System RAM')
   if any(overlaps((a,z),r) for r in reserved):raise ValueError('Segment intersects reserved memory')
   if any(overlaps((a,z),r) for r in segments[:i]):raise ValueError('Segments overlap')
-def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None,target_image=None,usb_linked=None):
+def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None,target_image=None,usb_linked=None,target_cpu_limit=None):
+ target_prefix('0'*32,target_cpu_limit)
+ if target_cpu_limit is not None and target_image is None:raise ValueError('CPU-limited target requires the verified USB kernel profile')
  if sha(boot)!=BOOT_SHA:raise ValueError('Pinned original boot required')
  token=token or secrets.token_hex(16)
  if not re.fullmatch('[0-9a-f]{32}',token):raise ValueError('Exact unique hexadecimal trial ID required')
@@ -68,7 +77,7 @@ def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None,target_image=None,usb_li
   oldargs=raw(chosen['bootargs'])
   if not oldargs.endswith(b'\0') or b'\0' in oldargs[:-1]:raise ValueError('Single terminated source bootargs required')
   oldargs=oldargs[:-1]
-  prefix,oldargs=usb_bootargs(oldargs,token)
+  prefix,oldargs=usb_bootargs(oldargs,token,target_cpu_limit)
   subprocess.run([str(fdtput),'-t','s',str(target),'/chosen','bootargs',(prefix+oldargs).decode('ascii')],check=True)
  after=snapshot(fdtget,target);expected={n:dict(p) for n,p in before.items()};expected['/chosen'][key]=' '.join(format(v,'x') for v in token.encode()+b'\0')
  if target_image is not None:expected['/chosen']['bootargs']=' '.join(format(v,'x') for v in prefix+oldargs+b'\0')
@@ -102,7 +111,8 @@ def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None,target_image=None,usb_li
  ranges_ok([(a,a+m) for _,_,a,m in segments],ram,reserved)
  report={'scope':'First experimental native kexec jump bundle; not executed','trial_id':token,'original_boot_sha256':BOOT_SHA,'entry':ENTRY,'target_image_sha256':sha(image),'target_dtb_sha256':sha(target.read_bytes()),'source_dtb_sha256':sha(dtb),'target_ramdisk_sha256':sha(initrd),'dt_changes_only':['/chosen/valethon,kexec-trial'],'initrd_addresses_unchanged':[start,end],'pstore_preserved':True,'native_allocator_owns_source_and_relocation_pages':True,'segments':[],'experimental_jump_executed':False,'unqualified':['hardware kexec transition','device/DMA shutdown sufficiency','target entry and normal Android return','failed-jump log retrieval']}
  if target_image is not None:
-  report.update(scope='USB kernel-console target bundle; not executed',target_config_sha256=usb_linked['artifacts']['.config']['sha256'],source_config_sha256=usb_linked['artifacts']['.config']['sha256'],dt_changes_only=['/chosen/valethon,kexec-trial','/chosen/bootargs'],bootargs_prefix=['console=ttyGS0','g_serial.ft_bind=1','g_serial.ft_trial='+token],original_bootargs_suffix_preserved=True,target_usb_descriptors={'vendor':'0525','product':'a4a7'})
+  report.update(scope='USB kernel-console target bundle; not executed',target_config_sha256=usb_linked['artifacts']['.config']['sha256'],source_config_sha256=usb_linked['artifacts']['.config']['sha256'],dt_changes_only=['/chosen/valethon,kexec-trial','/chosen/bootargs'],bootargs_prefix=target_prefix(token,target_cpu_limit),original_bootargs_suffix_preserved=True,target_usb_descriptors={'vendor':'0525','product':'a4a7'})
+  if target_cpu_limit is not None:report.update(target_cpu_limit=1,source_cpu_configuration_unchanged=True)
  for name,b,addr,memsz in segments:
   q=out/name;q.write_bytes(b);q.chmod(0o600);report['segments'].append({'file':name,'sha256':sha(b),'bytes':len(b),'address':addr,'memory_bytes':memsz})
  for f in [base,target]:f.chmod(0o600)
@@ -111,4 +121,4 @@ def prepare(boot,dtb,iomem,out,fdtget,fdtput,token=None,target_image=None,usb_li
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__)
  for n in ['original-boot','live-dtb','iomem','out','fdtget','fdtput']:p.add_argument('--'+n,type=Path,required=True)
- p.add_argument('--target-image',type=Path);p.add_argument('--usb-linked-report',type=Path);a=p.parse_args();print(json.dumps(prepare(a.original_boot.read_bytes(),a.live_dtb.read_bytes(),a.iomem.read_text(),a.out,a.fdtget,a.fdtput,target_image=a.target_image.read_bytes() if a.target_image else None,usb_linked=json.loads(a.usb_linked_report.read_text()) if a.usb_linked_report else None),indent=2))
+ p.add_argument('--target-image',type=Path);p.add_argument('--usb-linked-report',type=Path);p.add_argument('--target-cpu-limit',type=int,choices=[1]);a=p.parse_args();print(json.dumps(prepare(a.original_boot.read_bytes(),a.live_dtb.read_bytes(),a.iomem.read_text(),a.out,a.fdtget,a.fdtput,target_image=a.target_image.read_bytes() if a.target_image else None,usb_linked=json.loads(a.usb_linked_report.read_text()) if a.usb_linked_report else None,target_cpu_limit=a.target_cpu_limit),indent=2))

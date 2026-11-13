@@ -1,4 +1,22 @@
-# Milestone passed — accepted native kexec entry, November 12, 2026
+# Current work — execute a CPU0-only target boot, November 12, 2026
+
+Owner requested continued work toward a real boot milestone. Source native entry
+is a prerequisite; it is not being counted again as target progress. The next
+test changes only target boot arguments (`nr_cpus=1 maxcpus=1`) to bypass normal
+secondary CPU restart before USB initialization. Exact source review found the
+firmware/power-on startup path and unbounded secondary power waits. This is a
+testable hypothesis, not a claimed cause of the failed handoff.
+
+The already boot-tested kernel, source package, source CPU shutdown and relocation
+remain unchanged. The new mode has a distinct guarded scope, rejects existing CPU
+boot controls and requires the proven source capture profile. Actual target data
+is regenerated after source boot; the offline preview cannot be loaded. Proceed
+with one protected source boot/restore and one captured jump. Only a fresh target
+kernel nonce qualifies as the next milestone. Prior trial approvals stay consumed.
+
+[Concrete target-boot test and physical return](SINGLE-CPU-TARGET-TEST.md).
+
+# Previous milestone — accepted native kexec entry, November 12, 2026
 
 Host capture positively proves the kernel entered kernel_kexec with its mutex
 acquired and a loaded image accepted. Fresh source USB proof, nonce-bound

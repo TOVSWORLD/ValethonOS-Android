@@ -1,0 +1,45 @@
+{
+  "status": "CPU0-only target trial prepared; target boot is required, not another source checkpoint",
+  "date": "2026-11-12",
+  "target_cpu_limit": 1,
+  "target_only_bootargs": [
+    "nr_cpus=1",
+    "maxcpus=1"
+  ],
+  "image_sha256": "b999644ae295c8f177c29460469d9ec3e57eeb289658b7f696c1eb4d89e2c287",
+  "source_candidate_sha256": "ce0e7a57ce1bcff6afe4b5eae1c40e1f42ae38bcac98e0970d226df8b03977cc",
+  "kernel_rebuilt": false,
+  "source_shutdown_or_relocation_changed": false,
+  "source_cpu_configuration_unchanged": true,
+  "source_analysis_sha256": {
+    "kernel/smp.c": "028fe5d9c38928e96b8c56ee51757829b579960442b74312a01d6e3ccf93d37e",
+    "kernel/cpu.c": "0e7f890bfa3c9147a7a71315ac918d1c8a8c1c5f595aef4ba180b864fbe9daf9",
+    "arch/arm64/kernel/smp.c": "70dea9950094e649aef20eac2ffc163e718ae839502b20d729dcd98e715e34ab",
+    "init/main.c": "f7110828626521dc7a2058d5cf4da47fb7fadea1a48a47ecc71f6166a7c0a50a"
+  },
+  "validation": {
+    "python_cases_run": 99,
+    "python_passed": 98,
+    "python_skipped": 1,
+    "optional_skip": "Unicorn instruction emulation unavailable",
+    "read_only_preflight": {
+      "complete": true,
+      "preflight": "passed",
+      "candidate_write_attempts": 0,
+      "restore_write_attempts": 0,
+      "reboot_requests": 0,
+      "normal_shell_restored": true
+    },
+    "offline_preview_not_loadable": true,
+    "existing_live_cpu_limit_args": [],
+    "native_load_client_controls_passed": 12
+  },
+  "new_target_hardware_execution": false,
+  "required_result": "Fresh target kernel nonce on target USB console",
+  "limitations": [
+    "Secondary startup is a candidate path, not the proven hang cause",
+    "A negative result does not locate the hang or prove target entry never occurred",
+    "Source native-entry proof alone does not satisfy this test",
+    "Owner-assisted return remains the qualified recovery path"
+  ]
+}

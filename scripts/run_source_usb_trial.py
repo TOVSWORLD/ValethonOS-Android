@@ -6,11 +6,11 @@ from run_pstore_warm_reboot import LabADB
 from run_native_source_boot import facts,BOOT_SHA
 from run_usb_console_source_boot import run as source_boot
 from run_usb_console_jump import run as jump
-from prepare_native_jump_bundle import prepare
+from prepare_native_jump_bundle import prepare,target_prefix
 from build_native_load_client import build
 
 ROOT=Path(__file__).resolve().parents[1]
-POLICY=ROOT/'evidence/independent-recovery/ffs-console-two-stage-authorization-template.json'
+POLICY=ROOT/'evidence/independent-recovery/single-cpu-target-two-stage-authorization-template.json'
 def sha(f):return hashlib.sha256(f.read_bytes()).hexdigest()
 def read(f):return json.loads(f.read_text())
 def private(f,value):
@@ -18,6 +18,9 @@ def private(f,value):
         json.dump(value,h,indent=2)
 
 def validate(policy,package,linked,image,capture,helper,authorization):
+    target_prefix('0'*32,policy.get('target_cpu_limit'))
+    if policy.get('target_cpu_limit') is not None and read(capture).get('functionfs_hold') is not True:
+        raise ValueError('CPU0-only target requires proven source capture')
     if not all(sha(ROOT/f)==digest for f,digest in policy['code_sha256'].items()):
         raise ValueError('Reviewed trial code differs')
     for f,key in [(package/'report.json','source_package_report_sha256'),(package/'boot-full.img','source_boot_candidate_sha256'),(package/'original-boot.img','original_boot_sha256'),(linked,'linked_report_sha256'),(image,'target_image_sha256'),(capture,'capture_report_sha256'),(helper,'source_helper_sha256')]:
@@ -59,7 +62,7 @@ def run(a):
         d.adb('unroot');d.adb('wait-for-device')
         if b'uid=2000(' not in d.shell('id'):raise ValueError('Normal ADB not restored')
     bundle=a.output/'target-private';client=a.output/'client-private'
-    m=prepare((a.source_package/'original-boot.img').read_bytes(),(inputs/'live.dtb').read_bytes(),(inputs/'iomem.txt').read_text(),bundle,a.fdtget,a.fdtput,target_image=a.image.read_bytes(),usb_linked=linked)
+    m=prepare((a.source_package/'original-boot.img').read_bytes(),(inputs/'live.dtb').read_bytes(),(inputs/'iomem.txt').read_text(),bundle,a.fdtget,a.fdtput,target_image=a.image.read_bytes(),usb_linked=linked,target_cpu_limit=policy.get('target_cpu_limit'))
     c=build(ROOT/'projects/firetabs-android/native-kexec/load_client.c',bundle/'report.json',client)
     files={name:bundle/name for name in ['image.bin','metadata.bin','initrd.bin']}
     files.update({'native-load':client/'native-load','source-acm-hold':a.helper})
@@ -77,7 +80,9 @@ def run(a):
     pre=jump(d,dest,bundle/'report.json',client/'build-result.json',linked,a.output/'jump-preflight',source_report=capture)
     if pre.get('complete') is not True:raise ValueError('Jump preflight failed')
     auth=a.output/'jump-authorization-private.json'
-    private(auth,dict(scope='native-usb-source-target-console-jump-1',runner_sha256=sha(ROOT/'scripts/run_usb_console_jump.py'),manifest_sha256=sha(bundle/'report.json'),client_sha256=c['client_sha256'],target_image_sha256=policy['target_image_sha256'],native_config_sha256=policy['native_config_sha256'],receiver_sha256=sha(ROOT/'scripts/capture_usb_kernel_console.py'),shared_receiver_sha256=sha(ROOT/'scripts/capture_live_acm_probe.py'),owner_approved=True,owner_available=True,maximum_loads=1,maximum_jump_requests=1,boot_writes_allowed=False,automatic_reboot_allowed=False,source_capture_report_sha256=hashlib.sha256(json.dumps(capture,sort_keys=True).encode()).hexdigest(),source_capture_manager_sha256=sha(ROOT/'scripts/source_usb_console_trial.py')))
+    child=dict(scope='native-usb-source-target-console-jump-1',runner_sha256=sha(ROOT/'scripts/run_usb_console_jump.py'),manifest_sha256=sha(bundle/'report.json'),client_sha256=c['client_sha256'],target_image_sha256=policy['target_image_sha256'],native_config_sha256=policy['native_config_sha256'],receiver_sha256=sha(ROOT/'scripts/capture_usb_kernel_console.py'),shared_receiver_sha256=sha(ROOT/'scripts/capture_live_acm_probe.py'),owner_approved=True,owner_available=True,maximum_loads=1,maximum_jump_requests=1,boot_writes_allowed=False,automatic_reboot_allowed=False,source_capture_report_sha256=hashlib.sha256(json.dumps(capture,sort_keys=True).encode()).hexdigest(),source_capture_manager_sha256=sha(ROOT/'scripts/source_usb_console_trial.py'))
+    if policy.get('target_cpu_limit') is not None:child.update(scope='native-single-cpu-usb-source-target-console-jump-1',target_cpu_limit=1)
+    private(auth,child)
     return {'source_boot':first,'jump':jump(d,dest,bundle/'report.json',client/'build-result.json',linked,a.output/'jump',auth,capture)}
 
 if __name__=='__main__':
