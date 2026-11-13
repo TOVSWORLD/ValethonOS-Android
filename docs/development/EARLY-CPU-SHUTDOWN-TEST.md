@@ -1,5 +1,18 @@
 # CPU shutdown before device shutdown
 
+## Hardware outcome — November 13, 2026
+
+One source boot/restore and one load/jump ran. Fresh source capture proves the
+early secondary-CPU hardware off gate passed before device shutdown. Target USB
+never appeared during the 300-second window, so **target boot remains unproven**.
+The ordering change was insufficient. The capture cannot establish completion
+of device shutdown, the later final gate, relocation or target entry. Original
+boot was restored before jumping; owner-assisted return is pending. No retry.
+
+[Sanitized hardware receipt](../../evidence/independent-recovery/early-cpu-shutdown-runtime-result.json).
+
+## Historical preparation
+
 November 13, 2026. Target boot remains the required milestone. The CPU0-only
 target experiment timed out and owner-assisted return has been fully verified.
 

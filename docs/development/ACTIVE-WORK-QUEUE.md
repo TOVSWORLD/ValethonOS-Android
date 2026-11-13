@@ -1,3 +1,15 @@
+# Current result — early CPU-off gate passed; target still absent, November 13, 2026
+
+The handoff-order experiment ran once. Source boot and original-boot restoration
+passed, followed by one load and one jump. Captured hardware evidence proves
+secondary CPUs were off before device shutdown. Target USB timed out, so target
+boot remains unproven and this ordering change was insufficient. Later source
+phases are hidden by USB teardown; do not infer their success or failure.
+Owner-assisted return and separate post-return verification are pending. No
+automatic retry; this trial budget is consumed.
+
+[Exact hardware result](../../evidence/independent-recovery/early-cpu-shutdown-runtime-result.json).
+
 # Current experiment — CPU shutdown before device shutdown, November 13, 2026
 
 Original Android, full boot/config, recovery and normal ADB were verified after
