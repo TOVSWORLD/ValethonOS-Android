@@ -1,0 +1,63 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/* Updated: Karl MacMillan <kmacmillan@tresys.com>
+ *
+ *	Added conditional policy language extensions
+ *
+ *  Updated: Hewlett-Packard <paul@paul-moore.com>
+ *
+ *	Added support for the policy capability bitmap
+ *
+ * Copyright (C) 2007 Hewlett-Packard Development Company, L.P.
+ * Copyright (C) 2003 - 2004 Tresys Technology, LLC
+ * Copyright (C) 2004 Red Hat, Inc., James Morris <jmorris@redhat.com>
+ */
+
+static int sel_open_policy(struct inode *inode, struct file *filp)
+{
+	struct selinux_fs_info *fsi = inode->i_sb->s_fs_info;
+	struct policy_load_memory *plm = NULL;
+	int rc;
+
+	BUG_ON(filp->private_data);
+
+	mutex_lock(&selinux_state.policy_mutex);
+
+	rc = avc_has_perm(current_sid(), SECINITSID_SECURITY,
+			  SECCLASS_SECURITY, SECURITY__READ_POLICY, NULL);
+	if (rc)
+		goto err;
+
+	rc = -EBUSY;
+	if (fsi->policy_opened)
+		goto err;
+
+	rc = -ENOMEM;
+	plm = kzalloc(sizeof(*plm), GFP_KERNEL);
+	if (!plm)
+		goto err;
+
+	rc = security_read_policy(&plm->data, &plm->len);
+	if (rc)
+		goto err;
+
+	if ((size_t)i_size_read(inode) != plm->len) {
+		inode_lock(inode);
+		i_size_write(inode, plm->len);
+		inode_unlock(inode);
+	}
+
+	fsi->policy_opened = 1;
+
+	filp->private_data = plm;
+
+	mutex_unlock(&selinux_state.policy_mutex);
+
+	return 0;
+err:
+	mutex_unlock(&selinux_state.policy_mutex);
+
+	if (plm)
+		vfree(plm->data);
+	kfree(plm);
+	return rc;
+}

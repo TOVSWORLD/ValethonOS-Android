@@ -1,0 +1,25 @@
+{
+  "observed_at": "2026-10-31T22:53:14.511883+00:00",
+  "owner_observation": "special recovery menu",
+  "attempt": 2,
+  "supervisor": {
+    "status": "helper_exited",
+    "recovery_observed": false,
+    "failed_load_qualified": false,
+    "helper_returncode": 0
+  },
+  "adb_state": "recovery",
+  "bootmode": "unknown",
+  "twrp_version": "3.3.1-0",
+  "product_device": "douglas",
+  "kernel_release": "3.18.19-g51c2c8d5bfb",
+  "retry": false,
+  "failed_load_return_qualified": false,
+  "retained_failure_logs_qualified": false,
+  "supervisor_revision": "3f5f9add39710f3355a4f23b063a4f9674be09af",
+  "supervisor_sha256": "eadef99987f4c4affbd7f2f6138721db76fb7acb75e2ee5b6329aed7da0405c1",
+  "android_independent_recovery_entry_observed": true,
+  "maintained_kernel_qualified": false,
+  "personal_data_read": false,
+  "raw_logs_private": true
+}

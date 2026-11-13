@@ -1,0 +1,37 @@
+{
+  "scope": "Exact original-package selected gzip output-capacity call; not full loader or runtime qualification",
+  "original_lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "capacity_argument_instruction_offset": 255688,
+  "capacity_argument_bytes_hex": "4ff0e0733168c968",
+  "following_call_offset": 255696,
+  "following_call_target": 259484,
+  "output_capacity_bytes": 29360128,
+  "matched_historical_windows": [
+    {
+      "name": "gzip_argument_adapter",
+      "historical_offset": 259056,
+      "original_package_offset": 259484,
+      "bytes": 22,
+      "sha256": "8555f7fdf02c6a7d3323273c09f84fc3df5cda6497db353653f69880a603ad43"
+    },
+    {
+      "name": "inflate_arguments",
+      "historical_offset": 258740,
+      "original_package_offset": 259168,
+      "bytes": 92,
+      "sha256": "93d1edf214b1bd3b27faa8e034bacf1327efe4c1887d241f2bd5354a24546859"
+    },
+    {
+      "name": "gzip_header",
+      "historical_offset": 258916,
+      "original_package_offset": 259344,
+      "bytes": 76,
+      "sha256": "983ae9c31706e2a65126a7ec063e88f8e1cf71a4a84ac75ba94c8a49bc8c5e3a"
+    }
+  ],
+  "prior_diagnostic_image_bytes": 28645888,
+  "prior_usb_acm_profile_image_bytes": 41699840,
+  "prior_usb_acm_profile_fits_this_selected_capacity": false,
+  "whole_loader_qualified": false,
+  "runtime_selection_observed": false
+}

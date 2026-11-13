@@ -1,0 +1,20 @@
+{
+  "scope": "Current terminal state of actual first-draft test1",
+  "completed": true,
+  "original_boot_restored_verified": true,
+  "recovery_unchanged_verified": true,
+  "ram_cleanup_verified": true,
+  "twrp_left_running": true,
+  "reboot_after_restore": false,
+  "candidate_installed": false,
+  "capture_armed": false,
+  "helper_launches_this_trial": 1,
+  "helper_running": false,
+  "capture_running": false,
+  "owner_action_pending": false,
+  "kernel_boot_confirmed": false,
+  "kernel_record_confirmed": false,
+  "approval_consumed": true,
+  "repeat_trial_selected": false,
+  "result": "evidence/independent-recovery/first-draft-trial-result.json"
+}

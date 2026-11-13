@@ -1,0 +1,98 @@
+{
+  "status": "First jump ready for owner approval; not executed",
+  "bundle": {
+    "scope": "First experimental native kexec jump bundle; not executed",
+    "trial_id": "809683f6fad0ab2d040e83928c355377",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "entry": 1107394560,
+    "target_image_sha256": "ccd93b6c9daa3107f03e1633b0de3f609bc1a546f62779f92f29e77cb1855c08",
+    "target_dtb_sha256": "4b249f672463d4de381accb1faa74d82e5349e4e6f4dde2e5a482be6cc2bc12d",
+    "source_dtb_sha256": "cd3325a83a47f05982181903b531b5ec305389bccc9dbb7be8a0dd06036c656f",
+    "target_ramdisk_sha256": "0e8c340d30666c282a30e20e7686ea0aca2a9967cd9582294476a3f064d7642e",
+    "dt_changes_only": [
+      "/chosen/valethon,kexec-trial"
+    ],
+    "initrd_addresses_unchanged": [
+      1763986944,
+      1764851445
+    ],
+    "pstore_preserved": true,
+    "native_allocator_owns_source_and_relocation_pages": true,
+    "segments": [
+      {
+        "file": "image.bin",
+        "sha256": "ccd93b6c9daa3107f03e1633b0de3f609bc1a546f62779f92f29e77cb1855c08",
+        "bytes": 15137280,
+        "address": 1074266112,
+        "memory_bytes": 16363520
+      },
+      {
+        "file": "metadata.bin",
+        "sha256": "308e7eb1440c5cd5e1d464871d61896f2595ebe822bb6ae5a41f8b011a43b9ef",
+        "bytes": 98344,
+        "address": 1107296256,
+        "memory_bytes": 102400
+      },
+      {
+        "file": "initrd.bin",
+        "sha256": "da32af4493753e2eaadeb717477815aaf42b8ceed58591825f8b99ac18a588f4",
+        "bytes": 868085,
+        "address": 1763983360,
+        "memory_bytes": 868352
+      }
+    ],
+    "experimental_jump_executed": false,
+    "unqualified": [
+      "hardware kexec transition",
+      "device/DMA shutdown sufficiency",
+      "target entry and normal Android return",
+      "failed-jump log retrieval"
+    ]
+  },
+  "client": {
+    "scope": "Static native load/unload client; no execute command",
+    "source_sha256": "0db97cc82b93b205d3b86cc0b938332a09b5c305b54ed61880b993bbe209ccbd",
+    "manifest_sha256": "4dbad93795f031bbfc3745ae9cfd976dff50518e876970c24b2e8ac53761473e",
+    "client_sha256": "29ac890a9e9311550a2ece519d75d540aa180ee69c15b381613ce4db4aa43210",
+    "client_bytes": 144112,
+    "execute_implemented": false,
+    "loaded_on_tablet": false
+  },
+  "preflight": {
+    "scope": "native-kexec-first-jump-1",
+    "runner_sha256": "8a7352db1a21c49890ff43935eac263b3345be30ff59cb7020d1871785ed8e7c",
+    "manifest_sha256": "4dbad93795f031bbfc3745ae9cfd976dff50518e876970c24b2e8ac53761473e",
+    "client_sha256": "29ac890a9e9311550a2ece519d75d540aa180ee69c15b381613ce4db4aa43210",
+    "trial_id": "809683f6fad0ab2d040e83928c355377",
+    "load_attempts": 0,
+    "unload_attempts": 0,
+    "jump_requests": 0,
+    "complete": true,
+    "jump_proven": false,
+    "boot_written": false,
+    "recovery_written": false,
+    "normal_shell_restored": true,
+    "owner_attention_required": false,
+    "preflight": "passed"
+  },
+  "offline_controls": {
+    "native_python_tests": 39,
+    "actual_c_client_host_fault_cases": 12,
+    "c_client_controls_scope": "Linux host syscall/file mocks; not hardware syscall qualification"
+  },
+  "source_boot_passed": true,
+  "original_boot_restored_on_flash": true,
+  "failed_logging_pretrial_requirement": false,
+  "failed_build_attempts": [
+    {
+      "toolchain": "lab aarch64-linux-gnu-gcc",
+      "failure": "Missing cross libc bits/wordsize.h; no executable built",
+      "resolution": "Used existing local AArch64 Linux/musl cross compiler; no package install or disabled checks"
+    },
+    {
+      "toolchain": "macOS host cc for Linux harness",
+      "failure": "Linux CPU affinity types absent",
+      "resolution": "Compiled and ran actual client harness with mocked operations on Linux host"
+    }
+  ]
+}

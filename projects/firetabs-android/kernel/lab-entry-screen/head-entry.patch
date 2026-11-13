@@ -1,0 +1,19 @@
+--- a/arch/arm64/kernel/head.S
++++ b/arch/arm64/kernel/head.S
+@@ -118,6 +118,7 @@
+ 
+ 1:	mov	x0, x19
+ 	bl	init_kernel_el			// w0=cpu_boot_mode
++	bl	valethon_lab_entry_screen
+ 	mov	x20, x0
+ 
+ 	/*
+@@ -129,6 +130,8 @@
+ 	bl	__cpu_setup			// initialise processor
+ 	b	__primary_switch
+ SYM_CODE_END(primary_entry)
++
++#include "valethon-entry-screen.S"
+ 
+ 	__INIT
+ SYM_CODE_START_LOCAL(record_mmu_state)

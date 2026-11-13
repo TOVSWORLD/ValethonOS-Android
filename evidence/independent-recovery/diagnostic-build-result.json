@@ -1,0 +1,44 @@
+{
+  "issue": 346,
+  "scope": "Exact-revision diagnostic kernel compilation and resolved logging policy only",
+  "run": 41250510504,
+  "url": "https://github.com/TOVSWORLD/ValethonOS-Android/actions/runs/41250510504",
+  "repository_head": "b18254b450e5bc9de658146b555122a6b5e864e1",
+  "ack_commit": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "compile_started_at": "2026-10-31T22:58:42Z",
+  "compile_completed_at": "2026-10-31T23:22:35Z",
+  "job_completed_at": "2026-10-31T23:22:37Z",
+  "passed": true,
+  "resolved_logging": {
+    "PSTORE": "y",
+    "PSTORE_RAM": "y",
+    "PSTORE_CONSOLE": "y",
+    "PSTORE_BLK": "n"
+  },
+  "artifact_hashes_from_completed_build_log": {
+    ".config": {
+      "sha256": "73eef266650904728d70a7b10c959c5c4ba44adaf451944963e40c440e5d1ba9",
+      "bytes": null
+    },
+    "vmlinux": {
+      "sha256": "005089693ce6ecd506fa9ad9d7c82f6f61ee16f938a5cf24796e07e376428e4e",
+      "bytes": 251441016
+    },
+    "arch/arm64/boot/Image": {
+      "sha256": "1f6341ed81df2f2ef347565ca75fbe4196728d5715ab0b376ae0a74be9a6c194",
+      "bytes": 28645888
+    },
+    "arch/arm64/boot/Image.gz": {
+      "sha256": "35f8031a536ecb436ff1e999af72228cd5512ade30b85c55a3637159d7017cf9",
+      "bytes": 9204813
+    }
+  },
+  "build_log_sha256": "e085e214f778b9ca35e3b1a1d888eccaab722c35d0b449ce1e2355e13f1176e4",
+  "artifact_bytes_retained_by_this_workflow": false,
+  "boot_image_packed": false,
+  "device_loaded": false,
+  "ram_region_selected": false,
+  "retention_qualified": false,
+  "failed_load_return_qualified": false,
+  "phase1_complete": false
+}

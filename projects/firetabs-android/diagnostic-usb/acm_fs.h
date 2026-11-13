@@ -19,9 +19,10 @@ _Static_assert(sizeof(long)==8 && sizeof(void *)==8,"64-bit syscall argument ABI
 #define FT_NR_WRITE 64
 #define FT_AT_FDCWD -100
 #define FT_AT_REMOVEDIR 0x200
+/* ARM64 fcntl overrides are pinned and checked before generic fallbacks. */
 #define FT_O_WRONLY 1
-#define FT_O_DIRECTORY 00200000
-#define FT_O_NOFOLLOW 00400000
+#define FT_O_DIRECTORY 0040000
+#define FT_O_NOFOLLOW 0100000
 #define FT_O_CLOEXEC 02000000
 struct ft_acm_io {long (*call)(void *,long,long,long,long,long,long,long);void *ctx;};
 static int ft_same(const char *a,const char *b) {

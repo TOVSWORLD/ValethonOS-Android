@@ -1,0 +1,149 @@
+{
+  "scope": "poisoned console-only spans in isolated resident emulator; firmware services modeled",
+  "archive_payload_sha256": "e10fdf770a5be2c2adc3cce0d03b8e296eac3b31e18ebdce5b56dc5491f4e7e8",
+  "reclaimed_bytes": 1587,
+  "spans": [
+    [
+      "0x524",
+      "0x5d8"
+    ],
+    [
+      "0x618",
+      "0x736"
+    ],
+    [
+      "0x73a",
+      "0x778"
+    ],
+    [
+      "0x77c",
+      "0x794"
+    ],
+    [
+      "0x88e",
+      "0xa51"
+    ],
+    [
+      "0xbb8",
+      "0xe00"
+    ]
+  ],
+  "preserved_console_sinks": [
+    "0x736..0x73a",
+    "0x778..0x77c"
+  ],
+  "preserved_direct_branches_checked": 106,
+  "main_cases": [
+    {
+      "case": "normal",
+      "selected_lk_mode": 0,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "recovery",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "factory",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "advanced_factory",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "temporary_fastboot_flag",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 1
+    },
+    {
+      "case": "permanent_fastboot_flag",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "permanent_flag_recovery",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 1
+    },
+    {
+      "case": "recovery_flag",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 1
+    },
+    {
+      "case": "missing_boot_x",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 0
+    }
+  ],
+  "read_cases": [
+    {
+      "partition": "boot",
+      "offset": 0,
+      "redirected": true
+    },
+    {
+      "partition": "boot",
+      "offset": 2048,
+      "redirected": true
+    },
+    {
+      "partition": "boot",
+      "offset": 4096,
+      "redirected": false
+    },
+    {
+      "partition": "boot",
+      "offset": 4294967296,
+      "redirected": false
+    },
+    {
+      "partition": "recovery",
+      "offset": 0,
+      "redirected": true
+    },
+    {
+      "partition": "recovery",
+      "offset": 2048,
+      "redirected": true
+    },
+    {
+      "partition": "recovery",
+      "offset": 4096,
+      "redirected": false
+    },
+    {
+      "partition": "recovery",
+      "offset": 4294967296,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 0,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 2048,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 4096,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 4294967296,
+      "redirected": false
+    }
+  ],
+  "globals_memory_string_flag_gpt_helpers_preserved": true,
+  "source_attribution_retained_in_repository": true,
+  "physical_placement_admitted": false,
+  "device_accessed": false
+}

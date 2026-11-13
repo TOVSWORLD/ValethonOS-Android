@@ -1,0 +1,242 @@
+{
+  "scope": "Query-only affinity artifact build and read-only preflight; no hardware queries",
+  "build": {
+    "scope": "Query-only affinity build, not runtime acceptance",
+    "module_sha256": "a41314b4afcf554343bea7ff80c7a5ca902f3068713d3d22e9ee1ed3a7441828",
+    "module_bytes": 9088,
+    "vermagic": "4.9.337-g72940eb733af SMP preempt mod_unload modversions aarch64",
+    "config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "providers": {
+      "__sw_hweight64": {
+        "crc": 2672217816,
+        "object": "lib/hweight.o",
+        "object_sha256": "13512dc5312d97d3ace91598a1fdca0d02e2866b115f0e147928d063bbeda58d"
+      },
+      "__stack_chk_fail": {
+        "crc": 3681748385,
+        "object": "kernel/panic.o",
+        "object_sha256": "9896a5dd0d2f0c9dac87e2e4f35aa70403321a0d9f181ccb2da128663a07ac4b"
+      },
+      "get_online_cpus": {
+        "crc": 1056650697,
+        "object": "kernel/cpu.o",
+        "object_sha256": "25694d20dc7fdd502784add1d65b43af22ed2e4d47564dada570073d6e9f01ed"
+      },
+      "put_online_cpus": {
+        "crc": 3621228850,
+        "object": "kernel/cpu.o",
+        "object_sha256": "25694d20dc7fdd502784add1d65b43af22ed2e4d47564dada570073d6e9f01ed"
+      },
+      "__cpu_possible_mask": {
+        "crc": 513209405,
+        "object": "kernel/cpu.o",
+        "object_sha256": "25694d20dc7fdd502784add1d65b43af22ed2e4d47564dada570073d6e9f01ed"
+      },
+      "__cpu_online_mask": {
+        "crc": 2451244977,
+        "object": "kernel/cpu.o",
+        "object_sha256": "25694d20dc7fdd502784add1d65b43af22ed2e4d47564dada570073d6e9f01ed"
+      },
+      "module_layout": {
+        "crc": 2853544346,
+        "object": "kernel/module.o",
+        "object_sha256": "36dceaab11441bfd86cf39c23e420466e3721c2f1bacd95ecfbebf254df58572"
+      },
+      "printk": {
+        "crc": 669098057,
+        "object": "kernel/printk/printk.o",
+        "object_sha256": "78d20963b625963efe2250b4d884680ee57f273f48b0579920cd2a1edc3bbf3c"
+      },
+      "preempt_schedule": {
+        "crc": 1135659459,
+        "object": "kernel/sched/core.o",
+        "object_sha256": "31425db33095a0e0183de0fe1b15f67cc9ddfe5c1e4d60a8a3582e30a8533a7b"
+      },
+      "__stack_chk_guard": {
+        "crc": 2405927687,
+        "object": "arch/arm64/kernel/process.o",
+        "object_sha256": "af03b3013cb330bff4183e8450a4374017e55ba9833fdc07dd60e8f91418d69f"
+      },
+      "cpu_number": {
+        "crc": 2049636276,
+        "object": "arch/arm64/kernel/smp.o",
+        "object_sha256": "e94320d4c3d8a5475637412b360f0a22755723e23cb979fa4fa0fc5804285fe8"
+      },
+      "__arm_smccc_smc": {
+        "crc": 4181372486,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "strcmp": {
+        "crc": 3805619546,
+        "object": "arch/arm64/kernel/arm64ksyms.o",
+        "object_sha256": "a46a2c4aa5abf5cd0bda48f59d37ef0081be2b8f236e59fca123231d225d406f"
+      },
+      "of_property_read_string": {
+        "crc": 2950303599,
+        "object": "drivers/of/base.o",
+        "object_sha256": "dab1bbcf04c59316b64d843c46564617e3cf7e2d86822fbefeec63010794bbf8"
+      },
+      "of_get_cpu_node": {
+        "crc": 1583854159,
+        "object": "drivers/of/base.o",
+        "object_sha256": "dab1bbcf04c59316b64d843c46564617e3cf7e2d86822fbefeec63010794bbf8"
+      },
+      "of_property_read_variable_u32_array": {
+        "crc": 2458662229,
+        "object": "drivers/of/base.o",
+        "object_sha256": "dab1bbcf04c59316b64d843c46564617e3cf7e2d86822fbefeec63010794bbf8"
+      },
+      "of_machine_is_compatible": {
+        "crc": 3541879558,
+        "object": "drivers/of/base.o",
+        "object_sha256": "dab1bbcf04c59316b64d843c46564617e3cf7e2d86822fbefeec63010794bbf8"
+      },
+      "of_device_is_compatible": {
+        "crc": 320460705,
+        "object": "drivers/of/base.o",
+        "object_sha256": "dab1bbcf04c59316b64d843c46564617e3cf7e2d86822fbefeec63010794bbf8"
+      },
+      "of_find_node_opts_by_path": {
+        "crc": 4212199518,
+        "object": "drivers/of/base.o",
+        "object_sha256": "dab1bbcf04c59316b64d843c46564617e3cf7e2d86822fbefeec63010794bbf8"
+      }
+    },
+    "source_sha256": "607cc4f75ddb5de0aa437f5b2b45dca02bb0bd1d07947b86678886efdbfa3ced",
+    "policy_sha256": "8c046643fa7e4986184ceac82b531f8767ca7192bb09a36f9789e9351330e041",
+    "firmware_query_fid": "0x84000004",
+    "maximum_query_count": 4,
+    "state_changing_firmware_calls": false,
+    "loaded_on_tablet": false
+  },
+  "verification": {
+    "scope": "Query module ABI/import/instruction checks; not firmware safety proof",
+    "module_sha256": "a41314b4afcf554343bea7ff80c7a5ca902f3068713d3d22e9ee1ed3a7441828",
+    "module_bytes": 9088,
+    "imports": [
+      "__arm_smccc_smc",
+      "__cpu_online_mask",
+      "__cpu_possible_mask",
+      "__stack_chk_fail",
+      "__stack_chk_guard",
+      "__sw_hweight64",
+      "cpu_number",
+      "get_online_cpus",
+      "of_device_is_compatible",
+      "of_find_node_opts_by_path",
+      "of_get_cpu_node",
+      "of_machine_is_compatible",
+      "of_property_read_string",
+      "of_property_read_variable_u32_array",
+      "preempt_schedule",
+      "printk",
+      "put_online_cpus",
+      "strcmp"
+    ],
+    "vermagic": "4.9.337-g72940eb733af SMP preempt mod_unload modversions aarch64",
+    "all_required_crcs_match": true,
+    "smccc_query_call_sites": 1,
+    "firmware_queries": 4,
+    "query_fid": "0x84000004",
+    "firmware_call_can_be_interrupted": false,
+    "hardware_qualified": false
+  },
+  "instruction_emulation": {
+    "scope": "Actual compiled ARM64 query initializer emulation; all external kernel/SMC APIs stubbed",
+    "object_sha256": "2b6907f0fe46f94012095c27031df04f7493d3e9c7122a0909f58e3db13ba5b2",
+    "cases": [
+      {
+        "case": "compatible-score",
+        "queries": 4,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "other-current-cpu",
+        "queries": 4,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "unsupported-query",
+        "queries": 4,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "state-changing-fid-rejected",
+        "queries": 0,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "wrong-board",
+        "queries": 0,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "wrong-conduit",
+        "queries": 0,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "wrong-cells",
+        "queries": 0,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "missing-cpu-node",
+        "queries": 0,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "wrong-cpu-reg",
+        "queries": 0,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      },
+      {
+        "case": "wrong-topology",
+        "queries": 0,
+        "completed": true,
+        "native_writes": "stack/thread-preempt only"
+      }
+    ],
+    "real_firmware_calls": 0,
+    "hardware_qualified": false
+  },
+  "preflight": {
+    "scope": "kexec-affinity-query-1",
+    "module_sha256": "a41314b4afcf554343bea7ff80c7a5ca902f3068713d3d22e9ee1ed3a7441828",
+    "module_load_attempts": 0,
+    "module_loaded": false,
+    "module_unloaded": false,
+    "complete": true,
+    "rebooted": false,
+    "boot_written": false,
+    "handoff_attempted": false,
+    "cpu_hotplug_performed": false,
+    "firmware_affinity_qualified": false,
+    "preflight": "passed"
+  },
+  "shell_restoration": {
+    "normal_shell_restored": true
+  },
+  "local_tests": {
+    "run": 63,
+    "skipped": 1,
+    "failures": 0
+  },
+  "linux_probe_tests": {
+    "run": 11,
+    "failures": 0
+  },
+  "firmware_calls": 0,
+  "hardware_qualified": false,
+  "source_transfer_approved": true
+}

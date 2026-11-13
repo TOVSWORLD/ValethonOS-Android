@@ -1,0 +1,38 @@
+{
+  "scope": "Actual guarded C adapter and exact archived byte read/write wrappers; block hardware modeled",
+  "elf_sha256": "cd8965c947a382d6977c456eebff9b722f1ec2d6fed89e9f918443839dc7497f",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "read_entry": "0x4bd358e8",
+  "write_entry": "0x4bd35a88",
+  "cases": [
+    "exact_aligned_read_wrapper",
+    "partial_payload_owned_bounce",
+    "exact_aligned_write_wrapper",
+    "absolute_blob_read",
+    "short_result_no_retry_lp_read",
+    "short_result_no_retry_lp_write",
+    "seed_write_rejected",
+    "high64_not_truncated",
+    "lba32_extent_guard",
+    "prefix_first_short_read_stops"
+  ],
+  "case_count": 10,
+  "native_tests": 9,
+  "physical_context_bytes": 72,
+  "mmc_partition": 8,
+  "gpt_partition": 5,
+  "writes_confined_to_mailbox_slots": true,
+  "read_partial_uses_owned_aligned_bounce": true,
+  "lba32_extent_verified": true,
+  "callee_saved_sp_preserved": true,
+  "hardware_driver_dma_timing_or_card_bindings_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "full_prefix_native_only_with_modeled_compression": true,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/physical.c": "a70cb1b84703213ecb0e3fd5b879ad9192086d7249fc64d155ee591bf6930450",
+    "projects/firetabs-android/loader-retained/physical.h": "f298195c6669b4b01e4fa5cc8f38d05c9ae79fa2c2f32cf65efc5abf2f0765ca",
+    "scripts/validate_loader_physical.py": "f023a3079cf3dd59e3c8fcd2c5deb8feb96ed03acebe117dbaae1ac0b04db075",
+    "tests/test_loader_physical.py": "cebc164cc89def3166ad8bd2c87ccca465fdbd6f9e6940b604549bab5084bb91"
+  }
+}

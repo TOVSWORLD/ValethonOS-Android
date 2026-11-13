@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "loader_cached_identity_guard",
+  "hardware_acceptance": false,
+  "device_accessed": false,
+  "native_controls": 7,
+  "reads": "two selected metadata snapshots via caller supplied read callback",
+  "firmware_offsets": {
+    "device_id": 4,
+    "device_block_pointer": 8,
+    "card_host_pointer": 0,
+    "host_controller_base": 40,
+    "card_rca": 24,
+    "card_flags": 28,
+    "ext_csd_revision": 268,
+    "ext_csd_cache_ctrl": 109,
+    "ext_csd_cache_size": 325
+  },
+  "limits": [
+    "Cached metadata agreement is not fresh card interrogation or independent pointer provenance.",
+    "No pinned getter/read callback or hook integration is admitted.",
+    "Cache disabled is represented, but existing timed writer still rejects it.",
+    "No CID, serial, userdata, controller writes or physical trial."
+  ],
+  "sources": {
+    "identity.c": "3cd3f73a6f18e1be5984329194e2b273d912f424f997c810c0f7e53173dbde39",
+    "identity.h": "51343ab35a743bb7e3d8dabb7fb809433babfbc474dc1408debea9ac9f75c8e2",
+    "identity-memory.c": "264fa1db4b3f4db5ad14d0859bd5d0ca7c41520d60a1bc7a112147075fb772b0"
+  },
+  "timed_start_integration": {
+    "entry": "lft_start_bound",
+    "native_test_cases": 9,
+    "new_integration_case": 1,
+    "inherited_cases_repeated_by_test_subclass": 4,
+    "arm_compiled": true,
+    "arm_execution_validated": true,
+    "failure_before_controller_or_storage_callbacks": true,
+    "physical_frontend_bound": false
+  },
+  "arm_start_controls": {
+    "scope": "actual Thumb identity/start/writer instructions; metadata synthetic RAM (first five controls callback-modeled), prefix digest, block/controller/counter modeled",
+    "elf_sha256": "9c2ad19a1e95acac9c9f10c079c16f0688c1be4af76054aa38016bc2286f4a9b",
+    "cases": [
+      "bound_start_records_0x41000000",
+      "bound_start_records_0x43000000",
+      "mismatch_stops_before_controller_storage_clock_and_no_retry",
+      "unstable_stops_before_controller_storage_clock_and_no_retry",
+      "read_failure_stops_before_controller_storage_clock_and_no_retry",
+      "direct_selected_memory_discovery_start_and_forbidden_read_0x41000000",
+      "direct_selected_memory_discovery_start_and_forbidden_read_0x43000000"
+    ],
+    "case_count": 7,
+    "state_bytes": 8728,
+    "sp_callee_saved_checked": true,
+    "pinned_frontend_getter_provenance_proved": false,
+    "hardware_acceptance": false,
+    "device_accessed": false
+  },
+  "pinned_discovery": {
+    "device_slot": "0x4bd7e038",
+    "host_zero": "0x4bd7edf0",
+    "card_zero": "0x4bd7e280",
+    "lazy_device_getter_not_called": true,
+    "expected_device_and_block_descriptor_still_required": true,
+    "direct_read_callback_not_bound": false,
+    "trusted_descriptor_provenance_proved": false
+  }
+}

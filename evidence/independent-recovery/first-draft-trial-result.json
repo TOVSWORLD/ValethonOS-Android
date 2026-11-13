@@ -1,0 +1,79 @@
+{
+  "scope": "Actual complete first-draft test1, completed; originals restored; kernel entry remains unobserved",
+  "candidate_sha256": "af1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365",
+  "kernel_release": "6.18.34-valethon-draft1+",
+  "owner_observation": "Amazon logo for roughly one or two minutes, black, then logo again; later still repeating. No reset cause inferred.",
+  "minimum_observation_seconds": 300,
+  "elapsed_after_usb_departure_before_manual_return_status_seconds": 4503,
+  "agent_reboots": 0,
+  "timed_automatic_return": false,
+  "usb_capture": {
+    "complete": false,
+    "failure": "ValueError",
+    "failure_stage": "waiting_for_port",
+    "endpoint_selected": false,
+    "port_opened": false,
+    "cleanup": []
+  },
+  "usb_raw_bytes": 0,
+  "returned_readout": {
+    "exact_candidate_prefix_and_seed_verified": true,
+    "recovery_unchanged": true,
+    "current_boot_sha256": "af1dc7e2e76f94a8324f42d789a32ce1a54a827bc8390d721338caab7bce6365",
+    "record_present": true,
+    "attributable_record": false,
+    "kernel_record": false,
+    "host_control_only": true,
+    "sequence": 1,
+    "record_bytes": 73,
+    "invalid_slots": []
+  },
+  "whole_candidate_unchanged_before_restore": true,
+  "host_return_failure": {
+    "scope": "Host receipt permissions, separate from kernel/boot loop",
+    "initial_receipt_mode": "0o644",
+    "required_mode": "0o600",
+    "helper_launches_before_fix": 0,
+    "corrected_receipt_mode": "0o600",
+    "guarded_return_only_continuation": true,
+    "kernel_rewritten_or_capture_rearmed": false
+  },
+  "original_factorym_helper_launches_this_trial": 1,
+  "original_helper_returncode": 0,
+  "return_metadata_two_stable_identities": true,
+  "full_collection_passed_once": true,
+  "original_full_boot_restore_writes": 1,
+  "original_boot_restored_verified": true,
+  "recovery_unchanged_verified": true,
+  "ram_cleanup_verified": true,
+  "twrp_left_running": true,
+  "reboot_after_restore": false,
+  "capture_process_alive": false,
+  "return_process_alive": false,
+  "helper_launches_this_trial": 1,
+  "helper_returncode": 0,
+  "failed_initial_return_receipt_mode": "0o644",
+  "corrected_return_receipt_mode": "0o600",
+  "main_private_archive": {
+    "bytes": 27078552,
+    "sha256": "8f6cd8ae5a9eba67192fa6bdb806b202f7daa736de92f452cf9dd366b6421c67",
+    "lab_controller_hash_match": true
+  },
+  "post_restore_supplement": {
+    "bytes": 9265,
+    "sha256": "28eae4df6e9af69c167140e8fcc3f447ec4879d5e5a43b42e4da7c0af5088569",
+    "lab_controller_hash_match": true
+  },
+  "kernel_boot_confirmed": false,
+  "kernel_log_confirmed": false,
+  "reset_cause": "unproven",
+  "armed": false,
+  "owner_action_pending": false,
+  "approval_consumed": true,
+  "repeat_trial_selected": false,
+  "notes": [
+    "No earlier collector failure cause is inferred from this successful collection.",
+    "Kernel compile/VM/package checks are not target acceptance.",
+    "Stopped capture retained a stale armed bit; actual liveness/closure confirms stopped. Future source metadata closure corrected, not deployed or rearmed."
+  ]
+}

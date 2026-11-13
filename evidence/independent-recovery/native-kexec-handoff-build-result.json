@@ -1,0 +1,86 @@
+{
+  "status": "prepared; temporary source boot awaiting approval",
+  "image_sha256": "fef9e6cdd47bb6e7dec5ccdfa290b312a69e39c2aef119423c87652f847f964e",
+  "config_sha256": "71184d29b986824d086f9a0cb0ce6bb00d2d63723e0476a49d3381cb00603ac9",
+  "config_changes": [
+    "CONFIG_KEXEC=y",
+    "CONFIG_KEXEC_CORE=y"
+  ],
+  "linked_verification": {
+    "scope": "Linked native kexec syscall/CPU-gate/orderly-route checks; not boot acceptance",
+    "artifacts": {
+      "arch/arm64/boot/Image": {
+        "sha256": "fef9e6cdd47bb6e7dec5ccdfa290b312a69e39c2aef119423c87652f847f964e",
+        "bytes": 15268352
+      },
+      "vmlinux": {
+        "sha256": "b9d315e569adc8d75efc9d384ee5efae2ab80d21bb1ac1e7ba56eae825badef1",
+        "bytes": 20702232
+      },
+      "System.map": {
+        "sha256": "edd6d8aec54d1ffac69dbe736599f5141f65908ebb322ade8f895ef64b9045ef",
+        "bytes": 3855244
+      },
+      ".config": {
+        "sha256": "71184d29b986824d086f9a0cb0ce6bb00d2d63723e0476a49d3381cb00603ac9",
+        "bytes": 128454
+      }
+    },
+    "image_header": {
+      "text_offset": 524288,
+      "image_size": 16498688,
+      "flags": 10
+    },
+    "kernel_release": "4.9.337-g72940eb733af",
+    "required_linked_symbols": [
+      "mt8163_legacy_affinity_info",
+      "mt_kexec_secondary_off_gate",
+      "mt_psci_cpu_kill",
+      "spm_mtcmos_secondary_off_bounded",
+      "spm_mtcmos_secondary_off_check",
+      "psci_ops"
+    ],
+    "kill_calls_bounded_off": true,
+    "final_gate_calls_off_state_check": true,
+    "legacy_callback_uses_selected_conduit": true,
+    "handoff_gate_wired": true,
+    "hardware_qualified": false,
+    "handoff_admitted": false,
+    "arm64_syscall_104_is_kexec_load": true,
+    "native_final_gate_reaches_off_check": true,
+    "orderly_reboot_namespace_linked": true,
+    "failed_jump_logging_is_pretrial_blocker": false,
+    "kernel_boot_tested": false,
+    "hardware_execution": false
+  },
+  "cpu_controls_passed": 13,
+  "orderly_route_controls_passed": 22,
+  "preflight": {
+    "scope": "native-kexec-source-boot-1",
+    "runner_sha256": "da06b41356139dc6bdf32214c02bf9b765d89731ce304ab45a112bc2dd0cd237",
+    "candidate_sha256": "43ac32df0cf0b8195e70b0bc596b9a9b33750d1a6a14305640ff05cf12501327",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "candidate_write_attempts": 0,
+    "restore_write_attempts": 0,
+    "reboot_requests": 0,
+    "complete": true,
+    "original_boot_restored": false,
+    "normal_shell_restored": true,
+    "native_kernel_running": false,
+    "recovery_written": false,
+    "experimental_jump_executed": false,
+    "owner_attention_required": false,
+    "recovery_sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11",
+    "preflight": "passed"
+  },
+  "candidate_sha256": "43ac32df0cf0b8195e70b0bc596b9a9b33750d1a6a14305640ff05cf12501327",
+  "tests": {
+    "native_suite": 23,
+    "kexec_suite": 63,
+    "kexec_suite_skipped": 1,
+    "pstore_suite": 12
+  },
+  "hardware_boot_acceptance": false,
+  "experimental_jump_executed": false,
+  "failed_jump_logging": "Owner-directed follow-up after failed experimental jump, not prerequisite"
+}

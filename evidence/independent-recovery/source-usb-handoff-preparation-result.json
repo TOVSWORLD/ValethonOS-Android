@@ -1,0 +1,131 @@
+{
+  "status": "Source-plus-target console trial prepared; hardware execution pending new owner approval",
+  "date": "2026-11-10",
+  "source_package": {
+    "scope": "Source ttyGS0 console; Android configfs retains USB ownership",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "candidate_sha256": "b1386adcac2cacd6146a365100c0ab649fe75e67fb0db4217b6598b3fe8337a2",
+    "partition_bytes": 16777216,
+    "image_sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+    "image_file_bytes": 15333888,
+    "image_memory_bytes": 16564224,
+    "resolved_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "appended_dtbs": [
+      {
+        "bytes": 88655,
+        "sha256": "f79bed229e4a3eb6bd4aa1d7251869db6fa1950dad9a6b2ccca7b6975551bc48"
+      },
+      {
+        "bytes": 89019,
+        "sha256": "b0b81e5eff9f639d5100009abc87424a737e06f13707633c9cee1dc2165f1191"
+      }
+    ],
+    "original_dt_suffix_preserved": true,
+    "original_ramdisk_sha256": "0e8c340d30666c282a30e20e7686ea0aca2a9967cd9582294476a3f064d7642e",
+    "original_ramdisk_and_header_addresses_preserved": true,
+    "original_header_changes_only_kernel_size_and_id": false,
+    "new_declared_end": 7925760,
+    "original_declared_end": 7796736,
+    "original_tail_after_new_declared_end_preserved": true,
+    "original_standard_component_id_matched": false,
+    "new_standard_component_id": "7628971297305c5d6bb1d55a59c145f652e7c253",
+    "signature_verified": false,
+    "original_rollback_bytes_retained": true,
+    "boot_tested": false,
+    "experimental_jump_executed": false,
+    "failed_jump_logging_is_pretrial_blocker": false,
+    "usb_console_linked": true,
+    "serial_bind_is_opt_in": true,
+    "console_capture_at_boot_qualified": false,
+    "source_ramdisk_and_cmdline_unchanged": false,
+    "security_changes": false,
+    "watchdog_changes": false,
+    "original_header_changes_only_kernel_size_id_and_cmdline": true,
+    "source_cmdline_prefix": "console=ttyGS0",
+    "original_cmdline_suffix_preserved": true,
+    "legacy_serial_bind_enabled": false,
+    "source_shutdown_capture_qualified": false
+  },
+  "capture_build": {
+    "helper_sha256": "79a6662a8483c413108c54e31dcc5fadadb58d67922b07ac2c1359444c7d568d",
+    "receiver_sha256": "1176214e148f4218ec82091984d297add8e9cc5e4fef80ce7fb5b3f39f7895bb",
+    "restoration_controls_passed": 13,
+    "hold_flow_controls_passed": 4,
+    "helper_source_sha256": "c5db2f557571c242c44cf90cbeed6164d4c5ec359b9238a09ad227d14f03e840"
+  },
+  "audit_source_sha256": {
+    "arch/arm64/kernel/cpu-reset.S": "b2b12af1ea229f77a20bc3d5786f4e55afabca1d974a430675631c50b4ce112e",
+    "arch/arm64/kernel/cpu-reset.h": "6f8873558cb62ac5403af15f25493ecab5b73bf803b835e449712e7dcbde0666",
+    "arch/arm64/kernel/head.S": "f8cc22696326b68e69b4e858dffbe16940c257520a556cd374ba5abee70762c0",
+    "arch/arm64/kernel/machine_kexec.c": "ca952df32dd146e4ba7c05ba9c2a96832a129eeb1995b618ed5598f2222e7286",
+    "arch/arm64/kernel/process.c": "83c5443d277e1226c129e23a67ab006eabb293af87f64cd615605fd0ebacb2bb",
+    "arch/arm64/kernel/relocate_kernel.S": "dff750687c6de69aba5f46333478cfabd0a8fbebe0f7f9ea736628e09cfc49d1",
+    "arch/arm64/kernel/setup.c": "a4747254f2851047eba9520f56c04cbc066e56b439658331fcf6ad4f771c455f",
+    "arch/arm64/kernel/smp.c": "70dea9950094e649aef20eac2ffc163e718ae839502b20d729dcd98e715e34ab",
+    "drivers/misc/mediatek/usb20/mt8163/usb20.c": "cbca157a6801c3d04647f64ea82dab5887315dde3dccd1b4b698884c76a7bc57",
+    "drivers/misc/mediatek/usb20/mt8163/usb20_host.c": "225f2fac696dbaacef37abf026b72dfa21ec874a9c4d0503d43da57cf3be8217",
+    "drivers/misc/mediatek/usb20/mt8163/usb20_otg_if.c": "fd0250ac5981a9c31cbfbdc7dad4530839938faaab47e6d2ecc07ad3b257fc22",
+    "drivers/misc/mediatek/usb20/mt8163/usb20_phy.c": "bbd0cac9a11c0524e295a7815a615d02bf771308a12c6603a6af715b45e993b4",
+    "drivers/misc/mediatek/usb20/musb_core.c": "28492c02a58e8c626b2f598ddb9b70cdfd81a8b56622f7051b64575beca6ad37",
+    "drivers/misc/mediatek/usb20/musb_gadget.c": "f47356ac31f42b9e3fa3393fe0c4f9e005da51377bb0edf6f828d6aa99111e77",
+    "drivers/misc/mediatek/usb20/musb_gadget_ep0.c": "4c59a31ac0c5e56b287b0bf971183081585b997254814adf10fb3690040bc424",
+    "drivers/of/fdt.c": "d16f3132ce3a887ab3e1ff361a0d58f5dd0034073ba64b341decbf85db848c6c",
+    "drivers/usb/gadget/Makefile": "be31d94be9275abf6021cc9a6eb9bf183edff195594cacd8e5de8e33511c422e",
+    "drivers/usb/gadget/composite.c": "4f4047eed779bcbd239d519f23f3659198b0b08132a1fec9f7176ce90848cce2",
+    "drivers/usb/gadget/configfs.c": "b1652ce0af567c11c838fb27db01789cbc9749e645c1812f20b942a217e80adb",
+    "drivers/usb/gadget/function/u_serial.c": "72c3bdad40f4d5be71d4ae3a914a8ea03bf0d251b0cb01e2cfa31a42cfe2941e",
+    "drivers/usb/gadget/legacy/Makefile": "bbe256c812f2b23633a7d208f00416383fe7688f724fdd85f27a37f4fa12ccc3",
+    "drivers/usb/gadget/udc/core.c": "e2f5a844c9d7cf839c1c6186b079447bd9e465266dfa5eee2236ad3ded4cd118",
+    "drivers/usb/musb/musb_gadget.c": "abd837982771b969e46d38c809e96e4360767a6567ec23107ea2f1d5c10b6657",
+    "init/main.c": "f7110828626521dc7a2058d5cf4da47fb7fadea1a48a47ecc71f6166a7c0a50a",
+    "kernel/kexec_core.c": "d6059029914ea4eb59b1dfa8d1ca12bd721fc5e34e3108c277a1b7d1e2d5bf65",
+    "kernel/reboot.c": "c45dd70000a45c191a8f72762f8e3d5d77b1dce3bf42268514d30d5d6ac2f984"
+  },
+  "validation": {
+    "python_cases_run": 74,
+    "python_skipped": 1,
+    "python_passed": 73,
+    "actual_c_restoration_controls_passed": 13,
+    "actual_c_hold_controls_passed": 4,
+    "static_aarch64_helper_built": true,
+    "source_package_read_only_preflight": {
+      "scope": "usb-console-native-source-boot-1",
+      "runner_sha256": "da06b41356139dc6bdf32214c02bf9b765d89731ce304ab45a112bc2dd0cd237",
+      "candidate_sha256": "b1386adcac2cacd6146a365100c0ab649fe75e67fb0db4217b6598b3fe8337a2",
+      "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+      "candidate_write_attempts": 0,
+      "restore_write_attempts": 0,
+      "reboot_requests": 0,
+      "complete": true,
+      "original_boot_restored": false,
+      "normal_shell_restored": true,
+      "native_kernel_running": false,
+      "recovery_written": false,
+      "experimental_jump_executed": false,
+      "owner_attention_required": false,
+      "recovery_sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11",
+      "preflight": "passed",
+      "profile_runner_sha256": "4528e60ab212ef109bb40c87fba654d1d909400963848fa0cf3c38099605ef63"
+    },
+    "two_stage_driver_read_only_preflight": {
+      "complete": true,
+      "preflight": "passed",
+      "candidate_write_attempts": 0,
+      "restore_write_attempts": 0,
+      "reboot_requests": 0,
+      "normal_shell_restored": true
+    }
+  },
+  "new_hardware_actions": {
+    "boot_writes": 0,
+    "reboots": 0,
+    "usb_switches": 0,
+    "loads": 0,
+    "jumps": 0
+  },
+  "limits": [
+    "Source USB shutdown can end capture before CPU-off/relocation; absence of later messages does not locate the hang",
+    "Source console must pass a fresh kernel-only USB challenge before loading",
+    "No proven cause or hardware qualification from offline source analysis"
+  ]
+}

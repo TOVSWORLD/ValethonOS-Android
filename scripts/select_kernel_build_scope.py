@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 USB_PATHS={'scripts/apply_usb_port.py','scripts/select_kernel_build_scope.py'}
-MODES={'clocks','clocks-pinctrl','providers','usb-providers','usb-acm-diagnostic','diagnostic','sym827-provider','mipi-provider','dsi-provider','pwm-provider'}
+MODES={'first-draft','lab-retained','lab-log','clocks','clocks-pinctrl','providers','usb-providers','usb-acm-diagnostic','diagnostic','sym827-provider','mipi-provider','dsi-provider','pwm-provider'}
 
 
 def choose(event,changed=(),mode='diagnostic',argument_profile='none',emulated_boot=False):
