@@ -18,9 +18,10 @@ phase from missing messages after USB teardown. The next engineering interval
 is **after accepted native entry**, rather than init routing or a live logging
 baseline. Independent automatic return is still unqualified.
 
-Owner physical return was requested. Original boot is on flash; post-return
-boot/config/recovery and normal ADB verification are pending. The trial budget
-is consumed. No further load, jump or reboot is running.
+Owner returned the tablet physically. November 12 post-return verification
+passed: Android boot complete, original boot/config, unchanged recovery and
+normal unprivileged ADB restored. This is owner-assisted return. The trial
+budget is consumed. No further load, jump or reboot is being requested.
 
 [Actual result and limits](../../evidence/independent-recovery/ffs-native-entry-runtime-result.json).
 

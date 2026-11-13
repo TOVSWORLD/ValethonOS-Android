@@ -1,5 +1,5 @@
 {
-  "status": "Milestone passed: accepted native kexec entry; target absent; owner return pending",
+  "status": "Milestone passed: accepted native kexec entry; target absent; owner-assisted original-state return verified",
   "date": "2026-11-12",
   "milestone_passed": true,
   "milestone_scope": "kernel_kexec acquired its image mutex and accepted a loaded image on the diagnostic MT8163/PID1 path",
@@ -89,9 +89,14 @@
     "usb_port_observer": "Best-effort selected-port metadata polls; no serial strings"
   },
   "post_return": {
-    "owner_return_requested": true,
-    "original_boot_on_flash_before_jump": true,
-    "verification_pending": true
+    "verification_date": "2026-11-12",
+    "owner_reported_normal_boot_after_physical_return": true,
+    "android_boot_complete": true,
+    "original_boot_verified": true,
+    "original_kernel_config_verified": true,
+    "recovery_unchanged": true,
+    "normal_unprivileged_adb_restored": true,
+    "independent_automatic_return_qualified": false
   },
   "qualified": [
     "Fresh source USB kernel-console capture",

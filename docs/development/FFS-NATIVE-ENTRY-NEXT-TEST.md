@@ -4,8 +4,9 @@
 > FunctionFS retention, namespace-route and accepted native-entry checkpoints.
 > The 8,600-byte source capture was synced and hash-verified. Target USB did not
 > appear in five minutes; CPU shutdown/relocation/target entry remain unproven.
-> Original boot was restored on flash before the one actual jump. Owner return
-> was requested; post-return verification is pending.
+> Original boot was restored on flash before the one actual jump. Owner returned
+> the tablet physically; November 12 verification passed for Android boot
+> complete, original boot/config, unchanged recovery and normal unprivileged ADB.
 > [Actual result](../../evidence/independent-recovery/ffs-native-entry-runtime-result.json).
 > This trial is consumed. The procedure below is retained as history.
 
