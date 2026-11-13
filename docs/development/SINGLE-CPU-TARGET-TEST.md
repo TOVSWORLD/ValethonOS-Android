@@ -1,5 +1,20 @@
 # CPU0-only target boot experiment
 
+## Hardware outcome — November 12, 2026
+
+One load and one jump completed the source prerequisites, including fresh USB
+proof, retained FunctionFS close and native kexec entry. The target did not
+enumerate during the 300-second window. **The target-boot milestone was not
+reached.** CPU0-only arguments were insufficient; this does not locate the hang.
+Original boot was restored and verified before the jump; post-return verification
+passed November 13 after owner-assisted return: Android boot complete, original
+boot/config, unchanged recovery and normal unprivileged ADB. No automatic retry was attempted.
+
+[Sanitized runtime receipt](../../evidence/independent-recovery/single-cpu-target-runtime-result.json).
+
+The preparation below records the hypothesis and exact scope of this failed
+experiment, rather than a claim that it remains the next untried test.
+
 The next required result is **a fresh target kernel boot nonce on USB**. The
 already-proven source native-entry checkpoint is only a prerequisite, not a new
 milestone or proof that the target executed.

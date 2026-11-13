@@ -1,4 +1,28 @@
-# Current work — execute a CPU0-only target boot, November 12, 2026
+# Current experiment — CPU shutdown before device shutdown, November 13, 2026
+
+Original Android, full boot/config, recovery and normal ADB were verified after
+owner-assisted return. The next candidate changes source handoff ordering,
+parking secondaries while platform drivers are still running. Existing final
+CPU gates and relocation remain in place; target startup returns to its normal
+CPU configuration. This is a hypothesis under test, not a proven fix. Seven
+actual-C controls pass; the isolated kernel build is in progress. Hardware
+execution remains unqualified and actual target USB entry is still required.
+
+[Scope and validation](EARLY-CPU-SHUTDOWN-TEST.md).
+
+# Current work — CPU0-only trial failed; resolve handoff boundary, November 12, 2026
+
+The hardware trial below has now run once. Source prerequisites passed, but
+the target supplied no USB endpoint or nonce within 300 seconds. **Target boot
+is still unproven.** Original boot was restored before the jump; recovery was
+not written. Owner-assisted return completed November 13. Post-return checks verified Android boot complete, original boot/config, unchanged recovery and normal unprivileged ADB.
+No automatic retry. The next investigation covers device shutdown, CPU-off,
+restart/relocation and early target execution; this result does not locate the
+failure. Do not repeat the same CPU0 trial or re-count source native entry.
+
+[Actual CPU0-only result](../../evidence/independent-recovery/single-cpu-target-runtime-result.json).
+
+## Executed hypothesis and scope
 
 Owner requested continued work toward a real boot milestone. Source native entry
 is a prerequisite; it is not being counted again as target progress. The next
