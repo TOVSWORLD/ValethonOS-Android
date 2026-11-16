@@ -1,3 +1,21 @@
+# Current plan — one attributable reset target, then boot-strategy decision, November 16, 2026
+
+Owner authorized this final narrow handoff probe and requested a bolder plan if
+it fails. A one-page reset target, separate from the proven source kernel,
+appends a target-only nonce to the existing retained console and requests the
+normal hardware reset. Exact marker recovery, a fresh verified original boot
+and owner confirmation of no Power intervention are required. A reboot alone
+is insufficient. Linux target boot remains unproven.
+
+The package, offline native layout/load client, instruction controls and
+read-only tablet preflight pass. No reset-payload jump has run. Owner presence
+for the actual test is pending. After one failed/inconclusive jump, pivot to a
+bootloader-loaded minimal Linux environment and remove kexec from the critical
+path; do not automatically try another small handoff variation.
+
+[Test and terminal rule](MINIMAL-RESET-PAYLOAD-TEST.md).
+[Bolder fallback](BOOT-STRATEGY-PIVOT.md).
+
 # Verified return — November 16, 2026
 
 Android boot complete, original full boot/config, unchanged recovery and normal

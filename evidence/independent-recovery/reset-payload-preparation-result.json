@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-16",
+  "status": "One-shot reset experiment prepared; not executed",
+  "target_kind": "reset-payload-v1",
+  "reset_image_sha256": "8686490d8c165fd657c3ab1a65e23d1c45ee40c108d20c0acf28d659b2772d37",
+  "reset_image_bytes": 4096,
+  "payload_source_sha256": "50271daea8af314e6f19ba6722608f74bc719b4ae4e4de3de90758b35fbec722",
+  "source_boot_candidate_sha256": "0851746a5946472578c9ee99cbf18c5b8fa5de149e716e88e77a187557886e21",
+  "source_kernel_image_sha256": "d556acbc3edada086df0787c1922f6513182396504092248b41ca07f98d9cac3",
+  "original_boot_restored_and_verified_on_current_tablet": true,
+  "validation": {
+    "regression_suite_tests_passed": 906,
+    "regression_suite_skipped": 0,
+    "additional_two_stage_policy_tests_passed": 6,
+    "actual_load_client_controls_passed": 12,
+    "load_client_controls_host": "macOS with CPU-set compatibility shim; mocked syscalls",
+    "offline_preview_not_loadable": true,
+    "read_only_tablet_preflight_passed": true,
+    "candidate_writes": 0,
+    "restore_writes": 0,
+    "reboot_requests": 0,
+    "load_attempts": 0,
+    "jump_requests": 0,
+    "normal_shell_restored": true
+  },
+  "hardware_execution": false,
+  "target_payload_entry_proven": false,
+  "linux_target_boot_proven": false,
+  "terminal_rule": "One unsuccessful or inconclusive actual jump activates bootloader/minimal-initramfs strategy review; no automatic variant or retry",
+  "owner_presence_for_actual_test": "pending"
+}
