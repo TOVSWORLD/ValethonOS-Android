@@ -1,6 +1,6 @@
 {
   "date": "2026-11-16",
-  "status": "Attributable minimal target execution and verified original Android return; owner Power confirmation pending",
+  "status": "PASS: target-only marker recovered and automatic return to verified original Android confirmed",
   "target_kind": "reset-payload-v1",
   "target_image_sha256": "8686490d8c165fd657c3ab1a65e23d1c45ee40c108d20c0acf28d659b2772d37",
   "target_image_bytes": 4096,
@@ -22,9 +22,9 @@
   "original_full_boot_and_config_verified": true,
   "recovery_unchanged_verified": true,
   "normal_shell_restored": true,
-  "owner_used_power": null,
-  "automatic_reset_qualified": false,
-  "owner_confirmation_pending": true,
+  "owner_used_power": false,
+  "automatic_reset_qualified": true,
+  "owner_confirmation_pending": false,
   "target_linux_boot_proven": false,
   "source_capture": {
     "source_console_proven": true,
@@ -48,6 +48,10 @@
     "Proof is for the one-page reset payload, not a Linux kernel",
     "Full-size Linux Image relocation and Linux initialization remain unproven",
     "Source USB still ends at teardown; target-only retained marker provides execution evidence",
-    "Automatic reset requires owner confirmation of no Power intervention"
-  ]
+    "This does not qualify automatic recovery from arbitrary Linux startup hangs"
+  ],
+  "experiment_success": true,
+  "boot_strategy_pivot_triggered": false,
+  "owner_confirmation_date": "2026-11-16",
+  "qualified_reset_scope": "Deliberate software reset by this executing minimal payload; not an independent hang-recovery watchdog"
 }

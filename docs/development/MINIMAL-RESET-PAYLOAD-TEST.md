@@ -5,8 +5,9 @@
 The single jump recovered exactly one fresh target-only marker in the retained
 console; the marker was absent before loading. **The one-page target payload
 executed.** A different boot reached original Android; exact boot/config,
-unchanged recovery and normal ADB were verified. Owner confirmation of no Power
-intervention is pending before automatic reset is qualified. One source boot,
+unchanged recovery and normal ADB were verified. The owner confirmed no Power
+intervention, qualifying the deliberate reset and automatic return. **This test
+passed.** This is not a hang-recovery watchdog qualification. One source boot,
 one original restoration, one load and one jump; no retry.
 
 This proves the minimal payload path, not full-size Linux Image relocation or

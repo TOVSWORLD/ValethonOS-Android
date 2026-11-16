@@ -1,5 +1,9 @@
 # Bolder fallback: remove kexec from the boot path
 
+November 16 outcome: the reset-payload test passed, including owner-confirmed
+automatic return. Its failure-triggered pivot is not activated. This document
+remains a strategic fallback; Linux target boot is still unproven.
+
 The owner requested this pivot if the single minimal reset-payload test fails
 or remains inconclusive. Preparation is authorized; a new hardware procedure
 must be concrete and have a reviewed restoration path before it runs.

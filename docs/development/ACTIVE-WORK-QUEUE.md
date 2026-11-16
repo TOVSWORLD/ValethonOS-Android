@@ -1,14 +1,15 @@
-# Actual milestone — minimal target payload executed, November 16, 2026
+# Passed milestone — target payload executed and reset automatically, November 16, 2026
 
 One reset-payload jump recovered exactly one target-only retained marker that
 was absent before loading. This proves execution of the one-page target. A
 different boot returned to original Android with full boot/config, recovery and
-normal ADB verified. Owner confirmation of no Power intervention is pending
-before automatic reset is qualified. No retry; trial budget consumed.
+normal ADB verified. Owner explicitly confirmed no intervention: the deliberate
+payload reset and automatic return are qualified. No retry; trial budget consumed.
 
 Linux target boot and full-size Image relocation remain unproven. Do not infer
 that a small-payload pass proves every stage of the prior Linux handoff. The
-bolder fallback remains conditional on the reset experiment qualification.
+failure-triggered bolder fallback is not activated because this experiment passed.
+Automatic recovery from arbitrary Linux hangs remains unqualified.
 
 [Exact target-execution receipt](../../evidence/independent-recovery/reset-payload-runtime-result.json).
 
