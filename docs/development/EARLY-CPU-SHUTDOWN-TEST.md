@@ -7,7 +7,9 @@ early secondary-CPU hardware off gate passed before device shutdown. Target USB
 never appeared during the 300-second window, so **target boot remains unproven**.
 The ordering change was insufficient. The capture cannot establish completion
 of device shutdown, the later final gate, relocation or target entry. Original
-boot was restored before jumping; owner-assisted return is pending. No retry.
+boot was restored before jumping. Owner-assisted return was verified November
+16: Android boot complete, original boot/config, unchanged recovery and normal
+unprivileged ADB. No retry.
 
 [Sanitized hardware receipt](../../evidence/independent-recovery/early-cpu-shutdown-runtime-result.json).
 

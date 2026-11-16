@@ -1,3 +1,11 @@
+# Verified return — November 16, 2026
+
+Android boot complete, original full boot/config, unchanged recovery and normal
+unprivileged ADB verified after owner-assisted return. The early CPU-off gate
+passed in the November 13 experiment; target boot remains unproven. No new
+source boot, load or jump has run. All previous trial budgets remain consumed.
+Continuing read-only investigation of the remaining handoff interval.
+
 # Current result — early CPU-off gate passed; target still absent, November 13, 2026
 
 The handoff-order experiment ran once. Source boot and original-boot restoration

@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-16",
+  "scope": "Read-only comparison after verified owner-assisted return",
+  "new_boot_load_or_jump": false,
+  "stock_boot_cpu_mode_available": false,
+  "stock_kcore_configured": false,
+  "stock_devkmem_configured": false,
+  "stock_boot_cpu_mode_symbol_present": false,
+  "stock_boot_log_mode_message_present": false,
+  "normal_shell_restored": true,
+  "upstream_refs": ["torvalds/linux v4.9", "torvalds/linux v4.14", "torvalds/linux v4.19"],
+  "findings": [
+    "The v4.9, v4.14 and v4.19 normal kexec_core paths all omit syscore_shutdown; its absence in this profile is not evidence of an accidental missing generic step",
+    "The tested relocation assembly matches upstream v4.9 and v4.14 apart from trailing whitespace",
+    "The tested CPU restart header already uses the __pa_symbol translation present in v4.14",
+    "The tested reset assembly matches upstream instructions; its idmap section also has a writable attribute",
+    "The tested machine_kexec adds reviewed CPU gates and the corrected instruction-cache end address relative to v4.9",
+    "Original-kernel interface checks do not establish which exception-level branch the failed diagnostic-source jump used"
+  ],
+  "conclusion": "No newly established generic restart omission or relocation instruction difference justifies a speculative fix from this comparison. Target boot and the phase after USB teardown remain unproven.",
+  "sources": [
+    "https://github.com/torvalds/linux/blob/v4.9/kernel/kexec_core.c",
+    "https://github.com/torvalds/linux/blob/v4.14/kernel/kexec_core.c",
+    "https://github.com/torvalds/linux/blob/v4.19/kernel/kexec_core.c",
+    "https://github.com/torvalds/linux/blob/v4.9/arch/arm64/kernel/machine_kexec.c",
+    "https://github.com/torvalds/linux/blob/v4.9/arch/arm64/kernel/cpu-reset.S",
+    "https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/cpu-reset.h",
+    "https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/relocate_kernel.S"
+  ]
+}

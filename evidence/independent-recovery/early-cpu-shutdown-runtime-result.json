@@ -32,6 +32,14 @@
   "post_jump_device_commands_sent": false,
   "automatic_retry": false,
   "trial_budget_consumed": true,
-  "post_return_verification": "Pending owner-assisted return",
+  "post_return_verification": {
+    "date": "2026-11-16",
+    "boot_complete": true,
+    "original_boot_verified": true,
+    "original_config_verified": true,
+    "recovery_verified": true,
+    "normal_shell_restored": true,
+    "return_method": "owner-assisted hard boot"
+  },
   "conclusion": "Early source CPU shutdown succeeded while platform drivers were running, but target USB remained absent. This change alone did not achieve target boot. Device shutdown completion, relocation and target entry remain unproven; USB teardown hides later source messages."
 }
