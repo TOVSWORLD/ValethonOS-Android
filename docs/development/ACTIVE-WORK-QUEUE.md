@@ -1,4 +1,23 @@
-# Current work — full 6.18 kernel/PID1 RAM boot, November 16, 2026
+# Current work — UART bench preparation, November 16, 2026
+
+Owner requested a route out of blind boot trials. Receive-only UART capture and
+an exact-hash ACK UART DT preview are prepared; five host controls pass. No
+new tablet commands or trial ran. The tested ACK DT had UART0 disabled and no
+UART console arguments; built-in driver support exists. Source console suppression
+and earlycon's dependence on inherited hardware initialization are explicit.
+
+Actual board TX pad, voltage and a readable baseline are still unknown. Next is
+one competent bench session to identify/measure TX and capture the known-working
+boot, using receiver RX/ground only after electrical compatibility is established.
+Owner has no test instruments or UART adapter. The earlier annotated Douglas
+board recovery reference has been recovered and linked; it does not establish
+UART pads or voltage. Reuse it for bench layout identification. No purchase, booking, opening or probe connection
+has been performed. Do not label physical UART or Linux boot as qualified.
+
+[Prepared bench procedure and capture commands](UART-FIRST-CAPTURE.md).
+[Preparation receipt](../../evidence/independent-recovery/uart-test-preparation.json).
+
+# Completed attempt — full 6.18 kernel/PID1 RAM boot, November 16, 2026
 
 Owner requested Linux boot after the reset-payload milestone. The complete
 pinned 6.18.34 draft is prepared for the proven native RAM path at its required
