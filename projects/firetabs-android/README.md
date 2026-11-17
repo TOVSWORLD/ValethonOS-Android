@@ -12,6 +12,13 @@ apps, supported browsers, graphics, audio, video, networking, storage, power man
 updates, and enforcing SELinux. Document hardware absent from a device separately from
 hardware present but not supported by the port.
 
+## Hardware reference for kernel work
+
+Start with the [current Douglas hardware/kernel contract](../../docs/development/DOUGLAS-HARDWARE-CONTRACT.md).
+It consolidates pinned working-kernel source, registers/interrupts/provider resources,
+peripheral requirements, current build/device evidence and unresolved facts across
+20 subsystem areas. The older support matrix is a dated source audit, not live status.
+
 ## Working materials
 
 Shared paths remain at the repository root so existing source locks and commands work:

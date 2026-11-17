@@ -1,5 +1,9 @@
 # MT8163 integration after the generic compiler baseline
 
+> Historical source/integration snapshot. Use the [current hardware contract](../../../docs/development/DOUGLAS-HARDWARE-CONTRACT.md)
+> for consolidated implementation status and later boot evidence. Statements below
+> about routes/builds not yet established describe their original audit date.
+
 This queue targets the pinned ACK in `support-matrix.json`. A successful generic
 ARM64 defconfig build only verifies a compiler/source combination. It does not
 advance the douglas `kernel_compile` gate in `../validation.json`.

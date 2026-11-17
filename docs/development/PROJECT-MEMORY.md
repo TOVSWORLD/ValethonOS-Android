@@ -18,6 +18,17 @@ Current execution plan: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md).
 Immediate work is documentation/source tracing, not buying tools, booking a bench,
 opening the tablet or launching another boot experiment.
 
+## Hardware knowledge base
+
+The owner requires a complete kernel-facing hardware reference on GitHub,
+derived from board documentation and older working kernels. Use
+[DOUGLAS-HARDWARE-CONTRACT.md](DOUGLAS-HARDWARE-CONTRACT.md), covering20
+subsystem areas, plus the allowlisted resource inventory for430 working-source
+and152 ACK DT nodes. This is the starting point for implementation; do not reduce
+the project back to UART alone or repeat component discovery already recorded.
+Unknowns remain explicit rather than invented. Historical source matrices are
+not live build/runtime status.
+
 ## Owner decisions that must survive a restart
 
 - Use the direct GitHub connector for GitHub. Do not fall back to the browser or

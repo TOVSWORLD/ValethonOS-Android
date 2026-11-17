@@ -5,6 +5,16 @@ kernel source come first. No technician, equipment purchase or physical
 measurement is assumed necessary. This supersedes the earlier selection of a
 bench session as the immediate next action.
 
+## Hardware-first implementation basis
+
+Owner requires the complete kernel-facing hardware knowledge base, not only a
+UART investigation. The [central contract](DOUGLAS-HARDWARE-CONTRACT.md) now
+indexes20 subsystems, source-derived details, resource dependencies and current
+evidence. The generated inventory covers430 working-source and152 ACK resource
+nodes without identity/boot-argument data. Use it to identify a violated or missing
+boot contract and scope the next implementation. Later peripherals stay documented
+without becoming prerequisites for the first Linux/PID1 milestone.
+
 ## Milestone and evidence
 
 The milestone remains attributable maintained-kernel startup on the tablet,

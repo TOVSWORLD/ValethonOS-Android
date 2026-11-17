@@ -1,5 +1,9 @@
 # Douglas diagnostic-boot contract — issue #21
 
+> Historical source/integration snapshot. Use the [current hardware contract](DOUGLAS-HARDWARE-CONTRACT.md)
+> for consolidated implementation status and later boot evidence. Statements below
+> about routes/builds not yet established describe their original audit date.
+
 This is source evidence and a test design, not a bootable image or permission to
 modify the tablet. No temporary-boot route has been established for the user's
 Fire OS 5.7.1.0 tablet. Do not execute unlock/recovery helpers as a discovery step.

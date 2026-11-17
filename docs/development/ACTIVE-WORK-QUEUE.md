@@ -1,5 +1,11 @@
 # Current work — documentation-first UART contract, November 17, 2026
 
+Current hardware knowledge base: [Douglas hardware/kernel contract](DOUGLAS-HARDWARE-CONTRACT.md),
+covering20 subsystem areas and resource inventories for430 working-source/152
+ACK nodes. This is the implementation starting point requested by the owner.
+Use its source/dependency facts and explicit gaps to scope the next boot change;
+do not rediscover peripherals or conflate historical audit status with current work.
+
 Read [project memory](PROJECT-MEMORY.md) and the
 [next milestone plan](NEXT-MILESTONE-PLAN.md) before resuming. Owner requires us
 to use older working kernels and existing board documentation before assuming
