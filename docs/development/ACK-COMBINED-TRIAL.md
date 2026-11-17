@@ -3,7 +3,10 @@
 Prepared November 17, 2026 under #346; evidence/capture tracked in #348 and
 phase outcome in #344. This supersedes UART-first as the immediate execution
 plan. Hardware/source reference: [Douglas contract](DOUGLAS-HARDWARE-CONTRACT.md).
-No new tablet attempt has run during preparation. Linux on Douglas remains unproven.
+The single owner-attended hardware attempt has now run. Full Image integrity and
+Linux C entry through start_kernel passed; complete initialization/PID1 remain
+unproven. [Runtime receipt](../../evidence/independent-recovery/ack-combined-runtime-result.json).
+Original Android state was verified after return. The approval is consumed; no retry.
 
 ## Concrete change
 

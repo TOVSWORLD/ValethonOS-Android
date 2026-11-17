@@ -40,8 +40,11 @@ source for vendor command sequences and opaque configuration payloads.
   Its October 25 statements such as “uncompiled” are historical, not current build status.
 - Compiled complete draft identity and object hashes:
   [first-kernel-draft receipt](../../evidence/independent-recovery/first-kernel-draft-result.json).
-- Actual latest tablet outcome: [ACK RAM result](../../evidence/independent-recovery/ack-native-runtime-result.json).
-  Entry stub and automatic Android return passed; Linux/PID1 startup did not.
+- Latest tablet outcome: [combined ACK RAM result](../../evidence/independent-recovery/ack-combined-runtime-result.json).
+  Full padded Image integrity, actual entry/MMU/virtual transition and start_kernel
+  passed on Douglas. Complete kernel initialization and enforcing PID1/USB remain
+  unproven. Earlier [unattributed ACK trial](../../evidence/independent-recovery/ack-native-runtime-result.json)
+  is preserved as history, not current execution status.
 - [Full-image offline audit](../../evidence/independent-recovery/ack-full-image-offline-audit.json)
   checks relocation and the exact pre-MMU instruction path. It is not hardware acceptance.
 

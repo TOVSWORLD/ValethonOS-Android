@@ -9,15 +9,32 @@ New user instructions and newer verified results supersede this snapshot.
 The objective is maintained Linux/Android on the 2017 Fire HD 8, douglas/KFDOWI,
 ultimately a supported ValethonOS control panel. Interim Android is a working
 recovery/development environment, not completion. The full ACK 6.18.34 draft
-compiled and booted in a generic VM; **Linux startup on this tablet is unproven**.
-Last verified tablet state: original Android boot complete, exact original boot
-and config, unchanged recovery, normal unprivileged ADB. This is a November 16
-observation, not a claim that hardware was checked again on November 17.
+has now reached actual Linux start_kernel on Douglas: the combined trial proved
+full padded destination Image integrity and every entry/MMU checkpoint in order.
+**Complete kernel initialization and enforcing PID1/USB remain unproven.**
+Last verified tablet state (November17): a different completed original Android
+boot, exact original boot/config, unchanged recovery and normal unprivileged ADB.
+Owner Power attestation is pending; precise reset cause remains unqualified.
 
 Current execution plan: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md).
-The combined integrity/Linux-entry candidate and its protected single-attempt
-package are offline-qualified and ready for owner-attended testing. UART is not a prerequisite. No tablet test ran
-during November 17 preparation.
+The combined hardware attempt is complete and consumed. No automatic retry.
+UART is not a prerequisite. Next work is the early C initialization boundary
+between the proven start_kernel checkpoint and the absent attributed banner/PID1.
+
+## November 17 hardware milestone
+
+Receipt: evidence/independent-recovery/ack-combined-runtime-result.json.
+One protected source boot/restore, one load, one jump. Original boot restored and
+read back before jump; recovery never written. Fresh marker chain was absent
+before load and recovered once, unique and ordered: image_verified, linux_entry,
+before_mmu, after_mmu, virtual_entry, start_kernel. No map_refused/corrupt marker.
+The retained trace ends at start_kernel. This does not identify the next failing
+instruction or prove full initialization. Target USB endpoint/PID1 did not appear.
+The legacy controller outcome ack-boot-unproven refers to its stricter banner/
+PID1 acceptance; it must not erase the independently proven Linux C milestone.
+Do not repeat relocation, entry, MMU or metadata-only tests as unresolved work.
+Private runtime: out/recovery-linux-pivot/ack-combined-trial-runtime-1.
+Trial authorization and its source/jump children are consumed.
 
 ## November 17 combined candidate
 

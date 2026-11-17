@@ -1,16 +1,19 @@
-# Current work — combined maintained-kernel candidate, November 17, 2026
+# Current work — tablet Linux C-entry milestone passed, November 17, 2026
 
-[Concrete test](ACK-COMBINED-TRIAL.md), [plan](NEXT-MILESTONE-PLAN.md),
-[project memory](PROJECT-MEMORY.md). Exact instrumented full ACK Image passes both
-Cortex-A53 VM modes, five Linux checkpoints in order and enforcing PID1 probe.
-Offline integrity/reset controls are separate; hardware Linux remains unproven.
-No new tablet commands ran during preparation. Bound offline policy validation,
-all11 qualification controls and953 regression tests pass. Android evidence check
-passes; repository integrity retains its known empty test-helper failure.
-The package is ready: request owner presence for one protected source boot/restore and
-one RAM jump. Existing #344/#346/#348 stay open with historical failures retained.
-UART is supporting work, not a prerequisite. Do not repeat hardware discovery,
-old consumed trials, equipment questions or generic logger-only experiments.
+[Runtime receipt](../../evidence/independent-recovery/ack-combined-runtime-result.json):
+full relocated padded Image integrity and all five actual Linux checkpoints
+through MMU enable/virtual entry/start_kernel passed on Douglas. One source
+boot/restore and one load/jump consumed; no retry. Original Android returned on a
+different completed boot; exact original boot/config, unchanged recovery and
+normal ADB verified. Owner Power attestation pending; reset cause unqualified.
+Complete kernel initialization and enforcing PID1/target USB remain unproven.
+
+Next: inspect exact pinned early C initialization after start_kernel, using the
+working-source hardware contract. The retained trace ends at that checkpoint;
+do not call it the exact fault location or repeat pre-entry logging gates.
+Preserve #344/#346/#348 history and this milestone. UART is supporting work.
+See [memory](PROJECT-MEMORY.md), [plan](NEXT-MILESTONE-PLAN.md),
+[completed trial](ACK-COMBINED-TRIAL.md).
 
 # Historical selection — UART bench preparation, November 16, 2026
 
