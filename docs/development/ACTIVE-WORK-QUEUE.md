@@ -11,11 +11,20 @@ A 31-second reset-only hardware deadline is armed at entry, with its target
 driver disabled. Its physical behavior remains unqualified; owner-assisted
 return may still be needed. The source boot image is restored before jumping.
 
-Full regression, updated supervisor/instruction/capture controls, aligned C
-load-client controls and read-only tablet preflight pass. No new boot/load/jump
-has run under this scope. Owner availability for this new full-kernel test is
-pending. Success requires attributable 6.18 kernel output and the controlled
-PID1 USB stream; a handoff marker or ordinary return is insufficient.
+One protected source boot/restore and one native load/jump have now run. The
+original boot was verified before jumping. The metadata entry/readback marker
+was recovered; no attributable 6.18 kernel records or PID1 USB endpoint appeared.
+Android returned on a different completed boot, with exact original boot/config,
+unchanged recovery and normal ADB verified. Owner Power confirmation is pending;
+precise watchdog reset cause is unqualified. No retry; authorization consumed.
+
+The current result is **ACK boot unproven**, not a Linux milestone. Investigate
+the full Image entry and early architecture startup boundary before proposing
+another device test. The entry marker cannot verify the full relocated Image,
+its first kernel instructions, MMU enable or later driver initialization. Do not
+spend another trial on USB/logging settings without evidence of that failure.
+
+[Runtime receipt](../../evidence/independent-recovery/ack-native-runtime-result.json).
 
 [Concrete Linux test](ACK-LINUX-RAM-BOOT.md).
 

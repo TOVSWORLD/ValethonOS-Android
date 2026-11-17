@@ -1,7 +1,13 @@
 # Full 6.18 kernel and PID1 through the native RAM path
 
 Prepared November 16, 2026 after the attributable reset-payload test passed.
-No full ACK RAM-boot jump has run under this scope.
+One full ACK RAM-boot jump ran on November 16. It did not establish Linux
+startup or PID1. Android returned on a different completed boot, with original
+boot/config, recovery and normal ADB verified. Owner Power confirmation is
+pending. The target entry/readback marker survived; USB capture was empty.
+The 31-second deadline's exact reset cause remains unqualified. No retry.
+
+[Runtime receipt](../../evidence/independent-recovery/ack-native-runtime-result.json).
 
 The required result is the pinned **6.18.34-valethon-draft1+ kernel and its
 enforcing PID1 executing on the tablet**, with a fresh nonce-bound USB stream.
