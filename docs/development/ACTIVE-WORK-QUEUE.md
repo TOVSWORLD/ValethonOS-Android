@@ -1,24 +1,16 @@
-# Current work — documentation-first UART contract, November 17, 2026
+# Current work — combined maintained-kernel candidate, November 17, 2026
 
-Current hardware knowledge base: [Douglas hardware/kernel contract](DOUGLAS-HARDWARE-CONTRACT.md),
-covering20 subsystem areas and resource inventories for430 working-source/152
-ACK nodes. This is the implementation starting point requested by the owner.
-Use its source/dependency facts and explicit gaps to scope the next boot change;
-do not rediscover peripherals or conflate historical audit status with current work.
-
-Read [project memory](PROJECT-MEMORY.md) and the
-[next milestone plan](NEXT-MILESTONE-PLAN.md) before resuming. Owner requires us
-to use older working kernels and existing board documentation before assuming
-measurement, a technician or equipment purchase is necessary. No owner decision
-or equipment question is pending. No physical action or new boot test is selected.
-
-Next technical work: trace exact legacy/working UART initialization and pin/power
-routing into board/electrical documentation. Pinned 4.9 source already retrieved;
-UART0/26MHz/GPIO79 RX/GPIO80 TX corroborated. Config, linked functions and
-archived live DT identify the actual vendor UART implementation. PCB contact and UART-bank supply
-remain unresolved, not declared undocumented. Finish the cited source/board
-contract before selecting the next test. Keep existing #346 active, #348 linked;
-retain all failed trials and do not repeat them as new strategies.
+[Concrete test](ACK-COMBINED-TRIAL.md), [plan](NEXT-MILESTONE-PLAN.md),
+[project memory](PROJECT-MEMORY.md). Exact instrumented full ACK Image passes both
+Cortex-A53 VM modes, five Linux checkpoints in order and enforcing PID1 probe.
+Offline integrity/reset controls are separate; hardware Linux remains unproven.
+No new tablet commands ran during preparation. Bound offline policy validation,
+all11 qualification controls and953 regression tests pass. Android evidence check
+passes; repository integrity retains its known empty test-helper failure.
+The package is ready: request owner presence for one protected source boot/restore and
+one RAM jump. Existing #344/#346/#348 stay open with historical failures retained.
+UART is supporting work, not a prerequisite. Do not repeat hardware discovery,
+old consumed trials, equipment questions or generic logger-only experiments.
 
 # Historical selection — UART bench preparation, November 16, 2026
 

@@ -1,0 +1,23 @@
+{
+  "scope": "Exact instrumented Image generic Cortex-A53 VM; no tablet or physical USB qualification",
+  "passed": true,
+  "image_sha256": "a548bff1b6d8b67ffe1b45ed112c16c64db35fdcfc7ff592357c959758677f2e",
+  "vm_initramfs_sha256": "8d5455b497989b84740aeadcc6f1a6837356145ed5be960b71f0a8164ac2c373",
+  "virtualization": "off",
+  "stages": {
+    "linux_entry": true,
+    "before_mmu": true,
+    "after_mmu": true,
+    "virtual_entry": true,
+    "start_kernel": true
+  },
+  "stages_in_order": true,
+  "enforcing_pid1_filesystem_probe": true,
+  "metadata_integrity_stub_executed": false,
+  "hardware_execution": false,
+  "disk_attached": false,
+  "network_attached": false,
+  "tablet_commands": false,
+  "raw_log_sha256": "1adf012a1154f7402ca66e2ae7090ba861eff0a3e540dd760b7e43fbbb24bb2c",
+  "elapsed_seconds": 5.869
+}

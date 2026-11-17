@@ -15,8 +15,26 @@ and config, unchanged recovery, normal unprivileged ADB. This is a November 16
 observation, not a claim that hardware was checked again on November 17.
 
 Current execution plan: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md).
-Immediate work is documentation/source tracing, not buying tools, booking a bench,
-opening the tablet or launching another boot experiment.
+The combined integrity/Linux-entry candidate and its protected single-attempt
+package are offline-qualified and ready for owner-attended testing. UART is not a prerequisite. No tablet test ran
+during November 17 preparation.
+
+## November 17 combined candidate
+
+[Concrete trial](ACK-COMBINED-TRIAL.md): complete padded-Image SHA at destination,
+five markers inside actual Linux entry/MMU/start_kernel, existing enforcing PID1.
+Exact instrumented Image a548bff1b6d8b67ffe1b45ed112c16c64db35fdcfc7ff592357c959758677f2e
+passed both Cortex-A53 QEMU virtualization modes with all five stages in order
+and enforcing PID1 probe. All11 offline qualification controls and953 regression
+tests pass, with no skipped tests; Android evidence check passes. Repository
+integrity still flags the unchanged empty test helper at
+tests/test_source_usb_shutdown.py:201. This is VM evidence, not tablet Linux/USB acceptance.
+Source-derived DT corrections enable legacy PSCI status and normalize overlapping
+RAM declarations without changing their union; neither is a proven diagnosis.
+New scope ack-linux-combined-two-stage-2 binds the prequalified unspent reference
+Image/token, fresh PID1 and single-attempt controller. Old approvals stay consumed.
+Private candidate: out/recovery-linux-pivot/ack-combined-candidate-2; PID1:
+ack-combined-initramfs-1 in that same parent. Do not print nonce/raw metadata.
 
 ## Hardware knowledge base
 
@@ -130,7 +148,6 @@ Do not infer UART voltage from a VIO18 regulator used by another peripheral.
 - Current issues remain #344 (phase), #346 (current implementation/recovery) and
   #348 (capture evidence). Preserve history; do not create more micro-issues.
 
-No exact electrical test is ready yet. The next deliverable is a source-backed
-UART-to-board connection and initialization contract, with precise unresolved
-claims and citations. Propose measurement only for a specific remaining question
-that source/board documentation does not settle, and explain why.
+The next action is the combined software test after bound offline validation and
+owner availability. Physical UART remains an optional supporting investigation;
+do not make board contact/voltage resolution a gate for this candidate.

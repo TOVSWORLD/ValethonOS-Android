@@ -24,7 +24,10 @@ SCOPE_TWO_STAGE = 'ack-linux-native-two-stage-1'
 
 def validate(a):
     p = read(a.policy)
-    if (p.get('scope') != SCOPE_TWO_STAGE or p.get('target_kind') != 'ack-linux-v1' or
+    combined = getattr(a, 'combined', False)
+    required_scope = 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
+    required_kind = 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    if (p.get('scope') != required_scope or p.get('target_kind') != required_kind or
             p.get('target_hardware_deadline_seconds') != 31 or p.get('target_nr_cpus') != 1 or
             p.get('target_cpu_limit') is not None):
         raise ValueError('Exact maintained-kernel RAM-boot policy required')
@@ -50,6 +53,20 @@ def validate(a):
         raise ValueError('Completed entry-stub instruction qualification required')
     if q.get('entry_source_sha256') != digest(ROOT / 'projects/firetabs-android/native-kexec/ack_trampoline.S'):
         raise ValueError('Entry assembly changed after instruction qualification')
+    if combined:
+        from verify_ack_combined_bundle import verify
+        reference = getattr(a, 'combined_reference', None)
+        if reference is None or digest(reference / 'report.json') != p['combined_reference_report_sha256']:
+            raise ValueError('Exact prequalified combined reference required')
+        result = verify(reference / 'report.json', a.kernel_package, a.fdtget)
+        if result['instrumented_image_sha256'] != p['combined_target_image_sha256']:
+            raise ValueError('Qualified Image differs')
+        qualification = read(a.combined_qualification)
+        if (digest(a.combined_qualification) != p['combined_qualification_sha256'] or
+                qualification.get('all_tests_passed') is not True or qualification.get('tests_skipped') != 0 or
+                qualification.get('image_sha256') != p['combined_target_image_sha256'] or
+                any(digest(ROOT / path) != value for path,value in qualification.get('source_sha256', {}).items())):
+            raise ValueError('Completed exact combined qualification required')
     return p
 
 
@@ -98,10 +115,19 @@ def run(a):
     bundle = a.output / 'target-private'; client = a.output / 'client-private'
     k, i = a.kernel_package, a.initramfs_package
     nonce = (i / 'trial-nonce-private.bin').read_bytes()
-    m = prepare((inputs / 'live.dtb').read_bytes(), (inputs / 'iomem.txt').read_text(),
+    combined = getattr(a, 'combined', False)
+    builder = prepare
+    extra = {}
+    if combined:
+        from prepare_ack_combined_bundle import prepare as builder
+        reference = read(a.combined_reference / 'report.json')
+        extra = dict(system_map=(k / 'System.map').read_text(), trial_id=reference['trial_id'])
+    m = builder((inputs / 'live.dtb').read_bytes(), (inputs / 'iomem.txt').read_text(),
                 (k / 'draft.dtb').read_bytes(), (k / 'Image').read_bytes(), (k / 'resolved.config').read_bytes(),
                 (i / 'initramfs.cpio.gz').read_bytes(), read(i / 'report.json'), nonce, linked,
-                bundle, a.fdtget, a.fdtput)
+                bundle, a.fdtget, a.fdtput, **extra)
+    if combined and m['target_image_sha256'] != p['combined_target_image_sha256']:
+        raise ValueError('Fresh bundle differs from VM-qualified Image')
     c = build(ROOT / 'projects/firetabs-android/native-kexec/load_client.c', bundle / 'report.json', client)
     files = {n: bundle / n for n in ['image.bin', 'metadata.bin', 'initrd.bin']}
     files.update({'native-load': client / 'native-load', 'source-acm-hold': a.helper,
@@ -122,24 +148,27 @@ def run(a):
                                 capture_output=True, timeout=120, check=True)
     if json.loads(staged.stdout) != {name: digest(path) for name, path in files.items()}:
         raise ValueError('Staged full ACK bundle differs')
+    jump_options = dict(combined_kernel_package=a.kernel_package) if combined else {}
     capture = read(a.capture_report)
     before = jump(d, destination, bundle / 'report.json', client / 'build-result.json', linked,
-                  a.output / 'jump-preflight', nonce, capture)
+                  a.output / 'jump-preflight', nonce, capture, **jump_options)
     if before.get('complete') is not True:
         raise ValueError('ACK native preflight failed')
     auth = a.output / 'jump-authorization-private.json'
-    private(auth, dict(scope=SCOPE, runner_sha256=digest(ROOT / 'scripts/run_ack_native_jump.py'),
+    child_scope = 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    child_extra = dict(combined_verifier_sha256=digest(ROOT / 'scripts/verify_ack_combined_bundle.py')) if combined else {}
+    private(auth, dict(scope=child_scope, runner_sha256=digest(ROOT / 'scripts/run_ack_native_jump.py'),
                        manifest_sha256=digest(bundle / 'report.json'), client_sha256=c['client_sha256'],
-                       target_image_sha256=IMAGE_SHA, target_config_sha256=CONFIG_SHA,
+                       target_image_sha256=m['target_image_sha256'], target_config_sha256=CONFIG_SHA,
                        target_nonce_sha256=sha(nonce), source_config_sha256=p['native_config_sha256'],
                        source_capture_report_sha256=sha(json.dumps(capture, sort_keys=True).encode()),
                        source_capture_manager_sha256=digest(ROOT / 'scripts/source_usb_console_trial.py'),
                        receiver_sha256={name: digest(ROOT / 'scripts' / name) for name in RECEIVERS},
                        owner_approved=True, owner_available=True, maximum_loads=1, maximum_jump_requests=1,
                        target_hardware_deadline_seconds=31, boot_writes_allowed=False,
-                       post_jump_reboot_commands_allowed=False, bounded_read_only_return_poll_allowed=True))
+                       post_jump_reboot_commands_allowed=False, bounded_read_only_return_poll_allowed=True, **child_extra))
     return dict(source_boot=first, jump=jump(d, destination, bundle / 'report.json', client / 'build-result.json',
-                                           linked, a.output / 'jump', nonce, capture, auth))
+                                           linked, a.output / 'jump', nonce, capture, auth, **jump_options))
 
 
 if __name__ == '__main__':
@@ -149,6 +178,9 @@ if __name__ == '__main__':
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--lab-package', required=True)
     parser.add_argument('--authorization', type=Path)
+    parser.add_argument('--combined', action='store_true')
+    parser.add_argument('--combined-reference', type=Path)
+    parser.add_argument('--combined-qualification', type=Path)
     a = parser.parse_args()
     try:
         result = run(a); print(json.dumps(result, indent=2))

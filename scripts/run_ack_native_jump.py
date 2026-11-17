@@ -23,11 +23,18 @@ RECEIVERS = ['capture_ack_native_console.py', 'capture_lab_kernel_log.py',
 
 
 def run(device, lab_package, manifest, client_report, linked, output,
-        nonce, source_report, authorization=None):
+        nonce, source_report, authorization=None, *, combined_kernel_package=None):
     m = json.loads(manifest.read_text()); c = json.loads(client_report.read_text())
-    if m.get('offline_preview') is True or m.get('target_kind') != 'ack-linux-v1':
+    combined = combined_kernel_package is not None
+    kind = 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    scope = 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    image_sha = m.get('target_image_sha256') if combined else IMAGE_SHA
+    if combined:
+        from verify_ack_combined_bundle import verify
+        verify(manifest, combined_kernel_package)
+    if m.get('offline_preview') is True or m.get('target_kind') != kind:
         raise ValueError('Fresh maintained-kernel RAM bundle required')
-    if (m.get('target_image_sha256') != IMAGE_SHA or m.get('target_config_sha256') != CONFIG_SHA or
+    if (m.get('target_image_sha256') != image_sha or m.get('target_config_sha256') != CONFIG_SHA or
             m.get('target_release') != RELEASE or len(nonce) != 32 or sha(nonce) != m.get('target_nonce_sha256')):
         raise ValueError('Exact ACK kernel/config/PID1 nonce required')
     for flag in ['disk_logger_dt_opt_in_removed', 'all_storage_controllers_disabled',
@@ -56,12 +63,12 @@ def run(device, lab_package, manifest, client_report, linked, output,
         if (len(data) != s['bytes'] or sha(data) != s['sha256'] or
                 not 0 < s['bytes'] <= s['memory_bytes'] <= 32 * 1024 * 1024 or s['memory_bytes'] % 4096):
             raise ValueError('Bounded ACK segment differs')
-    if c['manifest_sha256'] != sha(manifest.read_bytes()) or c.get('execute_implemented') is not False or c.get('target_kind') != 'ack-linux-v1':
+    if c['manifest_sha256'] != sha(manifest.read_bytes()) or c.get('execute_implemented') is not False or c.get('target_kind') != kind:
         raise ValueError('ACK layout-bound load-only client required')
     here = Path(__file__).parent
-    expected = dict(scope=SCOPE, runner_sha256=sha(Path(__file__).read_bytes()),
+    expected = dict(scope=scope, runner_sha256=sha(Path(__file__).read_bytes()),
                     manifest_sha256=sha(manifest.read_bytes()), client_sha256=c['client_sha256'],
-                    target_image_sha256=IMAGE_SHA, target_config_sha256=CONFIG_SHA,
+                    target_image_sha256=image_sha, target_config_sha256=CONFIG_SHA,
                     target_nonce_sha256=sha(nonce), source_config_sha256=config,
                     source_capture_report_sha256=sha(json.dumps(source_report, sort_keys=True).encode()),
                     source_capture_manager_sha256=sha((here / 'source_usb_console_trial.py').read_bytes()),
@@ -69,6 +76,8 @@ def run(device, lab_package, manifest, client_report, linked, output,
                     owner_approved=True, owner_available=True, maximum_loads=1, maximum_jump_requests=1,
                     target_hardware_deadline_seconds=31, boot_writes_allowed=False,
                     post_jump_reboot_commands_allowed=False, bounded_read_only_return_poll_allowed=True)
+    if combined:
+        expected['combined_verifier_sha256'] = sha((here / 'verify_ack_combined_bundle.py').read_bytes())
     if authorization is not None:
         a = json.loads(authorization.read_text())
         if any(type(a.get(k)) is not type(v) or a.get(k) != v for k, v in expected.items()):
@@ -76,7 +85,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
     output.mkdir(mode=0o700)
     if authorization is not None:
         os.close(os.open(str(authorization) + '.consumed', os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600))
-    r = dict(scope=SCOPE, target_release=RELEASE, target_kind='ack-linux-v1',
+    r = dict(scope=scope, target_release=RELEASE, target_kind=kind,
              complete=False, load_attempts=0, unload_attempts=0, jump_requests=0,
              target_kernel_boot_proven=False, target_pid1_proven=False, source_console_proven=False,
              fresh_original_android_return=False, normal_shell_restored=False,
@@ -117,6 +126,11 @@ def run(device, lab_package, manifest, client_report, linked, output,
         prior = records(device, output / 'pstore-before-private', target_token)
         if any(p['marker_matches'] for p in prior):
             raise ValueError('ACK target nonce already present; refuse replay')
+        if combined:
+            prefix = ('FIRETABS_ACK_COMBINED_V2 nonce=' + trial).encode()
+            if any(prefix in p.read_bytes() for p in (output / 'pstore-before-private').iterdir() if p.is_file()):
+                raise ValueError('Combined trial marker already present; refuse replay')
+            r['combined_markers_absent_before_load'] = True
         r.update(preflight='passed', target_nonce_absent_before_load=True, before_records=prior,
                  source_boot_id_sha256=sha(before['boot_id'].encode())); save()
         if authorization is None:
@@ -182,12 +196,19 @@ def run(device, lab_package, manifest, client_report, linked, output,
             geometry(device)
             found = records(device, output / 'pstore-after-private', target_token)
             retained = (output / 'pstore-after-private')
-            matches = []; entry_seen = False
+            matches = []; entry_seen = False; combined_records = []
             for p in found:
                 if p['file'].startswith('console-ramoops'):
                     data = (retained / p['file']).read_bytes()
                     entry_seen |= handoff_marker(trial) in data
+                    if combined:
+                        from verify_ack_combined_bundle import assess
+                        combined_records.append(assess(data, trial))
                     matches.append(target_token in data and b'Linux version ' + RELEASE.encode() + b' ' in data)
+            if combined:
+                r['combined_retained_assessments'] = combined_records
+                r['linux_c_entry_proven'] = any(v['linux_c_entry_proven'] for v in combined_records)
+                r['full_image_integrity_proven'] = any(v['full_image_integrity_proven'] for v in combined_records)
             r.update(after_records=found, retained_kernel_boot_proven=any(matches),
                      retained_handoff_marker_seen=entry_seen,
                      target_kernel_boot_proven=any(matches), fresh_original_android_return=True,

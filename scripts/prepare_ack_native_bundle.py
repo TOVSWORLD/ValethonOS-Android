@@ -86,7 +86,7 @@ def bootargs(target_nonce):
 
 
 def prepare(source_dtb, iomem, draft_dtb, image, config, initramfs, init_report,
-            target_nonce, source_linked, out, fdtget, fdtput):
+            target_nonce, source_linked, out, fdtget, fdtput, trial_id=None):
     if sha(image) != IMAGE_SHA or sha(config) != CONFIG_SHA or sha(draft_dtb) != DRAFT_DT_SHA:
         raise ValueError('Exact complete first ACK draft artifacts required')
     if (len(target_nonce) != 32 or not any(target_nonce) or sha(target_nonce) != init_report['nonce_sha256'] or
@@ -186,7 +186,9 @@ def prepare(source_dtb, iomem, draft_dtb, image, config, initramfs, init_report,
         raise ValueError('USB0 peripheral must remain enabled')
     safety_reserved = combined + reserved_nodes(final)
     ram = [(int(a, 16), int(z, 16) + 1) for a, z in re.findall(r'^([0-9a-f]+)-([0-9a-f]+) : System RAM$', iomem, re.M)]
-    token = secrets.token_hex(16)
+    token = secrets.token_hex(16) if trial_id is None else trial_id
+    if not isinstance(token, str) or not re.fullmatch('[0-9a-f]{32}', token) or token == target_nonce.hex()[:32]:
+        raise ValueError('Fresh independent exact trial token required')
     entry, entry_report = build_entry(out / 'entry-private', token)
     if len(updated) > ENTRY - META:
         raise ValueError('DT exceeds metadata staging space')

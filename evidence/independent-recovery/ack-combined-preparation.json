@@ -1,0 +1,18 @@
+{
+  "scope": "Combined candidate ready for one owner-attended hardware attempt; no tablet commands during preparation",
+  "offline_policy_validation_passed": true,
+  "qualification_sha256": "ffc158fd75a9248fac2738ac38269a0052a1fbebd8a45c85cbc1b940b6a952c8",
+  "policy_sha256": "6f8267ed85c732fdc39d08b28eab721ca7ea52196f21c79f9bcef66368033afb",
+  "image_sha256": "a548bff1b6d8b67ffe1b45ed112c16c64db35fdcfc7ff592357c959758677f2e",
+  "reference_manifest_sha256": "caeee1c7d9f8734a425bb09fe5bb6ee82ba2789eddc405ce892bd7bbc1fdd1b5",
+  "load_only_client_sha256": "85f4b68715d0b1b64572b960f337d67478323f69bfca4f9d2252124b7e3576bc",
+  "execute_implemented": false,
+  "regression_tests": 953,
+  "regression_tests_passed": true,
+  "regression_tests_skipped": 0,
+  "android_evidence_check_passed": true,
+  "repository_integrity_check_passed": false,
+  "repository_integrity_existing_failure": "tests/test_source_usb_shutdown.py:201 empty implementation",
+  "hardware_execution": false,
+  "owner_presence_required": true
+}
