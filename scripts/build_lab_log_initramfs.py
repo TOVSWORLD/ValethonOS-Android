@@ -54,7 +54,7 @@ def inspect_archive(raw, entries):
     return [entry[0] for entry in entries]
 
 
-def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.lld-18'):
+def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.lld-18', compiler_kind='clang'):
     if output.exists() or output.is_symlink():
         raise ValueError('Fresh private output directory required')
     policy = policy_file.read_bytes()
@@ -70,9 +70,13 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
     for name, expected in report['source_sha256'].items():
         if name not in ['ack-abi.cil', 'diagnostic.cil'] or sha((SOURCE / 'policy' / name).read_bytes()) != expected:
             raise ValueError('Policy source changed after compilation')
-    tool = shutil.which(linker)
+    if compiler_kind not in ['clang', 'gcc']:
+        raise ValueError('Explicit clang or AArch64 GCC compiler kind required')
+    tool = shutil.which(linker) if compiler_kind == 'clang' else shutil.which(compiler)
     if not tool:
         raise ValueError('Explicit LLVM18 linker required')
+    if compiler_kind == 'gcc' and not subprocess.check_output([compiler, '-dumpmachine'], text=True).strip().startswith('aarch64-'):
+        raise ValueError('AArch64 cross GCC required')
     output.mkdir(mode=0o700, parents=True)
     nonce = secrets.token_bytes(32)
     (output / 'trial-nonce-private.bin').write_bytes(nonce)
@@ -86,7 +90,10 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
     header.write_text(array('lab_policy_blob', policy) + array('lab_trial_nonce', nonce))
     header.chmod(0o400)
     elf = output / 'init'
-    command = [compiler, '--target=aarch64-linux-gnu', '--ld-path=' + tool, '-nostdlib', '-static',
+    command = [compiler]
+    if compiler_kind == 'clang':
+        command += ['--target=aarch64-linux-gnu', '--ld-path=' + tool]
+    command += ['-nostdlib', '-static',
                '-Os', '-Wall', '-Wextra', '-Werror', '-ffreestanding', '-fno-builtin',
                '-fno-stack-protector', '-mgeneral-regs-only', '-Wl,--build-id=none,-e,_start',
                '-I', str(output), '-o', str(elf), str(SOURCE / 'lab_init.c'), str(SOURCE / 'memory.c')]
@@ -122,6 +129,7 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
         'sources_sha256': {p.name: sha(p.read_bytes()) for p in sorted(SOURCE.glob('*')) if p.suffix in ['.h', '.c']},
         'compiler': subprocess.check_output([compiler, '--version'], text=True).splitlines()[0],
         'linker': subprocess.check_output([tool, '--version'], text=True).splitlines()[0],
+        'compiler_kind': compiler_kind,
         'private_test_usb_id': '1209:0001', 'usb_id_globally_unique': False,
         'redistribution_allowed': False, 'physical_execution_admitted': False,
         'policy_load_device_tested': False, 'log_transport_device_tested': False,
@@ -139,9 +147,10 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--compiler', default='clang-18')
     parser.add_argument('--linker', default='ld.lld-18')
+    parser.add_argument('--compiler-kind', choices=['clang','gcc'], default='clang')
     args = parser.parse_args()
     try:
-        report = build(args.policy, args.policy_report, args.output, args.compiler, args.linker)
+        report = build(args.policy, args.policy_report, args.output, args.compiler, args.linker, args.compiler_kind)
     except (ValueError, KeyError, OSError, subprocess.SubprocessError):
         parser.exit(2, 'Lab component build stopped; inspect private output if created.\n')
     print(json.dumps(report, indent=2))

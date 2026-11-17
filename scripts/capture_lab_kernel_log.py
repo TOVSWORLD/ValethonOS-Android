@@ -71,7 +71,7 @@ def raw_settings(attrs):
     return result
 
 
-def capture(plan, nonce, output):
+def capture(plan, nonce, output, ready=None):
     # This action is only run after owner review/start. No device boot/write commands.
     output.mkdir(mode=0o700, parents=False, exist_ok=False)
     directory = os.open(output, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
@@ -85,6 +85,8 @@ def capture(plan, nonce, output):
               'failure_stage': None, 'endpoint_selected': False, 'port_opened': False}
     stage = 'waiting_for_port'
     try:
+        if ready is not None:
+            ready()
         end = time.monotonic() + plan['wait_seconds']
         selected = None
         while time.monotonic() < end:
@@ -101,7 +103,11 @@ def capture(plan, nonce, output):
             raise ValueError('Bounded physical-port wait expired')
         # One open only, no retry on disconnect/failed trial.
         stage = 'opening_port'
-        port = os.open(selected['endpoint'], os.O_RDWR | os.O_NONBLOCK | os.O_NOCTTY | os.O_NOFOLLOW | os.O_CLOEXEC)
+        if plan.get('allow_privileged_open') is True:
+            from capture_live_acm_probe import open_serial
+            port = open_serial({'path': selected['endpoint'], 'rdev': selected['rdev']}, True)
+        else:
+            port = os.open(selected['endpoint'], os.O_RDWR | os.O_NONBLOCK | os.O_NOCTTY | os.O_NOFOLLOW | os.O_CLOEXEC)
         result['port_opened'] = True
         stage = 'validating_opened_identity'
         s = os.fstat(port)

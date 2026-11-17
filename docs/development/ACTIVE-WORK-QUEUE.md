@@ -1,3 +1,24 @@
+# Current work — full 6.18 kernel/PID1 RAM boot, November 16, 2026
+
+Owner requested Linux boot after the reset-payload milestone. The complete
+pinned 6.18.34 draft is prepared for the proven native RAM path at its required
+zero-offset aligned address. The target now uses the live legacy PSCI contract
+rather than the draft assumption of PSCI 0.2. Fresh enforcing PID1, all live
+firmware reservations and USB0 are retained. Storage/display bootstrap probes
+and the disk-log opt-in are disabled. The maintained Image is not flashed.
+
+A 31-second reset-only hardware deadline is armed at entry, with its target
+driver disabled. Its physical behavior remains unqualified; owner-assisted
+return may still be needed. The source boot image is restored before jumping.
+
+Full regression, updated supervisor/instruction/capture controls, aligned C
+load-client controls and read-only tablet preflight pass. No new boot/load/jump
+has run under this scope. Owner availability for this new full-kernel test is
+pending. Success requires attributable 6.18 kernel output and the controlled
+PID1 USB stream; a handoff marker or ordinary return is insufficient.
+
+[Concrete Linux test](ACK-LINUX-RAM-BOOT.md).
+
 # Passed milestone — target payload executed and reset automatically, November 16, 2026
 
 One reset-payload jump recovered exactly one target-only retained marker that
@@ -13,7 +34,7 @@ Automatic recovery from arbitrary Linux hangs remains unqualified.
 
 [Exact target-execution receipt](../../evidence/independent-recovery/reset-payload-runtime-result.json).
 
-# Current plan — one attributable reset target, then boot-strategy decision, November 16, 2026
+# Historical current plan — one attributable reset target, then boot-strategy decision, November 16, 2026
 
 Owner authorized this final narrow handoff probe and requested a bolder plan if
 it fails. A one-page reset target, separate from the proven source kernel,
@@ -39,7 +60,7 @@ passed in the November 13 experiment; target boot remains unproven. No new
 source boot, load or jump has run. All previous trial budgets remain consumed.
 Continuing read-only investigation of the remaining handoff interval.
 
-# Current result — early CPU-off gate passed; target still absent, November 13, 2026
+# Historical current result — early CPU-off gate passed; target still absent, November 13, 2026
 
 The handoff-order experiment ran once. Source boot and original-boot restoration
 passed, followed by one load and one jump. Captured hardware evidence proves
@@ -51,7 +72,7 @@ automatic retry; this trial budget is consumed.
 
 [Exact hardware result](../../evidence/independent-recovery/early-cpu-shutdown-runtime-result.json).
 
-# Current experiment — CPU shutdown before device shutdown, November 13, 2026
+# Historical current experiment — CPU shutdown before device shutdown, November 13, 2026
 
 Original Android, full boot/config, recovery and normal ADB were verified after
 owner-assisted return. The next candidate changes source handoff ordering,
@@ -66,7 +87,7 @@ still required.
 
 [Scope and validation](EARLY-CPU-SHUTDOWN-TEST.md).
 
-# Current work — CPU0-only trial failed; resolve handoff boundary, November 12, 2026
+# Historical current work — CPU0-only trial failed; resolve handoff boundary, November 12, 2026
 
 The hardware trial below has now run once. Source prerequisites passed, but
 the target supplied no USB endpoint or nonce within 300 seconds. **Target boot
@@ -210,7 +231,7 @@ has run. Retention/watchdog work is not the critical path.
 
 [Exact two-stage test, limits and physical return](USB-CONSOLE-NEXT-TEST.md).
 
-# Current priority — USB capture, November 10, 2026
+# Historical current priority — USB capture, November 10, 2026
 
 Owner correction: prioritize USB logging/capture for faster boot/handoff diagnosis.
 Live working-kernel kernel→ACM→host capture PASSED (390 bytes, exact kernel
@@ -222,7 +243,7 @@ critical path. Earlier reset-first scope below is superseded as a priority.
 
 [Working capture path and evidence](../../projects/firetabs-android/usb-live-capture/README.md).
 
-# Current state — manually recovered, November 10, 2026
+# Historical current state — manually recovered, November 10, 2026
 
 Original Android, full boot/config and recovery verified after owner-assisted
 recovery. Normal ADB restored. Pstore mounted/enabled but record directory empty;
@@ -232,7 +253,7 @@ No new jump, boot write or automatic reboot; approvals consumed.
 
 [Recovery evidence and next implementation scope](NATIVE-KEXEC-POSTFAILURE.md).
 
-# Current state — first jump trial stopped, November 10, 2026
+# Historical current state — first jump trial stopped, November 10, 2026
 
 Native load succeeded and one orderly kexec request was issued. Target Android
 was not observed within 300 seconds; ADB is absent afterward. No partition
@@ -243,7 +264,7 @@ Earlier pending-approval/preparation status below is historical and superseded.
 
 [Actual trial receipt](../../evidence/independent-recovery/native-first-jump-runtime-result.json).
 
-# Current state — successful native source boot, November 10, 2026
+# Historical current state — successful native source boot, November 10, 2026
 
 Owner-approved temporary native source boot PASSED: Android home screen, native
 config verified, original full boot restored on flash, recovery unchanged, normal
@@ -253,7 +274,7 @@ Failed-jump logging remains post-failure follow-up, not a prerequisite.
 
 [Exact first-jump scope and evidence](NATIVE-KEXEC-FIRST-JUMP.md).
 
-# Current direction — November 10, 2026
+# Historical current direction — November 10, 2026
 
 Native kexec handoff kernel built and linked gates verified. Temporary source-boot
 package and corrected live read-only preflight complete; awaiting owner-attended
