@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-17",
+  "scope": "Legacy and exact working revision UART source trace, in progress",
+  "sources": [
+    {
+      "version": "3.18",
+      "revision": "e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74",
+      "path": "arch/arm64/boot/dts/mt8163.dtsi",
+      "cached_text_sha256": "932dc928cc3ac247f101b75079e9c4234febfa708ecc2ff9e609e19e1da23fb1",
+      "url": "https://github.com/mt8163-dev/android_kernel_amazon_mt8163/blob/e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74/arch/arm64/boot/dts/mt8163.dtsi"
+    },
+    {
+      "version": "3.18",
+      "revision": "e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74",
+      "path": "drivers/misc/mediatek/uart/uart.c",
+      "cached_text_sha256": "a7e6acf04f3e62bc4b83489ae7a611312c33b2cb473da2244b244cd49e31dcc1",
+      "url": "https://github.com/mt8163-dev/android_kernel_amazon_mt8163/blob/e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74/drivers/misc/mediatek/uart/uart.c"
+    },
+    {
+      "version": "4.9",
+      "revision": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+      "path": "arch/arm64/boot/dts/mediatek/mt8163.dtsi",
+      "cached_text_sha256": "4a9d71c72345103bef30f155eea867b0c0c93c0d7fd74ff597801bddfced942b",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/arch/arm64/boot/dts/mediatek/mt8163.dtsi"
+    },
+    {
+      "version": "4.9",
+      "revision": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+      "path": "arch/arm64/boot/dts/mediatek/douglas.dts",
+      "cached_text_sha256": "3bfad316a979c57212a565e98f53b3fc278794786c3b743d989484fbf57f0725",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/arch/arm64/boot/dts/mediatek/douglas.dts"
+    },
+    {
+      "version": "4.9",
+      "revision": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+      "path": "drivers/pinctrl/mediatek/pinctrl-mt8163.c",
+      "cached_text_sha256": "934c841dd549a406bbe7ff5037fe0c7cf4ba62027a76577a378f900cd1309134",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/pinctrl/mediatek/pinctrl-mt8163.c"
+    },
+    {
+      "version": "4.9",
+      "revision": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+      "path": "drivers/misc/mediatek/uart/uart.c",
+      "cached_text_sha256": "f9f71803ac2348ba8b41874d13671453340ac88d02b11fa5b7b248bbfa9fc68a",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/uart/uart.c"
+    }
+  ],
+  "established": {
+    "uart0_register_base": "0x11002000",
+    "uart_input_clock_hz": 26000000,
+    "rx_soc_gpio": 79,
+    "tx_soc_gpio": 80,
+    "pin_function": 1,
+    "vendor_has_separate_pin_set_clear_states": true,
+    "legacy_console_default_baud": 115200,
+    "legacy_config_requested_baud": 921600,
+    "working_revision_vendor_console_default_baud": 115200,
+    "working_revision_vendor_console_parses_options": true,
+    "vendor_source_has_pm_pin_remux": true,
+    "working_source_config_MTK_SERIAL": "y",
+    "working_source_config_MTK_SERIAL_CONSOLE": "y",
+    "linked_vendor_console_setup": true,
+    "linked_vendor_console_write": true,
+    "linked_vendor_baud_setup": true,
+    "archived_live_dt_uart0_enabled": true,
+    "archived_live_dt_vendor_compatible_fallback": "mediatek,mtk-uart"
+  },
+  "not_established": [
+    "Exact owner PCB TX test-pad mapping",
+    "UART I/O-bank supply tied to the exact board",
+    "Whether documentation can resolve every electrical fact",
+    "Actual physical UART output",
+    "Tablet maintained Linux startup",
+    "Electrical output and physical probe state are not established by compiled symbols or the archived DT"
+  ],
+  "measurement_necessity_established": false,
+  "documentation_exhausted": false,
+  "device_accessed": false,
+  "next": "Trace UART pin-bank electrical supply and accessible board net/contact using the established vendor implementation and recovered board reference",
+  "build_wiring_sources": [
+    {
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/Makefile"
+    },
+    {
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/uart/Makefile"
+    },
+    {
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/uart/Kconfig"
+    }
+  ],
+  "linked_build_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31"
+}

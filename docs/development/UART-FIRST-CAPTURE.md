@@ -1,6 +1,12 @@
-# Douglas UART: prepared first bench test
+# Douglas UART: prepared capture tools and conditional bench procedure
 
-Updated November 16, 2026. The next test is a receive-only capture from the
+> November 17 correction: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md)
+> supersedes the bench-first selection below. Trace the older working kernels and
+> exact-board documentation first. Physical measurement has not been demonstrated
+> necessary; no technician, purchase or opening is selected. The recorder/DT
+> preparation remains usable, while physical wiring is unqualified.
+
+Historical November 16 selection: receive-only capture from the
 known-working tablet, after a board-level operator identifies TX and its electrical
 level. No experimental Linux jump is selected. Software preparation is complete;
 physical pin identification and voltage measurement are still required. The owner

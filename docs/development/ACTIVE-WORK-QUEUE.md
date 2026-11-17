@@ -1,4 +1,20 @@
-# Current work — UART bench preparation, November 16, 2026
+# Current work — documentation-first UART contract, November 17, 2026
+
+Read [project memory](PROJECT-MEMORY.md) and the
+[next milestone plan](NEXT-MILESTONE-PLAN.md) before resuming. Owner requires us
+to use older working kernels and existing board documentation before assuming
+measurement, a technician or equipment purchase is necessary. No owner decision
+or equipment question is pending. No physical action or new boot test is selected.
+
+Next technical work: trace exact legacy/working UART initialization and pin/power
+routing into board/electrical documentation. Pinned 4.9 source already retrieved;
+UART0/26MHz/GPIO79 RX/GPIO80 TX corroborated. Config, linked functions and
+archived live DT identify the actual vendor UART implementation. PCB contact and UART-bank supply
+remain unresolved, not declared undocumented. Finish the cited source/board
+contract before selecting the next test. Keep existing #346 active, #348 linked;
+retain all failed trials and do not repeat them as new strategies.
+
+# Historical selection — UART bench preparation, November 16, 2026
 
 Owner requested a route out of blind boot trials. Receive-only UART capture and
 an exact-hash ACK UART DT preview are prepared; five host controls pass. No
