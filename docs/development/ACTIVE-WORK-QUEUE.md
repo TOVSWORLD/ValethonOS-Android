@@ -15,8 +15,8 @@ One protected source boot/restore and one native load/jump have now run. The
 original boot was verified before jumping. The metadata entry/readback marker
 was recovered; no attributable 6.18 kernel records or PID1 USB endpoint appeared.
 Android returned on a different completed boot, with exact original boot/config,
-unchanged recovery and normal ADB verified. Owner Power confirmation is pending;
-precise watchdog reset cause is unqualified. No retry; authorization consumed.
+unchanged recovery and normal ADB verified. Owner confirmed Power was untouched, establishing automatic return;
+precise watchdog reset cause remains unqualified. No retry; authorization consumed.
 
 The current result is **ACK boot unproven**, not a Linux milestone. Investigate
 the full Image entry and early architecture startup boundary before proposing

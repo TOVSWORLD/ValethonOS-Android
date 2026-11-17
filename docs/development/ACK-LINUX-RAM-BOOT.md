@@ -3,8 +3,7 @@
 Prepared November 16, 2026 after the attributable reset-payload test passed.
 One full ACK RAM-boot jump ran on November 16. It did not establish Linux
 startup or PID1. Android returned on a different completed boot, with original
-boot/config, recovery and normal ADB verified. Owner Power confirmation is
-pending. The target entry/readback marker survived; USB capture was empty.
+boot/config, recovery and normal ADB verified. Owner confirmed Power was untouched: automatic return is established. The target entry/readback marker survived; USB capture was empty.
 The 31-second deadline's exact reset cause remains unqualified. No retry.
 
 [Runtime receipt](../../evidence/independent-recovery/ack-native-runtime-result.json).

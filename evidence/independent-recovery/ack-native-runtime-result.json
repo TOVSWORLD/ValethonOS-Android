@@ -24,7 +24,7 @@
   "different_boot_completed": true,
   "retained_kernel_boot_proven": false,
   "retained_handoff_marker_seen": true,
-  "owner_power_confirmation_pending": true,
+  "owner_power_confirmation_pending": false,
   "wire_assessment": {
     "identity_verified": false,
     "complete_records": 0,
@@ -52,8 +52,8 @@
   },
   "date": "2026-11-16",
   "hardware_execution": true,
-  "owner_used_power": null,
-  "automatic_return_qualified": false,
+  "owner_used_power": false,
+  "automatic_return_qualified": true,
   "source_stage": {
     "candidate_write_attempts": 1,
     "restore_write_attempts": 1,
@@ -72,5 +72,5 @@
     "port_opened": false
   },
   "retained_console_sha256": "3cee4d539dd41cbdcfc7f71dea8bcb8fb61e86f459fd5e3a7f0facec92614596",
-  "interpretation": "Native metadata entry/readback marker recovered; full Linux startup and PID1 unproven. Android returned and original state verified. No retry. Owner intervention confirmation pending; precise reset cause and full Image execution remain unqualified."
+  "interpretation": "Native metadata entry/readback marker recovered; full Linux startup and PID1 unproven. Android returned without owner intervention and original state was verified. No retry. Precise reset cause and full Image execution remain unqualified."
 }
