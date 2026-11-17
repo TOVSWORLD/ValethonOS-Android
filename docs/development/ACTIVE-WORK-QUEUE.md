@@ -24,6 +24,16 @@ another device test. The entry marker cannot verify the full relocated Image,
 its first kernel instructions, MMU enable or later driver initialization. Do not
 spend another trial on USB/logging settings without evidence of that failure.
 
+Post-trial offline audit completed without tablet commands: the actual linked
+relocator copied every destination byte across all three full-size segments and
+14 list pages; the exact kernel reached MMU-enable entry in Cortex-A53 emulation.
+Corrupt-source and broken-entry controls were detected. No concrete defect or
+tablet Linux boot was established. Actual hardware destination integrity and
+Linux entry/MMU progression remain the gap. The next native experiment must
+combine those checks in one package; that package is not yet prepared. No more standalone USB-settings or stub-only trial is selected.
+
+[Offline audit](../../evidence/independent-recovery/ack-full-image-offline-audit.json).
+
 [Runtime receipt](../../evidence/independent-recovery/ack-native-runtime-result.json).
 
 [Concrete Linux test](ACK-LINUX-RAM-BOOT.md).

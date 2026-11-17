@@ -112,3 +112,41 @@ d9318bdb4c34e8b2d997b4f67ced56b120b22b87, not an assumed current upstream API.
 [Exact policy](../../evidence/independent-recovery/ack-native-two-stage-authorization-template.json).
 [Prepared artifacts](../../evidence/independent-recovery/ack-native-preparation-result.json).
 [Entry instruction qualification](../../evidence/independent-recovery/ack-native-entry-qualification.json).
+
+
+## Post-trial full-image audit — November 16
+
+No tablet commands or second hardware attempt were used. The reproducible
+`scripts/audit_ack_full_image.py` binds the consumed target Image/config and
+all three segment hashes, plus the hardware-tested source Image/config and
+its actual linked relocation instructions.
+
+The linked relocator executed 7,131,590 instructions over a synthetic disjoint
+source-page list spanning 14 indirection pages. All 28,049,408 image memory
+bytes, 102,400 metadata bytes and 16,384 initrd bytes matched the expected
+padded segments at destination. A corrupted-source control was detected.
+This checks the algorithm with this full-size layout; the hardware page list,
+cache coherency and DMA state were not recovered or reproduced.
+
+The exact Image then executed 34,164 instructions in a reset-like Cortex-A53
+EL1 model, reaching primary_entry, argument preservation, initial identity-map
+creation, exception-level initialization, CPU setup and __enable_mmu entry.
+The 52-bit-capable configuration selected 48-bit VA and 40-bit PA settings
+(T0SZ/T1SZ=16, IPS=2, DS=0); configuration capability alone is not evidence of
+an unsupported-52-bit boot failure. A deliberately broken initial branch was
+detected. The audit stops before MMU enable and does not qualify that transition.
+An exploratory extension hit an emulator exception at MMU enable; this is not
+evidence of the tablet's failure. The prior exact-image generic-VM pass remains
+separate evidence that this kernel can boot on a virtual platform.
+
+**No concrete production defect was established.** Do not relabel these offline
+passes as a device milestone or repeat the consumed experiment. The missing
+evidence is actual destination integrity and actual Linux execution on the
+warm tablet. Any next native trial must combine a post-relocation full-image
+integrity check with checkpoints in the actual kernel entry/MMU path, preserving
+the existing retained buffer and USB path. A standalone stub-only or USB-settings
+variation does not answer this gap. That combined trial is not implemented or
+admitted by this audit; it requires its own exact package and validation before
+any device action.
+
+[Exact offline receipt](../../evidence/independent-recovery/ack-full-image-offline-audit.json).
