@@ -35,11 +35,15 @@
   "fresh_original_android_return": true,
   "original_installation_checks_passed": true,
   "normal_shell_restored": true,
-  "owner_power_confirmation_pending": true,
-  "owner_visual_confirmation_pending": true,
+  "owner_power_confirmation_pending": false,
+  "owner_visual_confirmation_pending": false,
   "hardware_deadline_qualified": false,
   "authorization_scope": "ack-linux-display-functional-two-stage-7",
   "authorization_consumed": true,
   "wire_sha256": "2477adad37d654e98db432aa67e02c865529ef9f4468a959b5d4ecaa28b184fc",
-  "next_action": "Audit display component/provider binding from pinned sources; do not repeat logging, storage or unchanged hardware trial"
+  "next_action": "Audit display component/provider binding from pinned sources; do not repeat logging, storage or unchanged hardware trial",
+  "owner_power_untouched": true,
+  "owner_observed_banner": false,
+  "owner_observed_colour_bands": false,
+  "automatic_android_return_observed": true
 }

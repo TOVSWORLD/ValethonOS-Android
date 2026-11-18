@@ -27,7 +27,8 @@ d5596c9. Fresh120-byte VDISP001 received on selected physical USB: stage1,
 flags1,error-110. Enforcing display PID1 ran, but fb0 did not appear within the
 bounded probe; banner was not written. Display milestone NOT achieved. Original
 Android returned; original boot/config/recovery and normal ADB checks passed.
-Owner Power/visual confirmation pending. No recovery write or automatic retry.
+Owner confirmed no banner/bands and Power untouched throughout; automatic
+Android return observed. No recovery write or automatic retry.
 Receipt: evidence/display-pipeline-source/functional-runtime-result.json.
 Private trial: out/display-functional-trial-runtime-1. Do not replay scope7 or
 repeat logging/storage. Next source work audits display component/provider
