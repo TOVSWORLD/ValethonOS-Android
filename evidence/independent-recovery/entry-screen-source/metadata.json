@@ -1,0 +1,52 @@
+{
+  "recovery_framebuffer_get": {
+    "scope": "Framebuffer GET metadata only; no pixel/framebuffer/physical RAM read, write or mode change",
+    "helper_sha256": "425e7495a475dc193814610e3d7863a700210811eabc267ce90534f4ec3cb574",
+    "smem_start": "0x98600000",
+    "smem_len": 12288000,
+    "type": 0,
+    "visual": 2,
+    "line_length": 3200,
+    "xres": 800,
+    "yres": 1280,
+    "xres_virtual": 800,
+    "yres_virtual": 2560,
+    "xoffset": 0,
+    "yoffset": 1280,
+    "bits_per_pixel": 32,
+    "red": [
+      0,
+      8,
+      0
+    ],
+    "green": [
+      8,
+      8,
+      0
+    ],
+    "blue": [
+      16,
+      8,
+      0
+    ],
+    "transp": [
+      24,
+      8,
+      0
+    ],
+    "rotate": 0,
+    "device_tmpfs_helper_cleaned": true
+  },
+  "firmware_handoff_tag": {
+    "scope": "Firmware framebuffer handoff property metadata only",
+    "fb_base": "0x98600000",
+    "panel_found": 1,
+    "fps_x100": 6092,
+    "vram_bytes": 16777216,
+    "property_bytes": 56,
+    "pixels_read": false
+  },
+  "pixels_read": false,
+  "framebuffer_written": false,
+  "device_tmpfs_helper_cleaned": true
+}

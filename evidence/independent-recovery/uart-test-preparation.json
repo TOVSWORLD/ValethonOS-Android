@@ -1,0 +1,68 @@
+{
+  "scope": "Offline UART configuration preview; physical wiring and new trial package pending",
+  "loadable": false,
+  "hardware_execution": false,
+  "original_dtb_sha256": "86350eefce70cde1a07daac15b53fd94da5f194a6c294b3ad4992c8ced13be7a",
+  "preview_dtb_sha256": "37d0e0c2559e339eddf1e595213489c27000321ca69b0d46d6d6866a426a2a2a",
+  "target_image_sha256": "0f43c1f91d9c158659f4f4522d44390cdd934074fb57135344e9d20142235930",
+  "target_image_rebuilt": false,
+  "uart0_enabled": true,
+  "explicit_earlycon": true,
+  "explicit_uart_console": true,
+  "baud": 921600,
+  "framing": "8N1",
+  "gpio_rx": 79,
+  "gpio_tx": 80,
+  "gpio_function": 1,
+  "pcb_tx_pad_known": false,
+  "logic_voltage_known": false,
+  "earlycon_programs_baud": false,
+  "earlycon_requires_existing_uart_initialization": true,
+  "inherited_baud_unqualified": true,
+  "uart_qualified": false,
+  "previous_trial_authorization_reusable": false,
+  "changes": [
+    {
+      "node": "/soc/serial@11002000",
+      "property": "status"
+    },
+    {
+      "node": "/chosen",
+      "property": "stdout-path"
+    },
+    {
+      "node": "/chosen",
+      "property": "bootargs"
+    }
+  ],
+  "date": "2026-11-16",
+  "capture_host_controls_passed": 5,
+  "capture_real_adapter_tested": false,
+  "tablet_commands": false,
+  "physical_first_test": "Identify actual TX and electrical level, then receive-only capture of known-working boot",
+  "physical_test_ready": false,
+  "software_prepared": true,
+  "requires_actual_board_electrical_evidence": true,
+  "owner_equipment_question_pending": false,
+  "fcc_internal_photo_exhibit": "3376398",
+  "fcc_photos_inspected": false,
+  "usb_phy_uart_switch_enabled_in_source": false,
+  "microsd_uart_route_established": false,
+  "code_sha256": {
+    "scripts/capture_uart_receive_only.py": "6fc4a5686a66610606ab6fb1a7f591dbf0547f6056f4a07fedc131e65db95963",
+    "scripts/prepare_ack_uart_preview.py": "68ded08d477e1f032b5bfe43ecd1f8147410f0911b5111530e8f156f14c4f13d",
+    "tests/test_uart_receive_only.py": "28c28949cc35bf16bc485d484dc3c183901f0f38db97661b60aa29a53cb766f8"
+  },
+  "owner_available_equipment": [],
+  "earlier_annotated_board_reference": "https://xdaforums.com/posts/90488396/",
+  "earlier_reference_recovered_from": "2026-10-27 original route review and original chat",
+  "earlier_reference_qualifies_uart": false,
+  "earlier_reference_role": "Hardware recovery/BootROM fallback; not a UART voltage/pad map",
+  "next_owner_wiring_action_ready": false,
+  "current_direction_date": "2026-11-17",
+  "current_direction": "Documentation-first, including older working kernel sources; bench selection superseded",
+  "physical_measurement_necessity_established": false,
+  "technician_selected": false,
+  "documentation_exhausted": false,
+  "next": "Finish source-backed UART/board contract before selecting physical measurement or test"
+}

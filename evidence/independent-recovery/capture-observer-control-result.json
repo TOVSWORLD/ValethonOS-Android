@@ -1,0 +1,18 @@
+{
+  "scope": "Read-only host USB observer control on already-running recovery; not custom kernel/serial logging qualification",
+  "selected_port_observed": true,
+  "two_consistent_cached_snapshots": true,
+  "interface_count": 2,
+  "driver_names": [
+    "usbfs"
+  ],
+  "serial_strings_read": false,
+  "tty_opened": false,
+  "target_commands_sent": false,
+  "device_written": false,
+  "rebooted": false,
+  "kernel_logging_qualified": false,
+  "observer_source_sha256": "33f06b02888017de74733b718c5f6101bca726030996ada799d73f131eb4eabf",
+  "native_regression_controls": 3,
+  "private_evidence": "out/first-draft-test-1/private/usb-observer-recovery-control-private.json"
+}

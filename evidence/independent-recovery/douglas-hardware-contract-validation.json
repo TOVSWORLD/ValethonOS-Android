@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-17",
+  "scope": "Hardware contract/resource inventory validation; no device commands",
+  "privacy_and_provider_controls_passed": 3,
+  "inventory_byte_reproduction": true,
+  "contract_local_links_verified": true,
+  "new_python_integrity_checks_passed": true,
+  "android_evidence_check_passed": true,
+  "repository_wide_check_passed": false,
+  "repository_wide_failure": {
+    "path": "tests/test_source_usb_shutdown.py",
+    "line": 201,
+    "reason": "Existing no-op test helper is rejected by check_python as an empty implementation",
+    "unchanged_from_baseline": true,
+    "baseline_commit": "78402845f63db3e7847cfdb6636da8bd8d2bab1b"
+  },
+  "resource_nodes": {
+    "working_source_4_9": 430,
+    "tested_ack_6_18": 152
+  },
+  "inventory_sha256": "260fb3af5c3f7bf59c11c72f9ab72979589f4388a5cd7035fea242ef894748d8"
+}

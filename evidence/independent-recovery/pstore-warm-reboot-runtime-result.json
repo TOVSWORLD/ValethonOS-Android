@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-10",
+  "scope": "Actual console marker retention through one orderly software reboot of the installed kernel",
+  "result": {
+    "scope": "pstore-warm-reboot-marker-1",
+    "runner_sha256": "4c4e56c06ffdd8c8ec73a23dd4d7532bd2486ec8365257400ae46fdc3e0b8388",
+    "complete": true,
+    "marker_write_attempts": 1,
+    "reboot_requests": 1,
+    "boot_written": false,
+    "module_loaded": false,
+    "handoff_attempted": false,
+    "pstore_records_deleted": false,
+    "personal_log_contents_collected": false,
+    "normal_shell_restored": true,
+    "orderly_warm_reboot_retention_qualified": true,
+    "failed_handoff_retention_qualified": false,
+    "preflight": "passed",
+    "source_boot_id_sha256": "2b00431bd53c068ff90650edb35ea5778812158b293062e3708acb85e00604cc",
+    "source_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "source_config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "existing_backend": {
+      "address": 1145110528,
+      "size": 917504,
+      "console_size": 65536
+    },
+    "marker": "FIRETABS_RETENTION_V1 nonce=26d376f72018e8a7dedc4274ba432e4bbbc065c25ee77269 source_boot=2b00431bd53c068ff90650edb35ea5778812158b293062e3708acb85e00604cc scope=orderly-warm-reboot",
+    "source_marker_observed": true,
+    "source_marker_line": "[166104.096164] FIRETABS_RETENTION_V1 nonce=26d376f72018e8a7dedc4274ba432e4bbbc065c25ee77269 source_boot=2b00431bd53c068ff90650edb35ea5778812158b293062e3708acb85e00604cc scope=orderly-warm-reboot",
+    "target_boot_id_sha256": "05b8b023fa767611677b616c8dac19c01db92410477d799372677c274bcf8e0c",
+    "normal_android_return_observed": true,
+    "retained_marker_matches": 1,
+    "retained_marker_lines": [
+      "[166104.096164] FIRETABS_RETENTION_V1 nonce=26d376f72018e8a7dedc4274ba432e4bbbc065c25ee77269 source_boot=2b00431bd53c068ff90650edb35ea5778812158b293062e3708acb85e00604cc scope=orderly-warm-reboot"
+    ],
+    "outcome": "marker-retained"
+  },
+  "approval_consumed": true,
+  "failed_handoff_retention_qualified": false,
+  "power_loss_retention_qualified": false,
+  "private_archive": {
+    "sha256": "1a2b55d5c0ff91f40bb0a3dbd23f15826f72683c486e03dc75eb6ead5496ca44",
+    "bytes": 1275
+  },
+  "private_evidence_sha256": {
+    "result.json": "a113d06124e2a280f4a900765e8ae5700b1c60bc0faecd5d53b99304b26365af",
+    "pstore-warm-runtime-controller-20261110-private.json": "a113d06124e2a280f4a900765e8ae5700b1c60bc0faecd5d53b99304b26365af",
+    "pstore-warm-reboot-authorization-20261110.json": "d322227b1a6d0ed74190b096dc2ff218a02564e479ed5ddd0119cad52e4ee334",
+    "pstore-warm-reboot-authorization-20261110.json.consumed": "c58d602a26c7c146cb7036bf8dea9cad5bbfd7c95ec108c99b0311bc66c368cd"
+  },
+  "remaining": [
+    "Hotplug serialization and final gate wiring before relocation",
+    "Partial-shutdown/failed-handoff recovery and log retrieval",
+    "Preserve and validate the writer region in source/target RAM layouts",
+    "Target early-entry logging coverage and device/DMA/cache/MMU/EL contracts",
+    "Actual failure/power-loss retention and independent recovery reader compatibility"
+  ]
+}

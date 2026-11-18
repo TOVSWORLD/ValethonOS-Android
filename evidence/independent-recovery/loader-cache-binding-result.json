@@ -1,0 +1,26 @@
+{
+  "scope": "Actual binding and archived cache loop; CP15 maintenance effects modeled/recorded",
+  "elf_sha256": "4ea110035df26d19a2e6a2aad855e2731c1a7ff517a87813d539aa4848dcc964",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "firmware_cache_entry": "0x4bd3c740",
+  "cases": [
+    "clean_drain_invalidate_dsb_isb_512",
+    "clean_drain_invalidate_dsb_isb_4608",
+    "clean_drain_invalidate_dsb_isb_8192",
+    "invalid_0x0_512",
+    "invalid_0x43000010_0",
+    "invalid_0x43000010_8193",
+    "invalid_0xfffffff0_512"
+  ],
+  "case_count": 7,
+  "cache_order": "all covered64B lines clean, drain writes, invalidate I-cache, DSB, ISB",
+  "callee_saved_sp_preserved": true,
+  "ordinary_memory_writes_only_stack": true,
+  "cache_visibility_on_hardware_proved": false,
+  "device_accessed": false,
+  "physical_cache_operations": false,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/cache.S": "d8e83bd413fb71c6da0f135b1cd9d1e238bc8f33658b12f7186354a36bf340d5",
+    "scripts/validate_loader_cache.py": "7cb38306d9bdf623da5d74a725f79266acec72ee5bf8ad988bf2237746196dc3"
+  }
+}

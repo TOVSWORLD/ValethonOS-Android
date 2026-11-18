@@ -1,0 +1,15 @@
+{
+  "scope": "usb-console-native-source-boot-1",
+  "runner_sha256": "da06b41356139dc6bdf32214c02bf9b765d89731ce304ab45a112bc2dd0cd237",
+  "profile_runner_sha256": "4528e60ab212ef109bb40c87fba654d1d909400963848fa0cf3c38099605ef63",
+  "candidate_sha256": "d1b5fc85a5a560eab70a032ac11b88b0090b8ff98f5ff1af8960cc87b8746c26",
+  "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+  "native_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+  "owner_approved": false,
+  "owner_available": false,
+  "maximum_candidate_writes": 1,
+  "maximum_restore_writes": 1,
+  "maximum_reboots": 1,
+  "recovery_writes_allowed": false,
+  "experimental_jump_allowed": false
+}

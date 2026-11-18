@@ -1,0 +1,73 @@
+{
+  "verified": {
+    "scope": "Query module ABI/import/instruction checks; not firmware safety proof",
+    "module_sha256": "a41314b4afcf554343bea7ff80c7a5ca902f3068713d3d22e9ee1ed3a7441828",
+    "module_bytes": 9088,
+    "imports": [
+      "__arm_smccc_smc",
+      "__cpu_online_mask",
+      "__cpu_possible_mask",
+      "__stack_chk_fail",
+      "__stack_chk_guard",
+      "__sw_hweight64",
+      "cpu_number",
+      "get_online_cpus",
+      "of_device_is_compatible",
+      "of_find_node_opts_by_path",
+      "of_get_cpu_node",
+      "of_machine_is_compatible",
+      "of_property_read_string",
+      "of_property_read_variable_u32_array",
+      "preempt_schedule",
+      "printk",
+      "put_online_cpus",
+      "strcmp"
+    ],
+    "vermagic": "4.9.337-g72940eb733af SMP preempt mod_unload modversions aarch64",
+    "all_required_crcs_match": true,
+    "smccc_query_call_sites": 1,
+    "firmware_queries": 4,
+    "query_fid": "0x84000004",
+    "firmware_call_can_be_interrupted": false,
+    "hardware_qualified": false
+  },
+  "runtime": {
+    "scope": "kexec-affinity-query-1",
+    "module_sha256": "a41314b4afcf554343bea7ff80c7a5ca902f3068713d3d22e9ee1ed3a7441828",
+    "module_load_attempts": 1,
+    "module_loaded": true,
+    "module_unloaded": true,
+    "complete": true,
+    "rebooted": false,
+    "boot_written": false,
+    "handoff_attempted": false,
+    "cpu_hotplug_performed": false,
+    "firmware_affinity_qualified": true,
+    "preflight": "passed",
+    "insmod_exit_code": 0,
+    "current_cpu": 0,
+    "online_mask": 3,
+    "results": {
+      "0": 0,
+      "1": 0,
+      "2": 1,
+      "3": 1
+    },
+    "query_scope": "Affinity query responses only; no CPU shutdown acceptance",
+    "ram_cleanup_verified": true
+  },
+  "normal_shell_restored": true,
+  "private_evidence_sha256": {
+    "runtime-private/dmesg-after-private.txt": "80bfa78e5565f648ed9f097097317347b9e0fcbe2615ba051111333390f31a49",
+    "runtime-private/dmesg-before-private.txt": "de6d07020a22998e82e2a56f6867ee64cfa23a553fa2c832ddd50870968a00e1",
+    "runtime-private/dmesg-final-private.txt": "5396e64a0b2dc4fbf45cdb59f64e340e452acf39a1c903302f61207de3a9f3b8",
+    "runtime-private/insmod-private.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runtime-private/push-private.log": "0a41ff72bb8a3709379b5161ed7a36df1c9d46f716b7f645f524d50e23ec11a8",
+    "runtime-private/result.json": "7aba40d0fa85e5c4d4cfd0a8a87d1f4f6d5bdbe388e9e91e19ac27c6ee322dbc",
+    "runtime-private/rmmod-private.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "private_archive_sha256": "b52110a32869c1719f13bcc51698415c4e9284321ac211ea25432e0122f5e1d5",
+  "approval_consumed": true,
+  "date": "2026-11-09",
+  "scope": "Actual four-query affinity runtime result; no secondary-shutdown or handoff proof"
+}

@@ -1,0 +1,21 @@
+{
+  "scope": "Pinned recovery firmware inspection only; no execution, device access or mutation",
+  "recovery_sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11",
+  "members": {
+    "amonet-fixup.sh": {
+      "bytes": 65,
+      "sha256": "b5a856ea642cf1f148b0e6d72eb4e175df2cf0173135fcc173c3f5097c4f30cb"
+    },
+    "fix-bootpatch.sh": {
+      "bytes": 930,
+      "sha256": "07f4353c70f2025d86f76bab8e8a112e1e133648e25e705138825a82f1202715"
+    }
+  },
+  "condition": "Normal bootstrap header or payload differs from recovery bootstrap",
+  "effect": "Copies original recovery bootstrap header and payload into normal bootstrap",
+  "payload_offset_sectors": 223223,
+  "status_file": "/tmp/restore_bootpatch.log",
+  "expected_status_message": "Detected overwritten boot-exploit, restoring from recovery",
+  "runtime_execution_proved_by_this_script": false,
+  "recovery_modified": false
+}

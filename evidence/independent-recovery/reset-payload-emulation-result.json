@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-16",
+  "scope": "Host-only instruction execution and injected system-register branch controls",
+  "source_sha256": "50271daea8af314e6f19ba6722608f74bc719b4ae4e4de3de90758b35fbec722",
+  "qualified_canonical_image_sha256": "29f649cff58c4ace942897eaab1f906f5c5adb1f419cb288b666a3238e915aff",
+  "tests_run": 6,
+  "tests_skipped": 0,
+  "all_required_tests_passed": true,
+  "native_el1_valid_ring_cases": 7,
+  "injected_el2_valid_ring_cases": 7,
+  "invalid_ring_cases": 5,
+  "injected_cache_translation_guard_cases": 6,
+  "injected_unsupported_el_case": 1,
+  "hardware_execution": false,
+  "limitations": [
+    "EL2 and invalid translation-state branch tests inject MRS results; they do not qualify real EL2 hardware execution",
+    "Emulation cannot establish physical retained-memory survival or hardware reset behavior"
+  ]
+}

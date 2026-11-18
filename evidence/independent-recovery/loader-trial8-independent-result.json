@@ -1,0 +1,35 @@
+{
+  "scope": "Independent exact candidate/descriptor/padding/seed/object checks; no physical acceptance",
+  "candidate_sha256": "891ef137024e9b6712894dcbe1c2e398023b45598f56480b666b001147b1f5b3",
+  "observer_sha256": "0db009d6da24a8908df0c49769f3de81d11222ea31c6b42b6547df4bbfd6be41",
+  "fresh_base_declared_image_unchanged": true,
+  "parent_kernel_instructions_unchanged": true,
+  "parent_dt_pid1_only_nonce_bytes_changed": true,
+  "prefix_seed_exact": true,
+  "new_prefix_differs_from_base": true,
+  "no_old_prefix_record_reused": true,
+  "module_objects": {
+    "checkpoint.o": "1b839335c6ec119ef40ccdac20e7920c041587e7dc9115ca19d99c9e510a102e",
+    "freestanding.o": "48f6f620c59c41c526c7eb071494b6506ab46103b2b7daa90a45416a6a0565a3",
+    "hash-stream.o": "1dfe5a534b31e93148bb454486f5f94f9bb868ede2f01af9ce7a1f3d3b426628",
+    "hash-block.o": "99b196826d9e506faf78181567564d156f1a396be5b112e2c8945353c8082c84",
+    "identity-memory.o": "538b591166ed88dc4a5fa5b6ca6ff32c0ea425bdf566b72cb0191a7e7b763f1b",
+    "frontend.o": "13170b2b414f5e963baa9da9315e6ce0eaa481fe78e91820cd000a23622883c2",
+    "timed-module.o": "61584b81755e4e8bf72db36f42b2da102b942b69a5fb0ae0d9cc25c3d1a1062f",
+    "identity.o": "733570cbb6ae44dff98df6d61a2e01bf8e73e293286385142835b1cb01fa5997",
+    "mmc_flush.o": "9596e49132ebe5c4f0d6ace7760fdeba3f6e2084d9af4ff3d6d1a87b512b1a78",
+    "command.o": "397127121a160bc1015a61ff6c6e91eed2a8cd2ddddb16eb84625a4dc6467e8b",
+    "firmware-module.o": "cae4e543c625277259742bff4cbbd473fe7fcf4e336deac6c2e1e2b57d7754dd",
+    "module.o": "19c0e249a2e3c87bf2d41503f2e7b903b339f85d03e53360e9997910cde17eb6",
+    "clock.o": "c284be5134971d398c2f40828d6546df97e195467a7819f815eb7cd8f1a85fb2",
+    "physical.o": "22c1fbaf0127aebb081f8838c1c3b53b6eb485db7db273fd036aff9daffe4f2d",
+    "frontend-frame.o": "0d32ca498d8b22be33db853973d6764ed1ad20bd98f545db22db6fe917ad0444"
+  },
+  "allocated_relocation_types": {
+    "10": 33,
+    "3": 7,
+    "42": 64,
+    "30": 13
+  },
+  "private_device_accessed": false
+}

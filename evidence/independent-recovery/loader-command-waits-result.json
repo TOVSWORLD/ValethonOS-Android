@@ -1,0 +1,28 @@
+{
+  "scope": "Isolated archived wait instructions with modeled stuck conditions; no claim about actual trials",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "sites": [
+    {
+      "entry": "0x4bd37660",
+      "condition": "R1b DAT0 never ready",
+      "finding": "No internal timeout in selected busy loop",
+      "pc_after_1000_instructions": "0x4bd37664"
+    },
+    {
+      "entry": "0x4bd3b4e6",
+      "condition": "Legacy event-wait reset failure reaches self branch",
+      "finding": "Unconditional self loop",
+      "pc_after_1000_instructions": "0x4bd3b4e6"
+    }
+  ],
+  "r1_fallback_primary_source": "sources/kernel-mt8163/drivers/mmc/core/mmc_ops.c",
+  "r1_fallback_source_sha256": "8dea8552eb7c80a846d1c3bcb8e54627cbdb01053248eaef7fb82e0406f18627",
+  "new_command_driver_avoids_both_sites": true,
+  "raw_data_driver_guarantee_not_inferred": true,
+  "device_accessed": false,
+  "physical_commands": false,
+  "trial_failure_cause_proved": false,
+  "source_sha256": {
+    "scripts/audit_loader_command_waits.py": "5c0f6381639986e69447a7a94283cfedd816ec6371e4bc61b556e7abe4b4de61"
+  }
+}

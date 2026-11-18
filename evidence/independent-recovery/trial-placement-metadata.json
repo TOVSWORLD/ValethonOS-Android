@@ -1,0 +1,84 @@
+{
+  "scope": "Observed recovery DT memory/reservation metadata for separate own-source lab candidate; no free-buffer ownership or boot qualification",
+  "root_version": "hvt",
+  "address_cells": 2,
+  "size_cells": 2,
+  "memory": [
+    {
+      "node": "memory@00000000",
+      "reg": [
+        {
+          "address": "0x40000000",
+          "bytes": 1073741824
+        },
+        {
+          "address": "0x80000000",
+          "bytes": 425721856
+        }
+      ]
+    }
+  ],
+  "reserved": [
+    {
+      "node": "atf-reserved-memory@43000000",
+      "reg": [
+        {
+          "address": "0x43000000",
+          "bytes": 196608
+        }
+      ]
+    },
+    {
+      "node": "fb-reserved-memory",
+      "reg": [
+        {
+          "address": "0x98600000",
+          "bytes": 16777216
+        }
+      ]
+    },
+    {
+      "node": "ll_log-reserved-memory@46600000",
+      "reg": [
+        {
+          "address": "0x44600000",
+          "bytes": 131072
+        }
+      ]
+    },
+    {
+      "node": "mdump-reserved-memory@4bd00000",
+      "reg": [
+        {
+          "address": "0x4bd00000",
+          "bytes": 3145728
+        }
+      ]
+    },
+    {
+      "node": "ram_console-reserved-memory@44400000",
+      "reg": [
+        {
+          "address": "0x44400000",
+          "bytes": 2097152
+        }
+      ]
+    }
+  ],
+  "all_ram_is_free": false,
+  "physical_ram_read": false,
+  "device_mode_change": false,
+  "personal_data_read": false,
+  "initrd": {
+    "linux,initrd-start": {
+      "bytes": 4,
+      "hex": "43480000",
+      "address": "0x43480000"
+    },
+    "linux,initrd-end": {
+      "bytes": 4,
+      "hex": "43a88355",
+      "address": "0x43a88355"
+    }
+  }
+}

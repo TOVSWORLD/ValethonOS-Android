@@ -74,8 +74,8 @@ static int ft_serial_close(struct ft_acm_io *io,struct ft_serial_state *s) {
  }
  s->cleanup=cleanup;return cleanup;
 }
-static int ft_serial_output(struct ft_acm_io *io,int admitted,int owns_function,struct ft_serial_state *s) {
- if(!io||!io->call||!s)return -22;
+static int ft_serial_open_mode(struct ft_acm_io *io,int admitted,int owns_function,int duplex,struct ft_serial_state *s) {
+ if(!io||!io->call||!s||(duplex!=0&&duplex!=1))return -22;
  if(admitted!=1||owns_function!=1)return -1;
  if(s->fd!=-1||s->node_owned||s->restore_needed||s->primary||s->cleanup||s->accepted)return -16;
  char buf[32],path[32];unsigned int port,major,minor;int ret=0;
@@ -89,7 +89,7 @@ static int ft_serial_output(struct ft_acm_io *io,int admitted,int owns_function,
  long r=ft_call(io,FT_SERIAL_MKNODAT,FT_AT_FDCWD,(long)FT_SERIAL_NODE,FT_SERIAL_IFCHR|0600,(long)encoded,0,0);
  if(r<0)return (int)r; /* EEXIST is an error, never adopt an existing node. */
  s->node_owned=1;
- r=ft_retry(io,FT_NR_OPENAT,FT_AT_FDCWD,(long)FT_SERIAL_NODE,FT_O_WRONLY|FT_SERIAL_NOCTTY|FT_SERIAL_NONBLOCK|FT_O_NOFOLLOW|FT_O_CLOEXEC);
+ r=ft_retry(io,FT_NR_OPENAT,FT_AT_FDCWD,(long)FT_SERIAL_NODE,(duplex?2:FT_O_WRONLY)|FT_SERIAL_NOCTTY|FT_SERIAL_NONBLOCK|FT_O_NOFOLLOW|FT_O_CLOEXEC);
  if(r<0){ret=(int)r;goto finish;}s->fd=r;
  /* statx AT_EMPTY_PATH checks the opened fd, not a racy path lookup. */
  {unsigned long long aligned[32]={0};unsigned char *st=(unsigned char *)aligned;
@@ -114,6 +114,21 @@ static int ft_serial_output(struct ft_acm_io *io,int admitted,int owns_function,
   r=ft_serial_ioctl(io,s->fd,FT_SERIAL_TCGETS,&readback);if(r<0){ret=(int)r;goto finish;}
   if(!ft_bytes((const char *)&raw,(const char *)&readback,sizeof(raw))){ret=-5;goto finish;}
  }
+ return 0;
+finish:
+ s->primary=ret;
+ {int cleanup=ft_serial_close(io,s);return ret?ret:cleanup;}
+}
+static inline int ft_serial_open_owned(struct ft_acm_io *io,int admitted,int owns_function,struct ft_serial_state *s) {
+ return ft_serial_open_mode(io,admitted,owns_function,0,s);
+}
+static inline int ft_serial_open_duplex_owned(struct ft_acm_io *io,int admitted,int owns_function,struct ft_serial_state *s) {
+ return ft_serial_open_mode(io,admitted,owns_function,1,s);
+}
+static int ft_serial_output(struct ft_acm_io *io,int admitted,int owns_function,struct ft_serial_state *s) {
+ int ret=ft_serial_open_owned(io,admitted,owns_function,s);
+ if(ret)return ret;
+ long r=0;
  for(int attempts=0;attempts<128&&s->accepted<sizeof(ft_serial_frame)-1;attempts++) {
   unsigned long remaining=sizeof(ft_serial_frame)-1-s->accepted;
   r=ft_call(io,FT_NR_WRITE,s->fd,(long)(ft_serial_frame+s->accepted),remaining,0,0,0);
@@ -126,7 +141,6 @@ static int ft_serial_output(struct ft_acm_io *io,int admitted,int owns_function,
   if((unsigned long)r>remaining){ret=-5;break;}s->accepted+=(unsigned long)r;
  }
  if(!ret&&s->accepted!=sizeof(ft_serial_frame)-1)ret=-110;
-finish:
  s->primary=ret;
  {int cleanup=ft_serial_close(io,s);return ret?ret:cleanup;}
 }

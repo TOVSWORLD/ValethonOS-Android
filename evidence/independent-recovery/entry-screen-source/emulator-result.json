@@ -1,0 +1,24 @@
+{
+  "scope": "Actual marker instructions in emulator RAM only; no physical scanout/entry proof",
+  "passed": true,
+  "marker_sha256": "0100510a76b6029c496e3f55ab812472f13b201ac8bcebb9755ab44169cb5338",
+  "probe_sources_sha256": {
+    "entry_screen_probe.S": "595209ceb3235777b7daa9ae89d2c44f5555c690464194ca1a34ed44ffd68fe9",
+    "entry_screen_probe.c": "1a5c1133233ddf8f27422614bc3d8ab72d6b71ebf41c0389b99223eb96d21102"
+  },
+  "negative_dtb_cases": 8,
+  "all_framebuffer_words_checked": true,
+  "before_after_guard_words_checked": true,
+  "boot_registers_checked": [
+    "x0",
+    "x19",
+    "x20",
+    "x21",
+    "sp"
+  ],
+  "framebuffer_bytes": 12288000,
+  "device_written": false,
+  "physical_ram_read": false,
+  "no_network_or_disks": true,
+  "wall_limit_seconds": 30
+}

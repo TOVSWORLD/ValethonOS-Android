@@ -1,0 +1,90 @@
+{
+  "scope": "Matched ARM64 object compilation only; not module ABI/runtime qualification",
+  "config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+  "kernel_release": "4.9.337-g72940eb733af",
+  "objects": {
+    "mtcmos.o": {
+      "bytes": 25264,
+      "sha256": "9d4872213c99aaa26cfa5b50f3ff74850145ede0ce0da0317a332a6c5c47f464"
+    },
+    "mt_psci.o": {
+      "bytes": 4672,
+      "sha256": "ef7d7b6105772020234f89b455965da9f354425ef6b9c6e1646f7a8c2289f368"
+    },
+    "cpu-off-preview.o": {
+      "bytes": 28200,
+      "sha256": "cb84236ff077b34aee449becaa66b458cc9e334a6e332634147379ae057fac16"
+    }
+  },
+  "source_report": {
+    "scope": "Compile-only matched MT8163 secondary-off patch; not deployed",
+    "source_commit": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+    "source_mtcmos_header_sha256": "3430b5449722792c331adc4ed6d57686f614eea16f9e10dd020c799c9f3752db",
+    "files": {
+      "mtcmos.c": "b83923c7a06ba88489f9228b4f9f52dd50227797fcd50efced6ab6df6766a732",
+      "candidate.patch": "39849e6c17e35a813fa7e1ddd7059eb83b579f32f4bf4cb440ffb5b1042552b9",
+      "Makefile": "bffaf422341679b5235b83e841f1c62a05654c3b8d033a1a0c82104228245811",
+      "bounded_secondary_adapter.inc": "ee0207f7dba94fbb28469b395e8075cf9734486a69d4b01cc37daab4c5463410",
+      "mt_cpu_psci_ops.h": "3da30319721715c1671b896941c4e9b897947e915f158ca0536ea976958aa5f3",
+      "mtcmos.h": "9a6b7b402f1fe0c1fd73b2e29348ad7bf46d9b3748c3847772518bd5b435a1b9",
+      "bounded_secondary_off.h": "2a249086adbe6b052810675650725261794f1249f887d0777ebc1dfab1a93085",
+      "mt_psci.c": "2f3a96a814e2c3603fb823e66acd7b90190c6d41cee89a93e0f1780aa5d2c5e2"
+    },
+    "limits": {
+      "steps": 4096,
+      "timeout_ns": 100000000
+    },
+    "hardware_timing_qualified": false,
+    "whole_hotplug_bound_proved": false,
+    "handoff_admitted": false,
+    "limits_cannot_interrupt": [
+      "firmware calls",
+      "regmap/bus accesses",
+      "clock callbacks"
+    ],
+    "integration_remaining": [
+      "call compiled final off gate before relocation",
+      "serialize CPU hotplug and validate survivor CPU/secondary masks",
+      "independent power-state readback",
+      "abort/recovery after partial shutdown"
+    ]
+  },
+  "compiled_kill_uses_bounded_path": true,
+  "compiled_final_off_gate_present": true,
+  "modpost_warnings": [
+    "WARNING: \"cpu_psci_ops\" [build-only preview] undefined!",
+    "WARNING: \"ktime_get\" [build-only preview] undefined!",
+    "WARNING: \"__const_udelay\" [build-only preview] undefined!",
+    "WARNING: \"regmap_read\" [build-only preview] undefined!",
+    "WARNING: \"psci_ops\" [build-only preview] undefined!",
+    "WARNING: \"__cpu_possible_mask\" [build-only preview] undefined!",
+    "WARNING: \"_raw_spin_unlock_irqrestore\" [build-only preview] undefined!",
+    "WARNING: \"_raw_spin_trylock\" [build-only preview] undefined!",
+    "WARNING: \"__cpu_online_mask\" [build-only preview] undefined!",
+    "WARNING: \"syscon_node_to_regmap\" [build-only preview] undefined!",
+    "WARNING: \"__cpu_logical_map\" [build-only preview] undefined!",
+    "WARNING: \"__sw_hweight64\" [build-only preview] undefined!",
+    "WARNING: \"of_find_compatible_node\" [build-only preview] undefined!",
+    "WARNING: \"_raw_spin_lock_irqsave\" [build-only preview] undefined!",
+    "WARNING: \"regmap_write\" [build-only preview] undefined!"
+  ],
+  "generated_module_wrapper_must_not_be_loaded": true,
+  "full_kernel_built": false,
+  "source_kernel_unchanged": true,
+  "hardware_execution": false,
+  "handoff_admitted": false,
+  "whole_hotplug_bound_proved": false,
+  "host_tests": {
+    "linux": 24,
+    "shutdown_fault_tests": 15,
+    "entry_tests": 9,
+    "exit": 0,
+    "local_suite": 52,
+    "local_skipped_emulator": 1
+  },
+  "original_source_hashes": {
+    "mtcmos.c": "47b9347717374b2884fe984e9e337e76ca90a90fa5727a45f63525e137f4de14",
+    "mt_psci.c": "e453f34345d538c5ec484659ac2eb822f770a4dea420819ef4e6c24c65e79f5b",
+    "mtcmos.h": "3430b5449722792c331adc4ed6d57686f614eea16f9e10dd020c799c9f3752db"
+  }
+}

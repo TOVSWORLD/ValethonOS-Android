@@ -1,0 +1,18 @@
+--- a/arch/arm64/kernel/head.S
++++ b/arch/arm64/kernel/head.S
+@@ -83,6 +83,7 @@
+ 	 *  x21        primary_entry() .. start_kernel()        FDT pointer passed at boot in x0
+ 	 */
+ SYM_CODE_START(primary_entry)
++	bl	valethon_entry_delay
+ 	bl	record_mmu_state
+ 	bl	preserve_boot_args
+ 
+@@ -132,6 +133,7 @@
+ SYM_CODE_END(primary_entry)
+ 
+ #include "valethon-entry-screen.S"
++#include "valethon-entry-delay.S"
+ 
+ 	__INIT
+ SYM_CODE_START_LOCAL(record_mmu_state)

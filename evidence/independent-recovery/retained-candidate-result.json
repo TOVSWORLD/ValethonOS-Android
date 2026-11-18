@@ -1,0 +1,225 @@
+{
+  "scope": "Prepared persistent boot-tail normal trial only; no device execution/retention acceptance",
+  "kernel_run": 41574337098,
+  "kernel_build_status": "success",
+  "kernel_source": "035f197fa4c46f16e53eacdbe1775f09af069278",
+  "all_retained_manifest_hashes_verified": true,
+  "actual_recorder_emmc_objects_and_final_symbols_verified": true,
+  "candidate": {
+    "measurement": {
+      "scope": "File lengths/header memory requirement only; no board placement or boot qualification",
+      "image_bytes": 16912896,
+      "image_sha256": "940398b2949fae104e3b0db1aa192a3f0b08593b59bccb6ad6f3856819473fea",
+      "gzip_bytes": 7251746,
+      "gzip_sha256": "3846e9d6c9de0a170f0acab7175b82538b6b5b686876779b6b456710b2d9a738",
+      "gzip_header_hex": "1f8b0800000000000203",
+      "gzip_round_trip_verified": true,
+      "text_offset": 0,
+      "image_size": 17432576,
+      "flags": 10,
+      "declared_runtime_bytes_beyond_file": 519680,
+      "lk_checked_output_capacity_bytes": 29360128,
+      "decoded_file_fits_lk_capacity": true,
+      "lk_output_capacity_margin_bytes": 12447232,
+      "appended_dt_bytes": null,
+      "placement_base_alignment_bytes": 2097152,
+      "physical_destination_selected": false,
+      "boot_verified": false
+    },
+    "entry": 1073741824,
+    "runtime_regions": [
+      [
+        1073741824,
+        17432576
+      ],
+      [
+        1128792064,
+        54272
+      ],
+      [
+        1207959552,
+        1048576
+      ],
+      [
+        1157627904,
+        27376
+      ]
+    ],
+    "kernel_component_bytes": 7279124,
+    "component_sha1": "1d01cf08edd881d56c539e1fae7429f8fc286760",
+    "payload_bytes": 7297024,
+    "partition_bytes": 16777216,
+    "partition_sha256": "423ed64dc2a24e4ffc23c48f4a71246a1694dc98896f6465a8ad3c5357a4099e",
+    "scope": "Offline first normal log-bringup candidate; review still required",
+    "contract_sha256": "5102967ec2c9963b6a28df99e5c690519cad65d53cf398a5032df8ac7a1f44d0",
+    "config_sha256": "8ec3566dbe7b134f41699cb8b6fe053c7b68a7ccd06cdb6cc3821a10d8674b45",
+    "nonce_sha256": "447d1a83cb091658f8fd2e5897c9d9474c3be829d4384601bc48215d01a67a92",
+    "policy_sha256": "5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8",
+    "physical_execution_admitted": false,
+    "failed_load_qualified": false,
+    "recovery_partition_written": false,
+    "original_partition_tail_replaced": true,
+    "retained_mailbox": {
+      "format": "VLOG0001",
+      "seed_offset": 15728640,
+      "slot_base": 15732736,
+      "slot_bytes": 520192,
+      "payload_capacity": 516096,
+      "prefix_sha256": "de658015aeb9cf65ab1fec05daf95996fd6b7c3f36e281ee9d277e36e53c8823",
+      "original_boot_write_admitted": false,
+      "record_device_qualified": false,
+      "host_control_sequence": 1,
+      "host_control_sha256": "3f81a3fd0aa008ac3c45de5c9e8448b825fddc27106c1d3d243f3706d472d5b6",
+      "kernel_record_requires_sequence_at_least": 2
+    },
+    "kernel_manifest": {
+      "repository_revision": "035f197fa4c46f16e53eacdbe1775f09af069278",
+      "kernel_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+      "run_id": "41574337098",
+      "run_attempt": "1",
+      "files": {
+        "Image": {
+          "bytes": 16912896,
+          "sha256": "940398b2949fae104e3b0db1aa192a3f0b08593b59bccb6ad6f3856819473fea"
+        },
+        "Image.gz": {
+          "bytes": 7251746,
+          "sha256": "3846e9d6c9de0a170f0acab7175b82538b6b5b686876779b6b456710b2d9a738"
+        },
+        "resolved.config": {
+          "bytes": 121067,
+          "sha256": "8ec3566dbe7b134f41699cb8b6fe053c7b68a7ccd06cdb6cc3821a10d8674b45"
+        },
+        "System.map": {
+          "bytes": 3505937,
+          "sha256": "64de7c532e7c30bb437206b9b9060f01ccd10bfbc9809997fd3291ea5cee78d5"
+        },
+        "image-size-report.json": {
+          "bytes": 881,
+          "sha256": "eb40a55e64f414cadbaebb8834faf15e4403c1c83898bed71ef62cb55363c9f4"
+        },
+        "valethon_mailbox.o": {
+          "bytes": 203912,
+          "sha256": "3300cff606429647468d0e65efb2e621547a54839d8cbbf7bc8e657e1613f06c"
+        },
+        "mtk-sd.o": {
+          "bytes": 529192,
+          "sha256": "dbdb1523122a819ea3e56f755d47c8ef0ac6d6eb777ff89264c61dd0069f17ee"
+        }
+      },
+      "qualification": "Compile outputs only; no combined boot image or device acceptance."
+    }
+  },
+  "component_artifacts": {
+    "init": {
+      "bytes": 52800,
+      "sha256": "2cd05634dce53bcd7a18b4f3159f4bacb35c7f1482a8acf6d64ae98398ff81b3"
+    },
+    "initramfs.cpio.gz": {
+      "bytes": 13685,
+      "sha256": "61f0caa4460bb9ce26e0e331bc064bd3e61c98ff4bea4194f88232407105add9"
+    }
+  },
+  "dt_report": {
+    "scope": "Own-source minimal eMMC logging prerequisite, no physical acceptance",
+    "artifact": {
+      "format_version": 17,
+      "bytes": 27376,
+      "sha256": "fb4ad1f5b022ba196c9a65d2205a01714f9b1a685808ce2c03f07faa9bed5b6a"
+    },
+    "baseline": {
+      "scope": "Own-source lab DT compile/semantic comparison only; no boot test",
+      "artifact": {
+        "format_version": 17,
+        "bytes": 27408,
+        "sha256": "d58d4b26bc65bebda14067145558625013c9ff3db66978db238d1b7456f4798c"
+      },
+      "facts": {
+        "source_nodes_compared": 190,
+        "unrelated_properties_preserved": true,
+        "source_of_mmio_and_clocks": "Unchanged locked own-source base",
+        "source_of_memory_and_reservations": "Scoped recovery metadata",
+        "stock_dtb_substituted": false,
+        "runtime_qualified": false
+      },
+      "append_sha256": "6d57e3498058d8969e7f61af0fa65c9496b73d484acf5454eb4e7f7d96f1d4c5",
+      "metadata_sha256": "fe5a4d15bdb0ab5790cce4380e9623221b49d7951793dc925385766076fb2560",
+      "base_dtb_sha256": "4480f085cfb03c2cb6a1b2c9b0c6a7619f3f4c0e395833b93d623deffe65c5c4",
+      "kernel_commandline": "nr_cpus=1 maxcpus=0 clk_ignore_unused regulator_ignore_unused rdinit=/init",
+      "physical_execution_admitted": false
+    },
+    "nonce_sha256": "447d1a83cb091658f8fd2e5897c9d9474c3be829d4384601bc48215d01a67a92",
+    "source_sha256": "a0a72128343b5268f8f15ea5eac8236a97d89f17d1854330fc952056235e2e85",
+    "exact_delta_only": true,
+    "max_frequency": 26000000,
+    "hs200_highspeed_hwreset_removed": true,
+    "firmware_reservations_unchanged": true,
+    "device_written": false
+  },
+  "independent_checks": {
+    "independent_header_id_gzip_dt_ramdisk_padding_verified": true,
+    "independent_seed_control_and_nonce_dt_binding_verified": true,
+    "host_control_is_not_kernel_output": true,
+    "prefix_bytes": 15728640,
+    "payload_end_before_mailbox": true,
+    "device_written": false
+  },
+  "enforcing_vm": {
+    "scope": "Generic VM ABI/label/configfs regression only; no tablet handoff or USB hardware test",
+    "passed": true,
+    "kernel_sha256": "940398b2949fae104e3b0db1aa192a3f0b08593b59bccb6ad6f3856819473fea",
+    "policy_sha256": "5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8",
+    "probe_source_sha256": "8f684f2564d86deea24d831e6ad4a046b403291f5eab1982463ecf90ce60ac2d",
+    "runner_sha256": "37d9370cff09e6bd926a784610d9a12be48360aba279f665f7d0cc0af4d45718",
+    "vm_initramfs_sha256": "de92c8be21647ed1da145b65055141239136bb471209698c9e02ec6d3dff5968",
+    "values": {
+      "VM_LABELS": 0,
+      "VM_PROC": 0,
+      "VM_SYS": 0,
+      "VM_DOMAIN": 0,
+      "VM_KMSG_OPEN": 3,
+      "VM_KMSG_READ": 64,
+      "VM_GENERIC_FLAGS_OPEN": -22,
+      "VM_UDC_DIR": 3,
+      "VM_CONFIGFS": 0,
+      "VM_NAMESPACE_BEFORE": 0,
+      "VM_REAL_CONFIGFS_SETUP_WITHOUT_BIND": 0,
+      "VM_REAL_CONFIGFS_CLEANUP": 0,
+      "VM_NAMESPACE_AFTER": 0
+    },
+    "ram_mib": 512,
+    "cpu_count": 1,
+    "wall_limit_seconds": 20,
+    "log_limit_bytes": 2097152,
+    "qemu_version": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+    "selinux_enforcing": true,
+    "udc_bind_intercepted_vm_only": true,
+    "disk_attached": false,
+    "network_attached": false,
+    "tablet_commands": false,
+    "kernel_rebuilt": false,
+    "physical_execution_admitted": false
+  },
+  "controller_tests_before_final_control_test": 566,
+  "final_control_classification_test_passed": true,
+  "read_only_preparation": {
+    "host_tty_rule_installed": false,
+    "existing_adb_untouched": true,
+    "udev_changed": false,
+    "pinned_helper_verified_without_launch": true,
+    "private_execution_commands_prepared": true,
+    "original_boot_recovery_device_hashes_verified": true,
+    "lab_rollback_hashes_verified": true,
+    "fresh_receipts_unused": true,
+    "device_written": false,
+    "armed": false
+  },
+  "diagnostic_tty_rule_required": false,
+  "diagnostic_usb_not_required_for_readout": true,
+  "host_control_is_not_kernel_evidence": true,
+  "owner_review_pending": true,
+  "device_written": false,
+  "armed": false,
+  "early_failure_before_storage_first_commit_uncovered": true,
+  "controller_rollback_hashes_verified": true
+}

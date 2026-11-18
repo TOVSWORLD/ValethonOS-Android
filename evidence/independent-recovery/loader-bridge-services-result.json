@@ -1,0 +1,31 @@
+{
+  "scope": "Actual ARM bridge, archived allocator and loaded PIC module; actual blob SHA/cache instructions with per-service model flags",
+  "bridge_elf_sha256": "c9465bc8f300c02c10b2ba5104b6d42b6773f177cf16b51ed9df564f601e5921",
+  "module_blob_sha256": "1aad55589212ad423ff51b8bc4dbf48d134117a718111640a5a93ee879d265d1",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "cases": [
+    "allocated_verified_loaded_module_commits_on_owned_stack",
+    "no_publish_no_retry_allocation",
+    "no_publish_no_retry_read",
+    "no_publish_no_retry_sha",
+    "no_publish_no_retry_cache"
+  ],
+  "case_count": 5,
+  "native_bridge_tests": 5,
+  "blob_sha256_modeled": false,
+  "prefix_sha256_modeled": true,
+  "cache_instructions_actual": true,
+  "cache_effects_modeled": true,
+  "owned_allocation_and_private_stack_used_in_model": true,
+  "loader_sequence_after_mode_handoff": 3,
+  "arm_callee_saved_sp_preserved": true,
+  "actual_firmware_hash_cache_clock_heap_bindings_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "candidate_boot_modified": false,
+  "source_sha256": {
+    "scripts/build_loader_bridge.py": "9f83f09046287c92f1fb75ed2fe0857f259f0e6ab4d082cb0cda155a13ca1bdb",
+    "scripts/validate_loader_bridge.py": "fb772e6b1c5b03f5d08c7bd85cb814a23d952ed5cd3bd3911f53225db91635d1"
+  },
+  "linked_bytes": 968
+}

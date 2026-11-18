@@ -1,0 +1,61 @@
+{
+  "scope": "Actual timed PIC writer/target/clock/flush-command code and archived byte wrappers/GPT sampler; block hardware/counter/controller values and prefix digest modeled",
+  "profile": "timed",
+  "elf_sha256": "72c230153dd5ae092d49809574c5e1fd0162d9a10d4e3de3feca5a7ca2861888",
+  "object_sha256": {
+    "checkpoint.o": "1b839335c6ec119ef40ccdac20e7920c041587e7dc9115ca19d99c9e510a102e",
+    "mmc_flush.o": "9596e49132ebe5c4f0d6ace7760fdeba3f6e2084d9af4ff3d6d1a87b512b1a78",
+    "module.o": "19c0e249a2e3c87bf2d41503f2e7b903b339f85d03e53360e9997910cde17eb6",
+    "freestanding.o": "48f6f620c59c41c526c7eb071494b6506ab46103b2b7daa90a45416a6a0565a3",
+    "physical.o": "22c1fbaf0127aebb081f8838c1c3b53b6eb485db7db273fd036aff9daffe4f2d",
+    "hash-stream.o": "1dfe5a534b31e93148bb454486f5f94f9bb868ede2f01af9ce7a1f3d3b426628",
+    "firmware-module.o": "cae4e543c625277259742bff4cbbd473fe7fcf4e336deac6c2e1e2b57d7754dd",
+    "hash-block.o": "99b196826d9e506faf78181567564d156f1a396be5b112e2c8945353c8082c84",
+    "clock.o": "c284be5134971d398c2f40828d6546df97e195467a7819f815eb7cd8f1a85fb2",
+    "command.o": "397127121a160bc1015a61ff6c6e91eed2a8cd2ddddb16eb84625a4dc6467e8b",
+    "timed-module.o": "893cb5a7282a7424e0fea41b5bc0d6066e985123125bfe78cded472adcedf7f6"
+  },
+  "allocated_input_relocation_types": {
+    "10": 18,
+    "3": 6,
+    "42": 53,
+    "30": 11
+  },
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "cases": [
+    "bounded_driver_records_at_0x41000000",
+    "bounded_driver_records_at_0x43000000",
+    "stop_short_read",
+    "stop_short_write",
+    "inconsistent_target_no_io",
+    "one_initialization_only",
+    "non_normal_modes_no_io",
+    "stuck_clock_no_storage_io",
+    "controller_busy_stop_preserves_previous_record"
+  ],
+  "case_count": 9,
+  "native_composition_tests": 4,
+  "state_bytes": 8728,
+  "entry_symbols": [
+    "lft_start",
+    "lft_emit"
+  ],
+  "prefix_digest_modeled_here": true,
+  "full_prefix_native_and_actual_sha_stream_tested_separately": true,
+  "legacy_unbounded_command_driver_not_reached": true,
+  "controller_writes_only_command_arg_ack": true,
+  "mode_handoff_sequence": 3,
+  "callee_saved_sp_preserved": true,
+  "raw_data_driver_still_original_and_not_termination_qualified": true,
+  "real_card_dma_clock_visibility_or_placement_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/timed-module.c": "e342d5886a6ffe8998831e8a6bc705c3dab75f3d6f11c743179865dc3d3b9f48",
+    "projects/firetabs-android/loader-retained/timed-module.h": "7d4b98784625130b0a00d93714fff520864986cc8635b4a3afb1b1145776cb25",
+    "scripts/build_loader_module.py": "3543b112ad085d2d4a9f2f380fb002d9c5784c44f983d0bf2663af2b5c7904f5",
+    "scripts/validate_loader_timed_module.py": "a2e28c65f07c157222ec0d57b2253d1cda77b4f5aa247b90de00328c006b9063",
+    "tests/test_loader_timed_module.py": "13fbd1230f5eddcb8551faf0321016e8ff9a694345ab2f9d146ce1b392da85ee"
+  },
+  "linked_bytes": 6996
+}

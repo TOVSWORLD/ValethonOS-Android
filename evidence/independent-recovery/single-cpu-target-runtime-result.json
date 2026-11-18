@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-12",
+  "status": "Target USB timeout; target-boot milestone not reached",
+  "target_cpu_limit": 1,
+  "target_only_bootargs": [
+    "nr_cpus=1",
+    "maxcpus=1"
+  ],
+  "candidate_write_attempts": 1,
+  "restore_write_attempts": 1,
+  "ordinary_reboot_requests": 1,
+  "original_boot_restored_before_jump": true,
+  "recovery_written": false,
+  "load_attempts": 1,
+  "jump_requests": 1,
+  "automatic_retry": false,
+  "source_console_proven": true,
+  "source_capture_bytes": 9011,
+  "source_capture_sha256": "9d5a18e57a0e053aecc2cf1073ba5c7b3d96229a172d4bab8c21ba8f5bd74bf8",
+  "source_ffs_last_close_retained": true,
+  "source_init_reboot_route_seen": true,
+  "source_native_entry_seen": true,
+  "source_starting_new_kernel_seen": false,
+  "source_final_cpu_gate_seen": false,
+  "target_capture_window_seconds": 300,
+  "target_usb_endpoint_selected": false,
+  "target_marker_received": false,
+  "target_entry_proven": false,
+  "normal_android_boot_qualified": false,
+  "post_jump_device_commands_sent": false,
+  "post_return_verification": {
+    "date": "2026-11-13",
+    "boot_complete": true,
+    "original_boot_verified": true,
+    "original_config_verified": true,
+    "recovery_verified": true,
+    "normal_shell_restored": true,
+    "return_method": "owner-assisted hard boot"
+  },
+  "conclusion": "CPU0-only target arguments did not produce target USB evidence. The hang location remains unknown; source native entry is a repeated prerequisite, not a new milestone.",
+  "limitations": [
+    "No USB evidence does not prove the target never executed",
+    "The negative result does not eliminate all SMP, firmware or device-state causes",
+    "Original boot restoration was verified before the jump; post-return verification is separate"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "scope": "Offline entry-argument candidate; not a boot-ready layout",
+  "image_sha256": "ccd93b6c9daa3107f03e1633b0de3f609bc1a546f62779f92f29e77cb1855c08",
+  "dtb_sha256": "f79bed229e4a3eb6bd4aa1d7251869db6fa1950dad9a6b2ccca7b6975551bc48",
+  "trampoline_sha256": "e2480a1a58603615a5f0b41d51aecd38370a15bbf13954ce119a3a8598bfb45c",
+  "entry_address": 1128792064,
+  "image_address": 1074266112,
+  "dtb_address": 1207959552,
+  "image_placement": {
+    "assumed_entry_address": "0x40080000",
+    "text_offset": 524288,
+    "image_size": 16363520,
+    "required_base": "0x40000000",
+    "base_alignment_bytes": 2097152,
+    "alignment_satisfied": true,
+    "end_exclusive": "0x4101b000"
+  },
+  "trampoline_bytes": 40,
+  "instructions": 6,
+  "x0": 1207959552,
+  "x1_x2_x3": [
+    0,
+    0,
+    0
+  ],
+  "device_execution_allowed": false,
+  "checks_limited_to": "Template, Image placement, FDT header bounds, mutual overlap",
+  "unqualified": [
+    "FDT structure/board suitability",
+    "RAM/reserved-memory ownership",
+    "source allocator/relocation/control-page integration",
+    "CPU parking/EL/firmware",
+    "cache/MMU/DMA/device shutdown",
+    "filesystem quiescing",
+    "target logging/independent failure recovery"
+  ],
+  "addresses_are_hypothetical": true,
+  "source_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+  "source_gzip_eof_verified": true,
+  "appended_dtb_bytes": 88655,
+  "template_sha256": "52ba79d5cc3609d79830f0e59dd5855e76701cfd078cedf5783ee784d248e369",
+  "template_source_sha256": "3eef05e7dfa183f89c7afd8794fa88be2cb9174006b61f3e8d8449fa7792f2ba",
+  "offline_tests": {
+    "linux": 9,
+    "emulated_layouts": 6,
+    "actual_assembled_arm64": true,
+    "host_suite": 37,
+    "local_emulator_skipped": true
+  },
+  "hardware_execution": false
+}

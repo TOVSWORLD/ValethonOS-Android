@@ -1,0 +1,88 @@
+{
+  "status": "Live kernel-to-USB-serial host capture passed; early boot/handoff capture pending",
+  "owner_direction": "Prioritize USB logging/capture to shorten debugging; retained-log/watchdog work is not the critical path",
+  "adb_kernel_probe": {
+    "scope": "Live USB kernel-marker capture; no mode change or reboot",
+    "client_sha256": "a502b992b3b8fff9f063599be26581ccfd570fc89785c551d20d2aac735a652f",
+    "complete": true,
+    "kernel_marker_writes": 1,
+    "usb_mode_changed": false,
+    "reboot_requested": false,
+    "boot_written": false,
+    "transport_is_physical_usb": true,
+    "kernel_record_bytes": 85,
+    "kernel_record_sha256": "8dacfca09cf2abd5037f2a9143fbf4444a117bb0e5f1613aad033fc4685cb07e",
+    "host_capture_bytes": 146,
+    "host_capture_sha256": "db64d4958be5ef9406e8604f19f65096360f184fee776e80e45ff6ab8f3c1ca3",
+    "capture_fsynced": true,
+    "exact_marker_match": true,
+    "ram_cleaned": true,
+    "normal_shell_restored": true
+  },
+  "acm_attempt_1": {
+    "scope": "usb-acm-live-capture-1",
+    "runner_sha256": "81f3e60429fe83478286c368c9e7f5da0b16a7010785c69af85f6b3cb0acb38c",
+    "helper_sha256": "b528512d6bd7a35a65e14dcd8fb855f991f3c8a68ce152cfa87316d04ef9df25",
+    "receiver_sha256": "c57e4ff7da38278ccf4d94b9eee7f7d55f658b3071c07a283d79c538ab173050",
+    "trial_launches": 1,
+    "complete": false,
+    "host_received": false,
+    "usb_mode_changed": true,
+    "adb_only_restored": true,
+    "normal_shell_restored": true,
+    "boot_written": false,
+    "reboot_requested": false,
+    "owner_attention_required": false,
+    "preflight": "passed",
+    "usb_mode_change_requested": true,
+    "capture": {
+      "endpoint_selected": false,
+      "complete": false,
+      "host_received": false,
+      "failure_kind": "PermissionError"
+    }
+  },
+  "acm_attempt_1_resolution": "Host lacked serial open permission; temporary ADB+ACM enumerated and automatically restored. Narrow sudo fd opener added; no group/ACL/udev changes.",
+  "acm_attempt_2": {
+    "scope": "usb-acm-live-capture-1",
+    "runner_sha256": "2e3b314b713053288767700fff9183d7fd50c8eebcad791f17df25c3b98587dd",
+    "helper_sha256": "d87ddc0b93cb86cff91970e2e997a969e4423154103f9b423eaa3806699522b5",
+    "receiver_sha256": "1238df1f1027bbf0ab61a28175adfcde3fe977c530785df34a8782f2bfe3e7af",
+    "trial_launches": 1,
+    "complete": true,
+    "host_received": true,
+    "usb_mode_changed": true,
+    "adb_only_restored": true,
+    "normal_shell_restored": true,
+    "boot_written": false,
+    "reboot_requested": false,
+    "owner_attention_required": false,
+    "preflight": "passed",
+    "usb_mode_change_requested": true,
+    "capture": {
+      "endpoint_selected": true,
+      "complete": true,
+      "host_received": true,
+      "capture_bytes": 390,
+      "capture_sha256": "e4441e753f03cad7b0d01211393268866441c4cd7a71c3f4c2f7320b19f9734a",
+      "capture_fsynced": true
+    },
+    "kernel_record_captured": true
+  },
+  "build": {
+    "helper_sha256": "d87ddc0b93cb86cff91970e2e997a969e4423154103f9b423eaa3806699522b5",
+    "helper_source_sha256": "9339075982f1cc7bb90f7cb0b0832d256aeba967cdbab301807413781d74d22d",
+    "receiver_sha256": "1238df1f1027bbf0ab61a28175adfcde3fe977c530785df34a8782f2bfe3e7af",
+    "restoration_fault_controls_passed": 13,
+    "receiver_identity_tests_passed": 6,
+    "privileged_fd_transfer_control_passed": true,
+    "kernel_record_backed_probe": true
+  },
+  "qualification_limits": [
+    "Working installed 4.9 kernel only",
+    "Kernel marker capture is proven; full live log stream is not yet qualified",
+    "No USB capture through shutdown or early target boot yet",
+    "No successful experimental kexec jump claimed"
+  ],
+  "next": "Build existing builtin USB kernel console with target-only opt-in binding; preserve ADB source boot"
+}

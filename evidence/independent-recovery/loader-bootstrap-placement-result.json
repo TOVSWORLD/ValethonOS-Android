@@ -1,0 +1,119 @@
+{
+  "scope": "analysis bootstrap link in owned console spans only",
+  "bytes": 1530,
+  "sections": [
+    {
+      "object": "bridge.o",
+      "section": ".text.lb_load",
+      "bytes": 514,
+      "resident_offset": "0xbb8",
+      "zero": false
+    },
+    {
+      "object": "hash.o",
+      "section": ".text.lh_equal",
+      "bytes": 288,
+      "resident_offset": "0x88e",
+      "zero": false
+    },
+    {
+      "object": "bootstrap.o",
+      "section": ".text.lbo_observe",
+      "bytes": 198,
+      "resident_offset": "0x618",
+      "zero": false
+    },
+    {
+      "object": "bootstrap-hooks.o",
+      "section": ".rodata.lbo_frontend",
+      "bytes": 112,
+      "resident_offset": "0x528",
+      "zero": false
+    },
+    {
+      "object": "bootstrap-hooks.o",
+      "section": ".rodata.lbo_load_plan",
+      "bytes": 72,
+      "resident_offset": "0x6e0",
+      "zero": false
+    },
+    {
+      "object": "hash-block.o",
+      "section": ".text.lh_block",
+      "bytes": 52,
+      "resident_offset": "0x598",
+      "zero": false
+    },
+    {
+      "object": "cache.o",
+      "section": ".text.lb_cache_sync",
+      "bytes": 48,
+      "resident_offset": "0x73c",
+      "zero": false
+    },
+    {
+      "object": "bootstrap.o",
+      "section": ".text.read_blob",
+      "bytes": 40,
+      "resident_offset": "0x9ae",
+      "zero": false
+    },
+    {
+      "object": "bootstrap-hooks.o",
+      "section": ".text.lbo_read",
+      "bytes": 40,
+      "resident_offset": "0x9d8",
+      "zero": false
+    },
+    {
+      "object": "bootstrap.o",
+      "section": ".bss.loaded",
+      "bytes": 32,
+      "resident_offset": "0xa00",
+      "zero": true
+    },
+    {
+      "object": "bootstrap-hooks.o",
+      "section": ".text.lbo_handoff",
+      "bytes": 32,
+      "resident_offset": "0xa20",
+      "zero": false
+    },
+    {
+      "object": "hash.o",
+      "section": ".rodata.cst32",
+      "bytes": 32,
+      "resident_offset": "0xdc0",
+      "zero": false
+    },
+    {
+      "object": "bootstrap-hooks.o",
+      "section": ".text.lbo_call",
+      "bytes": 22,
+      "resident_offset": "0x77c",
+      "zero": false
+    },
+    {
+      "object": "bootstrap.o",
+      "section": ".rodata.services",
+      "bytes": 20,
+      "resident_offset": "0xde0",
+      "zero": false
+    },
+    {
+      "object": "freestanding.o",
+      "section": ".text.__aeabi_memcpy8",
+      "bytes": 16,
+      "resident_offset": "0xa40",
+      "zero": false
+    },
+    {
+      "object": "bootstrap.o",
+      "section": ".data.context",
+      "bytes": 12,
+      "resident_offset": "0x5cc",
+      "zero": false
+    }
+  ],
+  "physical_candidate": false
+}

@@ -1,0 +1,21 @@
+{
+  "scope": "Full USB end-to-end attempt with proven RAM correction and detached durable receiver; offline-qualified",
+  "offline_policy_validation_passed": true,
+  "qualification_sha256": "5a5f28db89bffa43acab7416c41976806fe0253fac79c58c586eabd84b429883",
+  "policy_sha256": "8245baf8e49a9cb5f7de16d538c21e7240661284c08e56cdd332a6f7f6facdeb",
+  "image_sha256": "52cd907c227c8568079439210ce766d88a9808e82a284970ee358f35f3cad541",
+  "reference_manifest_sha256": "5bac5f94ee0b3ca65123774dd38bdeb80bea3bd14d452bcf6ec40608a548776f",
+  "load_only_client_sha256": "b7d94caf87be478ad0869ea621f55a9b6e652588739c3090d4cc98e0257633b8",
+  "execute_implemented": false,
+  "regression_tests": 968,
+  "regression_tests_passed": true,
+  "regression_tests_skipped": 0,
+  "android_evidence_check_passed": true,
+  "repository_integrity_check_passed": false,
+  "repository_integrity_existing_failure": "tests/test_source_usb_shutdown.py:201 empty implementation",
+  "hardware_execution": false,
+  "owner_presence_required": true,
+  "receiver_parent_loss_control_passed": true,
+  "receiver_stdout_loss_recovery_control_passed": true,
+  "verbose_initcall_tracing": false
+}

@@ -1,5 +1,9 @@
 # Douglas DT-only integration experiment
 
+> Historical source/integration snapshot. Use the [current hardware contract](../../../../docs/development/DOUGLAS-HARDWARE-CONTRACT.md)
+> for consolidated implementation status and later boot evidence. Statements below
+> about routes/builds not yet established describe their original audit date.
+
 This is a source/compilation step toward a maintained Android 17 / 6.18 kernel port.
 It is **not an installable device image**. Kernel compilation and all hardware validation
 remain unperformed. Do not pack or flash the output.

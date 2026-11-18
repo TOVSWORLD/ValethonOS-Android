@@ -1,0 +1,207 @@
+{
+  "status": "USB-console kernel built and linked; source boot plus console-target jump awaiting owner go",
+  "image_sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+  "config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+  "kernel_release": "4.9.337-g72940eb733af",
+  "source_boot_candidate_sha256": "d1b5fc85a5a560eab70a032ac11b88b0090b8ff98f5ff1af8960cc87b8746c26",
+  "source_boot_package": {
+    "scope": "USB-console native source boot; default legacy gadget bind disabled",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "candidate_sha256": "d1b5fc85a5a560eab70a032ac11b88b0090b8ff98f5ff1af8960cc87b8746c26",
+    "partition_bytes": 16777216,
+    "image_sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+    "image_file_bytes": 15333888,
+    "image_memory_bytes": 16564224,
+    "resolved_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "appended_dtbs": [
+      {
+        "bytes": 88655,
+        "sha256": "f79bed229e4a3eb6bd4aa1d7251869db6fa1950dad9a6b2ccca7b6975551bc48"
+      },
+      {
+        "bytes": 89019,
+        "sha256": "b0b81e5eff9f639d5100009abc87424a737e06f13707633c9cee1dc2165f1191"
+      }
+    ],
+    "original_dt_suffix_preserved": true,
+    "original_ramdisk_sha256": "0e8c340d30666c282a30e20e7686ea0aca2a9967cd9582294476a3f064d7642e",
+    "original_ramdisk_and_header_addresses_preserved": true,
+    "original_header_changes_only_kernel_size_and_id": true,
+    "new_declared_end": 7925760,
+    "original_declared_end": 7796736,
+    "original_tail_after_new_declared_end_preserved": true,
+    "original_standard_component_id_matched": false,
+    "new_standard_component_id": "7628971297305c5d6bb1d55a59c145f652e7c253",
+    "signature_verified": false,
+    "original_rollback_bytes_retained": true,
+    "boot_tested": false,
+    "experimental_jump_executed": false,
+    "failed_jump_logging_is_pretrial_blocker": false,
+    "usb_console_linked": true,
+    "serial_bind_is_opt_in": true,
+    "console_capture_at_boot_qualified": false,
+    "source_ramdisk_and_cmdline_unchanged": true,
+    "security_changes": false,
+    "watchdog_changes": false
+  },
+  "source_boot_preflight": {
+    "scope": "usb-console-native-source-boot-1",
+    "runner_sha256": "da06b41356139dc6bdf32214c02bf9b765d89731ce304ab45a112bc2dd0cd237",
+    "candidate_sha256": "d1b5fc85a5a560eab70a032ac11b88b0090b8ff98f5ff1af8960cc87b8746c26",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "candidate_write_attempts": 0,
+    "restore_write_attempts": 0,
+    "reboot_requests": 0,
+    "complete": true,
+    "original_boot_restored": false,
+    "normal_shell_restored": true,
+    "native_kernel_running": false,
+    "recovery_written": false,
+    "experimental_jump_executed": false,
+    "owner_attention_required": false,
+    "recovery_sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11",
+    "preflight": "passed",
+    "profile_runner_sha256": "4528e60ab212ef109bb40c87fba654d1d909400963848fa0cf3c38099605ef63"
+  },
+  "linked_checks": {
+    "scope": "USB kernel console + native handoff linked profile; not boot acceptance",
+    "artifacts": {
+      "arch/arm64/boot/Image": {
+        "sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+        "bytes": 15333888
+      },
+      "vmlinux": {
+        "sha256": "281e4f348178cd5725ef7d50ec18fa262f8249fe661581d7878a7a19f529ba81",
+        "bytes": 20771776
+      },
+      "System.map": {
+        "sha256": "6678d67ea87aab0ddd088aaeaa5b34d52590cd9051bf4fcb7d717e6e5b06ccb8",
+        "bytes": 3858471
+      },
+      ".config": {
+        "sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+        "bytes": 128978
+      }
+    },
+    "image_header": {
+      "text_offset": 524288,
+      "image_size": 16564224,
+      "flags": 10
+    },
+    "handoff_gate_wired": true,
+    "arm64_syscall_104_is_kexec_load": true,
+    "native_final_gate_reaches_off_check": true,
+    "orderly_reboot_namespace_linked": true,
+    "usb_console_linked": true,
+    "serial_bind_is_opt_in": true,
+    "usb_profile_config_changes": {
+      "CONFIG_USB_F_OBEX": {
+        "before": "n",
+        "after": "y"
+      },
+      "CONFIG_U_SERIAL_CONSOLE": {
+        "before": "n",
+        "after": "y"
+      },
+      "CONFIG_USB_G_SERIAL": {
+        "before": "n",
+        "after": "y"
+      }
+    },
+    "serial_source_sha256": "b27ef69e4ed90ee5fc2511eaebb001ad8d3c88ede0bde04cb962ce4e52fbb5f9",
+    "watchdog_changes": false
+  },
+  "retained_archive": {
+    "bytes": 15973437,
+    "sha256": "67219b04312a298614f11dd78487b243e0dea957b598ffc536e48e9d2f4e8595",
+    "all_file_hashes_verified": true
+  },
+  "target_layout_preview": {
+    "scope": "USB kernel-console target bundle; not executed",
+    "trial_id": "9cb72b4308df052e5894ca7ae0ccc87b",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "entry": 1107394560,
+    "target_image_sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+    "target_dtb_sha256": "21f23cf564074eadcdffe41ae132503b5032bbfe59fa62f340b7850892e9f7f0",
+    "source_dtb_sha256": "cd3325a83a47f05982181903b531b5ec305389bccc9dbb7be8a0dd06036c656f",
+    "target_ramdisk_sha256": "0e8c340d30666c282a30e20e7686ea0aca2a9967cd9582294476a3f064d7642e",
+    "dt_changes_only": [
+      "/chosen/valethon,kexec-trial",
+      "/chosen/bootargs"
+    ],
+    "initrd_addresses_unchanged": [
+      1763986944,
+      1764851445
+    ],
+    "pstore_preserved": true,
+    "native_allocator_owns_source_and_relocation_pages": true,
+    "segments": [
+      {
+        "file": "image.bin",
+        "sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+        "bytes": 15333888,
+        "address": 1074266112,
+        "memory_bytes": 16564224
+      },
+      {
+        "file": "metadata.bin",
+        "sha256": "3193dcf05c43d9b9a7cc2b8c42d8005c95afc52733723c9938ffc722cb5aaa8e",
+        "bytes": 98344,
+        "address": 1107296256,
+        "memory_bytes": 102400
+      },
+      {
+        "file": "initrd.bin",
+        "sha256": "da32af4493753e2eaadeb717477815aaf42b8ceed58591825f8b99ac18a588f4",
+        "bytes": 868085,
+        "address": 1763983360,
+        "memory_bytes": 868352
+      }
+    ],
+    "experimental_jump_executed": false,
+    "unqualified": [
+      "hardware kexec transition",
+      "device/DMA shutdown sufficiency",
+      "target entry and normal Android return",
+      "failed-jump log retrieval"
+    ],
+    "target_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "source_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "bootargs_prefix": [
+      "console=ttyGS0",
+      "g_serial.ft_bind=1",
+      "g_serial.ft_trial=9cb72b4308df052e5894ca7ae0ccc87b"
+    ],
+    "original_bootargs_suffix_preserved": true,
+    "target_usb_descriptors": {
+      "vendor": "0525",
+      "product": "a4a7"
+    },
+    "offline_preview": true,
+    "preview_source": "Previously observed source DT; fresh current source inputs required after source boot"
+  },
+  "load_client_preview": {
+    "scope": "Static native load/unload client; no execute command",
+    "source_sha256": "0db97cc82b93b205d3b86cc0b938332a09b5c305b54ed61880b993bbe209ccbd",
+    "manifest_sha256": "359dc91fa6530ff2307cf57188be3b51f9771dc86f4efb0412a12d72e4960fae",
+    "client_sha256": "5a7d70a8b1dec54cbeded6e3c8b66f5cf270c73eafc6fb9f0ff9dac0c42707ff",
+    "client_bytes": 144112,
+    "execute_implemented": false,
+    "loaded_on_tablet": false
+  },
+  "offline_checks": {
+    "usb_console_profile_source_package_and_jump_tests": 20,
+    "real_fd_console_capture_tests": 7,
+    "live_acm_identity_tests": 6,
+    "native_regression_tests": 39,
+    "native_load_client_host_controls": 12,
+    "generated_serial_init_cases": 7
+  },
+  "hardware_status": {
+    "live_original_kernel_usb_acm_marker_capture_passed": true,
+    "new_console_image_booted": false,
+    "console_target_jump_executed": false,
+    "usb_early_boot_capture_qualified": false
+  },
+  "priority": "USB capture first; no retained-log or watchdog qualification gate"
+}

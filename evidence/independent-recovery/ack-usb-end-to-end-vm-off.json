@@ -1,0 +1,20 @@
+{
+  "scope": "Exact RAM-fix Image Cortex-A53 VM with target RAM/no-map geometry; no tablet/physical USB qualification",
+  "board_memory_geometry": true,
+  "nomap_ranges": 6,
+  "passed": true,
+  "image_sha256": "52cd907c227c8568079439210ce766d88a9808e82a284970ee358f35f3cad541",
+  "vm_initramfs_sha256": "6c6bde117e8f8135352541245b9216ecbba321da1495d9475da267b0e8a0166c",
+  "virtualization": "off",
+  "fresh_console_identity": true,
+  "run_init_seen": true,
+  "enforcing_pid1_filesystem_probe": true,
+  "permanent_callback_survived_init_memory_free": true,
+  "metadata_integrity_stub_executed": false,
+  "hardware_execution": false,
+  "disk_attached": false,
+  "network_attached": false,
+  "tablet_commands": false,
+  "raw_log_sha256": "ba575d97f3e901ebd3ee52a32cf6b82cac013c090d7df0703bf659eadf1bef6a",
+  "elapsed_seconds": 7.396
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "PIC module in emulated allocations; no physical allocation or RAM claim",
+  "elf_sha256": "9bed3c9a56a9a201fcb24d9e208016c799e661e71f81cada43934b5a06cb5a8b",
+  "input_object_sha256": {
+    "loader-checkpoint-pic.o": "ac6c2401fb04961d60f840ca2e492ec0818e0993e8afcc896793e6472f1e27ba",
+    "loader-freestanding-pic.o": "465a7171c03e5fff6a6f001ea2e3ddb7fca3103d2012cce54adca3ef09dfe685"
+  },
+  "allocated_input_relocation_types": {
+    "10": 1,
+    "3": 5,
+    "42": 13
+  },
+  "cases": [
+    {
+      "modeled_code_base": "0x43000000",
+      "mode_read_handoff_sequence": 4,
+      "passed": true
+    },
+    {
+      "modeled_code_base": "0x44000000",
+      "mode_read_handoff_sequence": 4,
+      "passed": true
+    },
+    {
+      "modeled_code_base": "0x4c100000",
+      "mode_read_handoff_sequence": 4,
+      "passed": true
+    }
+  ],
+  "module_position_independent_for_tested_paths": true,
+  "runtime_relocations_required": false,
+  "hardware_memory_ownership_proved": false,
+  "physical_commands": false,
+  "device_accessed": false
+}

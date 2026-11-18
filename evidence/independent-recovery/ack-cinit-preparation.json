@@ -1,0 +1,18 @@
+{
+  "scope": "Full C-init/PID1 candidate ready for one owner-attended hardware attempt; no tablet commands during preparation",
+  "offline_policy_validation_passed": true,
+  "qualification_sha256": "336bc392618add0721d31857badf111caed7c8aee11714c1aa5916e294ee1b95",
+  "policy_sha256": "3fa2db4fa9867639ffbf5fcc2a944053947a9fd2529ec387f98e0948d124afc9",
+  "image_sha256": "93722d1fd0d6d7f53b351fba8508bce7d1923fb21a9e92a5911a2acfc4742476",
+  "reference_manifest_sha256": "5a74ef8c92d50e76ca4c925cb7d84e4bb80981e6496fc9bc31bd01b1828fe44e",
+  "load_only_client_sha256": "60310f60c951206808e05bca89b50daafe3af7d0ae7393090bdd044d67ea748b",
+  "execute_implemented": false,
+  "regression_tests": 958,
+  "regression_tests_passed": true,
+  "regression_tests_skipped": 0,
+  "android_evidence_check_passed": true,
+  "repository_integrity_check_passed": false,
+  "repository_integrity_existing_failure": "tests/test_source_usb_shutdown.py:201 empty implementation",
+  "hardware_execution": false,
+  "owner_presence_required": true
+}

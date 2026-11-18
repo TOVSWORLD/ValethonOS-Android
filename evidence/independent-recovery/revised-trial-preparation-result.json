@@ -1,0 +1,22 @@
+{
+  "scope": "Fresh revised candidate2 preparation for complete owner review; no execution approval inferred",
+  "source_head": "2dc518725ea95fb3d925cfefb01bc27bd37af612",
+  "candidate_sha256": "4ec14bf8774949ff36ad2173fb9267f6d5dffb2d155f8be485521863dd10741b",
+  "candidate_bytes": 16777216,
+  "current_tools_staged_hash_verified": true,
+  "fresh_nonce_plan_and_unused_receipts": true,
+  "receiver_input_preflight_passed": true,
+  "receiver_port_opened": false,
+  "actual_original_boot_recovery_readonly_preflight_passed": true,
+  "lab_and_controller_rollback_hashes_verified": true,
+  "pinned_helper_verified_without_launch": true,
+  "temporary_tty_rule_prepared_not_installed": true,
+  "udev_changed": false,
+  "device_written": false,
+  "armed": false,
+  "rebooted": false,
+  "supervisor_installed_candidate_preflight": "deferred until separately approved candidate write and full readback",
+  "owner_review_required": true,
+  "physical_entry_or_usb_qualified": false,
+  "failed_load_or_retention_qualified": false
+}

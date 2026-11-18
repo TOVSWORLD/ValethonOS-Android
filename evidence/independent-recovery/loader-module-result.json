@@ -1,0 +1,50 @@
+{
+  "scope": "Integrated actual PIC writer/adapter plus exact archived command wrapper; storage, driver, clock modeled",
+  "elf_sha256": "5f22b4f63e903f6c63d7df9f9fe45752264b12332f7575c1cccfa125cb31bac9",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "object_sha256": {
+    "loader-module-checkpoint.o": "ac6c2401fb04961d60f840ca2e492ec0818e0993e8afcc896793e6472f1e27ba",
+    "loader-module-mmc_flush.o": "02fdc5edd1edfcd50d3acb0705784757c5ccddf805d3480357fb263cfdebca55",
+    "loader-module-module.o": "2dfa4210faf8efe72ca1963bad636b9ab4a34d19841d0be9ce6c12108bb36bc5",
+    "loader-module-freestanding.o": "465a7171c03e5fff6a6f001ea2e3ddb7fca3103d2012cce54adca3ef09dfe685"
+  },
+  "allocated_input_relocation_types": {
+    "10": 2,
+    "3": 5,
+    "42": 22,
+    "30": 2
+  },
+  "cases": [
+    "integrated_relocated_0x43000000",
+    "integrated_relocated_0x44000000",
+    "integrated_relocated_0x4c100000",
+    "stop_at_command_1",
+    "stop_at_command_2",
+    "stop_at_command_3",
+    "stop_at_command_4",
+    "stop_at_command_5",
+    "stop_at_command_6",
+    "stop_at_command_7",
+    "stop_at_command_8",
+    "stop_at_command_9"
+  ],
+  "case_count": 12,
+  "state_bytes": 8584,
+  "callee_saved_sp_preserved": true,
+  "old_switch_not_used": true,
+  "no_retry_after_error": true,
+  "physical_memory_bindings_or_durability_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "native_integration_controls": 4,
+  "linked_code_bytes": 4307,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/module.c": "e88afbb03569fb2e49dce7d61f3a8a0633ace41311afc4abb08da74b519fc8a6",
+    "projects/firetabs-android/loader-retained/module.h": "81a209617e86444c900656631655b43e498c49231561bcbe15e5143f286c363b",
+    "scripts/build_loader_module.py": "d64aaf28012a2a57fb92551e0cd6d8d85c75b0ba9b81dcf1afdbb6bd80b737f6",
+    "scripts/validate_loader_module.py": "1bd41a4f5a36253745c0672c37dfd91a3a303b634bd968c16f000474573a7653",
+    "scripts/validate_loader_relocation.py": "e8660a86b7c62db8601480f8f35e35b8fc0e8fa26f417d08176326ea3bb0e7ac",
+    "scripts/validate_loader_allocator.py": "7990a442e28be947cab9fd4a5fed8a374c183a72f6faef8df8a664f370afff01",
+    "tests/test_loader_module.py": "a4552c6c065c188e0de8dff1b3493754b601baf979f82285d5d441cc7640d71f"
+  }
+}

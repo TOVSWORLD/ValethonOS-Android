@@ -1,0 +1,23 @@
+{
+  "scope": "Full ACK/PID1 candidate preserving live RAM exclusions; offline-qualified, no tablet attempt",
+  "offline_policy_validation_passed": true,
+  "qualification_sha256": "0747b81afb5e98bac0f1634183cb4b9d70a398f47748df0ac17d9e9957f98870",
+  "policy_sha256": "a768f86f3e9c5a9065be2d92dce4032e3b5b537d6a708267a74dd792713ba333",
+  "image_sha256": "fb71d8d8eed60787d8f3fa1cb5a86cb577542b35ef40f57b974928c784f14c53",
+  "reference_manifest_sha256": "488447f4d79ee56c2408d088762e14c407566ed5acd0f44d2d65b19791055dd0",
+  "load_only_client_sha256": "b7d94caf87be478ad0869ea621f55a9b6e652588739c3090d4cc98e0257633b8",
+  "execute_implemented": false,
+  "regression_tests": 963,
+  "regression_tests_passed": true,
+  "regression_tests_skipped": 0,
+  "android_evidence_check_passed": true,
+  "repository_integrity_check_passed": false,
+  "repository_integrity_existing_failure": "tests/test_source_usb_shutdown.py:201 empty implementation",
+  "hardware_execution": false,
+  "owner_presence_required": true,
+  "qualification_controls": 13,
+  "added_nomap_exclusion": [
+    "0x98400000",
+    "0x98600000"
+  ]
+}

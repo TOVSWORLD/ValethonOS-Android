@@ -1,0 +1,211 @@
+{
+  "scope": "Matched source-kernel legacy binding object compilation only",
+  "binding": {
+    "scope": "Offline legacy affinity binding; firmware support untested",
+    "source_sha256": "142416b4d183500269fc8fa3adfb78183ac889be29cdd9f9eee4fdae8fd4b781",
+    "patched_sha256": "c52aa352263e0777a38d12ec6eda0958b1738c1d9c7ad75a9f5be411c463d9e4",
+    "policy_sha256": "8c046643fa7e4986184ceac82b531f8767ca7192bb09a36f9789e9351330e041",
+    "fid": "0x84000004",
+    "conduit": "smc",
+    "target_range": [
+      0,
+      3
+    ],
+    "lowest_affinity_level": 0,
+    "boot_time_firmware_probe": false,
+    "hardware_qualified": false
+  },
+  "config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+  "kernel_release": "4.9.337-g72940eb733af",
+  "object_sha256": "89bdad7138c5ea831f12948d3b65dbcce80b6d0a14c720b17e7fa60f9138ff7d",
+  "object_bytes": 19488,
+  "compiled_legacy_wrapper_present": true,
+  "source_unchanged": true,
+  "modpost_warnings": [
+    "WARNING: \"of_machine_is_compatible\" [build-only preview] undefined!",
+    "WARNING: \"__arm_smccc_hvc\" [build-only preview] undefined!",
+    "WARNING: \"__kmalloc\" [build-only preview] undefined!",
+    "WARNING: \"of_find_matching_node_and_match\" [build-only preview] undefined!",
+    "WARNING: \"of_parse_phandle\" [build-only preview] undefined!",
+    "WARNING: \"cpu_resume\" [build-only preview] undefined!",
+    "WARNING: \"cpu_suspend\" [build-only preview] undefined!",
+    "WARNING: \"of_device_is_compatible\" [build-only preview] undefined!",
+    "WARNING: \"strcmp\" [build-only preview] undefined!",
+    "WARNING: \"suspend_valid_only_mem\" [build-only preview] undefined!",
+    "WARNING: \"nr_cpu_ids\" [build-only preview] undefined!",
+    "WARNING: \"of_property_read_string\" [build-only preview] undefined!",
+    "WARNING: \"kimage_voffset\" [build-only preview] undefined!",
+    "WARNING: \"__cpu_logical_map\" [build-only preview] undefined!",
+    "WARNING: \"of_get_cpu_node\" [build-only preview] undefined!",
+    "WARNING: \"arm_pm_restart\" [build-only preview] undefined!",
+    "WARNING: \"__arm_smccc_smc\" [build-only preview] undefined!",
+    "WARNING: \"__per_cpu_offset\" [build-only preview] undefined!",
+    "WARNING: \"pm_power_off\" [build-only preview] undefined!",
+    "WARNING: \"suspend_set_ops\" [build-only preview] undefined!",
+    "WARNING: \"of_property_read_variable_u32_array\" [build-only preview] undefined!"
+  ],
+  "generated_module_wrapper_must_not_be_loaded": true,
+  "full_kernel_built": false,
+  "hardware_execution": false,
+  "handoff_admitted": false,
+  "native_generated_function_validation": {
+    "scope": "Actual generated initializer and callback text, native mocked APIs",
+    "source_sha256": "c52aa352263e0777a38d12ec6eda0958b1738c1d9c7ad75a9f5be411c463d9e4",
+    "policy_sha256": "8c046643fa7e4986184ceac82b531f8767ca7192bb09a36f9789e9351330e041",
+    "cases_passed": 17,
+    "firmware_calls": 0,
+    "hardware_qualified": false
+  },
+  "compiled_callback_emulation": {
+    "scope": "Actual ARM64 legacy callback; conduit stubbed; unused external symbols unresolved to zero",
+    "object_sha256": "89bdad7138c5ea831f12948d3b65dbcce80b6d0a14c720b17e7fa60f9138ff7d",
+    "cases": [
+      {
+        "target": 0,
+        "level": 0,
+        "response": 0,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 0,
+        "level": 0,
+        "response": 1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 0,
+        "level": 0,
+        "response": 2,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 0,
+        "level": 0,
+        "response": -1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 1,
+        "level": 0,
+        "response": 0,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 1,
+        "level": 0,
+        "response": 1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 1,
+        "level": 0,
+        "response": 2,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 1,
+        "level": 0,
+        "response": -1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 2,
+        "level": 0,
+        "response": 0,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 2,
+        "level": 0,
+        "response": 1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 2,
+        "level": 0,
+        "response": 2,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 2,
+        "level": 0,
+        "response": -1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 3,
+        "level": 0,
+        "response": 0,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 3,
+        "level": 0,
+        "response": 1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 3,
+        "level": 0,
+        "response": 2,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 3,
+        "level": 0,
+        "response": -1,
+        "conduit_calls": 1,
+        "passed": true
+      },
+      {
+        "target": 4,
+        "level": 0,
+        "response": 0,
+        "conduit_calls": 0,
+        "passed": true
+      },
+      {
+        "target": 18446744073709551615,
+        "level": 0,
+        "response": 0,
+        "conduit_calls": 0,
+        "passed": true
+      },
+      {
+        "target": 0,
+        "level": 1,
+        "response": 0,
+        "conduit_calls": 0,
+        "passed": true
+      },
+      {
+        "target": 0,
+        "level": 18446744073709551615,
+        "response": 0,
+        "conduit_calls": 0,
+        "passed": true
+      }
+    ],
+    "real_firmware_calls": 0,
+    "hardware_qualified": false
+  },
+  "firmware_query_runtime_reference": "kexec-affinity-runtime-result.json",
+  "date": "2026-11-09",
+  "combined_full_kernel_build_complete": false,
+  "combined_full_kernel_build_blocker": "Automatic approval review rejected broader combined CPU-off/affinity integration; explicit user approval needed"
+}

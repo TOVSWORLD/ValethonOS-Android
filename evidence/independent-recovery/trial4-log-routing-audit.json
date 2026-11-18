@@ -1,0 +1,22 @@
+{
+  "all_port_identity_events": 4,
+  "planned_path_identity_events": 4,
+  "expected_diagnostic_identity_events_anywhere": 0,
+  "preloader_identity_events": 2,
+  "usb_errors": 2,
+  "acm_bindings": 2,
+  "whole_window_host_kernel_rows": 32,
+  "other_identity_events": 2,
+  "acm_errors_associated_with_preloader_only": true,
+  "scope": "Trial4 full-window host USB identities/errors across all ports, not a whole-kernel-log absence claim",
+  "output_routing": {
+    "kernel_printk_enabled": true,
+    "kernel_pstore_built_in": true,
+    "pstore_backing_and_independent_reader_qualified": false,
+    "pid1_opens_kmsg_after_usb_gadget_and_serial_setup": true,
+    "early_pid1_notes_target_console": true,
+    "lab_dt_removes_stdout_path": true,
+    "kernel_entry_observed": false
+  },
+  "conclusion": "The receiver depends on successful USB setup. Logs may exist in the diagnostic kernel ring buffer without export; later recovery is a different kernel, and power-off cannot establish retention. No extra device trip/rebuild justified without a concrete independent readout contract."
+}

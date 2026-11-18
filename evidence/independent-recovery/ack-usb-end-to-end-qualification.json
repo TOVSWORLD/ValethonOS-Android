@@ -1,0 +1,42 @@
+{
+  "scope": "Offline exact C-init Image/console/integrity qualification; no tablet commands",
+  "all_tests_passed": true,
+  "tests_skipped": 0,
+  "checks": {
+    "full_padded_integrity": true,
+    "corrupt_first_page": true,
+    "corrupt_final_padding": true,
+    "console_small": true,
+    "console_wrap": true,
+    "console_oversized": true,
+    "console_invalid_sig": true,
+    "console_invalid_start": true,
+    "console_invalid_size": true,
+    "setup_valid": true,
+    "setup_invalid_signature": true,
+    "exact_image_both_vm_modes_pid1_after_init_free": true,
+    "target_memory_geometry_vm": true
+  },
+  "image_sha256": "52cd907c227c8568079439210ce766d88a9808e82a284970ee358f35f3cad541",
+  "metadata_sha256": "a4c702b13aac21be8c7534365dfdcde97b5ddcda196841d38aadc5c32e36717a",
+  "source_sha256": {
+    "scripts/build_ack_cinit_console.py": "0597dcfc82bd13a9986c7fac589c64e6256fb121873420ac6cb1814b867be800",
+    "scripts/prepare_ack_cinit_bundle.py": "4603a6ab57d49a046fd1cb1f864f987744e822dd2fa569dd1ce5198784f20eb7",
+    "scripts/verify_ack_cinit_bundle.py": "421f22df972a8518f74d5f12a4ef876e3a21ffd5a6518ffec1cdaa1b4451d313",
+    "scripts/qualify_ack_cinit.py": "64a657abe3c51a3b21fc06616915f836e962f919e8d5f075f2fa34a0e3065631",
+    "scripts/validate_ack_cinit_vm.py": "9e7c921b0fb20d1a1cfc038e52bc046f1147efb56dd83d351811b5ed3b3355a5",
+    "scripts/build_ack_combined_entry.py": "86b37036e12f0163c07abe6739e396d5ea00424049673e17e6a85f53e20b7071",
+    "scripts/qualify_ack_combined.py": "148b86f8b811cbb6a2634688adb57b2be432622f6886bdf90e83e9c4aee8d156",
+    "projects/firetabs-android/native-kexec/combined_sha256.c": "16a7c944cc14e9b3d6f30452379c2f136c35e13d5b204eddcaf9a75e9f4a0c26",
+    "scripts/prepare_ack_usb_end_to_end.py": "38a247c1368aec31a0adb6d75d6355571d84a9177d5ee489481574164a0bfa6d",
+    "scripts/prepare_ack_ramfix_bundle.py": "eb54a829e48611ebcc6059f025f9526d2243efdfe0a6a984b1b06c860248bbe8",
+    "scripts/verify_ack_ramfix_bundle.py": "016d41f17a76d657de885ef6e717046084950609d4133976754a2a407d44f2f3",
+    "scripts/validate_ack_ramfix_vm.py": "ff2012e48aa63ef10e451f757e00926bb04e491eaf440f7c51d2cbbe5740aaf8"
+  },
+  "vm_reports_sha256": [
+    "f4ec7aa3d6a2b763e92ed0925db99771f244f98c34f4d3174341a9a21416f62b",
+    "9ac3d71be38ff236bdb78a800694a0ed27f7f8c9d1d74c14d4e37be066aa5ec2"
+  ],
+  "hardware_execution": false,
+  "target_pid1_proven": false
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-16",
+  "all_tests_passed": true,
+  "tests_run": 4,
+  "tests_skipped": 0,
+  "entry_source_sha256": "4cbb4a855d704cebcddea5795950b737e772d53247b614f01d1d95d336d61d7f",
+  "native_el1_and_injected_el2_valid_cases": 10,
+  "readback_failure_cases": 2,
+  "invalid_retained_header_cases": 4,
+  "unsafe_state_branch_cases": 5,
+  "linux_abi_at_branch_verified": true,
+  "hardware_deadline_qualified": false,
+  "limitations": [
+    "EL2 and unsafe system-register states use injected reads in the emulator",
+    "Physical timer expiration, clock continuity and warm retention are unqualified until the full kernel experiment"
+  ]
+}

@@ -9,7 +9,7 @@
     "evidence/clock-port/ack/drivers/clk/mediatek/clk-mtk.h": "67c603ab0a319e7672fba7f569a4e691fd8b3772b031427524d8da934198e6d9",
     "evidence/clock-port/ack/drivers/clk/mediatek/clk-gate.h": "ac306d1e10a6ca619d472d1408f88cb8ae5ff2753e519e8a7c35417214e36e4c",
     "scripts/apply_clock_port.py": "4e7b25245f983eb7352fe09c8c2a2c0cd664a10f5cbd3fa7b7e2cdbcfc5bafb8",
-    "scripts/build_ack_baseline.sh": "40d2839a1adb5ee4e916582a8852bdfe289befe58b17c58a65510f19ae18a201",
+    "scripts/build_ack_baseline.sh": "17044a4116887dc0b8c3f03283c615e6879a9b31b92170ab52ce4efb7aeda30b",
     "projects/firetabs-android/kernel/clock-port/inputs.json": "830d79c9200c0f8931f47fa3b180943fada11262a1254008a08ada01c6be303f",
     "projects/firetabs-android/kernel/clock-port/build-wiring.patch": "fb0a02ec33feb419e1e4db547d5af78359cfdd399c55837e612fa1d2909bdf06",
     "projects/firetabs-android/kernel/clock-port/mux-api.patch": "63200df001b190198cc89dca99fec8d4327f07b66e4397874baca942b042f1a8",
@@ -57,5 +57,15 @@
   ],
   "parent_mapping": "Composite base exclusively maps resource0; gates device_node_to_regmap uses same node with check_res=false (no optional clock/reset management); default32-bit syscon, no candidate override",
   "population_scope": "Managed populate skips unavailable/OF_POPULATED children; reviewed AFE child is disabled. RAM wrapper controls do not simulate kernel devres internals.",
-  "runtime_pm_scope": "Descriptor does not request need_runtime_pm; safe AUDIO domain/MMIO access remains unqualified"
+  "runtime_pm_scope": "Descriptor does not request need_runtime_pm; safe AUDIO domain/MMIO access remains unqualified",
+  "historical_build_script_sha256": "983a6e7e4048368b1f0a434fa5e95092625bb89b971d7ee50ac94dbb6a3035a9",
+  "current_build_script_review": {
+    "scope": "Opt-in first-draft integration; prior named profile branches preserved",
+    "historical_build_receipts_unchanged": true,
+    "provider_sources_unchanged": true,
+    "current_sha256": "17044a4116887dc0b8c3f03283c615e6879a9b31b92170ab52ce4efb7aeda30b",
+    "actual_combined_build_run": 42091153900,
+    "combined_build_repository_revision": "dfdd0800db2d0a529b1e4e7d40e14f028974aed9",
+    "combined_build_receipt": "evidence/independent-recovery/first-kernel-draft-result.json"
+  }
 }

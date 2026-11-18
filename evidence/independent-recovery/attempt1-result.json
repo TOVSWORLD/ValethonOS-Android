@@ -1,0 +1,25 @@
+{
+  "issue": 346,
+  "attempt": 1,
+  "supervisor_revision": "78c1ed74896a9683632f83453bc94d1d359437f5",
+  "supervisor_sha256": "47ce00e25900a89d3d0c906772493817796e76baa63ca0cc2e4b988e834de3f1",
+  "owner_observation": "Android home screen",
+  "adb_state": "device",
+  "boot_completed": "1",
+  "android_release": "11",
+  "supervisor_result": "TimeoutError before helper launch",
+  "helper_log_created": false,
+  "timing_from_host_kernel_journal_seconds_after_arm": {
+    "usb_disconnect": 103.62,
+    "preloader_usb_detected": 214.95,
+    "serial_driver_event": 214.97,
+    "android_usb_detected": 261.49
+  },
+  "diagnosis": "Preloader appeared111.33seconds after disconnection; original90second reconnection/helper window had expired. Host timing design error; command compatibility was not tested.",
+  "automatic_retry_performed": false,
+  "recovery_entry_qualified": false,
+  "failed_load_return_qualified": false,
+  "retained_failure_logs_qualified": false,
+  "raw_logs_private": true,
+  "personal_data_read": false
+}

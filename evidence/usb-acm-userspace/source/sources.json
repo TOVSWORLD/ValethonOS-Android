@@ -105,6 +105,13 @@
       "bytes": 15971,
       "sha256": "1559e74af299c14155eb6d4387ea2ea83ce9f385532aa0da025aee7b3f5d221a",
       "local": "evidence/usb-acm-userspace/source/readdir.c"
+    },
+    {
+      "path": "arch/arm64/include/uapi/asm/fcntl.h",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/arch/arm64/include/uapi/asm/fcntl.h?format=TEXT",
+      "bytes": 1045,
+      "sha256": "6d43602d5db08d4f4acda256ba09009c43b9d93b9283ad9dd75ce7c9dd2b6864",
+      "local": "evidence/usb-acm-userspace/source/arm64-fcntl.h"
     }
   ]
 }

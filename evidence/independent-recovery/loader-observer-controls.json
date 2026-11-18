@@ -1,0 +1,461 @@
+{
+  "scope": "Analysis-only ARM relocatable object and in-memory archived fixture; modeled services, no tablet access",
+  "stub_bytes": 280,
+  "available_bytes": 584,
+  "placement": "0x4bcffbb8",
+  "stub_sha256": "190fd48d9a981737c2637bbbab1cbac0ce77c1fe486c24c4c6dcacb4885844d6",
+  "entries": {
+    "observer_mode": "0x4bcffbb8",
+    "observer_read": "0x4bcffbfa",
+    "observer_handoff": "0x4bcffc40"
+  },
+  "controls": [
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_mode",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_read",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0x0",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0xf80f0000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 0,
+      "flags": "0xa0050000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0x0",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0xf80f0000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 0,
+      "added_video_calls": 1,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 2,
+      "added_video_calls": 0,
+      "passed": true
+    },
+    {
+      "stub": "observer_handoff",
+      "stack_mod8": 4,
+      "flags": "0xa0050000",
+      "boot_mode": 99,
+      "added_video_calls": 0,
+      "passed": true
+    }
+  ],
+  "actual_final_call_replay_passed": true,
+  "full_main_mode_cases": 4,
+  "full_read_hook_cases": 12,
+  "negative_controls": [
+    "0x72",
+    "0x330",
+    "0xbb8",
+    "branch_0x4bcffbb9",
+    "branch_0x4dcffbb8"
+  ],
+  "modeled_existing_lk_cache_span_checked": true,
+  "cache_visibility_qualified": false,
+  "observer_packaged": false,
+  "device_written": false,
+  "hardware_qualified": false
+}

@@ -1,0 +1,59 @@
+/* Private log-bringup source candidate only. No physical execution admission.
+ * RAM/reservations/version derive from scoped current TWRP DT metadata.
+ * MMIO resources and clock definitions remain the locked donor/ACK source.
+ */
+/delete-node/ &bl31_secmon_reserved;
+/ {
+	version = "hvt";
+	chosen {
+		/delete-property/ stdout-path;
+		bootargs = "nr_cpus=1 maxcpus=0 clk_ignore_unused regulator_ignore_unused rdinit=/init";
+	};
+	memory@40000000 {
+		reg = <0 0x40000000 0 0x40000000>, <0 0x80000000 0 0x19600000>;
+	};
+	psci { status = "disabled"; };
+	pmu { status = "disabled"; };
+	reserved-memory {
+		atf-reserved-memory@43000000 { reg = <0 0x43000000 0 0x30000>; no-map; };
+		ram_console-reserved-memory@44400000 { reg = <0 0x44400000 0 0x200000>; no-map; };
+		/* Preserve observed firmware lookup name; reg is44600000, not46600000. */
+		ll_log-reserved-memory@46600000 { reg = <0 0x44600000 0 0x20000>; no-map; };
+		mdump-reserved-memory@4bd00000 { reg = <0 0x4bd00000 0 0x300000>; no-map; };
+		fb-reserved-memory@98600000 { reg = <0 0x98600000 0 0x1000000>; no-map; };
+	};
+};
+&cpu1 { status = "disabled"; };
+&cpu2 { status = "disabled"; };
+&cpu3 { status = "disabled"; };
+&usb0 { status = "okay"; dr_mode = "peripheral"; };
+&u2phy0 { status = "okay"; };
+&u2port1 { status = "disabled"; };
+&usb1 { status = "disabled"; };
+/* Leave firmware power/voltage state alone; no storage, PMIC or DVFS trial. */
+&gpu { status = "disabled"; };
+&i2c1 { status = "disabled"; };
+&mmc0 { status = "disabled"; };
+&pwm0 { status = "disabled"; };
+&uart0 { status = "disabled"; };
+&pio { status = "disabled"; };
+&syscfg_pctl_a { status = "disabled"; };
+&pwrap { status = "disabled"; };
+&scpsys { status = "disabled"; };
+&timer { status = "disabled"; }; /* Keep the separate ARM architected timer. */
+&disp_backlight { status = "disabled"; };
+&vgpu_1v15 { status = "disabled"; };
+&audiosys { status = "disabled"; };
+&mfgcfg { status = "disabled"; };
+&mmsys { status = "disabled"; };
+&imgsys { status = "disabled"; };
+&vdecsys { status = "disabled"; };
+&vencsys { status = "disabled"; };
+&afe_dma_mem { status = "disabled"; };
+&iommu { status = "disabled"; };
+&smi_common { status = "disabled"; };
+&larb0 { status = "disabled"; };
+&larb1 { status = "disabled"; };
+&larb2 { status = "disabled"; };
+&larb3 { status = "disabled"; };
+&gce { status = "disabled"; };

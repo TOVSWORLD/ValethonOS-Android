@@ -142,13 +142,18 @@
       "hardware_group": null,
       "conditions": [],
       "existing_work_exception": false,
-      "closed_issue_evidence_boundary": "Issue is closed completed and board Done. Ordinary stock return is observed; closure alone does not qualify failed-experiment return. Remaining phase344/release failure-return acceptance stays explicit until tested."
+      "closed_issue_evidence_boundary": "Current issue remains open for integration/follow-up. Approved failed-kernel panic return and exact original boot/config/recovery/normal ADB are now observed; runtime receipts, not closure, establish that case. No guarantee is claimed for every possible hardware hang.",
+      "runtime_gate_status": "approved_failed_experiment_return_observed",
+      "runtime_evidence": [
+        "evidence/independent-recovery/ack-cinit-runtime-result.json",
+        "evidence/independent-recovery/ack-ramfix-runtime-result.json"
+      ]
     },
     {
       "issue": 348,
       "order": 40,
       "parent": 344,
-      "name": "Failed-boot log retention \u2014 normal log capture complete",
+      "name": "Failed-boot retention observed; optional record-stream follow-up",
       "depends_on": [
         346
       ],
@@ -163,8 +168,13 @@
       "hardware_group": null,
       "conditions": [],
       "existing_work_exception": false,
-      "completed_milestone": "TWRP recovery log22493B/current kernel log130931B retrieved in PR452; see approved-lab-entry/runtime-result.json. Prior320KiB stock export is separate.",
-      "remaining_acceptance": "Fresh attributable failed-experiment log retention and retrieval remain unqualified; do not repeat normal capture as unfinished work."
+      "completed_milestone": "Fresh attributable maintained-kernel panic retained/retrieved after original Android return; 4084-byte ring, late-panic coverage and overwritten earlier fault context explicitly documented. Fresh PID1 USB identity also received.",
+      "remaining_acceptance": "Optional post-header kernel-record transfer is incomplete; its cleanup error is fixed offline. Per owner direction this is not a new kernel/PID1/USB proof gate or blocker to22.",
+      "runtime_gate_status": "fresh_failed_kernel_panic_retention_observed_with_bounded_coverage",
+      "runtime_evidence": [
+        "evidence/independent-recovery/ack-cinit-runtime-result.json",
+        "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json"
+      ]
     },
     {
       "issue": 22,
@@ -185,7 +195,18 @@
       "kind": "qualification",
       "hardware_group": "internal-storage",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "predecessor_runtime_satisfied_by": [
+        "evidence/independent-recovery/ack-cinit-runtime-result.json",
+        "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json"
+      ],
+      "next_action": "Preserve achieved read-only storage foundation; continue18 clock/reset dependencies for display/touch/Android. No logging-only re-proof.",
+      "runtime_gate_status": "maintained_kernel_known_boot_readonly_integrity_observed",
+      "runtime_evidence": [
+        "evidence/independent-recovery/ack-storage-readonly-runtime-result.json"
+      ],
+      "completed_milestone": "Actual maintained-kernel O_RDONLY p5 exact16MiB/EOF/SHA verified; fresh functional USB status and original Android return passed.",
+      "remaining_acceptance": "Code review/integration and broader storage scope remain distinct; no writable filesystem/Android UI claim."
     },
     {
       "issue": 18,
@@ -205,7 +226,11 @@
       "kind": "qualification",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "predecessor_runtime_satisfied_by": [
+        "evidence/independent-recovery/ack-storage-readonly-runtime-result.json"
+      ],
+      "next_action": "Derive only the clock/reset resources required by the actual display/touch path from working4.9 and maintained source; reuse qualified storage/USB and existing offline controls."
     },
     {
       "issue": 19,
@@ -672,7 +697,9 @@
       "level": "Phase",
       "order": 9.5,
       "name": "Phase 1 \u2014 Operational diagnostic entry, return and logs",
-      "state": "Active"
+      "state": "Active",
+      "runtime_exit_observed": true,
+      "remaining_followup": "Integration and optional post-header record transfer; not a repeat boot/PID1 proof gate."
     },
     {
       "issue": 4,
@@ -688,7 +715,10 @@
       "level": "Phase",
       "order": 49.5,
       "name": "Phase 2 \u2014 Diagnostic memory, UART and internal storage",
-      "state": "Blocked"
+      "state": "Active",
+      "current_issue": 22,
+      "runtime_exit_observed": true,
+      "remaining_followup": "Read-only known-p5 hardware acceptance passed; review/integration and broader storage coverage remain separate."
     },
     {
       "issue": 328,
@@ -696,7 +726,8 @@
       "level": "Phase",
       "order": 59,
       "name": "Phase 3 \u2014 Core board provider qualification",
-      "state": "Blocked"
+      "state": "Active",
+      "current_issue": 18
     },
     {
       "issue": 332,
@@ -814,5 +845,74 @@
     ],
     "completed_scopes_visible_in_all_gates_view": true,
     "child_counts_are_not_phase_acceptance": true
+  },
+  "latest_control2_result": {
+    "scope": "Completed actual control2; originals verified",
+    "review_head": "8789e1cc61f3f6c3f44340e83987bd0d88ea9cf1",
+    "five_required_checks": "SUCCESS",
+    "owner_approved": true,
+    "owner_available": true,
+    "approval_consumed": true,
+    "candidate_sha256": "e1f2a73bb1fef09605b938b42993ad93b5fe5de7d681e62211816944741722e6",
+    "observer_sha256": "3313d00c51d9960a3f24c8f4a87c3ee532119f4f48113512ad5deda0d8cdd20f",
+    "observer_written_once": true,
+    "observer_readback_ram_cleanup_verified": true,
+    "full_boot_written_once": true,
+    "full_boot_recovery_readbacks_ram_cleanup_verified": true,
+    "installed_preflight": "passed",
+    "observation_armed": false,
+    "durable_receipt_process_verified": true,
+    "waiting_for_owner_boot": false,
+    "helper_launches": 1,
+    "automatic_return": false,
+    "automatic_restore": false,
+    "rebooted": false,
+    "owner_action_pending": false,
+    "original_boot_restored": true,
+    "logging_qualified": false,
+    "observation_complete": true,
+    "owner_home_screen_confirmed": true,
+    "awaiting_return_trip_readiness": false,
+    "manual_return_waiter_running": false,
+    "manual_return_armed": false,
+    "owner_return_action_pending": false,
+    "helper_returncode": 0,
+    "complete": true,
+    "twrp_left_running": true,
+    "reboot_after_restore": false,
+    "loader_record": false,
+    "kernel_record": false,
+    "sequence": 1,
+    "record_bytes": 85,
+    "invalid_slots": [],
+    "bootstrap_already_original_no_agent_write": true,
+    "collection": "passed identity/aliases/full recovery/prefix/seed/slots",
+    "record": "HOSTCONTROL only",
+    "archive_sha256": "77324801f25ba0194d7b0fef4bbe93be5e88c7cdd1b3f7a42198cdbcc34b53e4",
+    "archive_bytes": 26475229,
+    "supplement_sha256": "9b06dd6a4d9d607eaa4cb7f967520b5adb9c879e5770b473c8dee64a611577c5",
+    "supplement_bytes": 9446,
+    "legacy_last_kmsg": "One bounded read: No such file; no retry",
+    "cause": "Unproven; no runtime proof observer reached",
+    "next": "Trace active bootstrap reachability and rejection visibility before another writer or physical test"
+  },
+  "latest_source_witness": {
+    "result": "evidence/independent-recovery/loader-screen-witness-result.json",
+    "controls": 11,
+    "display_wait_result": "evidence/independent-recovery/loader-display-wait-result.json",
+    "candidate_packaged": false,
+    "physical_execution_admitted": false,
+    "next": "Qualify independent display path before a changed physical review"
+  },
+  "current_execution_issue": 18,
+  "current_execution_state": "next_product_work_clock_reset_for_display_android",
+  "latest_runtime_milestone": {
+    "date": "2026-11-18",
+    "milestone": "Maintained kernel read-only internal eMMC original boot integrity observed on Douglas",
+    "evidence": "evidence/independent-recovery/ack-storage-readonly-runtime-result.json",
+    "previous_pid1_usb_evidence": "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json",
+    "record_stream_complete": false,
+    "record_stream_is_boot_proof_prerequisite": false,
+    "owner_direction": "Preserve achieved kernel/PID1/USB/storage; advance functional display/touch and maintained Android without logging-only re-proof."
   }
 }

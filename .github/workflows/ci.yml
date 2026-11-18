@@ -39,8 +39,8 @@ jobs:
         run: python3 scripts/kernel_audit.py
       - name: Verify DT source inputs and patches
         run: python3 scripts/build_douglas_dtb.py --verify-only
-      - name: Check retained resolved diagnostic kernel policy
-        run: python3 scripts/diagnostic_config.py check evidence/diagnostic-kernel/diagnostic.config
+      - name: Audit retained historical diagnostic policy
+        run: python3 scripts/diagnostic_config.py check evidence/diagnostic-kernel/diagnostic.config --historical-report evidence/diagnostic-kernel/resolved-policy.json
       - name: Verify bounded clock and pinctrl reference audits
         run: |
           python3 scripts/audit_clock_references.py --check
@@ -48,6 +48,17 @@ jobs:
           python3 scripts/audit_power_references.py --check
       - name: Test gate rejection paths
         run: python3 -m unittest discover -s tests -v
+      - name: Compile isolated diagnostic SELinux policy without loading it
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y secilc=3.5-1 checkpolicy=3.5-1
+          python3 scripts/build_diagnostic_selinux_policy.py
+      - name: Compile separate lab logging PID1 component without executing it
+        run: |
+          python3 scripts/build_lab_log_initramfs.py \
+            --policy out/diagnostic-trial-policy-build/policy.33 \
+            --policy-report out/diagnostic-trial-policy-build/report.json \
+            --output out/lab-log-component
       - name: Verify pinned genpd wakeup source comparison
         run: python3 scripts/validate_genpd_wakeup_comparison.py
   android:
@@ -67,6 +78,8 @@ jobs:
         run: python3 scripts/audit_usb_gadget_prerequisites.py
       - name: Build pinned isolated device-tree compiler
         run: python3 scripts/setup_dtb_tools.py --download
+      - name: Compile isolated own-source lab logging DT
+        run: python3 scripts/build_lab_log_dtb.py --output out/lab-log-dt
       - name: Install hash-locked schema-control tools (bounded isolated work venv)
         run: python3 scripts/setup_binding_tools.py --download
       - name: Compile and inspect experimental douglas DTB

@@ -1,0 +1,66 @@
+{
+  "scope": "Offline exact-artifact full-image relocation and pre-MMU instruction audit",
+  "all_controls_passed": true,
+  "hardware_execution": false,
+  "target_kernel_boot_proven": false,
+  "image_sha256": "0f43c1f91d9c158659f4f4522d44390cdd934074fb57135344e9d20142235930",
+  "relocation_code_sha256": "95f5e6d0a50d88adfe125ec1b09926052b862ff3992da4583e05d12b0f16fb01",
+  "relocation": {
+    "entry_reached": true,
+    "instructions": 7131590,
+    "error": null,
+    "indirection_pages": 14,
+    "segments": [
+      {
+        "file": "image.bin",
+        "bytes": 28049408,
+        "exact": true
+      },
+      {
+        "file": "metadata.bin",
+        "bytes": 102400,
+        "exact": true
+      },
+      {
+        "file": "initrd.bin",
+        "bytes": 16384,
+        "exact": true
+      }
+    ],
+    "all_destination_bytes_match": true
+  },
+  "kernel_prefix": {
+    "seen": [
+      "primary_entry",
+      "record_mmu_state",
+      "preserve_boot_args",
+      "__pi_create_init_idmap",
+      "init_kernel_el",
+      "__cpu_setup",
+      "__primary_switch",
+      "__enable_mmu"
+    ],
+    "instructions": 34164,
+    "reached_mmu_enable_entry": true,
+    "error": null,
+    "target_cpu": "Cortex-A53",
+    "entry_el": 1,
+    "mmu_enable_executed": false,
+    "tcr_t0sz": 16,
+    "tcr_t1sz": 16,
+    "tcr_ips": 2,
+    "tcr_ds": false
+  },
+  "negative_controls": {
+    "corrupted_source_detected": true,
+    "broken_kernel_branch_detected": true
+  },
+  "limitations": [
+    "Synthetic disjoint source pages; actual hardware kimage page list was not recovered",
+    "No cache, coherency, DMA, firmware or real device behavior is qualified",
+    "Reset-like emulated EL1 state; actual tablet entry state was not recovered",
+    "Stops before MMU enable; MMU transition and later startup remain unqualified"
+  ],
+  "date": "2026-11-16",
+  "audit_script_sha256": "f34906c7ed5e5e7f76712b8c848c617162e2073bd556f331401e57be1ab02139"
+}

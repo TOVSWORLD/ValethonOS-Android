@@ -3,7 +3,10 @@
 Maintain general-purpose Fire tablets with current Android releases and a maintained,
 release-appropriate Android kernel. Initial device: Fire HD 8 (2017), douglas/KFDOWI,
 16 GB. The maintained-platform target and update/security strategy are qualified under
-issue333. Source/build evidence exists; maintained-kernel device boot is not qualified.
+issue333. The maintained6.18 kernel now initializes on Douglas and executes a
+controlled enforcing PID1 whose fresh identity was received over USB.
+[Hardware milestone](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
+This is a minimal Linux/userspace bootstrap, not a maintained Android OS/UI pass.
 The installed LineageOS18.1 Android11 is an interim hardware/entry baseline, not the
 finished ValethonOS release. See the current ordered roadmap and live board.
 
@@ -11,6 +14,13 @@ Crestron is an optional workload; this project's acceptance includes ordinary An
 apps, supported browsers, graphics, audio, video, networking, storage, power management,
 updates, and enforcing SELinux. Document hardware absent from a device separately from
 hardware present but not supported by the port.
+
+## Hardware reference for kernel work
+
+Start with the [current Douglas hardware/kernel contract](../../docs/development/DOUGLAS-HARDWARE-CONTRACT.md).
+It consolidates pinned working-kernel source, registers/interrupts/provider resources,
+peripheral requirements, current build/device evidence and unresolved facts across
+20 subsystem areas. The older support matrix is a dated source audit, not live status.
 
 ## Working materials
 

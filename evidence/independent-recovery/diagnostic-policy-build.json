@@ -1,0 +1,32 @@
+{
+  "scope": "Policy compilation and compiler-enforced negative controls only; no policy load",
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "compiler_packages": {
+    "secilc": {
+      "version": "3.5-1",
+      "sha256": "cd5d2128c17083d2433b046ea9312352a8fcc4a73f7b9c421cca25368e753250"
+    },
+    "checkpolicy": {
+      "version": "3.5-1",
+      "sha256": "372f1e328705f4d039042fbf51226e1dd6f828f164906cd924b794c4cf8e48a2"
+    }
+  },
+  "source_sha256": {
+    "ack-abi.cil": "6cc1ad40f0df91a40aa2905ddf984c5e4c59fdd72025ecf30fd0be6a1c9ccec0",
+    "diagnostic.cil": "2812cd149e5d125f32aeb3b80c1299b85f9ed535c5c4de3a455106eed3a320c3"
+  },
+  "policy_version": 33,
+  "policy_bytes": 34371,
+  "policy_sha256": "408f869c3ff3d4a8a20501c70fdc306da35ba50b3cafadaa741d341d02888737",
+  "unknown_permissions": "deny",
+  "permissive_domains": false,
+  "forbidden_privilege_mutations_rejected": {
+    "enforcement_toggle": true,
+    "policy_reload": true,
+    "block_read": true,
+    "reboot_capability": true
+  },
+  "kernel_policy_load_tested": false,
+  "runtime_qualified": false,
+  "tablet_security_changed": false
+}

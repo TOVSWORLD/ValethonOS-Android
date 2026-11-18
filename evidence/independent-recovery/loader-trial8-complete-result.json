@@ -1,0 +1,27 @@
+{
+  "scope": "Complete original resident read/handoff hooks, actual archived allocator, blob SHA and cache instructions, PIC frontend/writer; synthetic metadata/heap, IRQ/cache effects/controller/block hardware and prefix digest modeled",
+  "cases": [
+    "native_redirect_load_verified_blob_owned_stack_mode_reads_handoff",
+    "non_normal_no_observer_2",
+    "non_normal_no_observer_99",
+    "blob_hash_original_read_preserved_observer_stops_no_retry",
+    "allocation_original_read_preserved_observer_stops_no_retry",
+    "irq_disabled_original_read_preserved_observer_stops_no_retry",
+    "loaded_observer_masked_handoff_preserves_arguments_and_skips_storage"
+  ],
+  "case_count": 7,
+  "bootstrap_sha256": "29c4075d121fd25595171aef99ee7d2e67fe27513ac685b8bbd43380f051030b",
+  "module_sha256": "a801b0b5d69959a0459011b05058aa3d0bad7c9d6421fec582dac75c6983a62c",
+  "blob_sha256": "b1a3f837ae3e767f669f5803c294723d988a9c99824de03a3cc38736832364c0",
+  "blob_bytes": 9216,
+  "state_bytes": 8744,
+  "integer_sp_apsr_and_original_instruction_replay": true,
+  "latest_loader_sequence": 5,
+  "private_stack_capacity": 4096,
+  "modeled_path_stack_bytes_used": 776,
+  "hardware_driver_worst_case_stack_bound_proved": false,
+  "no_device_access": true,
+  "hardware_acceptance": false,
+  "physical_candidate_ready": false,
+  "packed_candidate_tested": "exact trial8 candidate identified by public manifest hashes"
+}

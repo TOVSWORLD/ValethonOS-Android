@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "baseline_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "routine": "0x4bd39b80",
+  "cases": {
+    "ready": {
+      "polls": 1,
+      "command_argument": "0x3200101",
+      "counter_reduced_for_boundary_test": false,
+      "return_value": 0
+    },
+    "switch_error": {
+      "polls": 1,
+      "command_argument": "0x3200101",
+      "counter_reduced_for_boundary_test": false,
+      "return_value": 4
+    },
+    "command_failure": {
+      "polls": 0,
+      "command_argument": "0x3200101",
+      "counter_reduced_for_boundary_test": false,
+      "return_value": 7
+    },
+    "status_failure": {
+      "polls": 1,
+      "command_argument": "0x3200101",
+      "counter_reduced_for_boundary_test": false,
+      "return_value": 9
+    },
+    "never_ready_timeout_boundary": {
+      "polls": 2,
+      "command_argument": "0x3200101",
+      "counter_reduced_for_boundary_test": true,
+      "return_value": 0
+    }
+  },
+  "finding": "Timeout expiry returns zero, indistinguishable from ready using return value alone. Direct binding is rejected.",
+  "firmware_flush_adapter_qualified": false,
+  "device_accessed": false,
+  "hardware_durability_proved": false,
+  "model_limits": "Command and status callbacks modeled; timeout counter reduced only in timeout boundary case. No physical MMC command executed."
+}

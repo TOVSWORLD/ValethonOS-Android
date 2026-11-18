@@ -1,0 +1,217 @@
+{
+  "status": "New native-entry milestone test prepared; owner-attended hardware test pending",
+  "date": "2026-11-12",
+  "required_milestone": "KXHANDOFF native_entry=1 image_present=1 received after fresh source console challenge",
+  "kernel_build": {
+    "complete": true,
+    "phase": "complete",
+    "tablet_actions": false,
+    "image_sha256": "b999644ae295c8f177c29460469d9ec3e57eeb289658b7f696c1eb4d89e2c287",
+    "config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "unchanged_reboot_dispatch_sha256": "c45dd70000a45c191a8f72762f8e3d5d77b1dce3bf42268514d30d5d6ac2f984"
+  },
+  "source_boot_package": {
+    "scope": "Source ttyGS0 console; Android configfs retains USB ownership",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "candidate_sha256": "ce0e7a57ce1bcff6afe4b5eae1c40e1f42ae38bcac98e0970d226df8b03977cc",
+    "partition_bytes": 16777216,
+    "image_sha256": "b999644ae295c8f177c29460469d9ec3e57eeb289658b7f696c1eb4d89e2c287",
+    "image_file_bytes": 15333888,
+    "image_memory_bytes": 16564224,
+    "resolved_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+    "appended_dtbs": [
+      {
+        "bytes": 88655,
+        "sha256": "f79bed229e4a3eb6bd4aa1d7251869db6fa1950dad9a6b2ccca7b6975551bc48"
+      },
+      {
+        "bytes": 89019,
+        "sha256": "b0b81e5eff9f639d5100009abc87424a737e06f13707633c9cee1dc2165f1191"
+      }
+    ],
+    "original_dt_suffix_preserved": true,
+    "original_ramdisk_sha256": "0e8c340d30666c282a30e20e7686ea0aca2a9967cd9582294476a3f064d7642e",
+    "original_ramdisk_and_header_addresses_preserved": true,
+    "original_header_changes_only_kernel_size_and_id": false,
+    "new_declared_end": 7925760,
+    "original_declared_end": 7796736,
+    "original_tail_after_new_declared_end_preserved": true,
+    "original_standard_component_id_matched": false,
+    "new_standard_component_id": "1cced5e09a5accb9e7cbbe753eddd8fd68595460",
+    "signature_verified": false,
+    "original_rollback_bytes_retained": true,
+    "boot_tested": false,
+    "experimental_jump_executed": false,
+    "failed_jump_logging_is_pretrial_blocker": false,
+    "usb_console_linked": true,
+    "serial_bind_is_opt_in": true,
+    "console_capture_at_boot_qualified": false,
+    "source_ramdisk_and_cmdline_unchanged": false,
+    "security_changes": false,
+    "watchdog_changes": false,
+    "original_header_changes_only_kernel_size_id_and_cmdline": true,
+    "source_cmdline_prefix": "console=ttyGS0",
+    "original_cmdline_suffix_preserved": true,
+    "legacy_serial_bind_enabled": false,
+    "source_shutdown_capture_qualified": false
+  },
+  "linked_verification": {
+    "scope": "Default-off FunctionFS last-close hold and console queue ordering; native CPU/relocation route unchanged",
+    "artifacts": {
+      "arch/arm64/boot/Image": {
+        "sha256": "b999644ae295c8f177c29460469d9ec3e57eeb289658b7f696c1eb4d89e2c287",
+        "bytes": 15333888
+      },
+      "vmlinux": {
+        "sha256": "de2db1ea78cce2793b84843f7882163c6667ec12548b2e33ea6615cb412e271a",
+        "bytes": 20772296
+      },
+      "System.map": {
+        "sha256": "e01c0c395e3cac0197ba98d09f2139ca6f2522b0ac4f7049dd3560526fd1cd1b",
+        "bytes": 3858850
+      },
+      ".config": {
+        "sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+        "bytes": 128978
+      }
+    },
+    "image_header": {
+      "text_offset": 524288,
+      "image_size": 16564224,
+      "flags": 10
+    },
+    "kernel_release": "4.9.337-g72940eb733af",
+    "required_linked_symbols": [
+      "mt8163_legacy_affinity_info",
+      "mt_kexec_secondary_off_gate",
+      "mt_psci_cpu_kill",
+      "spm_mtcmos_secondary_off_bounded",
+      "spm_mtcmos_secondary_off_check",
+      "psci_ops"
+    ],
+    "kill_calls_bounded_off": true,
+    "final_gate_calls_off_state_check": true,
+    "legacy_callback_uses_selected_conduit": true,
+    "handoff_gate_wired": true,
+    "hardware_qualified": false,
+    "handoff_admitted": false,
+    "arm64_syscall_104_is_kexec_load": true,
+    "native_final_gate_reaches_off_check": true,
+    "orderly_reboot_namespace_linked": true,
+    "failed_jump_logging_is_pretrial_blocker": false,
+    "kernel_boot_tested": false,
+    "hardware_execution": false,
+    "usb_console_linked": true,
+    "serial_bind_is_opt_in": true,
+    "usb_profile_config_changes": {
+      "CONFIG_U_SERIAL_CONSOLE": {
+        "before": "n",
+        "after": "y"
+      },
+      "CONFIG_USB_G_SERIAL": {
+        "before": "n",
+        "after": "y"
+      },
+      "CONFIG_USB_F_OBEX": {
+        "before": "n",
+        "after": "y"
+      }
+    },
+    "serial_source_sha256": "b27ef69e4ed90ee5fc2511eaebb001ad8d3c88ede0bde04cb962ce4e52fbb5f9",
+    "live_acm_capture_already_observed": true,
+    "usb_boot_capture_qualified": false,
+    "watchdog_changes": false,
+    "ffs_console_hold_linked": true,
+    "ffs_hold_default_enabled": false,
+    "console_queue_ownership_before_submit": true,
+    "diagnostic_source_sha256": {
+      "drivers/usb/gadget/function/f_fs.c": "38913aa236ec8444f05867a138c616581bd7136c734a31a3a9bec2226938490a",
+      "drivers/usb/gadget/function/u_serial.c": "37881a3973766db7c85be036aba680ce6c0d0a76863a2a30bde2e7f6d146d5b1",
+      "kernel/kexec_core.c": "0149bfdcd72217b3065a8c08de5ccdc85225fbabb367bb1d743a8b1d5d1d9239"
+    },
+    "diagnostic_route_console_dwell_ms": 1000,
+    "native_entry_checkpoint_linked": true
+  },
+  "source_changes": {
+    "functionfs_hold": {
+      "original_sha256": "d9659aaad3fd36bbde3936717b0d585fd0cdbc47a039e840a61364689a066823",
+      "patched_sha256": "38913aa236ec8444f05867a138c616581bd7136c734a31a3a9bec2226938490a",
+      "default_enabled": false,
+      "root_only_parameters": true,
+      "requires_exact_nonce": true,
+      "board": "mediatek,mt8163",
+      "function": "adb",
+      "uses_existing_no_disconnect_branch": true,
+      "normal_config_and_negative_open_count_path_unchanged": true,
+      "device_execution": false
+    },
+    "console_queue_ownership": {
+      "original_sha256": "72c3bdad40f4d5be71d4ae3a914a8ea03bf0d251b0cb01e2cfa31a42cfe2941e",
+      "patched_sha256": "37881a3973766db7c85be036aba680ce6c0d0a76863a2a30bde2e7f6d146d5b1",
+      "ownership_published_before_queue": true,
+      "success_does_not_overwrite_completion": true,
+      "queue_error_still_clears_busy": true,
+      "buffer_size_unchanged": true,
+      "device_execution": false
+    },
+    "accepted_native_entry": {
+      "original_sha256": "d6059029914ea4eb59b1dfa8d1ca12bd721fc5e34e3108c277a1b7d1e2d5bf65",
+      "patched_sha256": "0149bfdcd72217b3065a8c08de5ccdc85225fbabb367bb1d743a8b1d5d1d9239",
+      "dwell_ms": 1000,
+      "requires_board_and_pid1": true,
+      "after_native_image_and_mutex_admission": true,
+      "before_device_shutdown": true,
+      "ordinary_reboot_targets_unchanged": true,
+      "cpu_and_relocation_unchanged": true,
+      "hardware_execution": false
+    }
+  },
+  "validation": {
+    "python_cases_run": 87,
+    "python_passed": 86,
+    "python_skipped": 1,
+    "skip_reason": "Optional Unicorn instruction emulation unavailable",
+    "actual_c_functionfs_last_close_controls": 12,
+    "actual_c_console_completion_schedules": 5,
+    "actual_c_native_entry_admission_controls": 6,
+    "unchanged_namespace_controls": 22,
+    "native_load_client_controls": 12,
+    "read_only_preflight": {
+      "complete": true,
+      "preflight": "passed",
+      "candidate_write_attempts": 0,
+      "restore_write_attempts": 0,
+      "reboot_requests": 0,
+      "normal_shell_restored": true
+    },
+    "offline_preview_not_loadable": true
+  },
+  "live_readonly": {
+    "functionfs_mount_source": "adb",
+    "mount_options": [
+      "rw",
+      "relatime"
+    ],
+    "no_disconnect_option_present": false,
+    "explicit_shutdown_usb_action_found_in_limited_search": false,
+    "search_not_exhaustive": true
+  },
+  "retention": {
+    "archive_sha256": "6530ef6652c0ae9919909f65d824017185116a4370793c154189dc4054c92fdc",
+    "all_retained_file_hashes_verified": true,
+    "raw_device_data_not_published": true
+  },
+  "new_hardware_execution": {
+    "source_boot": false,
+    "functionfs_hold_armed": false,
+    "usb_switch": false,
+    "load": false,
+    "jump": false
+  },
+  "limits": [
+    "The observed race interleaving is reproduced offline, not proven to have occurred in the tablet trial",
+    "FunctionFS source/default mount support the disconnect hypothesis; this trial must test whether capture survives actual service shutdown",
+    "Native-entry proof does not prove device shutdown, CPU-off, relocation or target entry",
+    "New Image is unbooted; existing owner-assisted return remains the qualified return path"
+  ]
+}

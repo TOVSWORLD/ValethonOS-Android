@@ -48,8 +48,17 @@ def main():
     parser.add_argument('mode', choices=['apply', 'check'])
     parser.add_argument('config', type=Path)
     parser.add_argument('--source', type=Path)
+    parser.add_argument('--historical-report', type=Path,
+                        help='Audit retained old configuration against its recorded policy, not current readiness')
     args = parser.parse_args()
     requirements = policy()
+    if args.historical_report:
+        if args.mode != 'check':
+            parser.error('--historical-report is check-only')
+        report = json.loads(args.historical_report.read_text())
+        if report.get('passed') is not True or not report.get('required'):
+            raise ValueError('Invalid historical policy receipt')
+        requirements = report['required']
     if args.mode == 'apply':
         if args.source is None:
             parser.error('--source required for apply')
@@ -57,7 +66,11 @@ def main():
             subprocess.run([str(args.source / 'scripts/config'), '--file', str(args.config),
                             '--enable' if state == 'y' else '--disable', name], check=True)
     else:
-        print(json.dumps(check(args.config.read_text(), requirements), indent=2))
+        result = check(args.config.read_text(), requirements)
+        if args.historical_report:
+            result.update(scope='Historical resolved-policy audit only; not current build readiness',
+                          fragment_sha256=report['fragment_sha256'], historical=True)
+        print(json.dumps(result, indent=2))
 
 
 if __name__ == '__main__':

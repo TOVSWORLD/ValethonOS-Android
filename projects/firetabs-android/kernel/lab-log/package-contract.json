@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "scope": "Conditional private first normal log-bringup candidate; no device admission or failed-load acceptance",
+  "task": 346,
+  "partition_bytes": 16777216,
+  "header_version": 0,
+  "page_bytes": 2048,
+  "mtk_kernel_wrapper": false,
+  "kernel_format": "one deterministic gzip ARM64 Image, zero alignment padding, one own-source hvt DTB",
+  "decoded_image_limit_bytes": 29360128,
+  "ram_base": 1073741824,
+  "kernel_entry": "ram_base plus fresh Image text_offset; validate 2MiB base and 512KiB entry alignment",
+  "inflate_stack": 1107296256,
+  "initramfs_address": 1128792064,
+  "tags_address": 1207959552,
+  "staging_address": 1157627904,
+  "dtb_limit_bytes": 1048576,
+  "runtime_placement": "Fresh Image image_size must fit observed RAM and avoid every firmware reservation, initramfs and DT placement",
+  "placement_evidence": "evidence/independent-recovery/trial-placement-metadata.json",
+  "loader_evidence": "evidence/independent-recovery/original-gzip-capacity.json",
+  "dt_builder": "scripts/build_lab_log_dtb.py",
+  "initramfs_builder": "scripts/build_lab_log_initramfs.py",
+  "logging": "Nonce-bound bounded /dev/kmsg stream; durable host identity before ACK and fsync each record; no deliberate failure in first trial",
+  "limitations": [
+    "Selected loader windows establish conditional capacity, not whole-firmware execution",
+    "First runtime USB, policy and kernel entry remain untested",
+    "Boot tail/header differences require complete candidate and rollback review before p5 write",
+    "A failure preceding log initialization is outside stream coverage",
+    "Recovery and boot full backups retained; recovery partition must never be written"
+  ],
+  "physical_execution_admitted": false
+}

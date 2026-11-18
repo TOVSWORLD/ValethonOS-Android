@@ -1,0 +1,56 @@
+{
+  "scope": "Actual composed PIC module and archived byte/command wrappers; hardware, clock and prefix digest modeled in this ARM composition",
+  "profile": "firmware",
+  "elf_sha256": "09474367023deaded3fa477960152323387ee013b9107a1db286c25e6d3fa614",
+  "object_sha256": {
+    "checkpoint.o": "1b839335c6ec119ef40ccdac20e7920c041587e7dc9115ca19d99c9e510a102e",
+    "mmc_flush.o": "06dfdf4665202f92f67b683ddfbeed19e56baded626beb16f74584f1afb03ff1",
+    "module.o": "19c0e249a2e3c87bf2d41503f2e7b903b339f85d03e53360e9997910cde17eb6",
+    "freestanding.o": "48f6f620c59c41c526c7eb071494b6506ab46103b2b7daa90a45416a6a0565a3",
+    "physical.o": "22c1fbaf0127aebb081f8838c1c3b53b6eb485db7db273fd036aff9daffe4f2d",
+    "hash-stream.o": "1dfe5a534b31e93148bb454486f5f94f9bb868ede2f01af9ce7a1f3d3b426628",
+    "firmware-module.o": "cae4e543c625277259742bff4cbbd473fe7fcf4e336deac6c2e1e2b57d7754dd",
+    "hash-block.o": "99b196826d9e506faf78181567564d156f1a396be5b112e2c8945353c8082c84"
+  },
+  "allocated_input_relocation_types": {
+    "10": 9,
+    "3": 6,
+    "42": 38,
+    "30": 7
+  },
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "cases": [
+    "complete_module_wrappers_at_0x41000000",
+    "complete_module_wrappers_at_0x43000000",
+    "whole_module_stop_short_read",
+    "whole_module_stop_short_write",
+    "inconsistent_target_no_io",
+    "uninitialized_and_repeat_start_no_io",
+    "non_normal_modes_no_io"
+  ],
+  "case_count": 7,
+  "native_composition_tests": 4,
+  "state_bytes": 8656,
+  "entry_symbols": [
+    "lfw_start",
+    "lfw_emit"
+  ],
+  "prefix_digest_modeled_here": true,
+  "full_prefix_native_c_stream_tested_separately": true,
+  "actual_sha_stream_vectors_tested_separately": true,
+  "writes_confined_to_slots": true,
+  "mode_handoff_sequence": 3,
+  "callee_saved_sp_preserved": true,
+  "physical_timing_card_dma_or_placement_qualified": false,
+  "device_accessed": false,
+  "physical_commands": false,
+  "source_sha256": {
+    "projects/firetabs-android/loader-retained/firmware-module.c": "937f3262aa52a03cb52513bd200e40f856c716159d79072c73b83b3e0edd845e",
+    "projects/firetabs-android/loader-retained/firmware-module.h": "c16e79bd92d1ccc563891fe2c06202f648274020e1bf7945cdcfe499fe7d9a77",
+    "projects/firetabs-android/loader-retained/module.c": "9a9b66a93f95446e4f5cc3e80d0280cc2f4e980d8b6e6a4568f5df0840add63f",
+    "scripts/build_loader_module.py": "a4a9688b63a78cbff7df6a5e309952570cf1df5bbe9c79315bbc6d4dccbcda90",
+    "scripts/validate_loader_firmware_module.py": "64eee62dadda90b318d0a7c6f998a18bda863f0d101cae12774ca7279b65ce89",
+    "tests/test_loader_firmware_module.py": "a149ecb13cfc6eba9572000836fcd2d9a7a60bd595fc576fcce3603ae4b6325d"
+  },
+  "linked_bytes": 5826
+}

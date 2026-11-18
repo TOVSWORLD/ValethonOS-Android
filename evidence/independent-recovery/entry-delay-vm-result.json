@@ -1,0 +1,29 @@
+{
+  "scope": "Actual earliest probe instructions in emulator RAM only; no physical entry/reset/display proof",
+  "passed": true,
+  "exception_levels": [
+    1,
+    2,
+    3
+  ],
+  "overlay_sha256": "87db846d88e21d227cc11fdc8bc4ad3dc622069b369e5fde062cd7abc1fb2c13",
+  "registers_preserved": [
+    "x0",
+    "x1",
+    "x2",
+    "x3",
+    "x18",
+    "x19",
+    "x20",
+    "x21",
+    "sp"
+  ],
+  "all_framebuffer_words_and_adjacent_guards_checked": true,
+  "cache_enabled_paint_and_clean_checked": true,
+  "zero_out_of_range_frequency_and_delay_controls_checked": true,
+  "eight_counter_seconds_checked": true,
+  "counter_stopped_wall_bound_qualified": false,
+  "reset_or_watchdog_register_writes": false,
+  "network_or_disks": false,
+  "device_accessed": false
+}

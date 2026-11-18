@@ -1,0 +1,100 @@
+{
+  "scope": "Exact private first normal log-bringup candidate prepared offline; no physical admission or acceptance",
+  "kernel_run": 41528041827,
+  "kernel_repository_revision": "de64394dea3bd3f07a19170fed0f9a33f7d25fba",
+  "kernel_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "kernel_release": "6.18.34-gd9318bdb4c34-dirty",
+  "kernel_files": {
+    "Image": {
+      "bytes": 15424000,
+      "sha256": "a37997fb2a2590287941d3bfc5e2b4f099e7ed30f94931a3ba138b1a14d57ec7"
+    },
+    "Image.gz": {
+      "bytes": 6488090,
+      "sha256": "3c02360b767659b41f54d5996b10fa878f570b7feae8fd4d12f018fe77135118"
+    },
+    "resolved.config": {
+      "bytes": 113235,
+      "sha256": "aac54b6374e02aacf3efbb38e8f1d48ca32c20b3b52ad50ae842d6be1822e31b"
+    },
+    "System.map": {
+      "bytes": 3245489,
+      "sha256": "d4c874f1d49b9f3c22cf405ee5d7e160f41db6d82661bf8d5e58e24f9adbcced"
+    },
+    "image-size-report.json": {
+      "bytes": 881,
+      "sha256": "04c4cedcd7efb692978ff0f2881d2eb30e73324fe5de4a985c8b5160328740fd"
+    }
+  },
+  "measurement": {
+    "scope": "File lengths/header memory requirement only; no board placement or boot qualification",
+    "image_bytes": 15424000,
+    "image_sha256": "a37997fb2a2590287941d3bfc5e2b4f099e7ed30f94931a3ba138b1a14d57ec7",
+    "gzip_bytes": 6488090,
+    "gzip_sha256": "3c02360b767659b41f54d5996b10fa878f570b7feae8fd4d12f018fe77135118",
+    "gzip_header_hex": "1f8b0800000000000203",
+    "gzip_round_trip_verified": true,
+    "text_offset": 0,
+    "image_size": 15925248,
+    "flags": 10,
+    "declared_runtime_bytes_beyond_file": 501248,
+    "lk_checked_output_capacity_bytes": 29360128,
+    "decoded_file_fits_lk_capacity": true,
+    "lk_output_capacity_margin_bytes": 13936128,
+    "appended_dt_bytes": null,
+    "placement_base_alignment_bytes": 2097152,
+    "physical_destination_selected": false,
+    "boot_verified": false
+  },
+  "candidate": {
+    "partition_bytes": 16777216,
+    "partition_sha256": "dde5d2bb3151a73b83a823639d3790416ac2321f3194b04ae57ddad731d7b429",
+    "payload_bytes": 6531072,
+    "component_sha1": "ea1a65a18dd98144c90e80745ab179c478c99d21",
+    "entry": 1073741824,
+    "runtime_regions": [
+      [
+        1073741824,
+        15925248
+      ],
+      [
+        1128792064,
+        51200
+      ],
+      [
+        1207959552,
+        1048576
+      ],
+      [
+        1157627904,
+        27408
+      ]
+    ]
+  },
+  "dt": {
+    "format_version": 17,
+    "bytes": 27408,
+    "sha256": "d58d4b26bc65bebda14067145558625013c9ff3db66978db238d1b7456f4798c"
+  },
+  "initramfs": {
+    "init": {
+      "bytes": 49944,
+      "sha256": "a77706b167542a14e785dc4cada9d10799b56edc20d2a99a5a44070feb0114e6"
+    },
+    "initramfs.cpio.gz": {
+      "bytes": 12062,
+      "sha256": "dabfef5991a447f56fb6b017f5f569bbe48f1ed5c843e2f7e3ea8b62af9e4420"
+    }
+  },
+  "independent_header_id_and_component_readback_passed": true,
+  "lab_asset_hashes_verified": true,
+  "receiver_input_preflight_passed_unarmed": true,
+  "device_write_performed": false,
+  "reboot_performed": false,
+  "physical_execution_admitted": false,
+  "failed_load_qualified": false,
+  "retained_failure_logs_qualified": false,
+  "actual_candidate_writer_read_only_preflight_passed": true,
+  "linux_new_lab_tests_passed": 15,
+  "linux_protocol_tests_passed": 7
+}

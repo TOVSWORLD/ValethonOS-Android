@@ -1,0 +1,28 @@
+{
+  "scope": "native-kexec-source-boot-1",
+  "runner_sha256": "da06b41356139dc6bdf32214c02bf9b765d89731ce304ab45a112bc2dd0cd237",
+  "candidate_sha256": "43ac32df0cf0b8195e70b0bc596b9a9b33750d1a6a14305640ff05cf12501327",
+  "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+  "candidate_write_attempts": 1,
+  "restore_write_attempts": 1,
+  "reboot_requests": 1,
+  "complete": true,
+  "original_boot_restored": true,
+  "normal_shell_restored": true,
+  "native_kernel_running": true,
+  "recovery_written": false,
+  "experimental_jump_executed": false,
+  "owner_attention_required": false,
+  "recovery_sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11",
+  "preflight": "passed",
+  "candidate_install_verified": true,
+  "native_config_sha256": "71184d29b986824d086f9a0cb0ce6bb00d2d63723e0476a49d3381cb00603ac9",
+  "gate_diagnostics": [
+    "[    2.549521] KXOFF cpu=3 result=0 phase=8 steps=34 writes=9 off_confirmed=1",
+    "[    8.081107] KXOFF cpu=3 result=0 phase=8 steps=69 writes=9 off_confirmed=1",
+    "[   22.145151] KXOFF cpu=3 result=0 phase=8 steps=59 writes=9 off_confirmed=1",
+    "[   24.289276] KXOFF cpu=2 result=0 phase=8 steps=48 writes=9 off_confirmed=1"
+  ],
+  "owner_observation": "Android home screen after reboot",
+  "approval_consumed": true
+}

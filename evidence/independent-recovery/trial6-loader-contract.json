@@ -1,0 +1,75 @@
+{
+  "scope": "Exact installed LK bytes and tested candidate6 selected-path static audit; no firmware execution",
+  "installed_lk_package_prefix_match": true,
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "installed_partition_sha256": "373f0f1dfd9162ba2b5636ecdc54a8ff616ba3e0644e34ac5a85cccea65b2fb1",
+  "installed_partition_bytes": 524288,
+  "historical_ota_lk_used_as_substitute": false,
+  "candidate_sha256": "8d3729e6869371ba80aa2da6e1c6d29dbbf1e84ba5ed6b431f1a66354141be16",
+  "normal_bootmode0_dispatch_target": "0x3f0da",
+  "checked_calls": [
+    {
+      "offset": "0x3ef1c",
+      "target": "0x24708"
+    },
+    {
+      "offset": "0x3ef42",
+      "target": "0x24e48"
+    },
+    {
+      "offset": "0x3ee44",
+      "target": "0x3ec10"
+    },
+    {
+      "offset": "0x3ec1c",
+      "target": "0x3deb4"
+    },
+    {
+      "offset": "0x3e6d0",
+      "target": "0x3f59c"
+    },
+    {
+      "offset": "0x3e524",
+      "target": "0x3de68"
+    },
+    {
+      "offset": "0x3de84",
+      "target": "0x3c978"
+    }
+  ],
+  "read_hook_source_contract": "Logical boot base and base+2048 redirected to boot_x; runtime hook/mode not observed",
+  "candidate": {
+    "page_bytes": 2048,
+    "kernel_component_bytes": 7279544,
+    "entry": "0x40000000",
+    "compressed_staging": "0x45000000",
+    "gzip_consumed_bytes": 7252168,
+    "decoded_bytes": 16912896,
+    "decoded_sha256": "34353b23cfbfa3f28a0a99283583ceb5126d5cafe159231ac58546bf63c7c64f",
+    "runtime_bytes": 17432576,
+    "dt_suffix_offset": 7252168,
+    "dt_bytes": 27376,
+    "dt_sha256": "104c4015fc8ab9389b8572c741b003486c908a2e811e14b8c35aae464dc7bad3",
+    "dt_argument": "0x48000000",
+    "ramdisk_address": "0x43480000",
+    "component_digest_verified": true,
+    "selected_gzip_capacity_fits": true
+  },
+  "final_lk_smc_contract": {
+    "function": "0x82000200",
+    "r1": "header kernel entry",
+    "r2": "selected DT address",
+    "r3": 0,
+    "r4": 1
+  },
+  "concrete_package_mismatch_found": false,
+  "unobserved": [
+    "Runtime normal boot mode and read-hook selection",
+    "Runtime completion of DT fixups/decompression",
+    "Secure monitor transfer and actual PC/EL/x0 at kernel entry",
+    "Physical scanout and timer preconditions"
+  ],
+  "next_decision": "Do not rebuild or repeat candidate6. A loader-owned observation before SMC is required to distinguish loader rejection from post-handoff failure. Any instrumentation of the resident chain needs a separately reviewed exact implementation; none is admitted by this report.",
+  "device_written": false,
+  "runtime_entry_qualified": false
+}

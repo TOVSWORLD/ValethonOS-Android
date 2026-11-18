@@ -1,0 +1,59 @@
+{
+  "scope": "Offline bootstrap payload observer only; not installed or armed",
+  "original_payload_sha256": "e10fdf770a5be2c2adc3cce0d03b8e296eac3b31e18ebdce5b56dc5491f4e7e8",
+  "rollback_sector_bytes": 492544,
+  "rollback_sector_sha256": "4c6f355c735b9302b0d421ef38f94a9974214d531fa974a41edd8132af7ac092",
+  "candidate_sector_sha256": "6a34b1a55d3b9c6de8e87e21f8b6cc3eaef18576583f66750ef6e012d0d1c10c",
+  "stub_bytes": 280,
+  "stub_sha256": "190fd48d9a981737c2637bbbab1cbac0ce77c1fe486c24c4c6dcacb4885844d6",
+  "stub_span": [
+    "0x4bcffbb8",
+    "0x4bcffcd0"
+  ],
+  "unused_zero_bytes": 304,
+  "allowed_patch_spans": [
+    {
+      "payload_file_offset": "0xa72",
+      "bytes": 4
+    },
+    {
+      "payload_file_offset": "0xd30",
+      "bytes": 4
+    },
+    {
+      "payload_file_offset": "0x15b8",
+      "bytes": 280
+    },
+    {
+      "payload_file_offset": "0x3ff24",
+      "bytes": 4
+    }
+  ],
+  "changed_bytes": 266,
+  "all_other_bytes_identical": true,
+  "live_globals_unchanged": true,
+  "header_and_original_recovery_chain_unchanged": true,
+  "existing_cache_coverage": {
+    "resident": [
+      "0x4bcff000",
+      "0x4bd00000"
+    ],
+    "lk": [
+      "0x4bd00000",
+      "0x4be00000"
+    ],
+    "span_containment_checked": true,
+    "hardware_visibility_qualified": false
+  },
+  "new_security_reset_watchdog_or_storage_operations": false,
+  "physical_execution_admitted": false,
+  "device_written": false,
+  "package_negative_controls": [
+    "truncated",
+    "changed_prefix",
+    "existing_output"
+  ],
+  "source_sha256": "597c078878ed50198de66c054e2c1e0c4f29aed9d63a9ed3f0cbac9ca4a917fd",
+  "added_display_calls_normal_mode_only": true,
+  "compiler": "Apple clang 21.0.0 (clang-2100.3.34.2)"
+}

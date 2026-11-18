@@ -1,0 +1,50 @@
+{
+  "status": "Manually recovered to original Android; failed-jump diagnostics unavailable",
+  "owner_observation": "Home screen after physical recovery instructions; exact timing/sequence not independently measured",
+  "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+  "original_boot_verified": true,
+  "original_config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+  "recovery_sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11",
+  "recovery_verified": true,
+  "normal_shell_restored": true,
+  "pstore_mounted": true,
+  "pstore_console_enabled": true,
+  "pstore_geometry": [
+    1145110528,
+    917504,
+    65536
+  ],
+  "pstore_inventory_empty": true,
+  "current_handoff_lines": 0,
+  "retained_handoff_lines": 0,
+  "logs_deleted_by_collector": false,
+  "posttrial_reboot_requested_by_agent": false,
+  "posttrial_partition_writes": false,
+  "jump_proven": false,
+  "failure_stage": "unknown",
+  "loss_cause": "Unqualified: physical power-off, earlier firmware/kernel clearing, or uninspected userspace consumers are not distinguished",
+  "watchdog_source_audit": {
+    "driver": "mtk-wdt",
+    "current_binding": "10007000.toprgu",
+    "source_sha256": "b4650c1d087bc2ef4e0e4161afc9dd54cb38901e98af16a1b2fc2e784f1d927b",
+    "shutdown_lines": [
+      540,
+      546
+    ],
+    "behavior": "mtk_wdt_shutdown calls mtk_wdt_stop if active/hardware-running; stop clears WDT_MODE_EN",
+    "call_path": [
+      "kernel_kexec",
+      "kernel_restart_prepare",
+      "device_shutdown",
+      "mtk_wdt_shutdown"
+    ],
+    "runtime_reached_shutdown_callback": null,
+    "runtime_reached_shutdown_callback_note": "Not established; no retained handoff logs",
+    "conclusion": "Ordinary watchdog enable cannot be assumed to survive orderly kexec shutdown; not a demonstrated cause of the handoff hang"
+  },
+  "next_work": [
+    "Handoff-scoped recovery timer that survives device shutdown and cannot be kept alive by remaining kicker paths",
+    "Attributable source/entry phase markers with a verified warm-reset readout path",
+    "Qualify reset-to-original and marker retrieval before repeating this failed handoff; earlier passed orderly-retention baseline does not need repetition"
+  ]
+}

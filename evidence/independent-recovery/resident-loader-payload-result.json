@@ -1,0 +1,147 @@
+{
+  "scope": "Pinned archived resident instructions in emulated RAM with modeled firmware services; no device access",
+  "archive_payload_sha256": "e10fdf770a5be2c2adc3cce0d03b8e296eac3b31e18ebdce5b56dc5491f4e7e8",
+  "emulator_version": "2.1.3",
+  "cached_source_sha256": {
+    "start.S": "0eb60174b7fc6ac66a6f78d99ca9e9f0ddee3a1fc47b5b742c4ded552d8b69dc",
+    "main.c": "a98172b957fce059ffc1d05dc1da5647add14cec6a0eaf5300ad2b1b3224f30f",
+    "common.h": "a74dde370000f9aa800628dddb8c6cd15d603384f9e906bfa718fe665d90f4ee",
+    "libc.c": "09219f68e6d5569df43a703f24fb6bc72a38fec86be4634a7beda5149c6af322",
+    "libc.h": "14396fdbda583ebbe4f2c9c91ba3cc39fee0f4607f5c1dfe0eb506b88d92bbe0",
+    "linker.x": "8676e54b20b029516275d19f22ec8a25c619b880c5ef0e038c3986540f787484",
+    "Makefile": "bdb58deceecedf165f3d6a818c28133e2c3333d32eca9304041b1dc0cdbc136b"
+  },
+  "source_correspondence": "Bounded mode/read/global behavior agrees with cached source; exact compiler/build equivalence NOT established",
+  "main_cases": [
+    {
+      "case": "normal",
+      "selected_lk_mode": 0,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "recovery",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "factory",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "advanced_factory",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "temporary_fastboot_flag",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 1
+    },
+    {
+      "case": "permanent_fastboot_flag",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 0
+    },
+    {
+      "case": "permanent_flag_recovery",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 1
+    },
+    {
+      "case": "recovery_flag",
+      "selected_lk_mode": 2,
+      "modeled_misc_writes": 1
+    },
+    {
+      "case": "missing_boot_x",
+      "selected_lk_mode": 99,
+      "modeled_misc_writes": 0
+    }
+  ],
+  "read_cases": [
+    {
+      "partition": "boot",
+      "offset": 0,
+      "redirected": true
+    },
+    {
+      "partition": "boot",
+      "offset": 2048,
+      "redirected": true
+    },
+    {
+      "partition": "boot",
+      "offset": 4096,
+      "redirected": false
+    },
+    {
+      "partition": "boot",
+      "offset": 4294967296,
+      "redirected": false
+    },
+    {
+      "partition": "recovery",
+      "offset": 0,
+      "redirected": true
+    },
+    {
+      "partition": "recovery",
+      "offset": 2048,
+      "redirected": true
+    },
+    {
+      "partition": "recovery",
+      "offset": 4096,
+      "redirected": false
+    },
+    {
+      "partition": "recovery",
+      "offset": 4294967296,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 0,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 2048,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 4096,
+      "redirected": false
+    },
+    {
+      "partition": "lk",
+      "offset": 4294967296,
+      "redirected": false
+    }
+  ],
+  "resident_base": "0x4bcff000",
+  "initialized_bytes_end_exclusive": "0x4bcffb84",
+  "bss_alignment_padding": [
+    "0x4bcffb84",
+    "0x4bcffb88"
+  ],
+  "referenced_bss_globals": {
+    "g_recovery_x": "0x4bcffb88",
+    "g_boot": "0x4bcffb90",
+    "g_misc": "0x4bcffb98",
+    "g_lk": "0x4bcffba0",
+    "g_boot_x": "0x4bcffba8",
+    "g_recovery": "0x4bcffbb0"
+  },
+  "observed_bss_end_exclusive": "0x4bcffbb8",
+  "remaining_zero_tail_bytes": 584,
+  "tail_is_admitted_injection_space": false,
+  "embedded_lk_prefix_start": "0x4bcffe00",
+  "next_baseline_decision": "Use exact archived binary as observation-design baseline; do not claim reproducible original source build or use a rebuilt original as equivalent.",
+  "exact_reproducible_build": false,
+  "device_written": false,
+  "hardware_qualified": false,
+  "observer_prepared": false
+}

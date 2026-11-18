@@ -1,0 +1,9 @@
+{
+  "platform_source": "evidence/diagnostic-kernel/ack/arch/arm64/Kconfig.platforms",
+  "platform_sha256": "4a1080d724eee97f2c5dea1dc54addf3bb9fc12415097ec47619459add8198d1",
+  "kernel_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "config_resolution_notes": {
+    "INPUT": "Disable VT, which selects INPUT in the pinned drivers/tty/Kconfig; retain the TTY core for ACM.",
+    "PERF_EVENTS": "Retain generic performance-event infrastructure; hardware PMU node disabled in the own-source lab DT. No forced security/hardening disable."
+  }
+}

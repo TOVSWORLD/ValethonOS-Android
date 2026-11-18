@@ -1,0 +1,21 @@
+{
+  "scope": "Independent Pillow photo decoder against exact emitted local ARM pixels with synthetic scale/blur/exposure/perspective/rotation; not actual tablet visibility or camera qualification.",
+  "candidate_sha256": "b9377fdb1c8ca78e627d19db0d0eee7fc84228acc54f248edc98ebec3e05ea1f",
+  "observer_sha256": "2dd2de6bb6b07b5c616621cd4ed65f1a4a023cb695a41c896496cc67f1229188",
+  "case_count": 10,
+  "cases": [
+    "exact_emitted_pixels",
+    "two_times_scale",
+    "moderate_blur",
+    "exposure_offset_and_reduced_contrast",
+    "perspective_lcd_quad",
+    "portrait_record_in_landscape_photo",
+    "wrong_capture_token_rejected",
+    "blank_low_contrast_rejected",
+    "wrong_lcd_region_rejected",
+    "degenerate_quad_rejected"
+  ],
+  "kernel_entry_proved": false,
+  "actual_camera_capture": false,
+  "device_accessed": false
+}

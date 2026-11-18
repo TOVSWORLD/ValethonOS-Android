@@ -1,0 +1,54 @@
+{
+  "scope": "Prepared orderly software-reboot console-retention test; runtime pending",
+  "date": "2026-11-09",
+  "preflight": {
+    "scope": "pstore-warm-reboot-marker-1",
+    "runner_sha256": "4c4e56c06ffdd8c8ec73a23dd4d7532bd2486ec8365257400ae46fdc3e0b8388",
+    "complete": true,
+    "marker_write_attempts": 0,
+    "reboot_requests": 0,
+    "boot_written": false,
+    "module_loaded": false,
+    "handoff_attempted": false,
+    "pstore_records_deleted": false,
+    "personal_log_contents_collected": false,
+    "normal_shell_restored": true,
+    "orderly_warm_reboot_retention_qualified": false,
+    "failed_handoff_retention_qualified": false,
+    "preflight": "passed",
+    "source_boot_id_sha256": "2b00431bd53c068ff90650edb35ea5778812158b293062e3708acb85e00604cc",
+    "source_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "source_config_sha256": "b087199622287207923f9449eedd820ee1940ee82157e77648e36b4b959f3859",
+    "existing_backend": {
+      "address": 1145110528,
+      "size": 917504,
+      "console_size": 65536
+    }
+  },
+  "test_code_sha256": "4c4e56c06ffdd8c8ec73a23dd4d7532bd2486ec8365257400ae46fdc3e0b8388",
+  "host_tests": {
+    "retention_tests": 12,
+    "kexec_tests": 63,
+    "kexec_skipped": 1,
+    "failures": 0
+  },
+  "live_reservations": {
+    "pstore": {
+      "address": 1145110528,
+      "size": 917504
+    },
+    "legacy_console": {
+      "address": 1145044992,
+      "size": 65536
+    }
+  },
+  "console": "pstore-1 enabled",
+  "pstore_empty_before_test": true,
+  "kernel_source_writer": "fs/pstore/platform.c:pstore_simp_console_write -> PSTORE_TYPE_CONSOLE",
+  "kernel_source_reader": "fs/pstore/ram.c:ramoops/persistent_ram_save_old",
+  "hardware_execution_pending": true,
+  "reboot_approval_pending": true,
+  "failed_handoff_retention_qualified": false,
+  "power_loss_retention_qualified": false,
+  "reads_pmsg_or_account_logs": false
+}

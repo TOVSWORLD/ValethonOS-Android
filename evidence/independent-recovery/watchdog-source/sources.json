@@ -1,0 +1,33 @@
+{
+  "scope": "Source-grounded inherited watchdog lifecycle prerequisite, not physical reset diagnosis",
+  "sources": [
+    {
+      "path": "evidence/independent-recovery/watchdog-source/mtk_wdt.c",
+      "sha256": "6e8230dff7db590f16bdc83918220da48be57c8a594cd3f0917f4c0e0018da9b",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/watchdog/mtk_wdt.c?format=TEXT"
+    },
+    {
+      "path": "evidence/independent-recovery/watchdog-source/Kconfig",
+      "sha256": "2b957ffef6bee161f65c444c0a35c14748e275b28c632fe7faeb8b7b510bb49f",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/watchdog/Kconfig?format=TEXT"
+    },
+    {
+      "path": "evidence/independent-recovery/watchdog-source/legacy-mt_wdt.h",
+      "sha256": "f2ba83feef0b30444bf7bdbd4c3199a0f2ef4ea2fde01f4acc02f832462358b1",
+      "url": "https://github.com/mt8163-dev/android_kernel_amazon_mt8163/blob/e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74/drivers/watchdog/mediatek/wdt/common/mt_wdt.h"
+    }
+  ],
+  "register_equivalence": {
+    "mode_offset": 0,
+    "length_offset": 4,
+    "reload_offset": 8,
+    "enable_bit": 1,
+    "mode_key": "0x22000000",
+    "length_key": "0x8",
+    "reload_key": "0x1971"
+  },
+  "match_change": "Only mt8163-wdt match with NULL SoC extension data; no reset-controller data or thermal request writes added",
+  "core_behavior": "Boot-enabled timer is marked HW_RUNNING, timeout refreshed and kernel heartbeat used until userspace takeover; disabled timer is not started by init. No userspace watchdog node/open or reboot request.",
+  "trial_lead": "Extra preloader at49.35s after normal-boot disconnect, before instructed90s wait; reset cause unproven",
+  "hardware_qualified": false
+}

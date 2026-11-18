@@ -1,0 +1,17 @@
+{
+  "files": 26,
+  "archive_bytes": 17874604,
+  "archive_sha256": "7c5a8c57e0ed29b84c4aa40a5fdb5366433cbed23e80e8b2a2baff28d1f80604",
+  "guard_all_four_artifact_hashes_verified": true,
+  "owner_approved": false,
+  "owner_available": false,
+  "source_exported": false,
+  "device_accessed": false,
+  "armed": false,
+  "scope": "known-boot-copy-control-3",
+  "screen_token": "d73d",
+  "candidate_sha256": "b9377fdb1c8ca78e627d19db0d0eee7fc84228acc54f248edc98ebec3e05ea1f",
+  "observer_sha256": "2dd2de6bb6b07b5c616621cd4ed65f1a4a023cb695a41c896496cc67f1229188",
+  "copy_boundary_evidence_bound": true,
+  "physical_execution_admitted": false
+}

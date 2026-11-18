@@ -1,0 +1,18 @@
+{
+  "ack_commit": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "source": "evidence/independent-recovery/entry-screen-source/head.S",
+  "target": "arch/arm64/kernel/head.S",
+  "original_sha256": "db56887baf6cb87c24974609ffdb76ed5765a3756739c50a44384e384925977d",
+  "patched_sha256": "d621c489d61ed4b97e9e7a8446dee3791a25e7ff3bf86013614584a76cae9437",
+  "patch_sha256": "22232ff4bb010c5a262fba01835b64779862b7b4bdae33df89900967eec2a4ea",
+  "overlay": "valethon-entry-screen.S",
+  "overlay_target": "arch/arm64/kernel/valethon-entry-screen.S",
+  "overlay_sha256": "0100510a76b6029c496e3f55ab812472f13b201ac8bcebb9755ab44169cb5338",
+  "framebuffer_start": 2556428288,
+  "framebuffer_bytes": 12288000,
+  "firmware_reservation_bytes": 16777216,
+  "dt_handoff_address": 1207959552,
+  "scope": "Positive-only display checkpoint after MMU-off normalization; no physical execution admission or halted boot",
+  "metadata_source": "evidence/independent-recovery/entry-screen-source/metadata.json",
+  "metadata_sha256": "6ccfb2468bd7ed932f789704b553d4134d12936ccce475dcd9f64e3a616eae6e"
+}

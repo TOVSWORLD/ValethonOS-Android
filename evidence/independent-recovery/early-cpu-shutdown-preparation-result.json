@@ -1,0 +1,35 @@
+{
+  "original_sha256": "0149bfdcd72217b3065a8c08de5ccdc85225fbabb367bb1d743a8b1d5d1d9239",
+  "patched_sha256": "c2ab0e60248f7bfd638d14f481f3c3d35f23aa0cc8f718b34a48f6279c9fc771",
+  "scope": "MT8163 PID1 default-image CPU shutdown before device shutdown",
+  "normal_reboot_dispatch_unchanged": true,
+  "preserve_context_branch_unchanged": true,
+  "cpu_off_implementation_unchanged": true,
+  "final_hardware_cpu_gate_retained": true,
+  "relocation_cache_mmu_el_transition_unchanged": true,
+  "new_watchdog_or_log_transport": false,
+  "hardware_execution": false,
+  "target_boot_proven": false,
+  "date": "2026-11-13",
+  "validation": {
+    "actual_generated_c_controls_passed": 7,
+    "python_suite_tests_run": 889,
+    "python_suite_passed": 888,
+    "optional_unicorn_skipped": 1,
+    "arm64_build": "passed",
+    "trial_scope_controls_passed": 5,
+    "linked_native_usb_and_final_cpu_gate": "passed",
+    "read_only_preflight": {
+      "complete": true,
+      "candidate_write_attempts": 0,
+      "restore_write_attempts": 0,
+      "reboot_requests": 0,
+      "normal_shell_restored": true
+    }
+  },
+  "status": "Built, linked-verified and packaged; owner-attended hardware test pending",
+  "image_sha256": "d556acbc3edada086df0787c1922f6513182396504092248b41ca07f98d9cac3",
+  "source_candidate_sha256": "0851746a5946472578c9ee99cbf18c5b8fa5de149e716e88e77a187557886e21",
+  "source_tree_comparison": "Only kernel/kexec_core.c differs from boot-tested source",
+  "kernel_release": "4.9.337-g72940eb733af"
+}

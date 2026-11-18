@@ -5,8 +5,13 @@ on:
       mode:
         description: Compile integration scope
         type: choice
-        options: [clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
+        options: [first-draft, lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
         default: diagnostic
+      entry_checkpoint:
+        description: Private earliest-entry checkpoint (lab-retained only)
+        type: choice
+        options: [none, entry-8s]
+        default: none
       argument_profile:
         description: Generic-only forced argument selection (diagnostic mode)
         type: choice
@@ -83,6 +88,7 @@ jobs:
       - name: Preflight and compile generic ARM64 baseline
         env:
           BUILD_MODE: ${{ steps.scope.outputs.mode }}
+          ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
           ARGUMENT_PROFILE: ${{ steps.scope.outputs.argument_profile }}
         run: |
           if [ "$BUILD_MODE" = pwm-provider ]; then
@@ -97,6 +103,79 @@ jobs:
             bash scripts/build_ack_baseline.sh "$BUILD_MODE"
           fi
 
+      - name: Retain diagnostic kernel bytes and provenance
+        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
+        env:
+          ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, shutil, subprocess
+          root = pathlib.Path('work/ack-baseline')
+          destination = pathlib.Path('out/diagnostic-kernel-artifact')
+          destination.mkdir(parents=True, exist_ok=False)
+          files = {}
+          sources = [('output/arch/arm64/boot/Image', 'Image'),
+                               ('output/arch/arm64/boot/Image.gz', 'Image.gz'),
+                               ('output/.config', 'resolved.config'),
+                               ('output/System.map', 'System.map'),
+                               ('image-size-report.json', 'image-size-report.json')]
+          if '${{ steps.scope.outputs.mode }}' in ('lab-retained','first-draft'):
+              sources += [('output/drivers/misc/valethon_mailbox.o', 'valethon_mailbox.o'),
+                          ('output/drivers/mmc/host/mtk-sd.o', 'mtk-sd.o')]
+          if '${{ steps.scope.outputs.mode }}' == 'first-draft':
+              sources += [(f'output/{path}', pathlib.Path(path).name) for path in [
+                  'drivers/regulator/fan53555.o', 'drivers/phy/mediatek/phy-mtk-mipi-dsi.o',
+                  'drivers/phy/mediatek/phy-mtk-mipi-dsi-mt8173.o',
+                  'drivers/gpu/drm/mediatek/mtk_dsi.o', 'drivers/gpu/drm/mediatek/mtk_drm_drv.o',
+                  'drivers/pwm/pwm-mtk-disp.o', 'drivers/usb/musb/mediatek.o',
+                  'drivers/phy/mediatek/phy-mtk-tphy.o', 'drivers/watchdog/mtk_wdt.o']]
+          for source, name in sources:
+              target = destination / name
+              shutil.copyfile(root / source, target)
+              data = target.read_bytes()
+              files[name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+          manifest = {
+              'build_mode': '${{ steps.scope.outputs.mode }}',
+              'repository_revision': os.environ['GITHUB_SHA'],
+              'kernel_revision': subprocess.check_output(
+                  ['git', '-C', str(root / 'source'), 'rev-parse', 'HEAD'], text=True).strip(),
+              'entry_checkpoint_profile': os.environ['ENTRY_CHECKPOINT_PROFILE'],
+              'run_id': os.environ['GITHUB_RUN_ID'],
+              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'files': files,
+              'qualification': 'Compile outputs only; no combined boot image or device acceptance.'}
+          (destination / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+          PY
+      - name: Upload diagnostic kernel compile outputs
+        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: diagnostic-kernel-${{ github.sha }}-${{ github.run_attempt }}
+          path: out/diagnostic-kernel-artifact/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Enforcing lab PID1 ABI and filesystem VM regression
+        if: (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
+        env:
+          ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
+        run: |
+          python3 scripts/install_qemu_for_ci.py --install
+          sudo apt-get install --no-install-recommends -y secilc=3.5-1 checkpolicy=3.5-1
+          if [ '${{ steps.scope.outputs.mode }}' != first-draft ]; then
+            python3 scripts/validate_lab_entry_screen_vm.py --output out/lab-entry-screen-vm
+          fi
+          vm_option=()
+          if [ "$ENTRY_CHECKPOINT_PROFILE" = entry-8s ]; then
+            python3 scripts/validate_lab_entry_delay_vm.py --output out/lab-entry-delay-vm
+            vm_option=(--entry-framebuffer-ram)
+          fi
+          python3 scripts/build_diagnostic_selinux_policy.py --output out/lab-vm-policy
+          python3 scripts/build_lab_log_initramfs.py --policy out/lab-vm-policy/policy.33 --policy-report out/lab-vm-policy/report.json --output out/lab-vm-component
+          image=work/ack-baseline/output/arch/arm64/boot/Image
+          image_sha=$(sha256sum "$image" | cut -d' ' -f1)
+          python3 scripts/validate_lab_policy_vm.py --kernel "$image" --expected-kernel-sha256 "$image_sha" --component-dir out/lab-vm-component --output out/lab-policy-vm "${vm_option[@]}"
+
       - name: Generic QEMU virt diagnostic userspace smoke test
         if: steps.scope.outputs.qemu == 'true'
         env:
@@ -106,3 +185,15 @@ jobs:
           force_option=()
           if [ "$ARGUMENT_PROFILE" = generic-force ]; then force_option=(--force-argument-test); fi
           python3 scripts/run_qemu_diagnostic.py --kernel work/ack-baseline/output/arch/arm64/boot/Image --config work/ack-baseline/output/.config --initramfs out/diagnostic-initramfs/initramfs.cpio.gz --output out/qemu-diagnostic "${force_option[@]}"
+
+      - name: Retain first draft enforcing ramdisk and VM result
+        if: steps.scope.outputs.mode == 'first-draft'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: first-draft-userspace-${{ github.sha }}
+          path: |
+            out/lab-vm-component/
+            out/lab-vm-policy/report.json
+            out/lab-policy-vm/report.json
+          if-no-files-found: error
+          retention-days: 7

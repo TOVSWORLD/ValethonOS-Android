@@ -1,5 +1,9 @@
 # Douglas diagnostic-boot contract — issue #21
 
+> Historical source/integration snapshot. Use the [current hardware contract](DOUGLAS-HARDWARE-CONTRACT.md)
+> for consolidated implementation status and later boot evidence. Statements below
+> about routes/builds not yet established describe their original audit date.
+
 This is source evidence and a test design, not a bootable image or permission to
 modify the tablet. No temporary-boot route has been established for the user's
 Fire OS 5.7.1.0 tablet. Do not execute unlock/recovery helpers as a discovery step.
@@ -151,12 +155,15 @@ and its decompression/relocation/entry behavior before selecting placement.
 
 ## Diagnostic log backend audit
 
-The retained restricted `diagnostic.config` has CONFIG_PSTORE=y but
+The historical retained restricted `diagnostic.config` has CONFIG_PSTORE=y but
 CONFIG_PSTORE_RAM=m, CONFIG_PSTORE_CONSOLE disabled and CONFIG_PSTORE_PMSG
 disabled. Our isolated initramfs has no module loader or module files. Therefore
 that configured RAM backend cannot provide logs in this diagnostic environment;
 the successful QEMU test used the live PL011 console, not retained pstore logs.
-This is a verified configuration limitation, not a claim that modern ramoops
+The current fragment now requires built-in PSTORE_RAM and PSTORE_CONSOLE under
+#346; a fresh resolved build receipt is required. That source fix selects no
+physical RAM address or reset/readout contract. The retained old configuration
+remains historical evidence. This is a verified configuration limitation, not a claim that modern ramoops
 cannot be developed for douglas. No module is loaded or config changed here.
 
 The pinned [legacy MediaTek RAM-console implementation](https://github.com/mt8163-dev/android_kernel_amazon_mt8163/blob/e0a3a2b2378ae4c7494ffdfea34d2a9e04a5fb74/drivers/misc/mediatek/ram_console/mtk_ram_console.c)

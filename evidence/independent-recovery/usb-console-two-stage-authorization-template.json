@@ -1,0 +1,30 @@
+{
+  "scope": "usb-console-two-stage-trial-1",
+  "owner_approved": false,
+  "owner_available": false,
+  "source_boot_candidate_sha256": "d1b5fc85a5a560eab70a032ac11b88b0090b8ff98f5ff1af8960cc87b8746c26",
+  "target_image_sha256": "e74878db3abb4bca4acc18e312d66ac8648a9261ac6dff216af387676b38ecff",
+  "native_config_sha256": "865d9beeb5c8c49af47aea818b341e48cbbd84f7669c0cccbc589b60d1699b31",
+  "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+  "linked_report_sha256": "d897e0a0630151fb06354c0b21213e8a2f755892c4a4a6a06126d2cf0fe33700",
+  "source_package_report_sha256": "550de0e749d0c9319d020c0f71458b49980566ee553759a26516713754c87c24",
+  "maximum_source_boot_requests": 1,
+  "maximum_candidate_writes": 1,
+  "maximum_original_restore_writes": 1,
+  "maximum_native_loads": 1,
+  "maximum_jump_requests": 1,
+  "recovery_writes_allowed": false,
+  "post_jump_automatic_reboot_allowed": false,
+  "owner_physical_return_may_be_required": true,
+  "code_sha256": {
+    "scripts/run_native_source_boot.py": "da06b41356139dc6bdf32214c02bf9b765d89731ce304ab45a112bc2dd0cd237",
+    "scripts/run_usb_console_source_boot.py": "4528e60ab212ef109bb40c87fba654d1d909400963848fa0cf3c38099605ef63",
+    "scripts/prepare_native_jump_bundle.py": "9434422b78d1559b6503ced3ac7c213464d54b10ddef4017e16a1ff9847b678b",
+    "scripts/build_native_load_client.py": "30a5357e025e4826006b0114af09ac7b1852f77911427510b6726bb7a38f5e05",
+    "projects/firetabs-android/native-kexec/load_client.c": "0db97cc82b93b205d3b86cc0b938332a09b5c305b54ed61880b993bbe209ccbd",
+    "scripts/run_usb_console_jump.py": "107486f090234fc8c4f126a930735c6481cd8af1064254380f7902d6991ce268",
+    "scripts/capture_usb_kernel_console.py": "a7c3bbda561b8d3df9ee22eae6ef2a2873357b756d3ce67a9395be92266d0bf4",
+    "scripts/capture_live_acm_probe.py": "1238df1f1027bbf0ab61a28175adfcde3fe977c530785df34a8782f2bfe3e7af"
+  },
+  "fresh_target_manifest_policy": "After successful source boot/original-flash restoration only: read fresh source DT/iomem, generate one fresh trial ID, preserve all DT fields except chosen trial marker and exact USB-console bootargs prefix, retain original initrd addresses and fixed verified Image; validate all segment pages against source System RAM/reservations. Never load the offline preview. Bind resulting manifest/client hashes into the child jump authorization under this already-approved procedure."
+}

@@ -1,0 +1,118 @@
+{
+  "scope": "ack-linux-native-ramfix-jump-4",
+  "target_release": "6.18.34-valethon-draft1+",
+  "target_kind": "ack-linux-ramfix-v4",
+  "complete": false,
+  "load_attempts": 1,
+  "unload_attempts": 0,
+  "jump_requests": 1,
+  "target_kernel_boot_proven": false,
+  "target_pid1_proven": false,
+  "source_console_proven": true,
+  "fresh_original_android_return": true,
+  "normal_shell_restored": true,
+  "target_hardware_deadline_seconds": 31,
+  "hardware_deadline_qualified": false,
+  "boot_written": false,
+  "recovery_written": false,
+  "automatic_retry": false,
+  "native_load_verified": true,
+  "original_boot_verified_before_jump": true,
+  "recovery_verified_before_jump": true,
+  "owner_return_required": false,
+  "different_boot_completed": true,
+  "cinit_console_proven": true,
+  "run_init_seen": true,
+  "cinit_retained_assessments": [
+    {
+      "fresh_console_identity": true,
+      "console_ready_seen": false,
+      "run_init_seen": true,
+      "linux_banner_seen": false,
+      "panic_seen": false,
+      "exception_seen": false,
+      "marker_absence_inconclusive": true
+    }
+  ],
+  "wire_assessment": {
+    "identity_verified": false,
+    "complete_records": 0,
+    "terminal_frame": false,
+    "kernel_release_seen": false,
+    "target_cmdline_nonce_seen": false,
+    "target_kernel_boot_proven": false,
+    "target_pid1_proven": false,
+    "capture_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "capture_bytes": 0
+  },
+  "source_capture": {
+    "source_console_proven": true,
+    "capture_bytes": 9438,
+    "capture_sha256": "dae49e33a63f83427a1ef162fce5df726ab1288b15e7917f1a3d9a2d8dd9de5e",
+    "end_reason": "disconnect",
+    "capture_fsynced": true,
+    "ffs_last_close_retained": true,
+    "init_reboot_route_seen": true,
+    "native_entry_seen": true,
+    "starting_new_kernel_seen": false,
+    "final_cpu_gate_seen": false,
+    "tty_restore_unconfirmed": true
+  },
+  "date": "2026-11-17",
+  "hardware_execution": true,
+  "image_sha256": "fb71d8d8eed60787d8f3fa1cb5a86cb577542b35ef40f57b974928c784f14c53",
+  "metadata_sha256": "67bdee861b6a32f78bd076fa51a14bae1b3fcf6837a3d5294f7ce47bf5f9f1d4",
+  "outcome": "kernel-initialization-and-pid1-execution-observed-usb-witness-missing",
+  "raw_controller_outcome": "ack-boot-unproven",
+  "owner_used_power": false,
+  "owner_power_confirmation_pending": false,
+  "automatic_return_qualified": true,
+  "source_stage": {
+    "candidate_write_attempts": 1,
+    "restore_write_attempts": 1,
+    "reboot_requests": 1,
+    "complete": true,
+    "original_boot_restored": true,
+    "normal_shell_restored": true,
+    "native_kernel_running": true,
+    "recovery_written": false
+  },
+  "retained_console_sha256": "866ff9d103eff7c9c6b8c292ecb5cc9789fb69d2a87dcb288754f2f61a539e26",
+  "retained_console_bytes": 4084,
+  "execution_evidence": {
+    "kernel_initialization_completed": true,
+    "pid1_execution_observed": true,
+    "selinux_policy_load_observed": true,
+    "gadget_probe_success_after_policy": true,
+    "previous_stack_overflow_not_observed": true,
+    "policy_enforcement_gates_inferred": true,
+    "enforcement_inference": "Pinned PID1 reaches gadget setup only after enforcing-state readbacks, policy load/RO remount, labels/domain and namespace checks; this is control-flow inference, not a USB wire attestation"
+  },
+  "host_usb_evidence": {
+    "test_vid_pid_enumeration_observed": true,
+    "cdc_acm_binding_observed": true,
+    "physical_protocol_identity_verified": false,
+    "receiver_stdout_receipt_missing": true,
+    "durable_host_receipt_missing": true,
+    "wire_bytes": 0,
+    "receiver_exit_status_not_preserved": true,
+    "receiver_failure_cause_unproven": true
+  },
+  "live_ram_exclusions": [
+    [
+      1124073472,
+      1124270080
+    ],
+    [
+      2554331136,
+      2556428288
+    ]
+  ],
+  "added_nomap_exclusions": [
+    [
+      2554331136,
+      2556428288
+    ]
+  ],
+  "interpretation": "The RAM-corrected kernel completed initialization and executed /init; its fresh retained output records SELinux policy-load success and gadget probe success. Prior panic was not observed. Host kernel events show test1209:0001 enumeration and CDC ACM binding; no nonce-verified wire record or receiver completion receipt was recovered. Preserve kernel/PID1/USB enumeration achievements; repair receiver lifecycle/result recovery and proceed directly to a full end-to-end attempt, with no logging-only hardware gate. Original Android state verified after automatic return; owner confirmed Power untouched. One attempt consumed; exact reset cause remains unqualified."
+}
