@@ -1,5 +1,10 @@
 # MT8163 Douglas display integration
 
+Scope11 ran: no visible banner, owner Power untouched, original Android verified
+returned. Received120 bytes failed display-status decoding; no valid status or
+target snapshot. Pinconf runtime effect remains unqualified. Scope11 consumed;
+no unchanged retry. See pinconf-runtime-result.json and current execution plan.
+
 Latest scope10 reached DRM component matching/IOMMU attachment but failed
 group43 pinconf. Scope11 removes redundant slew-rate=1: working4.9 treats it
 as GPIO output direction, already supplied by output-low/high, whereas ACK

@@ -1,5 +1,28 @@
 # Next milestone execution plan
 
+## Scope11 actual result — November18,2026
+
+Owner saw Android home with no test banner and confirmed Power untouched.
+Display remains failed. One protected source boot/restore and one RAM jump ran;
+original Android returned with original boot/config/recovery checks and normal
+ADB passing. Scope11 consumed; no retry or new test authorized.
+The selected USB endpoint delivered120 bytes that fail the display-status
+magic/version check; no valid target status or kernel snapshot was received.
+Do not claim this attempt proves target PID1, pinconf success or a new display
+failure cause. Existing kernel/PID1/USB/storage achievements remain historical
+successes. Saved pstore has no maintained-release/panic evidence for this attempt.
+Next audit existing packet provenance and active display DMA/resource behavior
+against working source; establish a concrete cause before another candidate.
+Do not redesign logging or repeat an unchanged experiment.
+Receipt: evidence/display-pipeline-source/pinconf-runtime-result.json.
+Raw data: out/display-pinconf-trial-runtime-1/jump (private).
+
+Boot sequence explained to owner: Amazon -> Lineage/source Android boot ->
+protected original-boot restore -> RAM jump (no Amazon logo) -> test display
+if working -> automatic reset -> Amazon -> Lineage -> original Android home.
+No test banner was observed at the RAM-jump stage. Display remains the current
+intermediate outcome; usable maintained Android remains the major outcome.
+
 ## Scope10 result and pinconf correction — November18,2026
 
 MM-power correction took effect: DRM matched ovl/rdma/color/ccorr/aal/gamma/dsi,
