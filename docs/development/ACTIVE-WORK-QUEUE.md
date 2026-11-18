@@ -28,6 +28,28 @@ gamma/mutex and TPV panel sources implemented;999 local tests pass. Hosted full
 kernel compile, DT closure and fresh RAM package remain; no display hardware
 claim or new device action. Keep proven storage/PID1/USB and consumed scope6.
 
+
+## Display functional package progress — November18,2026
+
+Hosted full display build44253355044 passed on source90655a3. Direct GitHub
+artifact ZIP digest and all manifest artifacts verified. Linked Image includes
+master/gamma/mutex, TPV panel, host lane APIs, LP8557 and framebuffer console.
+Receipt: evidence/display-pipeline-source/kernel-build-result.json. Earlier
+packaging-only failure remains historical, not current build status.
+Display-only enforcing PID1 compiled using unchanged proven policy; VDISP001
+reports framebuffer metadata/banner write, never physical pixel proof. Generic
+enforcing ABI/labels/configfs VM passed on the exact new unmodified Image.
+Fresh final RAM bundle3 passes seven integrity/deadline/both-VM controls.
+Actual display C metadata/short-write tests and controller visual-pending test
+pass. Fresh unapproved display scope7 template prepared; final offline controller
+validation/publishing underway before the attended visual test.
+Current private inputs: out/display-kernel-1, out/display-initramfs-1,
+out/display-functional-bundle-3 (current; earlier1/2 superseded). Build lab
+/tmp/firetabs-display-functional-build-20261118-1/out/init-2. No tablet action,
+no fresh authorization, no display hardware pass. Issues18/329 updated directly.
+Next is visible VALETHON DISPLAY TEST plus labelled RGB bands and protected
+Android return; no repeated storage or complete-log prerequisite.
+
 # Historical selection — UART bench preparation, November 16, 2026
 
 Owner requested a route out of blind boot trials. Receive-only UART capture and

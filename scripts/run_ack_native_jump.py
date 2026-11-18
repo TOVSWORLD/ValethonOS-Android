@@ -19,22 +19,33 @@ from build_ack_trampoline import marker as handoff_marker
 SCOPE = 'ack-linux-native-jump-1'
 RECEIVERS = ['ack_capture_supervisor.py', 'capture_ack_native_console.py', 'capture_lab_kernel_log.py',
              'capture_usb_acm_status.py', 'usb_acm_frame.py', 'kernel_log_protocol.py',
-             'capture_live_acm_probe.py', 'receive_storage_status.py']
+             'capture_live_acm_probe.py', 'receive_storage_status.py', 'receive_display_status.py']
 
 
 def run(device, lab_package, manifest, client_report, linked, output,
-        nonce, source_report, authorization=None, *, combined_kernel_package=None, storage_component=None):
+        nonce, source_report, authorization=None, *, combined_kernel_package=None, storage_component=None, display_component=None, baseline_kernel_package=None):
     m = json.loads(manifest.read_text()); c = json.loads(client_report.read_text())
     combined = combined_kernel_package is not None
+    display = combined and m.get('target_kind') == 'ack-linux-display-v7'
+    if (display_component is not None) != display or (baseline_kernel_package is not None) != display:
+        raise ValueError('Explicit display component and baseline binding required')
+    target_config, target_release = CONFIG_SHA, RELEASE
+    if display:
+        from display_kernel_contract import verify as verify_kernel
+        checked = verify_kernel(combined_kernel_package)
+        target_config, target_release = checked['config_sha256'], checked['target_release']
     storage = combined and m.get('target_kind') == 'ack-linux-storage-readonly-v6'
     if (storage_component is not None) != storage:raise ValueError('Explicit storage component/profile binding required')
     ramfix = storage or combined and m.get('target_kind') == 'ack-linux-ramfix-v4'
     cinit = ramfix or combined and m.get('target_kind') == 'ack-linux-cinit-v3'
-    kind = 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
-    scope = 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    kind = 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    scope = 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
     image_sha = m.get('target_image_sha256') if combined else IMAGE_SHA
     if combined:
-        if cinit:
+        if display:
+            from verify_display_bundle import verify
+            verify(manifest, combined_kernel_package, baseline_kernel_package, display_component, nonce=nonce)
+        elif cinit:
             if storage:
                 from verify_ack_storage_bundle import verify
             elif ramfix:
@@ -48,10 +59,10 @@ def run(device, lab_package, manifest, client_report, linked, output,
             verify(manifest, combined_kernel_package)
     if m.get('offline_preview') is True or m.get('target_kind') != kind:
         raise ValueError('Fresh maintained-kernel RAM bundle required')
-    if (m.get('target_image_sha256') != image_sha or m.get('target_config_sha256') != CONFIG_SHA or
-            m.get('target_release') != RELEASE or len(nonce) != 32 or sha(nonce) != m.get('target_nonce_sha256')):
+    if (m.get('target_image_sha256') != image_sha or m.get('target_config_sha256') != target_config or
+            m.get('target_release') != target_release or len(nonce) != 32 or sha(nonce) != m.get('target_nonce_sha256')):
         raise ValueError('Exact ACK kernel/config/PID1 nonce required')
-    for flag in ['disk_logger_dt_opt_in_removed', ('internal_emmc_only' if storage else 'all_storage_controllers_disabled'),
+    for flag in ['disk_logger_dt_opt_in_removed', ('internal_emmc_only' if storage or display else 'all_storage_controllers_disabled'),
                  'target_watchdog_driver_disabled', 'live_firmware_reservations_preserved',
                  'legacy_psci_contract_copied_from_live']:
         if m.get(flag) is not True:
@@ -82,7 +93,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
     here = Path(__file__).parent
     expected = dict(scope=scope, runner_sha256=sha(Path(__file__).read_bytes()),
                     manifest_sha256=sha(manifest.read_bytes()), client_sha256=c['client_sha256'],
-                    target_image_sha256=image_sha, target_config_sha256=CONFIG_SHA,
+                    target_image_sha256=image_sha, target_config_sha256=target_config,
                     target_nonce_sha256=sha(nonce), source_config_sha256=config,
                     source_capture_report_sha256=sha(json.dumps(source_report, sort_keys=True).encode()),
                     source_capture_manager_sha256=sha((here / 'source_usb_console_trial.py').read_bytes()),
@@ -91,7 +102,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
                     target_hardware_deadline_seconds=31, boot_writes_allowed=False,
                     post_jump_reboot_commands_allowed=False, bounded_read_only_return_poll_allowed=True)
     if combined:
-        expected['combined_verifier_sha256'] = sha((here / ('verify_ack_storage_bundle.py' if storage else 'verify_ack_ramfix_bundle.py' if ramfix else 'verify_ack_cinit_bundle.py' if cinit else 'verify_ack_combined_bundle.py')).read_bytes())
+        expected['combined_verifier_sha256'] = sha((here / ('verify_display_bundle.py' if display else 'verify_ack_storage_bundle.py' if storage else 'verify_ack_ramfix_bundle.py' if ramfix else 'verify_ack_cinit_bundle.py' if cinit else 'verify_ack_combined_bundle.py')).read_bytes())
     if authorization is not None:
         a = json.loads(authorization.read_text())
         if any(type(a.get(k)) is not type(v) or a.get(k) != v for k, v in expected.items()):
@@ -99,7 +110,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
     output.mkdir(mode=0o700)
     if authorization is not None:
         os.close(os.open(str(authorization) + '.consumed', os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600))
-    r = dict(scope=scope, target_release=RELEASE, target_kind=kind,
+    r = dict(scope=scope, target_release=target_release, target_kind=kind,
              complete=False, load_attempts=0, unload_attempts=0, jump_requests=0,
              target_kernel_boot_proven=False, target_pid1_proven=False, source_console_proven=False,
              fresh_original_android_return=False, normal_shell_restored=False,
@@ -169,7 +180,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
         r['native_load_verified'] = True; save()
         # Arm only after load verification: capture covers the actual entry,
         # not the time spent staging the full Image onto source RAM.
-        profile = dict(scope='ack-storage-readonly-capture-1' if storage else 'ack-native-pid1-capture-1', nonce_sha256=sha(nonce),
+        profile = dict(scope='ack-display-functional-capture-1' if display else 'ack-storage-readonly-capture-1' if storage else 'ack-native-pid1-capture-1', nonce_sha256=sha(nonce),
                        physical_usb_path=physical[4:], usb_id='1209:0001', interface='00', wait_seconds=90,
                        allow_privileged_open=True)
         code = ('import sys,pathlib,json;sys.path.insert(0,' + repr(lab_package) +
@@ -215,15 +226,15 @@ def run(device, lab_package, manifest, client_report, linked, output,
                 if p['file'].startswith('console-ramoops'):
                     data = (retained / p['file']).read_bytes()
                     entry_seen |= handoff_marker(trial) in data
-                    if combined:
+                    if combined and not display:
                         if cinit:
                             from verify_ack_cinit_bundle import assess
                             combined_records.append(assess(data, nonce))
                         else:
                             from verify_ack_combined_bundle import assess
                             combined_records.append(assess(data, trial))
-                    matches.append(target_token in data and b'Linux version ' + RELEASE.encode() + b' ' in data)
-            if combined:
+                    matches.append(target_token in data and b'Linux version ' + target_release.encode() + b' ' in data)
+            if combined and not display:
                 r['combined_retained_assessments'] = combined_records
                 if cinit:
                     r['cinit_retained_assessments'] = combined_records
@@ -260,7 +271,17 @@ def run(device, lab_package, manifest, client_report, linked, output,
         p = output / 'ack-kernel-wire-private.bin'
         with p.open('xb') as f:
             os.fchmod(f.fileno(), 0o600); f.write(raw); f.flush(); os.fsync(f.fileno())
-        if storage:
+        if display:
+            from receive_display_status import decode
+            assessment = decode(raw, nonce)
+            physical_writer = r['capture'].get('endpoint_selected') is True and r['capture'].get('complete') is True
+            r['display_status'] = assessment
+            r['pid1_usb_identity_proven'] = physical_writer
+            r['display_banner_status_verified'] = physical_writer and assessment['console_banner_written']
+            r['physical_pixels_confirmed'] = False
+            r['owner_visual_confirmation_pending'] = True
+            r['target_kernel_boot_proven'] |= physical_writer
+        elif storage:
             from receive_storage_status import decode
             assessment = decode(raw, nonce)
             physical_writer = r['capture'].get('endpoint_selected') is True and r['capture'].get('complete') is True
@@ -276,7 +297,8 @@ def run(device, lab_package, manifest, client_report, linked, output,
             r['pid1_usb_identity_proven'] = assessment['identity_verified'] and r['capture'].get('endpoint_selected') is True
             r['target_pid1_proven'] = assessment['target_pid1_proven']
             r['target_kernel_boot_proven'] |= assessment['target_kernel_boot_proven']
-        r['outcome'] = ('ack-storage-readonly-verified' if storage and r.get('storage_readonly_verified') else
+        r['outcome'] = ('ack-display-banner-status-verified-visual-confirmation-pending' if display and r.get('display_banner_status_verified') else
+                        'ack-display-status-failed' if display else 'ack-storage-readonly-verified' if storage and r.get('storage_readonly_verified') else
                         'ack-storage-status-failed' if storage else 'ack-kernel-and-pid1-proven' if r['target_pid1_proven'] else
                         'ack-pid1-usb-identity-proven-stream-incomplete' if r['pid1_usb_identity_proven'] else
                         'ack-kernel-entry-proven' if r['target_kernel_boot_proven'] else 'ack-boot-unproven')
@@ -316,7 +338,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
                 r['normal_shell_restored'] = b'uid=2000(' in device.shell('id', timeout=10)
             except Exception:
                 r['owner_return_required'] = True
-        r['complete'] = bool(((r.get('storage_readonly_verified', False) if storage else r['target_pid1_proven']) and r['fresh_original_android_return'] and r['normal_shell_restored'])
+        r['complete'] = bool(((r.get('display_banner_status_verified', False) if display else r.get('storage_readonly_verified', False) if storage else r['target_pid1_proven']) and r['fresh_original_android_return'] and r['normal_shell_restored'])
                              or (not r['jump_requests'] and not r['load_attempts'] and
                                  r.get('preflight') == 'passed' and r['normal_shell_restored']))
         save()

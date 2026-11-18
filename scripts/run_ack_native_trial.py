@@ -24,25 +24,29 @@ SCOPE_TWO_STAGE = 'ack-linux-native-two-stage-1'
 
 def validate(a):
     p = read(a.policy)
+    display = getattr(a, 'display_functional', False)
     storage = getattr(a, 'storage_readonly', False)
     ramfix = getattr(a, 'ramfix', False)
     cinit = ramfix or getattr(a, 'cinit', False)
     combined = getattr(a, 'combined', False) or cinit
     end_to_end = getattr(a, 'usb_end_to_end', False)
+    if display and (not ramfix or storage or end_to_end or getattr(a, 'baseline_kernel_package', None) is None):
+        raise ValueError('Display mode requires its own RAM-fixed profile and pinned baseline')
     if storage and (not ramfix or end_to_end):raise ValueError('Storage mode requires RAM fix and its own functional receiver')
     if end_to_end and not ramfix:raise ValueError('USB end-to-end mode requires the RAM-fixed candidate')
-    required_scope = 'ack-linux-storage-readonly-two-stage-6' if storage else 'ack-linux-usb-end-to-end-two-stage-5' if end_to_end else 'ack-linux-ramfix-two-stage-4' if ramfix else 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
-    required_kind = 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    required_scope = 'ack-linux-display-functional-two-stage-7' if display else 'ack-linux-storage-readonly-two-stage-6' if storage else 'ack-linux-usb-end-to-end-two-stage-5' if end_to_end else 'ack-linux-ramfix-two-stage-4' if ramfix else 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
+    required_kind = 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
     if (p.get('scope') != required_scope or p.get('target_kind') != required_kind or
             p.get('target_hardware_deadline_seconds') != 31 or p.get('target_nr_cpus') != 1 or
             p.get('target_cpu_limit') is not None):
         raise ValueError('Exact maintained-kernel RAM-boot policy required')
     image = a.kernel_package / 'Image'
     validate_source(p, a.source_package, a.linked_report, image, a.capture_report, a.helper, a.authorization)
+    baseline = a.baseline_kernel_package if display else a.kernel_package
     files = {a.kernel_package / 'resolved.config': 'target_config_sha256',
-             a.kernel_package / 'draft.dtb': 'target_base_dtb_sha256',
-             a.kernel_package / 'kernel-manifest.json': 'target_kernel_manifest_sha256',
-             a.kernel_package / 'valethon_mailbox.o': 'guarded_mailbox_object_sha256',
+             baseline / 'draft.dtb': 'target_base_dtb_sha256',
+             a.kernel_package / ('manifest.json' if display else 'kernel-manifest.json'): 'target_kernel_manifest_sha256',
+             baseline / 'valethon_mailbox.o': 'guarded_mailbox_object_sha256',
              a.initramfs_package / 'report.json': 'target_initramfs_report_sha256',
              a.initramfs_package / 'initramfs.cpio.gz': 'target_initramfs_sha256',
              a.initramfs_package / 'trial-nonce-private.bin': 'target_nonce_sha256',
@@ -50,7 +54,12 @@ def validate(a):
     for path, key in files.items():
         if digest(path) != p[key]:
             raise ValueError('Reviewed ACK artifact differs: ' + key)
-    if (p['target_image_sha256'] != IMAGE_SHA or p['target_config_sha256'] != CONFIG_SHA or
+    target_image, target_config = IMAGE_SHA, CONFIG_SHA
+    if display:
+        from display_kernel_contract import verify as verify_kernel
+        checked = verify_kernel(a.kernel_package)
+        target_image, target_config = checked['image_sha256'], checked['config_sha256']
+    if (p['target_image_sha256'] != target_image or p['target_config_sha256'] != target_config or
             p['target_base_dtb_sha256'] != DRAFT_DT_SHA or
             p['guarded_mailbox_object_sha256'] != '5b1dbcea1796d3a735d0e5f4cb69f80d0b65ab05ab1be5e362a8f2e04032462a'):
         raise ValueError('Pinned full ACK draft required')
@@ -60,7 +69,9 @@ def validate(a):
     if q.get('entry_source_sha256') != digest(ROOT / 'projects/firetabs-android/native-kexec/ack_trampoline.S'):
         raise ValueError('Entry assembly changed after instruction qualification')
     if combined:
-        if cinit:
+        if display:
+            from verify_display_bundle import verify
+        elif cinit:
             if storage:
                 from verify_ack_storage_bundle import verify
             elif ramfix:
@@ -73,7 +84,9 @@ def validate(a):
         if reference is None or digest(reference / 'report.json') != p['combined_reference_report_sha256']:
             raise ValueError('Exact prequalified combined reference required')
         verify_options = dict(nonce=(a.initramfs_package / 'trial-nonce-private.bin').read_bytes()) if cinit else {}
-        if storage:
+        if display:
+            result = verify(reference / 'report.json', a.kernel_package, baseline, a.initramfs_package, a.fdtget, **verify_options)
+        elif storage:
             result = verify(reference / 'report.json', a.kernel_package, a.initramfs_package, a.fdtget, **verify_options)
         else:
             result = verify(reference / 'report.json', a.kernel_package, a.fdtget, **verify_options)
@@ -133,6 +146,7 @@ def run(a):
     bundle = a.output / 'target-private'; client = a.output / 'client-private'
     k, i = a.kernel_package, a.initramfs_package
     nonce = (i / 'trial-nonce-private.bin').read_bytes()
+    display = getattr(a, 'display_functional', False)
     storage = getattr(a, 'storage_readonly', False)
     ramfix = getattr(a, 'ramfix', False)
     cinit = ramfix or getattr(a, 'cinit', False)
@@ -154,7 +168,13 @@ def run(a):
             from prepare_ack_combined_bundle import prepare as builder
         reference = read(a.combined_reference / 'report.json')
         extra = dict(system_map=(k / 'System.map').read_text(), trial_id=reference['trial_id'])
-    m = builder((inputs / 'live.dtb').read_bytes(), (inputs / 'iomem.txt').read_text(),
+    if display:
+        from prepare_display_bundle import prepare as display_builder
+        m = display_builder((inputs / 'live.dtb').read_bytes(), (inputs / 'iomem.txt').read_text(),
+                            k, a.baseline_kernel_package, i, linked, bundle, a.fdtget, a.fdtput,
+                            trial_id=reference['trial_id'])
+    else:
+        m = builder((inputs / 'live.dtb').read_bytes(), (inputs / 'iomem.txt').read_text(),
                 (k / 'draft.dtb').read_bytes(), (k / 'Image').read_bytes(), (k / 'resolved.config').read_bytes(),
                 (i / 'initramfs.cpio.gz').read_bytes(), read(i / 'report.json'), nonce, linked,
                 bundle, a.fdtget, a.fdtput, **extra)
@@ -182,17 +202,18 @@ def run(a):
         raise ValueError('Staged full ACK bundle differs')
     jump_options = dict(combined_kernel_package=a.kernel_package) if combined else {}
     if storage:jump_options['storage_component'] = a.initramfs_package
+    if display:jump_options.update(display_component=i, baseline_kernel_package=a.baseline_kernel_package)
     capture = read(a.capture_report)
     before = jump(d, destination, bundle / 'report.json', client / 'build-result.json', linked,
                   a.output / 'jump-preflight', nonce, capture, **jump_options)
     if before.get('complete') is not True:
         raise ValueError('ACK native preflight failed')
     auth = a.output / 'jump-authorization-private.json'
-    child_scope = 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
-    child_extra = dict(combined_verifier_sha256=digest(ROOT / ('scripts/verify_ack_storage_bundle.py' if storage else 'scripts/verify_ack_ramfix_bundle.py' if ramfix else 'scripts/verify_ack_cinit_bundle.py' if cinit else 'scripts/verify_ack_combined_bundle.py'))) if combined else {}
+    child_scope = 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    child_extra = dict(combined_verifier_sha256=digest(ROOT / ('scripts/verify_display_bundle.py' if display else 'scripts/verify_ack_storage_bundle.py' if storage else 'scripts/verify_ack_ramfix_bundle.py' if ramfix else 'scripts/verify_ack_cinit_bundle.py' if cinit else 'scripts/verify_ack_combined_bundle.py'))) if combined else {}
     private(auth, dict(scope=child_scope, runner_sha256=digest(ROOT / 'scripts/run_ack_native_jump.py'),
                        manifest_sha256=digest(bundle / 'report.json'), client_sha256=c['client_sha256'],
-                       target_image_sha256=m['target_image_sha256'], target_config_sha256=CONFIG_SHA,
+                       target_image_sha256=m['target_image_sha256'], target_config_sha256=m['target_config_sha256'],
                        target_nonce_sha256=sha(nonce), source_config_sha256=p['native_config_sha256'],
                        source_capture_report_sha256=sha(json.dumps(capture, sort_keys=True).encode()),
                        source_capture_manager_sha256=digest(ROOT / 'scripts/source_usb_console_trial.py'),
@@ -217,6 +238,8 @@ if __name__ == '__main__':
     mode.add_argument('--ramfix', action='store_true')
     parser.add_argument('--usb-end-to-end', action='store_true')
     parser.add_argument('--storage-readonly', action='store_true')
+    parser.add_argument('--display-functional', action='store_true')
+    parser.add_argument('--baseline-kernel-package', type=Path)
     parser.add_argument('--combined-reference', type=Path)
     parser.add_argument('--combined-qualification', type=Path)
     a = parser.parse_args()

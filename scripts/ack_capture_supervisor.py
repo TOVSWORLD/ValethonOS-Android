@@ -30,6 +30,9 @@ def worker(control):
   if profile['scope']=='ack-storage-readonly-capture-1':
    from receive_storage_status import receive_fd
    result=capture(profile,nonce,Path(inputs['output']),ready=ready,receiver=receive_fd)
+  elif profile['scope']=='ack-display-functional-capture-1':
+   from receive_display_status import receive_fd
+   result=capture(profile,nonce,Path(inputs['output']),ready=ready,receiver=receive_fd)
   else:
    result=capture(profile,nonce,Path(inputs['output']),ready=ready)
  except BaseException as e:

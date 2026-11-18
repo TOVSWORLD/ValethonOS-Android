@@ -56,7 +56,9 @@ def inspect_archive(raw, entries, *, storage_readonly=False):
     return [entry[0] for entry in entries]
 
 
-def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.lld-18', compiler_kind='clang', *, storage_readonly=False):
+def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.lld-18', compiler_kind='clang', *, storage_readonly=False, display_functional=False):
+    if display_functional and not storage_readonly:
+        raise ValueError('Display variant requires the enforcing read-only policy')
     if output.exists() or output.is_symlink():
         raise ValueError('Fresh private output directory required')
     policy = policy_file.read_bytes()
@@ -102,6 +104,8 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
                '-Os', '-Wall', '-Wextra', '-Werror', '-ffreestanding', '-fno-builtin',
                '-fno-stack-protector', '-mgeneral-regs-only', '-Wl,--build-id=none,-e,_start',
                '-I', str(output), '-o', str(elf), str(SOURCE / ('storage_init.c' if storage_readonly else 'lab_init.c')), str(SOURCE / 'memory.c')]
+    if display_functional:
+        command += ['-DVALETHON_DISPLAY_TEST=1']
     if storage_readonly:
         command += [str(ROOT / 'projects/firetabs-android/native-kexec/combined_sha256.c')]
     result = subprocess.run(command, capture_output=True, text=True, timeout=90)
@@ -127,8 +131,10 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
         if path.is_file():
             path.chmod(0o400 if path.name in ['trial-nonce-private.bin', 'lab_inputs.h'] else 0o600)
     final = {
-        'scope': 'Separate private ' + ('read-only storage' if storage_readonly else 'log-bringup') + ' component build only; not a boot image or device test',
+        'scope': 'Separate private ' + ('functional display' if display_functional else 'read-only storage' if storage_readonly else 'log-bringup') + ' component build only; not a boot image or device test',
         'storage_readonly_profile': storage_readonly,
+        'display_functional_profile': display_functional,
+        'storage_probe_enabled': storage_readonly and not display_functional,
         'storage_sha_source_sha256': sha((ROOT / 'projects/firetabs-android/native-kexec/combined_sha256.c').read_bytes()) if storage_readonly else None,
         'elf': inspection, 'archive_entries': names,
         'policy_sha256': sha(policy), 'nonce_sha256': sha(nonce),
@@ -160,9 +166,10 @@ def main():
     parser.add_argument('--linker', default='ld.lld-18')
     parser.add_argument('--compiler-kind', choices=['clang','gcc'], default='clang')
     parser.add_argument('--storage-readonly', action='store_true')
+    parser.add_argument('--display-functional', action='store_true')
     args = parser.parse_args()
     try:
-        report = build(args.policy, args.policy_report, args.output, args.compiler, args.linker, args.compiler_kind, storage_readonly=args.storage_readonly)
+        report = build(args.policy, args.policy_report, args.output, args.compiler, args.linker, args.compiler_kind, storage_readonly=args.storage_readonly, display_functional=args.display_functional)
     except (ValueError, KeyError, OSError, subprocess.SubprocessError):
         parser.exit(2, 'Lab component build stopped; inspect private output if created.\n')
     print(json.dumps(report, indent=2))

@@ -1,6 +1,7 @@
 import io
 import json
 import subprocess
+import struct
 import sys
 import tempfile
 import unittest
@@ -124,6 +125,32 @@ class ACKJump(unittest.TestCase):
         self.assertTrue(r['fresh_original_android_return']); self.assertTrue(r['complete'])
         self.assertEqual((r['load_attempts'], r['jump_requests']), (1, 1))
         self.assertFalse(r['hardware_deadline_qualified'])
+
+    def test_display_banner_status_does_not_claim_visible_pixels(self):
+        self.manifest.update(target_kind='ack-linux-display-v7', internal_emmc_only=True)
+        self.write_manifest()
+        client = json.loads(self.c.read_text())
+        client['target_kind'] = 'ack-linux-display-v7'
+        self.c.write_text(json.dumps(client))
+        self.auth.update(scope='ack-linux-native-display-functional-jump-7',
+                         manifest_sha256=runner.sha(self.m.read_bytes()),
+                         combined_verifier_sha256=runner.sha(Path('scripts/verify_display_bundle.py').read_bytes()))
+        self.a.write_text(json.dumps(self.auth))
+        self.d.wire = (b'VDISP001' + NONCE +
+                       struct.pack('<IIiIIIIIQIi',1,3,0,7,800,1280,32,3200,4096000,13,0) +
+                       b'mediatekdrmfb' + bytes(19))
+        self.console = b'old record; no kernel log required'
+        with patch('display_kernel_contract.verify', return_value={
+                'config_sha256': TARGET_CONFIG, 'target_release': runner.RELEASE}), \
+                patch('verify_display_bundle.verify') as verify:
+            result = self.invoke(combined_kernel_package=self.p, display_component=self.p,
+                                 baseline_kernel_package=self.p)
+            verify.assert_called_once_with(self.m,self.p,self.p,self.p,nonce=NONCE)
+        self.assertTrue(result['display_banner_status_verified'])
+        self.assertTrue(result['complete'])
+        self.assertFalse(result['physical_pixels_confirmed'])
+        self.assertTrue(result['owner_visual_confirmation_pending'])
+        self.assertEqual((result['load_attempts'],result['jump_requests']),(1,1))
 
     def test_fresh_pid1_usb_identity_is_a_milestone_without_log_payload(self):
         self.d.wire = b'VLOG0002' + NONCE

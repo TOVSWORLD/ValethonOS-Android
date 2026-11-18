@@ -24,8 +24,9 @@ stay inside the first outcome; do not promote them to more minor milestones.
 
 The DRM master/gamma/mutex port and TPV-only panel are implemented;999 tests pass.
 Working boot data/source resolve TPV/MP, power43/reset83 and LP8557 register-based
-backlight. Source tables match compiled legacy C. Full hosted compilation,
-complete DT dependency closure and a fresh functional RAM-test package remain.
+backlight. Source tables match compiled legacy C. Full hosted compilation and the generic enforcing-policy VM regression passed.
+DT dependency closure and a display-only PID1/RAM bundle are implemented; final
+controller/package qualification and the attended visual test remain.
 No display pass is claimed; no new physical test has run. Existing source pins,
 implementation and build contract are in
 [display integration](../../projects/firetabs-android/kernel/display-port/README.md).
