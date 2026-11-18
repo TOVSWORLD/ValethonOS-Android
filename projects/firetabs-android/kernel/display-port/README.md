@@ -1,5 +1,14 @@
 # MT8163 Douglas display integration
 
+Latest runtime correction: scope8 captured233 target kmsg records without loss
+and returned original Android with Power untouched. LP8557 pre-init fails
+ENXIO. Returned working OS ALSO leaves that node unbound: actual backlight is
+leds-mt65xx with saved DT mode5, mapped in pinned source to DISP_PWM0. The
+mandatory LP8557 panel dependency is wrong. Next correction is builtin PWM
+backlight plus its DT path; the current Image has BACKLIGHT_PWM=m. Do not
+requalify logging or claim a display pass. working-backlight-path-correction.json
+records the active-path proof; earlier LP8557 assumptions below are historical.
+
 Current runtime: full hosted build44253355044 passed. Scope7 booted the
 maintained kernel/enforcing PID1 and returned original Android automatically,
 but fb0 never appeared; owner saw no banner/bands and left Power untouched.

@@ -20,6 +20,29 @@ SELinux enforcing, USB/ADB and a verified return path. This is a sequence of
 outcomes, not a promise of three physical tests. Provider source/build steps
 stay inside the first outcome; do not promote them to more minor milestones.
 
+## Actual scope8 display diagnosis — November18,2026
+
+Fresh VDISP002 plus VKMSG001 delivered233 target-kernel records/16817 bytes,
+caught up with no truncation/ring loss/read error. Error capture is achieved;
+no separate logging milestone or repeat is needed. fb0 still timed out.
+Concrete target error: lp855x0-002c cannot read register0x00, returns-6/ENXIO,
+then fails pre-init/config. Backlight registration blocks the panel path.
+Underlying I2C/power cause is NOT yet established; do not claim a rail fix.
+Source boot/restore passed; original Android returned with boot/config/recovery
+and normal ADB checks passing. Owner confirmed Power untouched and no banner/bands; automatic return observed.
+Scope8 consumed; one source boot/restore and one load/jump, no recovery write
+or automatic retry. New trial requires concrete correction/fresh qualification.
+Private runtime out/display-errors-trial-runtime-1; parsed errors in its
+inspection-private directory. Public receipt error-capture-runtime-result.json.
+Read-only returned-OS check:0-002c device exists but has NO bound driver.
+lcd-backlight instead binds leds-mt65xx. Saved actual working DT led_mode=5;
+pinned working enum/callback proves CUST_BLS_PWM -> disp_bls_set_backlight ->
+DISP_PWM0,1024 period counts/divider0. Mandatory LP8557 panel dependency is a
+confirmed implementation error, not proof the working backlight rail is absent.
+Next correction: use display-PWM backlight and make BACKLIGHT_PWM builtin
+(current display Image has it modular). Keep existing error capture, no logging
+requalification. Working-backlight-path-correction.json pins source/observations.
+
 ## Display error-capture correction — November18,2026
 
 Owner authorized fixing the actual display attempt's missing target errors.

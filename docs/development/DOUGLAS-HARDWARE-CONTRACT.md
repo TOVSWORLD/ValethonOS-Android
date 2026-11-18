@@ -8,6 +8,18 @@ read-only eMMC are now observed on this tablet; display remains unqualified.
 The current OS loading animation is a working display/backlight/graphics
 reference. Use its pinned board/driver setup when comparing the maintained path.
 
+## Active backlight correction — November18,2026
+
+Runtime/saved-DT/source comparison disproves the earlier assumption that the
+LP8557 node must drive this board. Returned working Android leaves0-002c unbound
+and uses lcd-backlight/leds-mt65xx; actual working DT led_mode5 maps to
+CUST_BLS_PWM/disp_bls_set_backlight/DISP_PWM0. The declared LP8557 DT node is not
+evidence of an active driver. Candidate's mandatory LP8557 backlight phandle
+therefore blocks panel registration unnecessarily. Correct to the working PWM
+path, retaining panel power ownership and source-backed timing. Maintained
+BACKLIGHT_PWM is currently modular, so a builtin kernel build is required.
+[Source and read-only binding proof](../../evidence/display-pipeline-source/working-backlight-path-correction.json).
+
 ## How to use this reference
 
 Start with the relevant subsystem below, then inspect its exact working-source
