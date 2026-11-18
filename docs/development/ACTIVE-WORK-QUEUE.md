@@ -1,19 +1,18 @@
-# Current work — tablet Linux C-entry milestone passed, November 17, 2026
+# Current work — full C-init/PID1 candidate ready, November17,2026
 
-[Runtime receipt](../../evidence/independent-recovery/ack-combined-runtime-result.json):
-full relocated padded Image integrity and all five actual Linux checkpoints
-through MMU enable/virtual entry/start_kernel passed on Douglas. One source
-boot/restore and one load/jump consumed; no retry. Original Android returned on a
-different completed boot; exact original boot/config, unchanged recovery and
-normal ADB verified. Owner confirmed Power untouched: automatic return established; reset cause unqualified.
-Complete kernel initialization and enforcing PID1/target USB remain unproven.
+[Prepared next attempt](ACK-CINIT-TRIAL.md), [plan](NEXT-MILESTONE-PLAN.md),
+[memory](PROJECT-MEMORY.md). Prior hardware milestone remains passed: full Image
+integrity and Linux entry/MMU/start_kernel on Douglas, followed by verified
+original Android return with Power untouched. Complete initialization/PID1/USB
+remain unproven. Prior attempt consumed; no retry.
 
-Next: inspect exact pinned early C initialization after start_kernel, using the
-working-source hardware contract. The retained trace ends at that checkpoint;
-do not call it the exact fault location or repeat pre-entry logging gates.
-Preserve #344/#346/#348 history and this milestone. UART is supporting work.
-See [memory](PROJECT-MEMORY.md), [plan](NEXT-MILESTONE-PLAN.md),
-[completed trial](ACK-COMBINED-TRIAL.md).
+New full Image uses a RAM-only permanent early console that survives paging and
+init-memory cleanup. Both VM modes reach /init and pass enforcing PID1; all12
+qualification controls and958 regression tests pass without skips. One fresh
+protected source boot/restore and RAM jump is the next owner-attended action,
+under cinit scope3. No new tablet commands ran during preparation. UART is
+supporting work. Do not reinterpret an absent early banner as a proven fault
+location, re-open entry/MMU tests, or re-ask equipment/history questions.
 
 # Historical selection — UART bench preparation, November 16, 2026
 

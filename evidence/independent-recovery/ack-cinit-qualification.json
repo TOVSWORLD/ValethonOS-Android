@@ -1,0 +1,37 @@
+{
+  "scope": "Offline exact C-init Image/console/integrity qualification; no tablet commands",
+  "all_tests_passed": true,
+  "tests_skipped": 0,
+  "checks": {
+    "full_padded_integrity": true,
+    "corrupt_first_page": true,
+    "corrupt_final_padding": true,
+    "console_small": true,
+    "console_wrap": true,
+    "console_oversized": true,
+    "console_invalid_sig": true,
+    "console_invalid_start": true,
+    "console_invalid_size": true,
+    "setup_valid": true,
+    "setup_invalid_signature": true,
+    "exact_image_both_vm_modes_pid1_after_init_free": true
+  },
+  "image_sha256": "93722d1fd0d6d7f53b351fba8508bce7d1923fb21a9e92a5911a2acfc4742476",
+  "metadata_sha256": "6154242447445ec951b7472cea75424dc4b987d0d4a534fd3abdd4058df82e41",
+  "source_sha256": {
+    "scripts/build_ack_cinit_console.py": "0597dcfc82bd13a9986c7fac589c64e6256fb121873420ac6cb1814b867be800",
+    "scripts/prepare_ack_cinit_bundle.py": "4603a6ab57d49a046fd1cb1f864f987744e822dd2fa569dd1ce5198784f20eb7",
+    "scripts/verify_ack_cinit_bundle.py": "c4a72bdd987d16c1f544b55645a9080ec87f1931d0f824fc1ccb4deaed0bce10",
+    "scripts/qualify_ack_cinit.py": "2b3befa413311f15216b471bb7617f1ff9f6c2eaf0d2dd66ce2063946691205d",
+    "scripts/validate_ack_cinit_vm.py": "9e7c921b0fb20d1a1cfc038e52bc046f1147efb56dd83d351811b5ed3b3355a5",
+    "scripts/build_ack_combined_entry.py": "86b37036e12f0163c07abe6739e396d5ea00424049673e17e6a85f53e20b7071",
+    "scripts/qualify_ack_combined.py": "148b86f8b811cbb6a2634688adb57b2be432622f6886bdf90e83e9c4aee8d156",
+    "projects/firetabs-android/native-kexec/combined_sha256.c": "16a7c944cc14e9b3d6f30452379c2f136c35e13d5b204eddcaf9a75e9f4a0c26"
+  },
+  "vm_reports_sha256": [
+    "0677199d58e0ab438c12e2617687ad008f8cc3f46f8d9bb290718cdd2c1ab777",
+    "23c4b813ae3338cc5b04227a4c6b19c5277d341716247a5c9d0a379584de293e"
+  ],
+  "hardware_execution": false,
+  "target_pid1_proven": false
+}

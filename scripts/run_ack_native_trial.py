@@ -24,9 +24,10 @@ SCOPE_TWO_STAGE = 'ack-linux-native-two-stage-1'
 
 def validate(a):
     p = read(a.policy)
-    combined = getattr(a, 'combined', False)
-    required_scope = 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
-    required_kind = 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    cinit = getattr(a, 'cinit', False)
+    combined = getattr(a, 'combined', False) or cinit
+    required_scope = 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
+    required_kind = 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
     if (p.get('scope') != required_scope or p.get('target_kind') != required_kind or
             p.get('target_hardware_deadline_seconds') != 31 or p.get('target_nr_cpus') != 1 or
             p.get('target_cpu_limit') is not None):
@@ -54,11 +55,15 @@ def validate(a):
     if q.get('entry_source_sha256') != digest(ROOT / 'projects/firetabs-android/native-kexec/ack_trampoline.S'):
         raise ValueError('Entry assembly changed after instruction qualification')
     if combined:
-        from verify_ack_combined_bundle import verify
+        if cinit:
+            from verify_ack_cinit_bundle import verify
+        else:
+            from verify_ack_combined_bundle import verify
         reference = getattr(a, 'combined_reference', None)
         if reference is None or digest(reference / 'report.json') != p['combined_reference_report_sha256']:
             raise ValueError('Exact prequalified combined reference required')
-        result = verify(reference / 'report.json', a.kernel_package, a.fdtget)
+        verify_options = dict(nonce=(a.initramfs_package / 'trial-nonce-private.bin').read_bytes()) if cinit else {}
+        result = verify(reference / 'report.json', a.kernel_package, a.fdtget, **verify_options)
         if result['instrumented_image_sha256'] != p['combined_target_image_sha256']:
             raise ValueError('Qualified Image differs')
         qualification = read(a.combined_qualification)
@@ -115,11 +120,15 @@ def run(a):
     bundle = a.output / 'target-private'; client = a.output / 'client-private'
     k, i = a.kernel_package, a.initramfs_package
     nonce = (i / 'trial-nonce-private.bin').read_bytes()
-    combined = getattr(a, 'combined', False)
+    cinit = getattr(a, 'cinit', False)
+    combined = getattr(a, 'combined', False) or cinit
     builder = prepare
     extra = {}
     if combined:
-        from prepare_ack_combined_bundle import prepare as builder
+        if cinit:
+            from prepare_ack_cinit_bundle import prepare as builder
+        else:
+            from prepare_ack_combined_bundle import prepare as builder
         reference = read(a.combined_reference / 'report.json')
         extra = dict(system_map=(k / 'System.map').read_text(), trial_id=reference['trial_id'])
     m = builder((inputs / 'live.dtb').read_bytes(), (inputs / 'iomem.txt').read_text(),
@@ -155,8 +164,8 @@ def run(a):
     if before.get('complete') is not True:
         raise ValueError('ACK native preflight failed')
     auth = a.output / 'jump-authorization-private.json'
-    child_scope = 'ack-linux-native-combined-jump-2' if combined else SCOPE
-    child_extra = dict(combined_verifier_sha256=digest(ROOT / 'scripts/verify_ack_combined_bundle.py')) if combined else {}
+    child_scope = 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    child_extra = dict(combined_verifier_sha256=digest(ROOT / ('scripts/verify_ack_cinit_bundle.py' if cinit else 'scripts/verify_ack_combined_bundle.py'))) if combined else {}
     private(auth, dict(scope=child_scope, runner_sha256=digest(ROOT / 'scripts/run_ack_native_jump.py'),
                        manifest_sha256=digest(bundle / 'report.json'), client_sha256=c['client_sha256'],
                        target_image_sha256=m['target_image_sha256'], target_config_sha256=CONFIG_SHA,
@@ -178,7 +187,9 @@ if __name__ == '__main__':
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--lab-package', required=True)
     parser.add_argument('--authorization', type=Path)
-    parser.add_argument('--combined', action='store_true')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--combined', action='store_true')
+    mode.add_argument('--cinit', action='store_true')
     parser.add_argument('--combined-reference', type=Path)
     parser.add_argument('--combined-qualification', type=Path)
     a = parser.parse_args()

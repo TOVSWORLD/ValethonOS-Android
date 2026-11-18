@@ -1,0 +1,18 @@
+{
+  "scope": "Exact C-init Image generic Cortex-A53 VM; no tablet/physical USB qualification",
+  "passed": true,
+  "image_sha256": "93722d1fd0d6d7f53b351fba8508bce7d1923fb21a9e92a5911a2acfc4742476",
+  "vm_initramfs_sha256": "5c10cf6ff218b18227f7310859bb33e37afe08f7ff4060816893f142a1e8978b",
+  "virtualization": "on",
+  "fresh_console_identity": true,
+  "run_init_seen": true,
+  "enforcing_pid1_filesystem_probe": true,
+  "permanent_callback_survived_init_memory_free": true,
+  "metadata_integrity_stub_executed": false,
+  "hardware_execution": false,
+  "disk_attached": false,
+  "network_attached": false,
+  "tablet_commands": false,
+  "raw_log_sha256": "b8e53515570d09f60b3d70a11195f49686e17dd485877f0b9b1602dec0a01a8d",
+  "elapsed_seconds": 7.07
+}

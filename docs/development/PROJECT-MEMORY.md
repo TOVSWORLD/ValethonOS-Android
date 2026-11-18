@@ -19,8 +19,35 @@ precise reset cause remains unqualified.
 
 Current execution plan: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md).
 The combined hardware attempt is complete and consumed. No automatic retry.
-UART is not a prerequisite. Next work is the early C initialization boundary
-between the proven start_kernel checkpoint and the absent attributed banner/PID1.
+UART is not a prerequisite. The next full-kernel/PID1 candidate is now
+offline-qualified with a permanent retained early console; see below.
+
+## Prepared C-init/PID1 candidate
+
+[Exact trial](ACK-CINIT-TRIAL.md), scope ack-linux-cinit-two-stage-3. Full Image
+93722d1fd0d6d7f53b351fba8508bce7d1923fb21a9e92a5911a2acfc4742476.
+Both VM modes reach /init with enforcing PID1 probe and retained run-init output
+after init-memory cleanup. All12 offline controls and958 regression tests pass.
+Permanent executable padding hosts a RAM-only early console callback; one
+8250 early setup detour installs it without UART register operations. Existing
+fixmap covers one reserved4KiB console page; ring4084 bytes, full fresh PID1
+identity each write, bounded lengths/header checks and preserved registers/DAIF.
+Target ramoops params are removed to avoid a conflicting writer. keep_bootcon,
+initcall_debug/loglevel8/ignore_loglevel capture complete-kernel progress. The
+previous five entry hooks/Normal-NC identity map are absent. Existing full padded
+Image SHA and31-second reset deadline stay. No storage or recovery enablement.
+
+The missing old banner did NOT bound a fault to pre-banner C code: normal printk
+was not retained that early. SHADOW_CALL_STACK is disabled in the pinned config;
+do not present shadow-stack failure as a diagnosis. A specific stopping C
+instruction/driver remains unknown. This candidate runs the complete kernel and
+fresh enforcing PID1, not an isolated logger/payload. Hardware PID1/USB is unproven.
+
+Private reference: out/recovery-linux-pivot/ack-cinit-candidate-2; fresh userspace:
+ack-cinit-initramfs-1; prepared runner: run-ack-cinit-trial-1-private.py in that
+same parent. No new tablet commands ran during this preparation. Obtain owner
+presence and fresh cinit authorization for one source boot/restore and one jump;
+never reuse the completed combined trial's consumed approval.
 
 ## November 17 hardware milestone
 

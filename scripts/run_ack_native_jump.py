@@ -26,12 +26,17 @@ def run(device, lab_package, manifest, client_report, linked, output,
         nonce, source_report, authorization=None, *, combined_kernel_package=None):
     m = json.loads(manifest.read_text()); c = json.loads(client_report.read_text())
     combined = combined_kernel_package is not None
-    kind = 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
-    scope = 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    cinit = combined and m.get('target_kind') == 'ack-linux-cinit-v3'
+    kind = 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    scope = 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
     image_sha = m.get('target_image_sha256') if combined else IMAGE_SHA
     if combined:
-        from verify_ack_combined_bundle import verify
-        verify(manifest, combined_kernel_package)
+        if cinit:
+            from verify_ack_cinit_bundle import verify
+            verify(manifest, combined_kernel_package, nonce=nonce)
+        else:
+            from verify_ack_combined_bundle import verify
+            verify(manifest, combined_kernel_package)
     if m.get('offline_preview') is True or m.get('target_kind') != kind:
         raise ValueError('Fresh maintained-kernel RAM bundle required')
     if (m.get('target_image_sha256') != image_sha or m.get('target_config_sha256') != CONFIG_SHA or
@@ -77,7 +82,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
                     target_hardware_deadline_seconds=31, boot_writes_allowed=False,
                     post_jump_reboot_commands_allowed=False, bounded_read_only_return_poll_allowed=True)
     if combined:
-        expected['combined_verifier_sha256'] = sha((here / 'verify_ack_combined_bundle.py').read_bytes())
+        expected['combined_verifier_sha256'] = sha((here / ('verify_ack_cinit_bundle.py' if cinit else 'verify_ack_combined_bundle.py')).read_bytes())
     if authorization is not None:
         a = json.loads(authorization.read_text())
         if any(type(a.get(k)) is not type(v) or a.get(k) != v for k, v in expected.items()):
@@ -127,7 +132,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
         if any(p['marker_matches'] for p in prior):
             raise ValueError('ACK target nonce already present; refuse replay')
         if combined:
-            prefix = ('FIRETABS_ACK_COMBINED_V2 nonce=' + trial).encode()
+            prefix = (('FIRETABS_CINIT_V3 nonce=' + nonce.hex()) if cinit else ('FIRETABS_ACK_COMBINED_V2 nonce=' + trial)).encode()
             if any(prefix in p.read_bytes() for p in (output / 'pstore-before-private').iterdir() if p.is_file()):
                 raise ValueError('Combined trial marker already present; refuse replay')
             r['combined_markers_absent_before_load'] = True
@@ -202,13 +207,22 @@ def run(device, lab_package, manifest, client_report, linked, output,
                     data = (retained / p['file']).read_bytes()
                     entry_seen |= handoff_marker(trial) in data
                     if combined:
-                        from verify_ack_combined_bundle import assess
-                        combined_records.append(assess(data, trial))
+                        if cinit:
+                            from verify_ack_cinit_bundle import assess
+                            combined_records.append(assess(data, nonce))
+                        else:
+                            from verify_ack_combined_bundle import assess
+                            combined_records.append(assess(data, trial))
                     matches.append(target_token in data and b'Linux version ' + RELEASE.encode() + b' ' in data)
             if combined:
                 r['combined_retained_assessments'] = combined_records
-                r['linux_c_entry_proven'] = any(v['linux_c_entry_proven'] for v in combined_records)
-                r['full_image_integrity_proven'] = any(v['full_image_integrity_proven'] for v in combined_records)
+                if cinit:
+                    r['cinit_retained_assessments'] = combined_records
+                    r['cinit_console_proven'] = any(v['fresh_console_identity'] for v in combined_records)
+                    r['run_init_seen'] = any(v['run_init_seen'] for v in combined_records)
+                else:
+                    r['linux_c_entry_proven'] = any(v['linux_c_entry_proven'] for v in combined_records)
+                    r['full_image_integrity_proven'] = any(v['full_image_integrity_proven'] for v in combined_records)
             r.update(after_records=found, retained_kernel_boot_proven=any(matches),
                      retained_handoff_marker_seen=entry_seen,
                      target_kernel_boot_proven=any(matches), fresh_original_android_return=True,

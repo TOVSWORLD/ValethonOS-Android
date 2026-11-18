@@ -7,21 +7,29 @@ MMU transition, virtual entry and start_kernel on Douglas.
 **Next goal:** finish early kernel initialization and reach controlled enforcing
 PID1, then prove its identity on the target USB endpoint.
 
-## Work from the proven boundary
+## Prepared next attempt
 
-The retained trace ends at the start_kernel checkpoint; it does not identify the
-following fault instruction. There is no attributed Linux banner or target PID1
-wire. Analyze the pinned start_kernel prologue and pre-banner callees, stack and
-shadow-stack initialization, CPU feature alternatives and early exception path.
-Compare those with the working-source boot contract; choose the next change
-from a concrete violated contract or one bounded discriminating C-init test.
-Do not return to relocation, stub-only, entry or MMU experiments already passed.
-UART investigation remains supporting work, not a prerequisite.
+[Full C-init/PID1 trial](ACK-CINIT-TRIAL.md): the exact maintained Image now has a
+RAM-only early console whose fixmap and permanent text callback survive paging
+and init-memory cleanup. It retains initcall/error output during a complete
+kernel/PID1 attempt, with fresh identity on every write. The old entry hooks are
+absent; no driver fault or exact stopping instruction is yet established.
 
-Use the [hardware contract](DOUGLAS-HARDWARE-CONTRACT.md) and exact ACK sources.
-No new tablet test is currently authorized by the consumed combined approval.
-Prepare and offline-validate any next candidate before requesting owner presence.
-Do not infer a driver/USB fault before establishing execution reaches it.
+Both Cortex-A53 VM boot modes reached /init, passed the enforcing PID1 probe and
+retained the run-init message after init-memory cleanup. All12 offline instruction/
+corruption/console controls and958 regression tests pass without skips. The
+[preparation receipt](../../evidence/independent-recovery/ack-cinit-preparation.json)
+binds the exact reference, Image, policy and load-only client. This is offline
+qualification, not a Douglas PID1/USB pass. No tablet commands ran in preparation.
+
+Next action: owner-attended single protected source boot/restore and one RAM
+load/jump, under a fresh ack-linux-cinit-two-stage-3 authorization. Original boot
+restored/read back before jumping, recovery never written, existing31-second
+reset deadline, bounded read-only return checks and no retry. Prior approvals
+stay consumed. Success remains the fresh enforcing PID1 USB wire witness.
+If unsuccessful, collect once and use the attributed last initcall/exception or
+kernel messages to choose the next implementation change. UART is supporting
+work, not a prerequisite. Do not repeat an unchanged black-screen trial.
 
 ## Recovery and history
 
