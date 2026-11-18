@@ -1,6 +1,6 @@
 # FireTabs project memory
 
-Updated November 17, 2026. This is the compact resume record, versioned with the
+Updated November 18, 2026. This is the compact resume record, versioned with the
 project. It does not claim to modify an account-wide ChatGPT memory service.
 New user instructions and newer verified results supersede this snapshot.
 
@@ -23,8 +23,12 @@ Owner confirmed Power untouched throughout the latest attempt; automatic Android
 return is established, as for the prior corrected-RAM and C-init attempts. Exact reset cause remains unqualified. One source
 boot/restore and one load/jump consumed per attempt, no automatic retries.
 
-**Next product work:** read-only internal eMMC bring-up under #22, then
-maintained Android userspace/init/adbd. Complete log-record transfer is a
+**Read-only internal eMMC is now achieved:** the maintained kernel read the
+original16MiB p5 boot partition, matched its SHA-256 and sent fresh VSTORE01
+status over USB. Original Android then returned with installation checks and
+normal ADB passing. [Storage runtime receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json).
+**Next product work:** #18 clock/reset dependencies, then #19/#20 pin/power
+for display/touch/graphics and maintained Android userspace under #333/#24. Complete log-record transfer is a
 non-blocking follow-up, not another proof gate.
 The capture has40 bytes, zero complete records and no terminal frame. This does
 not erase the fresh PID1 USB identity. The old target_pid1_proven metric bundles
@@ -35,9 +39,34 @@ physical-writer/gated-source proof basis.
 Owner correction: do not get stuck on logging to prove working components.
 No logging-only tablet gate or repeated kernel/PID1/USB-enumeration proof. Next
 is an integrated read-only storage/status result using the existing USB path,
-with a fresh package/owner presence if a hardware attempt is needed. All prior authorizations remain consumed.
+with a fresh package/owner presence if a hardware attempt is needed. Storage
+scope6 and all prior authorizations are consumed; never replay them.
 
-## Read-only eMMC candidate ready offline — November18,2026
+## Read-only eMMC hardware milestone — November18,2026
+
+[Actual receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json).
+One source boot/restore and one native load/jump completed. Enforcing storage
+PID1 read exactly16777216 bytes from the immutable block179:5 p5 node using
+O_RDONLY, checked EOF and matched the original boot SHA-256. Fresh120-byte
+VSTORE01 result independently decoded; selected physical USB endpoint, stage5,
+flags31, error0. No block write/ioctl or userdata mount. Original p5 was restored
+and read back before jump; recovery untouched. A different completed Android
+boot returned with original boot/config/recovery and normal ADB checks passing.
+Storage acceptance is achieved; do not re-prove it through kernel-log transfer.
+Owner confirmed Power untouched throughout; automatic original Android return
+is observed. Exact reset cause remains unqualified.
+
+Source code at d6f3c5ae67dc66d41665b0170005efc61608eae2. Private trial:
+out/recovery-linux-pivot/ack-storage-readonly-trial-runtime-1. Parent/child
+scope6 authorizations are consumed. No replay/retry or owner recovery needed.
+The prior preparation's985 tests,14 controls,11 compiler negatives and four VM
+checks passed; repository integrity still flags the unchanged empty helper at
+tests/test_source_usb_shutdown.py:201. No new source change required for runtime.
+Next is the documented #18/#19/#20 display/touch provider path toward #333/#24
+usable maintained Android; broad hardware, writable filesystems and Android UI
+remain unqualified. Reuse the working kernel/RAM/storage/PID1/USB foundation.
+
+## Historical storage preparation — before the successful hardware test — November18,2026
 
 [Preparation receipt](../../evidence/independent-recovery/ack-storage-readonly-preparation.json).
 Dedicated enforcing storage PID1/policy and fresh VSTORE01 functional status are
@@ -59,7 +88,7 @@ Repository integrity still stops on unchanged tests/test_source_usb_shutdown.py:
 empty test helper; it is not claimed passing. No tablet command or trial ran.
 
 The source/three ABI transfers were approved and completed. Lab compilation and
-VM qualification are finished. Scope6 storage template is unapproved/unconsumed;
+VM qualification are finished. At preparation time scope6 was unapproved/unconsumed; now consumed, as above;
 prior approvals remain consumed. Next requires owner presence for one protected
 source boot/restore and one RAM jump; original p5 restored/read back before jump,
 recovery untouched,31-second target deadline and bounded read-only Android-return

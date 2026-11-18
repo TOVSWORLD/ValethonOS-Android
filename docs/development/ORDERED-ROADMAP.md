@@ -1,15 +1,16 @@
-# Current delivery status — November17,2026
+# Current delivery status — November18,2026
 
-Maintained6.18 kernel initialization, controlled enforcing PID1 and its fresh USB
-identity are now established on Douglas. Original Android state verified after
-return. [Runtime receipt](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
-[Current execution plan](NEXT-MILESTONE-PLAN.md) and project memory supersede the
-dated blocked selections preserved below. Next product work is Phase2/#22
-read-only internal-storage bring-up, then maintained Android userspace. Kernel
-record-transfer completion remains follow-up under #348, not a prerequisite for
-re-proving achieved boot/PID1/USB. Owner explicitly directed avoiding logging
-loops. Do not interpret historical no-boot/no-log statements below as live status.
-No maintained Android OS/UI, full hardware, security-update or QA pass is claimed.
+Maintained6.18 initialization, enforcing controlled PID1, fresh USB identity and
+read-only internal eMMC are achieved on Douglas. Original16MiB p5 boot artifact
+read/hash verified; fresh functional status and original Android installation/
+normal ADB return verified. [Actual receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json).
+Owner confirmed Power untouched; automatic return observed, exact reset cause
+unqualified. Scope6 consumed.
+Next execution is #18 clock/reset, then #19/#20 pin/power dependencies for
+#329/#330/#331 display/touch/graphics, toward #333/#24 maintained Android setup/home.
+No logging-only re-proof; preserve working kernel/RAM/PID1/USB/storage. Read-only
+known-p5 verification does not imply writable filesystem or Android UI support.
+[Current plan](NEXT-MILESTONE-PLAN.md) supersedes dated blocked selections below.
 
 # Ordered ValethonOS delivery roadmap
 

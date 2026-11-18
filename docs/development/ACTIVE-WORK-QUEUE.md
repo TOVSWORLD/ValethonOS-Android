@@ -1,32 +1,23 @@
-# Current milestone — maintained Linux/PID1 fresh USB identity reached, November17,2026
+# Current milestone — read-only internal eMMC achieved, November18,2026
 
-[Hardware receipt](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json):
-exact VLOG0002+fresh32-byte PID1 nonce received over USB. Reviewed PID1 gates
-policy/enforcing/RO/domain/namespace/UDC/serial/kmsg before that header. Kernel
-initialization/PID1/USB identity are achieved, not pending logging proof.
-Original Android installation and normal ADB verified after return. Owner confirmed
-Power untouched throughout; automatic return established. Scope5 consumed.
+[Actual receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json):
+maintained6.18/enforcing PID1 read original boot p5 exactly16MiB, checked EOF and
+matched its known SHA-256. Fresh120-byte VSTORE01 success received on the selected
+physical USB endpoint, independently decoded: stage5/flags31/error0. Original
+boot restored/read back before jump; recovery untouched. Different completed
+Android boot, original installation checks and normal ADB verified afterward.
+Owner confirmed Power untouched; automatic return observed, exact reset cause
+unqualified. Scope6 consumed.
+One source boot/restore, one load/jump, no retry, no owner recovery needed.
 
-[Next plan](NEXT-MILESTONE-PLAN.md): read-only internal eMMC bring-up under #22,
-then maintained Android userspace. Post-header log-record transfer is a separate
-non-blocking follow-up.
-Current wire40 bytes, zero complete records, no terminal. Host termios.error
-cleanup masked the receiver result; offline fix/tests preserve it. No new device
-or logging-only test for that fix. Keep working kernel/RAM/PID1; investigate the
-specific ACK/record boundary, never repeat a consumed trial or re-prove achieved
-stages. Use a functional storage/status response for the next integrated test.
-Owner explicitly directed avoiding logging loops.
-
-## Prepared next attempt — read-only eMMC, November18,2026
-
-[Offline receipt](../../evidence/independent-recovery/ack-storage-readonly-preparation.json):
-separate storage PID1/policy and VSTORE01 response built. Both synthetic storage
-VM modes, both exact-Image target-memory VM modes,11 compiler negatives,14
-qualification controls and985 tests pass. No new tablet action or runtime
-storage claim. Scope6 template remains unapproved/unconsumed; owner presence
-needed for one protected source boot/restore and one RAM jump. Preserve the
-proven RAM/PID1/USB path. Original p5 read-only16MiB digest/status is acceptance;
-complete kernel-log streaming remains non-blocking. See memory for exact inputs.
+[Next plan](NEXT-MILESTONE-PLAN.md): #18 clock/reset dependencies, #19/#20 pins/
+power, then display/touch/graphics and maintained Android under #333/#24. Preserve
+the achieved kernel/RAM/PID1/USB/storage foundation. Complete custom kernel-log
+streaming remains non-blocking; no logging-only re-proof or repeated storage
+milestone. Read-only known-p5 integrity does not qualify general/writable
+filesystems or Android UI. Earlier preparation:985 tests,14 qualification controls,
+11 compiler negatives and four VM checks passed. Source at d6f3c5a; raw trial
+private under out/recovery-linux-pivot/ack-storage-readonly-trial-runtime-1.
 
 # Historical selection — UART bench preparation, November 16, 2026
 

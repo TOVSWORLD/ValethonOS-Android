@@ -234,7 +234,10 @@ mt2701 fallback. Pinned working source:
 [mtk-sd.c](https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/mmc/host/mtk-sd.c),
 [host Makefile](https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/mmc/host/Makefile).
 [Candidate checks](../../evidence/independent-recovery/ack-storage-readonly-preparation.json)
-are offline only; maintained-kernel eMMC runtime remains pending.
+are offline preparation. The [actual storage test](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json)
+subsequently read/verified original p5 exactly16MiB under the maintained kernel,
+sent fresh functional USB success and returned to verified original Android.
+This establishes known-p5 read-only integrity, not general/writable filesystems.
 
 ## 10. USB controller, PHY, DMA and gadget
 
@@ -242,7 +245,8 @@ USB0 at0x11200000 needs the MT8163 MUSB glue, USB2 PHY, analog resources, clocks
 power/supplies, interrupt routing and role selection. Preserve PHY/controller
 binding resources and distinguish host, peripheral and OTG behavior. Target
 bootstrap selects peripheral; source USB-console capture is physically proven,
-but this does not prove modern MUSB/PHY enumeration or PID1.
+and fresh target PID1 USB identity plus functional storage status are now
+observed. This does not qualify all USB roles, PHY timings or peripherals.
 
 Required implementation: provider dependency closure, proper PHY register ranges,
 DMA ownership/quiescence, gadget/configfs and correct host capture. No new UART

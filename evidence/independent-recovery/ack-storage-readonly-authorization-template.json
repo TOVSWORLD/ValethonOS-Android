@@ -131,7 +131,7 @@
   },
   "fresh_target_manifest_policy": "After original p5 restoration/readback, derive fresh DT/iomem and reproduce the offline-qualified Image with its unused reference token. Preserve every firmware reservation/live non-System-RAM exclusion, legacy PSCI and31-second reset deadline. Enable only internal MMC0 at26MHz with exact clocks/pins/supplies/sysirq; all external MMC and disk logger remain disabled. Admit only immutable block179:5 node0400 and O_RDONLY boot reads; block writes/ioctls/other-block reads denied by enforcing policy. No userdata mount. One bounded one-way VSTORE01 receiver, one source boot/restore and one load/jump, no retries.",
   "maximum_cleanup_unloads": 1,
-  "trial_status": "offline_qualified_awaiting_owner_presence",
+  "trial_status": "executed_authorization_consumed_do_not_replay",
   "required_milestone": "Internal MMC0 boot partition p5 read exactly16MiB and verified against original boot SHA-256 under enforcing PID1, fresh VSTORE01 status on the selected physical USB port, then verified original Android return. Kernel log records are not required.",
   "source_cpu_shutdown_before_devices": true,
   "target_kind": "ack-linux-storage-readonly-v6",

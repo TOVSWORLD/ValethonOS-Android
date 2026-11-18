@@ -1,60 +1,45 @@
 # Next milestone execution plan
 
-November17,2026. **Reached on Douglas:** maintained Linux initialization,
-controlled enforcing PID1 and its exact fresh USB identity header.
-[Runtime evidence](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
-Original Android boot/config/recovery and normal ADB verified after return.
-Owner confirmed Power untouched; automatic Android return is established.
+November18,2026. **Achieved on Douglas:** maintained6.18 initialization,
+controlled enforcing PID1, fresh USB identity and read-only internal eMMC.
+[Actual storage receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json).
+The kernel read exactly16MiB from original boot p5, matched its known SHA-256,
+and sent fresh VSTORE01 success over the selected physical USB path. Android
+returned with original boot/config/recovery and normal ADB checks passing.
+Owner confirmed Power untouched; automatic Android return observed. Exact reset
+cause remains unqualified.
 
-## Next product milestone: read-only internal storage on the maintained kernel
+## Next execution: providers needed by display/touch and Android
 
-Continue the existing Phase2 boot-foundation work under #22. Carry forward the
-working RAM exclusion correction and USB/PID1 path. Trace the working4.9 eMMC
-clocks, regulators, pinctrl, interrupts and MT8163 host implementation into the
-pinned maintained tree using the [hardware contract](DOUGLAS-HARDWARE-CONTRACT.md).
-Prepare a RAM-boot profile that enables the internal eMMC controller only and
-keeps user-space block writes forbidden. Do not mount or modify personal data.
+Advance the existing order to #18 clock/reset, then #19 pinctrl/EINT and #20
+PMIC/power domains, feeding #329 display/backlight, #330 touch/input and #331
+graphics. Use the working4.9 source and consolidated
+[hardware contract](DOUGLAS-HARDWARE-CONTRACT.md) to carry the actual board's
+clock parents/rates, reset ownership, pin groups, rails and power sequences into
+the maintained tree. Reuse existing source/build/VM work and the proven eMMC/
+USB paths. Their success qualifies the resources they used, not every provider
+or peripheral. Prepare a functional display/touch candidate rather than repeat
+standalone proof of kernel/PID1/USB/storage or require complete log streaming.
 
-The concrete next acceptance is discovery of the internal storage plus a
-read-only verification of the already-known original boot artifact, reported
-through the existing USB path. This advances the Android boot foundation;
-maintained Android userspace/init/adbd integration follows. It does not claim
-that a maintained Android build, Android UI or general hardware qualification
-already exists. Use existing build resources and prepare/validate the exact
-candidate before requesting another owner-attended hardware attempt.
+The major outcome remains #333 / phase #24: a reproducible maintained-Android
+ValethonOS build reaching setup/home with usable display/touch, enforcing SELinux,
+USB/ADB and a verified return path. Pin Android/Binder/firmware/HAL/graphics inputs
+and the supported update/security baseline before claiming that outcome.
+Maintained Android userspace/init/adbd integration follows the existing provider
+and display dependencies; the interim Lineage installation is the development/
+recovery environment, not that milestone.
 
-## Transfer follow-up, not a prerequisite
+## Consumed storage trial and boundaries
 
-The40-byte VLOG0002+fresh nonce is verified. Zero complete records/no terminal
-means the optional kernel-record stream stopped after identity; it does not
-erase the kernel/PID1/USB milestone or block storage/userspace work. A host
-termios.error cleanup escape was fixed offline so the actual capture result
-survives disconnect. Primary post-header stream cause remains open under #348.
-Do not launch a logging-only device test to re-prove working stages. Owner
-explicitly requested this. Use a functional storage/status response in the next
-integrated test rather than making complete kernel-log retrieval an entry gate.
+Scope6 used one protected source boot, one original-p5 restore/readback, one
+native load and one RAM jump; recovery untouched. Read-only p5 digest/status
+acceptance passed. No userdata mount, block write/ioctl, general filesystem,
+storage performance or writable-storage qualification is claimed. The exact
+[prepared template](../../evidence/independent-recovery/ack-storage-readonly-authorization-template.json)
+is historical and consumed. Do not replay it or any earlier scope.
 
-Scope5 and earlier approvals are consumed. One protected source boot/restore and
-RAM jump per new owner-attended trial, original boot restored/read back before
-jump, recovery untouched and bounded read-only return. No wrapper replay or
-automatic retry. Preserve historical failures in the existing issues.
-
-## Ready for the attended storage attempt — November18,2026
-
-[Offline receipt](../../evidence/independent-recovery/ack-storage-readonly-preparation.json)
-and [exact unapproved template](../../evidence/independent-recovery/ack-storage-readonly-authorization-template.json).
-The separate storage PID1/policy and one-way VSTORE01 response are built. All11
-policy compiler negatives, both synthetic read-only storage VM modes, both
-exact-Image target-memory VM boots,14 qualification controls and985 tests pass.
-No physical storage acceptance or new tablet action is claimed.
-
-Next: owner present, one protected source boot with original p5 restored/read back,
-then one RAM jump. Only MMC0 at26MHz; fixed p5 read-only16MiB/EOF/SHA check; no
-userdata mounts or block writes/ioctls. Accept only the fresh functional status
-on the selected physical USB port plus verified original Android return. A
-complete storage failure packet records its stage/error; Android return alone
-is not storage success. Reset deadline31seconds, bounded return window, hard
-restart if needed, no automatic retry. No kernel-log transfer gate.
-
-After storage acceptance, continue maintained Android userspace/init/adbd toward
-#333/#24 setup/home with display/touch. Keep prior kernel/PID1/USB milestones.
+Preserve RAM exclusions, firmware reservations, enforcing policy, original boot
+restoration before any future RAM jump and bounded read-only return checks.
+Prepare/qualify a fresh exact package before requesting the next attended device
+test. No logging-only prerequisite; incomplete custom log-record transfer stays
+a non-blocking follow-up under #348.

@@ -200,7 +200,13 @@
         "evidence/independent-recovery/ack-cinit-runtime-result.json",
         "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json"
       ],
-      "next_action": "Prepare read-only eMMC integrity/status response using the working RAM/kernel/PID1/USB path; no logging-only gate or personal-data mount/write."
+      "next_action": "Preserve achieved read-only storage foundation; continue18 clock/reset dependencies for display/touch/Android. No logging-only re-proof.",
+      "runtime_gate_status": "maintained_kernel_known_boot_readonly_integrity_observed",
+      "runtime_evidence": [
+        "evidence/independent-recovery/ack-storage-readonly-runtime-result.json"
+      ],
+      "completed_milestone": "Actual maintained-kernel O_RDONLY p5 exact16MiB/EOF/SHA verified; fresh functional USB status and original Android return passed.",
+      "remaining_acceptance": "Code review/integration and broader storage scope remain distinct; no writable filesystem/Android UI claim."
     },
     {
       "issue": 18,
@@ -220,7 +226,11 @@
       "kind": "qualification",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "predecessor_runtime_satisfied_by": [
+        "evidence/independent-recovery/ack-storage-readonly-runtime-result.json"
+      ],
+      "next_action": "Derive only the clock/reset resources required by the actual display/touch path from working4.9 and maintained source; reuse qualified storage/USB and existing offline controls."
     },
     {
       "issue": 19,
@@ -706,7 +716,9 @@
       "order": 49.5,
       "name": "Phase 2 \u2014 Diagnostic memory, UART and internal storage",
       "state": "Active",
-      "current_issue": 22
+      "current_issue": 22,
+      "runtime_exit_observed": true,
+      "remaining_followup": "Read-only known-p5 hardware acceptance passed; review/integration and broader storage coverage remain separate."
     },
     {
       "issue": 328,
@@ -714,7 +726,8 @@
       "level": "Phase",
       "order": 59,
       "name": "Phase 3 \u2014 Core board provider qualification",
-      "state": "Blocked"
+      "state": "Active",
+      "current_issue": 18
     },
     {
       "issue": 332,
@@ -891,15 +904,15 @@
     "physical_execution_admitted": false,
     "next": "Qualify independent display path before a changed physical review"
   },
-  "current_execution_issue": 22,
-  "current_execution_state": "next_product_work_read_only_internal_storage",
+  "current_execution_issue": 18,
+  "current_execution_state": "next_product_work_clock_reset_for_display_android",
   "latest_runtime_milestone": {
-    "date": "2026-11-17",
-    "milestone": "Maintained Linux initialization, gated enforcing PID1 and exact fresh USB identity observed on Douglas",
-    "evidence": "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json",
-    "failure_retention_evidence": "evidence/independent-recovery/ack-cinit-runtime-result.json",
+    "date": "2026-11-18",
+    "milestone": "Maintained kernel read-only internal eMMC original boot integrity observed on Douglas",
+    "evidence": "evidence/independent-recovery/ack-storage-readonly-runtime-result.json",
+    "previous_pid1_usb_evidence": "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json",
     "record_stream_complete": false,
     "record_stream_is_boot_proof_prerequisite": false,
-    "owner_direction": "No logging-only retest or repeated proof of working kernel/PID1/USB; advance read-only storage/Android boot foundation."
+    "owner_direction": "Preserve achieved kernel/PID1/USB/storage; advance functional display/touch and maintained Android without logging-only re-proof."
   }
 }

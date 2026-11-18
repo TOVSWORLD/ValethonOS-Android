@@ -1,0 +1,78 @@
+{
+  "scope": "Actual maintained-kernel read-only internal eMMC boot verification on Douglas",
+  "date": "2026-11-18",
+  "issue": 22,
+  "source_code_commit": "d6f3c5ae67dc66d41665b0170005efc61608eae2",
+  "storage_readonly_verified": true,
+  "complete": true,
+  "target_release": "6.18.34-valethon-draft1+",
+  "target_kind": "ack-linux-storage-readonly-v6",
+  "kernel_boot_and_pid1_observed": true,
+  "functional_status": {
+    "protocol": "VSTORE01",
+    "storage_readonly_verified": true,
+    "stage": 5,
+    "error": 0,
+    "flags": 31,
+    "bytes_read": 16777216,
+    "boot_partition_bytes": 16777216,
+    "verified_expected_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e",
+    "block_writes_requested": false,
+    "userdata_mounted": false,
+    "kernel_log_transfer_required": false
+  },
+  "transport": {
+    "protocol": "VSTORE01",
+    "bytes": 120,
+    "sha256": "cd68b446c1fde94c65fb422b6b66bb9ca043856174926fffc1a533e282f2ea73",
+    "fresh_trial_identity_matched": true,
+    "selected_physical_endpoint": true,
+    "capture_complete": true,
+    "detached_worker_completed": true,
+    "kernel_log_transfer_required": false
+  },
+  "artifacts": {
+    "image_sha256": "a2155356a246324b515c03005f8a7c03a287cfdfbb2e7f9562aa17cb59be20c7",
+    "initramfs_sha256": "e8887c0f189f02db6093f56ea2f943f03cb1db42964e5bee3be4db4e835244c5",
+    "dtb_sha256": "c9ba8f1e4e447f138a08e6afae68ed343daa7abc3d978b9062ece04116573e87",
+    "policy_sha256": "bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd",
+    "original_boot_sha256": "08fcf3455d66943632d0fc91348d4ab7d41b80c40d88e61272000a1d697faa1e"
+  },
+  "protected_source_stage": {
+    "complete": true,
+    "candidate_write_attempts": 1,
+    "restore_write_attempts": 1,
+    "reboot_requests": 1,
+    "native_kernel_running": true,
+    "original_boot_restored": true,
+    "normal_shell_restored": true
+  },
+  "ram_stage": {
+    "load_attempts": 1,
+    "unload_attempts": 0,
+    "jump_requests": 1,
+    "original_boot_verified_before_jump": true,
+    "recovery_verified_before_jump": true,
+    "boot_written": false,
+    "recovery_written": false,
+    "fresh_original_android_return": true,
+    "normal_shell_restored": true,
+    "target_hardware_deadline_seconds": 31,
+    "hardware_deadline_qualified": false,
+    "automatic_retry": false,
+    "owner_return_required": false
+  },
+  "owner_power_untouched": true,
+  "owner_confirmation_pending": false,
+  "exact_reset_cause_qualified": false,
+  "authorization_consumed": true,
+  "runtime_report_sha256": "8233178d7b05ef0939c81a887777c94153fa565be40205b434fa2a00ce0ca77c",
+  "source_report_sha256": "2bcf89fd84501cdda245929889c0c292bdbd2852ca2c99e6f636277032423b1e",
+  "limits": [
+    "Known original boot partition p5 read-only integrity only; no userdata mount/write, filesystem or general storage-performance qualification.",
+    "No maintained Android UI, display/touch or general peripheral qualification.",
+    "Legacy log-specific target_pid1_proven remains separate; no kernel-log stream was needed."
+  ],
+  "automatic_original_android_return_observed": true,
+  "owner_attestation": "Owner confirmed in chat: Yes, untouched."
+}
