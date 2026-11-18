@@ -142,13 +142,18 @@
       "hardware_group": null,
       "conditions": [],
       "existing_work_exception": false,
-      "closed_issue_evidence_boundary": "Issue is closed completed and board Done. Ordinary stock return is observed; closure alone does not qualify failed-experiment return. Remaining phase344/release failure-return acceptance stays explicit until tested."
+      "closed_issue_evidence_boundary": "Current issue remains open for integration/follow-up. Approved failed-kernel panic return and exact original boot/config/recovery/normal ADB are now observed; runtime receipts, not closure, establish that case. No guarantee is claimed for every possible hardware hang.",
+      "runtime_gate_status": "approved_failed_experiment_return_observed",
+      "runtime_evidence": [
+        "evidence/independent-recovery/ack-cinit-runtime-result.json",
+        "evidence/independent-recovery/ack-ramfix-runtime-result.json"
+      ]
     },
     {
       "issue": 348,
       "order": 40,
       "parent": 344,
-      "name": "Failed-boot log retention \u2014 normal log capture complete",
+      "name": "Failed-boot retention observed; optional record-stream follow-up",
       "depends_on": [
         346
       ],
@@ -163,8 +168,13 @@
       "hardware_group": null,
       "conditions": [],
       "existing_work_exception": false,
-      "completed_milestone": "TWRP recovery log22493B/current kernel log130931B retrieved in PR452; see approved-lab-entry/runtime-result.json. Prior320KiB stock export is separate.",
-      "remaining_acceptance": "Fresh attributable failed-experiment log retention and retrieval remain unqualified; do not repeat normal capture as unfinished work."
+      "completed_milestone": "Fresh attributable maintained-kernel panic retained/retrieved after original Android return; 4084-byte ring, late-panic coverage and overwritten earlier fault context explicitly documented. Fresh PID1 USB identity also received.",
+      "remaining_acceptance": "Optional post-header kernel-record transfer is incomplete; its cleanup error is fixed offline. Per owner direction this is not a new kernel/PID1/USB proof gate or blocker to22.",
+      "runtime_gate_status": "fresh_failed_kernel_panic_retention_observed_with_bounded_coverage",
+      "runtime_evidence": [
+        "evidence/independent-recovery/ack-cinit-runtime-result.json",
+        "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json"
+      ]
     },
     {
       "issue": 22,
@@ -185,7 +195,12 @@
       "kind": "qualification",
       "hardware_group": "internal-storage",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "predecessor_runtime_satisfied_by": [
+        "evidence/independent-recovery/ack-cinit-runtime-result.json",
+        "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json"
+      ],
+      "next_action": "Prepare read-only eMMC integrity/status response using the working RAM/kernel/PID1/USB path; no logging-only gate or personal-data mount/write."
     },
     {
       "issue": 18,
@@ -672,7 +687,9 @@
       "level": "Phase",
       "order": 9.5,
       "name": "Phase 1 \u2014 Operational diagnostic entry, return and logs",
-      "state": "Active"
+      "state": "Active",
+      "runtime_exit_observed": true,
+      "remaining_followup": "Integration and optional post-header record transfer; not a repeat boot/PID1 proof gate."
     },
     {
       "issue": 4,
@@ -688,7 +705,8 @@
       "level": "Phase",
       "order": 49.5,
       "name": "Phase 2 \u2014 Diagnostic memory, UART and internal storage",
-      "state": "Blocked"
+      "state": "Active",
+      "current_issue": 22
     },
     {
       "issue": 328,
@@ -872,5 +890,16 @@
     "candidate_packaged": false,
     "physical_execution_admitted": false,
     "next": "Qualify independent display path before a changed physical review"
+  },
+  "current_execution_issue": 22,
+  "current_execution_state": "next_product_work_read_only_internal_storage",
+  "latest_runtime_milestone": {
+    "date": "2026-11-17",
+    "milestone": "Maintained Linux initialization, gated enforcing PID1 and exact fresh USB identity observed on Douglas",
+    "evidence": "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json",
+    "failure_retention_evidence": "evidence/independent-recovery/ack-cinit-runtime-result.json",
+    "record_stream_complete": false,
+    "record_stream_is_boot_proof_prerequisite": false,
+    "owner_direction": "No logging-only retest or repeated proof of working kernel/PID1/USB; advance read-only storage/Android boot foundation."
   }
 }
