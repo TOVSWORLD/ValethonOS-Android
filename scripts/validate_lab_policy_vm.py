@@ -23,11 +23,12 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def parse_log(data):
+def parse_log(data, display_errors=False):
     text = data.replace(b'\r\n', b'\n')
     expected_zero = ['VM_DOMAIN', 'VM_LABELS', 'VM_PROC', 'VM_SYS', 'VM_CONFIGFS', 'VM_NAMESPACE_BEFORE',
                      'VM_REAL_CONFIGFS_SETUP_WITHOUT_BIND', 'VM_REAL_CONFIGFS_CLEANUP', 'VM_NAMESPACE_AFTER']
     expected = set(expected_zero + ['VM_KMSG_OPEN', 'VM_KMSG_READ', 'VM_UDC_DIR', 'VM_GENERIC_FLAGS_OPEN'])
+    if display_errors:expected |= {'VM_DISPLAY_KMSG_ERROR','VM_DISPLAY_KMSG_FLAGS','VM_DISPLAY_KMSG_BYTES','VM_DISPLAY_KMSG_RECORDS'}
     values = {}
     for key, value in re.findall(rb'^(VM_[A-Z_]+)=([+-][0-9]{10})$', text, re.M):
         key = key.decode()
@@ -41,6 +42,8 @@ def parse_log(data):
             or values['VM_GENERIC_FLAGS_OPEN'] != -22 or text.count(b'VM_FILESYSTEM_PROBE_DONE') != 1
             or any(token in text for token in [b'avc:  denied', b'Kernel panic', b'Internal error: Oops'])):
         raise ValueError('Enforcing VM ABI/label/filesystem regression failed')
+    if display_errors and (values['VM_DISPLAY_KMSG_ERROR']!=0 or values['VM_DISPLAY_KMSG_FLAGS']!=1 or not 0<values['VM_DISPLAY_KMSG_BYTES']<=262144 or not 0<values['VM_DISPLAY_KMSG_RECORDS']<=4096):
+        raise ValueError('Real enforcing kernel snapshot failed')
     return values
 
 
@@ -82,6 +85,7 @@ def run(kernel, expected_kernel, component_dir, output, entry_framebuffer_ram=Fa
     (output / 'lab_inputs.h').write_bytes(header)
     elf = output / 'init'
     result = subprocess.run([cc, '--target=aarch64-linux-gnu', '--ld-path=' + linker, '-nostdlib', '-static',
+                             '-DVM_DISPLAY_ERRORS='+str(int(component.get('display_errors_profile',False))),
                              '-Os', '-ffreestanding', '-fno-builtin', '-fno-stack-protector', '-mgeneral-regs-only',
                              '-Wl,--build-id=none,-e,_start', '-I', str(SOURCE), '-I', str(output),
                              '-o', str(elf), str(PROBE), str(SOURCE / 'memory.c')],
@@ -134,14 +138,14 @@ def run(kernel, expected_kernel, component_dir, output, entry_framebuffer_ram=Fa
         for path in output.iterdir():
             if path.is_file():
                 path.chmod(0o600)
-    values = parse_log(bytes(data))
+    values = parse_log(bytes(data),display_errors=component.get('display_errors_profile',False))
     report = {'scope': 'Generic VM ABI/label/configfs regression only; no tablet handoff or USB hardware test',
               'passed': True, 'kernel_sha256': expected_kernel, 'policy_sha256': component['policy_sha256'],
               'probe_source_sha256': sha(PROBE.read_bytes()), 'runner_sha256': sha(Path(__file__).read_bytes()),
               'vm_initramfs_sha256': sha(initramfs.read_bytes()), 'values': values,
               'virtualization': virtualization, 'ram_mib': 1536 if entry_framebuffer_ram else 512, 'cpu_count': 1, 'wall_limit_seconds': 20, 'log_limit_bytes': 2 * 1024 * 1024,
               'qemu_version': subprocess.check_output([qemu, '--version'], text=True).splitlines()[0],
-              'selinux_enforcing': True, 'udc_bind_intercepted_vm_only': True,
+              'selinux_enforcing': True, 'display_kernel_snapshot_probe': component.get('display_errors_profile',False), 'udc_bind_intercepted_vm_only': True,
               'disk_attached': False, 'network_attached': False, 'tablet_commands': False,
               'kernel_rebuilt': False, 'physical_execution_admitted': False}
     (output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')

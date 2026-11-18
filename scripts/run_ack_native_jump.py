@@ -19,14 +19,15 @@ from build_ack_trampoline import marker as handoff_marker
 SCOPE = 'ack-linux-native-jump-1'
 RECEIVERS = ['ack_capture_supervisor.py', 'capture_ack_native_console.py', 'capture_lab_kernel_log.py',
              'capture_usb_acm_status.py', 'usb_acm_frame.py', 'kernel_log_protocol.py',
-             'capture_live_acm_probe.py', 'receive_storage_status.py', 'receive_display_status.py']
+             'capture_live_acm_probe.py', 'receive_storage_status.py', 'receive_display_status.py', 'receive_display_errors.py']
 
 
 def run(device, lab_package, manifest, client_report, linked, output,
         nonce, source_report, authorization=None, *, combined_kernel_package=None, storage_component=None, display_component=None, baseline_kernel_package=None):
     m = json.loads(manifest.read_text()); c = json.loads(client_report.read_text())
     combined = combined_kernel_package is not None
-    display = combined and m.get('target_kind') == 'ack-linux-display-v7'
+    display_errors = combined and m.get('target_kind') == 'ack-linux-display-errors-v8'
+    display = display_errors or combined and m.get('target_kind') == 'ack-linux-display-v7'
     if (display_component is not None) != display or (baseline_kernel_package is not None) != display:
         raise ValueError('Explicit display component and baseline binding required')
     target_config, target_release = CONFIG_SHA, RELEASE
@@ -38,8 +39,8 @@ def run(device, lab_package, manifest, client_report, linked, output,
     if (storage_component is not None) != storage:raise ValueError('Explicit storage component/profile binding required')
     ramfix = storage or combined and m.get('target_kind') == 'ack-linux-ramfix-v4'
     cinit = ramfix or combined and m.get('target_kind') == 'ack-linux-cinit-v3'
-    kind = 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
-    scope = 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    kind = 'ack-linux-display-errors-v8' if display_errors else 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    scope = 'ack-linux-native-display-errors-jump-8' if display_errors else 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
     image_sha = m.get('target_image_sha256') if combined else IMAGE_SHA
     if combined:
         if display:
@@ -180,7 +181,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
         r['native_load_verified'] = True; save()
         # Arm only after load verification: capture covers the actual entry,
         # not the time spent staging the full Image onto source RAM.
-        profile = dict(scope='ack-display-functional-capture-1' if display else 'ack-storage-readonly-capture-1' if storage else 'ack-native-pid1-capture-1', nonce_sha256=sha(nonce),
+        profile = dict(scope='ack-display-errors-capture-2' if display_errors else 'ack-display-functional-capture-1' if display else 'ack-storage-readonly-capture-1' if storage else 'ack-native-pid1-capture-1', nonce_sha256=sha(nonce),
                        physical_usb_path=physical[4:], usb_id='1209:0001', interface='00', wait_seconds=90,
                        allow_privileged_open=True)
         code = ('import sys,pathlib,json;sys.path.insert(0,' + repr(lab_package) +
@@ -272,7 +273,10 @@ def run(device, lab_package, manifest, client_report, linked, output,
         with p.open('xb') as f:
             os.fchmod(f.fileno(), 0o600); f.write(raw); f.flush(); os.fsync(f.fileno())
         if display:
-            from receive_display_status import decode
+            if display_errors:
+                from receive_display_errors import decode
+            else:
+                from receive_display_status import decode
             assessment = decode(raw, nonce)
             physical_writer = r['capture'].get('endpoint_selected') is True and r['capture'].get('complete') is True
             r['display_status'] = assessment

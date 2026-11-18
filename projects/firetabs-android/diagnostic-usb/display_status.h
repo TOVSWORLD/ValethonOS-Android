@@ -53,9 +53,14 @@ static inline int fd_probe(struct ll_context *ctx,struct fd_result *r){
 static inline void fd_le(unsigned char *p,unsigned long v,unsigned int n){for(unsigned int i=0;i<n;i++)p[i]=(unsigned char)(v>>(8*i));}
 static inline void fd_packet(unsigned char packet[FD_PACKET_BYTES],const unsigned char nonce[32],const struct fd_result *r){
  for(unsigned int i=0;i<FD_PACKET_BYTES;i++)packet[i]=0;
- const char magic[]="VDISP001";for(unsigned int i=0;i<8;i++)packet[i]=(unsigned char)magic[i];
+#ifdef VALETHON_DISPLAY_ERRORS
+ const char magic[]="VDISP002";unsigned int version=2;
+#else
+ const char magic[]="VDISP001";unsigned int version=1;
+#endif
+ for(unsigned int i=0;i<8;i++)packet[i]=(unsigned char)magic[i];
  for(unsigned int i=0;i<32;i++)packet[8+i]=nonce[i];
- fd_le(packet+40,1,4);fd_le(packet+44,r->stage,4);fd_le(packet+48,(unsigned int)r->error,4);fd_le(packet+52,r->flags,4);
+ fd_le(packet+40,version,4);fd_le(packet+44,r->stage,4);fd_le(packet+48,(unsigned int)r->error,4);fd_le(packet+52,r->flags,4);
  fd_le(packet+56,r->width,4);fd_le(packet+60,r->height,4);fd_le(packet+64,r->bpp,4);fd_le(packet+68,r->stride,4);
  fd_le(packet+72,(unsigned long)r->height*r->stride,8);fd_le(packet+80,r->name_length,4);fd_le(packet+84,(unsigned int)r->banner_error,4);
  for(unsigned int i=0;i<r->name_length&&i<32;i++)packet[88+i]=(unsigned char)r->name[i];

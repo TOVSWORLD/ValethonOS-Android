@@ -3,8 +3,10 @@
 Current consolidation: November 17, 2026. Target: Amazon Fire HD 8 (2017),
 douglas/KFDOWI, MT8163; maintained-kernel candidate is the pinned ACK 6.18.34
 Image. This is the central hardware reference for implementation and test
-selection. It brings the existing source audits together; it does not claim that
-all board facts are known or that the maintained kernel boots on this tablet.
+selection. It brings the existing source audits together. Maintained-kernel/PID1/USB and
+read-only eMMC are now observed on this tablet; display remains unqualified.
+The current OS loading animation is a working display/backlight/graphics
+reference. Use its pinned board/driver setup when comparing the maintained path.
 
 ## How to use this reference
 

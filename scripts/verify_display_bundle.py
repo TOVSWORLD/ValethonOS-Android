@@ -25,11 +25,11 @@ POLICY='bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd'
 
 def component(package,nonce):
     report=json.loads((package/'report.json').read_text())
-    if (report.get('display_functional_profile') is not True or report.get('storage_probe_enabled') is not False
+    if (report.get('display_errors_profile') is not True or report.get('display_functional_profile') is not True or report.get('storage_probe_enabled') is not False
             or report.get('storage_readonly_profile') is not True or report['policy_sha256']!=POLICY
             or len(nonce)!=32 or sha(nonce)!=report['nonce_sha256']):
         raise ValueError('Exact enforcing display PID1 required')
-    if not {'display_status.h','storage_init.c','lab_policy_load.h','lab_labels.h','lab_domain.h'}.issubset(report['sources_sha256']):
+    if not {'display_errors.h','display_status.h','storage_init.c','lab_policy_load.h','lab_labels.h','lab_domain.h'}.issubset(report['sources_sha256']):
         raise ValueError('Display runtime source closure missing')
     for name,digest in report['sources_sha256'].items():
         if Path(name).name!=name or sha((SOURCE/name).read_bytes())!=digest:raise ValueError('Display component source drift')
@@ -38,7 +38,7 @@ def component(package,nonce):
     header=generated_header((package/'lab_inputs.h').read_bytes(),report)
     body=re.search(rb'static const unsigned char lab_policy_blob\[\]=\{\n([0-9a-fx,\n]+)\n\};\n',header)[1]
     policy=bytes(int(token,16) for token in body.replace(b'\n',b'').split(b','))
-    if sha(policy)!=POLICY or elf.count(policy)!=1 or nonce not in elf or b'VDISP001' not in elf or b'VALETHON DISPLAY TEST' not in elf:
+    if sha(policy)!=POLICY or elf.count(policy)!=1 or nonce not in elf or b'VDISP002' not in elf or b'VKMSG001' not in elf or b'VALETHON DISPLAY TEST' not in elf:
         raise ValueError('Display ELF policy/identity/banner differs')
     packed=(package/'initramfs.cpio.gz').read_bytes()
     for name,data in [('init',elf),('initramfs.cpio.gz',packed)]:
@@ -54,7 +54,7 @@ def verify(manifest,kernel,baseline,initramfs,fdtget=Path('work/dtb-tool/build/f
     k=verify_kernel(kernel);c=component(initramfs,nonce);m=json.loads(manifest.read_text());root=manifest.parent
     if (m.get('target_kind')!=KIND or m.get('display_functional_profile') is not True
             or m.get('binary_code_hooks_added') is not False or m.get('unmodified_display_image') is not True
-            or m.get('display_status_protocol')!='VDISP001' or m['target_image_sha256']!=k['image_sha256']
+            or m.get('display_status_protocol')!='VDISP002' or m.get('display_errors_profile') is not True or m['target_image_sha256']!=k['image_sha256']
             or m['target_config_sha256']!=k['config_sha256'] or m['target_release']!=k['target_release']
             or m['target_initramfs_sha256']!=c['initramfs_sha256'] or m['target_nonce_sha256']!=sha(nonce)
             or m['display_kernel_contract_sha256']!=sha(CONTRACT.read_bytes())):

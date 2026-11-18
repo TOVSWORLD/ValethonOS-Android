@@ -152,6 +152,39 @@ class ACKJump(unittest.TestCase):
         self.assertTrue(result['owner_visual_confirmation_pending'])
         self.assertEqual((result['load_attempts'],result['jump_requests']),(1,1))
 
+    def test_display_failure_receives_kernel_errors_without_requiring_banner(self):
+        self.manifest.update(target_kind='ack-linux-display-errors-v8', internal_emmc_only=True)
+        self.write_manifest()
+        client=json.loads(self.c.read_text());client['target_kind']=self.manifest['target_kind']
+        self.c.write_text(json.dumps(client))
+        self.auth.update(scope='ack-linux-native-display-errors-jump-8',
+                         manifest_sha256=runner.sha(self.m.read_bytes()),
+                         combined_verifier_sha256=runner.sha(Path('scripts/verify_display_bundle.py').read_bytes()))
+        self.a.write_text(json.dumps(self.auth))
+        payload=b'3,1,100,-;mediatek-drm probe failed -517\n'
+        self.d.wire=(b'VDISP002'+NONCE+
+                     struct.pack('<IIiIIIIIQIi',2,1,-110,1,0,0,0,0,0,0,0)+bytes(32)+
+                     b'VKMSG001'+NONCE+struct.pack('<IiII',len(payload),0,1,1)+payload)
+        self.console=b'old record'
+        with patch('display_kernel_contract.verify',return_value={
+                'config_sha256':TARGET_CONFIG,'target_release':runner.RELEASE}), \
+                patch('verify_display_bundle.verify'):
+            old=dict(self.auth,scope='ack-linux-native-display-functional-jump-7')
+            self.a.write_text(json.dumps(old))
+            with self.assertRaises(ValueError):
+                self.invoke(combined_kernel_package=self.p,display_component=self.p,
+                            baseline_kernel_package=self.p)
+            self.assertEqual(self.d.calls,[])
+            self.a.write_text(json.dumps(self.auth))
+            result=self.invoke(combined_kernel_package=self.p,display_component=self.p,
+                               baseline_kernel_package=self.p)
+        self.assertTrue(result['display_status']['kernel_snapshot_received'])
+        self.assertFalse(result['display_banner_status_verified'])
+        self.assertFalse(result['complete'])
+        self.assertTrue(result['fresh_original_android_return'])
+        self.assertTrue(result['pid1_usb_identity_proven'])
+        self.assertEqual((result['load_attempts'],result['jump_requests']),(1,1))
+
     def test_fresh_pid1_usb_identity_is_a_milestone_without_log_payload(self):
         self.d.wire = b'VLOG0002' + NONCE
         self.console = b'old source record'

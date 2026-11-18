@@ -56,7 +56,8 @@ def inspect_archive(raw, entries, *, storage_readonly=False):
     return [entry[0] for entry in entries]
 
 
-def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.lld-18', compiler_kind='clang', *, storage_readonly=False, display_functional=False):
+def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.lld-18', compiler_kind='clang', *, storage_readonly=False, display_functional=False, display_errors=False):
+    if display_errors and not display_functional:raise ValueError('Display diagnostics require functional display mode')
     if display_functional and not storage_readonly:
         raise ValueError('Display variant requires the enforcing read-only policy')
     if output.exists() or output.is_symlink():
@@ -104,6 +105,7 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
                '-Os', '-Wall', '-Wextra', '-Werror', '-ffreestanding', '-fno-builtin',
                '-fno-stack-protector', '-mgeneral-regs-only', '-Wl,--build-id=none,-e,_start',
                '-I', str(output), '-o', str(elf), str(SOURCE / ('storage_init.c' if storage_readonly else 'lab_init.c')), str(SOURCE / 'memory.c')]
+    if display_errors:command += ['-DVALETHON_DISPLAY_ERRORS=1']
     if display_functional:
         command += ['-DVALETHON_DISPLAY_TEST=1']
     if storage_readonly:
@@ -134,6 +136,7 @@ def build(policy_file, policy_report, output, compiler='clang-18', linker='ld.ll
         'scope': 'Separate private ' + ('functional display' if display_functional else 'read-only storage' if storage_readonly else 'log-bringup') + ' component build only; not a boot image or device test',
         'storage_readonly_profile': storage_readonly,
         'display_functional_profile': display_functional,
+        'display_errors_profile': display_errors,
         'storage_probe_enabled': storage_readonly and not display_functional,
         'storage_sha_source_sha256': sha((ROOT / 'projects/firetabs-android/native-kexec/combined_sha256.c').read_bytes()) if storage_readonly else None,
         'elf': inspection, 'archive_entries': names,
@@ -167,9 +170,10 @@ def main():
     parser.add_argument('--compiler-kind', choices=['clang','gcc'], default='clang')
     parser.add_argument('--storage-readonly', action='store_true')
     parser.add_argument('--display-functional', action='store_true')
+    parser.add_argument('--display-errors', action='store_true')
     args = parser.parse_args()
     try:
-        report = build(args.policy, args.policy_report, args.output, args.compiler, args.linker, args.compiler_kind, storage_readonly=args.storage_readonly, display_functional=args.display_functional)
+        report = build(args.policy, args.policy_report, args.output, args.compiler, args.linker, args.compiler_kind, storage_readonly=args.storage_readonly, display_functional=args.display_functional, display_errors=args.display_errors)
     except (ValueError, KeyError, OSError, subprocess.SubprocessError):
         parser.exit(2, 'Lab component build stopped; inspect private output if created.\n')
     print(json.dumps(report, indent=2))

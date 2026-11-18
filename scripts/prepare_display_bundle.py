@@ -11,7 +11,7 @@ from display_kernel_contract import verify as verify_kernel,sha,CONTRACT
 from prepare_ack_storage_bundle import prepare as prepare_ram_baseline
 from prepare_ack_native_bundle import reserved_nodes,reservation_map
 from prepare_native_jump_bundle import ranges_ok
-KIND='ack-linux-display-v7'
+KIND='ack-linux-display-errors-v8'
 
 
 def prepare(source_dtb,iomem,kernel_package,baseline_package,initramfs_package,linked,
@@ -20,7 +20,7 @@ def prepare(source_dtb,iomem,kernel_package,baseline_package,initramfs_package,l
     config=(kernel_package/'resolved.config').read_bytes()
     init_report=json.loads((initramfs_package/'report.json').read_text())
     nonce=(initramfs_package/'trial-nonce-private.bin').read_bytes()
-    if init_report.get('display_functional_profile') is not True or init_report.get('storage_probe_enabled') is not False:
+    if init_report.get('display_errors_profile') is not True or init_report.get('display_functional_profile') is not True or init_report.get('storage_probe_enabled') is not False:
         raise ValueError('Dedicated display-status PID1 required')
     out.mkdir(mode=0o700)
     baseline=out/'prior-storage-private'
@@ -57,7 +57,7 @@ def prepare(source_dtb,iomem,kernel_package,baseline_package,initramfs_package,l
              target_image_sha256=sha(image),base_target_image_sha256=sha(image),target_config_sha256=sha(config),
              target_release=qualified['target_release'],target_dtb_sha256=sha(data),image_memory_bytes=extent,
              image_padded_sha256=sha(padded),deadline=deadline,display_functional_profile=True,
-             storage_status_protocol=None,display_status_protocol='VDISP001',binary_code_hooks_added=False,
+             storage_status_protocol=None,display_status_protocol='VDISP002',display_errors_profile=True,binary_code_hooks_added=False,
              unmodified_display_image=True,display_kernel_manifest_sha256=sha((kernel_package/'manifest.json').read_bytes()),
              display_kernel_contract_sha256=sha(CONTRACT.read_bytes()),segments=[])
     for name,content,address,memory in segments:

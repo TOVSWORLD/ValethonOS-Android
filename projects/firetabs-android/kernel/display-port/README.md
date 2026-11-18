@@ -1,5 +1,24 @@
 # MT8163 Douglas display integration
 
+Current runtime: full hosted build44253355044 passed. Scope7 booted the
+maintained kernel/enforcing PID1 and returned original Android automatically,
+but fb0 never appeared; owner saw no banner/bands and left Power untouched.
+Its display-only program did not read kmsg, so no target probe-error capture
+exists from that attempt. Working-OS animation is the known-good visual reference.
+
+The corrected private display build uses --storage-readonly --display-functional
+--display-errors. This selects VDISP002 status then VKMSG001: fresh nonce, byte
+length, signed read error, flags and record count followed by raw kmsg bytes.
+Flags:1 caught up,2 bounded cut,4 ring loss,8 deadline,16 read/open/close failure.
+Limits:256KiB,4096 reads,2s collection,4s transfer. Existing validating nonblocking
+kmsg-open/oldest-seek adapter is reused. No ACK, debugfs or block probe.
+Truncated/missing tail preserves valid status; it never proves visible pixels.
+Host raw data and inspect_display_errors.py output remain private under out/.
+Fresh scope8 requires final qualification and new owner availability; scope7
+is consumed. Kernel Image, display DT recipe and enforcing policy are unchanged.
+
+Historical source preparation follows; older test/build counts are not current:
+
 Updates #18 and #329. This implements source components for the agreed first
 intermediate outcome: display and backlight. It is not another milestone between
 storage and display. The next two outcomes remain touch/input and Android graphics/

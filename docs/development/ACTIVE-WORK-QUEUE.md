@@ -1,5 +1,24 @@
 # Current milestone — read-only internal eMMC achieved, November18,2026
 
+## Display error-capture correction — November18,2026
+
+Owner authorized fixing the actual display attempt's missing target errors.
+Scope7 sent VDISP001 only: storage_init.c never opened/read /dev/kmsg in that
+branch. Saved pstore/source console contains old Android/handoff output, not
+the maintained kernel's display probe errors. Do not claim those errors exist.
+Owner's current-OS loading animation is the working panel/backlight/graphics
+reference; preserve and compare its pinned driver/board setup.
+New candidate keeps the exact display Image/DT recipe/enforcing policy, sends
+fresh VDISP002 status first and a bounded VKMSG001 kernel snapshot afterward
+over the owned USB endpoint. No ACK/full-stream prerequisite or debugfs.
+Explicit read error, truncation, ring loss and deadline state; raw output private.
+Actual capture C read real kmsg under enforcing policy in both VM modes;1014
+tests pass without skips. All seven entry/VM controls and final offline
+two-stage controller validation passed; load-only client compiled. Candidate
+is ready for fresh owner availability.
+Fresh scope8 only; scope7 stays consumed, no new hardware action/approval yet.
+Private inputs: out/display-errors-{1,initramfs-1,bundle-1,client-1}.
+
 ## Display runtime result — November18,2026
 
 Scope7 consumed one protected source boot/restore and one load/jump on source
