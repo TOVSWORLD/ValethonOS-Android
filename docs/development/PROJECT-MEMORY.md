@@ -9,42 +9,53 @@ New user instructions and newer verified results supersede this snapshot.
 The objective is maintained Linux/Android on the 2017 Fire HD 8, douglas/KFDOWI,
 ultimately a supported ValethonOS control panel. Interim Android is a working
 recovery/development environment, not completion. The full ACK 6.18.34 draft
-now completes kernel initialization and executes /init on Douglas. Fresh retained
-records show SELinux policy-load success and successful gadget probe; host events
-show the test USB identity enumerating and CDC ACM binding. The prior stack-
-overflow panic was not seen after the live RAM correction.
+completes initialization and executes its controlled enforcing PID1 on Douglas.
+**The prepared PID1's exact fresh VLOG0002+32-byte nonce was received over USB.**
+This is the agreed kernel/PID1/USB-identity milestone, not a VM/stub-only pass.
+Pinned PID1 emits that header only after enforcing-policy readbacks/RO remount,
+labels/domain/namespace, UDC, duplex serial and kmsg-open gates. Kernel/RAM setup
+and userspace execution must not be reopened as pending because record transfer
+is incomplete.
 
-**Remaining acceptance:** fresh PID1 USB protocol identity/records/terminal
-witness. The enforcing/RO-policy/domain/namespace gates are supported by pinned
-control-flow to gadget setup, not a recovered USB attestation. Do not reopen
-kernel/PID1 execution just because the old wire-based flag remains false.
+Latest runtime: [USB identity milestone](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
+Original Android boot/config/recovery and normal ADB verified after return.
+Latest owner Power confirmation pending; prior corrected-RAM and C-init returns
+were explicitly untouched. Exact reset cause remains unqualified. One source
+boot/restore and one load/jump consumed per attempt, no automatic retries.
 
-Latest verified state: completed original Android, exact original boot/config,
-unchanged recovery and normal ADB. Owner confirmed Power untouched for both
-C-init and corrected-RAM attempts; automatic returns established, exact reset
-cause unqualified. All prior approvals consumed; no automatic retries.
+**Next product work:** read-only internal eMMC bring-up under #22, then
+maintained Android userspace/init/adbd. Complete log-record transfer is a
+non-blocking follow-up, not another proof gate.
+The capture has40 bytes, zero complete records and no terminal frame. This does
+not erase the fresh PID1 USB identity. The old target_pid1_proven metric bundles
+release/cmdline log payloads and stays false for that stricter stream criterion.
+Use the separate pid1_usb_identity_proven hardware milestone, with its recorded
+physical-writer/gated-source proof basis.
 
-[Next plan](NEXT-MILESTONE-PLAN.md), [full end-to-end action](ACK-USB-END-TO-END.md).
-Owner correction: do not get stuck on logging to prove something already working.
-No logging-only hardware gate. Repair the existing receiver and go directly to
-the full transfer; preserve achieved initialization/PID1/USB enumeration.
+Owner correction: do not get stuck on logging to prove working components.
+No logging-only tablet gate or repeated kernel/PID1/USB-enumeration proof. Next
+is an integrated read-only storage/status result using the existing USB path,
+with a fresh package/owner presence if a hardware attempt is needed. All prior authorizations remain consumed.
 
-## Corrected-RAM hardware milestone and receiver action
+## Receiver result and offline cleanup fix
 
-[Receipt](../../evidence/independent-recovery/ack-ramfix-runtime-result.json):
-Run /init, SELinux policy audit res1 and gadget probe success after policy. One
-load/jump, original boot restored before it, original state verified after return.
-Host observed test1209:0001 and CDC ACM; no fresh wire bytes/completion receipt.
-The receiver's SSH exit/stderr were previously discarded; process-failure cause
-is unknown. Detached bounded capture worker and durable outcome recovery repair
-that operational gap. No device/USB-driver changes are inferred from it.
+The detached worker delivered the identity, but its outcome was masked by
+termios.error during post-disconnect restoration (not caught by except OSError).
+The old supervisor then reported endpoint_selected false and rejected the wire
+assessment. Raw40-byte evidence was independently parsed against the fresh nonce
+and host digest. Preserve the original failed controller report; the sanitized
+runtime receipt distinguishes identity proof from incomplete records.
 
-Fresh end-to-end reference: out/recovery-linux-pivot/ack-usb-end-to-end-candidate-1;
-PID1 ack-ramfix-initramfs-2; prepared runner run-ack-usb-end-to-end-trial-1-private.py
-in that parent. Scope5 is distinct; old approvals remain consumed. Verbose
-initcall tracing is disabled; kernel/driver/RAM fix preserved. Current user said
-“Do it” while available; this authorizes continuing to the next full attempt,
-not repeating a consumed trial or an isolated logging test.
+Cleanup now catches termios.error, preserves the original capture outcome and
+accepts a completed transfer's expected vanished-TTY restoration. Offline tests
+cover incomplete/complete capture plus cleanup error, fresh header without log
+records, detached-parent loss and stdout-loss recovery. No new device test ran
+for this cleanup fix. Primary reason the record stream ended after identity is
+still unknown; do not invent a kernel/PHY regression or claim terminal success.
+
+[Next plan](NEXT-MILESTONE-PLAN.md), [end-to-end history](ACK-USB-END-TO-END.md).
+Private latest trial: out/recovery-linux-pivot/ack-usb-end-to-end-trial-runtime-1.
+Its scope5 approval and children are consumed; do not rerun the wrapper.
 
 ## C-init hardware result and live RAM correction
 

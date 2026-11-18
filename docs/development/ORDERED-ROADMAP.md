@@ -1,3 +1,16 @@
+# Current delivery status — November17,2026
+
+Maintained6.18 kernel initialization, controlled enforcing PID1 and its fresh USB
+identity are now established on Douglas. Original Android state verified after
+return. [Runtime receipt](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
+[Current execution plan](NEXT-MILESTONE-PLAN.md) and project memory supersede the
+dated blocked selections preserved below. Next product work is Phase2/#22
+read-only internal-storage bring-up, then maintained Android userspace. Kernel
+record-transfer completion remains follow-up under #348, not a prerequisite for
+re-proving achieved boot/PID1/USB. Owner explicitly directed avoiding logging
+loops. Do not interpret historical no-boot/no-log statements below as live status.
+No maintained Android OS/UI, full hardware, security-update or QA pass is claimed.
+
 # Ordered ValethonOS delivery roadmap
 
 Offline source delta: independent arrival/first-rejection witness implemented.

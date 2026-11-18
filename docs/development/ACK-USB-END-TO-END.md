@@ -1,6 +1,9 @@
 # Complete the existing PID1 USB transfer
 
-November17,2026. [Latest hardware result](../../evidence/independent-recovery/ack-ramfix-runtime-result.json).
+The full attempt ran November17,2026 and delivered the exact fresh PID1 USB
+identity. [Identity milestone and stream limit](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
+Scope5 is consumed; no replay. The40-byte header is verified, following record
+transfer incomplete. Historical preparation follows. [Prior hardware result](../../evidence/independent-recovery/ack-ramfix-runtime-result.json).
 The RAM-corrected maintained kernel completed initialization, executed /init,
 loaded its SELinux policy and probed the gadget successfully. Host kernel events
 show1209:0001 enumeration and CDC ACM binding during the attempt. Original
@@ -57,3 +60,18 @@ no retry. Earlier trials remain consumed. Accept success on the fresh enforcing
 PID1 USB protocol identity/records/terminal witness, then progress to the next
 functional milestone. If transfer fails, use the receiver's actual outcome to
 fix that boundary; do not require proof of already-working kernel/PID1 stages.
+
+## Completed attempt and cleanup repair
+
+The fresh exact VLOG0002+nonce header reached the host. Pinned PID1 gates
+policy/enforcing/RO/domain/namespace/UDC/serial/kmsg before emitting it, so the
+kernel/PID1/USB identity milestone is reached. Complete records0, terminal false:
+full record transfer is not claimed. The earlier stricter wire payload flag
+remains false; it must not downgrade this narrower achieved identity milestone.
+
+The detached worker exposed a termios.error cleanup escape after disconnect,
+which masked endpoint/result state. The controller's original ValueError is
+preserved in the runtime receipt. Cleanup now preserves both incomplete-transfer
+failures and completed-transfer outcomes when a vanished TTY cannot be restored.
+A local software test covers both cases. No new tablet logging test is planned.
+The original cause of the post-header transfer interruption is still open.

@@ -1,17 +1,21 @@
-# Current work — finish the existing PID1 USB transfer, November17,2026
+# Current milestone — maintained Linux/PID1 fresh USB identity reached, November17,2026
 
-[Hardware milestone](../../evidence/independent-recovery/ack-ramfix-runtime-result.json):
-RAM-corrected kernel completes initialization, executes /init, loads SELinux policy
-and probes gadget; host sees test VID/PID and CDC ACM. Original installation
-verified after return; Power untouched confirmed. Fresh USB protocol witness is
-still missing because receiver outcome was lost. Do not reopen kernel/PID1 or
-create another logging-only device gate. Owner explicitly directed this focus.
+[Hardware receipt](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json):
+exact VLOG0002+fresh32-byte PID1 nonce received over USB. Reviewed PID1 gates
+policy/enforcing/RO/domain/namespace/UDC/serial/kmsg before that header. Kernel
+initialization/PID1/USB identity are achieved, not pending logging proof.
+Original Android installation and normal ADB verified after return. Latest Power
+attestation pending; all previous confirmations recorded. Scope5 consumed.
 
-[Next full attempt](ACK-USB-END-TO-END.md), [plan](NEXT-MILESTONE-PLAN.md).
-Detached bounded receiver and durable-result recovery are implemented; keep the
-existing RAM fix/kernel, fresh PID1 identity and quiet initcalls. Owner available
-and “Do it” authorizes continuing to the full scope5 attempt; prior approvals
-consumed. One protected source boot/restore and jump only, no automatic retry.
+[Next plan](NEXT-MILESTONE-PLAN.md): read-only internal eMMC bring-up under #22,
+then maintained Android userspace. Post-header log-record transfer is a separate
+non-blocking follow-up.
+Current wire40 bytes, zero complete records, no terminal. Host termios.error
+cleanup masked the receiver result; offline fix/tests preserve it. No new device
+or logging-only test for that fix. Keep working kernel/RAM/PID1; investigate the
+specific ACK/record boundary, never repeat a consumed trial or re-prove achieved
+stages. Use a functional storage/status response for the next integrated test.
+Owner explicitly directed avoiding logging loops.
 
 # Historical selection — UART bench preparation, November 16, 2026
 

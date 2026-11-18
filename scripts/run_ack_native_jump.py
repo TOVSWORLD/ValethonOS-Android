@@ -259,9 +259,11 @@ def run(device, lab_package, manifest, client_report, linked, output,
         if assessment['identity_verified'] and r['capture'].get('endpoint_selected') is not True:
             raise ValueError('Wire evidence lacks physical endpoint provenance')
         r['wire_assessment'] = assessment
+        r['pid1_usb_identity_proven'] = assessment['identity_verified'] and r['capture'].get('endpoint_selected') is True
         r['target_pid1_proven'] = assessment['target_pid1_proven']
         r['target_kernel_boot_proven'] |= assessment['target_kernel_boot_proven']
         r['outcome'] = ('ack-kernel-and-pid1-proven' if r['target_pid1_proven'] else
+                        'ack-pid1-usb-identity-proven-stream-incomplete' if r['pid1_usb_identity_proven'] else
                         'ack-kernel-entry-proven' if r['target_kernel_boot_proven'] else 'ack-boot-unproven')
         return r
     except BaseException as e:

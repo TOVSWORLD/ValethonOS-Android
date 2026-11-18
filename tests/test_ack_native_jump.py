@@ -125,6 +125,14 @@ class ACKJump(unittest.TestCase):
         self.assertEqual((r['load_attempts'], r['jump_requests']), (1, 1))
         self.assertFalse(r['hardware_deadline_qualified'])
 
+    def test_fresh_pid1_usb_identity_is_a_milestone_without_log_payload(self):
+        self.d.wire = b'VLOG0002' + NONCE
+        self.console = b'old source record'
+        r = self.invoke()
+        self.assertTrue(r['pid1_usb_identity_proven'])
+        self.assertFalse(r['target_pid1_proven']); self.assertFalse(r['complete'])
+        self.assertEqual(r['outcome'],'ack-pid1-usb-identity-proven-stream-incomplete')
+
     def test_lost_ssh_stdout_recovers_durable_result_without_reopening(self):
         class LostSSH(Process):
             def communicate(self, **kw):

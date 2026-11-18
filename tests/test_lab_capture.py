@@ -101,6 +101,31 @@ class LabCapture(unittest.TestCase):
             os.close(master)
             os.close(slave)
 
+    def test_disconnect_restore_error_cannot_erase_capture_outcome(self):
+        for complete in [False,True]:
+            with self.subTest(complete=complete):
+                master,slave=os.openpty()
+                selected={'endpoint':os.ttyname(slave),'rdev':os.fstat(slave).st_rdev,'sysfs':'fixture'}
+                settings=termios.tcgetattr(slave);calls=[]
+                def configure(*args):
+                    calls.append(args)
+                    if len(calls)>1:raise termios.error(5,'fixture disconnected after capture')
+                def receive(*args):
+                    if not complete:raise ValueError('fixture incomplete record transfer')
+                    return {'complete':True,'identity_verified':True,'terminal_frame':True}
+                try:
+                    with tempfile.TemporaryDirectory() as tmp, patch.object(receiver,'endpoint_identity',return_value=selected), patch.object(Path,'glob',return_value=[Path('ttyACM0')]), patch.object(receiver.termios,'tcsetattr',side_effect=configure), patch.object(receiver,'host_raw_settings'), patch.object(receiver,'receive_fd',side_effect=receive):
+                        out=Path(tmp)/'capture';r=receiver.capture({'wait_seconds':1},bytes(range(32)),out)
+                        import json
+                        self.assertEqual(json.loads((out/'receipt.json').read_text()),r)
+                        self.assertTrue(r['endpoint_selected']);self.assertTrue(r['port_opened'])
+                        if complete:
+                            self.assertTrue(r['complete']);self.assertTrue(r['tty_restore_after_disconnect'])
+                        else:
+                            self.assertEqual(r['failure'],'ValueError');self.assertEqual(r['failure_stage'],'receiving_wire')
+                            self.assertIn('termios-restore-failed',r['cleanup'])
+                finally:os.close(master);os.close(slave)
+
     def test_missing_endpoint_records_stage_without_device_open(self):
         with tempfile.TemporaryDirectory() as d, \
              patch.object(receiver.time, 'monotonic', side_effect=[0, 2]), \

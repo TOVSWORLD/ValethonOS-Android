@@ -133,8 +133,14 @@ def capture(plan, nonce, output, ready=None):
             if original is not None:
                 try:
                     termios.tcsetattr(port, termios.TCSANOW, original)
-                except OSError:
-                    result['cleanup'].append('termios-restore-failed')
+                except (OSError, termios.error) as error:
+                    number=getattr(error,'errno',None) or (error.args[0] if error.args else None)
+                    if result.get('complete') is True and number in [5,6,19]:
+                        # The producer unbinds after its terminal ACK. Restoring
+                        # a vanished TTY is then expected, not loss of transfer.
+                        result['tty_restore_after_disconnect'] = True
+                    else:
+                        result['cleanup'].append('termios-restore-failed')
             try:
                 os.close(port)
             except OSError:

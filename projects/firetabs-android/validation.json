@@ -2,9 +2,14 @@
   "project": "firetabs-android",
   "stages": {
     "kernel_compile": {
-      "status": "not_run",
-      "revision": null,
-      "evidence": []
+      "status": "passed",
+      "revision": "dfdd0800db2d0a529b1e4e7d40e14f028974aed9",
+      "evidence": [
+        {
+          "path": "evidence/independent-recovery/first-kernel-draft-result.json",
+          "sha256": "4323774d28311613024725a42767d6a36a3cc0f3e5d48b692b5b7f0b55f81fac"
+        }
+      ]
     },
     "android_compile": {
       "status": "not_run",
