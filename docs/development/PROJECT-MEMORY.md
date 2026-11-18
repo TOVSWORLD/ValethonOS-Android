@@ -42,6 +42,30 @@ is an integrated read-only storage/status result using the existing USB path,
 with a fresh package/owner presence if a hardware attempt is needed. Storage
 scope6 and all prior authorizations are consumed; never replay them.
 
+## Active display/backlight implementation — November18,2026
+
+Owner accepted exactly three intermediate outcomes before the major Android UI:
+(1) display/backlight including needed providers, (2) touch/input, (3) Android
+graphics/userspace integration. Provider substeps are internal to those outcomes,
+not additional owner-facing milestones. Keep the major setup/home commitment.
+
+MT8163 DRM master/gamma/mutex source port and TPV-only DRM panel are implemented.
+Existing saved working boot DT identifies TPV/MP; no new device query needed.
+Working board pinctrl proves GPIO43 power/GPIO83 reset, correcting stale110/65
+comments. Working LP8557 is REGISTER_BASED at I2C0x2c, device control0x47; generic
+PWM-backlight is not sufficient. The board's epprom_data property is ignored by
+its eeprom_data-reading driver; do not activate the dormant ROM table writes.
+The172 TPV packets/two delays match compiled original C byte-for-byte. Actual C
+failure matrix covers every packet/short write, regulator errors and state cleanup.
+All995 tests and Android source-evidence checks pass. No display hardware trial.
+
+Full hosted kernel build is next via a draft PR: existing GitHub connector has
+no workflow-dispatch action and local gh is not authenticated; do not ask owner
+to redo connector setup. PR-open triggers the explicit display-provider scope.
+Source/issue publishing stays on the connector. Keep source-only DT-disabled
+build separate from later functional RAM-test admission. Never relabel this as
+achieved display or add a logging-only proof gate. See display-port/README.md.
+
 ## Read-only eMMC hardware milestone — November18,2026
 
 [Actual receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json).

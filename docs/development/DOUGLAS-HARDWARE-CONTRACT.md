@@ -270,10 +270,16 @@ See [IOMMU/SMI](../../projects/firetabs-android/kernel/dtb/IOMMU-SMI-BINDINGS.md
 ## 12. Display panel, DSI and backlight
 
 Legacy panel driver is NT35521 Douglas,800×1280, four DSI lanes, RGB888. It contains
-vendor-ID-dependent timing and command tables, GPIO110 rail control and GPIO65
-reset sequencing. Do not flatten its variants into one timing or assume a
-framebuffer address implements the panel. Legacy board also declares LP855x
-backlight at I2C0x2c; a PWM driver compile is not proof of the exact backlight path.
+vendor-ID-dependent timing and command tables. Its GPIO110/65 comments are
+stale: pinned working4.9 board pinctrl and saved live DT use GPIO43 for panel
+power and GPIO83 for reset. This tablet's already captured panel variant is
+TPV/MP; preserve that specific sequence and VGP3 I/O supply. Do not flatten its variants into one timing or assume a
+framebuffer address implements the panel. The working board declares LP8557
+backlight at I2C0x2c; its active driver uses REGISTER_BASED brightness with config
+0x47. A PWM driver compile is not proof of that backlight path. The working DTS
+epprom_data spelling does not match its driver's eeprom_data lookup, so the ROM
+table is not loaded. Do not silently activate these settings during the port.
+[Exact public source pins](../../evidence/display-pipeline-source/sources.json).
 
 Required implementation: panel identification, regulator/reset/delay/DSI commands,
 MIPI PHY, DSI host, MMSYS route, DRM graph, backlight and scanout. Preserve source

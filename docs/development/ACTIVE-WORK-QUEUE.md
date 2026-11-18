@@ -19,6 +19,15 @@ filesystems or Android UI. Earlier preparation:985 tests,14 qualification contro
 11 compiler negatives and four VM checks passed. Source at d6f3c5a; raw trial
 private under out/recovery-linux-pivot/ack-storage-readonly-trial-runtime-1.
 
+## Active first intermediate outcome — display/backlight
+
+Owner agreed to three outcomes before maintained Android setup/home: display/
+backlight, touch/input, Android graphics/userspace. Clock/pin/power substeps are
+internal dependencies, not extra owner-facing milestones. Actual DRM pipeline,
+gamma/mutex and TPV panel sources implemented;995 local tests pass. Hosted full
+kernel compile, DT closure and fresh RAM package remain; no display hardware
+claim or new device action. Keep proven storage/PID1/USB and consumed scope6.
+
 # Historical selection — UART bench preparation, November 16, 2026
 
 Owner requested a route out of blind boot trials. Receive-only UART capture and

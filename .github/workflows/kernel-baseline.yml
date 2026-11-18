@@ -5,7 +5,7 @@ on:
       mode:
         description: Compile integration scope
         type: choice
-        options: [first-draft, lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
+        options: [display-provider, first-draft, lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
         default: diagnostic
       entry_checkpoint:
         description: Private earliest-entry checkpoint (lab-retained only)
@@ -24,6 +24,11 @@ on:
   pull_request:
     types: [opened, ready_for_review]
     paths:
+      - projects/firetabs-android/kernel/display-port/**
+      - scripts/apply_display_port.py
+      - scripts/install_douglas_tpv_panel.py
+      - scripts/generate_douglas_tpv_sequence.py
+      - scripts/build_display_provider.sh
       - projects/firetabs-android/kernel/clock-port/**
       - projects/firetabs-android/kernel/regulator-port/**
       - projects/firetabs-android/kernel/pwm-port/**
@@ -91,7 +96,9 @@ jobs:
           ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
           ARGUMENT_PROFILE: ${{ steps.scope.outputs.argument_profile }}
         run: |
-          if [ "$BUILD_MODE" = pwm-provider ]; then
+          if [ "$BUILD_MODE" = display-provider ]; then
+            bash scripts/build_display_provider.sh
+          elif [ "$BUILD_MODE" = pwm-provider ]; then
             bash scripts/build_pwm_provider.sh
           elif [ "$BUILD_MODE" = dsi-provider ]; then
             bash scripts/build_dsi_provider.sh
@@ -104,7 +111,7 @@ jobs:
           fi
 
       - name: Retain diagnostic kernel bytes and provenance
-        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
+        if: steps.scope.outputs.mode == 'display-provider' || steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
         env:
           ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
         run: |
@@ -119,6 +126,14 @@ jobs:
                                ('output/.config', 'resolved.config'),
                                ('output/System.map', 'System.map'),
                                ('image-size-report.json', 'image-size-report.json')]
+          if '${{ steps.scope.outputs.mode }}' == 'display-provider':
+              sources += [('display-build-result.json', 'display-build-result.json')]
+              sources += [(f'output/{path}', pathlib.Path(path).name) for path in [
+                  'drivers/gpu/drm/panel/panel-amazon-douglas-tpv.o',
+                  'drivers/gpu/drm/mediatek/mtk_drm_drv.o',
+                  'drivers/gpu/drm/mediatek/mtk_disp_gamma.o',
+                  'drivers/soc/mediatek/mtk-mutex.o',
+                  'drivers/video/backlight/lp855x_bl.o']]
           if '${{ steps.scope.outputs.mode }}' in ('lab-retained','first-draft'):
               sources += [('output/drivers/misc/valethon_mailbox.o', 'valethon_mailbox.o'),
                           ('output/drivers/mmc/host/mtk-sd.o', 'mtk-sd.o')]
@@ -147,7 +162,7 @@ jobs:
           (destination / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
           PY
       - name: Upload diagnostic kernel compile outputs
-        if: steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
+        if: steps.scope.outputs.mode == 'display-provider' || steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: diagnostic-kernel-${{ github.sha }}-${{ github.run_attempt }}

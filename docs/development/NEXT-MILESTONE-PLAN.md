@@ -9,6 +9,27 @@ returned with original boot/config/recovery and normal ADB checks passing.
 Owner confirmed Power untouched; automatic Android return observed. Exact reset
 cause remains unqualified.
 
+## Three intermediate outcomes agreed with the owner
+
+1. Display and backlight, including required clock/pin/power support.
+2. Touch/input.
+3. Android graphics and userspace integration.
+
+Then the major outcome: maintained Android reaches usable setup/home with
+SELinux enforcing, USB/ADB and a verified return path. This is a sequence of
+outcomes, not a promise of three physical tests. Provider source/build steps
+stay inside the first outcome; do not promote them to more minor milestones.
+
+## Display/backlight implementation in progress
+
+The DRM master/gamma/mutex port and TPV-only panel are implemented;995 tests pass.
+Working boot data/source resolve TPV/MP, power43/reset83 and LP8557 register-based
+backlight. Source tables match compiled legacy C. Full hosted compilation,
+complete DT dependency closure and a fresh functional RAM-test package remain.
+No display pass is claimed; no new physical test has run. Existing source pins,
+implementation and build contract are in
+[display integration](../../projects/firetabs-android/kernel/display-port/README.md).
+
 ## Next execution: providers needed by display/touch and Android
 
 Advance the existing order to #18 clock/reset, then #19 pinctrl/EINT and #20
