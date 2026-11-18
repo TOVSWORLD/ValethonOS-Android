@@ -1,5 +1,26 @@
 # Next milestone execution plan
 
+## Direct test complete; original Android restored and verified — November18,2026
+
+Owner approved staging/test explicitly. One direct candidate p5 write/readback,
+one normal-loader boot and full300s observation ran from original TWRP. No kexec
+jump, recovery/bootstrap/bootloader write or automatic trial retry. First read-only
+preflight size mismatch was preserved; exact-size reads and strict full-hash
+recheck passed before the sole candidate write.
+No target endpoint appeared and zero capture bytes arrived. Selected-port metadata
+shows five boot-chain enumerations about65.6–65.8s apart. This establishes repeated
+returns to the boot chain, NOT reset cause, Linux entry, PID1 or a panel fault.
+Owner visual report pending. Direct boot did not yet achieve display and does not
+invalidate previous successful maintained Linux/PID1/USB/storage RAM boots.
+After observation, original FACTORYM helper ran exactly once and returned to
+original TWRP. Original p5 restored once with full readback; p6 unchanged. Original
+Android boot/config/recovery, different completed boot and normal ADB all passed.
+No more owner power steps needed. Current installation is original Android.
+Next compare direct-loader runtime entry/DT/initrd fixups with working boot and
+successful RAM-entry contracts; find a concrete discrepancy before another test.
+Do not repeat unchanged candidate, guess panel timings or reopen logging as a gate.
+Receipt direct-boot-runtime-result.json; private checkpoint out/display-direct-1.
+
 ## Direct-loader test prepared; lab staging approval pending — November18,2026
 
 Owner authorized setting up/running a direct-loader comparison, accepting recovery
