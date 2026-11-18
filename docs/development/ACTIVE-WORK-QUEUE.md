@@ -24,7 +24,7 @@ private under out/recovery-linux-pivot/ack-storage-readonly-trial-runtime-1.
 Owner agreed to three outcomes before maintained Android setup/home: display/
 backlight, touch/input, Android graphics/userspace. Clock/pin/power substeps are
 internal dependencies, not extra owner-facing milestones. Actual DRM pipeline,
-gamma/mutex and TPV panel sources implemented;995 local tests pass. Hosted full
+gamma/mutex and TPV panel sources implemented;999 local tests pass. Hosted full
 kernel compile, DT closure and fresh RAM package remain; no display hardware
 claim or new device action. Keep proven storage/PID1/USB and consumed scope6.
 

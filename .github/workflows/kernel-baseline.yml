@@ -22,7 +22,7 @@ on:
         type: boolean
         default: false
   pull_request:
-    types: [opened, ready_for_review]
+    types: [opened, synchronize, ready_for_review]
     paths:
       - projects/firetabs-android/kernel/display-port/**
       - scripts/apply_display_port.py
@@ -125,7 +125,7 @@ jobs:
                                ('output/arch/arm64/boot/Image.gz', 'Image.gz'),
                                ('output/.config', 'resolved.config'),
                                ('output/System.map', 'System.map'),
-                               ('image-size-report.json', 'image-size-report.json')]
+                               ('display-image-size-report.json' if '${{ steps.scope.outputs.mode }}' == 'display-provider' else 'image-size-report.json', 'image-size-report.json')]
           if '${{ steps.scope.outputs.mode }}' == 'display-provider':
               sources += [('display-build-result.json', 'display-build-result.json')]
               sources += [(f'output/{path}', pathlib.Path(path).name) for path in [

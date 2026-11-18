@@ -8,16 +8,23 @@ struct douglas_tpv_io {
  void (*power)(void *,int);
  void (*reset)(void *,int); /* Logical assertion: true drives physical reset low. */
  void (*delay)(void *,unsigned int);
+ int (*lanes_ready)(void *);
+ int (*lanes_down)(void *);
  long (*write)(void *,const unsigned char *,unsigned int);
  void *ctx;
 };
-struct douglas_tpv_state { int rail_owned,active,fault; };
+struct douglas_tpv_state { int rail_owned,lanes_owned,active,fault; };
 static inline int douglas_tpv_unprepare(struct douglas_tpv_state *s,const struct douglas_tpv_io *io)
 {
  int ret;
  if (!s->rail_owned)
   return 0;
  io->reset(io->ctx,1);
+ if(s->lanes_owned) {
+  ret=io->lanes_down(io->ctx);
+  if(ret) { s->fault=1;s->active=0;return ret; }
+  s->lanes_owned=0;
+ }
  io->delay(io->ctx,15);
  io->power(io->ctx,0);
  io->delay(io->ctx,5);
@@ -49,6 +56,9 @@ static inline int douglas_tpv_prepare(struct douglas_tpv_state *s,const struct d
  io->delay(io->ctx,6);
  io->power(io->ctx,1);
  io->delay(io->ctx,30);
+ ret=io->lanes_ready(io->ctx);
+ if(ret)goto failed;
+ s->lanes_owned=1;
  io->delay(io->ctx,10);
  io->reset(io->ctx,0);
  io->delay(io->ctx,10);

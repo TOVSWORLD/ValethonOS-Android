@@ -1,0 +1,17 @@
+{
+  "scope": "Actual first display source compile/link; final packaging failed, no hardware qualification",
+  "date": "2026-11-18",
+  "source_commit": "1b0d1b5046744c16bafa109e5eb97043c24e4306",
+  "workflow_run": 44250389319,
+  "job_id": 134619345276,
+  "workflow_url": "https://github.com/TOVSWORLD/ValethonOS-Android/actions/runs/44250389319",
+  "workflow_passed": false,
+  "display_objects_compiled": true,
+  "kernel_image_linked": true,
+  "artifacts_retained": false,
+  "failure_stage": "Final size-report packaging",
+  "failure": "Fresh output file required: dependency image-size-report.json already exists",
+  "fix": "Write final display-image-size-report.json and retain that file under the artifact's standard report name",
+  "newer_lane_api_requires_fresh_build": true,
+  "hardware_execution": false
+}

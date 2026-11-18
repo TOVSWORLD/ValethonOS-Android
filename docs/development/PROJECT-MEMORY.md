@@ -57,9 +57,25 @@ PWM-backlight is not sufficient. The board's epprom_data property is ignored by
 its eeprom_data-reading driver; do not activate the dormant ROM table writes.
 The172 TPV packets/two delays match compiled original C byte-for-byte. Actual C
 failure matrix covers every packet/short write, regulator errors and state cleanup.
-All995 tests and Android source-evidence checks pass. No display hardware trial.
+All999 tests and Android source-evidence checks pass. No display hardware trial.
 
-Full hosted kernel build is next via a draft PR: existing GitHub connector has
+Draft PR454, branch codex/issue-18-display-foundation, is stacked on the
+unchanged proven storage/native branch. First compile run44250389319 on source1b0d1b5 compiled the actual display
+objects and linked Image, then failed final packaging because the size-report
+writer requires a fresh filename. Fix uses display-image-size-report.json,
+preserving the dependency report. Failed receipt is versioned; no artifact or
+runtime pass inferred. Follow-up implements explicit MT8163 lane prepare/unprepare:
+rails settle before lane exit from ULPM and reset; lane shutdown precedes power
+off, with retained rail ownership on cleanup failure. These follow-up sources
+need an updated full build before admission. DT preview now closes the
+display/SMI/IOMMU/I2C0/panel/backlight graph, preserves RAM/no-map/reserve-map
+data, uses verified I2C0 pins75/76 and panel43/83, and strips the old RAM-console
+hook arguments. Explicit offline-preview marker/no executable metadata prevents
+misuse as a physical candidate. New Image package/VM and attended screen test
+still remain; source/DT checks are internal steps of the display outcome. Never treat the older build as
+qualification of a newer head.
+
+Full hosted kernel build uses the draft PR: existing GitHub connector has
 no workflow-dispatch action and local gh is not authenticated; do not ask owner
 to redo connector setup. PR-open triggers the explicit display-provider scope.
 Source/issue publishing stays on the connector. Keep source-only DT-disabled

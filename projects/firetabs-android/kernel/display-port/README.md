@@ -29,10 +29,12 @@ the original function produces byte-for-byte identical packets/delays. Actual
 ported C controls cover every command failure/short write, rail-enable failure,
 uncertain rail-disable cleanup, no false active state and idempotent transitions.
 The driver uses normal DRM panel/DSI, regulator and GPIO APIs; reset is active-low,
-host-first panel prepare is requested, and local power/reset ordering follows
-working resume/suspend. Complete host/rail/LP11/reset ordering still requires
-DSI integration review before hardware admission; this source build does not
-claim that cross-driver ordering is established.
+host-first prepare powers the host, then the panel settles its rails and calls
+a scoped MT8163 lane-ready API before reset. Unprepare quiesces lanes before
+dropping rails; failed lane cleanup retains power/ownership and a fault. The
+API rejects foreign, inactive and unowned hosts and takes no new power reference.
+Actual C controls cover guards and fault cleanup; electrical timing remains
+unqualified until the functional test.
 
 The working backlight driver is REGISTER_BASED LP8557 at I2C0x2c with config0x47,
 not the generic donor PWM-backlight node. Use the existing maintained LP855X
@@ -50,7 +52,17 @@ from dependency stages are not the display build. The final manifest hashes
 actual objects, Image, config, System.map and vmlinux. This is source compilation:
 no DT activation, RAM packaging, firmware write or physical admission occurs.
 
-Local validation:995 tests pass, including compiled panel and mutex controls.
+Local validation: compiled panel, mutex and explicit host/panel lane controls
+pass. All999 local regressions pass on the updated source, including the lane
+API and DT recipe; the full hosted build remains separate.
+
+`display_dtb_profile.py` previews the full pipeline, panel, I2C0 LP8557 and
+required SMI/IOMMU suppliers over the proven RAM/storage DT. It preserves all
+RAM/no-map/reserve-map data, uses working I2C0 pins75/76 and panel43/83, removes
+unused CMDQ suppliers only with CMDQ explicitly disabled, and replaces the old
+RAM-console hook arguments with tty0. Every edit is read back. The preview has
+an explicit marker and no executable RAM metadata/authorization; it is not a
+physical candidate or a reason to run another tablet test.
 Actual hosted kernel compilation is the next check. After it passes, prepare
 the complete display/panel/backlight DT dependency closure and a fresh RAM test
 package carrying forward the proven memory, PID1, USB and return contract.
@@ -58,3 +70,10 @@ Do not replay consumed scope6, repeat a storage/logging-only test, or claim a
 working screen from these source checks. Raw boot arguments remain private;
 public source pins and the allowlisted variant are in
 `evidence/display-pipeline-source/sources.json`.
+
+The first hosted run44250389319 compiled the actual display objects and linked
+Image, then failed because the final size-report writer refused to overwrite
+the dependency report. A distinct display-image-size-report.json fixes that
+packaging error. Its failed receipt is preserved; no artifact/runtime pass is
+inferred. The lane API and DT preview additions require the next exact-head
+full build. Previewing/validating DT data is not another tablet milestone.

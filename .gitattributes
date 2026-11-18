@@ -8,3 +8,5 @@ projects/firetabs-android/kernel/pinctrl-port/*.patch -whitespace
 projects/firetabs-android/kernel/power-port/*.patch -whitespace
 projects/firetabs-android/kernel/dtb/bindings/*.patch -whitespace
 projects/firetabs-android/kernel/usb-port/*.patch -whitespace
+
+projects/firetabs-android/kernel/display-port/*.patch -whitespace

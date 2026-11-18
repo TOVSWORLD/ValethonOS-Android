@@ -22,7 +22,7 @@ stay inside the first outcome; do not promote them to more minor milestones.
 
 ## Display/backlight implementation in progress
 
-The DRM master/gamma/mutex port and TPV-only panel are implemented;995 tests pass.
+The DRM master/gamma/mutex port and TPV-only panel are implemented;999 tests pass.
 Working boot data/source resolve TPV/MP, power43/reset83 and LP8557 register-based
 backlight. Source tables match compiled legacy C. Full hosted compilation,
 complete DT dependency closure and a fresh functional RAM-test package remain.

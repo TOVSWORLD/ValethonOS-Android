@@ -156,3 +156,87 @@
  	{ .compatible = "mediatek,mt8167-disp-mutex", .data = &mt8167_mutex_driver_data },
  	{ .compatible = "mediatek,mt8173-disp-mutex", .data = &mt8173_mutex_driver_data },
  	{ .compatible = "mediatek,mt8183-disp-mutex", .data = &mt8183_mutex_driver_data },
+--- a/drivers/gpu/drm/mediatek/mtk_dsi.c
++++ b/drivers/gpu/drm/mediatek/mtk_dsi.c
+@@ -27,6 +27,7 @@
+ #include <drm/drm_mipi_dsi.h>
+ #include <drm/drm_of.h>
+ #include <drm/drm_panel.h>
++#include <drm/mediatek/mtk_dsi_mt8163.h>
+ #include <drm/drm_print.h>
+ #include <drm/drm_probe_helper.h>
+ #include <drm/drm_simple_kms_helper.h>
+@@ -268,6 +269,7 @@
+ static ssize_t mtk_dsi_host_transfer(struct mipi_dsi_host *host,
+ 				     const struct mipi_dsi_msg *msg);
+ static int mtk_dsi_probe(struct platform_device *pdev);
++
+ static int mtk_dsi_probe_legacy(struct platform_device *pdev);
+ static void mtk_dsi_remove(struct platform_device *pdev);
+ static void mtk_dsi_remove_legacy(struct platform_device *pdev);
+@@ -1253,6 +1255,65 @@
+ 	.transfer = mtk_dsi_host_transfer,
+ };
+ 
++
++/* Panel power must settle before leaving ULPM, and reset must follow LP11.
++ * The panel calls this only inside host-first DRM prepare. No DSI command is
++ * sent and no new host power reference is taken. Other hosts/SoCs are rejected.
++ */
++int mtk_dsi_mt8163_prepare_lanes(struct mipi_dsi_device *device)
++{
++ struct mtk_dsi *dsi;
++ int ret = 0;
++
++ if (!device || !device->host || device->host->ops != &mtk_dsi_ops)
++  return -EOPNOTSUPP;
++ dsi = host_to_dsi(device->host);
++ if (!mtk_dsi_mt8163(dsi))
++  return -EOPNOTSUPP;
++ mutex_lock(&dsi->strict_lock);
++ if (dsi->strict_fault || !dsi->strict_active || !dsi->refcount ||
++     !dsi->strict_attached || !dsi->strict_phy_owned ||
++     !dsi->strict_engine_owned || !dsi->strict_digital_owned)
++  ret = -EPIPE;
++ else
++  mtk_dsi_lane_ready(dsi);
++ mutex_unlock(&dsi->strict_lock);
++ return ret;
++}
++EXPORT_SYMBOL_GPL(mtk_dsi_mt8163_prepare_lanes);
++
++
++int mtk_dsi_mt8163_unprepare_lanes(struct mipi_dsi_device *device)
++{
++ struct mtk_dsi *dsi;
++ int ret = 0;
++
++ if (!device || !device->host || device->host->ops != &mtk_dsi_ops)
++  return -EOPNOTSUPP;
++ dsi = host_to_dsi(device->host);
++ if (!mtk_dsi_mt8163(dsi))
++  return -EOPNOTSUPP;
++ mutex_lock(&dsi->strict_lock);
++ if (!dsi->lanes_ready)
++  goto out;
++ if (!dsi->strict_active || !dsi->refcount || !dsi->strict_engine_owned ||
++     !dsi->strict_digital_owned || !dsi->strict_phy_owned) {
++  ret = -EPIPE;
++  goto out;
++ }
++ /* Cleanup remains available after a command fault while clocks are owned. */
++ mtk_dsi_stop(dsi);
++ mtk_dsi_set_cmd_mode(dsi);
++ mtk_dsi_lane0_ulp_mode_enter(dsi);
++ mtk_dsi_clk_ulp_mode_enter(dsi);
++ writel(0, dsi->regs + DSI_TXRX_CTRL);
++ dsi->lanes_ready = false;
++out:
++ mutex_unlock(&dsi->strict_lock);
++ return ret;
++}
++EXPORT_SYMBOL_GPL(mtk_dsi_mt8163_unprepare_lanes);
++
+ static int mtk_dsi_probe_legacy(struct platform_device *pdev)
+ {
+ 	struct mtk_dsi *dsi;

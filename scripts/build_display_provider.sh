@@ -20,7 +20,7 @@ make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$(nproc)" W=1 \
   drivers/video/backlight/lp855x_bl.o
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 -j"$(nproc)" Image vmlinux
 gzip -n -9 -c "$output/arch/arm64/boot/Image" > "$output/arch/arm64/boot/Image.gz"
-python3 scripts/measure_arm64_image.py --image "$output/arch/arm64/boot/Image" --gzip "$output/arch/arm64/boot/Image.gz" --output "$root/image-size-report.json"
+python3 scripts/measure_arm64_image.py --image "$output/arch/arm64/boot/Image" --gzip "$output/arch/arm64/boot/Image.gz" --output "$root/display-image-size-report.json"
 python3 - <<'PY'
 from pathlib import Path
 import hashlib,json

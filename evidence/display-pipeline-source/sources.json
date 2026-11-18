@@ -108,7 +108,16 @@
     "regulator": "mt6323 VGP3",
     "backlight": "LP8557 at I2C0 address0x2c, REGISTER_BASED control",
     "legacy_device_control": 71,
-    "eprom_table_property_mismatch": "Working board spells epprom_data; working driver reads eeprom_data, so that table is not loaded. Do not silently activate those writes."
+    "eprom_table_property_mismatch": "Working board spells epprom_data; working driver reads eeprom_data, so that table is not loaded. Do not silently activate those writes.",
+    "backlight_i2c_pins": [
+      75,
+      76
+    ]
   },
-  "hardware_execution": false
+  "hardware_execution": false,
+  "dsi_host_input": {
+    "file": "ack-with-dsi-mtk_dsi.c",
+    "sha256": "64b67ab57d171d171f1638cae1676c82ec3be6bbfe3ae4b66e055abd9dbd753b",
+    "derived_from": "evidence/dsi-source/ack-mtk_dsi.c with the existing dsi-port patch DSI-file hunks only"
+  }
 }

@@ -12,6 +12,7 @@
 #include <drm/drm_mipi_dsi.h>
 #include <drm/drm_modes.h>
 #include <drm/drm_panel.h>
+#include <drm/mediatek/mtk_dsi_mt8163.h>
 #include "douglas_tpv_core.h"
 
 struct douglas_tpv {
@@ -38,6 +39,14 @@ static void tpv_reset(void *ctx,int asserted)
 static void tpv_delay(void *ctx,unsigned int milliseconds)
 {
  (void)ctx;msleep(milliseconds);
+}
+static int tpv_lanes_ready(void *ctx)
+{
+ struct douglas_tpv *p=ctx;return mtk_dsi_mt8163_prepare_lanes(p->dsi);
+}
+static int tpv_lanes_down(void *ctx)
+{
+ struct douglas_tpv *p=ctx;return mtk_dsi_mt8163_unprepare_lanes(p->dsi);
 }
 static long tpv_write(void *ctx,const unsigned char *data,unsigned int length)
 {
@@ -96,9 +105,8 @@ static int tpv_probe(struct mipi_dsi_device *dsi)
  msleep(15);
  p->power=devm_gpiod_get(dev,"power",GPIOD_OUT_LOW);
  if(IS_ERR(p->power))return dev_err_probe(dev,PTR_ERR(p->power),"panel power GPIO\n");
- p->io=(struct douglas_tpv_io){tpv_supply,tpv_power,tpv_reset,tpv_delay,tpv_write,p};
- /* Request host-first prepare; verify rail/LP11/reset ordering in the
-  * complete DSI integration before physical admission. */
+ p->io=(struct douglas_tpv_io){tpv_supply,tpv_power,tpv_reset,tpv_delay,tpv_lanes_ready,tpv_lanes_down,tpv_write,p};
+ /* Host clocks first; core powers rails, requests LP11, then resets panel. */
  p->panel.prepare_prev_first=true;
  dsi->lanes=4;dsi->format=MIPI_DSI_FMT_RGB888;
  dsi->mode_flags=MIPI_DSI_MODE_VIDEO|MIPI_DSI_MODE_LPM|MIPI_DSI_CLOCK_NON_CONTINUOUS;
