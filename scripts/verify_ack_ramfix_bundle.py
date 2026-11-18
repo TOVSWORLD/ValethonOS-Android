@@ -8,8 +8,8 @@ from prepare_ack_combined_bundle import sha
 from compare_pmic_dtb import snapshot
 from prepare_native_jump_bundle import raw,ranges_ok
 
-def verify(manifest,kernel_package,fdtget=Path('work/dtb-tool/build/fdtget'),nonce=None):
- result=cinit_verify(manifest,kernel_package,fdtget,nonce=nonce,expected_kind=KIND)
+def verify(manifest,kernel_package,fdtget=Path('work/dtb-tool/build/fdtget'),nonce=None,*,expected_kind=KIND):
+ result=cinit_verify(manifest,kernel_package,fdtget,nonce=nonce,expected_kind=expected_kind)
  m=json.loads(manifest.read_text());root=manifest.parent;source=(root/'source-iomem-private.txt').read_bytes()
  if sha(source)!=m['source_iomem_sha256'] or m.get('live_ram_exclusions_preserved') is not True:raise ValueError('Exact live iomem binding required')
  ram=ram_ranges(source.decode());gaps=exclusions(m['memory_banks'],ram)

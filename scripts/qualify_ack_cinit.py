@@ -11,11 +11,15 @@ from unicorn import arm64_const as r
 ROOT=Path(__file__).resolve().parents[1]
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
-def qualify(bundle,kernel,nonce,vm_reports,out,ramfix=False):
+def qualify(bundle,kernel,nonce,vm_reports,out,ramfix=False,*,storage_component=None,storage_vm_reports=()):
  validator=verify
- if ramfix:
-  from verify_ack_ramfix_bundle import verify as validator
- validator(bundle/'report.json',kernel,nonce=nonce)
+ if storage_component is not None:
+  from verify_ack_storage_bundle import verify as validator
+  validator(bundle/'report.json',kernel,storage_component,nonce=nonce)
+ else:
+  if ramfix:
+   from verify_ack_ramfix_bundle import verify as validator
+  validator(bundle/'report.json',kernel,nonce=nonce)
  m=json.loads((bundle/'report.json').read_text());image=(bundle/'image.bin').read_bytes();padded=image+bytes(m['image_memory_bytes']-len(image));meta=(bundle/'metadata.bin').read_bytes();checks={}
  for name,corrupt in [('full_padded_integrity',None),('corrupt_first_page',123),('corrupt_final_padding',len(padded)-1)]:
   data=bytearray(padded)
@@ -58,7 +62,11 @@ def qualify(bundle,kernel,nonce,vm_reports,out,ramfix=False):
  if ramfix:
   paths+=['scripts/prepare_ack_ramfix_bundle.py','scripts/verify_ack_ramfix_bundle.py','scripts/validate_ack_ramfix_vm.py']
   checks['target_memory_geometry_vm']=all(v.get('board_memory_geometry') is True for v in vms)
- result=dict(scope='Offline exact C-init Image/console/integrity qualification; no tablet commands',all_tests_passed=all(checks.values()),tests_skipped=0,checks=checks,image_sha256=digest(bundle/'image.bin'),metadata_sha256=digest(bundle/'metadata.bin'),source_sha256={p:digest(ROOT/p) for p in paths},vm_reports_sha256=[digest(p) for p in vm_reports],hardware_execution=False,target_pid1_proven=False)
+ if storage_component is not None:
+  storage_vms=[json.loads(p.read_text()) for p in storage_vm_reports]
+  checks['storage_enforcing_read_and_denials_both_vm_modes']=len(storage_vms)==2 and {v['virtualization'] for v in storage_vms}=={'off','on'} and all(v['passed'] and v['fixture_unchanged'] and v['readonly_backend'] and v['policy_sha256']=='bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd' and v['kernel_sha256']=='0f43c1f91d9c158659f4f4522d44390cdd934074fb57135344e9d20142235930' for v in storage_vms)
+  paths+=['scripts/prepare_ack_storage_bundle.py','scripts/ack_storage_contract.py','scripts/verify_ack_storage_bundle.py','scripts/validate_storage_vm.py','projects/firetabs-android/diagnostic-usb/storage_init.c','projects/firetabs-android/diagnostic-usb/storage_readonly.h','projects/firetabs-android/diagnostic-usb/storage_vm.c','projects/firetabs-android/diagnostic-usb/policy/storage-readonly.cil']
+ result=dict(scope='Offline exact C-init Image/console/integrity qualification; no tablet commands',all_tests_passed=all(checks.values()),tests_skipped=0,checks=checks,image_sha256=digest(bundle/'image.bin'),metadata_sha256=digest(bundle/'metadata.bin'),source_sha256={p:digest(ROOT/p) for p in paths},vm_reports_sha256=[digest(p) for p in vm_reports],storage_vm_reports_sha256=[digest(p) for p in storage_vm_reports],hardware_execution=False,target_pid1_proven=False)
  out.write_text(json.dumps(result,indent=2)+'\n')
  if not result['all_tests_passed']:raise ValueError('Qualification failed: '+','.join(k for k,v in checks.items() if not v))
  return result

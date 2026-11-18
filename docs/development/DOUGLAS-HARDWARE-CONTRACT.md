@@ -222,6 +222,20 @@ Required implementation: first read-only host/card identification, then explicit
 integrity/return testing when selected. See [console/storage](DOUGLAS-CONSOLE-STORAGE.md),
 [MMC source](../../evidence/offline-emmc-geometry/) and the ACK RAM receipt.
 
+The November18 storage candidate preserves the actual maintained DT's26MHz
+maximum and enables only MMC0 at11230000, not the historical200MHz/HS200 request.
+It checks source/hclk/bus clock IDs31/58/28, assigned parent21, SDR/UHS pin groups,
+8-bit non-removable wiring and existing VEMC3V3/VIO18 providers. IRQ0/79/8 is
+behind MediaTek sysirq10200620; changing it to direct-GIC polarity is incorrect.
+The working kernel uses CONFIG_MMC_MTK and generic mtk-sd.o; ComboA/PRO is not its
+active host. Its mt8163 and mt2701 compatibility entries have identical divisor,
+pad tune, FIFO/data tune and64-bit DMA quirks, corroborating the maintained
+mt2701 fallback. Pinned working source:
+[mtk-sd.c](https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/mmc/host/mtk-sd.c),
+[host Makefile](https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/mmc/host/Makefile).
+[Candidate checks](../../evidence/independent-recovery/ack-storage-readonly-preparation.json)
+are offline only; maintained-kernel eMMC runtime remains pending.
+
 ## 10. USB controller, PHY, DMA and gadget
 
 USB0 at0x11200000 needs the MT8163 MUSB glue, USB2 PHY, analog resources, clocks,

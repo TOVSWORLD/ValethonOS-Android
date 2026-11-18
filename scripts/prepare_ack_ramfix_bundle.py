@@ -26,8 +26,8 @@ def exclusions(banks,ram):
   if at<hi:gaps.append((at,hi))
  return gaps
 
-def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None):
- m=cinit_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id)
+def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None,*,storage_readonly=False):
+ m=cinit_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id,storage_readonly=storage_readonly)
  ram=ram_ranges(iomem);gaps=exclusions(m['memory_banks'],ram)
  dt=out/'target-private.dtb';tree=snapshot(fdtget,dt);covered=[]
  for node,props in tree.items():

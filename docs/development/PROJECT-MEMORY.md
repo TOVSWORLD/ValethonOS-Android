@@ -37,6 +37,45 @@ No logging-only tablet gate or repeated kernel/PID1/USB-enumeration proof. Next
 is an integrated read-only storage/status result using the existing USB path,
 with a fresh package/owner presence if a hardware attempt is needed. All prior authorizations remain consumed.
 
+## Read-only eMMC candidate ready offline — November18,2026
+
+[Preparation receipt](../../evidence/independent-recovery/ack-storage-readonly-preparation.json).
+Dedicated enforcing storage PID1/policy and fresh VSTORE01 functional status are
+built. Only internal MMC0 is enabled, at26MHz with exact existing pins/supplies,
+clock parents and MediaTek sysirq. The working4.9 mt8163 and mt2701 quirks match
+the maintained fallback. No speculative host-driver rewrite or new logging gate.
+The fixed archive block179:5 node is0400; PID1 uses O_RDONLY, exact16MiB/EOF and
+known original boot SHA verification. Policy denies block writes/ioctls/new nodes
+and reads of other block types. No userdata mount or block payload over USB.
+The120-byte one-way status carries fresh identity, stages/errors and a verified
+expected digest; it needs no VLOG ACK or kernel-record transfer.
+
+All11 compiler negatives pass. Both synthetic read-only storage VM modes pass:
+full read/hash, bad-hash rejection, write/ioctl/other-block/mknod denial, unchanged
+fixture. The exact fresh Image reaches enforcing PID1 in both target RAM-layout
+VM modes, including the live2MiB exclusion. All14 entry/console/corruption/VM
+controls and985 unit tests pass, no skips. Android source-evidence check passes.
+Repository integrity still stops on unchanged tests/test_source_usb_shutdown.py:201
+empty test helper; it is not claimed passing. No tablet command or trial ran.
+
+The source/three ABI transfers were approved and completed. Lab compilation and
+VM qualification are finished. Scope6 storage template is unapproved/unconsumed;
+prior approvals remain consumed. Next requires owner presence for one protected
+source boot/restore and one RAM jump; original p5 restored/read back before jump,
+recovery untouched,31-second target deadline and bounded read-only Android-return
+checks. No automatic retry. Hardware storage is not yet achieved.
+
+Private resume inputs: out/recovery-linux-pivot/ack-storage-readonly-candidate-1,
+storage-built-1/out/init, ack-storage-readonly-qualification-1.json,
+ack-storage-readonly-client-1, storage-qualification-artifacts-1. Isolated build
+lab: /tmp/firetabs-storage-readonly-build-20261117-1. Public trial template:
+evidence/independent-recovery/ack-storage-readonly-authorization-template.json.
+Use --ramfix --storage-readonly in run_ack_native_trial.py, never --usb-end-to-end.
+The storage mode requires its own exact scope, component verification and
+functional status plus original Android return; the old log-specific metric
+remains separate. Reuse no consumed scope5 wrapper. Do not run read-only device
+preflight while merely checking the offline parent validate() function.
+
 ## Receiver result and offline cleanup fix
 
 The detached worker delivered the identity, but its outcome was masked by

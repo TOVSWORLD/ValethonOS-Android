@@ -38,3 +38,23 @@ Scope5 and earlier approvals are consumed. One protected source boot/restore and
 RAM jump per new owner-attended trial, original boot restored/read back before
 jump, recovery untouched and bounded read-only return. No wrapper replay or
 automatic retry. Preserve historical failures in the existing issues.
+
+## Ready for the attended storage attempt — November18,2026
+
+[Offline receipt](../../evidence/independent-recovery/ack-storage-readonly-preparation.json)
+and [exact unapproved template](../../evidence/independent-recovery/ack-storage-readonly-authorization-template.json).
+The separate storage PID1/policy and one-way VSTORE01 response are built. All11
+policy compiler negatives, both synthetic read-only storage VM modes, both
+exact-Image target-memory VM boots,14 qualification controls and985 tests pass.
+No physical storage acceptance or new tablet action is claimed.
+
+Next: owner present, one protected source boot with original p5 restored/read back,
+then one RAM jump. Only MMC0 at26MHz; fixed p5 read-only16MiB/EOF/SHA check; no
+userdata mounts or block writes/ioctls. Accept only the fresh functional status
+on the selected physical USB port plus verified original Android return. A
+complete storage failure packet records its stage/error; Android return alone
+is not storage success. Reset deadline31seconds, bounded return window, hard
+restart if needed, no automatic retry. No kernel-log transfer gate.
+
+After storage acceptance, continue maintained Android userspace/init/adbd toward
+#333/#24 setup/home with display/touch. Keep prior kernel/PID1/USB milestones.

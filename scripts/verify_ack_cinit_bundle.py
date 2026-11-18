@@ -55,8 +55,13 @@ def verify(manifest,kernel_package,fdtget=Path('work/dtb-tool/build/fdtget'),non
   if 'valethon,trial-nonce' in tree['/chosen']:raise ValueError('Disk logger unexpectedly opted in')
   for name in ['10007000']:
    if raw(tree['/soc/watchdog@'+name]['status'])!=b'disabled\0':raise ValueError('Target watchdog driver must stay disabled')
-  for name in ['11230000','11240000','11250000']:
-   if raw(tree['/soc/mmc@'+name]['status'])!=b'disabled\0':raise ValueError('RAM-only target required')
+  if expected_kind=='ack-linux-storage-readonly-v6':
+   from ack_storage_contract import verify_tree
+   if m.get('storage_readonly_profile') is not True:raise ValueError('Storage-only manifest required')
+   verify_tree(tree)
+  else:
+   for name in ['11230000','11240000','11250000']:
+    if raw(tree['/soc/mmc@'+name]['status'])!=b'disabled\0':raise ValueError('RAM-only target required')
   if raw(tree['/psci']['status'])!=b'okay\0' or raw(tree['/psci']['compatible'])!=b'arm,psci\0' or raw(tree['/psci']['method'])!=b'smc\0':
    raise ValueError('Explicit available legacy PSCI contract required')
   for name,value in [('cpu_suspend',0x84000001),('cpu_off',0x84000002),('cpu_on',0x84000003),('affinity_info',0x84000004)]:

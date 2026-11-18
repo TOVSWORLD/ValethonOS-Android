@@ -17,6 +17,17 @@ specific ACK/record boundary, never repeat a consumed trial or re-prove achieved
 stages. Use a functional storage/status response for the next integrated test.
 Owner explicitly directed avoiding logging loops.
 
+## Prepared next attempt — read-only eMMC, November18,2026
+
+[Offline receipt](../../evidence/independent-recovery/ack-storage-readonly-preparation.json):
+separate storage PID1/policy and VSTORE01 response built. Both synthetic storage
+VM modes, both exact-Image target-memory VM modes,11 compiler negatives,14
+qualification controls and985 tests pass. No new tablet action or runtime
+storage claim. Scope6 template remains unapproved/unconsumed; owner presence
+needed for one protected source boot/restore and one RAM jump. Preserve the
+proven RAM/PID1/USB path. Original p5 read-only16MiB digest/status is acceptance;
+complete kernel-log streaming remains non-blocking. See memory for exact inputs.
+
 # Historical selection — UART bench preparation, November 16, 2026
 
 Owner requested a route out of blind boot trials. Receive-only UART capture and

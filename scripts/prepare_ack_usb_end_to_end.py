@@ -6,8 +6,8 @@ from prepare_ack_combined_bundle import sha
 from compare_pmic_dtb import snapshot
 from prepare_native_jump_bundle import raw
 
-def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None):
- m=ramfix_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id)
+def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None,*,storage_readonly=False):
+ m=ramfix_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id,storage_readonly=storage_readonly)
  dt=out/'target-private.dtb';tree=snapshot(fdtget,dt)
  values=raw(tree['/chosen']['bootargs']).rstrip(b'\0').decode().split()
  values=[a for a in values if a not in ['initcall_debug','ignore_loglevel'] and not a.startswith('loglevel=')]+['loglevel=7']

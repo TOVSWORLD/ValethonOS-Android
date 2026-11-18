@@ -98,7 +98,7 @@ class ACKJump(unittest.TestCase):
         self.c.write_text(json.dumps(dict(manifest_sha256=runner.sha(self.m.read_bytes()),
             client_sha256='a' * 64, execute_implemented=False, target_kind='ack-linux-v1')))
 
-    def invoke(self, execute=True, process=None):
+    def invoke(self, execute=True, process=None, **options):
         def facts(d):
             return dict(boot=runner.BOOT_SHA, config=runner.ORIGINAL_CONFIG if d.target else CFG,
                 boot_id=('22222222' if d.target else '11111111') + '-1111-1111-1111-111111111111')
@@ -114,7 +114,7 @@ class ACKJump(unittest.TestCase):
             capture.return_value.collect.return_value = {'native_entry_seen': True}
             selector.return_value.select.return_value = [True]
             return runner.run(self.d, '/lab', self.m, self.c, self.linked, self.p / 'out', NONCE,
-                              self.source, self.a if execute else None)
+                              self.source, self.a if execute else None, **options)
 
     def result(self): return json.loads((self.p / 'out/result.json').read_text())
 

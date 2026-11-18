@@ -27,7 +27,11 @@ def worker(control):
  signal.signal(signal.SIGALRM,expired);signal.alarm(125)
  def ready():private(control/'ready.json',dict(pid=os.getpid(),nonce_sha256=hashlib.sha256(nonce).hexdigest(),profile_sha256=hashlib.sha256(json.dumps(profile,sort_keys=True).encode()).hexdigest()))
  try:
-  result=capture(profile,nonce,Path(inputs['output']),ready=ready)
+  if profile['scope']=='ack-storage-readonly-capture-1':
+   from receive_storage_status import receive_fd
+   result=capture(profile,nonce,Path(inputs['output']),ready=ready,receiver=receive_fd)
+  else:
+   result=capture(profile,nonce,Path(inputs['output']),ready=ready)
  except BaseException as e:
   result=dict(complete=False,device_qualified=False,endpoint_selected=False,port_opened=False,worker_failure=type(e).__name__)
  finally:signal.alarm(0)

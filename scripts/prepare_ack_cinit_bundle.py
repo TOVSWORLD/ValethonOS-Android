@@ -9,9 +9,9 @@ from compare_pmic_dtb import snapshot
 from prepare_native_jump_bundle import raw
 KIND='ack-linux-cinit-v3'
 
-def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None):
+def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None,*,storage_readonly=False):
  out.mkdir(mode=0o700)
- m=prior_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out/'prior-private',fdtget,fdtput,system_map,trial_id)
+ m=prior_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out/'prior-private',fdtget,fdtput,system_map,trial_id,storage_readonly=storage_readonly)
  im,c=console(image,system_map,out/'console-private',nonce.hex())
  dt=out/'target-private.dtb';dt.write_bytes((out/'prior-private/target-private.dtb').read_bytes())
  tree=snapshot(fdtget,dt);args=raw(tree['/chosen']['bootargs']).rstrip(b'\0').decode().split()

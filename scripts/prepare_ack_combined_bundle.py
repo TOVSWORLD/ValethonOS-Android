@@ -13,10 +13,10 @@ METADATA_END=0x42028000
 
 def sha(b):return hashlib.sha256(b).hexdigest()
 
-def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None):
+def prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,out,fdtget,fdtput,system_map,trial_id=None,*,storage_readonly=False):
  out.mkdir(mode=0o700)
  base=out/'base-private'
- m=base_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,base,fdtget,fdtput,trial_id=trial_id)
+ m=base_prepare(source_dtb,iomem,draft_dtb,image,config,initramfs,init_report,nonce,linked,base,fdtget,fdtput,trial_id=trial_id,storage_readonly=storage_readonly)
  instrumented,h=hooks(image,system_map,out/'hooks-private',m['trial_id'])
  extent=m['image_memory_bytes'];padded=instrumented+bytes(extent-len(instrumented))
  code,e=entry(out/'entry-private',m['trial_id'],padded)

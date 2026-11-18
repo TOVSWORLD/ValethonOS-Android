@@ -6,7 +6,7 @@ from pathlib import Path
 def build(source,manifest,out,cc='aarch64-linux-musl-gcc'):
  r=json.loads(manifest.read_text());segments=r['segments']
  if len(segments)!=3 or [s['file'] for s in segments]!=['image.bin','metadata.bin','initrd.bin']:raise ValueError('Exact three-segment bundle required')
- image_address=0x40000000 if r.get('target_kind') in ['ack-linux-v1','ack-linux-combined-v2','ack-linux-cinit-v3','ack-linux-ramfix-v4'] else 0x40080000
+ image_address=0x40000000 if r.get('target_kind') in ['ack-linux-v1','ack-linux-combined-v2','ack-linux-cinit-v3','ack-linux-ramfix-v4','ack-linux-storage-readonly-v6'] else 0x40080000
  if [s['address'] for s in segments]!=[image_address,0x42000000,0x69244000] or r['entry']!=0x42018000:raise ValueError('Reviewed physical layout required')
  for s in segments:
   if not 0<s['bytes']<=s['memory_bytes']<=32*1024*1024 or s['memory_bytes']%4096:raise ValueError('Bounded page-aligned capacity required')
@@ -18,7 +18,7 @@ def build(source,manifest,out,cc='aarch64-linux-musl-gcc'):
  b=(out/'native-load').read_bytes()
  if b[:6]!=b'\x7fELF\x02\x01' or b[18:20]!=b'\xb7\x00':raise ValueError('AArch64 ELF64 required')
  result={'scope':'Static native load/unload client; no execute command','source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'manifest_sha256':hashlib.sha256(manifest.read_bytes()).hexdigest(),'client_sha256':hashlib.sha256(b).hexdigest(),'client_bytes':len(b),'execute_implemented':False,'loaded_on_tablet':False}
- if r.get('target_kind') in ['ack-linux-v1','ack-linux-combined-v2','ack-linux-cinit-v3','ack-linux-ramfix-v4']:result['target_kind']=r['target_kind']
+ if r.get('target_kind') in ['ack-linux-v1','ack-linux-combined-v2','ack-linux-cinit-v3','ack-linux-ramfix-v4','ack-linux-storage-readonly-v6']:result['target_kind']=r['target_kind']
  (out/'build-result.json').write_text(json.dumps(result,indent=2)+'\n');return result
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__)

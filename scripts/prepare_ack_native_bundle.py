@@ -86,14 +86,16 @@ def bootargs(target_nonce):
 
 
 def prepare(source_dtb, iomem, draft_dtb, image, config, initramfs, init_report,
-            target_nonce, source_linked, out, fdtget, fdtput, trial_id=None):
+            target_nonce, source_linked, out, fdtget, fdtput, trial_id=None, *, storage_readonly=False):
     if sha(image) != IMAGE_SHA or sha(config) != CONFIG_SHA or sha(draft_dtb) != DRAFT_DT_SHA:
         raise ValueError('Exact complete first ACK draft artifacts required')
     if (len(target_nonce) != 32 or not any(target_nonce) or sha(target_nonce) != init_report['nonce_sha256'] or
             sha(initramfs) != init_report['artifacts']['initramfs.cpio.gz']['sha256']):
         raise ValueError('Fresh enforcing PID1/initramfs/nonce binding required')
-    if init_report.get('policy_sha256') != '5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8':
-        raise ValueError('Exact previously VM-tested enforcing policy required')
+    expected_policy = ('bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd' if storage_readonly else
+                       '5b4f85ffa6c0d9a812fbbd004b307a4f932e93a720cb830eab582aeae21cf1e8')
+    if init_report.get('storage_readonly_profile', False) != storage_readonly or init_report.get('policy_sha256') != expected_policy:
+        raise ValueError('Exact enforcing policy/profile required; physical admission remains separately gated')
     if source_linked.get('early_cpu_shutdown_before_devices') is not True:
         raise ValueError('Hardware-tested source handoff profile required')
     offset, extent, flags = struct.unpack_from('<QQQ', image, 8)

@@ -71,7 +71,7 @@ def raw_settings(attrs):
     return result
 
 
-def capture(plan, nonce, output, ready=None):
+def capture(plan, nonce, output, ready=None, *, receiver=None):
     # This action is only run after owner review/start. No device boot/write commands.
     output.mkdir(mode=0o700, parents=False, exist_ok=False)
     directory = os.open(output, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
@@ -121,7 +121,7 @@ def capture(plan, nonce, output, ready=None):
         termios.tcsetattr(port, termios.TCSANOW, raw_settings(original))
         host_raw_settings(termios.tcgetattr(port))
         stage = 'receiving_wire'
-        result.update(receive_fd(port, raw, nonce, time.monotonic() + 30))
+        result.update((receive_fd if receiver is None else receiver)(port, raw, nonce, time.monotonic() + 30))
     except (Exception, KeyboardInterrupt) as error:
         result['complete'] = False
         result['failure'] = type(error).__name__
