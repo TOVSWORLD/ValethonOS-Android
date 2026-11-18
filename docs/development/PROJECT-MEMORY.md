@@ -1,5 +1,25 @@
 # FireTabs project memory
 
+## Direct-loader test prepared; lab staging approval pending — November18,2026
+
+Owner authorized setting up/running a direct-loader comparison, accepting recovery
+restoration. Fresh enforcing display component and direct16MiB boot image built;
+exact installed/original LK static audit and unchanged board-resource comparison
+pass. Same authenticated PWM Image/panel/MM0/GPIO/policy; only initrd location and
+fresh direct identity differ in chosen. All1025 tests pass, no skips. Existing
+VM proof reused for unchanged kernel/runtime/policy. No native trampoline/deadline.
+Original Android boot/config/recovery and pinned original helper sources verified
+read-only. Planned procedure: original TWRP identity/rollback preflight; one exact
+p5 write/readback; one bootloader-path boot and bounded observation; return to
+original recovery; one original p5 restore/readback; verify original Android.
+No recovery/bootstrap/bootloader write and no automatic trial retry.
+Automatic review rejected transferring images, nonce, selector/config and recovery
+tools to the isolated existing SSH lab because that payload/destination required
+specific user approval. Approval requested; no staging, reboot or tablet write.
+Local prepared package out/display-direct-boot-1; controller out/display-direct-1.
+Receipt evidence/display-pipeline-source/direct-boot-preparation.json. Never flash
+the earlier consumed-nonce offline comparison in display-direct-boot-review-1.
+
 ## Direct-boot comparison selected for preparation — November18,2026
 
 Owner questioned warm kexec handoff and requested a direct boot to remove that
