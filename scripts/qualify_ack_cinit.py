@@ -11,8 +11,11 @@ from unicorn import arm64_const as r
 ROOT=Path(__file__).resolve().parents[1]
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
-def qualify(bundle,kernel,nonce,vm_reports,out):
- verify(bundle/'report.json',kernel,nonce=nonce)
+def qualify(bundle,kernel,nonce,vm_reports,out,ramfix=False):
+ validator=verify
+ if ramfix:
+  from verify_ack_ramfix_bundle import verify as validator
+ validator(bundle/'report.json',kernel,nonce=nonce)
  m=json.loads((bundle/'report.json').read_text());image=(bundle/'image.bin').read_bytes();padded=image+bytes(m['image_memory_bytes']-len(image));meta=(bundle/'metadata.bin').read_bytes();checks={}
  for name,corrupt in [('full_padded_integrity',None),('corrupt_first_page',123),('corrupt_final_padding',len(padded)-1)]:
   data=bytearray(padded)
@@ -51,6 +54,9 @@ def qualify(bundle,kernel,nonce,vm_reports,out):
  vms=[json.loads(p.read_text()) for p in vm_reports]
  checks['exact_image_both_vm_modes_pid1_after_init_free']=len(vms)==2 and {v['virtualization'] for v in vms}=={'off','on'} and all(v['passed'] and v['image_sha256']==digest(bundle/'image.bin') and v['run_init_seen'] and v['enforcing_pid1_filesystem_probe'] and v['permanent_callback_survived_init_memory_free'] for v in vms)
  paths=['scripts/build_ack_cinit_console.py','scripts/prepare_ack_cinit_bundle.py','scripts/verify_ack_cinit_bundle.py','scripts/qualify_ack_cinit.py','scripts/validate_ack_cinit_vm.py','scripts/build_ack_combined_entry.py','scripts/qualify_ack_combined.py','projects/firetabs-android/native-kexec/combined_sha256.c']
+ if ramfix:
+  paths+=['scripts/prepare_ack_ramfix_bundle.py','scripts/verify_ack_ramfix_bundle.py','scripts/validate_ack_ramfix_vm.py']
+  checks['target_memory_geometry_vm']=all(v.get('board_memory_geometry') is True for v in vms)
  result=dict(scope='Offline exact C-init Image/console/integrity qualification; no tablet commands',all_tests_passed=all(checks.values()),tests_skipped=0,checks=checks,image_sha256=digest(bundle/'image.bin'),metadata_sha256=digest(bundle/'metadata.bin'),source_sha256={p:digest(ROOT/p) for p in paths},vm_reports_sha256=[digest(p) for p in vm_reports],hardware_execution=False,target_pid1_proven=False)
  out.write_text(json.dumps(result,indent=2)+'\n')
  if not result['all_tests_passed']:raise ValueError('Qualification failed: '+','.join(k for k,v in checks.items() if not v))
@@ -58,4 +64,4 @@ def qualify(bundle,kernel,nonce,vm_reports,out):
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__)
  for n in ['bundle','kernel','nonce-file','output']:p.add_argument('--'+n,type=Path,required=True)
- p.add_argument('--vm-report',type=Path,action='append',required=True);a=p.parse_args();print(json.dumps(qualify(a.bundle,a.kernel,a.nonce_file.read_bytes(),a.vm_report,a.output),indent=2))
+ p.add_argument('--vm-report',type=Path,action='append',required=True);p.add_argument('--ramfix',action='store_true');a=p.parse_args();print(json.dumps(qualify(a.bundle,a.kernel,a.nonce_file.read_bytes(),a.vm_report,a.output,a.ramfix),indent=2))

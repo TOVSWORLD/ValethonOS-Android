@@ -24,10 +24,11 @@ SCOPE_TWO_STAGE = 'ack-linux-native-two-stage-1'
 
 def validate(a):
     p = read(a.policy)
-    cinit = getattr(a, 'cinit', False)
+    ramfix = getattr(a, 'ramfix', False)
+    cinit = ramfix or getattr(a, 'cinit', False)
     combined = getattr(a, 'combined', False) or cinit
-    required_scope = 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
-    required_kind = 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    required_scope = 'ack-linux-ramfix-two-stage-4' if ramfix else 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
+    required_kind = 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
     if (p.get('scope') != required_scope or p.get('target_kind') != required_kind or
             p.get('target_hardware_deadline_seconds') != 31 or p.get('target_nr_cpus') != 1 or
             p.get('target_cpu_limit') is not None):
@@ -56,7 +57,10 @@ def validate(a):
         raise ValueError('Entry assembly changed after instruction qualification')
     if combined:
         if cinit:
-            from verify_ack_cinit_bundle import verify
+            if ramfix:
+                from verify_ack_ramfix_bundle import verify
+            else:
+                from verify_ack_cinit_bundle import verify
         else:
             from verify_ack_combined_bundle import verify
         reference = getattr(a, 'combined_reference', None)
@@ -120,13 +124,17 @@ def run(a):
     bundle = a.output / 'target-private'; client = a.output / 'client-private'
     k, i = a.kernel_package, a.initramfs_package
     nonce = (i / 'trial-nonce-private.bin').read_bytes()
-    cinit = getattr(a, 'cinit', False)
+    ramfix = getattr(a, 'ramfix', False)
+    cinit = ramfix or getattr(a, 'cinit', False)
     combined = getattr(a, 'combined', False) or cinit
     builder = prepare
     extra = {}
     if combined:
         if cinit:
-            from prepare_ack_cinit_bundle import prepare as builder
+            if ramfix:
+                from prepare_ack_ramfix_bundle import prepare as builder
+            else:
+                from prepare_ack_cinit_bundle import prepare as builder
         else:
             from prepare_ack_combined_bundle import prepare as builder
         reference = read(a.combined_reference / 'report.json')
@@ -164,8 +172,8 @@ def run(a):
     if before.get('complete') is not True:
         raise ValueError('ACK native preflight failed')
     auth = a.output / 'jump-authorization-private.json'
-    child_scope = 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
-    child_extra = dict(combined_verifier_sha256=digest(ROOT / ('scripts/verify_ack_cinit_bundle.py' if cinit else 'scripts/verify_ack_combined_bundle.py'))) if combined else {}
+    child_scope = 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    child_extra = dict(combined_verifier_sha256=digest(ROOT / ('scripts/verify_ack_ramfix_bundle.py' if ramfix else 'scripts/verify_ack_cinit_bundle.py' if cinit else 'scripts/verify_ack_combined_bundle.py'))) if combined else {}
     private(auth, dict(scope=child_scope, runner_sha256=digest(ROOT / 'scripts/run_ack_native_jump.py'),
                        manifest_sha256=digest(bundle / 'report.json'), client_sha256=c['client_sha256'],
                        target_image_sha256=m['target_image_sha256'], target_config_sha256=CONFIG_SHA,
@@ -190,6 +198,7 @@ if __name__ == '__main__':
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument('--combined', action='store_true')
     mode.add_argument('--cinit', action='store_true')
+    mode.add_argument('--ramfix', action='store_true')
     parser.add_argument('--combined-reference', type=Path)
     parser.add_argument('--combined-qualification', type=Path)
     a = parser.parse_args()

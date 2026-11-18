@@ -14,15 +14,38 @@ full padded destination Image integrity and every entry/MMU checkpoint in order.
 **Complete kernel initialization and enforcing PID1/USB remain unproven.**
 Last verified tablet state (November17): a different completed original Android
 boot, exact original boot/config, unchanged recovery and normal unprivileged ADB.
-Owner confirmed Power untouched: automatic Android return is established;
-precise reset cause remains unqualified.
+The prior combined trial returned automatically with Power untouched. Latest
+C-init return is verified; its owner Power attestation is pending and reset cause
+remains unqualified.
 
 Current execution plan: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md).
-The combined hardware attempt is complete and consumed. No automatic retry.
-UART is not a prerequisite. The next full-kernel/PID1 candidate is now
-offline-qualified with a permanent retained early console; see below.
+Both combined and C-init hardware attempts are consumed; no retry. C-init
+retained console worked and captured an attributed kernel panic before PID1.
+Next candidate fixes a concrete live RAM exclusion omitted from the earlier DT.
+UART is not a prerequisite.
 
-## Prepared C-init/PID1 candidate
+## C-init hardware result and live RAM correction
+
+[Receipt](../../evidence/independent-recovery/ack-cinit-runtime-result.json),
+[correction plan](ACK-LIVE-RAM-FIX.md). The single C-init attempt returned to
+verified original Android; Power attestation remains in the receipt. Fresh
+retained console reports stack overflow, PC show_pte+0x1d0, ESR96000006,
+FARffff0000585ff008. Nested fault reporting may hide the first exception.
+No PID1/USB proof. A no-map gap98400000–98600000 was missing: source live
+System RAM excludes it, but target DT allowed allocations there. Under the A53
+linear map the fault address implies physical985ff008 in that gap; inference,
+not a directly observed physical address. Gap ownership and causality unproven.
+
+The corrected allocator contract uses fresh iomem, not only static/live DT.
+Preserve every non-System-RAM gap as no-map, keep all existing reservations,
+and independently bind/recompute the source ranges. Both target-memory-geometry
+VM modes now reach enforcing PID1 with the fresh corrected Image. All13 controls,
+963 regression tests and bound offline policy validation pass. No additional
+tablet commands ran while preparing the fix. Scope4 requires new owner presence.
+Private reference ack-ramfix-candidate-1; PID1 ack-ramfix-initramfs-1; prepared
+runner run-ack-ramfix-trial-1-private.py under out/recovery-linux-pivot.
+
+## Historical preparation — C-init/PID1 candidate (now executed)
 
 [Exact trial](ACK-CINIT-TRIAL.md), scope ack-linux-cinit-two-stage-3. Full Image
 93722d1fd0d6d7f53b351fba8508bce7d1923fb21a9e92a5911a2acfc4742476.

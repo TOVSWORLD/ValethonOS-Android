@@ -1,43 +1,35 @@
 # Next milestone execution plan
 
-Updated November17,2026 after the single combined hardware attempt.
-**Achieved:** exact full relocated Image integrity, actual Linux primary entry,
-MMU transition, virtual entry and start_kernel on Douglas.
-[Runtime evidence](../../evidence/independent-recovery/ack-combined-runtime-result.json).
-**Next goal:** finish early kernel initialization and reach controlled enforcing
-PID1, then prove its identity on the target USB endpoint.
+Updated November17,2026 after the C-init hardware attempt.
+**Achieved:** maintained Linux entry/MMU/start_kernel on Douglas and attributed
+retained kernel output. **Goal remains:** complete initialization and prove fresh
+enforcing RAM PID1 through physical USB. Neither PID1 nor USB is yet proven.
 
-## Prepared next attempt
+## Concrete next correction
 
-[Full C-init/PID1 trial](ACK-CINIT-TRIAL.md): the exact maintained Image now has a
-RAM-only early console whose fixmap and permanent text callback survive paging
-and init-memory cleanup. It retains initcall/error output during a complete
-kernel/PID1 attempt, with fresh identity on every write. The old entry hooks are
-absent; no driver fault or exact stopping instruction is yet established.
+[Live RAM fix](ACK-LIVE-RAM-FIX.md): fresh source System RAM excludes
+98400000–98600000, but the target DT left it allocatable. The captured stack-
+overflow panic faults in show_pte at a VA corresponding, under the A53 linear-map
+geometry, to a physical page inside that gap. Nested fault reporting may obscure
+the first fault; resolving the panic through this correction is not yet proven.
 
-Both Cortex-A53 VM boot modes reached /init, passed the enforcing PID1 probe and
-retained the run-init message after init-memory cleanup. All12 offline instruction/
-corruption/console controls and958 regression tests pass without skips. The
-[preparation receipt](../../evidence/independent-recovery/ack-cinit-preparation.json)
-binds the exact reference, Image, policy and load-only client. This is offline
-qualification, not a Douglas PID1/USB pass. No tablet commands ran in preparation.
+The candidate preserves every source non-System-RAM gap as no-map, independently
+binds/verifies fresh iomem and rechecks all load segments. Existing firmware
+reservations, full padded Image SHA, permanent console, enforcing PID1 and
+31-second reset deadline remain. No logger-only/stub trial or guessed USB fix.
+Both VM modes using target RAM/no-map geometry reach enforcing PID1.
 
-Next action: owner-attended single protected source boot/restore and one RAM
-load/jump, under a fresh ack-linux-cinit-two-stage-3 authorization. Original boot
-restored/read back before jumping, recovery never written, existing31-second
-reset deadline, bounded read-only return checks and no retry. Prior approvals
-stay consumed. Success remains the fresh enforcing PID1 USB wire witness.
-If unsuccessful, collect once and use the attributed last initcall/exception or
-kernel messages to choose the next implementation change. UART is supporting
-work, not a prerequisite. Do not repeat an unchanged black-screen trial.
+All13 qualification controls,963 regression tests and bound offline policy
+validation pass. The candidate is ready: publish and request owner presence
+for one protected source boot/restore and one RAM jump under fresh scope4.
+Original boot restored/read back before jump; recovery never written; bounded
+read-only return checks; no retry. Previous approvals are consumed. Success still
+requires the fresh enforcing PID1 USB witness. If unsuccessful, collect once,
+verify original state and use the attributed failure to select the next change.
 
-## Recovery and history
+## History and continuity
 
-The combined trial used one source boot/restore and one native load/jump. Original
-boot was restored/read back before jumping; recovery was never written. A new
-completed original Android boot, exact flash/config and normal ADB were verified.
-Owner confirmed Power untouched: automatic Android return is established;
-precise reset cause remains unqualified.
-Retain the old failed trials in #344/#346/#348 and preserve this new milestone.
-Any later attempt keeps single-attempt limits, a bounded capture/return window,
-no post-jump mutations into a hung device and owner-assisted recovery if needed.
+C-init [runtime result](../../evidence/independent-recovery/ack-cinit-runtime-result.json)
+preserves the panic and source RAM intervals. Prior combined entry/MMU milestone
+remains passed. Do not downgrade it because the legacy banner/PID1 gate remains
+false. Do not repeat equipment/board-history questions; UART is supporting work.

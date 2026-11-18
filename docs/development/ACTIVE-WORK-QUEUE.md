@@ -1,18 +1,18 @@
-# Current work — full C-init/PID1 candidate ready, November17,2026
+# Current work — live RAM exclusion correction, November17,2026
 
-[Prepared next attempt](ACK-CINIT-TRIAL.md), [plan](NEXT-MILESTONE-PLAN.md),
-[memory](PROJECT-MEMORY.md). Prior hardware milestone remains passed: full Image
-integrity and Linux entry/MMU/start_kernel on Douglas, followed by verified
-original Android return with Power untouched. Complete initialization/PID1/USB
-remain unproven. Prior attempt consumed; no retry.
+[Runtime panic](../../evidence/independent-recovery/ack-cinit-runtime-result.json),
+[concrete fix](ACK-LIVE-RAM-FIX.md), [plan](NEXT-MILESTONE-PLAN.md).
+C-init retained console worked: attributed stack-overflow panic in show_pte,
+PID1/USB absent. Original Android state verified after return. Attempt consumed;
+Power attestation is in the receipt; no retry.
 
-New full Image uses a RAM-only permanent early console that survives paging and
-init-memory cleanup. Both VM modes reach /init and pass enforcing PID1; all12
-qualification controls and958 regression tests pass without skips. One fresh
-protected source boot/restore and RAM jump is the next owner-attended action,
-under cinit scope3. No new tablet commands ran during preparation. UART is
-supporting work. Do not reinterpret an absent early banner as a proven fault
-location, re-open entry/MMU tests, or re-ask equipment/history questions.
+Established defect: live source System RAM excludes98400000–98600000, while
+prior DT allowed kernel allocations there. Fault-address conversion points inside
+the gap, but primary cause/fix success remain unproven. Add no-map exclusions
+from fresh iomem and independently verify them. Both VM modes with target memory
+geometry reach enforcing PID1. All13 qualification controls,963 tests and bound
+policy validation pass. Publish and request owner presence for one fresh scope4 attempt. No new tablet commands in preparation.
+Prior Linux entry/MMU/start_kernel milestone remains passed; UART is supporting.
 
 # Historical selection — UART bench preparation, November 16, 2026
 

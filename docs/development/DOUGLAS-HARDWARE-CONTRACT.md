@@ -40,7 +40,9 @@ source for vendor command sequences and opaque configuration payloads.
   Its October 25 statements such as “uncompiled” are historical, not current build status.
 - Compiled complete draft identity and object hashes:
   [first-kernel-draft receipt](../../evidence/independent-recovery/first-kernel-draft-result.json).
-- Latest tablet outcome: [combined ACK RAM result](../../evidence/independent-recovery/ack-combined-runtime-result.json).
+- Latest tablet outcome: [C-init panic result](../../evidence/independent-recovery/ack-cinit-runtime-result.json).
+  Retained output identifies a panic and an omitted live RAM exclusion; fix
+  success remains unproven. Prior [combined result](../../evidence/independent-recovery/ack-combined-runtime-result.json):
   Full padded Image integrity, actual entry/MMU/virtual transition and start_kernel
   passed on Douglas. Complete kernel initialization and enforcing PID1/USB remain
   unproven. Earlier [unattributed ACK trial](../../evidence/independent-recovery/ack-native-runtime-result.json)
@@ -93,6 +95,17 @@ qualify generic donor reservations for every loader route.
 See [reservation inventory](../../evidence/reservation-inventory/result.json),
 [LK memory fixups](../../projects/firetabs-android/kernel/LK-MEMORY-FIXUPS.md)
 and the generated resource inventory.
+
+### Live RAM exclusions discovered November17
+
+The C-init [hardware receipt](../../evidence/independent-recovery/ack-cinit-runtime-result.json)
+records source System RAM excluding98400000–98600000. Earlier target DT imports
+did not cover this gap with no-map. A fault VA in show_pte corresponds to a
+physical page in the gap under the A53 runtime linear map; causality remains
+unproven. [Correction](ACK-LIVE-RAM-FIX.md): derive allocator exclusions from fresh
+working /proc/iomem in addition to DT, bind its hash, and verify every gap is
+unallocatable. Do not infer this gap's owner or free old reservations from a
+static resource inventory. This is a software-observed working-kernel contract.
 
 ## 3. Interrupts, timer and watchdog/reset
 

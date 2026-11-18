@@ -22,11 +22,11 @@ def assess(data,nonce):
              exception_seen=fresh and any(v in data for v in [b'Internal error:',b'Unable to handle kernel',b'SError Interrupt']),
              marker_absence_inconclusive=True)
 
-def verify(manifest,kernel_package,fdtget=Path('work/dtb-tool/build/fdtget'),nonce=None):
+def verify(manifest,kernel_package,fdtget=Path('work/dtb-tool/build/fdtget'),nonce=None,*,expected_kind=KIND):
  m=json.loads(manifest.read_text());root=manifest.parent
  if nonce is None or len(nonce)!=32 or sha(nonce)!=m['target_nonce_sha256']:raise ValueError('Exact fresh PID1 identity required')
  if m.get('legacy_entry_hooks_removed') is not True or m.get('ramoops_target_mapping_disabled') is not True:raise ValueError('C-init mapping isolation required')
- if m.get('target_kind')!=KIND or m.get('base_target_image_sha256')!=IMAGE_SHA or m.get('target_config_sha256')!=CONFIG_SHA:
+ if m.get('target_kind')!=expected_kind or m.get('base_target_image_sha256')!=IMAGE_SHA or m.get('target_config_sha256')!=CONFIG_SHA:
   raise ValueError('Exact combined manifest/base/config required')
  if not all(m.get(k) is True for k in ['metadata_reserved','psci_available','overlapping_memory_declarations_normalized']):
   raise ValueError('Combined boot contract flags missing')

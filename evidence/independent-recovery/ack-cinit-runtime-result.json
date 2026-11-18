@@ -1,0 +1,121 @@
+{
+  "scope": "ack-linux-native-cinit-jump-3",
+  "target_release": "6.18.34-valethon-draft1+",
+  "target_kind": "ack-linux-cinit-v3",
+  "complete": false,
+  "load_attempts": 1,
+  "unload_attempts": 0,
+  "jump_requests": 1,
+  "target_kernel_boot_proven": false,
+  "target_pid1_proven": false,
+  "source_console_proven": true,
+  "fresh_original_android_return": true,
+  "normal_shell_restored": true,
+  "target_hardware_deadline_seconds": 31,
+  "hardware_deadline_qualified": false,
+  "boot_written": false,
+  "recovery_written": false,
+  "automatic_retry": false,
+  "native_load_verified": true,
+  "original_boot_verified_before_jump": true,
+  "recovery_verified_before_jump": true,
+  "owner_return_required": false,
+  "different_boot_completed": true,
+  "owner_power_confirmation_pending": true,
+  "cinit_console_proven": true,
+  "run_init_seen": false,
+  "cinit_retained_assessments": [
+    {
+      "fresh_console_identity": true,
+      "console_ready_seen": false,
+      "run_init_seen": false,
+      "linux_banner_seen": false,
+      "panic_seen": true,
+      "exception_seen": false,
+      "marker_absence_inconclusive": true
+    }
+  ],
+  "wire_assessment": {
+    "identity_verified": false,
+    "complete_records": 0,
+    "terminal_frame": false,
+    "kernel_release_seen": false,
+    "target_cmdline_nonce_seen": false,
+    "target_kernel_boot_proven": false,
+    "target_pid1_proven": false,
+    "capture_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "capture_bytes": 0
+  },
+  "source_capture": {
+    "source_console_proven": true,
+    "capture_bytes": 8636,
+    "capture_sha256": "b1356db004e763138675285592dbf7eb1f14e938174e81e3484669f3a797f341",
+    "end_reason": "disconnect",
+    "capture_fsynced": true,
+    "ffs_last_close_retained": true,
+    "init_reboot_route_seen": true,
+    "native_entry_seen": true,
+    "starting_new_kernel_seen": false,
+    "final_cpu_gate_seen": false,
+    "tty_restore_unconfirmed": true
+  },
+  "date": "2026-11-17",
+  "hardware_execution": true,
+  "image_sha256": "93722d1fd0d6d7f53b351fba8508bce7d1923fb21a9e92a5911a2acfc4742476",
+  "metadata_sha256": "6154242447445ec951b7472cea75424dc4b987d0d4a534fd3abdd4058df82e41",
+  "target_dtb_sha256": "4f1060981cd3d03c6c53fbff8aa497427efdff2ca2b5f545748ff547fcb75527",
+  "raw_controller_outcome": "ack-boot-unproven",
+  "outcome": "attributed-kernel-panic-before-pid1",
+  "owner_used_power": null,
+  "automatic_return_qualified": false,
+  "source_stage": {
+    "candidate_write_attempts": 1,
+    "restore_write_attempts": 1,
+    "reboot_requests": 1,
+    "complete": true,
+    "original_boot_restored": true,
+    "normal_shell_restored": true,
+    "native_kernel_running": true,
+    "recovery_written": false
+  },
+  "target_capture": {
+    "complete": false,
+    "device_qualified": false,
+    "failure_stage": "waiting_for_port",
+    "endpoint_selected": false,
+    "port_opened": false
+  },
+  "retained_console_sha256": "77c0fdb7de359103d472c28c0c9880a3f27c4fc6edad68ad4ebe557cb3bb9b9d",
+  "retained_console_bytes": 4084,
+  "diagnosis": {
+    "observed_panic": "kernel stack overflow",
+    "observed_pc": "show_pte+0x1d0/0x350",
+    "observed_lr": "show_pte+0x188/0x350",
+    "observed_esr": "0x96000006",
+    "observed_far": "0xffff0000585ff008",
+    "source_system_ram_ranges": [
+      [
+        "0x40000000",
+        "0x43000000"
+      ],
+      [
+        "0x43030000",
+        "0x98400000"
+      ],
+      [
+        "0x98600000",
+        "0x99600000"
+      ]
+    ],
+    "missing_live_nomap_range": [
+      "0x98400000",
+      "0x98600000"
+    ],
+    "inferred_fault_physical_address": "0x985ff008",
+    "physical_address_inference": "A53 48-bit runtime linear map and DRAM base0x40000000; not a directly observed physical-address register",
+    "established_defect": "Target DT leaves a live source non-System-RAM gap available to kernel allocation",
+    "causal_status": "Strong address correlation; whether correcting the gap resolves the panic is unproven",
+    "first_exception_incomplete": true
+  },
+  "interpretation": "Fresh per-write target identity attributes the retained panic to the maintained kernel. Kernel reports stack overflow while show_pte faults; nested fault reporting may hide the original exception. The source live System RAM excludes98400000..98600000, while target DT memory includes it without no-map. Preserve live exclusions before another attempt. PID1/USB unproven. One attempt consumed, no retry. Original installation verified after a different completed Android boot. Owner Power attestation pending; reset cause unqualified."
+}

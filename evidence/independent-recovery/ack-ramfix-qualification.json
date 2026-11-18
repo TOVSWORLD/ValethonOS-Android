@@ -1,0 +1,41 @@
+{
+  "scope": "Offline exact C-init Image/console/integrity qualification; no tablet commands",
+  "all_tests_passed": true,
+  "tests_skipped": 0,
+  "checks": {
+    "full_padded_integrity": true,
+    "corrupt_first_page": true,
+    "corrupt_final_padding": true,
+    "console_small": true,
+    "console_wrap": true,
+    "console_oversized": true,
+    "console_invalid_sig": true,
+    "console_invalid_start": true,
+    "console_invalid_size": true,
+    "setup_valid": true,
+    "setup_invalid_signature": true,
+    "exact_image_both_vm_modes_pid1_after_init_free": true,
+    "target_memory_geometry_vm": true
+  },
+  "image_sha256": "fb71d8d8eed60787d8f3fa1cb5a86cb577542b35ef40f57b974928c784f14c53",
+  "metadata_sha256": "67bdee861b6a32f78bd076fa51a14bae1b3fcf6837a3d5294f7ce47bf5f9f1d4",
+  "source_sha256": {
+    "scripts/build_ack_cinit_console.py": "0597dcfc82bd13a9986c7fac589c64e6256fb121873420ac6cb1814b867be800",
+    "scripts/prepare_ack_cinit_bundle.py": "4603a6ab57d49a046fd1cb1f864f987744e822dd2fa569dd1ce5198784f20eb7",
+    "scripts/verify_ack_cinit_bundle.py": "b7f988b3c5354438cfa3676eee6e456c4ded774dc7cae1d655a9cdb87bb592f2",
+    "scripts/qualify_ack_cinit.py": "0a320a7a00d680f77b178c7a84be185013883eacf2c7ad9a346110b5dbeed13f",
+    "scripts/validate_ack_cinit_vm.py": "9e7c921b0fb20d1a1cfc038e52bc046f1147efb56dd83d351811b5ed3b3355a5",
+    "scripts/build_ack_combined_entry.py": "86b37036e12f0163c07abe6739e396d5ea00424049673e17e6a85f53e20b7071",
+    "scripts/qualify_ack_combined.py": "148b86f8b811cbb6a2634688adb57b2be432622f6886bdf90e83e9c4aee8d156",
+    "projects/firetabs-android/native-kexec/combined_sha256.c": "16a7c944cc14e9b3d6f30452379c2f136c35e13d5b204eddcaf9a75e9f4a0c26",
+    "scripts/prepare_ack_ramfix_bundle.py": "eb54a829e48611ebcc6059f025f9526d2243efdfe0a6a984b1b06c860248bbe8",
+    "scripts/verify_ack_ramfix_bundle.py": "016d41f17a76d657de885ef6e717046084950609d4133976754a2a407d44f2f3",
+    "scripts/validate_ack_ramfix_vm.py": "ff2012e48aa63ef10e451f757e00926bb04e491eaf440f7c51d2cbbe5740aaf8"
+  },
+  "vm_reports_sha256": [
+    "a5db5e910f3573d8a24357c7e07caa49415bcfe8331c74e914b2d630c945b40b",
+    "09c46500a41fd262569102e3a0dda5cc34a60de11a59fcc40165160750e87a60"
+  ],
+  "hardware_execution": false,
+  "target_pid1_proven": false
+}

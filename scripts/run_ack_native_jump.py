@@ -26,13 +26,17 @@ def run(device, lab_package, manifest, client_report, linked, output,
         nonce, source_report, authorization=None, *, combined_kernel_package=None):
     m = json.loads(manifest.read_text()); c = json.loads(client_report.read_text())
     combined = combined_kernel_package is not None
-    cinit = combined and m.get('target_kind') == 'ack-linux-cinit-v3'
-    kind = 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
-    scope = 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    ramfix = combined and m.get('target_kind') == 'ack-linux-ramfix-v4'
+    cinit = ramfix or combined and m.get('target_kind') == 'ack-linux-cinit-v3'
+    kind = 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    scope = 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
     image_sha = m.get('target_image_sha256') if combined else IMAGE_SHA
     if combined:
         if cinit:
-            from verify_ack_cinit_bundle import verify
+            if ramfix:
+                from verify_ack_ramfix_bundle import verify
+            else:
+                from verify_ack_cinit_bundle import verify
             verify(manifest, combined_kernel_package, nonce=nonce)
         else:
             from verify_ack_combined_bundle import verify
@@ -82,7 +86,7 @@ def run(device, lab_package, manifest, client_report, linked, output,
                     target_hardware_deadline_seconds=31, boot_writes_allowed=False,
                     post_jump_reboot_commands_allowed=False, bounded_read_only_return_poll_allowed=True)
     if combined:
-        expected['combined_verifier_sha256'] = sha((here / ('verify_ack_cinit_bundle.py' if cinit else 'verify_ack_combined_bundle.py')).read_bytes())
+        expected['combined_verifier_sha256'] = sha((here / ('verify_ack_ramfix_bundle.py' if ramfix else 'verify_ack_cinit_bundle.py' if cinit else 'verify_ack_combined_bundle.py')).read_bytes())
     if authorization is not None:
         a = json.loads(authorization.read_text())
         if any(type(a.get(k)) is not type(v) or a.get(k) != v for k, v in expected.items()):

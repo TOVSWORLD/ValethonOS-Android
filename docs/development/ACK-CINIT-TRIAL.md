@@ -1,6 +1,9 @@
 # Full kernel/PID1 attempt with retained C-initialization output
 
-Prepared November17,2026. Goal: complete maintained-kernel initialization and
+The single hardware attempt ran November17,2026 and captured an attributed kernel
+panic before PID1. [Result](../../evidence/independent-recovery/ack-cinit-runtime-result.json).
+Its approval is consumed; [next correction](ACK-LIVE-RAM-FIX.md) preserves live RAM
+exclusions missing from this DT. Historical preparation follows. Goal: complete maintained-kernel initialization and
 prove the enforcing RAM PID1 identity over physical USB. The prior hardware
 trial already established full Image integrity and Linux entry through
 start_kernel; this package does not reopen those milestones.
