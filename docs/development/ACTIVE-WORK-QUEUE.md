@@ -4,8 +4,8 @@
 exact VLOG0002+fresh32-byte PID1 nonce received over USB. Reviewed PID1 gates
 policy/enforcing/RO/domain/namespace/UDC/serial/kmsg before that header. Kernel
 initialization/PID1/USB identity are achieved, not pending logging proof.
-Original Android installation and normal ADB verified after return. Latest Power
-attestation pending; all previous confirmations recorded. Scope5 consumed.
+Original Android installation and normal ADB verified after return. Owner confirmed
+Power untouched throughout; automatic return established. Scope5 consumed.
 
 [Next plan](NEXT-MILESTONE-PLAN.md): read-only internal eMMC bring-up under #22,
 then maintained Android userspace. Post-header log-record transfer is a separate

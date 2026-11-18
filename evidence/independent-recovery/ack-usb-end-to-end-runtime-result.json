@@ -62,9 +62,9 @@
     "worker_failure": "error",
     "detached_worker_completed": true
   },
-  "owner_used_power": null,
-  "owner_power_confirmation_pending": true,
-  "automatic_return_qualified": false,
+  "owner_used_power": false,
+  "owner_power_confirmation_pending": false,
+  "automatic_return_qualified": true,
   "source_stage": {
     "candidate_write_attempts": 1,
     "restore_write_attempts": 1,
@@ -76,7 +76,7 @@
     "recovery_written": false
   },
   "proof_basis": "Exact fresh 32-byte nonce received in VLOG0002 USB header. Reviewed receiver writes it only after physical-port/VID/PID/interface/opened-device validation; receipt state was lost in termios cleanup. Reviewed PID1 emits the header only after enforcing policy/RO/domain/namespace/UDC/serial/kmsg gates. This establishes gated PID1 identity on USB without requiring complete kernel log transfer. Full raw log records/release/command-line/terminal-stream witness remain incomplete.",
-  "interpretation": "The agreed kernel/PID1/USB identity milestone is reached. Kernel/RAM correction remains working, original installation verified after return, one protected source boot/restore and one RAM jump consumed. No logging-only retest. A termios.error disconnect-cleanup handler defect was fixed offline; full log-record transfer is a separate remaining transport issue. Exact reset cause unqualified; owner Power confirmation pending.",
+  "interpretation": "The agreed kernel/PID1/USB identity milestone is reached. Kernel/RAM correction remains working, original installation verified after return, one protected source boot/restore and one RAM jump consumed. No logging-only retest. A termios.error disconnect-cleanup handler defect was fixed offline; full log-record transfer is a separate remaining transport issue. Exact reset cause unqualified; owner confirmed Power untouched throughout; automatic Android return established.",
   "executed_package_commit": "04df569b58aa09feea2a1d6bcd4ffe6bdc378b9d",
   "offline_postmortem_checks": {
     "regression_tests": 970,

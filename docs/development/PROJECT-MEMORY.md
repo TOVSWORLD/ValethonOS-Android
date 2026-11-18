@@ -19,8 +19,8 @@ is incomplete.
 
 Latest runtime: [USB identity milestone](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
 Original Android boot/config/recovery and normal ADB verified after return.
-Latest owner Power confirmation pending; prior corrected-RAM and C-init returns
-were explicitly untouched. Exact reset cause remains unqualified. One source
+Owner confirmed Power untouched throughout the latest attempt; automatic Android
+return is established, as for the prior corrected-RAM and C-init attempts. Exact reset cause remains unqualified. One source
 boot/restore and one load/jump consumed per attempt, no automatic retries.
 
 **Next product work:** read-only internal eMMC bring-up under #22, then

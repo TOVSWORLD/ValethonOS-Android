@@ -4,7 +4,7 @@ November17,2026. **Reached on Douglas:** maintained Linux initialization,
 controlled enforcing PID1 and its exact fresh USB identity header.
 [Runtime evidence](../../evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json).
 Original Android boot/config/recovery and normal ADB verified after return.
-Latest owner Power confirmation is pending in the receipt.
+Owner confirmed Power untouched; automatic Android return is established.
 
 ## Next product milestone: read-only internal storage on the maintained kernel
 
