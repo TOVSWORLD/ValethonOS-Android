@@ -133,7 +133,8 @@ jobs:
                   'drivers/gpu/drm/mediatek/mtk_drm_drv.o',
                   'drivers/gpu/drm/mediatek/mtk_disp_gamma.o',
                   'drivers/soc/mediatek/mtk-mutex.o',
-                  'drivers/video/backlight/lp855x_bl.o']]
+                  'drivers/video/backlight/lp855x_bl.o',
+                  'drivers/video/backlight/pwm_bl.o']]
           if '${{ steps.scope.outputs.mode }}' in ('lab-retained','first-draft'):
               sources += [('output/drivers/misc/valethon_mailbox.o', 'valethon_mailbox.o'),
                           ('output/drivers/mmc/host/mtk-sd.o', 'mtk-sd.o')]
