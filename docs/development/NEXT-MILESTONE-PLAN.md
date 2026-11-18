@@ -20,6 +20,26 @@ SELinux enforcing, USB/ADB and a verified return path. This is a sequence of
 outcomes, not a promise of three physical tests. Provider source/build steps
 stay inside the first outcome; do not promote them to more minor milestones.
 
+## PWM correction implementation — November18,2026
+
+Owner authorized replacing the incorrect LP8557 dependency. DT now connects
+panel to pwm-backlight/DISP_PWM0, pin59 function1,39385ns period from1024
+26MHz clocks/divider0; GPIO43 remains solely panel-owned. Old LP8557 nodes
+are disabled, no backlight I2C probe enabled. Exact main26M/MM suppliers and
+builtin BACKLIGHT_PWM are required. Pinned ACK pwm_bl.c confirms referenced
+off backlight remains off until its panel consumer enables it.
+Builtin PWM kernel source616de1891cbb2af1e89fa651ec68e5feedd54616/run44273014513
+passed; pwm_bl.o and its Image/config/map hashes are verified against the
+GitHub artifact digest. Only compiled config delta is BACKLIGHT_PWM=m -> y.
+Corrected DT built with actual new config preserves RAM/reservations. Both
+enforcing VM modes passed on the new Image;1016 tests pass without skips.
+Fresh unchanged capture PID1 with new nonce built in out/display-pwm-initramfs-1.
+All seven entry/VM controls and exact final offline controller validation pass;
+load-only client compiled. Corrected scope9 candidate is ready for owner
+availability. Do not use old scope8 package/approval.
+Fresh scope9 only; scopes7/8 consumed. No new tablet action or approval.
+Private checkpoint: out/display-pwm-1/resume-private.json.
+
 ## Actual scope8 display diagnosis — November18,2026
 
 Fresh VDISP002 plus VKMSG001 delivered233 target-kernel records/16817 bytes,

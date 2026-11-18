@@ -11,7 +11,7 @@ from display_kernel_contract import verify as verify_kernel,sha,CONTRACT
 from prepare_ack_storage_bundle import prepare as prepare_ram_baseline
 from prepare_ack_native_bundle import reserved_nodes,reservation_map
 from prepare_native_jump_bundle import ranges_ok
-KIND='ack-linux-display-errors-v8'
+KIND='ack-linux-display-pwm-v9'
 
 
 def prepare(source_dtb,iomem,kernel_package,baseline_package,initramfs_package,linked,
@@ -56,7 +56,7 @@ def prepare(source_dtb,iomem,kernel_package,baseline_package,initramfs_package,l
     m.update(scope='Full unmodified display-kernel RAM candidate; unexecuted',target_kind=KIND,
              target_image_sha256=sha(image),base_target_image_sha256=sha(image),target_config_sha256=sha(config),
              target_release=qualified['target_release'],target_dtb_sha256=sha(data),image_memory_bytes=extent,
-             image_padded_sha256=sha(padded),deadline=deadline,display_functional_profile=True,
+             image_padded_sha256=sha(padded),deadline=deadline,display_functional_profile=True,display_pwm_profile=True,
              storage_status_protocol=None,display_status_protocol='VDISP002',display_errors_profile=True,binary_code_hooks_added=False,
              unmodified_display_image=True,display_kernel_manifest_sha256=sha((kernel_package/'manifest.json').read_bytes()),
              display_kernel_contract_sha256=sha(CONTRACT.read_bytes()),segments=[])

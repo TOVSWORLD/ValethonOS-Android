@@ -58,7 +58,12 @@ def plan(tree,config):
         raise ValueError('This profile uses the established CPU-driven CMDQ-disabled build')
     chosen=tree['/chosen']
     if 'valethon,offline-display-preview' in chosen:raise ValueError('Fresh non-preview input required')
+    if 'CONFIG_BACKLIGHT_PWM=y\n' not in config+'\n':raise ValueError('Builtin PWM backlight required')
     r=resources(tree);changes=[];phandles={}
+    pwm=tree[r['pwm']];mmsys=tree[r['mmsys']]
+    if (cells(pwm.get('#pwm-cells',''))!=[2] or raw(pwm.get('clock-names',''))!=b'main\0mm\0'
+            or 'phandle' not in mmsys or cells(pwm.get('clocks',''))!=[cells(mmsys['phandle'])[0],33,cells(mmsys['phandle'])[0],32]):
+        raise ValueError('PWM0 main26MHz/MM supplier contract required')
     for node,p in tree.items():
         if 'phandle' in p:
             v=cells(p['phandle'])
@@ -72,38 +77,39 @@ def plan(tree,config):
         if value>=0xffffffff:raise ValueError('Phandle capacity exceeded')
         changes.append(('x',node,'phandle',[value]));return value
     for name,node in r.items():
-        if name not in ['gpio','vddio']:changes.append(('s',node,'status','okay'))
+        if name not in ['gpio','vddio','i2c']:changes.append(('s',node,'status','okay'))
         # No command-queue driver is built; do not leave missing mailbox suppliers.
         for prop in ['mboxes','mediatek,gce-client-reg','mediatek,gce-events']:
             if prop in tree[node]:changes.append(('delete',node,prop,None))
     changes.append(('x',r['iommu'],'mediatek,larbs',[handle(r['larb'])]))
     gpio=handle(r['gpio']);supply=handle(r['vddio'])
     pins=r['gpio']+'/douglas-panel-pins';settings=pins+'/pins'
-    backlight=r['i2c']+'/backlight@2c';panel=r['dsi']+'/panel@0'
+    backlight='/douglas-pwm-backlight';panel=r['dsi']+'/panel@0'
     port=r['dsi']+'/ports/port@1';host_ep=port+'/endpoint';panel_ep=panel+'/port/endpoint'
-    i2c_pins=r['gpio']+'/douglas-backlight-i2c-pins';i2c_settings=i2c_pins+'/pins'
-    for node in [pins,settings,i2c_pins,i2c_settings,backlight,panel,r['dsi']+'/ports',port,host_ep,panel+'/port',panel_ep]:
+    pwm_pins=r['gpio']+'/douglas-backlight-pwm-pins';pwm_settings=pwm_pins+'/pins'
+    for node in [pins,settings,pwm_pins,pwm_settings,backlight,panel,r['dsi']+'/ports',port,host_ep,panel+'/port',panel_ep]:
         if node in tree:raise ValueError('New display resource already exists: '+node)
         changes.append(('create',node,None,None))
-    pins_h=handle(pins);bus_h=handle(i2c_pins);backlight_h=handle(backlight)
+    pins_h=handle(pins);pwm_pins_h=handle(pwm_pins);backlight_h=handle(backlight);pwm_h=handle(r['pwm'])
     host_h=handle(host_ep);panel_h=handle(panel_ep)
     changes += [('x',settings,'pinmux',[43<<8,83<<8]),('x',settings,'slew-rate',[1]),('flag',settings,'output-low',None),
                 ('s',panel,'compatible','amazon,douglas-tpv-panel'),('x',panel,'reg',[0]),('x',panel,'vddio-supply',[supply]),
                 ('x',panel,'power-gpios',[gpio,43,0]),('x',panel,'reset-gpios',[gpio,83,1]),
                 ('s',panel,'pinctrl-names','default'),('x',panel,'pinctrl-0',[pins_h]),('x',panel,'backlight',[backlight_h]),
-                ('s',backlight,'compatible','ti,lp8557'),('x',backlight,'reg',[0x2c]),
-                ('s',backlight,'bl-name','douglas-backlight'),('bytes',backlight,'dev-ctrl',[0x47]),('bytes',backlight,'init-brt',[100]),
+                ('s',backlight,'compatible','pwm-backlight'),('s',backlight,'status','okay'),
+                ('x',backlight,'pwms',[pwm_h,0,39385]),
+                ('x',backlight,'brightness-levels',list(range(256))),('x',backlight,'default-brightness-level',[100]),
                 ('x',r['dsi'],'#address-cells',[1]),('x',r['dsi'],'#size-cells',[0]),
                 ('x',r['dsi']+'/ports','#address-cells',[1]),('x',r['dsi']+'/ports','#size-cells',[0]),('x',port,'reg',[1]),
                 ('x',host_ep,'remote-endpoint',[panel_h]),('x',panel_ep,'remote-endpoint',[host_h])]
-    # Working board i2c0 pin group is copied from its actual pinmux definition,
-    # supplied in the source-backed profile below rather than inferred from labels.
-    bus_pins=[(75<<8)|1,(76<<8)|1]
-    changes += [('x',i2c_settings,'pinmux',bus_pins),('flag',i2c_settings,'bias-disable',None),
-                ('s',r['i2c'],'pinctrl-names','default'),('x',r['i2c'],'pinctrl-0',[bus_h]),
-                ('x',r['i2c'],'clock-frequency',[400000])]
+    # Working mode5 uses DISP_PWM0. Port main clock is clk26m;1024 clocks
+    # rounded up to integer ns gives39385ns and encodes period1023/divider0.
+    # GPIO43 remains owned by the panel: no second backlight GPIO consumer.
+    changes += [('x',pwm_settings,'pinmux',[(59<<8)|1]),('flag',pwm_settings,'bias-disable',None),
+                ('s',r['pwm'],'pinctrl-names','default'),('x',r['pwm'],'pinctrl-0',[pwm_pins_h])]
     for node,p in tree.items():
-        if b'pwm-backlight' in raw(p.get('compatible','')).split(b'\0'):
+        compatibles=raw(p.get('compatible','')).split(b'\0')
+        if b'pwm-backlight' in compatibles or b'ti,lp8557' in compatibles or b'ti,lp855x-led' in compatibles:
             changes.append(('s',node,'status','disabled'))
     args=raw(chosen['bootargs']).rstrip(b'\0').decode().split()
     args=[a for a in args if not a.startswith(('console=','earlycon','ramoops.','loglevel=','valethon.native_trial=')) and a not in ['keep_bootcon','initcall_debug','ignore_loglevel']]
@@ -148,7 +154,7 @@ def preview(source,config,output,fdtget,fdtput):
     report={'scope':'Offline display DT preview only; no boot bundle or device action','offline_preview':True,
             'physical_execution_admitted':False,'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),
             'dtb_sha256':hashlib.sha256(dt.read_bytes()).hexdigest(),'resources':r,'edits':len(changes),
-            'panel_variant':'TPV/MP','memory_reservations_preserved':True,'kernel_log_transfer_required':False}
+            'panel_variant':'TPV/MP','backlight_backend':'display-pwm0','pwm_period_ns':39385,'pwm_pin':59,'lp8557_dependency':False,'memory_reservations_preserved':True,'kernel_log_transfer_required':False}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n');return report
 
 

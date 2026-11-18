@@ -1,5 +1,24 @@
 # MT8163 Douglas display integration
 
+## PWM correction implementation — November18,2026
+
+Owner authorized replacing the incorrect LP8557 dependency. DT now connects
+panel to pwm-backlight/DISP_PWM0, pin59 function1,39385ns period from1024
+26MHz clocks/divider0; GPIO43 remains solely panel-owned. Old LP8557 nodes
+are disabled, no backlight I2C probe enabled. Exact main26M/MM suppliers and
+builtin BACKLIGHT_PWM are required. Pinned ACK pwm_bl.c confirms referenced
+off backlight remains off until its panel consumer enables it.
+Builtin PWM kernel source616de1891cbb2af1e89fa651ec68e5feedd54616/run44273014513
+passed; pwm_bl.o retained and exact Image/config/map verified. Only compiled
+config delta is BACKLIGHT_PWM=m -> y.
+Corrected DT with actual compiled config preserves RAM/reservations; both
+enforcing VM modes passed and1016 tests pass.
+Fresh unchanged capture PID1 with new nonce built in out/display-pwm-initramfs-1.
+All seven entry/VM controls, final offline controller validation and load-only
+client compilation passed. Fresh scope9 is ready for owner availability.
+Fresh scope9 only; scopes7/8 consumed. No new tablet action or approval.
+Private checkpoint: out/display-pwm-1/resume-private.json.
+
 Latest runtime correction: scope8 captured233 target kmsg records without loss
 and returned original Android with Power untouched. LP8557 pre-init fails
 ENXIO. Returned working OS ALSO leaves that node unbound: actual backlight is

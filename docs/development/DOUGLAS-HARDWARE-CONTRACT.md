@@ -17,7 +17,10 @@ CUST_BLS_PWM/disp_bls_set_backlight/DISP_PWM0. The declared LP8557 DT node is no
 evidence of an active driver. Candidate's mandatory LP8557 backlight phandle
 therefore blocks panel registration unnecessarily. Correct to the working PWM
 path, retaining panel power ownership and source-backed timing. Maintained
-BACKLIGHT_PWM is currently modular, so a builtin kernel build is required.
+The previous Image had BACKLIGHT_PWM modular; new source616de189/run44273014513
+builds it builtin. Corrected DT connects PWM0, pin59 function1, period39385ns
+(1024 clocks at the declared26MHz main clock, divider0). Panel owns GPIO43.
+Compiled-image VM and offline DT checks pass; physical display is still pending.
 [Source and read-only binding proof](../../evidence/display-pipeline-source/working-backlight-path-correction.json).
 
 ## How to use this reference

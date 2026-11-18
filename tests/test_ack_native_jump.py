@@ -152,12 +152,12 @@ class ACKJump(unittest.TestCase):
         self.assertTrue(result['owner_visual_confirmation_pending'])
         self.assertEqual((result['load_attempts'],result['jump_requests']),(1,1))
 
-    def test_display_failure_receives_kernel_errors_without_requiring_banner(self):
-        self.manifest.update(target_kind='ack-linux-display-errors-v8', internal_emmc_only=True)
+    def display_error_result(self,kind,scope):
+        self.manifest.update(target_kind=kind, internal_emmc_only=True)
         self.write_manifest()
         client=json.loads(self.c.read_text());client['target_kind']=self.manifest['target_kind']
         self.c.write_text(json.dumps(client))
-        self.auth.update(scope='ack-linux-native-display-errors-jump-8',
+        self.auth.update(scope=scope,
                          manifest_sha256=runner.sha(self.m.read_bytes()),
                          combined_verifier_sha256=runner.sha(Path('scripts/verify_display_bundle.py').read_bytes()))
         self.a.write_text(json.dumps(self.auth))
@@ -169,7 +169,7 @@ class ACKJump(unittest.TestCase):
         with patch('display_kernel_contract.verify',return_value={
                 'config_sha256':TARGET_CONFIG,'target_release':runner.RELEASE}), \
                 patch('verify_display_bundle.verify'):
-            old=dict(self.auth,scope='ack-linux-native-display-functional-jump-7')
+            old=dict(self.auth,scope='ack-linux-native-display-errors-jump-8' if kind.endswith('v9') else 'ack-linux-native-display-functional-jump-7')
             self.a.write_text(json.dumps(old))
             with self.assertRaises(ValueError):
                 self.invoke(combined_kernel_package=self.p,display_component=self.p,
@@ -184,6 +184,12 @@ class ACKJump(unittest.TestCase):
         self.assertTrue(result['fresh_original_android_return'])
         self.assertTrue(result['pid1_usb_identity_proven'])
         self.assertEqual((result['load_attempts'],result['jump_requests']),(1,1))
+
+    def test_display_failure_receives_kernel_errors_without_requiring_banner(self):
+        self.display_error_result('ack-linux-display-errors-v8','ack-linux-native-display-errors-jump-8')
+
+    def test_pwm_display_uses_fresh_scope_and_keeps_error_capture(self):
+        self.display_error_result('ack-linux-display-pwm-v9','ack-linux-native-display-pwm-jump-9')
 
     def test_fresh_pid1_usb_identity_is_a_milestone_without_log_payload(self):
         self.d.wire = b'VLOG0002' + NONCE

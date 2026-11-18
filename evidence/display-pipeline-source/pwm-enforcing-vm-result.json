@@ -1,0 +1,42 @@
+{
+  "scope": "Both generic enforcing VM modes on exact builtin PWM Image; not physical display acceptance",
+  "image_sha256": "60f8780660120366708c7772fe20347dd8f16b8f7089e2d43efdf0fe3ecf49b1",
+  "hardware_execution": false,
+  "physical_display_qualified": false,
+  "vm_modes": {
+    "off": {
+      "passed": true,
+      "virtualization": "off",
+      "selinux_enforcing": true,
+      "display_kernel_snapshot_probe": true,
+      "policy_sha256": "bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd",
+      "runner_sha256": "38b0d51a4c3951b6d084d37b900bb323f162c300ab0f6069a64c7dae13a992d3",
+      "probe_source_sha256": "9223f61d832a3a2986907db3904e765e54c60e0be1978db2440a6d6cc9995991",
+      "ram_mib": 1536,
+      "cpu_count": 1,
+      "snapshot_values": {
+        "VM_DISPLAY_KMSG_ERROR": 0,
+        "VM_DISPLAY_KMSG_FLAGS": 1,
+        "VM_DISPLAY_KMSG_BYTES": 12949,
+        "VM_DISPLAY_KMSG_RECORDS": 203
+      }
+    },
+    "on": {
+      "passed": true,
+      "virtualization": "on",
+      "selinux_enforcing": true,
+      "display_kernel_snapshot_probe": true,
+      "policy_sha256": "bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd",
+      "runner_sha256": "38b0d51a4c3951b6d084d37b900bb323f162c300ab0f6069a64c7dae13a992d3",
+      "probe_source_sha256": "9223f61d832a3a2986907db3904e765e54c60e0be1978db2440a6d6cc9995991",
+      "ram_mib": 1536,
+      "cpu_count": 1,
+      "snapshot_values": {
+        "VM_DISPLAY_KMSG_ERROR": 0,
+        "VM_DISPLAY_KMSG_FLAGS": 1,
+        "VM_DISPLAY_KMSG_BYTES": 12996,
+        "VM_DISPLAY_KMSG_RECORDS": 204
+      }
+    }
+  }
+}
