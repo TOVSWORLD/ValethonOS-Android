@@ -1,5 +1,25 @@
 # Next milestone execution plan
 
+## Scope9 result and MM-power ancestry correction — November18,2026
+
+PWM-corrected scope9 still had no framebuffer/banner.229 target records/16439
+bytes arrived caught up without loss/error; LP8557 errors are gone. Original
+Android returned and installation checks passed; owner Power untouched, no
+banner/bands. Scope9 consumed; one source boot/restore and one load/jump.
+The tested DT still has /soc/syscon@10006000 status=disabled, inherited from
+build_lab_log_dtb.py DISABLED. Its power-controller child provides domain0/MM
+required by the display pipeline, so the provider cannot populate.
+Correction implemented locally: enable that parent/controller and only MM0,
+disable the other seven domains; verify MM_SEL clock51 and selected-device
+ancestor availability. Pinned mtk-pm-domains.c probe iterates AVAILABLE domain
+children, so disabled unrelated domains are not initialized. No new kernel or
+capture change: use exact PWM Image60f8780 and existing two generic VM reports;
+fresh nonce/component and scope10 package/control qualification passed:1018
+tests, seven controls, final offline validation and load-only client compiled.
+Fresh scope10 is ready for owner availability, unapproved/unconsumed.
+No new tablet action or approval. Raw scope9 logs private under
+out/display-pwm-trial-runtime-1/inspection-private. Receipt pwm-runtime-result.json.
+
 November18,2026. **Achieved on Douglas:** maintained6.18 initialization,
 controlled enforcing PID1, fresh USB identity and read-only internal eMMC.
 [Actual storage receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json).

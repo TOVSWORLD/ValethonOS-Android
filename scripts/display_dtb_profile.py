@@ -11,6 +11,7 @@ from prepare_native_jump_bundle import raw
 from ack_storage_contract import verify_tree as verify_storage
 
 COMPONENTS={
+ 'scpsys':('mediatek,mt8163-scpsys',0x10006000),
  'mmsys':('mediatek,mt8163-mmsys',0x14000000),
  'ovl':('mediatek,mt8163-disp-ovl',0x14007000),
  'rdma':('mediatek,mt8163-disp-rdma',0x14009000),
@@ -49,6 +50,11 @@ def resources(tree):
     result['vddio']=supplies[0]
     if 'gpio-controller' not in tree[result['gpio']] or cells(tree[result['gpio']]['#gpio-cells'])!=[2]:
         raise ValueError('Exact two-cell GPIO provider required')
+    controllers=[n for n,p in tree.items() if raw(p.get('compatible',''))==b'mediatek,mt8163-power-controller\0']
+    if len(controllers)!=1 or controllers[0].rsplit('/',1)[0]!=result['scpsys']:
+        raise ValueError('Exact SCPSYS power-controller child required')
+    result['power']=controllers[0]
+    if cells(tree[result['power']].get('#power-domain-cells',''))!=[1]:raise ValueError('Indexed power provider required')
     return result
 
 
@@ -64,6 +70,21 @@ def plan(tree,config):
     if (cells(pwm.get('#pwm-cells',''))!=[2] or raw(pwm.get('clock-names',''))!=b'main\0mm\0'
             or 'phandle' not in mmsys or cells(pwm.get('clocks',''))!=[cells(mmsys['phandle'])[0],33,cells(mmsys['phandle'])[0],32]):
         raise ValueError('PWM0 main26MHz/MM supplier contract required')
+    power=r['power'];power_handle=cells(tree[power].get('phandle',''))
+    if len(power_handle)!=1:raise ValueError('Power provider handle required')
+    domains={}
+    for node,p in tree.items():
+        if node.startswith(power+'/') and 'reg' in p:
+            value=cells(p['reg'])
+            if len(value)!=1 or value[0] in domains:raise ValueError('Unambiguous power domains required')
+            domains[value[0]]=node
+    if set(domains)!=set(range(8)) or domains[0].rsplit('/',1)[0]!=power:raise ValueError('Exact eight-domain provider model required')
+    r['mm-domain']=domains[0]
+    top=[(n,p) for n,p in tree.items() if b'mediatek,mt8163-topckgen' in raw(p.get('compatible','')).split(b'\0')]
+    if len(top)!=1 or 'phandle' not in top[0][1]:raise ValueError('Matching top clock provider required')
+    if (cells(tree[domains[0]].get('clocks',''))!=[cells(top[0][1]['phandle'])[0],51]
+            or raw(tree[domains[0]].get('clock-names',''))!=b'mm\0'):
+        raise ValueError('MM domain candidate MM_SEL clock required')
     for node,p in tree.items():
         if 'phandle' in p:
             v=cells(p['phandle'])
@@ -81,6 +102,11 @@ def plan(tree,config):
         # No command-queue driver is built; do not leave missing mailbox suppliers.
         for prop in ['mboxes','mediatek,gce-client-reg','mediatek,gce-events']:
             if prop in tree[node]:changes.append(('delete',node,prop,None))
+    for domain,node in domains.items():
+        changes.append(('s',node,'status','okay' if domain==0 else 'disabled'))
+    for name,node in r.items():
+        if 'power-domains' in tree[node] and cells(tree[node]['power-domains'])!=[power_handle[0],0]:
+            raise ValueError('Display resources must reference multimedia domain0')
     changes.append(('x',r['iommu'],'mediatek,larbs',[handle(r['larb'])]))
     gpio=handle(r['gpio']);supply=handle(r['vddio'])
     pins=r['gpio']+'/douglas-panel-pins';settings=pins+'/pins'
@@ -115,6 +141,15 @@ def plan(tree,config):
     args=[a for a in args if not a.startswith(('console=','earlycon','ramoops.','loglevel=','valethon.native_trial=')) and a not in ['keep_bootcon','initcall_debug','ignore_loglevel']]
     changes += [('s','/chosen','bootargs',' '.join(args+['console=tty0','loglevel=7'])),('flag','/chosen','valethon,offline-display-preview',None)]
     if 'valethon,native-trial' in chosen:changes.append(('delete','/chosen','valethon,native-trial',None))
+    statuses={n:raw(p.get('status','')).rstrip(b'\0') for n,p in tree.items()}
+    for kind,node,prop,value in changes:
+        if prop=='status':statuses[node]=value.encode()
+    for name,node in list(r.items())+[('backlight',backlight)]:
+        if name=='i2c':continue
+        while node:
+            if statuses.get(node,b'') not in [b'',b'ok',b'okay']:
+                raise ValueError('Display supplier has a disabled ancestor: '+node)
+            node=node.rsplit('/',1)[0]
     return r,changes
 
 
@@ -154,7 +189,7 @@ def preview(source,config,output,fdtget,fdtput):
     report={'scope':'Offline display DT preview only; no boot bundle or device action','offline_preview':True,
             'physical_execution_admitted':False,'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),
             'dtb_sha256':hashlib.sha256(dt.read_bytes()).hexdigest(),'resources':r,'edits':len(changes),
-            'panel_variant':'TPV/MP','backlight_backend':'display-pwm0','pwm_period_ns':39385,'pwm_pin':59,'lp8557_dependency':False,'memory_reservations_preserved':True,'kernel_log_transfer_required':False}
+            'panel_variant':'TPV/MP','backlight_backend':'display-pwm0','pwm_period_ns':39385,'pwm_pin':59,'lp8557_dependency':False,'multimedia_domain_only':True,'memory_reservations_preserved':True,'kernel_log_transfer_required':False}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n');return report
 
 

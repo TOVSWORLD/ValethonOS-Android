@@ -16,6 +16,15 @@ def fixture():
         tree[node]={'compatible':storage.raw(compatible.encode()+b'\0'),'reg':storage.cells(0,address,0,0x1000)}
         if kind=='gpio':tree[node].update({'gpio-controller':'','#gpio-cells':storage.cells(2)})
         if kind=='mmsys':tree[node]['mboxes']=storage.cells(99)
+    tree['/soc/scpsys@10006000']['status']=storage.raw(b'disabled\0')
+    controller='/soc/scpsys@10006000/power-controller'
+    tree[controller]={'compatible':storage.raw(b'mediatek,mt8163-power-controller\0'),'#power-domain-cells':storage.cells(1),'phandle':storage.cells(102)}
+    tree['/soc/topckgen@10000000']={'compatible':storage.raw(b'mediatek,mt8163-topckgen\0'),'phandle':storage.cells(101)}
+    for index in range(8):
+        node=controller+('/power-domain@6/power-domain@7' if index==7 else '/power-domain@'+str(index))
+        tree[node]={'reg':storage.cells(index)}
+        if index==0:tree[node].update({'clocks':storage.cells(101,51),'clock-names':storage.raw(b'mm\0')})
+    tree['/soc/mmsys@14000000']['power-domains']=storage.cells(102,0)
     tree['/soc/mmsys@14000000']['phandle']=storage.cells(100)
     tree['/soc/pwm@14014000'].update({'#pwm-cells':storage.cells(2),'clock-names':storage.raw(b'main\0mm\0'),'clocks':storage.cells(100,33,100,32)})
     tree['/soc/pwrap@1000d000/pmic/regulators/ldo_vgp3']={'regulator-name':storage.raw(b'vgp3\0')}
@@ -61,6 +70,17 @@ class DisplayProfile(unittest.TestCase):
         resources,changes=plan(tree,config)
         self.assertIn(('s','/soc/i2c@11007000/legacy-backlight@2c','status','disabled'),changes)
         self.assertNotIn(('s',resources['i2c'],'status','okay'),changes)
+
+    def test_disabled_power_parent_is_enabled_with_only_mm_domain(self):
+        config='# CONFIG_MTK_CMDQ is not set\nCONFIG_BACKLIGHT_PWM=y\n'
+        tree=fixture();resources,changes=plan(tree,config)
+        self.assertIn(('s',resources['scpsys'],'status','okay'),changes)
+        self.assertIn(('s',resources['power'],'status','okay'),changes)
+        self.assertIn(('s',resources['mm-domain'],'status','okay'),changes)
+        disabled=[node for kind,node,prop,v in changes if prop=='status' and v=='disabled' and '/power-domain@' in node]
+        self.assertEqual(len(disabled),7)
+        bad=copy.deepcopy(tree);bad[resources['mm-domain']]['clocks']=storage.cells(101,50)
+        with self.assertRaises(ValueError):plan(bad,config)
 
     def test_consumed_preview_or_disk_logger_opt_in_rejected(self):
         for key in ['valethon,offline-display-preview','valethon,trial-nonce']:

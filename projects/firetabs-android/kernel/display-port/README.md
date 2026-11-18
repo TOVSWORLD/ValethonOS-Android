@@ -1,5 +1,15 @@
 # MT8163 Douglas display integration
 
+Scope9 runtime: LP8557 failure removed, but no framebuffer; original Android
+returned with Power untouched and complete229-record target snapshot. Actual
+DT exposed a disabled SCPSYS ancestor inherited from bootstrap, preventing
+its MM power provider from populating. Current recipe enables parent/controller
+and MM0 only, disables the other seven domains and checks selected-resource
+ancestors/MM_SEL clock. Same Image/capture/policy; fresh scope10 qualification
+passed (1018 tests, seven controls and final offline validation). Scope10 is
+ready but unapproved/unconsumed. See pwm-runtime-result.json and
+mm-power-correction-preparation.json.
+
 ## PWM correction implementation — November18,2026
 
 Owner authorized replacing the incorrect LP8557 dependency. DT now connects

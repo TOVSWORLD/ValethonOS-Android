@@ -52,7 +52,7 @@ def component(package,nonce):
 
 def verify(manifest,kernel,baseline,initramfs,fdtget=Path('work/dtb-tool/build/fdtget'),nonce=None):
     k=verify_kernel(kernel);c=component(initramfs,nonce);m=json.loads(manifest.read_text());root=manifest.parent
-    if (m.get('target_kind')!=KIND or m.get('display_pwm_profile') is not True or m.get('display_functional_profile') is not True
+    if (m.get('target_kind')!=KIND or m.get('display_mm_power_profile') is not True or m.get('display_pwm_profile') is not True or m.get('display_functional_profile') is not True
             or m.get('binary_code_hooks_added') is not False or m.get('unmodified_display_image') is not True
             or m.get('display_status_protocol')!='VDISP002' or m.get('display_errors_profile') is not True or m['target_image_sha256']!=k['image_sha256']
             or m['target_config_sha256']!=k['config_sha256'] or m['target_release']!=k['target_release']

@@ -8,6 +8,16 @@ read-only eMMC are now observed on this tablet; display remains unqualified.
 The current OS loading animation is a working display/backlight/graphics
 reference. Use its pinned board/driver setup when comparing the maintained path.
 
+## Active multimedia-domain ancestry correction — November18,2026
+
+Scope9's actual DT still disabled /soc/syscon@10006000, inherited from the
+bootstrap DISABLED list. Its power-controller child supplies domain0/MM to
+display. Corrected recipe enables the parent/controller and MM0 only, disables
+the other seven domains, validates MM_SEL51 and checks selected-resource
+ancestors. Pinned provider probes only available domain children. Kernel Image,
+policy and capture are unchanged; scope10 tests/seven controls/final offline
+validation pass. Corrected physical display remains pending.
+
 ## Active backlight correction — November18,2026
 
 Runtime/saved-DT/source comparison disproves the earlier assumption that the

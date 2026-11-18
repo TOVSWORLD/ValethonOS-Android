@@ -169,7 +169,7 @@ class ACKJump(unittest.TestCase):
         with patch('display_kernel_contract.verify',return_value={
                 'config_sha256':TARGET_CONFIG,'target_release':runner.RELEASE}), \
                 patch('verify_display_bundle.verify'):
-            old=dict(self.auth,scope='ack-linux-native-display-errors-jump-8' if kind.endswith('v9') else 'ack-linux-native-display-functional-jump-7')
+            old=dict(self.auth,scope='ack-linux-native-display-pwm-jump-9' if kind.endswith('v10') else 'ack-linux-native-display-errors-jump-8' if kind.endswith('v9') else 'ack-linux-native-display-functional-jump-7')
             self.a.write_text(json.dumps(old))
             with self.assertRaises(ValueError):
                 self.invoke(combined_kernel_package=self.p,display_component=self.p,
@@ -190,6 +190,9 @@ class ACKJump(unittest.TestCase):
 
     def test_pwm_display_uses_fresh_scope_and_keeps_error_capture(self):
         self.display_error_result('ack-linux-display-pwm-v9','ack-linux-native-display-pwm-jump-9')
+
+    def test_mm_power_fix_requires_new_scope(self):
+        self.display_error_result('ack-linux-display-mm-power-v10','ack-linux-native-display-mm-power-jump-10')
 
     def test_fresh_pid1_usb_identity_is_a_milestone_without_log_payload(self):
         self.d.wire = b'VLOG0002' + NONCE
