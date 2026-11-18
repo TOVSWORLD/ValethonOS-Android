@@ -1,5 +1,26 @@
 # Next milestone execution plan
 
+## Direct-boot comparison selected for preparation — November18,2026
+
+Owner questioned warm kexec handoff and requested a direct boot to remove that
+variable. Do not repeat the unchanged RAM jump or turn missing diagnostics into
+another logging milestone. Historical normal-boot failures predate later kernel,
+RAM and display fixes; they do not rule out a current-candidate comparison.
+Exact archived LK audit establishes no nonpersistent fastboot boot command.
+Current Image fits selected original LK capacity; an offline16MiB Android boot
+package round-trips the same Image/initramfs and relocates chosen initrd pointers
+to the existing direct-loader layout, with required DT alignment. This is only
+packaging feasibility, NOT loader execution, a fresh test candidate or admission.
+Private comparison: out/display-direct-boot-review-1. It reuses a consumed nonce
+for offline comparison only and must never be flashed as a new experiment.
+Direct boot bypasses the native trampoline and its31s deadline. Automatic return
+to original Android is NOT qualified: original p5 must be restored before normal
+Android can boot. Recovery p6 remains untouched. Next prepare exact current-loader
+handoff validation and current original-recovery/restore procedure, fresh nonce,
+then present one concrete direct-boot test and return plan before any p5 write.
+No new physical test authorized or armed. Scope11 result remains failed display,
+verified automatic Android return, Power untouched; no valid target status.
+
 ## Scope11 actual result — November18,2026
 
 Owner saw Android home with no test banner and confirmed Power untouched.
