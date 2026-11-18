@@ -1,0 +1,38 @@
+{
+  "scope": "Concrete pinconf failure correction; no new physical acceptance",
+  "unsupported_dt_property": "slew-rate",
+  "generic_mapping": "PIN_CONFIG_SLEW_RATE",
+  "maintained_dispatcher_return": -22,
+  "retained_output_low_mapping": "PIN_CONFIG_LEVEL argument0",
+  "actual_dispatcher_native_test_passed": true,
+  "kernel_image_changed": false,
+  "capture_changed": false,
+  "policy_changed": false,
+  "mm_power_correction_retained": true,
+  "fresh_scope": 11,
+  "fresh_scope_approved": false,
+  "physical_test_run": false,
+  "sources": [
+    {
+      "file": "evidence/display-pipeline-source/ack-pinconf-generic.c",
+      "sha256": "b9710f219d977309a26cbb1740a32eaf2c2887b5a2cda38ff184bf3df43c91ca"
+    },
+    {
+      "file": "evidence/pinctrl-port/ack/drivers/pinctrl/mediatek/pinctrl-mtk-common.c",
+      "sha256": "6ea39d5265cb1bd6264ad3a0e3ca6ba56128bd707e057287aa8e25cfafa3c0eb"
+    },
+    {
+      "file": "evidence/display-pipeline-source/working-pinctrl-mtk-common.c",
+      "sha256": "7afdbcd2b13695a2a320712d4babbf8eb16cdf2ec5b3f6efd7d6ca96b7616478"
+    },
+    {
+      "file": "evidence/display-pipeline-source/working-pinconf-generic.c",
+      "sha256": "8aac234210a316f468c295d195a84d09919b9aa6bef0f8775ae2ed622fc8a1b4"
+    }
+  ],
+  "generic_source_url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/pinctrl/pinconf-generic.c",
+  "working_property_behavior": "slew-rate=1 calls GPIO output-direction helper, not a pad-slew register",
+  "working_behavior_preserved_by": "output-low/high already drive output direction",
+  "working_direction_alias_native_test_passed": true,
+  "working_source_revision": "72940eb733af8df948cc216cb977cd8be9cba5a9"
+}

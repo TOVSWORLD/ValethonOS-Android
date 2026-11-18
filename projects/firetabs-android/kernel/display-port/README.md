@@ -1,5 +1,14 @@
 # MT8163 Douglas display integration
 
+Latest scope10 reached DRM component matching/IOMMU attachment but failed
+group43 pinconf. Scope11 removes redundant slew-rate=1: working4.9 treats it
+as GPIO output direction, already supplied by output-low/high, whereas ACK
+rejects the alias. Actual old/new C comparison tests preserve final levels and
+direction on43/83. No new electrical slew setting is selected. Same kernel,
+PWM/MM0, panel sequence, policy and capture. Fresh scope11 package/client,
+1021 tests, seven controls and final offline validation pass. Scope11 is ready
+for an attended test, unapproved/unconsumed; scope10 is consumed.
+
 Scope9 runtime: LP8557 failure removed, but no framebuffer; original Android
 returned with Power untouched and complete229-record target snapshot. Actual
 DT exposed a disabled SCPSYS ancestor inherited from bootstrap, preventing
@@ -7,7 +16,7 @@ its MM power provider from populating. Current recipe enables parent/controller
 and MM0 only, disables the other seven domains and checks selected-resource
 ancestors/MM_SEL clock. Same Image/capture/policy; fresh scope10 qualification
 passed (1018 tests, seven controls and final offline validation). Scope10 is
-ready but unapproved/unconsumed. See pwm-runtime-result.json and
+historical and now consumed. See pwm-runtime-result.json and
 mm-power-correction-preparation.json.
 
 ## PWM correction implementation — November18,2026

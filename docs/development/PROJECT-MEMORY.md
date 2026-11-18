@@ -1,5 +1,29 @@
 # FireTabs project memory
 
+## Scope10 result and pinconf correction — November18,2026
+
+MM-power correction took effect: DRM matched ovl/rdma/color/ccorr/aal/gamma/dsi,
+OVL/RDMA joined IOMMU group0 and larb0 bound. Still no framebuffer/banner.
+242 target records/18236 bytes arrived caught up without loss/error. Android
+returned with original installation checks; owner Power untouched, no bands.
+Scope10 consumed, one source boot/restore and one load/jump, recovery untouched.
+Actual next error: pin_config_group_set failed for group43. Our panel group
+requested slew-rate=1; pinned ACK generic parser maps this to SLEW_RATE, which
+mtk_pconf_parse_conf does not support (default-EINVAL). Actual dispatcher C
+test reproduces the rejection and accepts LEVEL0/1, the output-low/high mapping.
+Owner challenged deviation from working behavior. Exact working4.9 source
+shows SLEW_RATE is a vendor GPIO-direction alias, not pad-slew programming;
+output-low/high already select output direction. Actual working dispatcher/
+helper C comparison preserves final levels/direction with or without that alias.
+Correction removes only the redundant unsupported request; GPIO levels, PWM/MM0, kernel
+Image, enforcing policy and working capture remain. Fresh nonce/scope11
+package and load-only client built; all 1021 tests and seven entry/VM controls
+passed. Exact unchanged Image VM proofs reused. Final offline controller
+validation passed. Scope11 ready, unapproved/unconsumed; scope10 consumed.
+No new tablet action/approval. Raw scope10 capture/inspection stays under
+out/display-mm-power-trial-runtime-1. Receipts mm-power-runtime-result.json
+and pinconf-correction-preparation.json preserve result and source proof.
+
 ## Scope9 result and MM-power ancestry correction — November18,2026
 
 PWM-corrected scope9 still had no framebuffer/banner.229 target records/16439

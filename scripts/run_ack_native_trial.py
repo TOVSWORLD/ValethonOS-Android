@@ -24,7 +24,9 @@ SCOPE_TWO_STAGE = 'ack-linux-native-two-stage-1'
 
 def validate(a):
     p = read(a.policy)
+    display_pinconf = getattr(a, 'display_pinconf', False)
     display_mm_power = getattr(a, 'display_mm_power', False)
+    if display_pinconf and not display_mm_power:raise ValueError('Pinconf mode requires corrected MM power profile')
     display_pwm = getattr(a, 'display_pwm', False)
     if display_mm_power and not display_pwm:raise ValueError('MM power mode requires corrected PWM profile')
     display_errors = getattr(a, 'display_errors', False)
@@ -40,8 +42,8 @@ def validate(a):
         raise ValueError('Display mode requires its own RAM-fixed profile and pinned baseline')
     if storage and (not ramfix or end_to_end):raise ValueError('Storage mode requires RAM fix and its own functional receiver')
     if end_to_end and not ramfix:raise ValueError('USB end-to-end mode requires the RAM-fixed candidate')
-    required_scope = 'ack-linux-display-mm-power-two-stage-10' if display_mm_power else 'ack-linux-display-pwm-two-stage-9' if display_pwm else 'ack-linux-display-errors-two-stage-8' if display_errors else 'ack-linux-display-functional-two-stage-7' if display else 'ack-linux-storage-readonly-two-stage-6' if storage else 'ack-linux-usb-end-to-end-two-stage-5' if end_to_end else 'ack-linux-ramfix-two-stage-4' if ramfix else 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
-    required_kind = 'ack-linux-display-mm-power-v10' if display_mm_power else 'ack-linux-display-pwm-v9' if display_pwm else 'ack-linux-display-errors-v8' if display_errors else 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    required_scope = 'ack-linux-display-pinconf-two-stage-11' if display_pinconf else 'ack-linux-display-mm-power-two-stage-10' if display_mm_power else 'ack-linux-display-pwm-two-stage-9' if display_pwm else 'ack-linux-display-errors-two-stage-8' if display_errors else 'ack-linux-display-functional-two-stage-7' if display else 'ack-linux-storage-readonly-two-stage-6' if storage else 'ack-linux-usb-end-to-end-two-stage-5' if end_to_end else 'ack-linux-ramfix-two-stage-4' if ramfix else 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
+    required_kind = 'ack-linux-display-pinconf-v11' if display_pinconf else 'ack-linux-display-mm-power-v10' if display_mm_power else 'ack-linux-display-pwm-v9' if display_pwm else 'ack-linux-display-errors-v8' if display_errors else 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
     if (p.get('scope') != required_scope or p.get('target_kind') != required_kind or
             p.get('target_hardware_deadline_seconds') != 31 or p.get('target_nr_cpus') != 1 or
             p.get('target_cpu_limit') is not None):
@@ -152,7 +154,9 @@ def run(a):
     bundle = a.output / 'target-private'; client = a.output / 'client-private'
     k, i = a.kernel_package, a.initramfs_package
     nonce = (i / 'trial-nonce-private.bin').read_bytes()
+    display_pinconf = getattr(a, 'display_pinconf', False)
     display_mm_power = getattr(a, 'display_mm_power', False)
+    if display_pinconf and not display_mm_power:raise ValueError('Pinconf mode requires corrected MM power profile')
     display_pwm = getattr(a, 'display_pwm', False)
     if display_mm_power and not display_pwm:raise ValueError('MM power mode requires corrected PWM profile')
     display_errors = getattr(a, 'display_errors', False)
@@ -221,7 +225,7 @@ def run(a):
     if before.get('complete') is not True:
         raise ValueError('ACK native preflight failed')
     auth = a.output / 'jump-authorization-private.json'
-    child_scope = 'ack-linux-native-display-mm-power-jump-10' if display_mm_power else 'ack-linux-native-display-pwm-jump-9' if display_pwm else 'ack-linux-native-display-errors-jump-8' if display_errors else 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    child_scope = 'ack-linux-native-display-pinconf-jump-11' if display_pinconf else 'ack-linux-native-display-mm-power-jump-10' if display_mm_power else 'ack-linux-native-display-pwm-jump-9' if display_pwm else 'ack-linux-native-display-errors-jump-8' if display_errors else 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
     child_extra = dict(combined_verifier_sha256=digest(ROOT / ('scripts/verify_display_bundle.py' if display else 'scripts/verify_ack_storage_bundle.py' if storage else 'scripts/verify_ack_ramfix_bundle.py' if ramfix else 'scripts/verify_ack_cinit_bundle.py' if cinit else 'scripts/verify_ack_combined_bundle.py'))) if combined else {}
     private(auth, dict(scope=child_scope, runner_sha256=digest(ROOT / 'scripts/run_ack_native_jump.py'),
                        manifest_sha256=digest(bundle / 'report.json'), client_sha256=c['client_sha256'],
@@ -254,6 +258,7 @@ if __name__ == '__main__':
     parser.add_argument('--display-errors', action='store_true')
     parser.add_argument('--display-pwm', action='store_true')
     parser.add_argument('--display-mm-power', action='store_true')
+    parser.add_argument('--display-pinconf', action='store_true')
     parser.add_argument('--baseline-kernel-package', type=Path)
     parser.add_argument('--combined-reference', type=Path)
     parser.add_argument('--combined-qualification', type=Path)

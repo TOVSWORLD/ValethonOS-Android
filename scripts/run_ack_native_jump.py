@@ -26,7 +26,8 @@ def run(device, lab_package, manifest, client_report, linked, output,
         nonce, source_report, authorization=None, *, combined_kernel_package=None, storage_component=None, display_component=None, baseline_kernel_package=None):
     m = json.loads(manifest.read_text()); c = json.loads(client_report.read_text())
     combined = combined_kernel_package is not None
-    display_mm_power = combined and m.get('target_kind') == 'ack-linux-display-mm-power-v10'
+    display_pinconf = combined and m.get('target_kind') == 'ack-linux-display-pinconf-v11'
+    display_mm_power = display_pinconf or combined and m.get('target_kind') == 'ack-linux-display-mm-power-v10'
     display_pwm = display_mm_power or combined and m.get('target_kind') == 'ack-linux-display-pwm-v9'
     display_errors = display_pwm or combined and m.get('target_kind') == 'ack-linux-display-errors-v8'
     display = display_errors or combined and m.get('target_kind') == 'ack-linux-display-v7'
@@ -41,8 +42,8 @@ def run(device, lab_package, manifest, client_report, linked, output,
     if (storage_component is not None) != storage:raise ValueError('Explicit storage component/profile binding required')
     ramfix = storage or combined and m.get('target_kind') == 'ack-linux-ramfix-v4'
     cinit = ramfix or combined and m.get('target_kind') == 'ack-linux-cinit-v3'
-    kind = 'ack-linux-display-mm-power-v10' if display_mm_power else 'ack-linux-display-pwm-v9' if display_pwm else 'ack-linux-display-errors-v8' if display_errors else 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
-    scope = 'ack-linux-native-display-mm-power-jump-10' if display_mm_power else 'ack-linux-native-display-pwm-jump-9' if display_pwm else 'ack-linux-native-display-errors-jump-8' if display_errors else 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
+    kind = 'ack-linux-display-pinconf-v11' if display_pinconf else 'ack-linux-display-mm-power-v10' if display_mm_power else 'ack-linux-display-pwm-v9' if display_pwm else 'ack-linux-display-errors-v8' if display_errors else 'ack-linux-display-v7' if display else 'ack-linux-storage-readonly-v6' if storage else 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
+    scope = 'ack-linux-native-display-pinconf-jump-11' if display_pinconf else 'ack-linux-native-display-mm-power-jump-10' if display_mm_power else 'ack-linux-native-display-pwm-jump-9' if display_pwm else 'ack-linux-native-display-errors-jump-8' if display_errors else 'ack-linux-native-display-functional-jump-7' if display else 'ack-linux-native-storage-readonly-jump-6' if storage else 'ack-linux-native-ramfix-jump-4' if ramfix else 'ack-linux-native-cinit-jump-3' if cinit else 'ack-linux-native-combined-jump-2' if combined else SCOPE
     image_sha = m.get('target_image_sha256') if combined else IMAGE_SHA
     if combined:
         if display:

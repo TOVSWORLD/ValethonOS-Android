@@ -8,6 +8,18 @@ read-only eMMC are now observed on this tablet; display remains unqualified.
 The current OS loading animation is a working display/backlight/graphics
 reference. Use its pinned board/driver setup when comparing the maintained path.
 
+## Pin configuration compatibility — November18,2026
+
+Scope10 reached DRM component matching/IOMMU attachment, then failed group43
+pin configuration. The working4.9 driver uses PIN_CONFIG_SLEW_RATE as a GPIO
+output-direction alias via mtk_pconf_set_direction; it does not program a
+pad-slew register. output-low/high already select output direction. Maintained
+ACK maps those properties to PIN_CONFIG_LEVEL, which is supported, but rejects
+SLEW_RATE. Actual working dispatcher/helper and ACK dispatcher C tests prove
+removing the redundant alias preserves final output level/direction on43/83.
+Keep the known-working behavior; do not invent a new slew setting or port a
+register write the working handler never made. Same Image/PWM/MM0/policy/capture.
+
 ## Active multimedia-domain ancestry correction — November18,2026
 
 Scope9's actual DT still disabled /soc/syscon@10006000, inherited from the

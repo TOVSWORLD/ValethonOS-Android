@@ -39,6 +39,8 @@ class DisplayProfile(unittest.TestCase):
         self.assertEqual(tree,original)
         pins=[v for kind,node,prop,v in changes if prop=='pinmux']
         self.assertIn([43<<8,83<<8],pins)
+        self.assertFalse(any(prop=='slew-rate' for kind,node,prop,v in changes))
+        self.assertTrue(any(prop=='output-low' for kind,node,prop,v in changes))
         self.assertIn([(59<<8)|1],pins)
         self.assertTrue(any(kind=='delete' and prop=='mboxes' for kind,node,prop,v in changes))
         self.assertFalse(any(prop=='dev-ctrl' for kind,node,prop,v in changes))

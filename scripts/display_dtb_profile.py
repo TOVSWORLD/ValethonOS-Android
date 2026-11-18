@@ -118,7 +118,7 @@ def plan(tree,config):
         changes.append(('create',node,None,None))
     pins_h=handle(pins);pwm_pins_h=handle(pwm_pins);backlight_h=handle(backlight);pwm_h=handle(r['pwm'])
     host_h=handle(host_ep);panel_h=handle(panel_ep)
-    changes += [('x',settings,'pinmux',[43<<8,83<<8]),('x',settings,'slew-rate',[1]),('flag',settings,'output-low',None),
+    changes += [('x',settings,'pinmux',[43<<8,83<<8]),('flag',settings,'output-low',None),
                 ('s',panel,'compatible','amazon,douglas-tpv-panel'),('x',panel,'reg',[0]),('x',panel,'vddio-supply',[supply]),
                 ('x',panel,'power-gpios',[gpio,43,0]),('x',panel,'reset-gpios',[gpio,83,1]),
                 ('s',panel,'pinctrl-names','default'),('x',panel,'pinctrl-0',[pins_h]),('x',panel,'backlight',[backlight_h]),
