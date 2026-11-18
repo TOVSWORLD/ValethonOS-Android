@@ -20,6 +20,19 @@ SELinux enforcing, USB/ADB and a verified return path. This is a sequence of
 outcomes, not a promise of three physical tests. Provider source/build steps
 stay inside the first outcome; do not promote them to more minor milestones.
 
+## Display runtime result — November18,2026
+
+Scope7 consumed one protected source boot/restore and one load/jump on source
+d5596c9. Fresh120-byte VDISP001 received on selected physical USB: stage1,
+flags1,error-110. Enforcing display PID1 ran, but fb0 did not appear within the
+bounded probe; banner was not written. Display milestone NOT achieved. Original
+Android returned; original boot/config/recovery and normal ADB checks passed.
+Owner Power/visual confirmation pending. No recovery write or automatic retry.
+Receipt: evidence/display-pipeline-source/functional-runtime-result.json.
+Private trial: out/display-functional-trial-runtime-1. Do not replay scope7 or
+repeat logging/storage. Next source work audits display component/provider
+binding and dependency closure; require a concrete fix before another trial.
+
 ## Display/backlight implementation in progress
 
 The DRM master/gamma/mutex port and TPV-only panel are implemented;999 tests pass.

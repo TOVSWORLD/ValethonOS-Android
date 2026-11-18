@@ -1,5 +1,18 @@
 # Current milestone — read-only internal eMMC achieved, November18,2026
 
+## Display runtime result — November18,2026
+
+Scope7 consumed one protected source boot/restore and one load/jump on source
+d5596c9. Fresh120-byte VDISP001 received on selected physical USB: stage1,
+flags1,error-110. Enforcing display PID1 ran, but fb0 did not appear within the
+bounded probe; banner was not written. Display milestone NOT achieved. Original
+Android returned; original boot/config/recovery and normal ADB checks passed.
+Owner Power/visual confirmation pending. No recovery write or automatic retry.
+Receipt: evidence/display-pipeline-source/functional-runtime-result.json.
+Private trial: out/display-functional-trial-runtime-1. Do not replay scope7 or
+repeat logging/storage. Next source work audits display component/provider
+binding and dependency closure; require a concrete fix before another trial.
+
 [Actual receipt](../../evidence/independent-recovery/ack-storage-readonly-runtime-result.json):
 maintained6.18/enforcing PID1 read original boot p5 exactly16MiB, checked EOF and
 matched its known SHA-256. Fresh120-byte VSTORE01 success received on the selected
