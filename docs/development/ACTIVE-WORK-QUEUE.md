@@ -5,7 +5,7 @@ full relocated padded Image integrity and all five actual Linux checkpoints
 through MMU enable/virtual entry/start_kernel passed on Douglas. One source
 boot/restore and one load/jump consumed; no retry. Original Android returned on a
 different completed boot; exact original boot/config, unchanged recovery and
-normal ADB verified. Owner Power attestation pending; reset cause unqualified.
+normal ADB verified. Owner confirmed Power untouched: automatic return established; reset cause unqualified.
 Complete kernel initialization and enforcing PID1/target USB remain unproven.
 
 Next: inspect exact pinned early C initialization after start_kernel, using the

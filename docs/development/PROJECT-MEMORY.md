@@ -14,7 +14,8 @@ full padded destination Image integrity and every entry/MMU checkpoint in order.
 **Complete kernel initialization and enforcing PID1/USB remain unproven.**
 Last verified tablet state (November17): a different completed original Android
 boot, exact original boot/config, unchanged recovery and normal unprivileged ADB.
-Owner Power attestation is pending; precise reset cause remains unqualified.
+Owner confirmed Power untouched: automatic Android return is established;
+precise reset cause remains unqualified.
 
 Current execution plan: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md).
 The combined hardware attempt is complete and consumed. No automatic retry.

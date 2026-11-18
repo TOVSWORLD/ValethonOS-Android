@@ -46,7 +46,7 @@
   "full_image_integrity_proven": true,
   "retained_kernel_boot_proven": false,
   "retained_handoff_marker_seen": true,
-  "owner_power_confirmation_pending": true,
+  "owner_power_confirmation_pending": false,
   "wire_assessment": {
     "identity_verified": false,
     "complete_records": 0,
@@ -78,8 +78,8 @@
   "target_dtb_sha256": "3ec53e4a1bfab5fc98ca5eee7a83a5a20f2dbef8932e9dbfd7f8ed3f72d638e2",
   "raw_controller_outcome": "ack-boot-unproven",
   "outcome": "ack-linux-c-entry-proven-pid1-unproven",
-  "owner_used_power": null,
-  "automatic_return_qualified": false,
+  "owner_used_power": false,
+  "automatic_return_qualified": true,
   "source_stage": {
     "candidate_write_attempts": 1,
     "restore_write_attempts": 1,
@@ -100,5 +100,5 @@
   "retained_console_sha256": "b3d4a96afefa9fb9565e877d4cc970fa6a910c198e32366c64ff54606328f8ff",
   "retained_trace_ends_with_start_kernel_marker": true,
   "retained_linux_banner_present": false,
-  "interpretation": "Full relocated padded Image integrity and unique ordered actual Linux entry/before-MMU/after-MMU/virtual-entry/start_kernel chain proven on Douglas. Trace ends at the start_kernel checkpoint; the exact later stopping instruction is unknown. This is Linux C entry, not complete kernel initialization or controlled PID1/USB. The legacy target_kernel_boot_proven flag requires attributed Linux banner/target identity or PID1 wire evidence and remains false. A different completed original Android boot and original flash/config/recovery/normal ADB were verified. One attempt consumed; no retry. Owner Power attestation pending; precise reset cause unqualified."
+  "interpretation": "Full relocated padded Image integrity and unique ordered actual Linux entry/before-MMU/after-MMU/virtual-entry/start_kernel chain proven on Douglas. Trace ends at the start_kernel checkpoint; the exact later stopping instruction is unknown. This is Linux C entry, not complete kernel initialization or controlled PID1/USB. The legacy target_kernel_boot_proven flag requires attributed Linux banner/target identity or PID1 wire evidence and remains false. A different completed original Android boot and original flash/config/recovery/normal ADB were verified. One attempt consumed; no retry. Owner confirmed Power untouched throughout, establishing automatic return; precise reset cause unqualified."
 }

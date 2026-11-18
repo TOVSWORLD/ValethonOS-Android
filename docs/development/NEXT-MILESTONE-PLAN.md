@@ -28,7 +28,8 @@ Do not infer a driver/USB fault before establishing execution reaches it.
 The combined trial used one source boot/restore and one native load/jump. Original
 boot was restored/read back before jumping; recovery was never written. A new
 completed original Android boot, exact flash/config and normal ADB were verified.
-Owner Power attestation is pending; precise reset cause remains unqualified.
+Owner confirmed Power untouched: automatic Android return is established;
+precise reset cause remains unqualified.
 Retain the old failed trials in #344/#346/#348 and preserve this new milestone.
 Any later attempt keeps single-attempt limits, a bounded capture/return window,
 no post-jump mutations into a hung device and owner-assisted recovery if needed.
