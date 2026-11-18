@@ -40,7 +40,10 @@ source for vendor command sequences and opaque configuration payloads.
   Its October 25 statements such as “uncompiled” are historical, not current build status.
 - Compiled complete draft identity and object hashes:
   [first-kernel-draft receipt](../../evidence/independent-recovery/first-kernel-draft-result.json).
-- Latest tablet outcome: [C-init panic result](../../evidence/independent-recovery/ack-cinit-runtime-result.json).
+- Latest tablet outcome: [RAM-corrected kernel/PID1 result](../../evidence/independent-recovery/ack-ramfix-runtime-result.json).
+  Kernel initialization and /init execution, SELinux policy load and USB
+  enumeration/CDC ACM observed. Fresh USB protocol witness remains open.
+  Earlier [C-init panic](../../evidence/independent-recovery/ack-cinit-runtime-result.json):
   Retained output identifies a panic and an omitted live RAM exclusion; fix
   success remains unproven. Prior [combined result](../../evidence/independent-recovery/ack-combined-runtime-result.json):
   Full padded Image integrity, actual entry/MMU/virtual transition and start_kernel

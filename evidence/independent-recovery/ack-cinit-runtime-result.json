@@ -21,7 +21,7 @@
   "recovery_verified_before_jump": true,
   "owner_return_required": false,
   "different_boot_completed": true,
-  "owner_power_confirmation_pending": true,
+  "owner_power_confirmation_pending": false,
   "cinit_console_proven": true,
   "run_init_seen": false,
   "cinit_retained_assessments": [
@@ -66,8 +66,8 @@
   "target_dtb_sha256": "4f1060981cd3d03c6c53fbff8aa497427efdff2ca2b5f545748ff547fcb75527",
   "raw_controller_outcome": "ack-boot-unproven",
   "outcome": "attributed-kernel-panic-before-pid1",
-  "owner_used_power": null,
-  "automatic_return_qualified": false,
+  "owner_used_power": false,
+  "automatic_return_qualified": true,
   "source_stage": {
     "candidate_write_attempts": 1,
     "restore_write_attempts": 1,
@@ -117,5 +117,5 @@
     "causal_status": "Strong address correlation; whether correcting the gap resolves the panic is unproven",
     "first_exception_incomplete": true
   },
-  "interpretation": "Fresh per-write target identity attributes the retained panic to the maintained kernel. Kernel reports stack overflow while show_pte faults; nested fault reporting may hide the original exception. The source live System RAM excludes98400000..98600000, while target DT memory includes it without no-map. Preserve live exclusions before another attempt. PID1/USB unproven. One attempt consumed, no retry. Original installation verified after a different completed Android boot. Owner Power attestation pending; reset cause unqualified."
+  "interpretation": "Fresh per-write target identity attributes the retained panic to the maintained kernel. Kernel reports stack overflow while show_pte faults; nested fault reporting may hide the original exception. The source live System RAM excludes98400000..98600000, while target DT memory includes it without no-map. Preserve live exclusions before another attempt. PID1/USB unproven. One attempt consumed, no retry. Original installation verified after a different completed Android boot. Owner confirmed Power untouched throughout; automatic Android return established, exact reset cause unqualified."
 }

@@ -125,6 +125,25 @@ class ACKJump(unittest.TestCase):
         self.assertEqual((r['load_attempts'], r['jump_requests']), (1, 1))
         self.assertFalse(r['hardware_deadline_qualified'])
 
+    def test_lost_ssh_stdout_recovers_durable_result_without_reopening(self):
+        class LostSSH(Process):
+            def communicate(self, **kw):
+                self.finished = True
+                return b'', b'fixture SSH connection lost'
+            def poll(self): return 255 if self.finished else None
+        original = self.d.host
+        def host(args, **kw):
+            if args[0] == 'python3':
+                return subprocess.CompletedProcess(args,0,json.dumps({'complete':True,'endpoint_selected':True}).encode(),b'')
+            return original(args,**kw)
+        self.d.host = host
+        r = self.invoke(process=LostSSH())
+        self.assertTrue(r['capture_recovered_from_durable_host_file'])
+        self.assertTrue(r['target_pid1_proven']); self.assertTrue(r['complete'])
+        self.assertEqual(r['receiver_returncode'],255)
+        self.assertEqual((r['load_attempts'],r['jump_requests']),(1,1))
+        self.assertEqual((self.p/'out/receiver-stderr-private.bin').read_bytes(),b'fixture SSH connection lost')
+
     def test_retained_kernel_record_without_usb_does_not_prove_pid1(self):
         self.d.wire = b''
         r = self.invoke(process=Process(endpoint=False))

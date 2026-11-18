@@ -17,7 +17,7 @@ from inspect_ack_native_capture import inspect
 from build_ack_trampoline import marker as handoff_marker
 
 SCOPE = 'ack-linux-native-jump-1'
-RECEIVERS = ['capture_ack_native_console.py', 'capture_lab_kernel_log.py',
+RECEIVERS = ['ack_capture_supervisor.py', 'capture_ack_native_console.py', 'capture_lab_kernel_log.py',
              'capture_usb_acm_status.py', 'usb_acm_frame.py', 'kernel_log_protocol.py',
              'capture_live_acm_probe.py']
 
@@ -233,8 +233,22 @@ def run(device, lab_package, manifest, client_report, linked, output,
                      returned_boot_id_sha256=sha(after['boot_id'].encode()), owner_return_required=False,
                      owner_power_confirmation_pending=True); save()
         stdout, stderr = receiver.communicate(timeout=125)
-        lines = stdout.splitlines()
+        for name,data in [('receiver-stdout-private.bin',stdout),('receiver-stderr-private.bin',stderr)]:
+            with (output/name).open('xb') as f:os.fchmod(f.fileno(),0o600);f.write(data)
+        r['receiver_returncode'] = receiver.poll()
+        lines = [line for line in stdout.splitlines() if line.startswith(b'{')]
         r['capture'] = json.loads(lines[-1]) if lines else {'receipt_missing': True}
+        if r['capture'].get('receipt_missing'):
+            # The worker is detached from SSH. Recover its durable outcome with
+            # bounded host-only reads; never reopen a port or repeat the trial.
+            code = ('import json,pathlib,time; p=pathlib.Path(' + repr(remote_capture+'.control/result.json') +
+                    '); old=pathlib.Path(' + repr(remote_capture+'/receipt.json') +
+                    '); control=p.parent/"inputs.json"; start=json.loads(control.read_text()).get("started_monotonic",time.monotonic()) if control.exists() else time.monotonic(); end=start+(135 if control.exists() else 35)\nwhile not p.exists() and not old.exists() and time.monotonic()<end: time.sleep(.1)\n'
+                    'print((p if p.exists() else old).read_text() if p.exists() or old.exists() else "{}")')
+            saved = json.loads(device.host(['python3','-c',code],timeout=145).stdout)
+            if saved:
+                r['capture'] = saved;r['capture_recovered_from_durable_host_file'] = True
+
         raw = device.host(['cat', remote_capture + '/raw.bin'], timeout=30).stdout
         if device.host(['sha256sum', remote_capture + '/raw.bin'], timeout=15).stdout.split()[0].decode() != sha(raw):
             raise ValueError('Captured wire copy differs from host digest')

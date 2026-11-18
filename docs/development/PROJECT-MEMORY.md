@@ -9,20 +9,42 @@ New user instructions and newer verified results supersede this snapshot.
 The objective is maintained Linux/Android on the 2017 Fire HD 8, douglas/KFDOWI,
 ultimately a supported ValethonOS control panel. Interim Android is a working
 recovery/development environment, not completion. The full ACK 6.18.34 draft
-has now reached actual Linux start_kernel on Douglas: the combined trial proved
-full padded destination Image integrity and every entry/MMU checkpoint in order.
-**Complete kernel initialization and enforcing PID1/USB remain unproven.**
-Last verified tablet state (November17): a different completed original Android
-boot, exact original boot/config, unchanged recovery and normal unprivileged ADB.
-The prior combined trial returned automatically with Power untouched. Latest
-C-init return is verified; its owner Power attestation is pending and reset cause
-remains unqualified.
+now completes kernel initialization and executes /init on Douglas. Fresh retained
+records show SELinux policy-load success and successful gadget probe; host events
+show the test USB identity enumerating and CDC ACM binding. The prior stack-
+overflow panic was not seen after the live RAM correction.
 
-Current execution plan: [NEXT-MILESTONE-PLAN.md](NEXT-MILESTONE-PLAN.md).
-Both combined and C-init hardware attempts are consumed; no retry. C-init
-retained console worked and captured an attributed kernel panic before PID1.
-Next candidate fixes a concrete live RAM exclusion omitted from the earlier DT.
-UART is not a prerequisite.
+**Remaining acceptance:** fresh PID1 USB protocol identity/records/terminal
+witness. The enforcing/RO-policy/domain/namespace gates are supported by pinned
+control-flow to gadget setup, not a recovered USB attestation. Do not reopen
+kernel/PID1 execution just because the old wire-based flag remains false.
+
+Latest verified state: completed original Android, exact original boot/config,
+unchanged recovery and normal ADB. Owner confirmed Power untouched for both
+C-init and corrected-RAM attempts; automatic returns established, exact reset
+cause unqualified. All prior approvals consumed; no automatic retries.
+
+[Next plan](NEXT-MILESTONE-PLAN.md), [full end-to-end action](ACK-USB-END-TO-END.md).
+Owner correction: do not get stuck on logging to prove something already working.
+No logging-only hardware gate. Repair the existing receiver and go directly to
+the full transfer; preserve achieved initialization/PID1/USB enumeration.
+
+## Corrected-RAM hardware milestone and receiver action
+
+[Receipt](../../evidence/independent-recovery/ack-ramfix-runtime-result.json):
+Run /init, SELinux policy audit res1 and gadget probe success after policy. One
+load/jump, original boot restored before it, original state verified after return.
+Host observed test1209:0001 and CDC ACM; no fresh wire bytes/completion receipt.
+The receiver's SSH exit/stderr were previously discarded; process-failure cause
+is unknown. Detached bounded capture worker and durable outcome recovery repair
+that operational gap. No device/USB-driver changes are inferred from it.
+
+Fresh end-to-end reference: out/recovery-linux-pivot/ack-usb-end-to-end-candidate-1;
+PID1 ack-ramfix-initramfs-2; prepared runner run-ack-usb-end-to-end-trial-1-private.py
+in that parent. Scope5 is distinct; old approvals remain consumed. Verbose
+initcall tracing is disabled; kernel/driver/RAM fix preserved. Current user said
+“Do it” while available; this authorizes continuing to the next full attempt,
+not repeating a consumed trial or an isolated logging test.
 
 ## C-init hardware result and live RAM correction
 

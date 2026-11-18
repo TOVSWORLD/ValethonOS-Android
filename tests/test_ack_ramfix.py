@@ -24,6 +24,14 @@ class LiveRAM(unittest.TestCase):
   a=SimpleNamespace(policy=Path('unused'),ramfix=True,cinit=False,combined=False)
   with patch.object(trial,'read',return_value={'scope':'ack-linux-cinit-two-stage-3','target_kind':'ack-linux-cinit-v3'}):
    with self.assertRaisesRegex(ValueError,'policy required'):trial.validate(a)
+ def test_new_usb_trial_cannot_reuse_ramfix_parent_scope(self):
+  a=SimpleNamespace(policy=Path('unused'),ramfix=True,cinit=False,combined=False,usb_end_to_end=True)
+  with patch.object(trial,'read',return_value={'scope':'ack-linux-ramfix-two-stage-4','target_kind':'ack-linux-ramfix-v4'}):
+   with self.assertRaisesRegex(ValueError,'policy required'):trial.validate(a)
+ def test_usb_mode_requires_ram_fixed_kernel(self):
+  a=SimpleNamespace(policy=Path('unused'),ramfix=False,cinit=True,combined=False,usb_end_to_end=True)
+  with patch.object(trial,'read',return_value={}):
+   with self.assertRaisesRegex(ValueError,'requires the RAM-fixed'):trial.validate(a)
  def test_vm_geometry_transplants_banks_and_nomap(self):
   strings=b'reg\0';begin=lambda name:struct.pack('>I',1)+(name+b'\0')+bytes((-(len(name)+1))%4)
   st=begin(b'')+begin(b'memory@40000000')+struct.pack('>IIIQQ',3,16,0,0x40000000,0x60000000)+struct.pack('>III',2,2,9)

@@ -27,7 +27,9 @@ def validate(a):
     ramfix = getattr(a, 'ramfix', False)
     cinit = ramfix or getattr(a, 'cinit', False)
     combined = getattr(a, 'combined', False) or cinit
-    required_scope = 'ack-linux-ramfix-two-stage-4' if ramfix else 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
+    end_to_end = getattr(a, 'usb_end_to_end', False)
+    if end_to_end and not ramfix:raise ValueError('USB end-to-end mode requires the RAM-fixed candidate')
+    required_scope = 'ack-linux-usb-end-to-end-two-stage-5' if end_to_end else 'ack-linux-ramfix-two-stage-4' if ramfix else 'ack-linux-cinit-two-stage-3' if cinit else 'ack-linux-combined-two-stage-2' if combined else SCOPE_TWO_STAGE
     required_kind = 'ack-linux-ramfix-v4' if ramfix else 'ack-linux-cinit-v3' if cinit else 'ack-linux-combined-v2' if combined else 'ack-linux-v1'
     if (p.get('scope') != required_scope or p.get('target_kind') != required_kind or
             p.get('target_hardware_deadline_seconds') != 31 or p.get('target_nr_cpus') != 1 or
@@ -132,7 +134,10 @@ def run(a):
     if combined:
         if cinit:
             if ramfix:
-                from prepare_ack_ramfix_bundle import prepare as builder
+                if getattr(a, 'usb_end_to_end', False):
+                    from prepare_ack_usb_end_to_end import prepare as builder
+                else:
+                    from prepare_ack_ramfix_bundle import prepare as builder
             else:
                 from prepare_ack_cinit_bundle import prepare as builder
         else:
@@ -199,6 +204,7 @@ if __name__ == '__main__':
     mode.add_argument('--combined', action='store_true')
     mode.add_argument('--cinit', action='store_true')
     mode.add_argument('--ramfix', action='store_true')
+    parser.add_argument('--usb-end-to-end', action='store_true')
     parser.add_argument('--combined-reference', type=Path)
     parser.add_argument('--combined-qualification', type=Path)
     a = parser.parse_args()

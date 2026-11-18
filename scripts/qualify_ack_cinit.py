@@ -54,6 +54,7 @@ def qualify(bundle,kernel,nonce,vm_reports,out,ramfix=False):
  vms=[json.loads(p.read_text()) for p in vm_reports]
  checks['exact_image_both_vm_modes_pid1_after_init_free']=len(vms)==2 and {v['virtualization'] for v in vms}=={'off','on'} and all(v['passed'] and v['image_sha256']==digest(bundle/'image.bin') and v['run_init_seen'] and v['enforcing_pid1_filesystem_probe'] and v['permanent_callback_survived_init_memory_free'] for v in vms)
  paths=['scripts/build_ack_cinit_console.py','scripts/prepare_ack_cinit_bundle.py','scripts/verify_ack_cinit_bundle.py','scripts/qualify_ack_cinit.py','scripts/validate_ack_cinit_vm.py','scripts/build_ack_combined_entry.py','scripts/qualify_ack_combined.py','projects/firetabs-android/native-kexec/combined_sha256.c']
+ if m.get('end_to_end_only') is True:paths+=['scripts/prepare_ack_usb_end_to_end.py']
  if ramfix:
   paths+=['scripts/prepare_ack_ramfix_bundle.py','scripts/verify_ack_ramfix_bundle.py','scripts/validate_ack_ramfix_vm.py']
   checks['target_memory_geometry_vm']=all(v.get('board_memory_geometry') is True for v in vms)

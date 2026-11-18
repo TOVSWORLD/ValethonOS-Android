@@ -49,7 +49,9 @@ def verify(manifest,kernel_package,fdtget=Path('work/dtb-tool/build/fdtget'),non
   if bytes(expected)!=meta or sha(dt)!=m['target_dtb_sha256']:raise ValueError('Metadata contains unexpected code/data')
   file=p/'target.dtb';file.write_bytes(dt);tree=snapshot(fdtget,file)
   args=raw(tree['/chosen']['bootargs']).rstrip(b'\0').decode().split()
-  if args.count('earlycon=uart8250,mmio32,0x444bf000')!=1 or 'keep_bootcon' not in args or 'initcall_debug' not in args or 'loglevel=8' not in args or 'ignore_loglevel' not in args or any(a.startswith('ramoops.') for a in args):raise ValueError('Exact permanent console and no conflicting mapping required')
+  quiet=m.get('end_to_end_only') is True
+  verbosity=(m.get('verbose_initcall_tracing') is False and 'loglevel=7' in args and 'initcall_debug' not in args and 'ignore_loglevel' not in args) if quiet else ('initcall_debug' in args and 'loglevel=8' in args and 'ignore_loglevel' in args)
+  if args.count('earlycon=uart8250,mmio32,0x444bf000')!=1 or 'keep_bootcon' not in args or not verbosity or any(a.startswith('ramoops.') for a in args):raise ValueError('Exact permanent console/no conflicting mapping and declared verbosity required')
   if 'valethon,trial-nonce' in tree['/chosen']:raise ValueError('Disk logger unexpectedly opted in')
   for name in ['10007000']:
    if raw(tree['/soc/watchdog@'+name]['status'])!=b'disabled\0':raise ValueError('Target watchdog driver must stay disabled')

@@ -1,18 +1,17 @@
-# Current work — live RAM exclusion correction, November17,2026
+# Current work — finish the existing PID1 USB transfer, November17,2026
 
-[Runtime panic](../../evidence/independent-recovery/ack-cinit-runtime-result.json),
-[concrete fix](ACK-LIVE-RAM-FIX.md), [plan](NEXT-MILESTONE-PLAN.md).
-C-init retained console worked: attributed stack-overflow panic in show_pte,
-PID1/USB absent. Original Android state verified after return. Attempt consumed;
-Power attestation is in the receipt; no retry.
+[Hardware milestone](../../evidence/independent-recovery/ack-ramfix-runtime-result.json):
+RAM-corrected kernel completes initialization, executes /init, loads SELinux policy
+and probes gadget; host sees test VID/PID and CDC ACM. Original installation
+verified after return; Power untouched confirmed. Fresh USB protocol witness is
+still missing because receiver outcome was lost. Do not reopen kernel/PID1 or
+create another logging-only device gate. Owner explicitly directed this focus.
 
-Established defect: live source System RAM excludes98400000–98600000, while
-prior DT allowed kernel allocations there. Fault-address conversion points inside
-the gap, but primary cause/fix success remain unproven. Add no-map exclusions
-from fresh iomem and independently verify them. Both VM modes with target memory
-geometry reach enforcing PID1. All13 qualification controls,963 tests and bound
-policy validation pass. Publish and request owner presence for one fresh scope4 attempt. No new tablet commands in preparation.
-Prior Linux entry/MMU/start_kernel milestone remains passed; UART is supporting.
+[Next full attempt](ACK-USB-END-TO-END.md), [plan](NEXT-MILESTONE-PLAN.md).
+Detached bounded receiver and durable-result recovery are implemented; keep the
+existing RAM fix/kernel, fresh PID1 identity and quiet initcalls. Owner available
+and “Do it” authorizes continuing to the full scope5 attempt; prior approvals
+consumed. One protected source boot/restore and jump only, no automatic retry.
 
 # Historical selection — UART bench preparation, November 16, 2026
 
