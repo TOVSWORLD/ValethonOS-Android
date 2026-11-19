@@ -198,7 +198,8 @@ class HoldSettings(unittest.TestCase):
   class D:
    args=[]
    def host(self,args,**kw):return SimpleNamespace(stdout=((('a' if args[-1].endswith('source-acm-hold') else 'b')*64)+' file\n').encode())
-   def adb(self,*args,**kw):pass
+   def __init__(self):self.adb_calls=[]
+   def adb(self,*args,**kw):self.adb_calls.append((args,kw))
    def shell(self,cmd,**kw):
     if cmd=='cat /proc/consoles':return b'ttyGS0 -W- (E p) 241:0\n'
     if cmd.startswith('sha256sum '):return ('a'*64+' file\n').encode()
@@ -207,3 +208,5 @@ class HoldSettings(unittest.TestCase):
   def arm():self.assertEqual(events[-1],b'SOURCE_CONSOLE_PROVEN')
   with patch('source_usb_console_trial.subprocess.Popen'),patch.object(c,'line',side_effect=lambda expected,seconds:events.append(expected)),patch.object(c,'arm_ffs_hold',side_effect=arm) as hold:
    c.start();hold.assert_called_once()
+  self.assertEqual([call[0][0] for call in c.d.adb_calls],['push','wait-for-device'])
+  self.assertEqual(c.d.adb_calls[-1][1],{'timeout':30})
