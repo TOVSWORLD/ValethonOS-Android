@@ -53,6 +53,20 @@ static int touch_open(void){
  return -1;
 }
 
+/* A late arrival sees an explicit prompt; GPU work waits for the first tap. */
+static void start_prompt(void){
+ const char *text="TAP TO START";const unsigned char glyphs[][7]={
+  {31,4,4,4,4,4,4}, {14,17,17,31,17,17,17}, {30,17,17,30,16,16,16},
+  {14,17,17,17,17,17,14}, {15,16,16,14,1,1,30}, {30,17,17,30,20,18,17}};
+ glEnable(GL_SCISSOR_TEST);glClearColor(.95f,.95f,.95f,1);
+ for(int c=0;text[c];c++){
+  int g=-1;switch(text[c]){case 'T':g=0;break;case 'A':g=1;break;case 'P':g=2;break;case 'O':g=3;break;case 'S':g=4;break;case 'R':g=5;break;}
+  if(g<0)continue;
+  for(int y=0;y<7;y++)for(int x=0;x<5;x++)if(glyphs[g][y]&(1U<<(4-x))){glScissor(112+c*48+x*8,1120+(6-y)*8,8,8);glClear(GL_COLOR_BUFFER_BIT);}
+ }
+ glDisable(GL_SCISSOR_TEST);
+}
+
 int main(void){
  (void)&ft_serial_output;
  (void)&ft_acm_setup;(void)&ft_discover_udc;
@@ -112,16 +126,18 @@ int main(void){
  GLuint buffer;glGenBuffers(1,&buffer);glBindBuffer(GL_ARRAY_BUFFER,buffer);glBufferData(GL_ARRAY_BUFFER,sizeof(mesh),mesh,GL_STATIC_DRAW);
  glEnableVertexAttribArray(0);glEnableVertexAttribArray(1);glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void *)0);glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void *)(3*sizeof(float)));glEnable(GL_DEPTH_TEST);glViewport(0,0,800,1280);
  stage="touch input";error_code=6;for(int retry=0;retry<500&&input<0;retry++){input=touch_open();if(input<0){struct timespec wait={0,10000000};nanosleep(&wait,NULL);}}if(input<0)goto failure;
- struct tp_state touch={0};float x=0,y=0;struct gbm_bo *previous=NULL;uint32_t previous_fb=0;unsigned long began=milliseconds(),frames=0;if(!began)goto failure;
+ struct tp_state touch={0};float x=0,y=0;struct gbm_bo *previous=NULL;uint32_t previous_fb=0;unsigned long began=milliseconds(),started_at=0,frames=0;int started=0;if(!began)goto failure;
  stage="GPU rendering and scanout";error_code=7;
- while(milliseconds()-began<90000){
+ while((!started&&milliseconds()-began<900000)||(started&&milliseconds()-started_at<300000)){
   struct tp_event events[32];for(int batch=0;batch<8;batch++){
    ssize_t n=read(input,events,sizeof(events));if(n<0){if(errno==EINTR)continue;if(errno==EAGAIN)break;goto failure;}if(n<=0||n%(ssize_t)sizeof(events[0]))goto failure;
    for(unsigned int i=0;i<(unsigned long)n/sizeof(events[0]);i++)tp_feed(&touch,&events[i]);if(touch.failed)goto failure;
-   for(int i=0;i<TP_SLOTS;i++)if(touch.slots[i].active&&touch.slots[i].valid==3){x=touch.slots[i].x/400.f-1.f;y=1.f-touch.slots[i].y/640.f;break;}
+   for(int i=0;i<TP_SLOTS;i++)if(touch.slots[i].active&&touch.slots[i].valid==3){x=touch.slots[i].x/400.f-1.f;y=1.f-touch.slots[i].y/640.f;if(!started){started=1;started_at=milliseconds();}break;}
   }
-  float m[16];matrix(m,(milliseconds()-began)/1100.f+x*2.f,x,y,800.f/1280.f);glUniformMatrix4fv(transform,1,GL_FALSE,m);glClearColor(.015f,.02f,.04f,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);glDrawArrays(GL_TRIANGLES,0,36);
+  if(!started&&frames){struct timespec pause={0,20000000};nanosleep(&pause,NULL);continue;}
+  float m[16];matrix(m,(started?(milliseconds()-started_at)/1100.f:0)+x*2.f,x,y,800.f/1280.f);glUniformMatrix4fv(transform,1,GL_FALSE,m);glClearColor(.015f,.02f,.04f,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);glDrawArrays(GL_TRIANGLES,0,36);
   if(!frames){unsigned char pixel[4];glFinish();glReadPixels(400,640,1,1,GL_RGBA,GL_UNSIGNED_BYTE,pixel);if((unsigned int)pixel[0]+pixel[1]+pixel[2]<64)goto failure;}
+  if(!started)start_prompt();
   if(glGetError()!=GL_NO_ERROR||!eglSwapBuffers(display,window))goto failure;
   struct gbm_bo *bo=gbm_surface_lock_front_buffer(surface);uint32_t fb=0;if(!bo||framebuffer(fd,bo,&fb))goto failure;
   if(!frames){if(drmModeSetCrtc(fd,crtc,fb,0,0,&connector,1,&mode))goto failure;}

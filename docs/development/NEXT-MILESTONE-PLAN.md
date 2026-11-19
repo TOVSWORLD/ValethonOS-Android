@@ -1,5 +1,63 @@
 # Next milestone execution plan
 
+## GPU frame confirmed; first-tap demo compiled; recovery pending — November 19, 2026
+
+Owner observed purple/orange cube after walking over late, without watching the
+first90seconds. This supports first-frame GPU rendering beyond GBM2. Old demo
+intentionally idles after90seconds, so late still/no-touch is not a demonstrated
+animation/touch failure. Full interactive rendering remains unqualified.
+First-tap demo now shows TAP TO START, waits up to15minutes with one rendered
+waiting frame, then runs animation/input for five minutes from first valid tap.
+Component6 compiled; both exact-kernel VM modes and ten graphics tests passed.
+Unchanged kernel/libraries/enforcing policy and corrected two-domain DT remain
+selected. Next package/controller needs fresh scope and must start observation
+on owner tap, permit USB disconnect after startup for desk use, reconnect for
+recovery. No next boot image is qualified/staged/installed yet.
+
+Current recovery: initial listener timed out with zero helper launches. Renewed
+only the waiting window, preserved timeout receipt, same maximum one helper call.
+Owner reported restart done and booting; lab still observed experimental USB
+1209:0001. Original TWRP/p5/p6 return is not verified. Existing renewed listener
+is waiting; no additional software boot/install or Android restoration. Asked
+owner current screen. Inspect private execution/helper receipt before acting:
+out/graphics-source-preparation-1/test-case-2/ (renewed supervisor session36331).
+First-tap component/VM copies: out/graphics-source-preparation-1/first-tap-lab-results/.
+Receipts: graphics-power-runtime-result.json and first-tap-preparation-result.json
+under evidence/graphics-source/. No logging-proof gate.
+
+## Late cube observation clarified; next demo waits for first tap — November 19, 2026
+
+Owner clarified they walked over just before reporting and did not watch the
+first90seconds. The purple/orange cube was observed after the full five-minute
+host window, when the old program deliberately idles. This confirms visible
+first-frame rendering; it is not evidence of failed animation or broken touch.
+Animation/touch/stability remain unqualified. Current original-TWRP return is
+still pending; keep existing helper/owner instructions, no further tablet boot.
+
+Fixed demo.c now draws the initial cube with large TAP TO START text, waits up
+to15minutes for a valid first touch without repeatedly rendering, then animates
+and handles touch for five minutes from that touch. Component6 compiled in the
+existing approved lab; ten graphics tests passed. Both exact-kernel VM checks
+are running. No next image has been prepared/staged or installed yet.
+Next procedure allows unplugging USB after the prompt to carry the tablet to
+the desk; graphics has no USB dependency after startup. Begin host interaction
+observation when owner taps, not at boot; reconnect for original TWRP return.
+Private build: out/graphics-source-preparation-1/component-6-build-private.log.
+
+## GPU cube observed; animation/touch timing unresolved — November 19, 2026
+
+Owner reports a purple/orange cube, still and not movable. Exact installed
+program rejects non-T720/software renderers and validates GPU pixels before
+scanout, so this supports first-frame GPU rendering beyond the former GBM2
+failure. Animation/interaction is not qualified. Critically, demo.c deliberately
+stops its rendering/input loop after90seconds and retains the last frame. Owner
+observation timing is unknown; a late static frame does not establish a hang.
+Asked owner to clarify timing and complete the already-instructed restart to
+original TWRP. Existing one-shot return helper was armed; inspect its receipt
+and selected device before further action. Do not run another test or restore
+Android. Next functional test design must keep touch/animation active for the
+entire owner observation window and visibly mark completion; no logging gate.
+
 ## Corrected graphics window finished; owner action pending — November 19, 2026
 
 Corrected candidate741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf

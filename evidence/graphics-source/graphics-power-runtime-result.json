@@ -15,16 +15,32 @@
     "Enable nested MFG power domain7"
   ],
   "kernel_renderer_libraries_policy_unchanged": true,
-  "owner_observation": null,
-  "cube_observed": null,
+  "owner_observation": "Purple and orange cube visible; owner could not move it and reports it is still",
+  "cube_observed": true,
   "gpu_rendering_qualified": false,
   "power_untouched_confirmation": null,
   "return_to_twrp_verified": false,
   "original_android_restoration_requested": false,
   "observation_seconds": 300,
   "observation_finished": true,
-  "owner_observation_pending": true,
+  "owner_observation_pending": false,
   "return_helper_armed": true,
   "return_helper_complete": false,
-  "return_status": "Awaiting owner restart/reconnect; original recovery not yet verified"
+  "return_status": "Original TWRP unverified; initial wait expired with zero calls, waiting renewed under same one-call limit",
+  "animation_observed": false,
+  "touch_response_observed": false,
+  "observation_timing_relative_to_90_second_active_window": "Owner walked over just before reporting, after the announced five-minute window; first90seconds not watched",
+  "gpu_first_frame_observed": true,
+  "limits": [
+    "Exact installed program rejects non-T720/software renderers and checks GPU pixels before scanout; visible cube supports first-frame rendering.",
+    "Program deliberately idles after90seconds, retaining the last frame; late static observation cannot establish animation/touch failure.",
+    "Animation, touch interaction, stability and original TWRP return remain unverified."
+  ],
+  "animation_result": "Unqualified: observed retained frame after deliberate active-window expiry",
+  "touch_result": "Unqualified: attempted interaction after deliberate active-window expiry",
+  "return_helper_wait_renewed": true,
+  "initial_return_helper_launches": 0,
+  "owner_restart_reported": true,
+  "owner_latest_screen_report": "booting",
+  "experimental_usb_observed_after_restart_report": true
 }

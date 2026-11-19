@@ -14,7 +14,11 @@
   "gallium_threading": false,
   "mesa_glthread": false,
   "disk_shader_cache": false,
-  "test_duration_seconds": 90,
+  "test_duration_seconds": 300,
   "observation_window_seconds": 300,
-  "physical_graphics_verified": false
+  "physical_graphics_verified": false,
+  "arrival_timeout_seconds": 900,
+  "start_trigger": "First valid touchscreen contact after the initial GPU cube and TAP TO START prompt",
+  "waiting_gpu_rendering": "One initial frame; then input polling without repeated rendering",
+  "observation_window_starts": "Owner confirms first tap/animation, not kernel boot"
 }
