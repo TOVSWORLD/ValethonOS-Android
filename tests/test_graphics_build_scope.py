@@ -21,7 +21,7 @@ class GraphicsBuild(unittest.TestCase):
                  'drivers/gpu/drm/panel/panel-amazon-douglas-tpv.o', 'drivers/gpu/drm/mediatek/mtk_drm_drv.o',
                  'drivers/gpu/drm/mediatek/mtk_disp_gamma.o', 'drivers/soc/mediatek/mtk-mutex.o',
                  'drivers/video/backlight/lp855x_bl.o', 'drivers/video/backlight/pwm_bl.o',
-                 'drivers/input/touchscreen/goodix.o', 'drivers/watchdog/mtk_wdt.o', 'drivers/gpu/drm/panfrost/panfrost.o']
+                 'drivers/input/touchscreen/goodix.o', 'drivers/watchdog/mtk_wdt.o', 'drivers/gpu/drm/panfrost/panfrost_drv.o', 'drivers/gpu/drm/panfrost/panfrost_device.o', 'drivers/gpu/drm/panfrost/panfrost_gpu.o']
         with tempfile.TemporaryDirectory() as tmp:
             old = Path.cwd()
             try:
@@ -35,6 +35,6 @@ class GraphicsBuild(unittest.TestCase):
                     exec(compile(code, '<actual workflow retention>', 'exec'), {})
                 manifest = json.loads(Path('out/diagnostic-kernel-artifact/manifest.json').read_text())
                 self.assertEqual(manifest['build_mode'], 'graphics-provider')
-                self.assertTrue({'panfrost.o', 'goodix.o', 'mtk_wdt.o', 'mtk_drm_drv.o'}.issubset(manifest['files']))
+                self.assertTrue({'panfrost_drv.o', 'panfrost_gpu.o', 'panfrost_device.o', 'goodix.o', 'mtk_wdt.o', 'mtk_drm_drv.o'}.issubset(manifest['files']))
             finally:
                 os.chdir(old)

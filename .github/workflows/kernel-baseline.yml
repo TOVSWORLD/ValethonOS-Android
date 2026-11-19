@@ -147,7 +147,7 @@ jobs:
               sources += [(f'output/{path}', pathlib.Path(path).name) for path in [
                   'drivers/input/touchscreen/goodix.o', 'drivers/watchdog/mtk_wdt.o']]
           if '${{ steps.scope.outputs.mode }}' == 'graphics-provider':
-              sources += [('output/drivers/gpu/drm/panfrost/panfrost.o', 'panfrost.o')]
+              sources += [('output/drivers/gpu/drm/panfrost/'+n, n) for n in ['panfrost_drv.o','panfrost_device.o','panfrost_gpu.o']]
           if '${{ steps.scope.outputs.mode }}' in ('lab-retained','first-draft'):
               sources += [('output/drivers/misc/valethon_mailbox.o', 'valethon_mailbox.o'),
                           ('output/drivers/mmc/host/mtk-sd.o', 'mtk-sd.o')]

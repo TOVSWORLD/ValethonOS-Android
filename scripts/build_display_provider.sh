@@ -49,7 +49,7 @@ root=Path('work/ack-baseline');output=root/'output';sha=lambda p:hashlib.sha256(
 artifacts=['arch/arm64/boot/Image','vmlinux','System.map','.config','drivers/gpu/drm/mediatek/mtk_drm_drv.o','drivers/gpu/drm/mediatek/mtk_disp_gamma.o','drivers/soc/mediatek/mtk-mutex.o','drivers/gpu/drm/panel/panel-amazon-douglas-tpv.o','drivers/video/backlight/lp855x_bl.o','drivers/video/backlight/pwm_bl.o']
 touch=__import__('os').environ.get('VALETHON_TOUCH_BUILD','0')=='1'
 gpu=__import__('os').environ.get('VALETHON_GPU_BUILD','0')=='1'
-if gpu:artifacts+=['drivers/gpu/drm/panfrost/panfrost.o']
+if gpu:artifacts+=['drivers/gpu/drm/panfrost/'+n for n in ['panfrost_drv.o','panfrost_device.o','panfrost_gpu.o']]
 if touch:artifacts+=['drivers/input/touchscreen/goodix.o','drivers/watchdog/mtk_wdt.o']
 result={'scope':'Full maintained kernel with MT8163 display pipeline and TPV panel/display-PWM backlight support; no hardware qualification','ack_revision':'d9318bdb4c34e8b2d997b4f67ced56b120b22b87','hardware_execution':False,'display_dt_enabled':False,'physical_execution_admitted':False,'artifacts':{n:{'bytes':(output/n).stat().st_size,'sha256':sha(output/n)} for n in artifacts}}
 result['builtin_goodix_touch_support']=touch
