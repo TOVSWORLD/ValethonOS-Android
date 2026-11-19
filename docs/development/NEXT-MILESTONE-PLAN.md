@@ -1,5 +1,24 @@
 # Next milestone execution plan
 
+## Shared staged testing — November 19, 2026
+
+Owner requested grouping issues into staged tests to reduce work time. The
+[shared test plan](STAGED-TEST-PLAN.md) and ordered-roadmap.json now map every
+hardware issue to candidate checkpoints. T0 offline integration/package gate
+feeds T1 one integrated Android boot/UI session. Selected ready T2 connectivity,
+media/input/storage and lifecycle checks can run on that same image before one
+final recovery. T3 full release validation follows later. The next first-home
+milestone needs T0/T1, not all peripheral/soak/release gates.
+
+Source/offline implementation readiness remains serial with one active primary
+task/PR. Runtime acceptance can be co-qualified in one approved session; no
+one-issue-one-boot requirement or circular331-runtime-before333-source gate.
+Preserve acceptance and actual prerequisites (including335 before suspend443),
+record unready checks as not_run/blocked, and do not close issues without their
+actual evidence. Current standalone animated GPU/touch and original TWRP return
+are verified; all helpers stopped. Next is Android userspace/composer integration
+and one complete candidate, no repeat standalone cube/logging-proof gate.
+
 ## Three grouped work packages to maintained Android setup/home — November 19, 2026
 
 Owner explicitly requested grouping the remaining steps. The next major outcome

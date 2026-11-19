@@ -1,4 +1,23 @@
-# Current execution — physical touch achieved; graphics next, November18,2026
+# Current execution — shared staged Android tests, November19,2026
+
+## Shared staged testing — November 19, 2026
+
+Owner requested grouping issues into staged tests to reduce work time. The
+[shared test plan](STAGED-TEST-PLAN.md) and ordered-roadmap.json now map every
+hardware issue to candidate checkpoints. T0 offline integration/package gate
+feeds T1 one integrated Android boot/UI session. Selected ready T2 connectivity,
+media/input/storage and lifecycle checks can run on that same image before one
+final recovery. T3 full release validation follows later. The next first-home
+milestone needs T0/T1, not all peripheral/soak/release gates.
+
+Source/offline implementation readiness remains serial with one active primary
+task/PR. Runtime acceptance can be co-qualified in one approved session; no
+one-issue-one-boot requirement or circular331-runtime-before333-source gate.
+Preserve acceptance and actual prerequisites (including335 before suspend443),
+record unready checks as not_run/blocked, and do not close issues without their
+actual evidence. Current standalone animated GPU/touch and original TWRP return
+are verified; all helpers stopped. Next is Android userspace/composer integration
+and one complete candidate, no repeat standalone cube/logging-proof gate.
 
 ## Touch grid achieved; remain in TWRP for graphics test — November 18, 2026
 
@@ -183,8 +202,8 @@ what source groundwork exists, what remains untested and the exact predecessor.
 
 ## How work proceeds
 
-1. Select the earliest open task whose predecessor and explicit outcome gates
-   pass. Mark that task Active on both Status and Delivery state before work.
+1. Select the earliest source-ready implementation task under the current shared
+   test plan; predecessor source/offline and explicit outcome gates must pass. Mark that task Active on both Status and Delivery state before work.
    Parent Feature/Phase rollups do not count as parallel implementation tasks.
 2. Work one implementation task at a time. Each PR has exactly one primary Task
    issue, and each task records its primary PR. Use `codex/issue-N-short-name` and
@@ -192,8 +211,8 @@ what source groundwork exists, what remains untested and the exact predecessor.
    Necessary follow-up PRs stay on the same issue; do not invent a micro-issue for
    each source fragment or test. Merge to development only after all required
    exact-head checks pass. Main receives development-to-main releases only.
-3. Follow source contract → bounded implementation → exact candidate build →
-   approved device qualification → sanitized acceptance evidence. Source/build
+3. Follow source contract → bounded implementation → shared exact candidate build
+   → approved staged device qualification → sanitized per-issue evidence. Source/build
    success does not close runtime hardware issues. Keep the issue open until its
    actual acceptance is met, including required follow-up testing.
 4. If blocked, record the exact blocker. Work only within that task or on a
@@ -240,9 +259,9 @@ explicit reviewed procedure and approval. No security weakening merely for logs.
   qualification after useful logs and return evidence.
 - **Phase 3,#328:** **060 — #18** clock/reset, **070 — #19** pinctrl/EINT,
   **080 — #20** PMIC/domain qualification. Reuse completed source work; resolve
-  only the active blocker and measure required behavior. A necessary first-boot
-  source prerequisite must be explicitly inserted through#439, not used as a
-  reason to restart broad provider/peripheral cleanup.
+  only the active blocker and measure required behavior. A candidate-required
+  source prerequisite must be documented in its owning issue/shared stage; do not
+  restart historical entry decisions or broad provider/peripheral cleanup.
 - **Phase 4,#23:** **100 — #329** display/backlight, **110 — #330** touch,
   **120 — #331** GPU/graphics composition, in that order.
 - **Phase 5,#24:** **200 — #333**, one reproducible integrated Android candidate
@@ -250,8 +269,11 @@ explicit reviewed procedure and approval. No security weakening merely for logs.
 
 ## Phase 6 — Dedicated peripheral tasks
 
-Each group has its own source/implementation/build/device-test plan and measurable
-acceptance. Execute in this order after the preceding gate:
+Each group retains its own source contract and measurable acceptance. The order
+below is the source implementation/dependency inventory, not a requirement for
+one physical boot per issue. Runtime checks use the shared T2 cohorts after
+source/offline readiness; actual power/thermal and other functional prerequisites
+remain binding.
 
 - **300 — #334:** Wi-Fi identity/firmware/HAL, integrity transfer and reconnect.
 - **310 — #442:** audio AFE/codec/routes/HAL, playback and recording.
@@ -266,7 +288,9 @@ acceptance. Execute in this order after the preceding gate:
 
 Together with internal storage, display/backlight, touch and GPU, these are14
 broad hardware groups. This is a qualification inventory, not14 untouched drivers
-or a percentage. None has experimental-kernel device qualification yet.
+or a percentage. Read-only internal storage, display/touch and standalone animated GPU interaction
+are observed; full Android composition and the remaining peripheral acceptance
+remain open. Current receipts distinguish those scopes.
 
 An unsupported item stays unqualified. If a beta scope exclusion is needed, stop
 for an explicit recorded owner decision and amend dependencies/order before

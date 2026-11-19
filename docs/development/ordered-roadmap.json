@@ -12,7 +12,9 @@
     "no_unrelated_blocker_bypass": true,
     "exact_head_checks_before_merge": true,
     "hardware_done_requires_actual_device_evidence": true,
-    "unsupported_is_not_a_hardware_pass": true
+    "unsupported_is_not_a_hardware_pass": true,
+    "predecessor_gate_scope": "Source/offline readiness gates implementation; runtime acceptance may be co-qualified only in the approved shared test stage",
+    "shared_stage_runtime_coqualification": true
   },
   "tasks": [
     {
@@ -31,7 +33,8 @@
       "kind": "administrative",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": []
     },
     {
       "issue": 440,
@@ -51,7 +54,8 @@
       "conditions": [],
       "existing_work_exception": true,
       "primary_pr": 436,
-      "no_new_scope": true
+      "no_new_scope": true,
+      "test_stages": []
     },
     {
       "issue": 439,
@@ -73,7 +77,8 @@
       "kind": "decision",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": []
     },
     {
       "issue": 345,
@@ -97,7 +102,8 @@
       ],
       "existing_work_exception": false,
       "disposition": "not_planned",
-      "disposition_reason": "Case-closed approved software route reached TWRP and Android11 without opening or a short; conditional inspection branch not selected. No physical-inspection pass claimed."
+      "disposition_reason": "Case-closed approved software route reached TWRP and Android11 without opening or a short; conditional inspection branch not selected. No physical-inspection pass claimed.",
+      "test_stages": []
     },
     {
       "issue": 347,
@@ -121,7 +127,8 @@
         "Admission decision outcome must be GO; a closed NO-GO issue does not unblock this task.",
         "Pretrial recovery/log provisions are reviewed in the admission package; #346/#348 stay open until actual runtime evidence."
       ],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": []
     },
     {
       "issue": 346,
@@ -147,6 +154,9 @@
       "runtime_evidence": [
         "evidence/independent-recovery/ack-cinit-runtime-result.json",
         "evidence/independent-recovery/ack-ramfix-runtime-result.json"
+      ],
+      "test_stages": [
+        "T1"
       ]
     },
     {
@@ -174,7 +184,8 @@
       "runtime_evidence": [
         "evidence/independent-recovery/ack-cinit-runtime-result.json",
         "evidence/independent-recovery/ack-usb-end-to-end-runtime-result.json"
-      ]
+      ],
+      "test_stages": []
     },
     {
       "issue": 22,
@@ -206,7 +217,10 @@
         "evidence/independent-recovery/ack-storage-readonly-runtime-result.json"
       ],
       "completed_milestone": "Actual maintained-kernel O_RDONLY p5 exact16MiB/EOF/SHA verified; fresh functional USB status and original Android return passed.",
-      "remaining_acceptance": "Code review/integration and broader storage scope remain distinct; no writable filesystem/Android UI claim."
+      "remaining_acceptance": "Code review/integration and broader storage scope remain distinct; no writable filesystem/Android UI claim.",
+      "test_stages": [
+        "T0"
+      ]
     },
     {
       "issue": 18,
@@ -230,7 +244,10 @@
       "predecessor_runtime_satisfied_by": [
         "evidence/independent-recovery/ack-storage-readonly-runtime-result.json"
       ],
-      "next_action": "Derive only the clock/reset resources required by the actual display/touch path from working4.9 and maintained source; reuse qualified storage/USB and existing offline controls."
+      "next_action": "Derive only the clock/reset resources required by the actual display/touch path from working4.9 and maintained source; reuse qualified storage/USB and existing offline controls.",
+      "test_stages": [
+        "T0"
+      ]
     },
     {
       "issue": 19,
@@ -250,7 +267,10 @@
       "kind": "qualification",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T0"
+      ]
     },
     {
       "issue": 20,
@@ -270,7 +290,10 @@
       "kind": "qualification",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T0"
+      ]
     },
     {
       "issue": 329,
@@ -290,7 +313,13 @@
       "kind": "qualification",
       "hardware_group": "display-backlight",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T0",
+        "T1",
+        "T2B",
+        "T2C"
+      ]
     },
     {
       "issue": 330,
@@ -310,7 +339,13 @@
       "kind": "qualification",
       "hardware_group": "touch",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T0",
+        "T1",
+        "T2B",
+        "T2C"
+      ]
     },
     {
       "issue": 331,
@@ -330,7 +365,11 @@
       "kind": "qualification",
       "hardware_group": "gpu",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T0",
+        "T1"
+      ]
     },
     {
       "issue": 333,
@@ -353,7 +392,13 @@
       "kind": "integration",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T0",
+        "T1",
+        "T2C",
+        "T3"
+      ]
     },
     {
       "issue": 334,
@@ -373,7 +418,10 @@
       "kind": "qualification",
       "hardware_group": "wifi",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2A"
+      ]
     },
     {
       "issue": 442,
@@ -393,7 +441,10 @@
       "kind": "qualification",
       "hardware_group": "audio",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2B"
+      ]
     },
     {
       "issue": 335,
@@ -413,7 +464,10 @@
       "kind": "qualification",
       "hardware_group": "charging-thermal",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2A"
+      ]
     },
     {
       "issue": 443,
@@ -433,7 +487,10 @@
       "kind": "qualification",
       "hardware_group": "suspend-wake",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2C"
+      ]
     },
     {
       "issue": 336,
@@ -453,7 +510,11 @@
       "kind": "qualification",
       "hardware_group": "usb",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T1",
+        "T2A"
+      ]
     },
     {
       "issue": 444,
@@ -473,7 +534,10 @@
       "kind": "qualification",
       "hardware_group": "sd",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2B"
+      ]
     },
     {
       "issue": 446,
@@ -493,7 +557,10 @@
       "kind": "qualification",
       "hardware_group": "video-decode",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2B"
+      ]
     },
     {
       "issue": 441,
@@ -513,7 +580,10 @@
       "kind": "qualification",
       "hardware_group": "bluetooth",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2A"
+      ]
     },
     {
       "issue": 445,
@@ -533,7 +603,10 @@
       "kind": "qualification",
       "hardware_group": "sensors",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2B"
+      ]
     },
     {
       "issue": 447,
@@ -553,7 +626,10 @@
       "kind": "qualification",
       "hardware_group": "cameras",
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T2B"
+      ]
     },
     {
       "issue": 27,
@@ -573,7 +649,11 @@
       "kind": "validation",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T0",
+        "T3"
+      ]
     },
     {
       "issue": 353,
@@ -592,7 +672,8 @@
       "kind": "decision",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": []
     },
     {
       "issue": 354,
@@ -613,7 +694,8 @@
       "kind": "release",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": []
     },
     {
       "issue": 340,
@@ -634,7 +716,10 @@
       "kind": "release",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T3"
+      ]
     },
     {
       "issue": 341,
@@ -655,7 +740,10 @@
       "kind": "release",
       "hardware_group": null,
       "conditions": [],
-      "existing_work_exception": false
+      "existing_work_exception": false,
+      "test_stages": [
+        "T3"
+      ]
     }
   ],
   "containers": [
@@ -914,5 +1002,207 @@
     "record_stream_complete": false,
     "record_stream_is_boot_proof_prerequisite": false,
     "owner_direction": "Preserve achieved kernel/PID1/USB/storage; advance functional display/touch and maintained Android without logging-only re-proof."
+  },
+  "test_execution": {
+    "version": 1,
+    "owner_requested_on": "2026-11-19",
+    "major_exit_stage": "T1",
+    "preserve_issue_acceptance": true,
+    "one_install_per_candidate_session": true,
+    "one_final_recovery_per_session": true,
+    "all_hardware_ready_required": false,
+    "record_unready_checkpoints_as_not_run": true,
+    "physical_action_authorized_by_plan": false,
+    "evidence_statuses": [
+      "pass",
+      "fail",
+      "not_run",
+      "blocked"
+    ],
+    "evidence_key": [
+      "candidate_sha256",
+      "stage_id",
+      "checkpoint_id",
+      "issue_number"
+    ],
+    "stages": [
+      {
+        "id": "T0",
+        "name": "Offline integrated candidate gate",
+        "kind": "offline",
+        "required_for_first_android_home": true,
+        "depends_on": [],
+        "issues": [
+          18,
+          19,
+          20,
+          22,
+          27,
+          329,
+          330,
+          331,
+          333
+        ],
+        "checkpoints": [
+          "Pinned Android/kernel/device/ABI/Binder/HAL inputs and target graphics compatibility",
+          "Candidate-required provider/DT/policy/interface and package checks",
+          "One reproducible complete candidate with exact artifact identity, storage/backup/rollback plan"
+        ],
+        "issue_scope_limits": {
+          "22": "Reuse achieved read-only storage evidence; no new storage-proof trial",
+          "27": "Candidate-required subset only; full release corpus remains T3"
+        },
+        "owner_device_action": false
+      },
+      {
+        "id": "T1",
+        "name": "Integrated Android boot and usable setup/home",
+        "kind": "attended",
+        "required_for_first_android_home": true,
+        "depends_on": [
+          "T0"
+        ],
+        "issues": [
+          329,
+          330,
+          331,
+          333,
+          336,
+          346
+        ],
+        "checkpoints": [
+          "Boot Android init and reach actual setup/home with usable compositor/display",
+          "Tap/drag/basic UI navigation and brightness on the same build",
+          "SELinux enforcing and usable authorized USB/ADB",
+          "Single final return to original recovery and exact approved partition verification"
+        ],
+        "issue_scope_limits": {
+          "336": "Core ADB/transport checkpoint for333; full roles/integrity remain T2A"
+        },
+        "owner_device_action": true
+      },
+      {
+        "id": "T2A",
+        "name": "Same-candidate connectivity and power checks",
+        "kind": "attended",
+        "required_for_first_android_home": false,
+        "depends_on": [
+          "T1"
+        ],
+        "issues": [
+          334,
+          335,
+          336,
+          441
+        ],
+        "checkpoints": [
+          "Source-ready Wi-Fi and Bluetooth pairing/reconnect",
+          "Declared USB roles/data integrity/reconnect",
+          "Source-qualified charging/battery/thermal checks within approved limits"
+        ],
+        "issue_scope_limits": {},
+        "owner_device_action": true
+      },
+      {
+        "id": "T2B",
+        "name": "Same-candidate media, input and storage checks",
+        "kind": "attended",
+        "required_for_first_android_home": false,
+        "depends_on": [
+          "T1"
+        ],
+        "issues": [
+          329,
+          330,
+          442,
+          444,
+          445,
+          446,
+          447
+        ],
+        "checkpoints": [
+          "Ready audio/playback/recording, video and cameras in one functional session",
+          "Touch edge/multicontact and sensors/orientation while UI is already running",
+          "SD integrity/hotplug only with required card/fixtures and approved procedure"
+        ],
+        "issue_scope_limits": {},
+        "owner_device_action": true
+      },
+      {
+        "id": "T2C",
+        "name": "Same-candidate power lifecycle checks",
+        "kind": "attended",
+        "required_for_first_android_home": false,
+        "depends_on": [
+          "T1"
+        ],
+        "issues": [
+          329,
+          330,
+          333,
+          443
+        ],
+        "checkpoints": [
+          "Ten approved screen-off/suspend/wake cycles after335 power/thermal readiness",
+          "Recheck already-qualified input/display/network/audio state after wake",
+          "Record repeat-boot behavior and perform final recovery once at session end"
+        ],
+        "issue_scope_limits": {
+          "333": "Broader stability follow-up; not a new first-home admission gate"
+        },
+        "owner_device_action": true,
+        "additional_runtime_prerequisites": [
+          335
+        ]
+      },
+      {
+        "id": "T3",
+        "name": "Release validation and handoff",
+        "kind": "release",
+        "required_for_first_android_home": false,
+        "depends_on": [
+          "T2A",
+          "T2B",
+          "T2C"
+        ],
+        "issues": [
+          27,
+          333,
+          340,
+          341
+        ],
+        "checkpoints": [
+          "Full exact-candidate DT/dependency corpus and original issue acceptance",
+          "Stable supported platform/security/update/licensing obligations",
+          "Exact beta package, known limitations, recovery handoff and admission review"
+        ],
+        "issue_scope_limits": {
+          "333": "Full release contract remains distinct from first-home milestone"
+        },
+        "owner_device_action": false
+      }
+    ],
+    "defer_final_recovery_until_session_end": true,
+    "stage_dependency_gate": "Functional entry/checkpoints; shared final recovery is deferred until selected stages finish. First-home is recorded only after that return verifies.",
+    "nonblocking_followups": [
+      348
+    ]
+  },
+  "current_execution": {
+    "primary_issue": 331,
+    "primary_pr": 456,
+    "stage": "T0",
+    "next_major_issue": 333,
+    "next_owner_session_stage": "T1",
+    "current_work": "Prepare coherent Android userspace/composer integration and one complete candidate",
+    "observed_foundations": [
+      "maintained kernel/PID1/USB identity",
+      "read-only internal storage",
+      "display/backlight",
+      "nine-target touch",
+      "animated GPU tap/drag response",
+      "original recovery return"
+    ],
+    "standalone_reproof_required": false
   }
 }

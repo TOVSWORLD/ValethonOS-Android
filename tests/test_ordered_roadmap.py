@@ -20,3 +20,22 @@ class OrderedRoadmap(unittest.TestCase):
  def test_closed_nogo_cannot_implicitly_unblock_trial(self):
   next(t for t in self.plan['tasks'] if t['issue']==347)['conditions']=[]
   with self.assertRaises(ValueError):validate(self.plan)
+
+ def test_peripheral_stage_cannot_block_first_home(self):
+  self.plan['test_execution']['stages'][2]['required_for_first_android_home']=True
+  with self.assertRaises(ValueError):validate(self.plan)
+ def test_second_recovery_per_session_rejected(self):
+  self.plan['test_execution']['defer_final_recovery_until_session_end']=False
+  with self.assertRaises(ValueError):validate(self.plan)
+ def test_missing_or_wrong_issue_stage_mapping_rejected(self):
+  next(t for t in self.plan['tasks'] if t['issue']==330)['test_stages']=[]
+  with self.assertRaises(ValueError):validate(self.plan)
+ def test_forward_shared_stage_dependency_rejected(self):
+  self.plan['test_execution']['stages'][0]['depends_on']=['T3']
+  with self.assertRaises(ValueError):validate(self.plan)
+ def test_grouping_cannot_authorize_device_actions(self):
+  self.plan['test_execution']['physical_action_authorized_by_plan']=True
+  with self.assertRaises(ValueError):validate(self.plan)
+ def test_suspend_cannot_drop_power_prerequisite(self):
+  next(s for s in self.plan['test_execution']['stages'] if s['id']=='T2C')['additional_runtime_prerequisites']=[]
+  with self.assertRaises(ValueError):validate(self.plan)
