@@ -1,5 +1,12 @@
 # MT8163 Douglas display integration
 
+Corrected direct scope2 reached the physical test screen: owner confirmed the
+VALETHON banner and labelled red/green/blue bands. Display/backlight foundation
+is observed. Original Android restored/verified. Repeated resets, invalid120-byte
+USB status, brightness endpoints and suspend/resume remain open; full display
+acceptance is not claimed. Carry the screen forward to touch/input. See
+direct-fbfix-runtime-result.json and the current plan.
+
 Direct-loader correction: live fb-reserved-memory node collides with LK's
 unconditional same-name add, including unit-address matching. Exact callback/
 libfdt emulation returns EXISTS/failure for the tested DT and succeeds after a

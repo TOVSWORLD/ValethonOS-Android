@@ -1,5 +1,34 @@
 # FireTabs project memory
 
+## Visible display/backlight achieved; touch/input next — November18,2026
+
+Corrected direct scope2 ran once after explicit staging/test approval. Owner
+confirmed VALETHON DISPLAY TEST and labelled red/green/blue bands physically
+visible. Maintained kernel/PID1 reached the actual display test. Carry this
+foundation forward; do not demand another screen or logging proof before touch.
+Some small error text was reported but unreadable; do not invent its contents.
+Target USB endpoint appeared five times about65.6–65.8s apart. Captured120 bytes
+fail the display-status header; no valid USB status or kernel snapshot. Physical
+visual evidence is affirmative; the packet is NOT a valid nonce-bound proof.
+Repeated boot resets, their cause, stable operation, brightness endpoints and
+suspend/resume remain unqualified; full#329 acceptance is not closed.
+One candidate p5 write/readback and one direct boot request; full300s observation.
+Afterward original helper ran once, original TWRP returned, original p5 restored
+once/full readback, p6 unchanged. Original Android boot/config/recovery, fresh
+completed boot and normal ADB verified. Current installation is original Android.
+No recovery/bootstrap/bootloader write, test replay or active capture/helper.
+Receipt direct-fbfix-runtime-result.json; private checkpoint out/display-direct-fbfix-2.
+Next agreed implementation is#330 Goodix touch/input: working source declares
+I2C0x5d, reset46, IRQ35. Check active controller/config/orientation before porting;
+current maintained GOODIX is modular, INPUT_EVDEV/I2C_MT65XX builtin. Prepare
+visual touch feedback on the achieved display, then one fresh qualified test.
+Alongside that, inspect inherited watchdog handling for repeated resets. Current
+Image has MEDIATEK_WATCHDOG builtin and boot-enabled handoff support, but the RAM
+bootstrap-derived DT disables watchdog@10007000. Historical watchdog candidate3
+predated observed kernel entry; reuse its source/VM findings, not its old test.
+Watchdog reset cause is not established and no watchdog-only/logging trial is
+selected. Keep invalid USB packet tracked separately; do not reopen logging gate.
+
 ## Concrete direct-loader framebuffer-node collision fixed — November18,2026
 
 The direct input DT already contains fb-reserved-memory@98600000, imported from
