@@ -1,0 +1,17 @@
+{
+  "id": "33dab9cb650e75d1a32830a9817d206d8ae03dc0",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "35c7ea359566544997dffe1daf58afcccf8ecb1f",
+      "name": "webview.apk"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "59154eb62ecb510b2c998603b74eea8ea0da9fb9",
+      "name": "webview.apk.intoto.jsonl"
+    }
+  ]
+}

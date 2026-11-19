@@ -3,6 +3,7 @@
 import argparse,hashlib,json,shutil
 from pathlib import Path
 from package_bionic_graphics import elf_info
+from build_bootanimation import build_bytes as build_bootanimation
 ROOT=Path(__file__).resolve().parents[1]
 
 def plan(aosp,graphics):
@@ -27,6 +28,7 @@ def plan(aosp,graphics):
     device=ROOT/'projects/firetabs-android/android-integration/device'
     for p in device.rglob('*'):
         if p.is_file():copies[aosp/'device/valethon/douglas'/p.relative_to(device)]=p.read_bytes()
+    copies[aosp/'device/valethon/douglas/media/bootanimation.zip']=build_bootanimation()
     for dest,data in copies.items():
         if dest.is_symlink() or not dest.resolve().is_relative_to(aosp):raise ValueError('Staging path escape')
         if dest.exists() and dest.read_bytes()!=data:raise ValueError('Refuse to overwrite different checkout inputs: '+str(dest.relative_to(aosp)))

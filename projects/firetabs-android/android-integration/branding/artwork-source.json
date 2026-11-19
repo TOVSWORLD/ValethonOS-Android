@@ -1,0 +1,11 @@
+{
+  "source": "Owner-selected Valethon G3 Intercom background; ChatGPT chat Valethon G3 Background Design",
+  "source_sha256": "cacbfa37bf4f61eaf4dcb38e9192a1ec925482d64135cc870f127262c5b977fe",
+  "raster_size": [
+    300,
+    512
+  ],
+  "raster_sha256": "d563663414cf66238834c0b2dd93b038bba7c3e224fa34d77e4bac150c770e5d",
+  "derivation": "CoreGraphics high-quality downsample of exact 600x1024 owner artwork, RGB, no logo regeneration",
+  "runtime_verified": false
+}

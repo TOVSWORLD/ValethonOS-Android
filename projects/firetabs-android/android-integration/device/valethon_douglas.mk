@@ -25,6 +25,20 @@ PRODUCT_BUILD_CACHE_IMAGE := false
 # Android boot container is assembled separately using the qualified LK path.
 # Original recovery is never replaced by this product.
 PRODUCT_PACKAGES += Launcher3QuickStep Provision adbd
+# Do not rely on the absent optional frameworks/webview/chromium/chromium.mk.
+# external/chromium-webview supplies the pinned ARM32 provider and required JNI.
+# These ordinary apps have no new boot service, privileged grant or device-owner role.
+PRODUCT_PACKAGES += \
+    webview \
+    Browser2 \
+    LatinIME \
+    Settings \
+    DocumentsUI \
+    DownloadProvider \
+    DownloadProviderUi \
+    PackageInstaller \
+    CertInstaller \
+    ValethonReadiness
 PRODUCT_VENDOR_PROPERTIES += \
     ro.hardware=douglas \
     ro.sf.lcd_density=160 \
@@ -34,6 +48,7 @@ PRODUCT_VENDOR_PROPERTIES += \
     debug.renderengine.backend=skiaglthreaded
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/media/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip \
     $(LOCAL_PATH)/init/fstab.douglas:$(TARGET_COPY_OUT_RAMDISK)/fstab.douglas \
     $(LOCAL_PATH)/init/fstab.douglas:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.douglas \
     $(LOCAL_PATH)/init/init.douglas.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.douglas.rc \
