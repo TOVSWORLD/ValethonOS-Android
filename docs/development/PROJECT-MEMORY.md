@@ -1,5 +1,32 @@
 # FireTabs project memory
 
+## Corrected graphics window finished; owner action pending — November 19, 2026
+
+Corrected candidate741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf
+was installed once/full-readback verified and booted once. Original recovery
+remained unchanged and RAM staging cleanup verified. Full five-minute window
+finished. Owner screen report has not arrived, so cube/GPU result is unknown;
+no graphics pass is claimed. Original recovery return helper was armed once
+with a15-minute wait. Owner was instructed to note the screen, then unplugUSB,
+hold onlyPower40seconds, release/wait5seconds/reconnect same cable. Screen result,
+Power-untouched confirmation and selected original TWRP return are pending.
+Do not install/reboot another candidate or restore Android while awaiting this.
+Private helper/session state: out/graphics-source-preparation-1/test-case-2/.
+Public pending receipt: evidence/graphics-source/graphics-power-runtime-result.json.
+Next: collect owner result, finish/inspect existing helper, verify exact retained
+corrected p5 and original p6 in original TWRP, then update result. No logging gate.
+
+## Corrected graphics test installed and running — November 19, 2026
+
+Owner approved staging and one attended graphics-direct-2 test. Selected
+original TWRP and exact previous graphics p5/original p6 preflight passed.
+Corrected candidate741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf
+was written once; full p5 readback, unchanged original recovery and RAM staging
+cleanup verified. One direct boot requested after WATCH NOW. The five-minute
+cube/touch window is running; owner observation pending. No hardware graphics
+pass claimed. Return to original TWRP afterward, no Android round trip.
+Private execution: out/graphics-source-preparation-1/test-case-2/.
+
 ## GPU power-domain correction qualified; next attended test ready — November 19, 2026
 
 The failed graphics DT enabled GPU but left MFG_ASYNC6 and nested MFG7 disabled.

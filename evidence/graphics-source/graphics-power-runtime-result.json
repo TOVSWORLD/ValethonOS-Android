@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-19",
+  "scope": "Attended direct graphics test with MFG_ASYNC6/MFG7 enabled",
+  "candidate_sha256": "741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf",
+  "predecessor_sha256": "a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042",
+  "candidate_writes": 1,
+  "test_boot_requests": 1,
+  "full_candidate_readback_verified": true,
+  "original_recovery_unchanged_after_install": true,
+  "ram_staging_cleanup_verified": true,
+  "source_preparation_commit": "500df7d14ba8c7b8b560b1005c3a2e08f2a71f05",
+  "qualification_receipt": "evidence/graphics-source/direct-power-preparation-result.json",
+  "hardware_changes": [
+    "Enable MFG_ASYNC power domain6",
+    "Enable nested MFG power domain7"
+  ],
+  "kernel_renderer_libraries_policy_unchanged": true,
+  "owner_observation": null,
+  "cube_observed": null,
+  "gpu_rendering_qualified": false,
+  "power_untouched_confirmation": null,
+  "return_to_twrp_verified": false,
+  "original_android_restoration_requested": false,
+  "observation_seconds": 300,
+  "observation_finished": true,
+  "owner_observation_pending": true,
+  "return_helper_armed": true,
+  "return_helper_complete": false,
+  "return_status": "Awaiting owner restart/reconnect; original recovery not yet verified"
+}
