@@ -1,0 +1,16 @@
+{
+  "scope": "Full platform revision closure, not a compiled or security-qualified Android device",
+  "manifest_commit": "29ace668ae756c7b8917c57abb440f6518844b0c",
+  "superproject_commit": "d6985d7ea38e602e9b1c94e2ebcbafacd7cc9892",
+  "project_count": 1087,
+  "locked_manifest_sha256": "2c28b1fb594e8259ada61d7e9e23000ff3c65c6955b9c6e791b6f7c5c8257849",
+  "source_snapshot_date": "2026-06-17",
+  "current_security_patch_qualification": false,
+  "kernel_image_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+  "device_product_compiled": false,
+  "kernel_delta_required": [
+    "CONFIG_ANDROID_BINDERFS=y"
+  ],
+  "kernel_delta_basis": "system/core at 545d2487e38192a2ce25040897ced877cf6b4f53 rootdir/init.rc mounts binderfs and uses binderfs symlinks",
+  "full_platform_checkout_performed": false
+}

@@ -1,5 +1,28 @@
 # Current milestone — interactive GPU achieved; next maintained Android setup/home, November19,2026
 
+## Android source closure and integration findings — November 19, 2026
+
+Resolved all 1,087 Android17 projects against superproject d6985d7e...; immutable
+platform manifest and source captures are in projects/firetabs-android/android-integration/
+and evidence/android-integration-source/. No platform checkout or Android build.
+Pinned init requires BinderFS (currently disabled); integrated kernel fragment also
+makes FUSE built-in. ARM32 product path with Binder64 is present. Pinned allocator/
+mapper/composer module names and VINTF versions are captured. AOSP Mesa Soong files
+omit EGL/GBM/Panfrost modules; generation recipe depends on an unmerged converter
+and absent project config. Do not treat the source lock as a completed device product
+or copy the glibc demo libraries into Bionic. Next: source-controlled Bionic graphics
+build integration plus complete Douglas product/init/fstab/policy/package closure.
+Keep achieved hardware; no repeated logging/cube milestone. Infrastructure work and
+provider blockers remain in private GitLab; no operational issue details here.
+
+
+## Private build infrastructure — November 19, 2026
+
+Owner directed runner provisioning, costs, caches and build operations to a separate
+private GitLab project. Keep those operational issues and infrastructure details
+out of this public repository. Continue Android T0 source/device integration here;
+full Android build has not started. No repeat standalone GPU/logging test.
+
 ## Shared staged testing — November 19, 2026
 
 Owner requested grouping issues into staged tests to reduce work time. The

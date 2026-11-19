@@ -1,0 +1,5 @@
+# Integrated Android init requires binderfs (system/core 545d2487... rootdir/init.rc).
+CONFIG_ANDROID_BINDER_IPC=y
+CONFIG_ANDROID_BINDERFS=y
+# Android emulated storage must not depend on an unshipped FUSE kernel module.
+CONFIG_FUSE_FS=y

@@ -1,0 +1,4464 @@
+[submodule "device/amlogic/yukawa"]
+	branch = android17-release
+	path = device/amlogic/yukawa
+	url = ../../device/amlogic/yukawa
+[submodule "device/amlogic/yukawa-kernel"]
+	branch = android17-release
+	shallow = true
+	path = device/amlogic/yukawa-kernel
+	url = ../../device/amlogic/yukawa-kernel
+[submodule "device/common"]
+	branch = android17-release
+	path = device/common
+	url = ../../device/common
+[submodule "device/generic/arm64"]
+	branch = android17-release
+	path = device/generic/arm64
+	url = ../../device/generic/arm64
+[submodule "device/generic/armv7-a-neon"]
+	branch = android17-release
+	path = device/generic/armv7-a-neon
+	url = ../../device/generic/armv7-a-neon
+[submodule "device/generic/art"]
+	branch = android17-release
+	path = device/generic/art
+	url = ../../device/generic/art
+[submodule "device/generic/car"]
+	branch = android17-release
+	path = device/generic/car
+	url = ../../device/generic/car
+[submodule "device/generic/common"]
+	branch = android17-release
+	path = device/generic/common
+	url = ../../device/generic/common
+[submodule "device/generic/goldfish"]
+	branch = android17-release
+	path = device/generic/goldfish
+	url = ../../device/generic/goldfish
+[submodule "device/generic/trusty"]
+	branch = android17-release
+	path = device/generic/trusty
+	url = ../../device/generic/trusty
+[submodule "device/generic/x86"]
+	branch = android17-release
+	path = device/generic/x86
+	url = ../../device/generic/x86
+[submodule "device/generic/x86_64"]
+	branch = android17-release
+	path = device/generic/x86_64
+	url = ../../device/generic/x86_64
+[submodule "device/google/atv"]
+	branch = android17-release
+	path = device/google/atv
+	url = ../../device/google/atv
+[submodule "device/google/common/etm"]
+	branch = android17-release
+	shallow = true
+	path = device/google/common/etm
+	url = ../../device/google/common/etm
+[submodule "device/google/contexthub"]
+	branch = android17-release
+	path = device/google/contexthub
+	url = ../../device/google/contexthub
+[submodule "device/google/cuttlefish"]
+	branch = android17-release
+	path = device/google/cuttlefish
+	url = ../../device/google/cuttlefish
+[submodule "device/google/cuttlefish_prebuilts"]
+	branch = android17-release
+	shallow = true
+	path = device/google/cuttlefish_prebuilts
+	url = ../../device/google/cuttlefish_prebuilts
+[submodule "device/google/cuttlefish_vmm"]
+	branch = android17-release
+	shallow = true
+	path = device/google/cuttlefish_vmm
+	url = ../../device/google/cuttlefish_vmm
+[submodule "device/google/sdv"]
+	branch = android17-release
+	shallow = true
+	path = device/google/sdv
+	url = ../../device/google/sdv
+[submodule "device/google/sdv_display_safety"]
+	branch = android17-release
+	shallow = true
+	path = device/google/sdv_display_safety
+	url = ../../device/google/sdv_display_safety
+[submodule "device/google/trout"]
+	branch = android17-release
+	shallow = true
+	path = device/google/trout
+	url = ../../device/google/trout
+[submodule "device/google_car"]
+	branch = android17-release
+	path = device/google_car
+	url = ../../device/google_car
+[submodule "device/linaro/dragonboard"]
+	branch = android17-release
+	path = device/linaro/dragonboard
+	url = ../../device/linaro/dragonboard
+[submodule "device/linaro/dragonboard-kernel"]
+	branch = android17-release
+	shallow = true
+	path = device/linaro/dragonboard-kernel
+	url = ../../device/linaro/dragonboard-kernel
+[submodule "device/linaro/hikey"]
+	branch = android17-release
+	path = device/linaro/hikey
+	url = ../../device/linaro/hikey
+[submodule "device/linaro/hikey-kernel"]
+	branch = android17-release
+	shallow = true
+	path = device/linaro/hikey-kernel
+	url = ../../device/linaro/hikey-kernel
+[submodule "device/sample"]
+	branch = android17-release
+	path = device/sample
+	url = ../../device/sample
+[submodule "kernel/configs"]
+	branch = android17-release
+	path = kernel/configs
+	url = ../../kernel/configs
+[submodule "kernel/prebuilts/6.1/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.1/arm64
+	url = ../../kernel/prebuilts/6.1/arm64
+[submodule "kernel/prebuilts/6.1/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.1/x86_64
+	url = ../../kernel/prebuilts/6.1/x86-64
+[submodule "kernel/prebuilts/6.12/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.12/arm64
+	url = ../../kernel/prebuilts/6.12/arm64
+[submodule "kernel/prebuilts/6.12/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.12/x86_64
+	url = ../../kernel/prebuilts/6.12/x86-64
+[submodule "kernel/prebuilts/6.18/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.18/arm64
+	url = ../../kernel/prebuilts/6.18/arm64
+[submodule "kernel/prebuilts/6.18/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.18/x86_64
+	url = ../../kernel/prebuilts/6.18/x86-64
+[submodule "kernel/prebuilts/6.6/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.6/arm64
+	url = ../../kernel/prebuilts/6.6/arm64
+[submodule "kernel/prebuilts/6.6/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/6.6/x86_64
+	url = ../../kernel/prebuilts/6.6/x86-64
+[submodule "kernel/prebuilts/common-modules/trusty/6.12/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/trusty/6.12/arm64
+	url = ../../kernel/prebuilts/common-modules/trusty/6.12/arm64
+[submodule "kernel/prebuilts/common-modules/trusty/6.6/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/trusty/6.6/arm64
+	url = ../../kernel/prebuilts/common-modules/trusty/6.6/arm64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.1/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.1/arm64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.1/arm64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.1/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.1/x86-64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.1/x86-64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.12/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.12/arm64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.12/arm64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.12/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.12/x86-64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.12/x86-64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.18/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.18/arm64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.18/arm64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.18/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.18/x86-64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.18/x86-64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.6/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.6/arm64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.6/arm64
+[submodule "kernel/prebuilts/common-modules/virtual-device/6.6/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/6.6/x86-64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/6.6/x86-64
+[submodule "kernel/prebuilts/common-modules/virtual-device/mainline/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/mainline/arm64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/mainline/arm64
+[submodule "kernel/prebuilts/common-modules/virtual-device/mainline/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/common-modules/virtual-device/mainline/x86-64
+	url = ../../kernel/prebuilts/common-modules/virtual-device/mainline/x86-64
+[submodule "kernel/prebuilts/mainline/arm64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/mainline/arm64
+	url = ../../kernel/prebuilts/mainline/arm64
+[submodule "kernel/prebuilts/mainline/x86-64"]
+	branch = android17-release
+	shallow = true
+	path = kernel/prebuilts/mainline/x86_64
+	url = ../../kernel/prebuilts/mainline/x86-64
+[submodule "kernel/tests"]
+	branch = android17-release
+	path = kernel/tests
+	url = ../../kernel/tests
+[submodule "platform/art"]
+	branch = android17-release
+	path = art
+	url = ../art
+[submodule "platform/bionic"]
+	branch = android17-release
+	path = bionic
+	url = ../bionic
+[submodule "platform/bootable/deprecated-ota"]
+	branch = android17-release
+	path = bootable/deprecated-ota
+	url = ../bootable/deprecated-ota
+[submodule "platform/bootable/libbootloader"]
+	branch = android17-release
+	path = bootable/libbootloader
+	url = ../bootable/libbootloader
+[submodule "platform/bootable/recovery"]
+	branch = android17-release
+	path = bootable/recovery
+	url = ../bootable/recovery
+[submodule "platform/build"]
+	branch = android17-release
+	path = build/make
+	url = ../build
+[submodule "platform/build/blueprint"]
+	branch = android17-release
+	path = build/blueprint
+	url = ../build/blueprint
+[submodule "platform/build/pesto"]
+	branch = android17-release
+	path = build/pesto
+	url = ../build/pesto
+[submodule "platform/build/release"]
+	branch = android17-release
+	path = build/release
+	url = ../build/release
+[submodule "platform/build/soong"]
+	branch = android17-release
+	path = build/soong
+	url = ../build/soong
+[submodule "platform/cts"]
+	branch = android17-release
+	path = cts
+	url = ../cts
+[submodule "platform/dalvik"]
+	branch = android17-release
+	path = dalvik
+	url = ../dalvik
+[submodule "platform/developers/build"]
+	branch = android17-release
+	path = developers/build
+	url = ../developers/build
+[submodule "platform/developers/samples/android"]
+	branch = android17-release
+	path = developers/samples/android
+	url = ../developers/samples/android
+[submodule "platform/development"]
+	branch = android17-release
+	path = development
+	url = ../development
+[submodule "platform/external/AFLplusplus"]
+	branch = android17-release
+	path = external/AFLplusplus
+	url = ../external/AFLplusplus
+[submodule "platform/external/ComputeLibrary"]
+	branch = android17-release
+	path = external/ComputeLibrary
+	url = ../external/ComputeLibrary
+[submodule "platform/external/FP16"]
+	branch = android17-release
+	path = external/FP16
+	url = ../external/FP16
+[submodule "platform/external/FXdiv"]
+	branch = android17-release
+	path = external/FXdiv
+	url = ../external/FXdiv
+[submodule "platform/external/Little-CMS"]
+	branch = android17-release
+	path = external/Little-CMS
+	url = ../external/Little-CMS
+[submodule "platform/external/MPAndroidChart"]
+	branch = android17-release
+	path = external/MPAndroidChart
+	url = ../external/MPAndroidChart
+[submodule "platform/external/OpenCL-CLHPP"]
+	branch = android17-release
+	path = external/OpenCL-CLHPP
+	url = ../external/OpenCL-CLHPP
+[submodule "platform/external/OpenCL-CTS"]
+	branch = android17-release
+	path = external/OpenCL-CTS
+	url = ../external/OpenCL-CTS
+[submodule "platform/external/OpenCL-Headers"]
+	branch = android17-release
+	path = external/OpenCL-Headers
+	url = ../external/OpenCL-Headers
+[submodule "platform/external/OpenCL-ICD-Loader"]
+	branch = android17-release
+	path = external/OpenCL-ICD-Loader
+	url = ../external/OpenCL-ICD-Loader
+[submodule "platform/external/OpenCSD"]
+	branch = android17-release
+	path = external/OpenCSD
+	url = ../external/OpenCSD
+[submodule "platform/external/SPIRV-Headers"]
+	branch = android17-release
+	path = external/SPIRV-Headers
+	url = ../external/SPIRV-Headers
+[submodule "platform/external/SPIRV-Tools"]
+	branch = android17-release
+	path = external/SPIRV-Tools
+	url = ../external/SPIRV-Tools
+[submodule "platform/external/TestParameterInjector"]
+	branch = android17-release
+	path = external/TestParameterInjector
+	url = ../external/TestParameterInjector
+[submodule "platform/external/XMP-Toolkit-SDK"]
+	branch = android17-release
+	path = external/XMP-Toolkit-SDK
+	url = ../external/XMP-Toolkit-SDK
+[submodule "platform/external/XNNPACK"]
+	branch = android17-release
+	path = external/XNNPACK
+	url = ../external/XNNPACK
+[submodule "platform/external/aac"]
+	branch = android17-release
+	path = external/aac
+	url = ../external/aac
+[submodule "platform/external/abseil-cpp"]
+	branch = android17-release
+	path = external/abseil-cpp
+	url = ../external/abseil-cpp
+[submodule "platform/external/accessibility-test-framework"]
+	branch = android17-release
+	path = external/accessibility-test-framework
+	url = ../external/accessibility-test-framework
+[submodule "platform/external/accompanist"]
+	branch = android17-release
+	path = external/accompanist
+	url = ../external/accompanist
+[submodule "platform/external/acpica"]
+	branch = android17-release
+	path = external/acpica
+	url = ../external/acpica
+[submodule "platform/external/android-browser-helper"]
+	branch = android17-release
+	path = external/android-browser-helper
+	url = ../external/android-browser-helper
+[submodule "platform/external/android-key-attestation"]
+	branch = android17-release
+	path = external/android-key-attestation
+	url = ../external/android-key-attestation
+[submodule "platform/external/android-nn-driver"]
+	branch = android17-release
+	path = external/android-nn-driver
+	url = ../external/android-nn-driver
+[submodule "platform/external/android_onboarding"]
+	branch = android17-release
+	path = external/android_onboarding
+	url = ../external/android_onboarding
+[submodule "platform/external/androidplot"]
+	branch = android17-release
+	path = external/androidplot
+	url = ../external/androidplot
+[submodule "platform/external/angle"]
+	branch = android17-release
+	path = external/angle
+	url = ../external/angle
+[submodule "platform/external/animal-sniffer"]
+	branch = android17-release
+	path = external/animal-sniffer
+	url = ../external/animal-sniffer
+[submodule "platform/external/anonymous-counting-tokens"]
+	branch = android17-release
+	path = external/anonymous-counting-tokens
+	url = ../external/anonymous-counting-tokens
+[submodule "platform/external/antlr"]
+	branch = android17-release
+	path = external/antlr
+	url = ../external/antlr
+[submodule "platform/external/apache-commons-bcel"]
+	branch = android17-release
+	path = external/apache-commons-bcel
+	url = ../external/apache-commons-bcel
+[submodule "platform/external/apache-commons-compress"]
+	branch = android17-release
+	path = external/apache-commons-compress
+	url = ../external/apache-commons-compress
+[submodule "platform/external/apache-commons-io"]
+	branch = android17-release
+	path = external/apache-commons-io
+	url = ../external/apache-commons-io
+[submodule "platform/external/apache-commons-lang"]
+	branch = android17-release
+	path = external/apache-commons-lang
+	url = ../external/apache-commons-lang
+[submodule "platform/external/apache-commons-math"]
+	branch = android17-release
+	path = external/apache-commons-math
+	url = ../external/apache-commons-math
+[submodule "platform/external/apache-harmony"]
+	branch = android17-release
+	path = external/apache-harmony
+	url = ../external/apache-harmony
+[submodule "platform/external/apache-http"]
+	branch = android17-release
+	path = external/apache-http
+	url = ../external/apache-http
+[submodule "platform/external/apache-velocity-engine"]
+	branch = android17-release
+	path = external/apache-velocity-engine
+	url = ../external/apache-velocity-engine
+[submodule "platform/external/apache-xml"]
+	branch = android17-release
+	path = external/apache-xml
+	url = ../external/apache-xml
+[submodule "platform/external/arm-neon-tests"]
+	branch = android17-release
+	path = external/arm-neon-tests
+	url = ../external/arm-neon-tests
+[submodule "platform/external/arm-optimized-routines"]
+	branch = android17-release
+	path = external/arm-optimized-routines
+	url = ../external/arm-optimized-routines
+[submodule "platform/external/arm-trusted-firmware"]
+	branch = android17-release
+	path = external/arm-trusted-firmware
+	url = ../external/arm-trusted-firmware
+[submodule "platform/external/armnn"]
+	branch = android17-release
+	path = external/armnn
+	url = ../external/armnn
+[submodule "platform/external/auto"]
+	branch = android17-release
+	path = external/auto
+	url = ../external/auto
+[submodule "platform/external/automotive-design-compose-protos"]
+	branch = android17-release
+	path = external/automotive-design-compose-protos
+	url = ../external/automotive-design-compose-protos
+[submodule "platform/external/avb"]
+	branch = android17-release
+	path = external/avb
+	url = ../external/avb
+[submodule "platform/external/aws-crt-java"]
+	branch = android17-release
+	path = external/aws-crt-java
+	url = ../external/aws-crt-java
+[submodule "platform/external/aws-eventstream-java"]
+	branch = android17-release
+	path = external/aws-eventstream-java
+	url = ../external/aws-eventstream-java
+[submodule "platform/external/aws-sdk-java-v2"]
+	branch = android17-release
+	path = external/aws-sdk-java-v2
+	url = ../external/aws-sdk-java-v2
+[submodule "platform/external/bazelbuild-remote-apis"]
+	branch = android17-release
+	path = external/bazelbuild-remote-apis
+	url = ../external/bazelbuild-remote-apis
+[submodule "platform/external/bc"]
+	branch = android17-release
+	path = external/bc
+	url = ../external/bc
+[submodule "platform/external/bcc"]
+	branch = android17-release
+	path = external/bcc
+	url = ../external/bcc
+[submodule "platform/external/blktrace"]
+	branch = android17-release
+	path = external/blktrace
+	url = ../external/blktrace
+[submodule "platform/external/boringssl"]
+	branch = android17-release
+	path = external/boringssl
+	url = ../external/boringssl
+[submodule "platform/external/bouncycastle"]
+	branch = android17-release
+	path = external/bouncycastle
+	url = ../external/bouncycastle
+[submodule "platform/external/bpftool"]
+	branch = android17-release
+	path = external/bpftool
+	url = ../external/bpftool
+[submodule "platform/external/brotli"]
+	branch = android17-release
+	path = external/brotli
+	url = ../external/brotli
+[submodule "platform/external/bsdiff"]
+	branch = android17-release
+	path = external/bsdiff
+	url = ../external/bsdiff
+[submodule "platform/external/bzip2"]
+	branch = android17-release
+	path = external/bzip2
+	url = ../external/bzip2
+[submodule "platform/external/cairo"]
+	branch = android17-release
+	path = external/cairo
+	url = ../external/cairo
+[submodule "platform/external/caliper"]
+	branch = android17-release
+	path = external/caliper
+	url = ../external/caliper
+[submodule "platform/external/capstone"]
+	branch = android17-release
+	path = external/capstone
+	url = ../external/capstone
+[submodule "platform/external/cblas"]
+	branch = android17-release
+	path = external/cblas
+	url = ../external/cblas
+[submodule "platform/external/cbor-java"]
+	branch = android17-release
+	path = external/cbor-java
+	url = ../external/cbor-java
+[submodule "platform/external/chromium-crossbench"]
+	branch = android17-release
+	path = external/chromium-crossbench
+	url = ../external/chromium-crossbench
+[submodule "platform/external/chromium-trace"]
+	branch = android17-release
+	path = external/chromium-trace
+	url = ../external/chromium-trace
+[submodule "platform/external/chromium-web-tests"]
+	branch = android17-release
+	path = external/chromium-web-tests
+	url = ../external/chromium-web-tests
+[submodule "platform/external/chromium-webview"]
+	branch = android17-release
+	shallow = true
+	path = external/chromium-webview
+	url = ../external/chromium-webview
+[submodule "platform/external/chromiumos-config"]
+	branch = android17-release
+	shallow = true
+	path = external/chromiumos-config
+	url = ../external/chromiumos-config
+[submodule "platform/external/clang"]
+	branch = android17-release
+	path = external/clang
+	url = ../external/clang
+[submodule "platform/external/cldr"]
+	branch = android17-release
+	path = external/cldr
+	url = ../external/cldr
+[submodule "platform/external/clpeak"]
+	branch = android17-release
+	path = external/clpeak
+	url = ../external/clpeak
+[submodule "platform/external/clspv"]
+	branch = android17-release
+	path = external/clspv
+	url = ../external/clspv
+[submodule "platform/external/clvk"]
+	branch = android17-release
+	path = external/clvk
+	url = ../external/clvk
+[submodule "platform/external/cn-cbor"]
+	branch = android17-release
+	path = external/cn-cbor
+	url = ../external/cn-cbor
+[submodule "platform/external/compiler-rt"]
+	branch = android17-release
+	path = external/compiler-rt
+	url = ../external/compiler-rt
+[submodule "platform/external/connectedappssdk"]
+	branch = android17-release
+	path = external/connectedappssdk
+	url = ../external/connectedappssdk
+[submodule "platform/external/conscrypt"]
+	branch = android17-release
+	path = external/conscrypt
+	url = ../external/conscrypt
+[submodule "platform/external/coreboot"]
+	branch = android17-release
+	path = external/coreboot
+	url = ../external/coreboot
+[submodule "platform/external/cpu_features"]
+	branch = android17-release
+	path = external/cpu_features
+	url = ../external/cpu_features
+[submodule "platform/external/cpuinfo"]
+	branch = android17-release
+	path = external/cpuinfo
+	url = ../external/cpuinfo
+[submodule "platform/external/cronet"]
+	branch = android17-release
+	path = external/cronet
+	url = ../external/cronet
+[submodule "platform/external/crosvm"]
+	branch = android17-release
+	path = external/crosvm
+	url = ../external/crosvm
+[submodule "platform/external/curl"]
+	branch = android17-release
+	path = external/curl
+	url = ../external/curl
+[submodule "platform/external/dagger2"]
+	branch = android17-release
+	path = external/dagger2
+	url = ../external/dagger2
+[submodule "platform/external/deqp"]
+	branch = android17-release
+	path = external/deqp
+	url = ../external/deqp
+[submodule "platform/external/deqp-deps/SPIRV-Headers"]
+	branch = android17-release
+	path = external/deqp-deps/SPIRV-Headers
+	url = ../external/deqp-deps/SPIRV-Headers
+[submodule "platform/external/deqp-deps/SPIRV-Tools"]
+	branch = android17-release
+	path = external/deqp-deps/SPIRV-Tools
+	url = ../external/deqp-deps/SPIRV-Tools
+[submodule "platform/external/deqp-deps/amber"]
+	branch = android17-release
+	path = external/deqp-deps/amber
+	url = ../external/deqp-deps/amber
+[submodule "platform/external/deqp-deps/glslang"]
+	branch = android17-release
+	path = external/deqp-deps/glslang
+	url = ../external/deqp-deps/glslang
+[submodule "platform/external/dexmaker"]
+	branch = android17-release
+	path = external/dexmaker
+	url = ../external/dexmaker
+[submodule "platform/external/dlmalloc"]
+	branch = android17-release
+	path = external/dlmalloc
+	url = ../external/dlmalloc
+[submodule "platform/external/dng_sdk"]
+	branch = android17-release
+	path = external/dng_sdk
+	url = ../external/dng_sdk
+[submodule "platform/external/dnsmasq"]
+	branch = android17-release
+	path = external/dnsmasq
+	url = ../external/dnsmasq
+[submodule "platform/external/doclava"]
+	branch = android17-release
+	path = external/doclava
+	url = ../external/doclava
+[submodule "platform/external/dokka"]
+	branch = android17-release
+	path = external/dokka
+	url = ../external/dokka
+[submodule "platform/external/double-conversion"]
+	branch = android17-release
+	path = external/double-conversion
+	url = ../external/double-conversion
+[submodule "platform/external/downloader"]
+	branch = android17-release
+	path = external/downloader
+	url = ../external/downloader
+[submodule "platform/external/drm_hwcomposer"]
+	branch = android17-release
+	path = external/drm_hwcomposer
+	url = ../external/drm_hwcomposer
+[submodule "platform/external/dtc"]
+	branch = android17-release
+	path = external/dtc
+	url = ../external/dtc
+[submodule "platform/external/dynamic_depth"]
+	branch = android17-release
+	path = external/dynamic_depth
+	url = ../external/dynamic_depth
+[submodule "platform/external/e2fsprogs"]
+	branch = android17-release
+	path = external/e2fsprogs
+	url = ../external/e2fsprogs
+[submodule "platform/external/easymock"]
+	branch = android17-release
+	path = external/easymock
+	url = ../external/easymock
+[submodule "platform/external/eigen"]
+	branch = android17-release
+	path = external/eigen
+	url = ../external/eigen
+[submodule "platform/external/elfutils"]
+	branch = android17-release
+	path = external/elfutils
+	url = ../external/elfutils
+[submodule "platform/external/emboss"]
+	branch = android17-release
+	path = external/emboss
+	url = ../external/emboss
+[submodule "platform/external/emma"]
+	branch = android17-release
+	path = external/emma
+	url = ../external/emma
+[submodule "platform/external/epson-inkjet-printer-escpr"]
+	branch = android17-release
+	path = external/epson-inkjet-printer-escpr
+	url = ../external/epson-inkjet-printer-escpr
+[submodule "platform/external/erofs-utils"]
+	branch = android17-release
+	path = external/erofs-utils
+	url = ../external/erofs-utils
+[submodule "platform/external/error_prone"]
+	branch = android17-release
+	path = external/error_prone
+	url = ../external/error_prone
+[submodule "platform/external/escapevelocity"]
+	branch = android17-release
+	path = external/escapevelocity
+	url = ../external/escapevelocity
+[submodule "platform/external/ethtool"]
+	branch = android17-release
+	path = external/ethtool
+	url = ../external/ethtool
+[submodule "platform/external/exfatprogs"]
+	branch = android17-release
+	path = external/exfatprogs
+	url = ../external/exfatprogs
+[submodule "platform/external/exoplayer"]
+	branch = android17-release
+	path = external/exoplayer
+	url = ../external/exoplayer
+[submodule "platform/external/expat"]
+	branch = android17-release
+	path = external/expat
+	url = ../external/expat
+[submodule "platform/external/f2fs-tools"]
+	branch = android17-release
+	path = external/f2fs-tools
+	url = ../external/f2fs-tools
+[submodule "platform/external/failsafe"]
+	branch = android17-release
+	path = external/failsafe
+	url = ../external/failsafe
+[submodule "platform/external/fastrpc"]
+	branch = android17-release
+	path = external/fastrpc
+	url = ../external/fastrpc
+[submodule "platform/external/fdlibm"]
+	branch = android17-release
+	path = external/fdlibm
+	url = ../external/fdlibm
+[submodule "platform/external/fec"]
+	branch = android17-release
+	path = external/fec
+	url = ../external/fec
+[submodule "platform/external/federated-compute"]
+	branch = android17-release
+	path = external/federated-compute
+	url = ../external/federated-compute
+[submodule "platform/external/fft2d"]
+	branch = android17-release
+	path = external/fft2d
+	url = ../external/fft2d
+[submodule "platform/external/fhir/spec/r4"]
+	branch = android17-release
+	path = external/fhir/spec/r4
+	url = ../external/fhir/spec/r4
+[submodule "platform/external/fio"]
+	branch = android17-release
+	path = external/fio
+	url = ../external/fio
+[submodule "platform/external/firebase-messaging"]
+	branch = android17-release
+	path = external/firebase-messaging
+	url = ../external/firebase-messaging
+[submodule "platform/external/flac"]
+	branch = android17-release
+	path = external/flac
+	url = ../external/flac
+[submodule "platform/external/flashrom"]
+	branch = android17-release
+	path = external/flashrom
+	url = ../external/flashrom
+[submodule "platform/external/flatbuffers"]
+	branch = android17-release
+	path = external/flatbuffers
+	url = ../external/flatbuffers
+[submodule "platform/external/fmtlib"]
+	branch = android17-release
+	path = external/fmtlib
+	url = ../external/fmtlib
+[submodule "platform/external/fonttools"]
+	branch = android17-release
+	path = external/fonttools
+	url = ../external/fonttools
+[submodule "platform/external/freetype"]
+	branch = android17-release
+	path = external/freetype
+	url = ../external/freetype
+[submodule "platform/external/fsck_msdos"]
+	branch = android17-release
+	path = external/fsck_msdos
+	url = ../external/fsck_msdos
+[submodule "platform/external/fsverity-utils"]
+	branch = android17-release
+	path = external/fsverity-utils
+	url = ../external/fsverity-utils
+[submodule "platform/external/gemmlowp"]
+	branch = android17-release
+	path = external/gemmlowp
+	url = ../external/gemmlowp
+[submodule "platform/external/geojson-jackson"]
+	branch = android17-release
+	path = external/geojson-jackson
+	url = ../external/geojson-jackson
+[submodule "platform/external/geonames"]
+	branch = android17-release
+	path = external/geonames
+	url = ../external/geonames
+[submodule "platform/external/gflags"]
+	branch = android17-release
+	path = external/gflags
+	url = ../external/gflags
+[submodule "platform/external/giflib"]
+	branch = android17-release
+	path = external/giflib
+	url = ../external/giflib
+[submodule "platform/external/glide"]
+	branch = android17-release
+	path = external/glide
+	url = ../external/glide
+[submodule "platform/external/gmmlib"]
+	branch = android17-release
+	path = external/gmmlib
+	url = ../external/gmmlib
+[submodule "platform/external/go-cmp"]
+	branch = android17-release
+	path = external/go-cmp
+	url = ../external/go-cmp
+[submodule "platform/external/golang-protobuf"]
+	branch = android17-release
+	path = external/golang-protobuf
+	url = ../external/golang-protobuf
+[submodule "platform/external/google-auth-library-java"]
+	branch = android17-release
+	path = external/google-auth-library-java
+	url = ../external/google-auth-library-java
+[submodule "platform/external/google-benchmark"]
+	branch = android17-release
+	path = external/google-benchmark
+	url = ../external/google-benchmark
+[submodule "platform/external/google-breakpad"]
+	branch = android17-release
+	path = external/google-breakpad
+	url = ../external/google-breakpad
+[submodule "platform/external/google-cloud-java"]
+	branch = android17-release
+	path = external/google-cloud-java
+	url = ../external/google-cloud-java
+[submodule "platform/external/google-fonts/arbutus-slab"]
+	branch = android17-release
+	path = external/google-fonts/arbutus-slab
+	url = ../external/google-fonts/arbutus-slab
+[submodule "platform/external/google-fonts/arvo"]
+	branch = android17-release
+	path = external/google-fonts/arvo
+	url = ../external/google-fonts/arvo
+[submodule "platform/external/google-fonts/barlow"]
+	branch = android17-release
+	path = external/google-fonts/barlow
+	url = ../external/google-fonts/barlow
+[submodule "platform/external/google-fonts/big-shoulders-text"]
+	branch = android17-release
+	path = external/google-fonts/big-shoulders-text
+	url = ../external/google-fonts/big-shoulders-text
+[submodule "platform/external/google-fonts/carrois-gothic-sc"]
+	branch = android17-release
+	path = external/google-fonts/carrois-gothic-sc
+	url = ../external/google-fonts/carrois-gothic-sc
+[submodule "platform/external/google-fonts/coming-soon"]
+	branch = android17-release
+	path = external/google-fonts/coming-soon
+	url = ../external/google-fonts/coming-soon
+[submodule "platform/external/google-fonts/cutive-mono"]
+	branch = android17-release
+	path = external/google-fonts/cutive-mono
+	url = ../external/google-fonts/cutive-mono
+[submodule "platform/external/google-fonts/dancing-script"]
+	branch = android17-release
+	path = external/google-fonts/dancing-script
+	url = ../external/google-fonts/dancing-script
+[submodule "platform/external/google-fonts/fraunces"]
+	branch = android17-release
+	path = external/google-fonts/fraunces
+	url = ../external/google-fonts/fraunces
+[submodule "platform/external/google-fonts/karla"]
+	branch = android17-release
+	path = external/google-fonts/karla
+	url = ../external/google-fonts/karla
+[submodule "platform/external/google-fonts/lato"]
+	branch = android17-release
+	path = external/google-fonts/lato
+	url = ../external/google-fonts/lato
+[submodule "platform/external/google-fonts/lustria"]
+	branch = android17-release
+	path = external/google-fonts/lustria
+	url = ../external/google-fonts/lustria
+[submodule "platform/external/google-fonts/rubik"]
+	branch = android17-release
+	path = external/google-fonts/rubik
+	url = ../external/google-fonts/rubik
+[submodule "platform/external/google-fonts/source-sans-pro"]
+	branch = android17-release
+	path = external/google-fonts/source-sans-pro
+	url = ../external/google-fonts/source-sans-pro
+[submodule "platform/external/google-fonts/zilla-slab"]
+	branch = android17-release
+	path = external/google-fonts/zilla-slab
+	url = ../external/google-fonts/zilla-slab
+[submodule "platform/external/google-fruit"]
+	branch = android17-release
+	path = external/google-fruit
+	url = ../external/google-fruit
+[submodule "platform/external/google-highway"]
+	branch = android17-release
+	path = external/google-highway
+	url = ../external/google-highway
+[submodule "platform/external/google-java-format"]
+	branch = android17-release
+	path = external/google-java-format
+	url = ../external/google-java-format
+[submodule "platform/external/google-smali"]
+	branch = android17-release
+	path = external/google-smali
+	url = ../external/google-smali
+[submodule "platform/external/googleapis"]
+	branch = android17-release
+	path = external/googleapis
+	url = ../external/googleapis
+[submodule "platform/external/googletest"]
+	branch = android17-release
+	path = external/googletest
+	url = ../external/googletest
+[submodule "platform/external/gptfdisk"]
+	branch = android17-release
+	path = external/gptfdisk
+	url = ../external/gptfdisk
+[submodule "platform/external/grpc-grpc"]
+	branch = android17-release
+	path = external/grpc-grpc
+	url = ../external/grpc-grpc
+[submodule "platform/external/grpc-grpc-java"]
+	branch = android17-release
+	path = external/grpc-grpc-java
+	url = ../external/grpc-grpc-java
+[submodule "platform/external/gsc-utils"]
+	branch = android17-release
+	path = external/gsc-utils
+	url = ../external/gsc-utils
+[submodule "platform/external/gson"]
+	branch = android17-release
+	path = external/gson
+	url = ../external/gson
+[submodule "platform/external/gturri-aXMLRPC"]
+	branch = android17-release
+	path = external/gturri-aXMLRPC
+	url = ../external/gturri-aXMLRPC
+[submodule "platform/external/gturri-jISO8601"]
+	branch = android17-release
+	path = external/gturri-jISO8601
+	url = ../external/gturri-jISO8601
+[submodule "platform/external/guava"]
+	branch = android17-release
+	path = external/guava
+	url = ../external/guava
+[submodule "platform/external/guice"]
+	branch = android17-release
+	path = external/guice
+	url = ../external/guice
+[submodule "platform/external/gwp_asan"]
+	branch = android17-release
+	path = external/gwp_asan
+	url = ../external/gwp_asan
+[submodule "platform/external/hafnium"]
+	branch = android17-release
+	path = external/hafnium
+	url = ../external/hafnium
+[submodule "platform/external/hamcrest"]
+	branch = android17-release
+	path = external/hamcrest
+	url = ../external/hamcrest
+[submodule "platform/external/harfbuzz_ng"]
+	branch = android17-release
+	path = external/harfbuzz_ng
+	url = ../external/harfbuzz_ng
+[submodule "platform/external/hplip"]
+	branch = android17-release
+	path = external/hplip
+	url = ../external/hplip
+[submodule "platform/external/hyphenation-patterns"]
+	branch = android17-release
+	path = external/hyphenation-patterns
+	url = ../external/hyphenation-patterns
+[submodule "platform/external/iamf_tools"]
+	branch = android17-release
+	path = external/iamf_tools
+	url = ../external/iamf_tools
+[submodule "platform/external/icing"]
+	branch = android17-release
+	path = external/icing
+	url = ../external/icing
+[submodule "platform/external/icu"]
+	branch = android17-release
+	path = external/icu
+	url = ../external/icu
+[submodule "platform/external/igt-gpu-tools"]
+	branch = android17-release
+	path = external/igt-gpu-tools
+	url = ../external/igt-gpu-tools
+[submodule "platform/external/image_io"]
+	branch = android17-release
+	path = external/image_io
+	url = ../external/image_io
+[submodule "platform/external/ims"]
+	branch = android17-release
+	path = external/ims
+	url = ../external/ims
+[submodule "platform/external/intel-pmt-metadata"]
+	branch = android17-release
+	path = external/intel-pmt-metadata
+	url = ../external/intel-pmt-metadata
+[submodule "platform/external/iperf3"]
+	branch = android17-release
+	path = external/iperf3
+	url = ../external/iperf3
+[submodule "platform/external/iproute2"]
+	branch = android17-release
+	path = external/iproute2
+	url = ../external/iproute2
+[submodule "platform/external/iptables"]
+	branch = android17-release
+	path = external/iptables
+	url = ../external/iptables
+[submodule "platform/external/iputils"]
+	branch = android17-release
+	path = external/iputils
+	url = ../external/iputils
+[submodule "platform/external/iw"]
+	branch = android17-release
+	path = external/iw
+	url = ../external/iw
+[submodule "platform/external/jackson-annotations"]
+	branch = android17-release
+	path = external/jackson-annotations
+	url = ../external/jackson-annotations
+[submodule "platform/external/jackson-core"]
+	branch = android17-release
+	path = external/jackson-core
+	url = ../external/jackson-core
+[submodule "platform/external/jackson-databind"]
+	branch = android17-release
+	path = external/jackson-databind
+	url = ../external/jackson-databind
+[submodule "platform/external/jacoco"]
+	branch = android17-release
+	path = external/jacoco
+	url = ../external/jacoco
+[submodule "platform/external/jakarta.inject"]
+	branch = android17-release
+	path = external/jakarta.inject
+	url = ../external/jakarta.inject
+[submodule "platform/external/jarjar"]
+	branch = android17-release
+	path = external/jarjar
+	url = ../external/jarjar
+[submodule "platform/external/java-diff-utils"]
+	branch = android17-release
+	path = external/java-diff-utils
+	url = ../external/java-diff-utils
+[submodule "platform/external/javaparser"]
+	branch = android17-release
+	path = external/javaparser
+	url = ../external/javaparser
+[submodule "platform/external/javapoet"]
+	branch = android17-release
+	path = external/javapoet
+	url = ../external/javapoet
+[submodule "platform/external/javasqlite"]
+	branch = android17-release
+	path = external/javasqlite
+	url = ../external/javasqlite
+[submodule "platform/external/javassist"]
+	branch = android17-release
+	path = external/javassist
+	url = ../external/javassist
+[submodule "platform/external/jazzer-api"]
+	branch = android17-release
+	path = external/jazzer-api
+	url = ../external/jazzer-api
+[submodule "platform/external/jcommander"]
+	branch = android17-release
+	path = external/jcommander
+	url = ../external/jcommander
+[submodule "platform/external/jctools"]
+	branch = android17-release
+	path = external/jctools
+	url = ../external/jctools
+[submodule "platform/external/jemalloc_new"]
+	branch = android17-release
+	path = external/jemalloc_new
+	url = ../external/jemalloc_new
+[submodule "platform/external/jetpack-camera-app"]
+	branch = android17-release
+	path = external/jetpack-camera-app
+	url = ../external/jetpack-camera-app
+[submodule "platform/external/jimfs"]
+	branch = android17-release
+	path = external/jimfs
+	url = ../external/jimfs
+[submodule "platform/external/jipp"]
+	branch = android17-release
+	path = external/jipp
+	url = ../external/jipp
+[submodule "platform/external/jline"]
+	branch = android17-release
+	path = external/jline
+	url = ../external/jline
+[submodule "platform/external/jmustache"]
+	branch = android17-release
+	path = external/jmustache
+	url = ../external/jmustache
+[submodule "platform/external/jsilver"]
+	branch = android17-release
+	path = external/jsilver
+	url = ../external/jsilver
+[submodule "platform/external/jsmn"]
+	branch = android17-release
+	path = external/jsmn
+	url = ../external/jsmn
+[submodule "platform/external/json-schema-validator"]
+	branch = android17-release
+	path = external/json-schema-validator
+	url = ../external/json-schema-validator
+[submodule "platform/external/jsoncpp"]
+	branch = android17-release
+	path = external/jsoncpp
+	url = ../external/jsoncpp
+[submodule "platform/external/jsoup"]
+	branch = android17-release
+	path = external/jsoup
+	url = ../external/jsoup
+[submodule "platform/external/jspecify"]
+	branch = android17-release
+	path = external/jspecify
+	url = ../external/jspecify
+[submodule "platform/external/jsr305"]
+	branch = android17-release
+	path = external/jsr305
+	url = ../external/jsr305
+[submodule "platform/external/jsr330"]
+	branch = android17-release
+	path = external/jsr330
+	url = ../external/jsr330
+[submodule "platform/external/junit"]
+	branch = android17-release
+	path = external/junit
+	url = ../external/junit
+[submodule "platform/external/junit-params"]
+	branch = android17-release
+	path = external/junit-params
+	url = ../external/junit-params
+[submodule "platform/external/jxmpp"]
+	branch = android17-release
+	path = external/jxmpp
+	url = ../external/jxmpp
+[submodule "platform/external/kernel-headers"]
+	branch = android17-release
+	path = external/kernel-headers
+	url = ../external/kernel-headers
+[submodule "platform/external/keyattestation"]
+	branch = android17-release
+	path = external/keyattestation
+	url = ../external/keyattestation
+[submodule "platform/external/kmod"]
+	branch = android17-release
+	path = external/kmod
+	url = ../external/kmod
+[submodule "platform/external/kotlin-compose-compiler"]
+	branch = android17-release
+	path = external/kotlin-compose-compiler
+	url = ../external/kotlin-compose-compiler
+[submodule "platform/external/kotlin.metadata"]
+	branch = android17-release
+	path = external/kotlin.metadata
+	url = ../external/kotlin.metadata
+[submodule "platform/external/kotlinc"]
+	branch = android17-release
+	path = external/kotlinc
+	url = ../external/kotlinc
+[submodule "platform/external/kotlinpoet"]
+	branch = android17-release
+	path = external/kotlinpoet
+	url = ../external/kotlinpoet
+[submodule "platform/external/kotlinx.atomicfu"]
+	branch = android17-release
+	path = external/kotlinx.atomicfu
+	url = ../external/kotlinx.atomicfu
+[submodule "platform/external/kotlinx.coroutines"]
+	branch = android17-release
+	path = external/kotlinx.coroutines
+	url = ../external/kotlinx.coroutines
+[submodule "platform/external/kotlinx.metadata"]
+	branch = android17-release
+	path = external/kotlinx.metadata
+	url = ../external/kotlinx.metadata
+[submodule "platform/external/kotlinx.serialization"]
+	branch = android17-release
+	path = external/kotlinx.serialization
+	url = ../external/kotlinx.serialization
+[submodule "platform/external/ksoap2"]
+	branch = android17-release
+	path = external/ksoap2
+	url = ../external/ksoap2
+[submodule "platform/external/ksp"]
+	branch = android17-release
+	path = external/ksp
+	url = ../external/ksp
+[submodule "platform/external/ktfmt"]
+	branch = android17-release
+	path = external/ktfmt
+	url = ../external/ktfmt
+[submodule "platform/external/leakcanary2"]
+	branch = android17-release
+	path = external/leakcanary2
+	url = ../external/leakcanary2
+[submodule "platform/external/leveldb"]
+	branch = android17-release
+	path = external/leveldb
+	url = ../external/leveldb
+[submodule "platform/external/lfi/disarm"]
+	branch = android17-release
+	path = external/lfi/disarm
+	url = ../external/lfi/disarm
+[submodule "platform/external/lfi/fadec"]
+	branch = android17-release
+	path = external/lfi/fadec
+	url = ../external/lfi/fadec
+[submodule "platform/external/lfi/lfi-bind"]
+	branch = android17-release
+	path = external/lfi/lfi-bind
+	url = ../external/lfi/lfi-bind
+[submodule "platform/external/lfi/lfi-runtime"]
+	branch = android17-release
+	path = external/lfi/lfi-runtime
+	url = ../external/lfi/lfi-runtime
+[submodule "platform/external/lfi/lfi-verifier"]
+	branch = android17-release
+	path = external/lfi/lfi-verifier
+	url = ../external/lfi/lfi-verifier
+[submodule "platform/external/lfi/rlbox"]
+	branch = android17-release
+	path = external/lfi/rlbox
+	url = ../external/lfi/rlbox
+[submodule "platform/external/lfi/rlbox-lfi"]
+	branch = android17-release
+	path = external/lfi/rlbox-lfi
+	url = ../external/lfi/rlbox-lfi
+[submodule "platform/external/libaom"]
+	branch = android17-release
+	path = external/libaom
+	url = ../external/libaom
+[submodule "platform/external/libavc"]
+	branch = android17-release
+	path = external/libavc
+	url = ../external/libavc
+[submodule "platform/external/libbackup"]
+	branch = android17-release
+	path = external/libbackup
+	url = ../external/libbackup
+[submodule "platform/external/libbpf"]
+	branch = android17-release
+	path = external/libbpf
+	url = ../external/libbpf
+[submodule "platform/external/libbrillo"]
+	branch = android17-release
+	path = external/libbrillo
+	url = ../external/libbrillo
+[submodule "platform/external/libburnia/libburn"]
+	branch = android17-release
+	path = external/libburnia/libburn
+	url = ../external/libburnia/libburn
+[submodule "platform/external/libburnia/libisoburn"]
+	branch = android17-release
+	path = external/libburnia/libisoburn
+	url = ../external/libburnia/libisoburn
+[submodule "platform/external/libburnia/libisofs"]
+	branch = android17-release
+	path = external/libburnia/libisofs
+	url = ../external/libburnia/libisofs
+[submodule "platform/external/libcamera"]
+	branch = android17-release
+	path = external/libcamera
+	url = ../external/libcamera
+[submodule "platform/external/libcap"]
+	branch = android17-release
+	path = external/libcap
+	url = ../external/libcap
+[submodule "platform/external/libcap-ng"]
+	branch = android17-release
+	path = external/libcap-ng
+	url = ../external/libcap-ng
+[submodule "platform/external/libchrome"]
+	branch = android17-release
+	path = external/libchrome
+	url = ../external/libchrome
+[submodule "platform/external/libchrome-gestures"]
+	branch = android17-release
+	path = external/libchrome-gestures
+	url = ../external/libchrome-gestures
+[submodule "platform/external/libconfig"]
+	branch = android17-release
+	path = external/libconfig
+	url = ../external/libconfig
+[submodule "platform/external/libcups"]
+	branch = android17-release
+	path = external/libcups
+	url = ../external/libcups
+[submodule "platform/external/libcupsfilters"]
+	branch = android17-release
+	path = external/libcupsfilters
+	url = ../external/libcupsfilters
+[submodule "platform/external/libcxx"]
+	branch = android17-release
+	path = external/libcxx
+	url = ../external/libcxx
+[submodule "platform/external/libcxxabi"]
+	branch = android17-release
+	path = external/libcxxabi
+	url = ../external/libcxxabi
+[submodule "platform/external/libdav1d"]
+	branch = android17-release
+	path = external/libdav1d
+	url = ../external/libdav1d
+[submodule "platform/external/libdisplay-info"]
+	branch = android17-release
+	path = external/libdisplay-info
+	url = ../external/libdisplay-info
+[submodule "platform/external/libdivsufsort"]
+	branch = android17-release
+	path = external/libdivsufsort
+	url = ../external/libdivsufsort
+[submodule "platform/external/libdrm"]
+	branch = android17-release
+	path = external/libdrm
+	url = ../external/libdrm
+[submodule "platform/external/libese"]
+	branch = android17-release
+	path = external/libese
+	url = ../external/libese
+[submodule "platform/external/libevent"]
+	branch = android17-release
+	path = external/libevent
+	url = ../external/libevent
+[submodule "platform/external/libexif"]
+	branch = android17-release
+	path = external/libexif
+	url = ../external/libexif
+[submodule "platform/external/libffi"]
+	branch = android17-release
+	path = external/libffi
+	url = ../external/libffi
+[submodule "platform/external/libfuse"]
+	branch = android17-release
+	path = external/libfuse
+	url = ../external/libfuse
+[submodule "platform/external/libgav1"]
+	branch = android17-release
+	path = external/libgav1
+	url = ../external/libgav1
+[submodule "platform/external/libgsm"]
+	branch = android17-release
+	path = external/libgsm
+	url = ../external/libgsm
+[submodule "platform/external/libhevc"]
+	branch = android17-release
+	path = external/libhevc
+	url = ../external/libhevc
+[submodule "platform/external/libjpeg-turbo"]
+	branch = android17-release
+	path = external/libjpeg-turbo
+	url = ../external/libjpeg-turbo
+[submodule "platform/external/libjxl"]
+	branch = android17-release
+	path = external/libjxl
+	url = ../external/libjxl
+[submodule "platform/external/libkmsxx"]
+	branch = android17-release
+	path = external/libkmsxx
+	url = ../external/libkmsxx
+[submodule "platform/external/liblc3"]
+	branch = android17-release
+	path = external/liblc3
+	url = ../external/liblc3
+[submodule "platform/external/libldac"]
+	branch = android17-release
+	path = external/libldac
+	url = ../external/libldac
+[submodule "platform/external/libmnl"]
+	branch = android17-release
+	path = external/libmnl
+	url = ../external/libmnl
+[submodule "platform/external/libmonet"]
+	branch = android17-release
+	path = external/libmonet
+	url = ../external/libmonet
+[submodule "platform/external/libmpeg2"]
+	branch = android17-release
+	path = external/libmpeg2
+	url = ../external/libmpeg2
+[submodule "platform/external/libnetfilter_conntrack"]
+	branch = android17-release
+	path = external/libnetfilter_conntrack
+	url = ../external/libnetfilter_conntrack
+[submodule "platform/external/libnfnetlink"]
+	branch = android17-release
+	path = external/libnfnetlink
+	url = ../external/libnfnetlink
+[submodule "platform/external/libnl"]
+	branch = android17-release
+	path = external/libnl
+	url = ../external/libnl
+[submodule "platform/external/libogg"]
+	branch = android17-release
+	path = external/libogg
+	url = ../external/libogg
+[submodule "platform/external/libopenapv"]
+	branch = android17-release
+	path = external/libopenapv
+	url = ../external/libopenapv
+[submodule "platform/external/libopus"]
+	branch = android17-release
+	path = external/libopus
+	url = ../external/libopus
+[submodule "platform/external/libpalmrejection"]
+	branch = android17-release
+	path = external/libpalmrejection
+	url = ../external/libpalmrejection
+[submodule "platform/external/libpcap"]
+	branch = android17-release
+	path = external/libpcap
+	url = ../external/libpcap
+[submodule "platform/external/libpciaccess"]
+	branch = android17-release
+	path = external/libpciaccess
+	url = ../external/libpciaccess
+[submodule "platform/external/libphonenumber"]
+	branch = android17-release
+	path = external/libphonenumber
+	url = ../external/libphonenumber
+[submodule "platform/external/libpng"]
+	branch = android17-release
+	path = external/libpng
+	url = ../external/libpng
+[submodule "platform/external/libppd"]
+	branch = android17-release
+	path = external/libppd
+	url = ../external/libppd
+[submodule "platform/external/libprotobuf-mutator"]
+	branch = android17-release
+	path = external/libprotobuf-mutator
+	url = ../external/libprotobuf-mutator
+[submodule "platform/external/libsrtp2"]
+	branch = android17-release
+	path = external/libsrtp2
+	url = ../external/libsrtp2
+[submodule "platform/external/libtextclassifier"]
+	branch = android17-release
+	path = external/libtextclassifier
+	url = ../external/libtextclassifier
+[submodule "platform/external/libtraceevent"]
+	branch = android17-release
+	path = external/libtraceevent
+	url = ../external/libtraceevent
+[submodule "platform/external/libtracefs"]
+	branch = android17-release
+	path = external/libtracefs
+	url = ../external/libtracefs
+[submodule "platform/external/libudev-zero"]
+	branch = android17-release
+	path = external/libudev-zero
+	url = ../external/libudev-zero
+[submodule "platform/external/libultrahdr"]
+	branch = android17-release
+	path = external/libultrahdr
+	url = ../external/libultrahdr
+[submodule "platform/external/liburing"]
+	branch = android17-release
+	path = external/liburing
+	url = ../external/liburing
+[submodule "platform/external/libusb"]
+	branch = android17-release
+	path = external/libusb
+	url = ../external/libusb
+[submodule "platform/external/libutf"]
+	branch = android17-release
+	path = external/libutf
+	url = ../external/libutf
+[submodule "platform/external/libva"]
+	branch = android17-release
+	path = external/libva
+	url = ../external/libva
+[submodule "platform/external/libva-utils"]
+	branch = android17-release
+	path = external/libva-utils
+	url = ../external/libva-utils
+[submodule "platform/external/libvpx"]
+	branch = android17-release
+	path = external/libvpx
+	url = ../external/libvpx
+[submodule "platform/external/libwebm"]
+	branch = android17-release
+	path = external/libwebm
+	url = ../external/libwebm
+[submodule "platform/external/libwebsockets"]
+	branch = android17-release
+	path = external/libwebsockets
+	url = ../external/libwebsockets
+[submodule "platform/external/libxaac"]
+	branch = android17-release
+	path = external/libxaac
+	url = ../external/libxaac
+[submodule "platform/external/libxkbcommon"]
+	branch = android17-release
+	path = external/libxkbcommon
+	url = ../external/libxkbcommon
+[submodule "platform/external/libxml2"]
+	branch = android17-release
+	path = external/libxml2
+	url = ../external/libxml2
+[submodule "platform/external/libyaml"]
+	branch = android17-release
+	path = external/libyaml
+	url = ../external/libyaml
+[submodule "platform/external/libyuv"]
+	branch = android17-release
+	path = external/libyuv
+	url = ../external/libyuv
+[submodule "platform/external/licenseclassifier"]
+	branch = android17-release
+	path = external/licenseclassifier
+	url = ../external/licenseclassifier
+[submodule "platform/external/linux-firmware"]
+	branch = android17-release
+	path = external/linux-firmware
+	url = ../external/linux-firmware
+[submodule "platform/external/linux-kselftest"]
+	branch = android17-release
+	shallow = true
+	path = external/linux-kselftest
+	url = ../external/linux-kselftest
+[submodule "platform/external/llvm"]
+	branch = android17-release
+	path = external/llvm
+	url = ../external/llvm
+[submodule "platform/external/llvm-libc"]
+	branch = android17-release
+	path = external/llvm-libc
+	url = ../external/llvm-libc
+[submodule "platform/external/lottie"]
+	branch = android17-release
+	path = external/lottie
+	url = ../external/lottie
+[submodule "platform/external/ltp"]
+	branch = android17-release
+	path = external/ltp
+	url = ../external/ltp
+[submodule "platform/external/lua"]
+	branch = android17-release
+	path = external/lua
+	url = ../external/lua
+[submodule "platform/external/lz4"]
+	branch = android17-release
+	path = external/lz4
+	url = ../external/lz4
+[submodule "platform/external/lzma"]
+	branch = android17-release
+	path = external/lzma
+	url = ../external/lzma
+[submodule "platform/external/marisa-trie"]
+	branch = android17-release
+	path = external/marisa-trie
+	url = ../external/marisa-trie
+[submodule "platform/external/mbedtls"]
+	branch = android17-release
+	path = external/mbedtls
+	url = ../external/mbedtls
+[submodule "platform/external/mdnsresponder"]
+	branch = android17-release
+	path = external/mdnsresponder
+	url = ../external/mdnsresponder
+[submodule "platform/external/mesa3d"]
+	branch = android17-release
+	path = external/mesa3d
+	url = ../external/mesa3d
+[submodule "platform/external/mime-support"]
+	branch = android17-release
+	path = external/mime-support
+	url = ../external/mime-support
+[submodule "platform/external/minidns"]
+	branch = android17-release
+	path = external/minidns
+	url = ../external/minidns
+[submodule "platform/external/minigbm"]
+	branch = android17-release
+	path = external/minigbm
+	url = ../external/minigbm
+[submodule "platform/external/minijail"]
+	branch = android17-release
+	path = external/minijail
+	url = ../external/minijail
+[submodule "platform/external/mksh"]
+	branch = android17-release
+	path = external/mksh
+	url = ../external/mksh
+[submodule "platform/external/ml_dtypes"]
+	branch = android17-release
+	path = external/ml_dtypes
+	url = ../external/ml_dtypes
+[submodule "platform/external/mobile-data-download"]
+	branch = android17-release
+	path = external/mobile-data-download
+	url = ../external/mobile-data-download
+[submodule "platform/external/mobly-bundled-snippets"]
+	branch = android17-release
+	path = external/mobly-bundled-snippets
+	url = ../external/mobly-bundled-snippets
+[submodule "platform/external/mobly-snippet-lib"]
+	branch = android17-release
+	path = external/mobly-snippet-lib
+	url = ../external/mobly-snippet-lib
+[submodule "platform/external/mockftpserver"]
+	branch = android17-release
+	path = external/mockftpserver
+	url = ../external/mockftpserver
+[submodule "platform/external/mockito"]
+	branch = android17-release
+	path = external/mockito
+	url = ../external/mockito
+[submodule "platform/external/mockito-kotlin"]
+	branch = android17-release
+	path = external/mockito-kotlin
+	url = ../external/mockito-kotlin
+[submodule "platform/external/mockwebserver"]
+	branch = android17-release
+	path = external/mockwebserver
+	url = ../external/mockwebserver
+[submodule "platform/external/modp_b64"]
+	branch = android17-release
+	path = external/modp_b64
+	url = ../external/modp_b64
+[submodule "platform/external/moshi"]
+	branch = android17-release
+	path = external/moshi
+	url = ../external/moshi
+[submodule "platform/external/mp4parser"]
+	branch = android17-release
+	path = external/mp4parser
+	url = ../external/mp4parser
+[submodule "platform/external/mpdecimal"]
+	branch = android17-release
+	path = external/mpdecimal
+	url = ../external/mpdecimal
+[submodule "platform/external/ms-tpm-20-ref"]
+	branch = android17-release
+	path = external/ms-tpm-20-ref
+	url = ../external/ms-tpm-20-ref
+[submodule "platform/external/mtools"]
+	branch = android17-release
+	path = external/mtools
+	url = ../external/mtools
+[submodule "platform/external/musl"]
+	branch = android17-release
+	path = external/musl
+	url = ../external/musl
+[submodule "platform/external/nanohttpd"]
+	branch = android17-release
+	path = external/nanohttpd
+	url = ../external/nanohttpd
+[submodule "platform/external/nanopb-c"]
+	branch = android17-release
+	path = external/nanopb-c
+	url = ../external/nanopb-c
+[submodule "platform/external/naver-fonts"]
+	branch = android17-release
+	path = external/naver-fonts
+	url = ../external/naver-fonts
+[submodule "platform/external/neon_2_sse"]
+	branch = android17-release
+	path = external/neon_2_sse
+	url = ../external/neon_2_sse
+[submodule "platform/external/neven"]
+	branch = android17-release
+	path = external/neven
+	url = ../external/neven
+[submodule "platform/external/newfs_msdos"]
+	branch = android17-release
+	path = external/newfs_msdos
+	url = ../external/newfs_msdos
+[submodule "platform/external/nist-pkits"]
+	branch = android17-release
+	path = external/nist-pkits
+	url = ../external/nist-pkits
+[submodule "platform/external/nist-sip"]
+	branch = android17-release
+	path = external/nist-sip
+	url = ../external/nist-sip
+[submodule "platform/external/nos/host/generic"]
+	branch = android17-release
+	path = external/nos/host/generic
+	url = ../external/nos/host/generic
+[submodule "platform/external/noto-fonts"]
+	branch = android17-release
+	path = external/noto-fonts
+	url = ../external/noto-fonts
+[submodule "platform/external/nullaway"]
+	branch = android17-release
+	path = external/nullaway
+	url = ../external/nullaway
+[submodule "platform/external/oauth"]
+	branch = android17-release
+	path = external/oauth
+	url = ../external/oauth
+[submodule "platform/external/obex"]
+	branch = android17-release
+	path = external/obex
+	url = ../external/obex
+[submodule "platform/external/objenesis"]
+	branch = android17-release
+	path = external/objenesis
+	url = ../external/objenesis
+[submodule "platform/external/oboe"]
+	branch = android17-release
+	path = external/oboe
+	url = ../external/oboe
+[submodule "platform/external/obstack"]
+	branch = android17-release
+	path = external/obstack
+	url = ../external/obstack
+[submodule "platform/external/oj-libjdwp"]
+	branch = android17-release
+	path = external/oj-libjdwp
+	url = ../external/oj-libjdwp
+[submodule "platform/external/okhttp"]
+	branch = android17-release
+	path = external/okhttp
+	url = ../external/okhttp
+[submodule "platform/external/okio"]
+	branch = android17-release
+	path = external/okio
+	url = ../external/okio
+[submodule "platform/external/one-true-awk"]
+	branch = android17-release
+	path = external/one-true-awk
+	url = ../external/one-true-awk
+[submodule "platform/external/open-dice"]
+	branch = android17-release
+	path = external/open-dice
+	url = ../external/open-dice
+[submodule "platform/external/opencensus-java"]
+	branch = android17-release
+	path = external/opencensus-java
+	url = ../external/opencensus-java
+[submodule "platform/external/opencl/llvm-project"]
+	branch = android17-release
+	path = external/opencl/llvm-project
+	url = ../external/opencl/llvm-project
+[submodule "platform/external/openscreen"]
+	branch = android17-release
+	path = external/openscreen
+	url = ../external/openscreen
+[submodule "platform/external/openthread"]
+	branch = android17-release
+	path = external/openthread
+	url = ../external/openthread
+[submodule "platform/external/openwrt-prebuilts"]
+	branch = android17-release
+	shallow = true
+	path = external/openwrt-prebuilts
+	url = ../external/openwrt-prebuilts
+[submodule "platform/external/openxr-sdk"]
+	branch = android17-release
+	path = external/openxr-sdk
+	url = ../external/openxr-sdk
+[submodule "platform/external/opus-experimental"]
+	branch = android17-release
+	path = external/opus-experimental
+	url = ../external/opus-experimental
+[submodule "platform/external/ot-br-posix"]
+	branch = android17-release
+	path = external/ot-br-posix
+	url = ../external/ot-br-posix
+[submodule "platform/external/ow2-asm"]
+	branch = android17-release
+	path = external/ow2-asm
+	url = ../external/ow2-asm
+[submodule "platform/external/owasp/java-encoder"]
+	branch = android17-release
+	path = external/owasp/java-encoder
+	url = ../external/owasp/java-encoder
+[submodule "platform/external/owasp/sanitizer"]
+	branch = android17-release
+	path = external/owasp/sanitizer
+	url = ../external/owasp/sanitizer
+[submodule "platform/external/pandora/mmi2grpc"]
+	branch = android17-release
+	path = external/pandora/mmi2grpc
+	url = ../external/pandora/mmi2grpc
+[submodule "platform/external/parameter-framework"]
+	branch = android17-release
+	path = external/parameter-framework
+	url = ../external/parameter-framework
+[submodule "platform/external/pciutils"]
+	branch = android17-release
+	path = external/pciutils
+	url = ../external/pciutils
+[submodule "platform/external/pcollections"]
+	branch = android17-release
+	path = external/pcollections
+	url = ../external/pcollections
+[submodule "platform/external/pcre"]
+	branch = android17-release
+	path = external/pcre
+	url = ../external/pcre
+[submodule "platform/external/pdfium"]
+	branch = android17-release
+	path = external/pdfium
+	url = ../external/pdfium
+[submodule "platform/external/perfetto"]
+	branch = android17-release
+	path = external/perfetto
+	url = ../external/perfetto
+[submodule "platform/external/perfmark"]
+	branch = android17-release
+	path = external/perfmark
+	url = ../external/perfmark
+[submodule "platform/external/pffft"]
+	branch = android17-release
+	path = external/pffft
+	url = ../external/pffft
+[submodule "platform/external/piex"]
+	branch = android17-release
+	path = external/piex
+	url = ../external/piex
+[submodule "platform/external/pigweed"]
+	branch = android17-release
+	path = external/pigweed
+	url = ../external/pigweed
+[submodule "platform/external/pixman"]
+	branch = android17-release
+	path = external/pixman
+	url = ../external/pixman
+[submodule "platform/external/ply"]
+	branch = android17-release
+	path = external/ply
+	url = ../external/ply
+[submodule "platform/external/pogreb"]
+	branch = android17-release
+	path = external/pogreb
+	url = ../external/pogreb
+[submodule "platform/external/private-join-and-compute"]
+	branch = android17-release
+	path = external/private-join-and-compute
+	url = ../external/private-join-and-compute
+[submodule "platform/external/protobuf"]
+	branch = android17-release
+	path = external/protobuf
+	url = ../external/protobuf
+[submodule "platform/external/pthreadpool"]
+	branch = android17-release
+	path = external/pthreadpool
+	url = ../external/pthreadpool
+[submodule "platform/external/puffin"]
+	branch = android17-release
+	path = external/puffin
+	url = ../external/puffin
+[submodule "platform/external/python/absl-py"]
+	branch = android17-release
+	path = external/python/absl-py
+	url = ../external/python/absl-py
+[submodule "platform/external/python/apitools"]
+	branch = android17-release
+	path = external/python/apitools
+	url = ../external/python/apitools
+[submodule "platform/external/python/asn1crypto"]
+	branch = android17-release
+	path = external/python/asn1crypto
+	url = ../external/python/asn1crypto
+[submodule "platform/external/python/bumble"]
+	branch = android17-release
+	path = external/python/bumble
+	url = ../external/python/bumble
+[submodule "platform/external/python/cachetools"]
+	branch = android17-release
+	path = external/python/cachetools
+	url = ../external/python/cachetools
+[submodule "platform/external/python/cpplint"]
+	branch = android17-release
+	path = external/python/cpplint
+	url = ../external/python/cpplint
+[submodule "platform/external/python/cpython3"]
+	branch = android17-release
+	path = external/python/cpython3
+	url = ../external/python/cpython3
+[submodule "platform/external/python/dateutil"]
+	branch = android17-release
+	path = external/python/dateutil
+	url = ../external/python/dateutil
+[submodule "platform/external/python/enum34"]
+	branch = android17-release
+	path = external/python/enum34
+	url = ../external/python/enum34
+[submodule "platform/external/python/fdt"]
+	branch = android17-release
+	path = external/python/fdt
+	url = ../external/python/fdt
+[submodule "platform/external/python/google-api-python-client"]
+	branch = android17-release
+	path = external/python/google-api-python-client
+	url = ../external/python/google-api-python-client
+[submodule "platform/external/python/google-auth-library-python"]
+	branch = android17-release
+	path = external/python/google-auth-library-python
+	url = ../external/python/google-auth-library-python
+[submodule "platform/external/python/httplib2"]
+	branch = android17-release
+	path = external/python/httplib2
+	url = ../external/python/httplib2
+[submodule "platform/external/python/ipaddress"]
+	branch = android17-release
+	path = external/python/ipaddress
+	url = ../external/python/ipaddress
+[submodule "platform/external/python/jinja"]
+	branch = android17-release
+	path = external/python/jinja
+	url = ../external/python/jinja
+[submodule "platform/external/python/mako"]
+	branch = android17-release
+	path = external/python/mako
+	url = ../external/python/mako
+[submodule "platform/external/python/markupsafe"]
+	branch = android17-release
+	path = external/python/markupsafe
+	url = ../external/python/markupsafe
+[submodule "platform/external/python/mobly"]
+	branch = android17-release
+	path = external/python/mobly
+	url = ../external/python/mobly
+[submodule "platform/external/python/oauth2client"]
+	branch = android17-release
+	path = external/python/oauth2client
+	url = ../external/python/oauth2client
+[submodule "platform/external/python/parse_type"]
+	branch = android17-release
+	path = external/python/parse_type
+	url = ../external/python/parse_type
+[submodule "platform/external/python/pexpect"]
+	branch = android17-release
+	path = external/python/pexpect
+	url = ../external/python/pexpect
+[submodule "platform/external/python/portpicker"]
+	branch = android17-release
+	path = external/python/portpicker
+	url = ../external/python/portpicker
+[submodule "platform/external/python/ptyprocess"]
+	branch = android17-release
+	path = external/python/ptyprocess
+	url = ../external/python/ptyprocess
+[submodule "platform/external/python/pyasn1"]
+	branch = android17-release
+	path = external/python/pyasn1
+	url = ../external/python/pyasn1
+[submodule "platform/external/python/pyasn1-modules"]
+	branch = android17-release
+	path = external/python/pyasn1-modules
+	url = ../external/python/pyasn1-modules
+[submodule "platform/external/python/pycparser"]
+	branch = android17-release
+	path = external/python/pycparser
+	url = ../external/python/pycparser
+[submodule "platform/external/python/pyee"]
+	branch = android17-release
+	path = external/python/pyee
+	url = ../external/python/pyee
+[submodule "platform/external/python/pyfakefs"]
+	branch = android17-release
+	path = external/python/pyfakefs
+	url = ../external/python/pyfakefs
+[submodule "platform/external/python/pyserial"]
+	branch = android17-release
+	path = external/python/pyserial
+	url = ../external/python/pyserial
+[submodule "platform/external/python/python-api-core"]
+	branch = android17-release
+	path = external/python/python-api-core
+	url = ../external/python/python-api-core
+[submodule "platform/external/python/pyyaml"]
+	branch = android17-release
+	path = external/python/pyyaml
+	url = ../external/python/pyyaml
+[submodule "platform/external/python/rsa"]
+	branch = android17-release
+	path = external/python/rsa
+	url = ../external/python/rsa
+[submodule "platform/external/python/six"]
+	branch = android17-release
+	path = external/python/six
+	url = ../external/python/six
+[submodule "platform/external/python/snippet-uiautomator"]
+	branch = android17-release
+	path = external/python/snippet-uiautomator
+	url = ../external/python/snippet-uiautomator
+[submodule "platform/external/python/timeout-decorator"]
+	branch = android17-release
+	path = external/python/timeout-decorator
+	url = ../external/python/timeout-decorator
+[submodule "platform/external/python/typing"]
+	branch = android17-release
+	path = external/python/typing
+	url = ../external/python/typing
+[submodule "platform/external/python/typing_extensions"]
+	branch = android17-release
+	path = external/python/typing_extensions
+	url = ../external/python/typing_extensions
+[submodule "platform/external/python/uritemplates"]
+	branch = android17-release
+	path = external/python/uritemplates
+	url = ../external/python/uritemplates
+[submodule "platform/external/python/watchdog"]
+	branch = android17-release
+	path = external/python/watchdog
+	url = ../external/python/watchdog
+[submodule "platform/external/qdl"]
+	branch = android17-release
+	path = external/qdl
+	url = ../external/qdl
+[submodule "platform/external/qpdf"]
+	branch = android17-release
+	path = external/qpdf
+	url = ../external/qpdf
+[submodule "platform/external/rappor"]
+	branch = android17-release
+	path = external/rappor
+	url = ../external/rappor
+[submodule "platform/external/regex-re2"]
+	branch = android17-release
+	path = external/regex-re2
+	url = ../external/regex-re2
+[submodule "platform/external/renderscript-intrinsics-replacement-toolkit"]
+	branch = android17-release
+	path = external/renderscript-intrinsics-replacement-toolkit
+	url = ../external/renderscript-intrinsics-replacement-toolkit
+[submodule "platform/external/replicaisland"]
+	branch = android17-release
+	path = external/replicaisland
+	url = ../external/replicaisland
+[submodule "platform/external/rmi4utils"]
+	branch = android17-release
+	path = external/rmi4utils
+	url = ../external/rmi4utils
+[submodule "platform/external/rnnoise"]
+	branch = android17-release
+	path = external/rnnoise
+	url = ../external/rnnoise
+[submodule "platform/external/robolectric"]
+	branch = android17-release
+	path = external/robolectric
+	url = ../external/robolectric
+[submodule "platform/external/roboto-flex-fonts"]
+	branch = android17-release
+	path = external/roboto-flex-fonts
+	url = ../external/roboto-flex-fonts
+[submodule "platform/external/roboto-fonts"]
+	branch = android17-release
+	path = external/roboto-fonts
+	url = ../external/roboto-fonts
+[submodule "platform/external/roboto-mono"]
+	branch = android17-release
+	path = external/roboto-mono
+	url = ../external/roboto-mono
+[submodule "platform/external/rootdev"]
+	branch = android17-release
+	path = external/rootdev
+	url = ../external/rootdev
+[submodule "platform/external/rust/android-crates-io"]
+	branch = android17-release
+	path = external/rust/android-crates-io
+	url = ../external/rust/android-crates-io
+[submodule "platform/external/rust/autocxx"]
+	branch = android17-release
+	path = external/rust/autocxx
+	url = ../external/rust/autocxx
+[submodule "platform/external/rust/beto-rust"]
+	branch = android17-release
+	path = external/rust/beto-rust
+	url = ../external/rust/beto-rust
+[submodule "platform/external/rust/crabbyavif"]
+	branch = android17-release
+	path = external/rust/crabbyavif
+	url = ../external/rust/crabbyavif
+[submodule "platform/external/rust/crates/openssl"]
+	branch = android17-release
+	path = external/rust/crates/openssl
+	url = ../external/rust/crates/openssl
+[submodule "platform/external/rust/crates/v4l2r"]
+	branch = android17-release
+	path = external/rust/crates/v4l2r
+	url = ../external/rust/crates/v4l2r
+[submodule "platform/external/rust/crates/vhost-device-vsock"]
+	branch = android17-release
+	path = external/rust/crates/vhost-device-vsock
+	url = ../external/rust/crates/vhost-device-vsock
+[submodule "platform/external/rust/cros-libva"]
+	branch = android17-release
+	path = external/rust/cros-libva
+	url = ../external/rust/cros-libva
+[submodule "platform/external/rust/cxx"]
+	branch = android17-release
+	path = external/rust/cxx
+	url = ../external/rust/cxx
+[submodule "platform/external/rust/ninja-to-soong"]
+	branch = android17-release
+	path = external/rust/ninja-to-soong
+	url = ../external/rust/ninja-to-soong
+[submodule "platform/external/rust/pica"]
+	branch = android17-release
+	path = external/rust/pica
+	url = ../external/rust/pica
+[submodule "platform/external/rust/rutabaga_gfx"]
+	branch = android17-release
+	path = external/rust/rutabaga_gfx
+	url = ../external/rust/rutabaga_gfx
+[submodule "platform/external/ruy"]
+	branch = android17-release
+	path = external/ruy
+	url = ../external/ruy
+[submodule "platform/external/s2-geometry-library-java"]
+	branch = android17-release
+	path = external/s2-geometry-library-java
+	url = ../external/s2-geometry-library-java
+[submodule "platform/external/sandboxed-api"]
+	branch = android17-release
+	path = external/sandboxed-api
+	url = ../external/sandboxed-api
+[submodule "platform/external/scapy"]
+	branch = android17-release
+	path = external/scapy
+	url = ../external/scapy
+[submodule "platform/external/scrypt"]
+	branch = android17-release
+	path = external/scrypt
+	url = ../external/scrypt
+[submodule "platform/external/scudo"]
+	branch = android17-release
+	path = external/scudo
+	url = ../external/scudo
+[submodule "platform/external/sdk-platform-java"]
+	branch = android17-release
+	path = external/sdk-platform-java
+	url = ../external/sdk-platform-java
+[submodule "platform/external/sdv/vsomeip"]
+	branch = android17-release
+	path = external/sdv/vsomeip
+	url = ../external/sdv/vsomeip
+[submodule "platform/external/seccomp-tests"]
+	branch = android17-release
+	path = external/seccomp-tests
+	url = ../external/seccomp-tests
+[submodule "platform/external/selinux"]
+	branch = android17-release
+	path = external/selinux
+	url = ../external/selinux
+[submodule "platform/external/setfilters"]
+	branch = android17-release
+	path = external/setfilters
+	url = ../external/setfilters
+[submodule "platform/external/setupcompat"]
+	branch = android17-release
+	path = external/setupcompat
+	url = ../external/setupcompat
+[submodule "platform/external/setupdesign"]
+	branch = android17-release
+	path = external/setupdesign
+	url = ../external/setupdesign
+[submodule "platform/external/sg3_utils"]
+	branch = android17-release
+	path = external/sg3_utils
+	url = ../external/sg3_utils
+[submodule "platform/external/shaderc/spirv-headers"]
+	branch = android17-release
+	path = external/shaderc/spirv-headers
+	url = ../external/shaderc/spirv-headers
+[submodule "platform/external/shflags"]
+	branch = android17-release
+	path = external/shflags
+	url = ../external/shflags
+[submodule "platform/external/skia"]
+	branch = android17-release
+	path = external/skia
+	url = ../external/skia
+[submodule "platform/external/sl4a"]
+	branch = android17-release
+	path = external/sl4a
+	url = ../external/sl4a
+[submodule "platform/external/slf4j"]
+	branch = android17-release
+	path = external/slf4j
+	url = ../external/slf4j
+[submodule "platform/external/smack"]
+	branch = android17-release
+	path = external/smack
+	url = ../external/smack
+[submodule "platform/external/snakeyaml"]
+	branch = android17-release
+	path = external/snakeyaml
+	url = ../external/snakeyaml
+[submodule "platform/external/sonic"]
+	branch = android17-release
+	path = external/sonic
+	url = ../external/sonic
+[submodule "platform/external/sonivox"]
+	branch = android17-release
+	path = external/sonivox
+	url = ../external/sonivox
+[submodule "platform/external/spdx-tools"]
+	branch = android17-release
+	path = external/spdx-tools
+	url = ../external/spdx-tools
+[submodule "platform/external/speex"]
+	branch = android17-release
+	path = external/speex
+	url = ../external/speex
+[submodule "platform/external/sqlite"]
+	branch = android17-release
+	path = external/sqlite
+	url = ../external/sqlite
+[submodule "platform/external/squashfs-tools"]
+	branch = android17-release
+	path = external/squashfs-tools
+	url = ../external/squashfs-tools
+[submodule "platform/external/starlark-go"]
+	branch = android17-release
+	path = external/starlark-go
+	url = ../external/starlark-go
+[submodule "platform/external/stg"]
+	branch = android17-release
+	path = external/stg
+	url = ../external/stg
+[submodule "platform/external/strace"]
+	branch = android17-release
+	path = external/strace
+	url = ../external/strace
+[submodule "platform/external/stressapptest"]
+	branch = android17-release
+	path = external/stressapptest
+	url = ../external/stressapptest
+[submodule "platform/external/subsampling-scale-image-view"]
+	branch = android17-release
+	shallow = true
+	path = external/subsampling-scale-image-view
+	url = ../external/subsampling-scale-image-view
+[submodule "platform/external/swiftshader"]
+	branch = android17-release
+	path = external/swiftshader
+	url = ../external/swiftshader
+[submodule "platform/external/tagsoup"]
+	branch = android17-release
+	path = external/tagsoup
+	url = ../external/tagsoup
+[submodule "platform/external/tcpdump"]
+	branch = android17-release
+	path = external/tcpdump
+	url = ../external/tcpdump
+[submodule "platform/external/tensorflow"]
+	branch = android17-release
+	path = external/tensorflow
+	url = ../external/tensorflow
+[submodule "platform/external/testng"]
+	branch = android17-release
+	path = external/testng
+	url = ../external/testng
+[submodule "platform/external/tflite-support"]
+	branch = android17-release
+	path = external/tflite-support
+	url = ../external/tflite-support
+[submodule "platform/external/threetenbp"]
+	branch = android17-release
+	path = external/threetenbp
+	url = ../external/threetenbp
+[submodule "platform/external/timezone-boundary-builder"]
+	branch = android17-release
+	shallow = true
+	path = external/timezone-boundary-builder
+	url = ../external/timezone-boundary-builder
+[submodule "platform/external/tink"]
+	branch = android17-release
+	path = external/tink
+	url = ../external/tink
+[submodule "platform/external/tink-java"]
+	branch = android17-release
+	path = external/tink-java
+	url = ../external/tink-java
+[submodule "platform/external/tinyalsa"]
+	branch = android17-release
+	path = external/tinyalsa
+	url = ../external/tinyalsa
+[submodule "platform/external/tinyalsa_new"]
+	branch = android17-release
+	path = external/tinyalsa_new
+	url = ../external/tinyalsa_new
+[submodule "platform/external/tinycompress"]
+	branch = android17-release
+	path = external/tinycompress
+	url = ../external/tinycompress
+[submodule "platform/external/tinyxml2"]
+	branch = android17-release
+	path = external/tinyxml2
+	url = ../external/tinyxml2
+[submodule "platform/external/toolchain-utils"]
+	branch = android17-release
+	path = external/toolchain-utils
+	url = ../external/toolchain-utils
+[submodule "platform/external/toybox"]
+	branch = android17-release
+	path = external/toybox
+	url = ../external/toybox
+[submodule "platform/external/tpm2-tss"]
+	branch = android17-release
+	path = external/tpm2-tss
+	url = ../external/tpm2-tss
+[submodule "platform/external/trace-cmd"]
+	branch = android17-release
+	path = external/trace-cmd
+	url = ../external/trace-cmd
+[submodule "platform/external/tremolo"]
+	branch = android17-release
+	path = external/tremolo
+	url = ../external/tremolo
+[submodule "platform/external/truth"]
+	branch = android17-release
+	path = external/truth
+	url = ../external/truth
+[submodule "platform/external/turbine"]
+	branch = android17-release
+	path = external/turbine
+	url = ../external/turbine
+[submodule "platform/external/ublksrv"]
+	branch = android17-release
+	path = external/ublksrv
+	url = ../external/ublksrv
+[submodule "platform/external/unicode"]
+	branch = android17-release
+	path = external/unicode
+	url = ../external/unicode
+[submodule "platform/external/usb-ids"]
+	branch = android17-release
+	path = external/usb-ids
+	url = ../external/usb-ids
+[submodule "platform/external/uwb"]
+	branch = android17-release
+	path = external/uwb
+	url = ../external/uwb
+[submodule "platform/external/v4l-utils"]
+	branch = android17-release
+	path = external/v4l-utils
+	url = ../external/v4l-utils
+[submodule "platform/external/v4l2_codec2"]
+	branch = android17-release
+	path = external/v4l2_codec2
+	url = ../external/v4l2_codec2
+[submodule "platform/external/vboot_reference"]
+	branch = android17-release
+	path = external/vboot_reference
+	url = ../external/vboot_reference
+[submodule "platform/external/virtio-media"]
+	branch = android17-release
+	path = external/virtio-media
+	url = ../external/virtio-media
+[submodule "platform/external/vixl"]
+	branch = android17-release
+	path = external/vixl
+	url = ../external/vixl
+[submodule "platform/external/vkoverhead"]
+	branch = android17-release
+	path = external/vkoverhead
+	url = ../external/vkoverhead
+[submodule "platform/external/vogar"]
+	branch = android17-release
+	path = external/vogar
+	url = ../external/vogar
+[submodule "platform/external/volley"]
+	branch = android17-release
+	path = external/volley
+	url = ../external/volley
+[submodule "platform/external/vulkan-headers"]
+	branch = android17-release
+	path = external/vulkan-headers
+	url = ../external/vulkan-headers
+[submodule "platform/external/vulkan-validation-layers"]
+	branch = android17-release
+	path = external/vulkan-validation-layers
+	url = ../external/vulkan-validation-layers
+[submodule "platform/external/walt"]
+	branch = android17-release
+	path = external/walt
+	url = ../external/walt
+[submodule "platform/external/wayland"]
+	branch = android17-release
+	path = external/wayland
+	url = ../external/wayland
+[submodule "platform/external/wayland-protocols"]
+	branch = android17-release
+	path = external/wayland-protocols
+	url = ../external/wayland-protocols
+[submodule "platform/external/webp"]
+	branch = android17-release
+	path = external/webp
+	url = ../external/webp
+[submodule "platform/external/webrtc"]
+	branch = android17-release
+	path = external/webrtc
+	url = ../external/webrtc
+[submodule "platform/external/wireless-regdb"]
+	branch = android17-release
+	path = external/wireless-regdb
+	url = ../external/wireless-regdb
+[submodule "platform/external/wmediumd"]
+	branch = android17-release
+	path = external/wmediumd
+	url = ../external/wmediumd
+[submodule "platform/external/wpa_supplicant_8"]
+	branch = android17-release
+	path = external/wpa_supplicant_8
+	url = ../external/wpa_supplicant_8
+[submodule "platform/external/wuffs-mirror-release-c"]
+	branch = android17-release
+	path = external/wuffs-mirror-release-c
+	url = ../external/wuffs-mirror-release-c
+[submodule "platform/external/wycheproof"]
+	branch = android17-release
+	path = external/wycheproof
+	url = ../external/wycheproof
+[submodule "platform/external/xmp_toolkit"]
+	branch = android17-release
+	path = external/xmp_toolkit
+	url = ../external/xmp_toolkit
+[submodule "platform/external/xz-embedded"]
+	branch = android17-release
+	path = external/xz-embedded
+	url = ../external/xz-embedded
+[submodule "platform/external/xz-java"]
+	branch = android17-release
+	path = external/xz-java
+	url = ../external/xz-java
+[submodule "platform/external/yapf"]
+	branch = android17-release
+	path = external/yapf
+	url = ../external/yapf
+[submodule "platform/external/zlib"]
+	branch = android17-release
+	path = external/zlib
+	url = ../external/zlib
+[submodule "platform/external/zopfli"]
+	branch = android17-release
+	path = external/zopfli
+	url = ../external/zopfli
+[submodule "platform/external/zstd"]
+	branch = android17-release
+	path = external/zstd
+	url = ../external/zstd
+[submodule "platform/external/zucchini"]
+	branch = android17-release
+	path = external/zucchini
+	url = ../external/zucchini
+[submodule "platform/external/zxing"]
+	branch = android17-release
+	path = external/zxing
+	url = ../external/zxing
+[submodule "platform/frameworks/av"]
+	branch = android17-release
+	path = frameworks/av
+	url = ../frameworks/av
+[submodule "platform/frameworks/base"]
+	branch = android17-release
+	path = frameworks/base
+	url = ../frameworks/base
+[submodule "platform/frameworks/compile/libbcc"]
+	branch = android17-release
+	path = frameworks/compile/libbcc
+	url = ../frameworks/compile/libbcc
+[submodule "platform/frameworks/compile/mclinker"]
+	branch = android17-release
+	path = frameworks/compile/mclinker
+	url = ../frameworks/compile/mclinker
+[submodule "platform/frameworks/compile/slang"]
+	branch = android17-release
+	path = frameworks/compile/slang
+	url = ../frameworks/compile/slang
+[submodule "platform/frameworks/ex"]
+	branch = android17-release
+	path = frameworks/ex
+	url = ../frameworks/ex
+[submodule "platform/frameworks/hardware/interfaces"]
+	branch = android17-release
+	path = frameworks/hardware/interfaces
+	url = ../frameworks/hardware/interfaces
+[submodule "platform/frameworks/layoutlib"]
+	branch = android17-release
+	path = frameworks/layoutlib
+	url = ../frameworks/layoutlib
+[submodule "platform/frameworks/libs/binary_translation"]
+	branch = android17-release
+	path = frameworks/libs/binary_translation
+	url = ../frameworks/libs/binary_translation
+[submodule "platform/frameworks/libs/gsma_services"]
+	branch = android17-release
+	path = frameworks/libs/gsma_services
+	url = ../frameworks/libs/gsma_services
+[submodule "platform/frameworks/libs/modules-utils"]
+	branch = android17-release
+	path = frameworks/libs/modules-utils
+	url = ../frameworks/libs/modules-utils
+[submodule "platform/frameworks/libs/native_bridge_support"]
+	branch = android17-release
+	path = frameworks/libs/native_bridge_support
+	url = ../frameworks/libs/native_bridge_support
+[submodule "platform/frameworks/libs/service_entitlement"]
+	branch = android17-release
+	path = frameworks/libs/service_entitlement
+	url = ../frameworks/libs/service_entitlement
+[submodule "platform/frameworks/libs/systemui"]
+	branch = android17-release
+	path = frameworks/libs/systemui
+	url = ../frameworks/libs/systemui
+[submodule "platform/frameworks/minikin"]
+	branch = android17-release
+	path = frameworks/minikin
+	url = ../frameworks/minikin
+[submodule "platform/frameworks/multidex"]
+	branch = android17-release
+	path = frameworks/multidex
+	url = ../frameworks/multidex
+[submodule "platform/frameworks/native"]
+	branch = android17-release
+	path = frameworks/native
+	url = ../frameworks/native
+[submodule "platform/frameworks/opt/bitmap"]
+	branch = android17-release
+	path = frameworks/opt/bitmap
+	url = ../frameworks/opt/bitmap
+[submodule "platform/frameworks/opt/calendar"]
+	branch = android17-release
+	path = frameworks/opt/calendar
+	url = ../frameworks/opt/calendar
+[submodule "platform/frameworks/opt/car/services"]
+	branch = android17-release
+	path = frameworks/opt/car/services
+	url = ../frameworks/opt/car/services
+[submodule "platform/frameworks/opt/car/setupwizard"]
+	branch = android17-release
+	path = frameworks/opt/car/setupwizard
+	url = ../frameworks/opt/car/setupwizard
+[submodule "platform/frameworks/opt/chips"]
+	branch = android17-release
+	path = frameworks/opt/chips
+	url = ../frameworks/opt/chips
+[submodule "platform/frameworks/opt/colorpicker"]
+	branch = android17-release
+	path = frameworks/opt/colorpicker
+	url = ../frameworks/opt/colorpicker
+[submodule "platform/frameworks/opt/localepicker"]
+	branch = android17-release
+	path = frameworks/opt/localepicker
+	url = ../frameworks/opt/localepicker
+[submodule "platform/frameworks/opt/net/ims"]
+	branch = android17-release
+	path = frameworks/opt/net/ims
+	url = ../frameworks/opt/net/ims
+[submodule "platform/frameworks/opt/net/voip"]
+	branch = android17-release
+	path = frameworks/opt/net/voip
+	url = ../frameworks/opt/net/voip
+[submodule "platform/frameworks/opt/net/wifi"]
+	branch = android17-release
+	path = frameworks/opt/net/wifi
+	url = ../frameworks/opt/net/wifi
+[submodule "platform/frameworks/opt/photoviewer"]
+	branch = android17-release
+	path = frameworks/opt/photoviewer
+	url = ../frameworks/opt/photoviewer
+[submodule "platform/frameworks/opt/setupwizard"]
+	branch = android17-release
+	path = frameworks/opt/setupwizard
+	url = ../frameworks/opt/setupwizard
+[submodule "platform/frameworks/opt/telephony"]
+	branch = android17-release
+	path = frameworks/opt/telephony
+	url = ../frameworks/opt/telephony
+[submodule "platform/frameworks/opt/timezonepicker"]
+	branch = android17-release
+	path = frameworks/opt/timezonepicker
+	url = ../frameworks/opt/timezonepicker
+[submodule "platform/frameworks/opt/tv/tvsystem"]
+	branch = android17-release
+	path = frameworks/opt/tv/tvsystem
+	url = ../frameworks/opt/tv/tvsystem
+[submodule "platform/frameworks/opt/vcard"]
+	branch = android17-release
+	path = frameworks/opt/vcard
+	url = ../frameworks/opt/vcard
+[submodule "platform/frameworks/proto_logging"]
+	branch = android17-release
+	path = frameworks/proto_logging
+	url = ../frameworks/proto_logging
+[submodule "platform/frameworks/rs"]
+	branch = android17-release
+	path = frameworks/rs
+	url = ../frameworks/rs
+[submodule "platform/frameworks/wilhelm"]
+	branch = android17-release
+	path = frameworks/wilhelm
+	url = ../frameworks/wilhelm
+[submodule "platform/hardware/broadcom/libbt"]
+	branch = android17-release
+	path = hardware/broadcom/libbt
+	url = ../hardware/broadcom/libbt
+[submodule "platform/hardware/broadcom/wlan"]
+	branch = android17-release
+	path = hardware/broadcom/wlan
+	url = ../hardware/broadcom/wlan
+[submodule "platform/hardware/google/apf"]
+	branch = android17-release
+	path = hardware/google/apf
+	url = ../hardware/google/apf
+[submodule "platform/hardware/google/av"]
+	branch = android17-release
+	path = hardware/google/av
+	url = ../hardware/google/av
+[submodule "platform/hardware/google/camera"]
+	branch = android17-release
+	path = hardware/google/camera
+	url = ../hardware/google/camera
+[submodule "platform/hardware/google/gfxstream"]
+	branch = android17-release
+	path = hardware/google/gfxstream
+	url = ../hardware/google/gfxstream
+[submodule "platform/hardware/google/interfaces"]
+	branch = android17-release
+	path = hardware/google/interfaces
+	url = ../hardware/google/interfaces
+[submodule "platform/hardware/interfaces"]
+	branch = android17-release
+	path = hardware/interfaces
+	url = ../hardware/interfaces
+[submodule "platform/hardware/invensense"]
+	branch = android17-release
+	path = hardware/invensense
+	url = ../hardware/invensense
+[submodule "platform/hardware/libhardware"]
+	branch = android17-release
+	path = hardware/libhardware
+	url = ../hardware/libhardware
+[submodule "platform/hardware/libhardware_legacy"]
+	branch = android17-release
+	path = hardware/libhardware_legacy
+	url = ../hardware/libhardware_legacy
+[submodule "platform/hardware/nxp/keymint"]
+	branch = android17-release
+	path = hardware/nxp/keymint
+	url = ../hardware/nxp/keymint
+[submodule "platform/hardware/nxp/nfc"]
+	branch = android17-release
+	path = hardware/nxp/nfc
+	url = ../hardware/nxp/nfc
+[submodule "platform/hardware/nxp/nxp_mcu_loader"]
+	branch = android17-release
+	path = hardware/nxp/nxp_mcu_loader
+	url = ../hardware/nxp/nxp_mcu_loader
+[submodule "platform/hardware/nxp/secure_element"]
+	branch = android17-release
+	path = hardware/nxp/secure_element
+	url = ../hardware/nxp/secure_element
+[submodule "platform/hardware/nxp/uwb"]
+	branch = android17-release
+	path = hardware/nxp/uwb
+	url = ../hardware/nxp/uwb
+[submodule "platform/hardware/nxp/weaver"]
+	branch = android17-release
+	path = hardware/nxp/weaver
+	url = ../hardware/nxp/weaver
+[submodule "platform/hardware/qcom/wlan"]
+	branch = android17-release
+	path = hardware/qcom/wlan
+	url = ../hardware/qcom/wlan
+[submodule "platform/hardware/ril"]
+	branch = android17-release
+	path = hardware/ril
+	url = ../hardware/ril
+[submodule "platform/hardware/samsung/nfc"]
+	branch = android17-release
+	path = hardware/samsung/nfc
+	url = ../hardware/samsung/nfc
+[submodule "platform/hardware/sdv/interfaces"]
+	branch = android17-release
+	path = hardware/sdv/interfaces
+	url = ../hardware/sdv/interfaces
+[submodule "platform/hardware/st/nfc"]
+	branch = android17-release
+	path = hardware/st/nfc
+	url = ../hardware/st/nfc
+[submodule "platform/hardware/st/secure_element"]
+	branch = android17-release
+	path = hardware/st/secure_element
+	url = ../hardware/st/secure_element
+[submodule "platform/hardware/st/secure_element2"]
+	branch = android17-release
+	path = hardware/st/secure_element2
+	url = ../hardware/st/secure_element2
+[submodule "platform/hardware/synaptics/wlan"]
+	branch = android17-release
+	path = hardware/synaptics/wlan
+	url = ../hardware/synaptics/wlan
+[submodule "platform/hardware/telink/atv/refDesignRcu"]
+	branch = android17-release
+	path = hardware/telink/atv/refDesignRcu
+	url = ../hardware/telink/atv/refDesignRcu
+[submodule "platform/hardware/ti/am57x"]
+	branch = android17-release
+	path = hardware/ti/am57x
+	url = ../hardware/ti/am57x
+[submodule "platform/libcore"]
+	branch = android17-release
+	path = libcore
+	url = ../libcore
+[submodule "platform/libnativehelper"]
+	branch = android17-release
+	path = libnativehelper
+	url = ../libnativehelper
+[submodule "platform/packages/apps/AvatarPicker"]
+	branch = android17-release
+	path = packages/apps/AvatarPicker
+	url = ../packages/apps/AvatarPicker
+[submodule "platform/packages/apps/BasicSmsReceiver"]
+	branch = android17-release
+	path = packages/apps/BasicSmsReceiver
+	url = ../packages/apps/BasicSmsReceiver
+[submodule "platform/packages/apps/Browser2"]
+	branch = android17-release
+	path = packages/apps/Browser2
+	url = ../packages/apps/Browser2
+[submodule "platform/packages/apps/Calendar"]
+	branch = android17-release
+	path = packages/apps/Calendar
+	url = ../packages/apps/Calendar
+[submodule "platform/packages/apps/Camera2"]
+	branch = android17-release
+	path = packages/apps/Camera2
+	url = ../packages/apps/Camera2
+[submodule "platform/packages/apps/Car/CalendarPrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/CalendarPrebuilt
+	url = ../packages/apps/Car/CalendarPrebuilt
+[submodule "platform/packages/apps/Car/Cluster"]
+	branch = android17-release
+	path = packages/apps/Car/Cluster
+	url = ../packages/apps/Car/Cluster
+[submodule "platform/packages/apps/Car/DataSubscriptionReference"]
+	branch = android17-release
+	path = packages/apps/Car/DataSubscriptionReference
+	url = ../packages/apps/Car/DataSubscriptionReference
+[submodule "platform/packages/apps/Car/DebuggingRestrictionController"]
+	branch = android17-release
+	path = packages/apps/Car/DebuggingRestrictionController
+	url = ../packages/apps/Car/DebuggingRestrictionController
+[submodule "platform/packages/apps/Car/DialerPrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/DialerPrebuilt
+	url = ../packages/apps/Car/DialerPrebuilt
+[submodule "platform/packages/apps/Car/DriverUIPrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/DriverUIPrebuilt
+	url = ../packages/apps/Car/DriverUIPrebuilt
+[submodule "platform/packages/apps/Car/LatinIME"]
+	branch = android17-release
+	path = packages/apps/Car/LatinIME
+	url = ../packages/apps/Car/LatinIME
+[submodule "platform/packages/apps/Car/Launcher"]
+	branch = android17-release
+	path = packages/apps/Car/Launcher
+	url = ../packages/apps/Car/Launcher
+[submodule "platform/packages/apps/Car/LinkViewer"]
+	branch = android17-release
+	path = packages/apps/Car/LinkViewer
+	url = ../packages/apps/Car/LinkViewer
+[submodule "platform/packages/apps/Car/LocalMediaPlayer"]
+	branch = android17-release
+	path = packages/apps/Car/LocalMediaPlayer
+	url = ../packages/apps/Car/LocalMediaPlayer
+[submodule "platform/packages/apps/Car/MediaPrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/MediaPrebuilt
+	url = ../packages/apps/Car/MediaPrebuilt
+[submodule "platform/packages/apps/Car/MessengerPrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/MessengerPrebuilt
+	url = ../packages/apps/Car/MessengerPrebuilt
+[submodule "platform/packages/apps/Car/Notification"]
+	branch = android17-release
+	path = packages/apps/Car/Notification
+	url = ../packages/apps/Car/Notification
+[submodule "platform/packages/apps/Car/Provision"]
+	branch = android17-release
+	path = packages/apps/Car/Provision
+	url = ../packages/apps/Car/Provision
+[submodule "platform/packages/apps/Car/RadioPrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/RadioPrebuilt
+	url = ../packages/apps/Car/RadioPrebuilt
+[submodule "platform/packages/apps/Car/References"]
+	branch = android17-release
+	path = packages/apps/Car/References
+	url = ../packages/apps/Car/References
+[submodule "platform/packages/apps/Car/RotaryController"]
+	branch = android17-release
+	path = packages/apps/Car/RotaryController
+	url = ../packages/apps/Car/RotaryController
+[submodule "platform/packages/apps/Car/RotaryImePrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/RotaryImePrebuilt
+	url = ../packages/apps/Car/RotaryImePrebuilt
+[submodule "platform/packages/apps/Car/Settings"]
+	branch = android17-release
+	path = packages/apps/Car/Settings
+	url = ../packages/apps/Car/Settings
+[submodule "platform/packages/apps/Car/SettingsIntelligence"]
+	branch = android17-release
+	path = packages/apps/Car/SettingsIntelligence
+	url = ../packages/apps/Car/SettingsIntelligence
+[submodule "platform/packages/apps/Car/SystemUI"]
+	branch = android17-release
+	path = packages/apps/Car/SystemUI
+	url = ../packages/apps/Car/SystemUI
+[submodule "platform/packages/apps/Car/SystemUpdater"]
+	branch = android17-release
+	path = packages/apps/Car/SystemUpdater
+	url = ../packages/apps/Car/SystemUpdater
+[submodule "platform/packages/apps/Car/Templates"]
+	branch = android17-release
+	path = packages/apps/Car/Templates
+	url = ../packages/apps/Car/Templates
+[submodule "platform/packages/apps/Car/TemplatesPrebuilt"]
+	branch = android17-release
+	path = packages/apps/Car/TemplatesPrebuilt
+	url = ../packages/apps/Car/TemplatesPrebuilt
+[submodule "platform/packages/apps/Car/VoiceControl"]
+	branch = android17-release
+	path = packages/apps/Car/VoiceControl
+	url = ../packages/apps/Car/VoiceControl
+[submodule "platform/packages/apps/Car/systemlibs"]
+	branch = android17-release
+	path = packages/apps/Car/systemlibs
+	url = ../packages/apps/Car/systemlibs
+[submodule "platform/packages/apps/CarrierConfig"]
+	branch = android17-release
+	path = packages/apps/CarrierConfig
+	url = ../packages/apps/CarrierConfig
+[submodule "platform/packages/apps/CellBroadcastReceiver"]
+	branch = android17-release
+	path = packages/apps/CellBroadcastReceiver
+	url = ../packages/apps/CellBroadcastReceiver
+[submodule "platform/packages/apps/CertInstaller"]
+	branch = android17-release
+	path = packages/apps/CertInstaller
+	url = ../packages/apps/CertInstaller
+[submodule "platform/packages/apps/Contacts"]
+	branch = android17-release
+	path = packages/apps/Contacts
+	url = ../packages/apps/Contacts
+[submodule "platform/packages/apps/ContactsPicker"]
+	branch = android17-release
+	path = packages/apps/ContactsPicker
+	url = ../packages/apps/ContactsPicker
+[submodule "platform/packages/apps/DeskClock"]
+	branch = android17-release
+	path = packages/apps/DeskClock
+	url = ../packages/apps/DeskClock
+[submodule "platform/packages/apps/DevCamera"]
+	branch = android17-release
+	path = packages/apps/DevCamera
+	url = ../packages/apps/DevCamera
+[submodule "platform/packages/apps/DeviceDiagnostics"]
+	branch = android17-release
+	path = packages/apps/DeviceDiagnostics
+	url = ../packages/apps/DeviceDiagnostics
+[submodule "platform/packages/apps/Dialer"]
+	branch = android17-release
+	path = packages/apps/Dialer
+	url = ../packages/apps/Dialer
+[submodule "platform/packages/apps/DocumentsUI"]
+	branch = android17-release
+	path = packages/apps/DocumentsUI
+	url = ../packages/apps/DocumentsUI
+[submodule "platform/packages/apps/EmergencyInfo"]
+	branch = android17-release
+	path = packages/apps/EmergencyInfo
+	url = ../packages/apps/EmergencyInfo
+[submodule "platform/packages/apps/EyeDropper"]
+	branch = android17-release
+	path = packages/apps/EyeDropper
+	url = ../packages/apps/EyeDropper
+[submodule "platform/packages/apps/Gallery"]
+	branch = android17-release
+	path = packages/apps/Gallery
+	url = ../packages/apps/Gallery
+[submodule "platform/packages/apps/Gallery2"]
+	branch = android17-release
+	path = packages/apps/Gallery2
+	url = ../packages/apps/Gallery2
+[submodule "platform/packages/apps/HTMLViewer"]
+	branch = android17-release
+	path = packages/apps/HTMLViewer
+	url = ../packages/apps/HTMLViewer
+[submodule "platform/packages/apps/ImsServiceEntitlement"]
+	branch = android17-release
+	path = packages/apps/ImsServiceEntitlement
+	url = ../packages/apps/ImsServiceEntitlement
+[submodule "platform/packages/apps/KeyChain"]
+	branch = android17-release
+	path = packages/apps/KeyChain
+	url = ../packages/apps/KeyChain
+[submodule "platform/packages/apps/Launcher3"]
+	branch = android17-release
+	path = packages/apps/Launcher3
+	url = ../packages/apps/Launcher3
+[submodule "platform/packages/apps/LegacyCamera"]
+	branch = android17-release
+	path = packages/apps/LegacyCamera
+	url = ../packages/apps/LegacyCamera
+[submodule "platform/packages/apps/Login"]
+	branch = android17-release
+	path = packages/apps/Login
+	url = ../packages/apps/Login
+[submodule "platform/packages/apps/ManagedProvisioning"]
+	branch = android17-release
+	path = packages/apps/ManagedProvisioning
+	url = ../packages/apps/ManagedProvisioning
+[submodule "platform/packages/apps/Messaging"]
+	branch = android17-release
+	path = packages/apps/Messaging
+	url = ../packages/apps/Messaging
+[submodule "platform/packages/apps/Multiuser"]
+	branch = android17-release
+	path = packages/apps/Multiuser
+	url = ../packages/apps/Multiuser
+[submodule "platform/packages/apps/Music"]
+	branch = android17-release
+	path = packages/apps/Music
+	url = ../packages/apps/Music
+[submodule "platform/packages/apps/MusicFX"]
+	branch = android17-release
+	path = packages/apps/MusicFX
+	url = ../packages/apps/MusicFX
+[submodule "platform/packages/apps/OnDeviceAppPrediction"]
+	branch = android17-release
+	path = packages/apps/OnDeviceAppPrediction
+	url = ../packages/apps/OnDeviceAppPrediction
+[submodule "platform/packages/apps/PersonalContext"]
+	branch = android17-release
+	path = packages/apps/PersonalContext
+	url = ../packages/apps/PersonalContext
+[submodule "platform/packages/apps/PhoneCommon"]
+	branch = android17-release
+	path = packages/apps/PhoneCommon
+	url = ../packages/apps/PhoneCommon
+[submodule "platform/packages/apps/PrivateSpace"]
+	branch = android17-release
+	path = packages/apps/PrivateSpace
+	url = ../packages/apps/PrivateSpace
+[submodule "platform/packages/apps/Protips"]
+	branch = android17-release
+	path = packages/apps/Protips
+	url = ../packages/apps/Protips
+[submodule "platform/packages/apps/Provision"]
+	branch = android17-release
+	path = packages/apps/Provision
+	url = ../packages/apps/Provision
+[submodule "platform/packages/apps/QuickAccessWallet"]
+	branch = android17-release
+	path = packages/apps/QuickAccessWallet
+	url = ../packages/apps/QuickAccessWallet
+[submodule "platform/packages/apps/QuickSearchBox"]
+	branch = android17-release
+	path = packages/apps/QuickSearchBox
+	url = ../packages/apps/QuickSearchBox
+[submodule "platform/packages/apps/SafetyRegulatoryInfo"]
+	branch = android17-release
+	path = packages/apps/SafetyRegulatoryInfo
+	url = ../packages/apps/SafetyRegulatoryInfo
+[submodule "platform/packages/apps/SampleLocationAttribution"]
+	branch = android17-release
+	path = packages/apps/SampleLocationAttribution
+	url = ../packages/apps/SampleLocationAttribution
+[submodule "platform/packages/apps/SecureElement"]
+	branch = android17-release
+	path = packages/apps/SecureElement
+	url = ../packages/apps/SecureElement
+[submodule "platform/packages/apps/Settings"]
+	branch = android17-release
+	path = packages/apps/Settings
+	url = ../packages/apps/Settings
+[submodule "platform/packages/apps/SettingsIntelligence"]
+	branch = android17-release
+	path = packages/apps/SettingsIntelligence
+	url = ../packages/apps/SettingsIntelligence
+[submodule "platform/packages/apps/SpareParts"]
+	branch = android17-release
+	path = packages/apps/SpareParts
+	url = ../packages/apps/SpareParts
+[submodule "platform/packages/apps/Stk"]
+	branch = android17-release
+	path = packages/apps/Stk
+	url = ../packages/apps/Stk
+[submodule "platform/packages/apps/StorageManager"]
+	branch = android17-release
+	path = packages/apps/StorageManager
+	url = ../packages/apps/StorageManager
+[submodule "platform/packages/apps/SystemUIGo"]
+	branch = android17-release
+	path = packages/apps/SystemUIGo
+	url = ../packages/apps/SystemUIGo
+[submodule "platform/packages/apps/TV"]
+	branch = android17-release
+	path = packages/apps/TV
+	url = ../packages/apps/TV
+[submodule "platform/packages/apps/Tag"]
+	branch = android17-release
+	path = packages/apps/Tag
+	url = ../packages/apps/Tag
+[submodule "platform/packages/apps/Test/connectivity"]
+	branch = android17-release
+	path = packages/apps/Test/connectivity
+	url = ../packages/apps/Test/connectivity
+[submodule "platform/packages/apps/ThemePicker"]
+	branch = android17-release
+	path = packages/apps/ThemePicker
+	url = ../packages/apps/ThemePicker
+[submodule "platform/packages/apps/Traceur"]
+	branch = android17-release
+	path = packages/apps/Traceur
+	url = ../packages/apps/Traceur
+[submodule "platform/packages/apps/TvFeedbackConsent"]
+	branch = android17-release
+	path = packages/apps/TvFeedbackConsent
+	url = ../packages/apps/TvFeedbackConsent
+[submodule "platform/packages/apps/TvSettings"]
+	branch = android17-release
+	path = packages/apps/TvSettings
+	url = ../packages/apps/TvSettings
+[submodule "platform/packages/apps/TvSystemUI"]
+	branch = android17-release
+	path = packages/apps/TvSystemUI
+	url = ../packages/apps/TvSystemUI
+[submodule "platform/packages/apps/UniversalMediaPlayer"]
+	branch = android17-release
+	path = packages/apps/UniversalMediaPlayer
+	url = ../packages/apps/UniversalMediaPlayer
+[submodule "platform/packages/apps/VirtualGamepad"]
+	branch = android17-release
+	path = packages/apps/VirtualGamepad
+	url = ../packages/apps/VirtualGamepad
+[submodule "platform/packages/apps/WallpaperPicker2"]
+	branch = android17-release
+	path = packages/apps/WallpaperPicker2
+	url = ../packages/apps/WallpaperPicker2
+[submodule "platform/packages/inputmethods/LatinIME"]
+	branch = android17-release
+	path = packages/inputmethods/LatinIME
+	url = ../packages/inputmethods/LatinIME
+[submodule "platform/packages/inputmethods/LeanbackIME"]
+	branch = android17-release
+	path = packages/inputmethods/LeanbackIME
+	url = ../packages/inputmethods/LeanbackIME
+[submodule "platform/packages/modules/AdServices"]
+	branch = android17-release
+	path = packages/modules/AdServices
+	url = ../packages/modules/AdServices
+[submodule "platform/packages/modules/AppSearch"]
+	branch = android17-release
+	path = packages/modules/AppSearch
+	url = ../packages/modules/AppSearch
+[submodule "platform/packages/modules/ArtPrebuilt"]
+	branch = android17-release
+	shallow = true
+	path = packages/modules/ArtPrebuilt
+	url = ../packages/modules/ArtPrebuilt
+[submodule "platform/packages/modules/Bluetooth"]
+	branch = android17-release
+	path = packages/modules/Bluetooth
+	url = ../packages/modules/Bluetooth
+[submodule "platform/packages/modules/CaptivePortalLogin"]
+	branch = android17-release
+	path = packages/modules/CaptivePortalLogin
+	url = ../packages/modules/CaptivePortalLogin
+[submodule "platform/packages/modules/CellBroadcastService"]
+	branch = android17-release
+	path = packages/modules/CellBroadcastService
+	url = ../packages/modules/CellBroadcastService
+[submodule "platform/packages/modules/ConfigInfrastructure"]
+	branch = android17-release
+	path = packages/modules/ConfigInfrastructure
+	url = ../packages/modules/ConfigInfrastructure
+[submodule "platform/packages/modules/Connectivity"]
+	branch = android17-release
+	path = packages/modules/Connectivity
+	url = ../packages/modules/Connectivity
+[submodule "platform/packages/modules/CrashRecovery"]
+	branch = android17-release
+	path = packages/modules/CrashRecovery
+	url = ../packages/modules/CrashRecovery
+[submodule "platform/packages/modules/DeviceLock"]
+	branch = android17-release
+	path = packages/modules/DeviceLock
+	url = ../packages/modules/DeviceLock
+[submodule "platform/packages/modules/DnsResolver"]
+	branch = android17-release
+	path = packages/modules/DnsResolver
+	url = ../packages/modules/DnsResolver
+[submodule "platform/packages/modules/ExtServices"]
+	branch = android17-release
+	path = packages/modules/ExtServices
+	url = ../packages/modules/ExtServices
+[submodule "platform/packages/modules/GenericBootstrappingArchitecture"]
+	branch = android17-release
+	path = packages/modules/GenericBootstrappingArchitecture
+	url = ../packages/modules/GenericBootstrappingArchitecture
+[submodule "platform/packages/modules/GeoTZ"]
+	branch = android17-release
+	path = packages/modules/GeoTZ
+	url = ../packages/modules/GeoTZ
+[submodule "platform/packages/modules/Gki"]
+	branch = android17-release
+	path = packages/modules/Gki
+	url = ../packages/modules/Gki
+[submodule "platform/packages/modules/HealthFitness"]
+	branch = android17-release
+	path = packages/modules/HealthFitness
+	url = ../packages/modules/HealthFitness
+[submodule "platform/packages/modules/IPsec"]
+	branch = android17-release
+	path = packages/modules/IPsec
+	url = ../packages/modules/IPsec
+[submodule "platform/packages/modules/ImsMedia"]
+	branch = android17-release
+	path = packages/modules/ImsMedia
+	url = ../packages/modules/ImsMedia
+[submodule "platform/packages/modules/ImsStack"]
+	branch = android17-release
+	path = packages/modules/ImsStack
+	url = ../packages/modules/ImsStack
+[submodule "platform/packages/modules/IntentResolver"]
+	branch = android17-release
+	path = packages/modules/IntentResolver
+	url = ../packages/modules/IntentResolver
+[submodule "platform/packages/modules/Media"]
+	branch = android17-release
+	path = packages/modules/Media
+	url = ../packages/modules/Media
+[submodule "platform/packages/modules/ModuleMetadata"]
+	branch = android17-release
+	path = packages/modules/ModuleMetadata
+	url = ../packages/modules/ModuleMetadata
+[submodule "platform/packages/modules/NetworkStack"]
+	branch = android17-release
+	path = packages/modules/NetworkStack
+	url = ../packages/modules/NetworkStack
+[submodule "platform/packages/modules/NeuralNetworks"]
+	branch = android17-release
+	path = packages/modules/NeuralNetworks
+	url = ../packages/modules/NeuralNetworks
+[submodule "platform/packages/modules/Nfc"]
+	branch = android17-release
+	path = packages/modules/Nfc
+	url = ../packages/modules/Nfc
+[submodule "platform/packages/modules/NpuManager"]
+	branch = android17-release
+	path = packages/modules/NpuManager
+	url = ../packages/modules/NpuManager
+[submodule "platform/packages/modules/OnDevicePersonalization"]
+	branch = android17-release
+	path = packages/modules/OnDevicePersonalization
+	url = ../packages/modules/OnDevicePersonalization
+[submodule "platform/packages/modules/Permission"]
+	branch = android17-release
+	path = packages/modules/Permission
+	url = ../packages/modules/Permission
+[submodule "platform/packages/modules/Profiling"]
+	branch = android17-release
+	path = packages/modules/Profiling
+	url = ../packages/modules/Profiling
+[submodule "platform/packages/modules/RemoteKeyProvisioning"]
+	branch = android17-release
+	path = packages/modules/RemoteKeyProvisioning
+	url = ../packages/modules/RemoteKeyProvisioning
+[submodule "platform/packages/modules/RuntimeI18n"]
+	branch = android17-release
+	path = packages/modules/RuntimeI18n
+	url = ../packages/modules/RuntimeI18n
+[submodule "platform/packages/modules/Scheduling"]
+	branch = android17-release
+	path = packages/modules/Scheduling
+	url = ../packages/modules/Scheduling
+[submodule "platform/packages/modules/SdkExtensions"]
+	branch = android17-release
+	path = packages/modules/SdkExtensions
+	url = ../packages/modules/SdkExtensions
+[submodule "platform/packages/modules/StatsD"]
+	branch = android17-release
+	path = packages/modules/StatsD
+	url = ../packages/modules/StatsD
+[submodule "platform/packages/modules/Telecom"]
+	branch = android17-release
+	path = packages/modules/Telecom
+	url = ../packages/modules/Telecom
+[submodule "platform/packages/modules/Telephony"]
+	branch = android17-release
+	path = packages/modules/Telephony
+	url = ../packages/modules/Telephony
+[submodule "platform/packages/modules/ThreadNetwork"]
+	branch = android17-release
+	path = packages/modules/ThreadNetwork
+	url = ../packages/modules/ThreadNetwork
+[submodule "platform/packages/modules/UprobeStats"]
+	branch = android17-release
+	path = packages/modules/UprobeStats
+	url = ../packages/modules/UprobeStats
+[submodule "platform/packages/modules/Uwb"]
+	branch = android17-release
+	path = packages/modules/Uwb
+	url = ../packages/modules/Uwb
+[submodule "platform/packages/modules/Virtualization"]
+	branch = android17-release
+	path = packages/modules/Virtualization
+	url = ../packages/modules/Virtualization
+[submodule "platform/packages/modules/WebApp"]
+	branch = android17-release
+	path = packages/modules/WebApp
+	url = ../packages/modules/WebApp
+[submodule "platform/packages/modules/WebViewBootstrap"]
+	branch = android17-release
+	path = packages/modules/WebViewBootstrap
+	url = ../packages/modules/WebViewBootstrap
+[submodule "platform/packages/modules/Wifi"]
+	branch = android17-release
+	path = packages/modules/Wifi
+	url = ../packages/modules/Wifi
+[submodule "platform/packages/modules/adb"]
+	branch = android17-release
+	path = packages/modules/adb
+	url = ../packages/modules/adb
+[submodule "platform/packages/modules/common"]
+	branch = android17-release
+	path = packages/modules/common
+	url = ../packages/modules/common
+[submodule "platform/packages/modules/desktop/Serviceability"]
+	branch = android17-release
+	path = packages/modules/desktop/Serviceability
+	url = ../packages/modules/desktop/Serviceability
+[submodule "platform/packages/modules/vndk"]
+	branch = android17-release
+	path = packages/modules/vndk
+	url = ../packages/modules/vndk
+[submodule "platform/packages/providers/BlockedNumberProvider"]
+	branch = android17-release
+	path = packages/providers/BlockedNumberProvider
+	url = ../packages/providers/BlockedNumberProvider
+[submodule "platform/packages/providers/BookmarkProvider"]
+	branch = android17-release
+	path = packages/providers/BookmarkProvider
+	url = ../packages/providers/BookmarkProvider
+[submodule "platform/packages/providers/CalendarProvider"]
+	branch = android17-release
+	path = packages/providers/CalendarProvider
+	url = ../packages/providers/CalendarProvider
+[submodule "platform/packages/providers/CallLogProvider"]
+	branch = android17-release
+	path = packages/providers/CallLogProvider
+	url = ../packages/providers/CallLogProvider
+[submodule "platform/packages/providers/ContactsKeysProvider"]
+	branch = android17-release
+	path = packages/providers/ContactsKeysProvider
+	url = ../packages/providers/ContactsKeysProvider
+[submodule "platform/packages/providers/ContactsProvider"]
+	branch = android17-release
+	path = packages/providers/ContactsProvider
+	url = ../packages/providers/ContactsProvider
+[submodule "platform/packages/providers/DownloadProvider"]
+	branch = android17-release
+	path = packages/providers/DownloadProvider
+	url = ../packages/providers/DownloadProvider
+[submodule "platform/packages/providers/MediaProvider"]
+	branch = android17-release
+	path = packages/providers/MediaProvider
+	url = ../packages/providers/MediaProvider
+[submodule "platform/packages/providers/PartnerBookmarksProvider"]
+	branch = android17-release
+	path = packages/providers/PartnerBookmarksProvider
+	url = ../packages/providers/PartnerBookmarksProvider
+[submodule "platform/packages/providers/TelephonyProvider"]
+	branch = android17-release
+	path = packages/providers/TelephonyProvider
+	url = ../packages/providers/TelephonyProvider
+[submodule "platform/packages/providers/TvProvider"]
+	branch = android17-release
+	path = packages/providers/TvProvider
+	url = ../packages/providers/TvProvider
+[submodule "platform/packages/providers/UserDictionaryProvider"]
+	branch = android17-release
+	path = packages/providers/UserDictionaryProvider
+	url = ../packages/providers/UserDictionaryProvider
+[submodule "platform/packages/screensavers/Basic"]
+	branch = android17-release
+	path = packages/screensavers/Basic
+	url = ../packages/screensavers/Basic
+[submodule "platform/packages/screensavers/PhotoTable"]
+	branch = android17-release
+	path = packages/screensavers/PhotoTable
+	url = ../packages/screensavers/PhotoTable
+[submodule "platform/packages/services/AlternativeNetworkAccess"]
+	branch = android17-release
+	path = packages/services/AlternativeNetworkAccess
+	url = ../packages/services/AlternativeNetworkAccess
+[submodule "platform/packages/services/BuiltInPrintService"]
+	branch = android17-release
+	path = packages/services/BuiltInPrintService
+	url = ../packages/services/BuiltInPrintService
+[submodule "platform/packages/services/Car"]
+	branch = android17-release
+	path = packages/services/Car
+	url = ../packages/services/Car
+[submodule "platform/packages/services/CrossDeviceSync"]
+	branch = android17-release
+	path = packages/services/CrossDeviceSync
+	url = ../packages/services/CrossDeviceSync
+[submodule "platform/packages/services/DeviceAsWebcam"]
+	branch = android17-release
+	path = packages/services/DeviceAsWebcam
+	url = ../packages/services/DeviceAsWebcam
+[submodule "platform/packages/services/DroidfoodAttestationFixer"]
+	branch = android17-release
+	path = packages/services/DroidfoodAttestationFixer
+	url = ../packages/services/DroidfoodAttestationFixer
+[submodule "platform/packages/services/Iwlan"]
+	branch = android17-release
+	path = packages/services/Iwlan
+	url = ../packages/services/Iwlan
+[submodule "platform/packages/services/Mms"]
+	branch = android17-release
+	path = packages/services/Mms
+	url = ../packages/services/Mms
+[submodule "platform/packages/services/Mtp"]
+	branch = android17-release
+	path = packages/services/Mtp
+	url = ../packages/services/Mtp
+[submodule "platform/packages/services/QualifiedNetworksService"]
+	branch = android17-release
+	path = packages/services/QualifiedNetworksService
+	url = ../packages/services/QualifiedNetworksService
+[submodule "platform/packages/services/Telecomm"]
+	branch = android17-release
+	path = packages/services/Telecomm
+	url = ../packages/services/Telecomm
+[submodule "platform/packages/services/Telephony"]
+	branch = android17-release
+	path = packages/services/Telephony
+	url = ../packages/services/Telephony
+[submodule "platform/packages/services/display_safety"]
+	branch = android17-release
+	path = packages/services/display_safety
+	url = ../packages/services/display_safety
+[submodule "platform/packages/wallpapers/LivePicker"]
+	branch = android17-release
+	path = packages/wallpapers/LivePicker
+	url = ../packages/wallpapers/LivePicker
+[submodule "platform/pdk"]
+	branch = android17-release
+	path = pdk
+	url = ../pdk
+[submodule "platform/platform_testing"]
+	branch = android17-release
+	path = platform_testing
+	url = ../platform_testing
+[submodule "platform/prebuilts/abi-dumps/ndk"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/abi-dumps/ndk
+	url = ../prebuilts/abi-dumps/ndk
+[submodule "platform/prebuilts/abi-dumps/platform"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/abi-dumps/platform
+	url = ../prebuilts/abi-dumps/platform
+[submodule "platform/prebuilts/abi-dumps/vndk"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/abi-dumps/vndk
+	url = ../prebuilts/abi-dumps/vndk
+[submodule "platform/prebuilts/android-emulator"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/android-emulator
+	url = ../prebuilts/android-emulator
+[submodule "platform/prebuilts/asuite"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/asuite
+	url = ../prebuilts/asuite
+[submodule "platform/prebuilts/bazel/common"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/bazel/common
+	url = ../prebuilts/bazel/common
+[submodule "platform/prebuilts/build-tools"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/build-tools
+	url = ../prebuilts/build-tools
+[submodule "platform/prebuilts/bundletool"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/bundletool
+	url = ../prebuilts/bundletool
+[submodule "platform/prebuilts/checkcolor"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/checkcolor
+	url = ../prebuilts/checkcolor
+[submodule "platform/prebuilts/checkstyle"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/checkstyle
+	url = ../prebuilts/checkstyle
+[submodule "platform/prebuilts/cipd"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/cipd
+	url = ../prebuilts/cipd
+[submodule "platform/prebuilts/clang-tools"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/clang-tools
+	url = ../prebuilts/clang-tools
+[submodule "platform/prebuilts/clang/host/darwin-x86"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/clang/host/darwin-x86
+	url = ../prebuilts/clang/host/darwin-x86
+[submodule "platform/prebuilts/clang/host/linux-x86"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/clang/host/linux-x86
+	url = ../prebuilts/clang/host/linux-x86
+[submodule "platform/prebuilts/cmake/linux-x86"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/cmake/linux-x86
+	url = ../prebuilts/cmake/linux-x86
+[submodule "platform/prebuilts/cmdline-tools"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/cmdline-tools
+	url = ../prebuilts/cmdline-tools
+[submodule "platform/prebuilts/devtools"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/devtools
+	url = ../prebuilts/devtools
+[submodule "platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8
+	url = ../prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8
+[submodule "platform/prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8
+	url = ../prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8
+[submodule "platform/prebuilts/go/darwin-x86"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/go/darwin-x86
+	url = ../prebuilts/go/darwin-x86
+[submodule "platform/prebuilts/go/linux-x86"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/go/linux-x86
+	url = ../prebuilts/go/linux-x86
+[submodule "platform/prebuilts/gradle-plugin"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/gradle-plugin
+	url = ../prebuilts/gradle-plugin
+[submodule "platform/prebuilts/jdk/jdk21"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/jdk/jdk21
+	url = ../prebuilts/jdk/jdk21
+[submodule "platform/prebuilts/jdk/jdk25"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/jdk/jdk25
+	url = ../prebuilts/jdk/jdk25
+[submodule "platform/prebuilts/jdk/jdk8"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/jdk/jdk8
+	url = ../prebuilts/jdk/jdk8
+[submodule "platform/prebuilts/ktlint"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/ktlint
+	url = ../prebuilts/ktlint
+[submodule "platform/prebuilts/manifest-merger"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/manifest-merger
+	url = ../prebuilts/manifest-merger
+[submodule "platform/prebuilts/maven_repo/bumptech"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/maven_repo/bumptech
+	url = ../prebuilts/maven_repo/bumptech
+[submodule "platform/prebuilts/misc"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/misc
+	url = ../prebuilts/misc
+[submodule "platform/prebuilts/module_sdk/AdServices"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/AdServices
+	url = ../prebuilts/module_sdk/AdServices
+[submodule "platform/prebuilts/module_sdk/AppSearch"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/AppSearch
+	url = ../prebuilts/module_sdk/AppSearch
+[submodule "platform/prebuilts/module_sdk/Bluetooth"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Bluetooth
+	url = ../prebuilts/module_sdk/Bluetooth
+[submodule "platform/prebuilts/module_sdk/ConfigInfrastructure"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/ConfigInfrastructure
+	url = ../prebuilts/module_sdk/ConfigInfrastructure
+[submodule "platform/prebuilts/module_sdk/Connectivity"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Connectivity
+	url = ../prebuilts/module_sdk/Connectivity
+[submodule "platform/prebuilts/module_sdk/CrashRecovery"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/CrashRecovery
+	url = ../prebuilts/module_sdk/CrashRecovery
+[submodule "platform/prebuilts/module_sdk/DeviceLock"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/DeviceLock
+	url = ../prebuilts/module_sdk/DeviceLock
+[submodule "platform/prebuilts/module_sdk/HealthFitness"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/HealthFitness
+	url = ../prebuilts/module_sdk/HealthFitness
+[submodule "platform/prebuilts/module_sdk/IPsec"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/IPsec
+	url = ../prebuilts/module_sdk/IPsec
+[submodule "platform/prebuilts/module_sdk/Media"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Media
+	url = ../prebuilts/module_sdk/Media
+[submodule "platform/prebuilts/module_sdk/MediaProvider"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/MediaProvider
+	url = ../prebuilts/module_sdk/MediaProvider
+[submodule "platform/prebuilts/module_sdk/Nfc"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Nfc
+	url = ../prebuilts/module_sdk/Nfc
+[submodule "platform/prebuilts/module_sdk/NpuManager"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/NpuManager
+	url = ../prebuilts/module_sdk/NpuManager
+[submodule "platform/prebuilts/module_sdk/OnDevicePersonalization"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/OnDevicePersonalization
+	url = ../prebuilts/module_sdk/OnDevicePersonalization
+[submodule "platform/prebuilts/module_sdk/Permission"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Permission
+	url = ../prebuilts/module_sdk/Permission
+[submodule "platform/prebuilts/module_sdk/Profiling"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Profiling
+	url = ../prebuilts/module_sdk/Profiling
+[submodule "platform/prebuilts/module_sdk/RemoteKeyProvisioning"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/RemoteKeyProvisioning
+	url = ../prebuilts/module_sdk/RemoteKeyProvisioning
+[submodule "platform/prebuilts/module_sdk/Scheduling"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Scheduling
+	url = ../prebuilts/module_sdk/Scheduling
+[submodule "platform/prebuilts/module_sdk/SdkExtensions"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/SdkExtensions
+	url = ../prebuilts/module_sdk/SdkExtensions
+[submodule "platform/prebuilts/module_sdk/StatsD"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/StatsD
+	url = ../prebuilts/module_sdk/StatsD
+[submodule "platform/prebuilts/module_sdk/Telephony"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Telephony
+	url = ../prebuilts/module_sdk/Telephony
+[submodule "platform/prebuilts/module_sdk/UprobeStats"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/UprobeStats
+	url = ../prebuilts/module_sdk/UprobeStats
+[submodule "platform/prebuilts/module_sdk/Uwb"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Uwb
+	url = ../prebuilts/module_sdk/Uwb
+[submodule "platform/prebuilts/module_sdk/WebApp"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/WebApp
+	url = ../prebuilts/module_sdk/WebApp
+[submodule "platform/prebuilts/module_sdk/WebViewBootstrap"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/WebViewBootstrap
+	url = ../prebuilts/module_sdk/WebViewBootstrap
+[submodule "platform/prebuilts/module_sdk/Wifi"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/Wifi
+	url = ../prebuilts/module_sdk/Wifi
+[submodule "platform/prebuilts/module_sdk/art"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/art
+	url = ../prebuilts/module_sdk/art
+[submodule "platform/prebuilts/module_sdk/conscrypt"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/module_sdk/conscrypt
+	url = ../prebuilts/module_sdk/conscrypt
+[submodule "platform/prebuilts/ndk"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/ndk
+	url = ../prebuilts/ndk
+[submodule "platform/prebuilts/qemu-kernel"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/qemu-kernel
+	url = ../prebuilts/qemu-kernel
+[submodule "platform/prebuilts/r8"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/r8
+	url = ../prebuilts/r8
+[submodule "platform/prebuilts/remoteexecution-client"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/remoteexecution-client
+	url = ../prebuilts/remoteexecution-client
+[submodule "platform/prebuilts/runtime"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/runtime
+	url = ../prebuilts/runtime
+[submodule "platform/prebuilts/rust"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/rust
+	url = ../prebuilts/rust
+[submodule "platform/prebuilts/rust-toolchain/darwin"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/rust-toolchain/darwin
+	url = ../prebuilts/rust-toolchain/darwin
+[submodule "platform/prebuilts/rust-toolchain/linux-musl-x86"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/rust-toolchain/linux-musl-x86
+	url = ../prebuilts/rust-toolchain/linux-musl-x86
+[submodule "platform/prebuilts/rust-toolchain/linux-x86"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/rust-toolchain/linux-x86
+	url = ../prebuilts/rust-toolchain/linux-x86
+[submodule "platform/prebuilts/sdk"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/sdk
+	url = ../prebuilts/sdk
+[submodule "platform/prebuilts/siso"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/siso
+	url = ../prebuilts/siso
+[submodule "platform/prebuilts/tools"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/tools
+	url = ../prebuilts/tools
+[submodule "platform/prebuilts/vndk/v31"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/vndk/v31
+	url = ../prebuilts/vndk/v31
+[submodule "platform/prebuilts/vndk/v32"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/vndk/v32
+	url = ../prebuilts/vndk/v32
+[submodule "platform/prebuilts/vndk/v33"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/vndk/v33
+	url = ../prebuilts/vndk/v33
+[submodule "platform/prebuilts/vndk/v34"]
+	branch = android17-release
+	shallow = true
+	path = prebuilts/vndk/v34
+	url = ../prebuilts/vndk/v34
+[submodule "platform/sdk"]
+	branch = android17-release
+	path = sdk
+	url = ../sdk
+[submodule "platform/system/acpi/bert_collector"]
+	branch = android17-release
+	path = system/acpi/bert_collector
+	url = ../system/acpi/bert_collector
+[submodule "platform/system/apex"]
+	branch = android17-release
+	path = system/apex
+	url = ../system/apex
+[submodule "platform/system/authgraph"]
+	branch = android17-release
+	path = system/authgraph
+	url = ../system/authgraph
+[submodule "platform/system/bpf"]
+	branch = android17-release
+	path = system/bpf
+	url = ../system/bpf
+[submodule "platform/system/bpfprogs"]
+	branch = android17-release
+	path = system/bpfprogs
+	url = ../system/bpfprogs
+[submodule "platform/system/ca-certificates"]
+	branch = android17-release
+	path = system/ca-certificates
+	url = ../system/ca-certificates
+[submodule "platform/system/chre"]
+	branch = android17-release
+	path = system/chre
+	url = ../system/chre
+[submodule "platform/system/connectivity/wificond"]
+	branch = android17-release
+	path = system/connectivity/wificond
+	url = ../system/connectivity/wificond
+[submodule "platform/system/core"]
+	branch = android17-release
+	path = system/core
+	url = ../system/core
+[submodule "platform/system/dmesgd"]
+	branch = android17-release
+	path = system/dmesgd
+	url = ../system/dmesgd
+[submodule "platform/system/extras"]
+	branch = android17-release
+	path = system/extras
+	url = ../system/extras
+[submodule "platform/system/fs/casefolding_remover"]
+	branch = android17-release
+	path = system/fs/casefolding_remover
+	url = ../system/fs/casefolding_remover
+[submodule "platform/system/fs/fs_mgr"]
+	branch = android17-release
+	path = system/fs/fs_mgr
+	url = ../system/fs/fs_mgr
+[submodule "platform/system/gatekeeper"]
+	branch = android17-release
+	path = system/gatekeeper
+	url = ../system/gatekeeper
+[submodule "platform/system/gsid"]
+	branch = android17-release
+	path = system/gsid
+	url = ../system/gsid
+[submodule "platform/system/hardware/interfaces"]
+	branch = android17-release
+	path = system/hardware/interfaces
+	url = ../system/hardware/interfaces
+[submodule "platform/system/hwservicemanager"]
+	branch = android17-release
+	path = system/hwservicemanager
+	url = ../system/hwservicemanager
+[submodule "platform/system/incremental_delivery"]
+	branch = android17-release
+	path = system/incremental_delivery
+	url = ../system/incremental_delivery
+[submodule "platform/system/keymaster"]
+	branch = android17-release
+	path = system/keymaster
+	url = ../system/keymaster
+[submodule "platform/system/keymint"]
+	branch = android17-release
+	path = system/keymint
+	url = ../system/keymint
+[submodule "platform/system/lfi"]
+	branch = android17-release
+	path = system/lfi
+	url = ../system/lfi
+[submodule "platform/system/libartpalette"]
+	branch = android17-release
+	path = system/libartpalette
+	url = ../system/libartpalette
+[submodule "platform/system/libbase"]
+	branch = android17-release
+	path = system/libbase
+	url = ../system/libbase
+[submodule "platform/system/libcppbor"]
+	branch = android17-release
+	path = system/libcppbor
+	url = ../system/libcppbor
+[submodule "platform/system/libfmq"]
+	branch = android17-release
+	path = system/libfmq
+	url = ../system/libfmq
+[submodule "platform/system/libhidl"]
+	branch = android17-release
+	path = system/libhidl
+	url = ../system/libhidl
+[submodule "platform/system/libhwbinder"]
+	branch = android17-release
+	path = system/libhwbinder
+	url = ../system/libhwbinder
+[submodule "platform/system/libprocinfo"]
+	branch = android17-release
+	path = system/libprocinfo
+	url = ../system/libprocinfo
+[submodule "platform/system/librustutils"]
+	branch = android17-release
+	path = system/librustutils
+	url = ../system/librustutils
+[submodule "platform/system/libskuconfig"]
+	branch = android17-release
+	path = system/libskuconfig
+	url = ../system/libskuconfig
+[submodule "platform/system/libsysprop"]
+	branch = android17-release
+	path = system/libsysprop
+	url = ../system/libsysprop
+[submodule "platform/system/libueventd-rs"]
+	branch = android17-release
+	path = system/libueventd-rs
+	url = ../system/libueventd-rs
+[submodule "platform/system/libufdt"]
+	branch = android17-release
+	path = system/libufdt
+	url = ../system/libufdt
+[submodule "platform/system/liburingutils"]
+	branch = android17-release
+	path = system/liburingutils
+	url = ../system/liburingutils
+[submodule "platform/system/libvintf"]
+	branch = android17-release
+	path = system/libvintf
+	url = ../system/libvintf
+[submodule "platform/system/libziparchive"]
+	branch = android17-release
+	path = system/libziparchive
+	url = ../system/libziparchive
+[submodule "platform/system/linkerconfig"]
+	branch = android17-release
+	path = system/linkerconfig
+	url = ../system/linkerconfig
+[submodule "platform/system/logging"]
+	branch = android17-release
+	path = system/logging
+	url = ../system/logging
+[submodule "platform/system/media"]
+	branch = android17-release
+	path = system/media
+	url = ../system/media
+[submodule "platform/system/memory/amemdiff"]
+	branch = android17-release
+	path = system/memory/amemdiff
+	url = ../system/memory/amemdiff
+[submodule "platform/system/memory/guardian"]
+	branch = android17-release
+	path = system/memory/guardian
+	url = ../system/memory/guardian
+[submodule "platform/system/memory/libdmabufheap"]
+	branch = android17-release
+	path = system/memory/libdmabufheap
+	url = ../system/memory/libdmabufheap
+[submodule "platform/system/memory/libion"]
+	branch = android17-release
+	path = system/memory/libion
+	url = ../system/memory/libion
+[submodule "platform/system/memory/libmeminfo"]
+	branch = android17-release
+	path = system/memory/libmeminfo
+	url = ../system/memory/libmeminfo
+[submodule "platform/system/memory/libmemtrack"]
+	branch = android17-release
+	path = system/memory/libmemtrack
+	url = ../system/memory/libmemtrack
+[submodule "platform/system/memory/libmemunreachable"]
+	branch = android17-release
+	path = system/memory/libmemunreachable
+	url = ../system/memory/libmemunreachable
+[submodule "platform/system/memory/libwrapfd"]
+	branch = android17-release
+	path = system/memory/libwrapfd
+	url = ../system/memory/libwrapfd
+[submodule "platform/system/memory/lmkd"]
+	branch = android17-release
+	path = system/memory/lmkd
+	url = ../system/memory/lmkd
+[submodule "platform/system/memory/mmd"]
+	branch = android17-release
+	path = system/memory/mmd
+	url = ../system/memory/mmd
+[submodule "platform/system/netd"]
+	branch = android17-release
+	path = system/netd
+	url = ../system/netd
+[submodule "platform/system/nvram"]
+	branch = android17-release
+	path = system/nvram
+	url = ../system/nvram
+[submodule "platform/system/secretkeeper"]
+	branch = android17-release
+	path = system/secretkeeper
+	url = ../system/secretkeeper
+[submodule "platform/system/secure_element"]
+	branch = android17-release
+	path = system/secure_element
+	url = ../system/secure_element
+[submodule "platform/system/security"]
+	branch = android17-release
+	path = system/security
+	url = ../system/security
+[submodule "platform/system/see/authmgr"]
+	branch = android17-release
+	path = system/see/authmgr
+	url = ../system/see/authmgr
+[submodule "platform/system/sepolicy"]
+	branch = android17-release
+	path = system/sepolicy
+	url = ../system/sepolicy
+[submodule "platform/system/server_configurable_flags"]
+	branch = android17-release
+	path = system/server_configurable_flags
+	url = ../system/server_configurable_flags
+[submodule "platform/system/software_defined_vehicle/automotive_services"]
+	branch = android17-release
+	path = system/software_defined_vehicle/automotive_services
+	url = ../system/software_defined_vehicle/automotive_services
+[submodule "platform/system/software_defined_vehicle/common"]
+	branch = android17-release
+	path = system/software_defined_vehicle/common
+	url = ../system/software_defined_vehicle/common
+[submodule "platform/system/software_defined_vehicle/health_monitor"]
+	branch = android17-release
+	path = system/software_defined_vehicle/health_monitor
+	url = ../system/software_defined_vehicle/health_monitor
+[submodule "platform/system/software_defined_vehicle/lifecycle_management"]
+	branch = android17-release
+	path = system/software_defined_vehicle/lifecycle_management
+	url = ../system/software_defined_vehicle/lifecycle_management
+[submodule "platform/system/software_defined_vehicle/middleware"]
+	branch = android17-release
+	path = system/software_defined_vehicle/middleware
+	url = ../system/software_defined_vehicle/middleware
+[submodule "platform/system/software_defined_vehicle/orchestration"]
+	branch = android17-release
+	path = system/software_defined_vehicle/orchestration
+	url = ../system/software_defined_vehicle/orchestration
+[submodule "platform/system/software_defined_vehicle/platform"]
+	branch = android17-release
+	path = system/software_defined_vehicle/platform
+	url = ../system/software_defined_vehicle/platform
+[submodule "platform/system/software_defined_vehicle/samples"]
+	branch = android17-release
+	path = system/software_defined_vehicle/samples
+	url = ../system/software_defined_vehicle/samples
+[submodule "platform/system/software_defined_vehicle/sdv_gateway"]
+	branch = android17-release
+	path = system/software_defined_vehicle/sdv_gateway
+	url = ../system/software_defined_vehicle/sdv_gateway
+[submodule "platform/system/software_defined_vehicle/service_bundles_registry"]
+	branch = android17-release
+	path = system/software_defined_vehicle/service_bundles_registry
+	url = ../system/software_defined_vehicle/service_bundles_registry
+[submodule "platform/system/software_defined_vehicle/some_ip"]
+	branch = android17-release
+	path = system/software_defined_vehicle/some_ip
+	url = ../system/software_defined_vehicle/some_ip
+[submodule "platform/system/software_defined_vehicle/telemetry"]
+	branch = android17-release
+	path = system/software_defined_vehicle/telemetry
+	url = ../system/software_defined_vehicle/telemetry
+[submodule "platform/system/software_defined_vehicle/tools"]
+	branch = android17-release
+	path = system/software_defined_vehicle/tools
+	url = ../system/software_defined_vehicle/tools
+[submodule "platform/system/software_defined_vehicle/update_manager"]
+	branch = android17-release
+	path = system/software_defined_vehicle/update_manager
+	url = ../system/software_defined_vehicle/update_manager
+[submodule "platform/system/software_defined_vehicle/vpm"]
+	branch = android17-release
+	path = system/software_defined_vehicle/vpm
+	url = ../system/software_defined_vehicle/vpm
+[submodule "platform/system/software_defined_vehicle/vsidl"]
+	branch = android17-release
+	path = system/software_defined_vehicle/vsidl
+	url = ../system/software_defined_vehicle/vsidl
+[submodule "platform/system/teeui"]
+	branch = android17-release
+	path = system/teeui
+	url = ../system/teeui
+[submodule "platform/system/testing/gtest_extras"]
+	branch = android17-release
+	path = system/testing/gtest_extras
+	url = ../system/testing/gtest_extras
+[submodule "platform/system/timezone"]
+	branch = android17-release
+	path = system/timezone
+	url = ../system/timezone
+[submodule "platform/system/tools/aidl"]
+	branch = android17-release
+	path = system/tools/aidl
+	url = ../system/tools/aidl
+[submodule "platform/system/tools/hidl"]
+	branch = android17-release
+	path = system/tools/hidl
+	url = ../system/tools/hidl
+[submodule "platform/system/tools/mkbootimg"]
+	branch = android17-release
+	path = system/tools/mkbootimg
+	url = ../system/tools/mkbootimg
+[submodule "platform/system/tools/sysprop"]
+	branch = android17-release
+	path = system/tools/sysprop
+	url = ../system/tools/sysprop
+[submodule "platform/system/tools/xsdc"]
+	branch = android17-release
+	path = system/tools/xsdc
+	url = ../system/tools/xsdc
+[submodule "platform/system/unwinding"]
+	branch = android17-release
+	path = system/unwinding
+	url = ../system/unwinding
+[submodule "platform/system/update_engine"]
+	branch = android17-release
+	path = system/update_engine
+	url = ../system/update_engine
+[submodule "platform/system/usb"]
+	branch = android17-release
+	path = system/usb
+	url = ../system/usb
+[submodule "platform/system/usb_info_tools"]
+	branch = android17-release
+	path = system/usb_info_tools
+	url = ../system/usb_info_tools
+[submodule "platform/system/vold"]
+	branch = android17-release
+	path = system/vold
+	url = ../system/vold
+[submodule "platform/system/weaver"]
+	branch = android17-release
+	path = system/weaver
+	url = ../system/weaver
+[submodule "platform/system/zygote"]
+	branch = android17-release
+	path = system/zygote
+	url = ../system/zygote
+[submodule "platform/test/app_compat/csuite"]
+	branch = android17-release
+	path = test/app_compat/csuite
+	url = ../test/app_compat/csuite
+[submodule "platform/test/catbox"]
+	branch = android17-release
+	path = test/catbox
+	url = ../test/catbox
+[submodule "platform/test/cts-root"]
+	branch = android17-release
+	path = test/cts-root
+	url = ../test/cts-root
+[submodule "platform/test/dittosuite"]
+	branch = android17-release
+	path = test/dittosuite
+	url = ../test/dittosuite
+[submodule "platform/test/mlts/benchmark"]
+	branch = android17-release
+	path = test/mlts/benchmark
+	url = ../test/mlts/benchmark
+[submodule "platform/test/mlts/models"]
+	branch = android17-release
+	path = test/mlts/models
+	url = ../test/mlts/models
+[submodule "platform/test/robolectric-extensions"]
+	branch = android17-release
+	path = test/robolectric-extensions
+	url = ../test/robolectric-extensions
+[submodule "platform/test/suite_harness"]
+	branch = android17-release
+	path = test/suite_harness
+	url = ../test/suite_harness
+[submodule "platform/test/vts"]
+	branch = android17-release
+	path = test/vts
+	url = ../test/vts
+[submodule "platform/test/vts-testcase/hal"]
+	branch = android17-release
+	path = test/vts-testcase/hal
+	url = ../test/vts-testcase/hal
+[submodule "platform/test/vts-testcase/kernel"]
+	branch = android17-release
+	path = test/vts-testcase/kernel
+	url = ../test/vts-testcase/kernel
+[submodule "platform/test/vts-testcase/nbu"]
+	branch = android17-release
+	path = test/vts-testcase/nbu
+	url = ../test/vts-testcase/nbu
+[submodule "platform/test/vts-testcase/performance"]
+	branch = android17-release
+	path = test/vts-testcase/performance
+	url = ../test/vts-testcase/performance
+[submodule "platform/test/vts-testcase/security"]
+	branch = android17-release
+	path = test/vts-testcase/security
+	url = ../test/vts-testcase/security
+[submodule "platform/test/vts-testcase/vndk"]
+	branch = android17-release
+	path = test/vts-testcase/vndk
+	url = ../test/vts-testcase/vndk
+[submodule "platform/tools/aadevtools"]
+	branch = android17-release
+	path = tools/aadevtools
+	url = ../tools/aadevtools
+[submodule "platform/tools/acloud"]
+	branch = android17-release
+	path = tools/acloud
+	url = ../tools/acloud
+[submodule "platform/tools/apifinder"]
+	branch = android17-release
+	path = tools/apifinder
+	url = ../tools/apifinder
+[submodule "platform/tools/apksig"]
+	branch = android17-release
+	path = tools/apksig
+	url = ../tools/apksig
+[submodule "platform/tools/apkzlib"]
+	branch = android17-release
+	path = tools/apkzlib
+	url = ../tools/apkzlib
+[submodule "platform/tools/asuite"]
+	branch = android17-release
+	path = tools/asuite
+	url = ../tools/asuite
+[submodule "platform/tools/carrier_settings"]
+	branch = android17-release
+	path = tools/carrier_settings
+	url = ../tools/carrier_settings
+[submodule "platform/tools/content_addressed_storage/prebuilts"]
+	branch = android17-release
+	shallow = true
+	path = tools/content_addressed_storage/prebuilts
+	url = ../tools/content_addressed_storage/prebuilts
+[submodule "platform/tools/currysrc"]
+	branch = android17-release
+	path = tools/currysrc
+	url = ../tools/currysrc
+[submodule "platform/tools/deviceinfra/prebuilts"]
+	branch = android17-release
+	shallow = true
+	path = tools/deviceinfra/prebuilts
+	url = ../tools/deviceinfra/prebuilts
+[submodule "platform/tools/dexter"]
+	branch = android17-release
+	path = tools/dexter
+	url = ../tools/dexter
+[submodule "platform/tools/doc_generation"]
+	branch = android17-release
+	path = tools/doc_generation
+	url = ../tools/doc_generation
+[submodule "platform/tools/external/fat32lib"]
+	branch = android17-release
+	path = tools/external/fat32lib
+	url = ../tools/external/fat32lib
+[submodule "platform/tools/external_updater"]
+	branch = android17-release
+	path = tools/external_updater
+	url = ../tools/external_updater
+[submodule "platform/tools/lint_checks"]
+	branch = android17-release
+	path = tools/lint_checks
+	url = ../tools/lint_checks
+[submodule "platform/tools/loganalysis"]
+	branch = android17-release
+	path = tools/loganalysis
+	url = ../tools/loganalysis
+[submodule "platform/tools/mainline"]
+	branch = android17-release
+	path = tools/mainline
+	url = ../tools/mainline
+[submodule "platform/tools/metalava"]
+	branch = android17-release
+	path = tools/metalava
+	url = ../tools/metalava
+[submodule "platform/tools/ndkports"]
+	branch = android17-release
+	path = tools/ndkports
+	url = ../tools/ndkports
+[submodule "platform/tools/netsim"]
+	branch = android17-release
+	path = tools/netsim
+	url = ../tools/netsim
+[submodule "platform/tools/repohooks"]
+	branch = android17-release
+	path = tools/repohooks
+	url = ../tools/repohooks
+[submodule "platform/tools/rootcanal"]
+	branch = android17-release
+	path = tools/rootcanal
+	url = ../tools/rootcanal
+[submodule "platform/tools/rr_prebuilt"]
+	branch = android17-release
+	shallow = true
+	path = tools/rr_prebuilt
+	url = ../tools/rr_prebuilt
+[submodule "platform/tools/security"]
+	branch = android17-release
+	path = tools/security
+	url = ../tools/security
+[submodule "platform/tools/strictdeps"]
+	branch = android17-release
+	path = tools/strictdeps
+	url = ../tools/strictdeps
+[submodule "platform/tools/test/connectivity"]
+	branch = android17-release
+	path = tools/test/connectivity
+	url = ../tools/test/connectivity
+[submodule "platform/tools/test/desktop/mobly"]
+	branch = android17-release
+	path = tools/test/desktop/mobly
+	url = ../tools/test/desktop/mobly
+[submodule "platform/tools/test/mobly_extensions"]
+	branch = android17-release
+	path = tools/test/mobly_extensions
+	url = ../tools/test/mobly_extensions
+[submodule "platform/tools/test/mobly_snippets"]
+	branch = android17-release
+	path = tools/test/mobly_snippets
+	url = ../tools/test/mobly_snippets
+[submodule "platform/tools/test/openhst"]
+	branch = android17-release
+	path = tools/test/openhst
+	url = ../tools/test/openhst
+[submodule "platform/tools/tradefederation"]
+	branch = android17-release
+	path = tools/tradefederation/core
+	url = ../tools/tradefederation
+[submodule "platform/tools/tradefederation/contrib"]
+	branch = android17-release
+	path = tools/tradefederation/contrib
+	url = ../tools/tradefederation/contrib
+[submodule "platform/tools/tradefederation/prebuilts"]
+	branch = android17-release
+	shallow = true
+	path = tools/tradefederation/prebuilts
+	url = ../tools/tradefederation/prebuilts
+[submodule "platform/tools/treble"]
+	branch = android17-release
+	path = tools/treble
+	url = ../tools/treble
+[submodule "platform/tools/trebuchet"]
+	branch = android17-release
+	path = tools/trebuchet
+	url = ../tools/trebuchet
+[submodule "toolchain/pgo-profiles"]
+	branch = android17-release
+	shallow = true
+	path = toolchain/pgo-profiles
+	url = ../../toolchain/pgo-profiles
+[submodule "tools/platform-compat"]
+	branch = android17-release
+	path = tools/platform-compat
+	url = ../../tools/platform-compat
+[submodule "trusty/app/authmgr"]
+	branch = android17-release
+	path = trusty/user/app/authmgr
+	url = ../../trusty/app/authmgr
+[submodule "trusty/app/avb"]
+	branch = android17-release
+	path = trusty/user/app/avb
+	url = ../../trusty/app/avb
+[submodule "trusty/app/cast-auth"]
+	branch = android17-release
+	path = trusty/user/app/cast-auth
+	url = ../../trusty/app/cast-auth
+[submodule "trusty/app/confirmationui"]
+	branch = android17-release
+	path = trusty/user/app/confirmationui
+	url = ../../trusty/app/confirmationui
+[submodule "trusty/app/gatekeeper"]
+	branch = android17-release
+	path = trusty/user/app/gatekeeper
+	url = ../../trusty/app/gatekeeper
+[submodule "trusty/app/keymaster"]
+	branch = android17-release
+	path = trusty/user/app/keymaster
+	url = ../../trusty/app/keymaster
+[submodule "trusty/app/keymint"]
+	branch = android17-release
+	path = trusty/user/app/keymint
+	url = ../../trusty/app/keymint
+[submodule "trusty/app/sample"]
+	branch = android17-release
+	path = trusty/user/app/sample
+	url = ../../trusty/app/sample
+[submodule "trusty/app/secretkeeper"]
+	branch = android17-release
+	path = trusty/user/app/secretkeeper
+	url = ../../trusty/app/secretkeeper
+[submodule "trusty/app/storage"]
+	branch = android17-release
+	path = trusty/user/app/storage
+	url = ../../trusty/app/storage
+[submodule "trusty/device/arm/generic-arm64"]
+	branch = android17-release
+	path = trusty/device/arm/generic-arm64
+	url = ../../trusty/device/arm/generic-arm64
+[submodule "trusty/device/arm/vexpress-a15"]
+	branch = android17-release
+	path = trusty/device/arm/vexpress-a15
+	url = ../../trusty/device/arm/vexpress-a15
+[submodule "trusty/device/common"]
+	branch = android17-release
+	path = trusty/device/common
+	url = ../../trusty/device/common
+[submodule "trusty/device/desktop"]
+	branch = android17-release
+	path = trusty/device/desktop
+	url = ../../trusty/device/desktop
+[submodule "trusty/device/nxp/imx7d"]
+	branch = android17-release
+	path = trusty/device/nxp/imx7d
+	url = ../../trusty/device/nxp/imx7d
+[submodule "trusty/device/x86/generic-x86_64"]
+	branch = android17-release
+	path = trusty/device/x86/generic-x86_64
+	url = ../../trusty/device/x86/generic-x86_64
+[submodule "trusty/external/headers"]
+	branch = android17-release
+	path = external/trusty/headers
+	url = ../../trusty/external/headers
+[submodule "trusty/external/musl"]
+	branch = android17-release
+	path = external/trusty/musl
+	url = ../../trusty/external/musl
+[submodule "trusty/external/trusted-firmware-a"]
+	branch = android17-release
+	path = external/trusty/arm-trusted-firmware
+	url = ../../trusty/external/trusted-firmware-a
+[submodule "trusty/external/trusty"]
+	branch = android17-release
+	path = external/trusty/bootloader
+	url = ../../trusty/external/trusty
+[submodule "trusty/host/common"]
+	branch = android17-release
+	path = trusty/host/common
+	url = ../../trusty/host/common
+[submodule "trusty/lib"]
+	branch = android17-release
+	path = trusty/user/base
+	url = ../../trusty/lib
+[submodule "trusty/lk/common"]
+	branch = android17-release
+	path = external/trusty/lk
+	url = ../../trusty/lk/common
+[submodule "trusty/lk/nxp"]
+	branch = android17-release
+	path = trusty/hardware/nxp
+	url = ../../trusty/lk/nxp
+[submodule "trusty/lk/trusty"]
+	branch = android17-release
+	path = trusty/kernel
+	url = ../../trusty/lk/trusty
+[submodule "trusty/user/desktop"]
+	branch = android17-release
+	path = trusty/user/desktop
+	url = ../../trusty/user/desktop
+[submodule "trusty/vendor/google/aosp"]
+	branch = android17-release
+	path = trusty/vendor/google/aosp
+	url = ../../trusty/vendor/google/aosp
