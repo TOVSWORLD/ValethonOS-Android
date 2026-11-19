@@ -110,7 +110,7 @@ int main(void){
             path = Path(directory)
             (path/'probe.c').write_text(source)
             subprocess.run([shutil.which('clang') or 'cc', '-std=c11',
-                            '-fsanitize=address,undefined', '-I',
+                            '-fsanitize=address,undefined','-DFT_ACM_HOST_TEST=1', '-I',
                             str(root/'projects/firetabs-android/diagnostic-usb'),
                             str(path/'probe.c'), '-o', str(path/'probe')], check=True,
                            capture_output=True)
