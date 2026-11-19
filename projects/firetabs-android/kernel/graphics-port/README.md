@@ -1,48 +1,54 @@
 # Douglas graphics/userspace integration
 
-Primary issue: #331. Carries the physically observed display and nine-target
-touch foundations from #329/#330. The owner selected staying in original TWRP
-with the exact current candidate on p5 rather than returning to Android between
-tests. Original rollback remains ready; recovery must remain unchanged.
+Primary issue: #331; implementation/evidence PR #456. The maintained 6.18
+kernel now renders a GPU cube that the owner observed moving and responding
+to taps and dragging. Exact candidate `628a1641...` rejects non-T720/software
+renderers and validates rendered pixels before scanout. USB stayed connected.
+The start prompt was not seen; that UX observation does not invalidate the
+actual interaction or justify another cube-only test.
 
-The next candidate will exercise GPU rendering and visible DRM composition
-with touch interaction. A repeated console banner/grid or driver probe alone
-does not qualify this outcome. It is a preparation toward maintained Android
-graphics/userspace, not an Android setup/home pass.
+[Physical result](../../../../evidence/graphics-source/graphics-interaction-runtime-result.json)
+records observation and recovery separately. This is standalone functional
+GPU rendering, not Android composer, full API conformance, broad stability or
+maintained Android setup/home acceptance. Broader touch qualification remains
+open under #330. Original recovery stays unchanged and exact rollback remains
+available.
 
-Use the pinned ACK6.18 Panfrost driver and existing MT8163 display pipeline.
-The source identifies Mali-T720 at0x13040000 with job/MMU/GPU IRQ227/226/225,
-MFG clock gate, MFG power domain and a fixed1.15V supply. Validate the actual
-prepared DT and source relationships before enabling them. Preserve known
-display, Goodix, watchdog and RAM reservations.
+## Source-backed hardware and runtime
 
-The official Mesa Panfrost documentation currently lists T720 OpenGL ES2.0
-and OpenGL2.1, with no Vulkan. These are userspace-driver limits, not proof of
-tablet support. Pin a maintained Mesa release and compile a coherent Panfrost,
-EGL/GLES2, GBM/libdrm display path. Never count software rendering as hardware
-acceleration. Android EGL/gralloc/composer and platform API compatibility
-remain explicit integration requirements after the rendering path works.
+Mali-T720 uses registers at 0x13040000, job/MMU/GPU IRQs 227/226/225,
+MFG clock gating, fixed 1.15V supply and the source-listed 416MHz parent.
+Both MFG_ASYNC domain6 and nested MFG domain7 must be enabled. The first
+candidate left them disabled; the power driver skipped parent6 and never
+registered GPU domain7. Enabling exactly those two domains preserved the
+observed display MM0, Goodix touch, watchdog and memory configuration.
+[Correction evidence](../../../../evidence/graphics-source/power-domain-correction.json).
 
-Preparation order:
+The pinned runtime is Mesa26.2.7/libdrm2.4.133 with Panfrost, EGL/GLES2,
+GBM and MediaTek DRM/KMS. The enforcing policy retains storage/input write,
+PID1 fork and executable-memory denials. The first-tap program draws one
+waiting frame, permits up to15minutes arrival, then starts five minutes of
+animation/input on first valid touch. Hardware interaction was observed with
+USB connected; portable disconnected operation is not claimed as tested.
 
-1. Build Panfrost and required DRM dependencies into the tested kernel.
-2. Match GPU DT, clock, power, regulator and OPP contracts to pinned sources.
-3. Build the renderer/runtime and enforcing policy; verify dynamic dependencies,
-   required threading, device access and package memory/size limits.
-4. Qualify the exact candidate offline and in VMs. Existing TWRP installation
-   must expect the exact retained graphics predecessor, not assume original p5 is installed.
-5. Load one qualified candidate and show actual animated GPU rendering with
-   touch response. Keep an exact original-image rollback available.
+## Next outcome: Android graphics/userspace
 
-The first physical graphics attempt displayed GBM failure digit2. The exact
-failed DT left MFG_ASYNC6 and its MFG7 child disabled, preventing registration
-of the referenced domain7. Enable both domains while preserving active MM0;
-see `evidence/graphics-source/power-domain-correction.json`. The corrected
-candidate is not yet hardware-qualified.
-No new logging proof gate, userdata access, recovery write or automatic trial
-retry is selected.
+Carry this working kernel/display/touch/GPU into the existing Android
+integration outcome, toward issue333's maintained Android setup/home milestone:
+
+1. Pin Android source/device configuration, ABI/Binder, firmware/HAL and update
+   inputs against the existing maintained-kernel/source audit.
+2. Integrate allocator/composer/EGL with this DRM/Panfrost display path, plus
+   Android init/adbd and enforcing SELinux. Resolve the documented T720 GLES2
+   limitation against the actual Android render path and declared API scope.
+3. Build reproducible integrated artifacts and a concrete storage/rollback plan,
+   then qualify one attended setup/home candidate.
+
+Do not count this standalone demo as Android compatibility, substitute an old
+Lineage baseline for the maintained platform, or add another logging/cube proof
+gate for observed foundations. Full conformance, release stability, security
+and updates remain explicit requirements.
 
 References: [Mesa Panfrost](https://docs.mesa3d.org/drivers/panfrost.html),
-[Mesa Android build](https://docs.mesa3d.org/android.html),
-`evidence/touch-input-source/touch-runtime-result.json`, and the central
-`docs/development/DOUGLAS-HARDWARE-CONTRACT.md`.
+[Mesa Android build](https://docs.mesa3d.org/android.html), and the central
+[hardware contract](../../../../docs/development/DOUGLAS-HARDWARE-CONTRACT.md).

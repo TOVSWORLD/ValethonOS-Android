@@ -63,9 +63,11 @@
     "android_composer_compatibility_qualified": false
   },
   "remaining": [
-    "Qualify corrected two-domain DT and fresh-identity package",
-    "Run one attended corrected GPU cube/touch test from retained graphics p5",
-    "Qualify accelerated rendering and Android composer/platform integration"
+    "Integrate pinned Android allocator/composer/EGL and platform userspace on the observed kernel foundation",
+    "Qualify supported API/ABI limitations and maintained Android setup/home",
+    "Complete broader release stability and update/security requirements"
   ],
-  "physical_graphics_verified": false
+  "physical_graphics_verified": true,
+  "physical_graphics_verified_scope": "Owner-observed standalone T720 cube animation with tap/drag response; not Android composition or API conformance",
+  "hardware_runtime_receipt": "evidence/graphics-source/graphics-interaction-runtime-result.json"
 }

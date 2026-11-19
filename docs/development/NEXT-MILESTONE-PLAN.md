@@ -1,5 +1,38 @@
 # Next milestone execution plan
 
+## Interactive GPU rendering achieved; recovery return armed — November 19, 2026
+
+Owner confirms cube animation and tap/drag response on exact candidate628a1641...
+This qualifies the standalone functional GPU interaction foundation. USB stayed
+connected; portable unplugged operation was not tested. TAP TO START was not
+seen; do not invent a cause or require another cube test for that UX detail.
+The300second host observation after owner report finished. It is not a measured
+frame-rate/full-duration stability proof; broad stability/API/Android composer
+remain open. Existing kernel/display/touch/GPU should move into Android userspace
+integration toward333 setup/home, not another cube/logging-proof gate.
+
+Original recovery helper armed once after window; owner instructed to unplugUSB,
+hold onlyPower40seconds, release/wait5seconds/reconnect same lab cable. TWRP
+return/p5/p6 verification pending. No Android restore or extra test selected.
+Private active return supervisor77420, out/graphics-source-preparation-1/test-case-3/.
+
+## Animated GPU cube responds to touch; USB stayed connected — November 19, 2026
+
+Owner confirms moving cube responds to taps and dragging. This is observed
+functional animated/touch-controlled GPU rendering on exact candidate628a1641...
+Program rejects non-T720/software renderers and validates first-frame pixels.
+TAP TO START was not seen; record without inferring its disappearance cause.
+Owner explicitly says USB was never unplugged; desk-disconnected operation is
+not qualified and no reconnect trip is required. Owner first-tap report started
+controller's300second observation. No recovery helper is armed yet. Finish the
+window, then arm exactly one original recovery helper before Power instructions;
+verify retained exact interaction p5 and original p6 in original TWRP. No Android
+restoration, automatic test retry or repeated cube/logging-proof gate.
+Do not call full stability/API/Android composer qualified. Next is Android
+userspace/composer integration toward333 setup/home, carrying working hardware
+forward within331. Raw state: out/graphics-source-preparation-1/test-case-3/;
+active controller93075. Signal first-tap-observed-private already created.
+
 ## First-tap desk test installed; waiting for owner tap — November 19, 2026
 
 Owner approved staging and one attended graphics-direct-3 test. Exact selected
