@@ -1,4 +1,35 @@
-# Current milestone — corrected GPU cube test ready; original TWRP retained, November19,2026
+# Current milestone — GPU cube observed; desk interaction test ready, November19,2026
+
+## GPU cube observed; original TWRP verified; desk interaction test ready — November 19, 2026
+
+Owner confirmed purple/orange cube after arriving late. Exact tested program
+rejects non-T720/software renderers and checks rendered pixels before scanout:
+first-frame GPU rendering is observed. Animation/touch/stability are unqualified
+because old demo deliberately idles after90seconds and owner did not watch then.
+Original TWRP3.3.1-0, exact corrected graphics p5 and original p6 are now verified.
+Initial recovery wait expired with zero calls; renewed waiting preserved that
+receipt and one-call limit. Helper subsequently ran once/exited0. All workers
+finished; no Android restoration requested and no more Power steps needed.
+
+Next first-tap candidate628a164112f5c4d09d7c55478b7e57b991933f10eb406945bf1f4502d946a34b
+is qualified offline. TAP TO START waiting frame, up to15minutes arrival with no
+repeated GPU rendering; first valid touch starts five-minute animation/input.
+All hardware DT properties, kernel/libraries/enforcing policy unchanged from
+observed cube. Fresh scope graphics-direct-3 expects exact retained741696e2...
+Both exact-kernel VM modes and all1051 repository tests pass; original-LK,
+partition/RAM checks and fresh-scope guard controls pass. Payload15,007,744B.
+
+Prepared private package/controllers under out/graphics-source-preparation-1/
+{direct-interaction-package-1,test-case-3,first-tap-lab-results}/. No actual next
+owner authorization, private staging, candidate write or boot has run. Next:
+obtain attendance/staging/test approval; install once from existing TWRP; owner
+may disconnect USB after TAP TO START and carry tablet to desk; first tap/report
+starts interaction observation. USB loss does not gate rendering. Reconnect to
+same lab cable before arming recovery helper and requesting restart, avoiding
+an expired helper while owner is away. Return to original TWRP. No logging gate.
+Receipts: evidence/graphics-source/graphics-power-runtime-result.json,
+first-tap-preparation-result.json and direct-interaction-preparation-result.json.
+Android composer/setup/home remain open; do not close331 or broader330.
 
 ## GPU frame confirmed; first-tap demo compiled; recovery pending — November 19, 2026
 

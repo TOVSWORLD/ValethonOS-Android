@@ -66,8 +66,9 @@
   "planned_procedure": "Owner can disconnect USB after startup and carry tablet to desk before first tap; reconnect for recovery",
   "physical_graphics_interaction_verified": false,
   "remaining": [
-    "Finish and verify current original TWRP return",
-    "Prepare fresh scoped exact boot package with retained corrected graphics predecessor",
-    "Run attended interactive test"
-  ]
+    "Obtain attendance/staging/test approval",
+    "Run first-tap desk interaction and verify original TWRP return"
+  ],
+  "qualified_boot_package_receipt": "evidence/graphics-source/direct-interaction-preparation-result.json",
+  "current_original_twrp_return_verified": true
 }
