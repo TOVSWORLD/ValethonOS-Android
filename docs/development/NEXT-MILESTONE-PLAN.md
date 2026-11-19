@@ -1,5 +1,21 @@
 # Next milestone execution plan
 
+## First-tap desk test installed; waiting for owner tap — November 19, 2026
+
+Owner approved staging and one attended graphics-direct-3 test. Exact selected
+TWRP/retained corrected graphics p5/original recovery preflight passed. Candidate
+628a164112f5c4d09d7c55478b7e57b991933f10eb406945bf1f4502d946a34b
+was installed once/full readback verified; original recovery unchanged and RAM
+cleanup verified. One direct boot requested after WATCH NOW. Controller waits
+up to15minutes for owner's first-tap report before starting300second observation.
+Owner may unplug USB after TAP TO START, carry tablet to desk, tap/drag there.
+Do not create first-tap-observed-private until owner confirms actual first tap.
+Screen/prompt/animation/touch reports are pending; no interaction pass claimed.
+No recovery helper is armed; wait for owner to reconnect same lab cable before
+arming one return helper and giving Power instructions. No Android restoration.
+Private case: out/graphics-source-preparation-1/test-case-3/; active controller
+session93075. Previous corrected cube case is fully returned/verified in TWRP.
+
 ## GPU cube observed; original TWRP verified; desk interaction test ready — November 19, 2026
 
 Owner confirmed purple/orange cube after arriving late. Exact tested program

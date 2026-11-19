@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-19",
+  "scope": "Attended first-tap desk graphics test",
+  "candidate_sha256": "628a164112f5c4d09d7c55478b7e57b991933f10eb406945bf1f4502d946a34b",
+  "predecessor_sha256": "741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf",
+  "source_preparation_commit": "341fc1fc62349eff98a1a955042861e21382099e",
+  "qualification_receipt": "evidence/graphics-source/direct-interaction-preparation-result.json",
+  "candidate_writes": 1,
+  "software_test_boot_requests": 1,
+  "full_candidate_readback_verified": true,
+  "original_recovery_unchanged_after_install": true,
+  "ram_staging_cleanup_verified": true,
+  "usb_disconnect_after_prompt_allowed": true,
+  "first_tap_owner_confirmation": false,
+  "interaction_window_seconds": 300,
+  "owner_observation_pending": true,
+  "interaction_qualified": false,
+  "return_to_twrp_verified": false,
+  "return_helper_armed": false,
+  "original_android_restoration_requested": false
+}
