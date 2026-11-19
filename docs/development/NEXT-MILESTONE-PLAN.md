@@ -1,5 +1,28 @@
 # Next milestone execution plan
 
+## Touch grid achieved; remain in TWRP for graphics test — November 18, 2026
+
+Owner confirmed all nine touch panels turned green and that the green grid was
+still displayed after the full five-minute window. One candidate write/full
+readback and one direct boot ran. The original recovery helper ran once/exited0.
+The original-boot restore preflight stopped at a recovery read-size check before
+any write or operation receipt. Subsequent exact bounded full reads verified the
+touch candidate on p5 and unchanged original p6. Owner then explicitly directed:
+"Just work on the next test and load that." Keep original TWRP running and the
+qualified touch candidate on p5; do not reboot to Android or perform the deferred
+original restoration. Original rollback image remains ready. All helper/restore
+workers have stopped. Power-untouched confirmation was not explicitly supplied.
+
+The physical display/touch foundations are achieved. Full pixel-edge accuracy,
+simultaneous contacts and suspend/wake acceptance remain open; do not close#330.
+Next outcome is#331 Android graphics/userspace: source-match Mali-T720 resources,
+Panfrost/Mesa and DRM display composition, build one coherent visible rendering
+candidate, qualify it offline, then use the existing TWRP for its installation.
+Keep current display/touch and original rollback; no repeat touch-only or logging
+proof gate. No next graphics candidate is qualified or loaded yet. Receipt:
+evidence/touch-input-source/touch-runtime-result.json. Private current device and
+execution state: out/touch-input-1/test-case-1/parked-twrp-state-private.json.
+
 ## Touch candidate built; exact-kernel VM checks passed — November 18, 2026
 
 The maintained Goodix kernel build succeeded in GitHub run 44438104081.

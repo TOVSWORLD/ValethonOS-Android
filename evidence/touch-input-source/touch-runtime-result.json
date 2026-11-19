@@ -1,0 +1,33 @@
+{
+  "scope": "One owner-approved direct touch test",
+  "source_commit": "7b1a620310567931a49ab2ccf21fa4855cff8d5c",
+  "physical_touch_grid_passed": true,
+  "owner_confirmed_targets_green": 9,
+  "owner_observed_green_grid_after_five_minute_window": true,
+  "minimum_observation_seconds": 300,
+  "candidate_writes": 1,
+  "candidate_full_readback_verified": true,
+  "direct_boot_requests": 1,
+  "candidate_sha256": "cd53313a70f5471ac5f033f145340f1c0766a797e41cace1aee3f248561d44af",
+  "kernel_image_sha256": "d93f2ed5dad7f60abe032fef48fa05f93901bb493a02211d399c7d5b779ec27f",
+  "policy_sha256": "86a082ac70ddc1778aa6242b364c3d6c24620321196bd92952f5fcedd745252c",
+  "raw_input_events_stored": false,
+  "usb_logging_qualified": false,
+  "power_untouched_confirmation": "not explicitly supplied",
+  "original_recovery_helper_launches": 1,
+  "original_recovery_helper_returncode": 0,
+  "recovery_sha256": "3c9bafcbfc4a0b12cb1a3f372af0cfd49ffec5b3e01a0b070465b49bd8435f11",
+  "recovery_unchanged_verified": true,
+  "original_boot_restore_writes": 0,
+  "original_boot_restore_deferred_by_owner": true,
+  "current_state": "Verified original TWRP, exact touch candidate retained on p5, original rollback image ready",
+  "workers_active": false,
+  "failed_restore_preflight": "Recovery partition read size mismatch before operation/write receipt; no restore write. Subsequent bounded full reads verified candidate p5 and unchanged original p6. Owner then selected staying in TWRP for next test.",
+  "initial_staging_failure": "Builder source checksum input missing; staged unchanged source and passed preflight before sole candidate write.",
+  "remaining_touch_acceptance": [
+    "Pixel-edge accuracy",
+    "Simultaneous-contact qualification",
+    "Suspend/wake reliability"
+  ],
+  "next_outcome": "Android graphics and userspace integration; carry forward observed display/touch foundation"
+}
