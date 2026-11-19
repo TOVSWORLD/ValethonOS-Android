@@ -5328,7 +5328,7 @@ The next decision is whether to change the boot/observability approach or end th
 modern-kernel port effort. This failed capture is not proof that the hardware is
 incapable of a port. No further physical test is selected.
 
-[Actual trial receipt](../../evidence/independent-recovery/loader-copy-control3-trial-result.json).
+[Actual trial receipt](../evidence/independent-recovery/loader-copy-control3-trial-result.json).
 
 ## New investigation: Linux-to-Linux handoff, November 7, 2026
 
@@ -5367,7 +5367,7 @@ also explicitly requires custom TF-A/U-Boot/OP-TEE for its Echo Dot target; it i
 not a drop-in douglas firmware alternative. Do not transplant its firmware or
 reserved memory to this tablet.
 
-[Read-only source/compatibility receipt](../../evidence/independent-recovery/recovery-linux-kexec-route.json).
+[Read-only source/compatibility receipt](../evidence/independent-recovery/recovery-linux-kexec-route.json).
 
 ## Linux-to-Linux stage1 probe built — November 7, 2026
 
@@ -5400,8 +5400,8 @@ approved boot of existing LineageOS and one probe load/unload, then a matched ke
 port using the observed compatibility report. The initial probe cannot establish
 DMA shutdown, stopped secondary CPUs, firmware entry or target logging.
 
-[Build receipt](../../evidence/independent-recovery/kexec-probe-build-result.json).
-[Source and concrete review](../../projects/firetabs-android/kexec-probe/README.md).
+[Build receipt](../evidence/independent-recovery/kexec-probe-build-result.json).
+[Source and concrete review](../projects/firetabs-android/kexec-probe/README.md).
 
 ## Actual Linux compatibility probe succeeded — November 8, 2026
 
@@ -5427,7 +5427,7 @@ Next source stage: adapt a matched4.9 kexec loader, keeping execution disabled
 until allocation, CPU/DMA shutdown and entry contracts are independently reviewed.
 Do not reuse the probe approval for a handoff or an additional module execution.
 
-[Actual hardware receipt](../../evidence/independent-recovery/kexec-probe-runtime-result.json).
+[Actual hardware receipt](../evidence/independent-recovery/kexec-probe-runtime-result.json).
 
 ## Prepare-only kexec loader port built — November 8, 2026
 
@@ -5458,8 +5458,8 @@ a direct Linux Image branch therefore needs the appropriate DTB-carrying entry
 trampoline. CPU parking, EL/HVC behavior, device/DMA shutdown and clean filesystem
 quiescing still require explicit handoff contracts. No new jump binary selected.
 
-[Build review receipt](../../evidence/independent-recovery/kexec-stage-build-result.json).
-[Exact module/client/procedure](../../projects/firetabs-android/kexec-stage/README.md).
+[Build review receipt](../evidence/independent-recovery/kexec-stage-build-result.json).
+[Exact module/client/procedure](../projects/firetabs-android/kexec-stage/README.md).
 
 ## Prepare-only staging passed on hardware — November 9, 2026
 
@@ -5488,7 +5488,7 @@ upstream false stuck-CPU stub. DTB/x0 trampoline, Image placement, cache/MMU,
 device/DMA shutdown and filesystem quiescing remain open. Source ADB ends at
 handoff; no target early/failure log or retention route is yet qualified.
 
-[Actual hardware staging receipt](../../evidence/independent-recovery/kexec-stage-runtime-result.json).
+[Actual hardware staging receipt](../evidence/independent-recovery/kexec-stage-runtime-result.json).
 
 ## Linux Image entry candidate implemented — November 9, 2026
 
@@ -5521,8 +5521,8 @@ relocation and preserve source-memory ownership until every secondary is proven
 released. Cache/MMU/EL, DMA/device/filesystem shutdown and independent target
 logging/failure retrieval remain open. No CPU hotplug, firmware call or jump ran.
 
-[Entry build/validation receipt](../../evidence/independent-recovery/kexec-entry-build-result.json).
-[Live CPU/source audit](../../evidence/independent-recovery/kexec-cpu-shutdown-audit.json).
+[Entry build/validation receipt](../evidence/independent-recovery/kexec-entry-build-result.json).
+[Live CPU/source audit](../evidence/independent-recovery/kexec-cpu-shutdown-audit.json).
 
 ## Bounded MT8163 secondary-off candidate compiled — November 9, 2026
 
@@ -5558,7 +5558,7 @@ or clock callback, nor bound the entire generic cpu_down lifecycle. A working
 replacement source-kernel build/qualification remains necessary; this patch is not
 an approved runtime module for the existing kernel. No kernel jump admitted.
 
-[Compile/source/fault-test receipt](../../evidence/independent-recovery/kexec-cpu-off-build-result.json).
+[Compile/source/fault-test receipt](../evidence/independent-recovery/kexec-cpu-off-build-result.json).
 
 ## Legacy firmware affinity prerequisite — November 9, 2026
 
@@ -5613,7 +5613,7 @@ call could require a physical power cycle; a host timeout cannot interrupt it.
 Query success alone does not prove secondary shutdown, retained logs, independent
 recovery or handoff. Those gates remain open under #346/#348.
 
-[Exact build/emulation/preflight receipt](../../evidence/independent-recovery/kexec-affinity-development-result.json).
+[Exact build/emulation/preflight receipt](../evidence/independent-recovery/kexec-affinity-development-result.json).
 
 ## Live affinity query accepted — November 9, 2026
 
@@ -5626,7 +5626,7 @@ on the installed firmware; it does not qualify active secondary shutdown or
 power-controller readback. Module unloaded, RAM file removed and normal UID2000
 ADB shell restored. No CPU hotplug, reboot, flash or jump. Approval consumed;
 no automatic rerun. Private source logs archived with hashes in the sanitized
-[kernel query runtime receipt](../../evidence/independent-recovery/kexec-affinity-runtime-result.json).
+[kernel query runtime receipt](../evidence/independent-recovery/kexec-affinity-runtime-result.json).
 
 Next source integration is the corrected legacy affinity binding, followed by
 CPU-off/final-gate integration and recovery/logging contracts. Attempt to transfer
@@ -5666,7 +5666,7 @@ build; that combined build did not execute. Await explicit approval for the
 combined offline build. Hotplug serialization/final gate wiring, partial-shutdown
 recovery and independent target/failure logging #348 remain open.
 
-[Binding compile and validation receipt](../../evidence/independent-recovery/kexec-legacy-affinity-build-result.json).
+[Binding compile and validation receipt](../evidence/independent-recovery/kexec-legacy-affinity-build-result.json).
 
 ## Combined source kernel Image built and retained — November 9, 2026
 
@@ -5709,7 +5709,7 @@ has no handoff caller. Full compilation alone cannot veto generic restart paths 
 admit this Image to a hardware boot/handoff test. Independent failed-load recovery
 remains open under #346.
 
-[Full build, failed-attempt trail and retained-artifact receipt](../../evidence/independent-recovery/kexec-source-integration-build-result.json).
+[Full build, failed-attempt trail and retained-artifact receipt](../evidence/independent-recovery/kexec-source-integration-build-result.json).
 
 ## Existing-kernel console survives orderly reboot — November 10, 2026
 
@@ -5730,4 +5730,4 @@ under serialization, partial-shutdown recovery/readout, and preservation of this
 existing writer region in source/target RAM layouts alongside DMA/cache/MMU/EL
 and early logging contracts. No new hardware test selected by this result.
 
-[Actual retained-marker result](../../evidence/independent-recovery/pstore-warm-reboot-runtime-result.json).
+[Actual retained-marker result](../evidence/independent-recovery/pstore-warm-reboot-runtime-result.json).
