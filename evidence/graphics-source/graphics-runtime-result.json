@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-19",
+  "scope": "First attended direct graphics test",
+  "candidate_sha256": "a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042",
+  "candidate_writes": 1,
+  "test_boot_requests": 1,
+  "full_candidate_readback_verified": true,
+  "original_recovery_unchanged_after_install": true,
+  "ram_staging_cleanup_verified": true,
+  "observation_seconds": 300,
+  "owner_observation": "Orange screen, large 2, error text",
+  "failure_digit": 2,
+  "failure_stage": "GBM device creation or surface setup",
+  "cube_observed": false,
+  "gpu_rendering_qualified": false,
+  "power_untouched_confirmation": null,
+  "return_to_twrp_verified": true,
+  "original_android_restoration_requested": false,
+  "previous_install_failure": {
+    "partition_write_started": false,
+    "reason": "Exact read guard omitted installer RAM staging file",
+    "receipt_preserved": true,
+    "fix_commit": "4208130dc73785822905da68eb1a271c5850df2c",
+    "graphics_tests_passed": 9
+  },
+  "next": "Narrow GBM device-versus-surface failure and check exact MediaTek/Panfrost discovery and GPU probe; preserve kernel/display/touch; no logging-proof gate",
+  "original_recovery_unchanged_after_return": true,
+  "retained_graphics_image_verified_after_return": true,
+  "return_helper_launches": 1,
+  "return_helper_exit_code": 0,
+  "active_workers": 0
+}

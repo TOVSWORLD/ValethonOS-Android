@@ -1,5 +1,38 @@
 # Next milestone execution plan
 
+## Graphics test complete; original TWRP verified — November 19, 2026
+
+One attended direct graphics attempt displayed the orange failure screen with
+large2 (GBM device creation/surface setup), as reported by the owner. No cube or
+accelerated rendering pass. Candidate a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042
+was written once/full-readback verified and booted once. The full five-minute
+window ended; original recovery helper ran once/exited0. Selected original
+TWRP3.3.1-0, retained exact graphics p5 and unchanged original p6 were verified
+with full bounded reads. Original Android restoration remains deferred by owner
+instruction. All observation/return workers ended. Owner may disconnect/move the
+tablet. Power-untouched confirmation remains unknown; do not invent it.
+
+Next: narrow the GBM device-versus-surface return using the exact shipped source;
+check MediaTek-to-Panfrost render-node discovery and the actual GPU probe before
+changing clocks, kernel or policy. Stage2 alone does not identify the cause.
+Keep proven display/touch and original rollback. Any next image needs fresh exact
+qualification and attended execution; no repeat logging-proof gate. Published
+runtime receipt: evidence/graphics-source/graphics-runtime-result.json.
+
+## First physical graphics test stopped at GBM stage 2 — November 19, 2026
+
+Owner observed an orange screen with a large2 and error text. No cube appeared;
+GPU rendering and touch-controlled rendering are not achieved. This maps to GBM
+device creation or surface setup, before EGL/shaders. Exact Mesa source shows
+MediaTek display GBM creation must discover a compatible Panfrost render node.
+Do not claim which subcall failed until evidence distinguishes them. Preserve
+working display/touch and unchanged graphics kernel while narrowing this path.
+One candidate write/full readback and one boot ran. Full five-minute window
+finished. Existing USB receiver selected/opened endpoint but retained zero bytes;
+that does not negate the observed stage or create a logging-proof gate.
+Original recovery return helper is armed for one call. Owner was instructed to
+restart/reconnect; return to TWRP is pending, no Android restoration requested.
+
 ## Graphics candidate installed; attended boot running — November 19, 2026
 
 One graphics candidate write completed and its full16MiB readback matched
