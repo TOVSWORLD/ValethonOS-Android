@@ -1,5 +1,26 @@
 # Next milestone execution plan
 
+## Touch/input source integration started — November18,2026
+
+Work moved to codex/issue-330-touch-input, stacked on observed display foundation.
+Read-only restored-OS metadata confirms Goodix-TS at I2C0x5d/goodix,gt9xx and
+input goodix-ts; capability axes800/1280, direct multitouch. Cached186-byte
+configuration exactly matches pinned public hvt groups0-3. Sensor/chip ID is not
+claimed from the all-zero live-read section; it is unusable evidence.
+Pinned working driver/DTS and maintained Goodix source retained. GPIO35 maps to
+EINT46 (not IRQ35); resetGPIO46, falling edge from profile. Working driver sets
+VGP2 analog3.0V; IO1.8V. Preserve source profile, not guessed coordinates/config.
+Minimal maintained driver change adds legacy goodix,gt9xx compatible alias; its
+runtime chip-ID selection remains. Dedicated touch-provider build keeps observed
+display setup and makes GOODIX builtin, retaining Goodix/watchdog object evidence.
+Public configuration generator reproduces the known cached186-byte profile and
+rejects changes. All1035 tests pass; no new Image build or touch hardware pass yet.
+Next run exact touch kernel build while preparing DT/supplies/EINT, enforcing
+read-only evdev access and large visual3x3 feedback. Handle inherited watchdog
+alongside this test; no new logging proof gate or physical test authorized.
+Original Android remains restored; raw working-OS metadata private in out/touch-input-1.
+Source contract: projects/firetabs-android/kernel/touch-port/contract.json.
+
 ## Visible display/backlight achieved; touch/input next — November18,2026
 
 Corrected direct scope2 ran once after explicit staging/test approval. Owner

@@ -1,0 +1,25 @@
+{
+  "scope": "Pinned public working and maintained Goodix sources; no touch hardware pass",
+  "sources": [
+    {
+      "path": "evidence/touch-input-source/working-gt9xx.c",
+      "sha256": "b37d3527cd6590f7b4ff579bcac6808b4c6fdde36aae11ad3be2972a22e7e995",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/input/touchscreen/mediatek/gt9xx/gt9xx.c"
+    },
+    {
+      "path": "evidence/touch-input-source/working-gt9xx.h",
+      "sha256": "3b983aa2a955318e61e0c15e99cc4bc6a80f75c96378d241e250581ae5a71d24",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/input/touchscreen/mediatek/gt9xx/gt9xx.h"
+    },
+    {
+      "path": "evidence/touch-input-source/working-douglas_hvt.dts",
+      "sha256": "e73ec59d57732ec7d9a9d9b2b036e0e38b261f8d2304097c84e7f625bf8cd579",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/arch/arm64/boot/dts/mediatek/douglas_hvt.dts"
+    },
+    {
+      "path": "evidence/kernel-audit/ack/drivers/input/touchscreen/goodix.c",
+      "sha256": "03379465564da73d041e207c9cd83b2466085595a51f42682f87d64968a275dc",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/input/touchscreen/goodix.c"
+    }
+  ]
+}

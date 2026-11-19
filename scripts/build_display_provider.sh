@@ -5,12 +5,22 @@ set -euo pipefail
 bash scripts/build_ack_baseline.sh first-draft
 readonly root="$PWD/work/ack-baseline"
 readonly output="$root/output"
+readonly touch_build="${VALETHON_TOUCH_BUILD:-0}"
+[[ "$touch_build" = 0 || "$touch_build" = 1 ]] || exit 2
 python3 scripts/apply_display_port.py "$root/source"
 python3 scripts/install_douglas_tpv_panel.py "$root/source"
+if [[ "$touch_build" = 1 ]]; then
+  python3 scripts/apply_goodix_board_port.py "$root/source"
+  "$root/source/scripts/config" --file "$output/.config" --enable TOUCHSCREEN_GOODIX
+fi
 for symbol in DRM_PANEL_AMAZON_DOUGLAS_TPV BACKLIGHT_CLASS_DEVICE BACKLIGHT_PWM BACKLIGHT_LP855X I2C_MT65XX FRAMEBUFFER_CONSOLE VT VT_CONSOLE LOGO LOGO_LINUX_CLUT224 FONT_8x16; do
   "$root/source/scripts/config" --file "$output/.config" --enable "$symbol"
 done
 make -C "$root/source" O="$output" ARCH=arm64 LLVM=-18 olddefconfig
+if [[ "$touch_build" = 1 ]]; then
+  grep -qx CONFIG_TOUCHSCREEN_GOODIX=y "$output/.config"
+  grep -qx CONFIG_INPUT_EVDEV=y "$output/.config"
+fi
 for symbol in DRM_MEDIATEK DRM_PANEL_AMAZON_DOUGLAS_TPV BACKLIGHT_PWM BACKLIGHT_LP855X I2C_MT65XX FRAMEBUFFER_CONSOLE VT_CONSOLE; do
   grep -qx "CONFIG_${symbol}=y" "$output/.config"
 done
@@ -26,7 +36,10 @@ from pathlib import Path
 import hashlib,json
 root=Path('work/ack-baseline');output=root/'output';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 artifacts=['arch/arm64/boot/Image','vmlinux','System.map','.config','drivers/gpu/drm/mediatek/mtk_drm_drv.o','drivers/gpu/drm/mediatek/mtk_disp_gamma.o','drivers/soc/mediatek/mtk-mutex.o','drivers/gpu/drm/panel/panel-amazon-douglas-tpv.o','drivers/video/backlight/lp855x_bl.o','drivers/video/backlight/pwm_bl.o']
+touch=__import__('os').environ.get('VALETHON_TOUCH_BUILD','0')=='1'
+if touch:artifacts+=['drivers/input/touchscreen/goodix.o','drivers/watchdog/mtk_wdt.o']
 result={'scope':'Full maintained kernel with MT8163 display pipeline and TPV panel/display-PWM backlight support; no hardware qualification','ack_revision':'d9318bdb4c34e8b2d997b4f67ced56b120b22b87','hardware_execution':False,'display_dt_enabled':False,'physical_execution_admitted':False,'artifacts':{n:{'bytes':(output/n).stat().st_size,'sha256':sha(output/n)} for n in artifacts}}
+result['builtin_goodix_touch_support']=touch
 (root/'display-build-result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
 PY
 echo MT8163_DISPLAY_PROVIDER_IMAGE_COMPLETE_RUNTIME_UNQUALIFIED
