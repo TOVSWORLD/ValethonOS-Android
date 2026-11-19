@@ -21,7 +21,10 @@ def fixture():
                  'power-domains': cells(3, 7), 'mali-supply': cells(4), 'operating-points-v2': cells(5)},
         '/mfg': {'compatible': string('mediatek,mt8163-mfgcfg'), 'phandle': cells(1), 'reg': cells(0, 0x13000000, 0, 0x1000)},
         '/top': {'compatible': string('mediatek,mt8163-topckgen'), 'phandle': cells(2)},
-        '/spm': {'phandle': cells(3)},
+        '/spm': {'phandle': cells(3), 'compatible': string('mediatek,mt8163-power-controller')},
+        '/spm/power-domain@6': {'reg':cells(6),'#power-domain-cells':cells(1),'status':string('disabled')},
+        '/spm/power-domain@6/power-domain@7': {'reg':cells(7),'#power-domain-cells':cells(0),'status':string('disabled')},
+        '/spm/power-domain@0': {'reg':cells(0),'status':string('okay')},
         '/supply': {'compatible': string('regulator-fixed'), 'phandle': cells(4),
                     'regulator-min-microvolt': cells(1150000), 'regulator-max-microvolt': cells(1150000)},
         '/opps': {'phandle': cells(5)}, '/opps/416': {'opp-hz': cells(0, 416000000), 'opp-microvolt': cells(1150000)},
@@ -49,3 +52,15 @@ class GraphicsDT(unittest.TestCase):
             with self.assertRaises(ValueError): plan(tree, config)
         tree, config = fixture()
         with self.assertRaises(ValueError): plan(tree, config.replace('CONFIG_DRM_PANFROST=y', 'CONFIG_DRM_PANFROST=m'))
+
+    def test_both_gpu_domains_enabled_and_display_domain_preserved(self):
+        tree,config=fixture();before=deepcopy(tree);resources,edits=plan(tree,config)
+        for key in ['power_domain_async','power_domain_mfg']:
+            self.assertIn(('s',resources[key],'status',['okay']),edits)
+        self.assertEqual([v for _,node,_,v in edits if node=='/spm/power-domain@0'],[])
+        self.assertEqual(tree,before)
+        for missing in ['/spm/power-domain@6','/spm/power-domain@6/power-domain@7']:
+            broken=deepcopy(tree);del broken[missing]
+            with self.assertRaises(ValueError):plan(broken,config)
+        broken=deepcopy(tree);child=broken.pop('/spm/power-domain@6/power-domain@7');broken['/spm/power-domain@7']=child
+        with self.assertRaises(ValueError):plan(broken,config)

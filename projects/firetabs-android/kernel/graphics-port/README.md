@@ -2,7 +2,7 @@
 
 Primary issue: #331. Carries the physically observed display and nine-target
 touch foundations from #329/#330. The owner selected staying in original TWRP
-with the exact touch candidate on p5 rather than returning to Android between
+with the exact current candidate on p5 rather than returning to Android between
 tests. Original rollback remains ready; recovery must remain unchanged.
 
 The next candidate will exercise GPU rendering and visible DRM composition
@@ -30,11 +30,15 @@ Preparation order:
 3. Build the renderer/runtime and enforcing policy; verify dynamic dependencies,
    required threading, device access and package memory/size limits.
 4. Qualify the exact candidate offline and in VMs. Existing TWRP installation
-   must expect the retained touch image, not assume original p5 is installed.
+   must expect the exact retained graphics predecessor, not assume original p5 is installed.
 5. Load one qualified candidate and show actual animated GPU rendering with
    touch response. Keep an exact original-image rollback available.
 
-No graphics candidate is hardware-qualified or loaded by this document.
+The first physical graphics attempt displayed GBM failure digit2. The exact
+failed DT left MFG_ASYNC6 and its MFG7 child disabled, preventing registration
+of the referenced domain7. Enable both domains while preserving active MM0;
+see `evidence/graphics-source/power-domain-correction.json`. The corrected
+candidate is not yet hardware-qualified.
 No new logging proof gate, userdata access, recovery write or automatic trial
 retry is selected.
 

@@ -40,6 +40,18 @@ def plan(tree, config):
         raise ValueError('Source-backed fixed GPU supply required')
     for resource in [top, spm]:
         if raw(tree[resource].get('status', '')) == b'disabled\0': raise ValueError('Existing GPU core supplier is disabled')
+    if spm != unique('mediatek,mt8163-power-controller'):
+        raise ValueError('MT8163 power provider required')
+    parents = [n for n,v in tree.items() if n.rsplit('/',1)[0] == spm and cells(v.get('reg','')) == [6]]
+    if len(parents) != 1: raise ValueError('Unique MFG_ASYNC domain6 required')
+    async_domain = parents[0]
+    children = [n for n,v in tree.items() if n.rsplit('/',1)[0] == async_domain and cells(v.get('reg','')) == [7]]
+    if len(children) != 1: raise ValueError('MFG domain7 must be child of MFG_ASYNC6')
+    mfg_domain = children[0]
+    for domain,count in [(async_domain,1),(mfg_domain,0)]:
+        if (cells(tree[domain].get('#power-domain-cells','')) != [count]
+                or raw(tree[domain].get('status','')) != b'disabled\0'):
+            raise ValueError('Exact inherited disabled GPU power hierarchy required')
     opp = cells(p.get('operating-points-v2', ''))
     if len(opp) != 1: raise ValueError('Original donor OPP table required')
     table = provider(opp[0]); entries = [v for n, v in tree.items() if n.startswith(table+'/')]
@@ -47,9 +59,10 @@ def plan(tree, config):
         raise ValueError('Working source416MHz/1.15V point required')
     if 'assigned-clock-rates' in p: raise ValueError('Unexpected GPU PLL rate assignment')
     edits = [('s', gpu, 'status', ['okay']), ('s', gate, 'status', ['okay']),
-             ('s', regulator, 'status', ['okay']), ('x', gpu, 'assigned-clock-parents', [assigned[0], 9]),
+             ('s', regulator, 'status', ['okay']),
+             ('s', async_domain, 'status', ['okay']), ('s', mfg_domain, 'status', ['okay']), ('x', gpu, 'assigned-clock-parents', [assigned[0], 9]),
              ('delete', gpu, 'operating-points-v2', [])]
-    return {'gpu': gpu, 'clock_gate': gate, 'topckgen': top, 'power_provider': spm, 'supply': regulator}, edits
+    return {'gpu': gpu, 'clock_gate': gate, 'topckgen': top, 'power_provider': spm, 'power_domain_async': async_domain, 'power_domain_mfg': mfg_domain, 'supply': regulator}, edits
 
 
 def preview(source, config, output, fdtget, fdtput):
@@ -69,7 +82,7 @@ def preview(source, config, output, fdtget, fdtput):
               'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(), 'dtb_sha256': hashlib.sha256(dt.read_bytes()).hexdigest(),
               'resources': resources, 'display_touch_memory_unchanged': True, 'gpu_dvfs_enabled': False,
               'gpu_clock_parent': 'CLK_TOP_UNIV_416M', 'source_rate_hz': 416000000,
-              'hardware_rate_measured': False, 'gpu_supply_microvolts': 1150000}
+              'hardware_rate_measured': False, 'enabled_gpu_power_domain_ids': [6,7], 'gpu_supply_microvolts': 1150000}
     (output/'report.json').write_text(json.dumps(report, indent=2)+'\n'); return report
 
 

@@ -1,0 +1,124 @@
+{
+  "kernel_image_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+  "kernel_build_receipt": "evidence/graphics-source/kernel-build-result.json",
+  "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+  "policy_negative_controls": {
+    "enforcement_toggle": true,
+    "policy_reload": true,
+    "block_read": true,
+    "reboot_capability": true,
+    "pid1_fork": true,
+    "pid1_domain_escape": true,
+    "block_write": true,
+    "block_ioctl": true,
+    "block_create": true,
+    "block_relabel": true,
+    "other_block_open": true,
+    "input_write": true,
+    "input_ioctl": true,
+    "input_create": true,
+    "input_relabel": true,
+    "input_block_open": true,
+    "graphics_memory_execute": true,
+    "graphics_node_create": true,
+    "graphics_node_relabel": true,
+    "graphics_block_open": true
+  },
+  "partition_bytes": 16777216,
+  "ramdisk_address": "0x46000000",
+  "owner_selected_stay_in_twrp": true,
+  "acceptance": "Colored hardware-rendered cube rotates and moves with touch; other/software renderers rejected",
+  "readable_failure_stage_digits": {
+    "1": "Display discovery",
+    "2": "GBM buffers",
+    "3": "EGL initialization",
+    "4": "T720 renderer identity",
+    "5": "GPU shader compilation",
+    "6": "Touch input",
+    "7": "GPU rendering and scanout"
+  },
+  "date": "2026-11-19",
+  "scope": "Qualified offline two-domain graphics correction; hardware test pending",
+  "ready_for_attended_test": true,
+  "authorization_scope": "graphics-direct-2",
+  "candidate_sha256": "741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf",
+  "payload_bytes": 15007744,
+  "expected_current_boot_sha256": "a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042",
+  "current_state": "Verified original TWRP with exact previous graphics image on p5; original recovery unchanged; rollback ready",
+  "physical_graphics_verified": false,
+  "hardware_property_changes": [
+    [
+      "/soc/syscon@10006000/power-controller/power-domain@6",
+      "status"
+    ],
+    [
+      "/soc/syscon@10006000/power-controller/power-domain@6/power-domain@7",
+      "status"
+    ]
+  ],
+  "kernel_renderer_libraries_policy_unchanged": true,
+  "physical_archive": {
+    "bytes": 5642088,
+    "sha256": "5ada53c77a52c3cf97d1c256f2803424e6659c126a77b6097005d989ea86fca5",
+    "unpacked_bytes": 30211072,
+    "unpacked_sha256": "8cff88cbc28fd2412e1d2f428f1ea4e4b997939c1b6265b07bfde7ceb9623e0e",
+    "compression": "xz-lzma2-8m-crc32"
+  },
+  "vm_archive": {
+    "bytes": 5637804,
+    "sha256": "ec85eb93d48bfedc8e8220a99f7cecc3ea207cb49c9e34eb45508badb79ba7c8",
+    "unpacked_bytes": 30198272,
+    "unpacked_sha256": "0b6039d33d686c12482a1763dcd55e67874882d979b344d463ebbe9d9e8ae8d0",
+    "compression": "xz-lzma2-8m-crc32"
+  },
+  "vm_reports": [
+    {
+      "scope": "VM graphics loader/policy only; no physical renderer qualification",
+      "passed": true,
+      "failure": null,
+      "kernel_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+      "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+      "component_report_sha256": "a78a5ca5bba2cf62f40ce0e31cd8d9e78757b51bdc3a6db2572b4b7af40c1296",
+      "vm_archive_sha256": "ec85eb93d48bfedc8e8220a99f7cecc3ea207cb49c9e34eb45508badb79ba7c8",
+      "virtualization": "off",
+      "vm_only": true,
+      "network_attached": false,
+      "physical_graphics_verified": false,
+      "boot_log_sha256": "8eca2c277870c27bcbae9842ed1ea87470204b3712262a3c798f76975b481a40",
+      "elapsed_seconds": 12.372
+    },
+    {
+      "scope": "VM graphics loader/policy only; no physical renderer qualification",
+      "passed": true,
+      "failure": null,
+      "kernel_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+      "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+      "component_report_sha256": "a78a5ca5bba2cf62f40ce0e31cd8d9e78757b51bdc3a6db2572b4b7af40c1296",
+      "vm_archive_sha256": "ec85eb93d48bfedc8e8220a99f7cecc3ea207cb49c9e34eb45508badb79ba7c8",
+      "virtualization": "on",
+      "vm_only": true,
+      "network_attached": false,
+      "physical_graphics_verified": false,
+      "boot_log_sha256": "1e853a5247e0fefae17463d511604a133f928fb70452078602afd25b84df41f7",
+      "elapsed_seconds": 11.978
+    }
+  ],
+  "repository_tests_passed": 1051,
+  "original_loader_static_audit_passed": true,
+  "compressed_kernel_staging_and_all_reservations_checked": true,
+  "fresh_test_identity": true,
+  "source_correction_receipt": "evidence/graphics-source/power-domain-correction.json",
+  "source_sha256": {
+    "scripts/graphics_dtb_profile.py": "5d739b5124f3fbe395f87656b13ed449f672ebcf77039c9485317735aec2e656",
+    "scripts/graphics_direct_device.py": "73c6a98b14f5450480eadb67d5e7eb375b6c6e9f3d0d3edb70a330929fc59010",
+    "scripts/prepare_graphics_direct_boot.py": "9d5bdbb583acfb2fd3f6dbda993b0cc6aee79ee0fb8bdc6b8b4a6feec60c0d45"
+  },
+  "offline_guard_controls": {
+    "qualified_candidate_with_disposable_fixture_accepted": true,
+    "tablet_commands_executed": false,
+    "consumed_graphics_scope_rejected": true,
+    "incorrect_predecessor_rejected": true,
+    "unapproved_fixture_rejected": true,
+    "missing_authorization_rejected": true
+  }
+}

@@ -1,6 +1,6 @@
 {
   "scope": "Graphics source/preparation contract; no device admission",
-  "predecessor_runtime": "evidence/touch-input-source/touch-runtime-result.json",
+  "predecessor_runtime": "evidence/graphics-source/graphics-runtime-result.json",
   "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
   "gpu": {
     "compatible": [
@@ -22,7 +22,21 @@
     "candidate_clock_parent": "CLK_TOP_UNIV_416M",
     "clock_parent_id": 9,
     "opp_table_to_detach_for_first_fixed_rate_candidate": true,
-    "clock_policy_reason": "The original donor assigns MMPLL and dynamic OPP changes can propagate clock rates. Keep the tested display clocks intact; first candidate uses the source-listed416MHz fixed parent and no GPU DVFS. This candidate choice is not hardware-qualified."
+    "clock_policy_reason": "The original donor assigns MMPLL and dynamic OPP changes can propagate clock rates. Keep the tested display clocks intact; first candidate uses the source-listed416MHz fixed parent and no GPU DVFS. This candidate choice is not hardware-qualified.",
+    "power_domain_hierarchy": [
+      {
+        "id": 6,
+        "name": "MFG_ASYNC",
+        "parent": "power-controller",
+        "required_status": "okay"
+      },
+      {
+        "id": 7,
+        "name": "MFG",
+        "parent": 6,
+        "required_status": "okay"
+      }
+    ]
   },
   "kernel_builtin": [
     "DRM_PANFROST",
@@ -49,12 +63,9 @@
     "android_composer_compatibility_qualified": false
   },
   "remaining": [
-    "Complete exact kernel build and artifact verification",
-    "Qualify fixed-clock GPU DT against sources",
-    "Build renderer and coherent dynamic runtime dependencies",
-    "Qualify enforcing graphics/thread/device policy and actual package size/memory",
-    "Qualify exact candidate offline and in VM",
-    "Replace retained touch candidate from existing TWRP and run one visible rendering/touch test"
+    "Qualify corrected two-domain DT and fresh-identity package",
+    "Run one attended corrected GPU cube/touch test from retained graphics p5",
+    "Qualify accelerated rendering and Android composer/platform integration"
   ],
   "physical_graphics_verified": false
 }

@@ -1,5 +1,37 @@
 # Douglas hardware and kernel implementation contract
 
+## GPU power-domain correction qualified; next attended test ready — November 19, 2026
+
+The failed graphics DT enabled GPU but left MFG_ASYNC6 and nested MFG7 disabled.
+Pinned mtk-pm-domains.c scpsys_probe iterates available top-level children, so
+it skips6 and never registers its7 child requested by GPU. This is a concrete
+source-established omission consistent with GBM failure2, not proof that no
+additional faults exist. The corrected preview enables just those two domains.
+Direct comparison with the failed candidate confirms exactly two hardware
+property changes; display MM0, touch, memory and every other hardware property
+are unchanged. The exact kernel, renderer, dynamic libraries and enforcing
+policy are unchanged. Fresh identity; both exact-kernel VM modes pass, all20
+policy denial controls retained, all1051 repository tests pass, original-LK
+roundtrip and RAM/partition placement checks pass. Payload15,007,744B fits16MiB.
+
+Qualified corrected candidate SHA256:
+741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf.
+Fresh scope graphics-direct-2 expects previous graphics p5 a09bbb9f..., never
+touch/original p5. Disposable offline controls accept exact candidate and reject
+consumed graphics scope, wrong predecessor, unapproved or missing authorization.
+No actual next-test owner authorization, staging or tablet command has run.
+Tablet last verified original TWRP with old graphics p5 and unchanged original p6;
+owner may have disconnected/moved it. Original rollback ready; all workers ended.
+
+Next: owner attendance/reconnect, stage corrected package and recovery tools in
+existing SSH lab, preflight exact retained graphics p5 and original recovery,
+install once, say WATCH NOW, test actual rotating T720 cube/touch for one bounded
+window, then return to TWRP. No Android round trip or logging-proof gate.
+Hardware rendering, Android composer/setup/home remain unqualified. Receipts:
+evidence/graphics-source/power-domain-correction.json and
+evidence/graphics-source/direct-power-preparation-result.json. Local exact state:
+out/graphics-source-preparation-1/{direct-power-package-1,power-lab-results}/.
+
 ## Graphics test complete; original TWRP verified — November 19, 2026
 
 One attended direct graphics attempt displayed the orange failure screen with

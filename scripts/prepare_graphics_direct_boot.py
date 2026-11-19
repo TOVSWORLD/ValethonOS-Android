@@ -12,7 +12,8 @@ from prepare_native_jump_bundle import raw
 
 
 def prepare(kernel,touch,display,template,component,policy,vm_off,vm_on,installed_lk,package_lk,output,fdtget,fdtput):
-    checked=verify(kernel,touch,display);receipt=json.loads((ROOT/'evidence/touch-input-source/touch-runtime-result.json').read_text())
+    checked=verify(kernel,touch,display);receipt=json.loads((ROOT/'evidence/touch-input-source/touch-runtime-result.json').read_text()); predecessor=json.loads((ROOT/'evidence/graphics-source/graphics-runtime-result.json').read_text())
+    if predecessor.get('return_to_twrp_verified') is not True: raise ValueError('Verified retained graphics predecessor required')
     if sha((template/'boot-full.img').read_bytes())!=receipt['candidate_sha256']: raise ValueError('Exact physically observed touch package required')
     previous=json.loads((template/'report.json').read_text());source=template/'dt/touch-preview-private.dtb'
     if sha(source.read_bytes())!=previous['dt_sha256']: raise ValueError('Observed touch DT differs')
@@ -55,9 +56,9 @@ def prepare(kernel,touch,display,template,component,policy,vm_off,vm_on,installe
     candidate,final=assemble(image,compressed,bytes(data),rd,json.loads(METADATA.read_text()))
     loader=audit(installed_lk.read_bytes(),package_lk.read_bytes(),candidate,expected_candidate_sha=sha(candidate))
     if loader['candidate']['decoded_sha256']!=checked['image_sha256'] or loader['candidate']['dt_sha256']!=sha(data): raise ValueError('Original loader roundtrip differs')
-    final.update(scope='Offline direct graphics candidate only',authorization_scope='graphics-direct-1',kernel=checked,
+    final.update(scope='Offline direct graphics candidate only',authorization_scope='graphics-direct-2',kernel=checked,
         nonce_sha256=sha(nonce),policy_sha256=sha(policy_bytes),initramfs_sha256=sha(rd),dt_sha256=sha(data),
-        dt_preview=dt_report,loader_static_audit=loader,expected_current_boot_sha256=receipt['candidate_sha256'],
+        dt_preview=dt_report,loader_static_audit=loader,expected_current_boot_sha256=predecessor['candidate_sha256'],
         original_rollback_ready=True,recovery_written=False,automatic_trial_retry=False,
         owner_selected_stay_in_twrp=True,physical_graphics_verified=False,
         acceptance='Actual colored cube rotates with touch movement; non-T720/software renderer is rejected',
