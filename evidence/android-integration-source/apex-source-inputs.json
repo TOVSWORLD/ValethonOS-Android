@@ -1,0 +1,38 @@
+[
+  {
+    "path": "apexd/apexd.cpp",
+    "project_path": "system/apex",
+    "revision": "ce2bb9f710183c864040401d859874b5723e44d8",
+    "url": "https://android.googlesource.com/platform/system/apex/+/ce2bb9f710183c864040401d859874b5723e44d8/apexd/apexd.cpp?format=TEXT",
+    "sha256": "c10e7fc3dcb913b1bb34c8a74cea6a1218d51d038ea3200f1e89d45dbf969c46",
+    "bytes": 141655,
+    "status": "captured"
+  },
+  {
+    "path": "apexd/apexd_loop.cpp",
+    "project_path": "system/apex",
+    "revision": "ce2bb9f710183c864040401d859874b5723e44d8",
+    "url": "https://android.googlesource.com/platform/system/apex/+/ce2bb9f710183c864040401d859874b5723e44d8/apexd/apexd_loop.cpp?format=TEXT",
+    "sha256": "3b7de85c1649b4901945d4625f179f558a09d9063408fb33e38af961ddd6ea4b",
+    "bytes": 25546,
+    "status": "captured"
+  },
+  {
+    "path": "apexd/apexd_verity.cpp",
+    "project_path": "system/apex",
+    "revision": "ce2bb9f710183c864040401d859874b5723e44d8",
+    "url": "https://android.googlesource.com/platform/system/apex/+/ce2bb9f710183c864040401d859874b5723e44d8/apexd/apexd_verity.cpp?format=TEXT",
+    "sha256": "2ec8e499257c7bdaff5bde951ad80e556cbbadb03616896367620654ed000dbb",
+    "bytes": 3497,
+    "status": "captured"
+  },
+  {
+    "path": "apexer/apexer.py",
+    "project_path": "system/apex",
+    "revision": "ce2bb9f710183c864040401d859874b5723e44d8",
+    "url": "https://android.googlesource.com/platform/system/apex/+/ce2bb9f710183c864040401d859874b5723e44d8/apexer/apexer.py?format=TEXT",
+    "sha256": "70d5ce3ab4888929bc1ff6fdb139b329b447998b343d00b50870dac531d81522",
+    "bytes": 35926,
+    "status": "captured"
+  }
+]

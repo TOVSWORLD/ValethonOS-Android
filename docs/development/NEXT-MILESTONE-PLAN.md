@@ -1,20 +1,30 @@
 # Next milestone execution plan
 
-## Android source closure and integration findings — November 19, 2026
+## Bionic graphics compiled; Douglas Android product staged — November 19, 2026
 
-Resolved all 1,087 Android17 projects against superproject d6985d7e...; immutable
-platform manifest and source captures are in projects/firetabs-android/android-integration/
-and evidence/android-integration-source/. No platform checkout or Android build.
-Pinned init requires BinderFS (currently disabled); integrated kernel fragment also
-makes FUSE built-in. ARM32 product path with Binder64 is present. Pinned allocator/
-mapper/composer module names and VINTF versions are captured. AOSP Mesa Soong files
-omit EGL/GBM/Panfrost modules; generation recipe depends on an unmerged converter
-and absent project config. Do not treat the source lock as a completed device product
-or copy the glibc demo libraries into Bionic. Next: source-controlled Bionic graphics
-build integration plus complete Douglas product/init/fstab/policy/package closure.
-Keep achieved hardware; no repeated logging/cube milestone. Infrastructure work and
-provider blockers remain in private GitLab; no operational issue details here.
+The pinned Mesa 26.2.7/libdrm 2.4.133 sources now compile as ARM32 Bionic with
+NDK r30/API34. Four real EGL/GLES/Panfrost runtime libraries passed ARM ELF,
+Android ABI-note, dependency and SONAME checks; generated Soong modules retain
+strict ELF checking. Source scripts, package examples and build-result hashes are
+in scripts/, projects/firetabs-android/android-integration/ and
+evidence/android-integration-source/bionic-graphics-build-result.json.
+This is a graphics library build, not a full Android image or tablet Android boot.
 
+Douglas product/BoardConfig/init/fstab inputs and verified graphics package staged
+successfully in an isolated control tree. Full AOSP build graph is not yet run.
+The candidate builds bounded p14 system plus ramdisk, with vendor/product/system_ext
+co-located and a volatile 256-MiB /data; original userdata/recovery are excluded.
+Pinned RenderEngine has GLES2 fallback; select skiaglthreaded/Ganesh GL and advertise
+GLES2 only. Keep enforcing SELinux and authenticated ADB. VINTF/HAL closure, memory,
+image fit and integrated Android execution remain unqualified.
+
+The source-only kernel build is active. Integration includes BinderFS, built-in
+FUSE/FunctionFS and source-derived loop/dm-verity/EROFS APEX requirements. Preserve
+the working hardware configuration and check the resolved bounded delta. No new
+tablet test or writes have occurred. Next: finish kernel compile, validate the full
+Android product graph and build system/ramdisk; then one prepared T1 session with
+concrete backup/rollback approval. Do not repeat cube/logging proof. Build operations
+and resource blockers remain tracked privately, outside this public repository.
 
 ## Private build infrastructure — November 19, 2026
 

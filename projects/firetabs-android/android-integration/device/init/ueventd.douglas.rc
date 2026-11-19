@@ -1,0 +1,4 @@
+/dev/dri/card* 0660 system graphics
+/dev/dri/renderD* 0660 system graphics
+/dev/input/event* 0660 root input
+/sys/class/backlight/* brightness 0664 system graphics

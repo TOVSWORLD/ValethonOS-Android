@@ -17,9 +17,16 @@ class ManifestLock(unittest.TestCase):
   for project in captures:
    for source in project.get('files',[]):
     if source['status']=='captured':self.assertEqual(hashlib.sha256((evidence/'upstream'/project['path']/source['path']).read_bytes()).hexdigest(),source['sha256'])
-  for index in ['additional-source-inputs.json','graphics-build-inputs.json']:
+  for index in ['additional-source-inputs.json','graphics-build-inputs.json','apex-source-inputs.json','renderengine-source-inputs.json']:
    for source in json.loads((evidence/index).read_text()):
     if source['status']=='captured':self.assertEqual(hashlib.sha256((evidence/'upstream'/source['project_path']/source['path']).read_bytes()).hexdigest(),source['sha256'])
+
+ def test_framework_backend_evidence_matches_captured_source_and_excerpt(self):
+  evidence=ROOT/'evidence/android-integration-source'
+  for source in json.loads((evidence/'framework-backend-inputs.json').read_text()):
+   name=source.get('captured_file',source.get('excerpt_file'))
+   expected=source.get('excerpt_sha256',source['sha256'])
+   self.assertEqual(hashlib.sha256((evidence/name).read_bytes()).hexdigest(),expected)
 
  def test_resolver_rejects_missing_or_extra_gitlinks(self):
   xml=b'<manifest><remote name="aosp" fetch=".."/><default revision="main"/><project name="platform/core" path="system/core"/></manifest>'

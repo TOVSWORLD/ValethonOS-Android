@@ -1,0 +1,8 @@
+# Pinned apexd mounts image APEXes using loop devices and dm-verity.
+CONFIG_BLK_DEV_LOOP=y
+CONFIG_BLK_DEV_DM=y
+CONFIG_DM_BUFIO=y
+CONFIG_DM_VERITY=y
+# Accept the platform's ext4/EROFS APEX payloads and filesystem verification.
+CONFIG_EROFS_FS=y
+CONFIG_FS_VERITY=y
