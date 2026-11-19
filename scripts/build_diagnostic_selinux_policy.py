@@ -17,7 +17,8 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def compile_policy(output, *, storage_readonly=False):
+def compile_policy(output, *, storage_readonly=False, touch_input=False):
+    if touch_input and not storage_readonly:raise ValueError('Touch extension requires existing enforcing read-only base')
     subprocess.run([sys.executable, str(ROOT / 'scripts/generate_diagnostic_selinux_abi.py'), '--check'],
                    check=True, capture_output=True)
     tools = {}
@@ -38,7 +39,7 @@ def compile_policy(output, *, storage_readonly=False):
 
     def command(source, target):
         return ['secilc', '-m', '-c', '33', '-o', str(target), '-f', str(output / 'file_contexts'),
-                str(abi), str(source)]
+                str(abi), str(source)] + ([str(SOURCE/'touch-input.cil')] if touch_input else [])
 
     binary = output / 'policy.33'
     result = subprocess.run(command(policy, binary), capture_output=True, text=True, timeout=30)
@@ -68,6 +69,14 @@ def compile_policy(output, *, storage_readonly=False):
             'block_relabel': '(allow init_t boot_block_t (blk_file (relabelto)))',
             'other_block_open': '(allow init_t rootfs_t (blk_file (open)))',
         })
+    if touch_input:
+        mutations.update({
+            'input_write':'(allow init_t input_dev_t (chr_file (write)))',
+            'input_ioctl':'(allow init_t input_dev_t (chr_file (ioctl)))',
+            'input_create':'(allow init_t input_dev_t (chr_file (create)))',
+            'input_relabel':'(allow init_t input_dev_t (chr_file (relabelto)))',
+            'input_block_open':'(allow init_t input_dev_t (blk_file (open)))',
+        })
     for name, rule in mutations.items():
         mutant = output / (name + '.cil')
         mutant.write_text(policy.read_text() + '\n' + rule + '\n')
@@ -81,11 +90,12 @@ def compile_policy(output, *, storage_readonly=False):
         'scope': 'Policy compilation and compiler-enforced negative controls only; no policy load',
         'ack_revision': 'd9318bdb4c34e8b2d997b4f67ced56b120b22b87',
         'compiler_packages': tools,
-        'source_sha256': {name: digest(SOURCE / name) for name in ['ack-abi.cil', policy_name]},
+        'source_sha256': {name: digest(SOURCE / name) for name in ['ack-abi.cil', policy_name]+(['touch-input.cil'] if touch_input else [])},
         'policy_version': 33, 'policy_bytes': binary.stat().st_size, 'policy_sha256': digest(binary),
         'unknown_permissions': 'deny', 'permissive_domains': False,
         'forbidden_privilege_mutations_rejected': controls,
         'storage_readonly_profile': storage_readonly,
+        'touch_input_profile': touch_input,
         'kernel_policy_load_tested': False, 'runtime_qualified': False,
         'tablet_security_changed': False,
     }
@@ -97,9 +107,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'out/diagnostic-trial-policy-build')
     parser.add_argument('--storage-readonly', action='store_true')
+    parser.add_argument('--touch-input', action='store_true')
     args = parser.parse_args()
     try:
-        report = compile_policy(args.output, storage_readonly=args.storage_readonly)
+        report = compile_policy(args.output, storage_readonly=args.storage_readonly, touch_input=args.touch_input)
     except (ValueError, OSError, subprocess.SubprocessError) as error:
         parser.exit(2, 'Policy build stopped: ' + str(error) + '\n')
     print(json.dumps(report, indent=2))

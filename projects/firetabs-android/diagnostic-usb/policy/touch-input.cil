@@ -1,0 +1,9 @@
+; Extension for immutable standalone-trial evdev nodes. Never an Android policy.
+(type input_dev_t)
+(roletype object_r input_dev_t)
+(allow kernel_t input_dev_t (chr_file (getattr relabelto)))
+(allow init_t input_dev_t (chr_file (open read getattr)))
+(allow input_dev_t rootfs_t (filesystem (associate)))
+(neverallow trial_domain input_dev_t (chr_file (write append ioctl create setattr unlink)))
+(neverallow init_t input_dev_t (chr_file (relabelfrom relabelto)))
+(neverallow trial_domain input_dev_t (blk_file (open read write append ioctl create getattr relabelfrom relabelto)))

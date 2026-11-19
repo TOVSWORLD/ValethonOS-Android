@@ -1,5 +1,37 @@
 # Douglas hardware and kernel implementation contract
 
+## Touch candidate built; exact-kernel VM checks passed — November 18, 2026
+
+The maintained Goodix kernel build succeeded in GitHub run 44438104081.
+Source 1525308e981f48a6abd4a8122093f478053382a0 and workflow merge commit
+ccb8f413cb657d31e2110d0296736982ee25d03f have the same tree. The downloaded
+artifact digest and all 14 manifest files verified. Goodix is the only kernel
+configuration change from the observed display baseline: module to builtin.
+The source-backed DT uses GPIO35/EINT46, reset46, I2C0 pads75/76 and VGP2 at
+3.0V with VIO18 at1.8V. RAM reservations and the corrected loader framebuffer
+node survive. Enable the existing watchdog driver for inherited heartbeat;
+this does not establish the prior reset cause or stable hardware operation.
+
+The enforcing touch component compiled in the approved isolated lab directory.
+All 1,041 repository tests pass in the final source regression run.
+All16 forbidden-privilege compiler controls passed. On the exact new kernel,
+both virtualization modes pass real virtual-evdev read-only open/idle-read,
+denied ioctl, denied relabel and denied write-open checks. The first VM fixture
+incorrectly assumed no virtual input device; its failed result is retained.
+These results are VM policy checks, not physical Goodix qualification.
+
+A fresh direct touch package is prepared offline. Static original-loader audit
+and disposable authorization-fixture checks pass; missing approval and the
+historical display scope are rejected. No real owner authorization file was
+created and no tablet command was run. Original Android remains restored.
+The visible acceptance is all nine large blue panels turning green as the owner
+touches them. USB display status is sent before the touch window, its send result
+does not gate the grid, and it cannot prove touch. No raw events are stored.
+Next: publish the exact preparation, obtain fresh attendance/staging/test
+approval, run one direct test, then restore and verify original Android.
+No new logging proof gate. Receipts: evidence/touch-input-source/
+kernel-build-result.json and touch-preparation-result.json.
+
 ## Touch/input source integration started — November18,2026
 
 Work moved to codex/issue-330-touch-input, stacked on observed display foundation.
