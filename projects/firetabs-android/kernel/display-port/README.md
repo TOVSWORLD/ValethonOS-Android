@@ -1,5 +1,12 @@
 # MT8163 Douglas display integration
 
+Direct-loader correction: live fb-reserved-memory node collides with LK's
+unconditional same-name add, including unit-address matching. Exact callback/
+libfdt emulation returns EXISTS/failure for the tested DT and succeeds after a
+one-byte rename to fw-reserved-memory, preserving all reservation properties.
+No kernel/panel/capture change. See direct-loader-fb-collision-audit.json and
+current execution plan; physical correction not yet tested.
+
 Scope11 ran: no visible banner, owner Power untouched, original Android verified
 returned. Received120 bytes failed display-status decoding; no valid status or
 target snapshot. Pinconf runtime effect remains unqualified. Scope11 consumed;

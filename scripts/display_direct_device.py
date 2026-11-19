@@ -15,7 +15,7 @@ def inputs(case):
     candidate=(case/'boot-full.img').read_bytes();original=(case/'original-boot.img').read_bytes()
     manifest={'boot':{'bytes':BOOT_BYTES,'sha256':ORIGINAL},'recovery':{'bytes':17825792,'sha256':RECOVERY}}
     validate_backup(original,manifest)
-    expected={'scope':'display-direct-coldboot-1','candidate_sha256':sha(candidate),
+    expected={'scope':'display-direct-fbfix-2','candidate_sha256':sha(candidate),
               'nonce_sha256':sha((case/'trial-nonce-private.bin').read_bytes()),
               'runner_sha256':sha(Path(__file__).read_bytes()),'owner_approved':True,
               'maximum_candidate_writes':1,'maximum_original_restore_writes':1,
@@ -27,7 +27,9 @@ def inputs(case):
             report['nonce_sha256']!=expected['nonce_sha256'] or
             report.get('board_resources_unchanged') is not True or
             report.get('native_trampoline_used') is not False or
-            report.get('original_boot_restore_required') is not True):raise ValueError('Exact reviewed package required')
+            report.get('original_boot_restore_required') is not True or
+            report.get('authorization_scope')!='display-direct-fbfix-2' or
+            report.get('loader_fb_name_adjustment',{}).get('changed_bytes')!=1):raise ValueError('Exact reviewed package required')
     return candidate,original,manifest
 
 

@@ -1,5 +1,30 @@
 # Douglas hardware and kernel implementation contract
 
+## Concrete direct-loader framebuffer-node collision fixed — November18,2026
+
+The direct input DT already contains fb-reserved-memory@98600000, imported from
+the live OS reservation map. Exact original LK callback25c54 unconditionally
+adds fb-reserved-memory. Its libfdt name lookup also matches unit-address suffixes;
+add returns-2/EXISTS, callback returns1, caller3dfe4 branches to failure return,
+and wrapper3ec20 loops before kernel handoff. This is a deterministic violated
+contract on that selected path, not proof it was the sole physical reset cause.
+Exact pinned LK callback AND libfdt instruction emulation reproduce failure on
+the tested DT. Renaming the preserved node to fw-reserved-memory@98600000 passes
+(return0); reg/no-map/compatible survive the callback unchanged. Removal is only
+a negative/control fixture, never the candidate fix. Runtime globals are modeled,
+not measured firmware state; receipt direct-loader-fb-collision-audit.json.
+Implemented a one-byte input node-name change in direct packaging. No reservation,
+RAM exclusion, phandle, panel setting, kernel, policy or capture is removed/changed.
+Builder verifies every other board property. Fresh unchanged enforcing PID1 built;
+1031 regression tests pass and all three exact-code callback controls pass.
+Fresh corrected package and exact-LK static loader audit passed; offline device
+guard accepts exact inputs under a disposable test authorization fixture, rejects
+unapproved templates and consumed scope1. Scope display-direct-fbfix-2 is ready
+locally for fresh owner attendance/approval, not staged to the lab. No new tablet
+action or test approval. Original Android remains verified restored.
+Receipt direct-fbfix-preparation.json; private checkpoint out/display-direct-fbfix-2.
+Consumed first direct test and unknown owner visual result stay historical.
+
 Current consolidation: November 17, 2026. Target: Amazon Fire HD 8 (2017),
 douglas/KFDOWI, MT8163; maintained-kernel candidate is the pinned ACK 6.18.34
 Image. This is the central hardware reference for implementation and test

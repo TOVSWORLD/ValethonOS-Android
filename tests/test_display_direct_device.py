@@ -44,3 +44,17 @@ class DirectDisplayGuards(unittest.TestCase):
             (self.case/name).write_bytes(data)
         for name in ['report.json','owner-authorization-private.json']:(self.case/name).write_text('{}')
         with self.assertRaises(ValueError):direct.inputs(self.case)
+
+    def test_consumed_first_direct_scope_cannot_authorize_corrected_test(self):
+        nonce=bytes([2])*32
+        for name,data in [('boot-full.img',self.candidate),('original-boot.img',self.original),
+                          ('trial-nonce-private.bin',nonce)]:
+            (self.case/name).write_bytes(data)
+        (self.case/'report.json').write_text('{}')
+        auth=dict(scope='display-direct-coldboot-1',candidate_sha256=direct.sha(self.candidate),
+                  nonce_sha256=direct.sha(nonce),runner_sha256=direct.sha(Path(direct.__file__).read_bytes()),
+                  owner_approved=True,maximum_candidate_writes=1,maximum_original_restore_writes=1,
+                  recovery_writes_allowed=False,automatic_trial_retry=False)
+        (self.case/'owner-authorization-private.json').write_text(json.dumps(auth))
+        with patch.object(direct,'validate_backup'):
+            with self.assertRaisesRegex(ValueError,'authorization'):direct.inputs(self.case)
