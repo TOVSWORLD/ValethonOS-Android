@@ -1,33 +1,35 @@
 # Next milestone execution plan
 
-## Bionic graphics compiled; Douglas Android product staged — November 19, 2026
+## Integrated Android kernel compiled; complete Android image next — November 19, 2026
 
-The pinned Mesa 26.2.7/libdrm 2.4.133 sources now compile as ARM32 Bionic with
-NDK r30/API34. Four real EGL/GLES/Panfrost runtime libraries passed ARM ELF,
-Android ABI-note, dependency and SONAME checks; generated Soong modules retain
-strict ELF checking. Source scripts, package examples and build-result hashes are
-in scripts/, projects/firetabs-android/android-integration/ and
-evidence/android-integration-source/bionic-graphics-build-result.json.
-This is a graphics library build, not a full Android image or tablet Android boot.
+The ACK6.18 kernel with BinderFS, built-in FUSE/ADB FunctionFS and APEX
+loop/device-mapper/dm-verity/EROFS/FS-verity support compiled and linked.
+Downloaded artifacts passed independent hashes, parent/config-delta checks,
+ARM64 header/footprint checks and exact gzip round-trip. Raw Image: 27,083,264
+bytes; gzip: 9,556,029 bytes; runtime footprint: 28,573,696 bytes. Raw output
+fits the existing 28-MiB LK decode capacity with 2,276,864 bytes spare.
+Image SHA256: c83baf995268af14e0a4ba3faac683ee2ee4d6d1c4717a675d7eaccea20337b6.
+Evidence: evidence/android-integration-source/android-kernel-build-result.json.
+This is a completed kernel source build, not a full Android image or tablet boot.
 
-Douglas product/BoardConfig/init/fstab inputs and verified graphics package staged
-successfully in an isolated control tree. Full AOSP build graph is not yet run.
-The candidate builds bounded p14 system plus ramdisk, with vendor/product/system_ext
-co-located and a volatile 256-MiB /data; original userdata/recovery are excluded.
-Pinned RenderEngine has GLES2 fallback; select skiaglthreaded/Ganesh GL and advertise
-GLES2 only. Keep enforcing SELinux and authenticated ADB. VINTF/HAL closure, memory,
-image fit and integrated Android execution remain unqualified.
+The first integrated compile exposed an ACK FUSE cleanup conditional error on
+ARM64 without FUSE_BPF. Exact-source repair preserves allocation lifetime and the
+newer d_time initialization, guards BPF-only fields separately and keeps BPF off.
+The failed attempt/source hashes and successful repair are retained in
+android-fuse-build-repair.json. C cleanup tests cover 32/64-bit with BPF on/off
+and null cleanup; exact patched-source resume passed. Repository suite: 1,074
+tests, nine skipped, no failures. Existing hardware configuration is preserved;
+no new tablet operation or repeated cube/logging proof occurred.
 
-The source-only kernel build is active. Isolated Kconfig preflight resolved all
-requested Android/APEX features; pinned NFS Kconfig explains its existing pNFS
-helper promotion when device-mapper becomes built-in. This is not final compile
-or hardware execution. Integration includes BinderFS, built-in
-FUSE/FunctionFS and source-derived loop/dm-verity/EROFS APEX requirements. Preserve
-the working hardware configuration and check the resolved bounded delta. No new
-tablet test or writes have occurred. Next: finish kernel compile, validate the full
-Android product graph and build system/ramdisk; then one prepared T1 session with
-concrete backup/rollback approval. Do not repeat cube/logging proof. Build operations
-and resource blockers remain tracked privately, outside this public repository.
+Real ARM32 Bionic EGL/GLES/Panfrost is compiled/packaged with strict ELF checks.
+Douglas product/init/fstab plus verified graphics package staged in a control
+tree; full AOSP checkout/product graph/system+ramdisk build remains pending.
+The candidate uses bounded p14 system with co-located vendor/product/system_ext,
+volatile /data, GLES2, enforcing SELinux and authenticated ADB; original userdata
+and recovery are excluded. HAL/VINTF/policy closure, image fit, memory and actual
+Android setup/home remain unqualified. Next is the full Android build discussion
+and product graph/image work, then one prepared grouped T1 with backup/rollback.
+Build operations/resources/caches remain private; reuse this completed kernel.
 
 ## Private build infrastructure — November 19, 2026
 

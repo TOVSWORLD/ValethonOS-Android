@@ -15,6 +15,7 @@ else
 fi
 readonly root="$PWD/work/ack-baseline"
 readonly output="$root/output"
+python3 scripts/apply_android_fuse_guard.py "$root/source" --report "$root/android-fuse-source-fix.json"
 cp "$output/.config" "$root/android-parent.config"
 python3 - <<'PARENT_IMAGE'
 from pathlib import Path
@@ -37,7 +38,7 @@ python3 - <<'PY'
 from pathlib import Path
 import hashlib,json
 root=Path('work/ack-baseline');sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-result={'scope':'Integrated Android kernel compile only; no device execution','ack_revision':'d9318bdb4c34e8b2d997b4f67ced56b120b22b87','config_changes':json.loads((root/'android-config-delta.json').read_text()),'size':json.loads((root/'android-image-size-report.json').read_text()),'hardware_execution':False,'android_boot_qualified':False,'artifacts':{n:{'bytes':(root/'output'/n).stat().st_size,'sha256':sha(root/'output'/n)} for n in ['arch/arm64/boot/Image','arch/arm64/boot/Image.gz','.config','System.map']}}
+result={'scope':'Integrated Android kernel compile only; no device execution','ack_revision':'d9318bdb4c34e8b2d997b4f67ced56b120b22b87','source_fixes':[json.loads((root/'android-fuse-source-fix.json').read_text())],'config_changes':json.loads((root/'android-config-delta.json').read_text()),'size':json.loads((root/'android-image-size-report.json').read_text()),'hardware_execution':False,'android_boot_qualified':False,'artifacts':{n:{'bytes':(root/'output'/n).stat().st_size,'sha256':sha(root/'output'/n)} for n in ['arch/arm64/boot/Image','arch/arm64/boot/Image.gz','.config','System.map']}}
 (root/'android-build-result.json').write_text(json.dumps(result,indent=2)+'\n')
 print('Integrated Android kernel source compilation complete; runtime unqualified.')
 PY
