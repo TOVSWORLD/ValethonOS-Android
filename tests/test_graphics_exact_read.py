@@ -28,3 +28,14 @@ class ExactGraphicsRead(unittest.TestCase):
         d,calls=self.device(body)
         with self.assertRaises(ValueError):d.read('/dev/block/mmcblk0p1',BOOT_BYTES)
         self.assertEqual(calls,[])
+
+    def test_only_exact_private_ram_staging_file_is_admitted(self):
+        node='/tmp/valethonos-rollback-'+'a'*32+'/boot.img'
+        d=object.__new__(ExactReadAdb);calls=[]
+        d.run=lambda args: calls.append(args) or b'X'*BOOT_BYTES
+        self.assertEqual(len(d.read(node,BOOT_BYTES)),BOOT_BYTES)
+        self.assertEqual(calls,[['exec-out','cat',node]])
+        d.run=lambda args: b'X'*(BOOT_BYTES-1)
+        with self.assertRaises(PartitionReadError):d.read(node,BOOT_BYTES)
+        for invalid in [node+'/extra',node.replace('boot.img','other.img'),'/tmp/boot.img']:
+            with self.assertRaises(ValueError):d.read(invalid,BOOT_BYTES)

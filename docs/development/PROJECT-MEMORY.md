@@ -1,5 +1,30 @@
 # FireTabs project memory
 
+## Graphics candidate installed; attended boot running — November 19, 2026
+
+One graphics candidate write completed and its full16MiB readback matched
+SHA256 a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042.
+Original recovery hash remained unchanged and temporary RAM staging cleanup
+verified. One direct reboot from original TWRP was requested after the owner's
+watch cue. The five-minute observation window is running; physical cube/touch
+result is pending. No hardware graphics pass is claimed. Return to original
+TWRP after the window; no Android round trip or original restoration is planned.
+
+## Attended graphics test authorized — November 19, 2026
+
+Owner explicitly approved private staging and one attended graphics test in the
+existing SSH lab direct-test-1 directory. Build/VM approval had previously been
+insufficient for private test staging; no transfer bypass was attempted.
+Selected original TWRP and exact retained touch p5/original p6 preflight passed.
+First installation stopped before any partition write: ExactReadAdb admitted
+partitions but omitted the existing installer RAM staging file. The durable
+receipt confirms write_started=false. Preserve that receipt. The read guard now
+also admits only the installer's exact /tmp/valethonos-rollback-<32 hex>/boot.img
+path and full16MiB read; unrelated paths remain rejected. All9 graphics tests
+pass, including full/short RAM reads and invalid-path rejection. The graphics
+image itself is unchanged. The corrected installation and one attended direct
+boot remain the current execution; no test reboot has occurred yet.
+
 ## Graphics candidate qualified offline; ready to load from TWRP — November 18, 2026
 
 The next functional test is a colored GPU-rendered cube that rotates and moves

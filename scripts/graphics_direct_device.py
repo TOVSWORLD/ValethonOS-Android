@@ -11,6 +11,8 @@ LOCK=ROOT/'evidence/graphics-source/direct-preparation-result.json'
 
 class ExactReadAdb(Adb):
     def read(self,node,size):
+        if re.fullmatch(r'/tmp/valethonos-rollback-[0-9a-f]{32}/boot\.img',node) and size==BOOT_BYTES:
+            return super().read(node,size)
         expected={BOOT:BOOT_BYTES,RECOVERY:RECOVERY_BYTES}
         if node not in expected or size!=expected[node]: raise ValueError('Only exact boot/recovery reads admitted')
         sectors=self.run(['exec-out','cat','/sys/class/block/'+Path(node).name+'/size']).strip()
