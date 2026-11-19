@@ -16,7 +16,7 @@
   "target_endpoint_selected": false,
   "target_kernel_entry_proven": false,
   "display_milestone_passed": false,
-  "owner_screen_confirmation_pending": true,
+  "owner_screen_confirmation_pending": false,
   "return_helper_armed": false,
   "maximum_return_helper_launches": 1,
   "original_boot_restored": true,
@@ -39,5 +39,9 @@
   ],
   "reset_cause_qualified": false,
   "automatic_return_to_android": false,
-  "next_action": "Audit direct-loader runtime entry/DT/initrd fixups against working boot and successful RAM-entry contracts. No unchanged retry, panel-timing guess or new logging milestone."
+  "next_action": "Audit direct-loader runtime entry/DT/initrd fixups against working boot and successful RAM-entry contracts. No unchanged retry, panel-timing guess or new logging milestone.",
+  "owner_watched_screen": false,
+  "owner_observed_banner": null,
+  "owner_observed_colour_bands": null,
+  "visual_result": "unknown; owner was not watching"
 }

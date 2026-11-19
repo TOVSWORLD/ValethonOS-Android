@@ -10,7 +10,9 @@ recheck passed before the sole candidate write.
 No target endpoint appeared and zero capture bytes arrived. Selected-port metadata
 shows five boot-chain enumerations about65.6–65.8s apart. This establishes repeated
 returns to the boot chain, NOT reset cause, Linux entry, PID1 or a panel fault.
-Owner visual report pending. Direct boot did not yet achieve display and does not
+Owner was not watching; visual result is UNKNOWN, not a confirmed blank screen.
+Do not repeat this test solely to recover that observation. Direct boot did not
+yet achieve display and does not
 invalidate previous successful maintained Linux/PID1/USB/storage RAM boots.
 After observation, original FACTORYM helper ran exactly once and returned to
 original TWRP. Original p5 restored once with full readback; p6 unchanged. Original
