@@ -1,5 +1,41 @@
 # Next milestone execution plan
 
+## Graphics candidate qualified offline; ready to load from TWRP — November 18, 2026
+
+The next functional test is a colored GPU-rendered cube that rotates and moves
+with touch. Actual non-T720/software renderers are rejected. Large failure digits
+1-7 identify the failed stage without asking the owner to read tiny kernel text.
+Kernel run44451450892 passed at source4d534e81905130dd496e0eba2f3034aca4beca2f.
+Image c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5;
+only Panfrost/DRM scheduler/shmem move from modules to builtin versus proven touch.
+The authenticated artifact, all17 manifest files and source merge tree verified.
+Initial kernel compilation succeeded but export requested a nonexistent combined
+panfrost.o; retaining three actual builtin translation units fixed it.
+
+Mesa26.2.7/libdrm2.4.133 host tools and AArch64 runtime compiled. Mesa26.2 uses a
+unified libgallium and gbm/dri_gbm.so, not per-driver DRI files; packing follows
+that actual layout. All20 enforcing-policy denial controls passed, preserving
+PID1 fork denial. Both virtualization modes pass the final exact kernel/component:
+real EGL/Gallium/GBM loading, shared-memory RW, and denied executable memory,
+fork, input write and block write. All1049 repository tests pass.
+The30.2MB runtime compresses to5.6MB with kernel-supported XZ/8MB dictionary/CRC32.
+The separate graphics packer places it at0x46000000 and checks the full compressed
+kernel staging span, raw archive span and every observed reservation. Existing
+small diagnostic packers stay unchanged. Complete payload15,007,744B fits16MiB p5.
+Original-LK static audit and disposable authorization-guard controls pass.
+
+Current tablet is original TWRP with the exact successful touch candidate on p5;
+original p6 is unchanged and rollback is ready. The owner explicitly requested
+preparing/loading the next test rather than returning to Android between tests.
+No graphics candidate has been written or booted yet. Use new graphics-direct-1
+scope; the guard expects the retained touch SHA, never assumes original p5.
+Reads check exact sysfs partition size and bounded full bytes/hash, with no trim.
+Next: publish final source/receipt, stage/install once from TWRP, say watch now,
+run one direct graphics test, then return to TWRP without an Android round trip.
+No logging proof gate. Receipts: evidence/graphics-source/kernel-build-result.json
+and direct-preparation-result.json. Private qualified package/component/VM state:
+out/graphics-source-preparation-1/. Primary task#331 / draft PR#456.
+
 ## Touch grid achieved; remain in TWRP for graphics test — November 18, 2026
 
 Owner confirmed all nine touch panels turned green and that the green grid was

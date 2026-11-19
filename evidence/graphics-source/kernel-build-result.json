@@ -1,0 +1,35 @@
+{
+  "scope": "Authenticated builtin graphics kernel compile; no physical rendering qualification",
+  "workflow_passed": true,
+  "workflow_run": 44451450892,
+  "source_commit": "4d534e81905130dd496e0eba2f3034aca4beca2f",
+  "source_tree": "6e7182d687e49dcc491917a1a2d997c60ee2e840",
+  "workflow_repository_revision": "cd5eaf32daf5bf9e71a1ce8650d43695adc687df",
+  "merge_parents": [
+    "3148b0b8163d554bfc598f035240f827b2ee90ad",
+    "4d534e81905130dd496e0eba2f3034aca4beca2f"
+  ],
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "artifact_id": 14495823245,
+  "artifact_sha256": "c1c02c4fcbc752bd0d16e4fd4466499f55b295076eeca3d584ca4acec38ad0b5",
+  "manifest_sha256": "d8f8ef74d6da2c5c05de3134f9d4d874b0fd4578a1c86c6dba7d76fe9bcd4145",
+  "image_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+  "config_sha256": "c5d9da7e2ecd09a1a5cd0f69459a537abedc1bd992be661e5c1d30648ba42242",
+  "system_map_sha256": "bb46534d0ddd1c105b1ae99902c1565cd847a5c346e4fe3f2e07542361e745b9",
+  "config_changes_from_observed_touch": [
+    "CONFIG_DRM_GEM_SHMEM_HELPER=m->y",
+    "CONFIG_DRM_PANFROST=m->y",
+    "CONFIG_DRM_SCHED=m->y"
+  ],
+  "target_release": "6.18.34-valethon-draft1+",
+  "manifest_files_verified": 17,
+  "xz_ramdisk_support": true,
+  "physical_graphics_verified": false,
+  "initial_compile_export_failure": {
+    "workflow_run": 44448317232,
+    "source_commit": "7b422f922c259b3503791faabc178c96da852df9",
+    "kernel_compiled": true,
+    "artifact_export_failed": "Builtin composite panfrost.o not emitted; individual translation units retained by correction",
+    "hardware_test_run": false
+  }
+}
