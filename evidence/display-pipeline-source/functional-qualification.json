@@ -1,0 +1,34 @@
+{
+  "scope": "Offline unmodified display entry and enforcing VM qualification",
+  "all_tests_passed": true,
+  "tests_skipped": 0,
+  "checks": {
+    "full_image": true,
+    "corrupt_first_page": true,
+    "corrupt_last_padding_byte": true,
+    "ring_wrap": true,
+    "invalid_ring_header": true,
+    "deadline_readback_failure": true,
+    "both_vm_modes_enforcing": true
+  },
+  "image_sha256": "25392d2aecafca17d14632261a1e015ef871d1208a96c8c37a3e6832e88ae22d",
+  "metadata_sha256": "5a78cd353a35df3d6363c5e50bf7669b26ca58a0a9ff4b8c6386a08816a90590",
+  "source_sha256": {
+    "scripts/qualify_display_bundle.py": "5c7bb9ab878ee207cb90b6848ce17239812a052f1aeb2e58aa29f4b6015f1780",
+    "scripts/qualify_ack_combined.py": "148b86f8b811cbb6a2634688adb57b2be432622f6886bdf90e83e9c4aee8d156",
+    "scripts/build_ack_combined_entry.py": "86b37036e12f0163c07abe6739e396d5ea00424049673e17e6a85f53e20b7071",
+    "scripts/verify_display_bundle.py": "7f06f36f83627a2d7082f3a3487187c48fadc148261cbc5cada8ff70c45d8559",
+    "scripts/prepare_display_bundle.py": "799c1efd5e71c6c36f0765b4a36253ae95cf5c079a0b47bdb7ab5ddaf4a78f86",
+    "scripts/display_kernel_contract.py": "b4f8cd7df9fc60d4e459bc89b661f0a0ae2f05c78a58edbe308768b33719f7e7",
+    "scripts/display_dtb_profile.py": "260b015727d8ba82dc28da90e2f5b42d70d62521b9a937fea1ea5ba8357a15fb",
+    "scripts/validate_lab_policy_vm.py": "4ef8c82735969fb8f0ce4500eea001f9fe1150eb060aaf8097e873fdf41d9d76",
+    "projects/firetabs-android/native-kexec/combined_sha256.c": "16a7c944cc14e9b3d6f30452379c2f136c35e13d5b204eddcaf9a75e9f4a0c26",
+    "projects/firetabs-android/native-kexec/ack_trampoline.S": "4cbb4a855d704cebcddea5795950b737e772d53247b614f01d1d95d336d61d7f"
+  },
+  "vm_reports_sha256": [
+    "0bd2c1a6d72084e8a6fd29a8c1cc96b5888c00b2c057caf048898ba99c0a0257",
+    "e4300d4b59efb2e8080aa53925974560a397adf468e915700248fe15156bf30b"
+  ],
+  "hardware_execution": false,
+  "physical_pixels_confirmed": false
+}

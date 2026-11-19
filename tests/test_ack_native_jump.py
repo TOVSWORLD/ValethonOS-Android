@@ -1,6 +1,7 @@
 import io
 import json
 import subprocess
+import struct
 import sys
 import tempfile
 import unittest
@@ -124,6 +125,77 @@ class ACKJump(unittest.TestCase):
         self.assertTrue(r['fresh_original_android_return']); self.assertTrue(r['complete'])
         self.assertEqual((r['load_attempts'], r['jump_requests']), (1, 1))
         self.assertFalse(r['hardware_deadline_qualified'])
+
+    def test_display_banner_status_does_not_claim_visible_pixels(self):
+        self.manifest.update(target_kind='ack-linux-display-v7', internal_emmc_only=True)
+        self.write_manifest()
+        client = json.loads(self.c.read_text())
+        client['target_kind'] = 'ack-linux-display-v7'
+        self.c.write_text(json.dumps(client))
+        self.auth.update(scope='ack-linux-native-display-functional-jump-7',
+                         manifest_sha256=runner.sha(self.m.read_bytes()),
+                         combined_verifier_sha256=runner.sha(Path('scripts/verify_display_bundle.py').read_bytes()))
+        self.a.write_text(json.dumps(self.auth))
+        self.d.wire = (b'VDISP001' + NONCE +
+                       struct.pack('<IIiIIIIIQIi',1,3,0,7,800,1280,32,3200,4096000,13,0) +
+                       b'mediatekdrmfb' + bytes(19))
+        self.console = b'old record; no kernel log required'
+        with patch('display_kernel_contract.verify', return_value={
+                'config_sha256': TARGET_CONFIG, 'target_release': runner.RELEASE}), \
+                patch('verify_display_bundle.verify') as verify:
+            result = self.invoke(combined_kernel_package=self.p, display_component=self.p,
+                                 baseline_kernel_package=self.p)
+            verify.assert_called_once_with(self.m,self.p,self.p,self.p,nonce=NONCE)
+        self.assertTrue(result['display_banner_status_verified'])
+        self.assertTrue(result['complete'])
+        self.assertFalse(result['physical_pixels_confirmed'])
+        self.assertTrue(result['owner_visual_confirmation_pending'])
+        self.assertEqual((result['load_attempts'],result['jump_requests']),(1,1))
+
+    def display_error_result(self,kind,scope):
+        self.manifest.update(target_kind=kind, internal_emmc_only=True)
+        self.write_manifest()
+        client=json.loads(self.c.read_text());client['target_kind']=self.manifest['target_kind']
+        self.c.write_text(json.dumps(client))
+        self.auth.update(scope=scope,
+                         manifest_sha256=runner.sha(self.m.read_bytes()),
+                         combined_verifier_sha256=runner.sha(Path('scripts/verify_display_bundle.py').read_bytes()))
+        self.a.write_text(json.dumps(self.auth))
+        payload=b'3,1,100,-;mediatek-drm probe failed -517\n'
+        self.d.wire=(b'VDISP002'+NONCE+
+                     struct.pack('<IIiIIIIIQIi',2,1,-110,1,0,0,0,0,0,0,0)+bytes(32)+
+                     b'VKMSG001'+NONCE+struct.pack('<IiII',len(payload),0,1,1)+payload)
+        self.console=b'old record'
+        with patch('display_kernel_contract.verify',return_value={
+                'config_sha256':TARGET_CONFIG,'target_release':runner.RELEASE}), \
+                patch('verify_display_bundle.verify'):
+            old=dict(self.auth,scope='ack-linux-native-display-mm-power-jump-10' if kind.endswith('v11') else 'ack-linux-native-display-pwm-jump-9' if kind.endswith('v10') else 'ack-linux-native-display-errors-jump-8' if kind.endswith('v9') else 'ack-linux-native-display-functional-jump-7')
+            self.a.write_text(json.dumps(old))
+            with self.assertRaises(ValueError):
+                self.invoke(combined_kernel_package=self.p,display_component=self.p,
+                            baseline_kernel_package=self.p)
+            self.assertEqual(self.d.calls,[])
+            self.a.write_text(json.dumps(self.auth))
+            result=self.invoke(combined_kernel_package=self.p,display_component=self.p,
+                               baseline_kernel_package=self.p)
+        self.assertTrue(result['display_status']['kernel_snapshot_received'])
+        self.assertFalse(result['display_banner_status_verified'])
+        self.assertFalse(result['complete'])
+        self.assertTrue(result['fresh_original_android_return'])
+        self.assertTrue(result['pid1_usb_identity_proven'])
+        self.assertEqual((result['load_attempts'],result['jump_requests']),(1,1))
+
+    def test_display_failure_receives_kernel_errors_without_requiring_banner(self):
+        self.display_error_result('ack-linux-display-errors-v8','ack-linux-native-display-errors-jump-8')
+
+    def test_pwm_display_uses_fresh_scope_and_keeps_error_capture(self):
+        self.display_error_result('ack-linux-display-pwm-v9','ack-linux-native-display-pwm-jump-9')
+
+    def test_mm_power_fix_requires_new_scope(self):
+        self.display_error_result('ack-linux-display-mm-power-v10','ack-linux-native-display-mm-power-jump-10')
+
+    def test_pinconf_fix_requires_new_scope(self):
+        self.display_error_result('ack-linux-display-pinconf-v11','ack-linux-native-display-pinconf-jump-11')
 
     def test_fresh_pid1_usb_identity_is_a_milestone_without_log_payload(self):
         self.d.wire = b'VLOG0002' + NONCE

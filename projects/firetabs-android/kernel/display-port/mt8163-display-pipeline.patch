@@ -1,0 +1,242 @@
+--- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+@@ -110,6 +110,19 @@
+ 	DDP_COMPONENT_PWM2,
+ };
+ 
++static unsigned int mt8163_mtk_ddp_main[] = {
++	DDP_COMPONENT_OVL0,
++	DDP_COMPONENT_COLOR0,
++	DDP_COMPONENT_CCORR,
++	DDP_COMPONENT_AAL0,
++	DDP_COMPONENT_GAMMA,
++	DDP_COMPONENT_DITHER0,
++	DDP_COMPONENT_RDMA0,
++	DDP_COMPONENT_UFOE,
++	DDP_COMPONENT_DSI0,
++	DDP_COMPONENT_PWM0,
++};
++
+ static unsigned int mt8167_mtk_ddp_main[] = {
+ 	DDP_COMPONENT_OVL0,
+ 	DDP_COMPONENT_COLOR0,
+@@ -258,6 +271,12 @@
+ 	.mmsys_dev_num = 1,
+ };
+ 
++static const struct mtk_mmsys_driver_data mt8163_mmsys_driver_data = {
++	.main_path = mt8163_mtk_ddp_main,
++	.main_len = ARRAY_SIZE(mt8163_mtk_ddp_main),
++	.mmsys_dev_num = 1,
++};
++
+ static const struct mtk_mmsys_driver_data mt8167_mmsys_driver_data = {
+ 	.main_path = mt8167_mtk_ddp_main,
+ 	.main_len = ARRAY_SIZE(mt8167_mtk_ddp_main),
+@@ -337,6 +356,8 @@
+ 	  .data = &mt7623_mmsys_driver_data},
+ 	{ .compatible = "mediatek,mt2712-mmsys",
+ 	  .data = &mt2712_mmsys_driver_data},
++	{ .compatible = "mediatek,mt8163-mmsys",
++	  .data = &mt8163_mmsys_driver_data},
+ 	{ .compatible = "mediatek,mt8167-mmsys",
+ 	  .data = &mt8167_mmsys_driver_data},
+ 	{ .compatible = "mediatek,mt8173-mmsys",
+@@ -738,6 +759,8 @@
+ 	  .data = (void *)MTK_DISP_DITHER },
+ 	{ .compatible = "mediatek,mt8195-disp-dsc",
+ 	  .data = (void *)MTK_DISP_DSC },
++	{ .compatible = "mediatek,mt8163-disp-gamma",
++	  .data = (void *)MTK_DISP_GAMMA },
+ 	{ .compatible = "mediatek,mt8167-disp-gamma",
+ 	  .data = (void *)MTK_DISP_GAMMA, },
+ 	{ .compatible = "mediatek,mt8173-disp-gamma",
+@@ -751,6 +774,8 @@
+ 	{ .compatible = "mediatek,mt2701-disp-mutex",
+ 	  .data = (void *)MTK_DISP_MUTEX },
+ 	{ .compatible = "mediatek,mt2712-disp-mutex",
++	  .data = (void *)MTK_DISP_MUTEX },
++	{ .compatible = "mediatek,mt8163-disp-mutex",
+ 	  .data = (void *)MTK_DISP_MUTEX },
+ 	{ .compatible = "mediatek,mt8167-disp-mutex",
+ 	  .data = (void *)MTK_DISP_MUTEX },
+--- a/drivers/gpu/drm/mediatek/mtk_disp_gamma.c
++++ b/drivers/gpu/drm/mediatek/mtk_disp_gamma.c
+@@ -293,6 +293,14 @@
+ 	component_del(&pdev->dev, &mtk_disp_gamma_component_ops);
+ }
+ 
++/* MT8163 has a separate dither block; preserve its 512-entry,10-bit LUT. */
++static const struct mtk_disp_gamma_data mt8163_gamma_driver_data = {
++	.has_dither = false,
++	.lut_bank_size = 512,
++	.lut_bits = 10,
++	.lut_size = 512,
++};
++
+ static const struct mtk_disp_gamma_data mt8173_gamma_driver_data = {
+ 	.has_dither = true,
+ 	.lut_bank_size = 512,
+@@ -315,6 +323,8 @@
+ };
+ 
+ static const struct of_device_id mtk_disp_gamma_driver_dt_match[] = {
++	{ .compatible = "mediatek,mt8163-disp-gamma",
++	  .data = &mt8163_gamma_driver_data},
+ 	{ .compatible = "mediatek,mt8173-disp-gamma",
+ 	  .data = &mt8173_gamma_driver_data},
+ 	{ .compatible = "mediatek,mt8183-disp-gamma",
+--- a/drivers/soc/mediatek/mtk-mutex.c
++++ b/drivers/soc/mediatek/mtk-mutex.c
+@@ -65,6 +65,20 @@
+ #define MT8186_MUTEX_SOF_DPI0			2
+ #define MT8186_MUTEX_EOF_DSI0			(MT8186_MUTEX_SOF_DSI0 << 6)
+ #define MT8186_MUTEX_EOF_DPI0			(MT8186_MUTEX_SOF_DPI0 << 6)
++
++#define MT8163_MUTEX_MOD_DISP_OVL0		6
++#define MT8163_MUTEX_MOD_DISP_OVL1		7
++#define MT8163_MUTEX_MOD_DISP_RDMA0		8
++#define MT8163_MUTEX_MOD_DISP_RDMA1		9
++#define MT8163_MUTEX_MOD_DISP_WDMA0		10
++#define MT8163_MUTEX_MOD_DISP_COLOR0		11
++#define MT8163_MUTEX_MOD_DISP_CCORR		12
++#define MT8163_MUTEX_MOD_DISP_AAL		13
++#define MT8163_MUTEX_MOD_DISP_GAMMA		14
++#define MT8163_MUTEX_MOD_DISP_DITHER		15
++#define MT8163_MUTEX_MOD_DISP_UFOE		16
++#define MT8163_MUTEX_MOD_DISP_PWM0		17
++#define MT8163_MUTEX_MOD_DISP_WDMA1		18
+ 
+ #define MT8167_MUTEX_MOD_DISP_PWM		1
+ #define MT8167_MUTEX_MOD_DISP_OVL0		6
+@@ -395,6 +409,22 @@
+ 	[DDP_COMPONENT_UFOE] = MT2712_MUTEX_MOD_DISP_UFOE,
+ 	[DDP_COMPONENT_WDMA0] = MT2712_MUTEX_MOD_DISP_WDMA0,
+ 	[DDP_COMPONENT_WDMA1] = MT2712_MUTEX_MOD_DISP_WDMA1,
++};
++
++static const u8 mt8163_mutex_mod[DDP_COMPONENT_ID_MAX] = {
++	[DDP_COMPONENT_AAL0] = MT8163_MUTEX_MOD_DISP_AAL,
++	[DDP_COMPONENT_COLOR0] = MT8163_MUTEX_MOD_DISP_COLOR0,
++	[DDP_COMPONENT_DITHER0] = MT8163_MUTEX_MOD_DISP_DITHER,
++	[DDP_COMPONENT_CCORR] = MT8163_MUTEX_MOD_DISP_CCORR,
++	[DDP_COMPONENT_GAMMA] = MT8163_MUTEX_MOD_DISP_GAMMA,
++	[DDP_COMPONENT_OVL0] = MT8163_MUTEX_MOD_DISP_OVL0,
++	[DDP_COMPONENT_OVL1] = MT8163_MUTEX_MOD_DISP_OVL1,
++	[DDP_COMPONENT_PWM0] = MT8163_MUTEX_MOD_DISP_PWM0,
++	[DDP_COMPONENT_RDMA0] = MT8163_MUTEX_MOD_DISP_RDMA0,
++	[DDP_COMPONENT_RDMA1] = MT8163_MUTEX_MOD_DISP_RDMA1,
++	[DDP_COMPONENT_UFOE] = MT8163_MUTEX_MOD_DISP_UFOE,
++	[DDP_COMPONENT_WDMA0] = MT8163_MUTEX_MOD_DISP_WDMA0,
++	[DDP_COMPONENT_WDMA1] = MT8163_MUTEX_MOD_DISP_WDMA1,
+ };
+ 
+ static const u8 mt8167_mutex_mod[DDP_COMPONENT_ID_MAX] = {
+@@ -754,6 +784,15 @@
+ 	.mutex_sof_reg = MT2701_MUTEX0_SOF0,
+ };
+ 
++static const struct mtk_mutex_data mt8163_mutex_driver_data = {
++	.mutex_mod = mt8163_mutex_mod,
++	.mutex_sof = mt8167_mutex_sof,
++	.mutex_mod_reg = MT2701_MUTEX0_MOD0,
++	.mutex_mod1_reg = MT2701_MUTEX0_MOD1,
++	.mutex_sof_reg = MT2701_MUTEX0_SOF0,
++	.no_clk = true,
++};
++
+ static const struct mtk_mutex_data mt8167_mutex_driver_data = {
+ 	.mutex_mod = mt8167_mutex_mod,
+ 	.mutex_sof = mt8167_mutex_sof,
+@@ -1133,6 +1172,7 @@
+ 	{ .compatible = "mediatek,mt2701-disp-mutex", .data = &mt2701_mutex_driver_data },
+ 	{ .compatible = "mediatek,mt2712-disp-mutex", .data = &mt2712_mutex_driver_data },
+ 	{ .compatible = "mediatek,mt6795-disp-mutex", .data = &mt6795_mutex_driver_data },
++	{ .compatible = "mediatek,mt8163-disp-mutex", .data = &mt8163_mutex_driver_data },
+ 	{ .compatible = "mediatek,mt8167-disp-mutex", .data = &mt8167_mutex_driver_data },
+ 	{ .compatible = "mediatek,mt8173-disp-mutex", .data = &mt8173_mutex_driver_data },
+ 	{ .compatible = "mediatek,mt8183-disp-mutex", .data = &mt8183_mutex_driver_data },
+--- a/drivers/gpu/drm/mediatek/mtk_dsi.c
++++ b/drivers/gpu/drm/mediatek/mtk_dsi.c
+@@ -27,6 +27,7 @@
+ #include <drm/drm_mipi_dsi.h>
+ #include <drm/drm_of.h>
+ #include <drm/drm_panel.h>
++#include <drm/mediatek/mtk_dsi_mt8163.h>
+ #include <drm/drm_print.h>
+ #include <drm/drm_probe_helper.h>
+ #include <drm/drm_simple_kms_helper.h>
+@@ -268,6 +269,7 @@
+ static ssize_t mtk_dsi_host_transfer(struct mipi_dsi_host *host,
+ 				     const struct mipi_dsi_msg *msg);
+ static int mtk_dsi_probe(struct platform_device *pdev);
++
+ static int mtk_dsi_probe_legacy(struct platform_device *pdev);
+ static void mtk_dsi_remove(struct platform_device *pdev);
+ static void mtk_dsi_remove_legacy(struct platform_device *pdev);
+@@ -1253,6 +1255,65 @@
+ 	.transfer = mtk_dsi_host_transfer,
+ };
+ 
++
++/* Panel power must settle before leaving ULPM, and reset must follow LP11.
++ * The panel calls this only inside host-first DRM prepare. No DSI command is
++ * sent and no new host power reference is taken. Other hosts/SoCs are rejected.
++ */
++int mtk_dsi_mt8163_prepare_lanes(struct mipi_dsi_device *device)
++{
++ struct mtk_dsi *dsi;
++ int ret = 0;
++
++ if (!device || !device->host || device->host->ops != &mtk_dsi_ops)
++  return -EOPNOTSUPP;
++ dsi = host_to_dsi(device->host);
++ if (!mtk_dsi_mt8163(dsi))
++  return -EOPNOTSUPP;
++ mutex_lock(&dsi->strict_lock);
++ if (dsi->strict_fault || !dsi->strict_active || !dsi->refcount ||
++     !dsi->strict_attached || !dsi->strict_phy_owned ||
++     !dsi->strict_engine_owned || !dsi->strict_digital_owned)
++  ret = -EPIPE;
++ else
++  mtk_dsi_lane_ready(dsi);
++ mutex_unlock(&dsi->strict_lock);
++ return ret;
++}
++EXPORT_SYMBOL_GPL(mtk_dsi_mt8163_prepare_lanes);
++
++
++int mtk_dsi_mt8163_unprepare_lanes(struct mipi_dsi_device *device)
++{
++ struct mtk_dsi *dsi;
++ int ret = 0;
++
++ if (!device || !device->host || device->host->ops != &mtk_dsi_ops)
++  return -EOPNOTSUPP;
++ dsi = host_to_dsi(device->host);
++ if (!mtk_dsi_mt8163(dsi))
++  return -EOPNOTSUPP;
++ mutex_lock(&dsi->strict_lock);
++ if (!dsi->lanes_ready)
++  goto out;
++ if (!dsi->strict_active || !dsi->refcount || !dsi->strict_engine_owned ||
++     !dsi->strict_digital_owned || !dsi->strict_phy_owned) {
++  ret = -EPIPE;
++  goto out;
++ }
++ /* Cleanup remains available after a command fault while clocks are owned. */
++ mtk_dsi_stop(dsi);
++ mtk_dsi_set_cmd_mode(dsi);
++ mtk_dsi_lane0_ulp_mode_enter(dsi);
++ mtk_dsi_clk_ulp_mode_enter(dsi);
++ writel(0, dsi->regs + DSI_TXRX_CTRL);
++ dsi->lanes_ready = false;
++out:
++ mutex_unlock(&dsi->strict_lock);
++ return ret;
++}
++EXPORT_SYMBOL_GPL(mtk_dsi_mt8163_unprepare_lanes);
++
+ static int mtk_dsi_probe_legacy(struct platform_device *pdev)
+ {
+ 	struct mtk_dsi *dsi;

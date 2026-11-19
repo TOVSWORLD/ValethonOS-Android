@@ -16,13 +16,15 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def audit(installed, package, candidate):
+def audit(installed, package, candidate, *, expected_candidate_sha=CANDIDATE_SHA):
     if sha(package) != LK_SHA or len(package) != 485988:
         raise ValueError('Exact original-package LK required')
     if len(installed) != 524288 or installed[:len(package)] != package:
         raise ValueError('Installed LK executable does not match package')
-    if sha(candidate) != CANDIDATE_SHA or len(candidate) != 16777216:
-        raise ValueError('Exact tested candidate6 required')
+    if (len(expected_candidate_sha) != 64 or
+            any(c not in '0123456789abcdef' for c in expected_candidate_sha) or
+            sha(candidate) != expected_candidate_sha or len(candidate) != 16777216):
+        raise ValueError('Exact reviewed candidate required')
     code = package[512:]
     def exact(at, raw):
         if code[at:at+len(raw)] != raw:

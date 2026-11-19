@@ -1,0 +1,34 @@
+{
+  "ack_commit": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "donor_commit": "20951722df6ae1f6fecbfcea0a7d585118a06f3f",
+  "requires_existing_dsi_port": true,
+  "patch": "mt8163-display-pipeline.patch",
+  "patch_sha256": "c38dd2a2942f5c1153e7829d38fe61a0697f770dd48dd3350131af056606dec2",
+  "files": [
+    {
+      "target": "drivers/gpu/drm/mediatek/mtk_drm_drv.c",
+      "source": "evidence/display-pipeline-source/ack-with-dsi-mtk_drm_drv.c",
+      "original_sha256": "fd7af1b187b34d4caf99a329354fe7b11da78d19c20ffc5c30a0a6bc5e24c3fd",
+      "patched_sha256": "f1dbddd467d8637fc8b10b882897721341a6aadc4d87fa7f147f860e214a6dde"
+    },
+    {
+      "target": "drivers/gpu/drm/mediatek/mtk_disp_gamma.c",
+      "source": "evidence/display-pipeline-source/ack-mtk_disp_gamma.c",
+      "original_sha256": "eb4f4eb6e09fe5f808d135bef97cabd205fbe6937b0e49e68d2686b616b23fc7",
+      "patched_sha256": "c56f641246931fc653e28c47b3876e35e6f9ac4be365e052ed7f83086bf02f2c"
+    },
+    {
+      "target": "drivers/soc/mediatek/mtk-mutex.c",
+      "source": "evidence/display-pipeline-source/ack-mtk-mutex.c",
+      "original_sha256": "3d62c9f315dc53c189f97febb3aaaea9a76528c84bf42515cf572c5f5f11f2e3",
+      "patched_sha256": "dcf44aa9999296d408f6cdd961caca7038aad753a35a23d3a3328a0764096e04"
+    },
+    {
+      "target": "drivers/gpu/drm/mediatek/mtk_dsi.c",
+      "source": "evidence/display-pipeline-source/ack-with-dsi-mtk_dsi.c",
+      "original_sha256": "64b67ab57d171d171f1638cae1676c82ec3be6bbfe3ae4b66e055abd9dbd753b",
+      "patched_sha256": "ef4e674ea2bed0ac1400d93368f4f5ed56e68a7d5dd366b7e3a92adfe48ad509"
+    }
+  ],
+  "hardware_execution": false
+}

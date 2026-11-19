@@ -1,0 +1,123 @@
+{
+  "scope": "Pinned public source for MT8163 display integration; no runtime qualification",
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "working_revision": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+  "donor_revision": "20951722df6ae1f6fecbfcea0a7d585118a06f3f",
+  "records": [
+    {
+      "file": "working-panel.c",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/lcm/nt35521_wxga_dsi_vdo_douglas/nt35521_wxga_dsi_vdo_douglas.c",
+      "sha256": "2f327cf0e5147840afe5606dd62f75563014e4b337a14a8665ac9e0811aa5819",
+      "bytes": 43585
+    },
+    {
+      "file": "working-douglas.dts",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/arch/arm64/boot/dts/mediatek/douglas.dts",
+      "sha256": "be9fb99a496e399c5811b71cd6bc2868e3634b1aa8a754b98846a3456ed4f767",
+      "bytes": 35335
+    },
+    {
+      "file": "working-backlight.c",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/leds/leds-lp855x_bl.c",
+      "sha256": "1029f32723664b5cdc1f15fae3248f89c469845d9c6b2752c1614b87bd0b951f",
+      "bytes": 22702
+    },
+    {
+      "file": "working-lp855x.h",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/include/linux/lp855x.h",
+      "sha256": "3ae4c4716e8036774d31ff97cb8acaec0e3f0f9feec653a3b211da29acc60689",
+      "bytes": 4733
+    },
+    {
+      "file": "ack-mtk_disp_gamma.c",
+      "path": "drivers/gpu/drm/mediatek/mtk_disp_gamma.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/gpu/drm/mediatek/mtk_disp_gamma.c?format=TEXT",
+      "sha256": "eb4f4eb6e09fe5f808d135bef97cabd205fbe6937b0e49e68d2686b616b23fc7",
+      "bytes": 9623
+    },
+    {
+      "file": "ack-mtk-mutex.c",
+      "path": "drivers/soc/mediatek/mtk-mutex.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/soc/mediatek/mtk-mutex.c?format=TEXT",
+      "sha256": "3d62c9f315dc53c189f97febb3aaaea9a76528c84bf42515cf572c5f5f11f2e3",
+      "bytes": 43592
+    },
+    {
+      "file": "ack-drm_panel.h",
+      "path": "include/drm/drm_panel.h",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/include/drm/drm_panel.h?format=TEXT",
+      "sha256": "bdf2a6559ca06d773068f39154cd4d3badc1dfcfeee0151ee97c151a7e8dd6d4",
+      "bytes": 10740
+    },
+    {
+      "file": "ack-panel-Kconfig",
+      "path": "drivers/gpu/drm/panel/Kconfig",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/gpu/drm/panel/Kconfig?format=TEXT",
+      "sha256": "771736ce5ce2dfcdbab0743ed800be57984946999a025939baff91d42875e659",
+      "bytes": 37244
+    },
+    {
+      "file": "ack-panel-Makefile",
+      "path": "drivers/gpu/drm/panel/Makefile",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/gpu/drm/panel/Makefile?format=TEXT",
+      "sha256": "711e270b1a7c41f0be3d629f3fc3323478afb24cac5f54376dd58023db4f3da7",
+      "bytes": 8021
+    },
+    {
+      "file": "ack-lp855x_bl.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/video/backlight/lp855x_bl.c?format=TEXT",
+      "sha256": "cf79a50c63e0f6d055ee09c6a80d45f162836ebbdb1de1f665229a2ac69d5283",
+      "bytes": 13997
+    },
+    {
+      "file": "ack-lp855x.h",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/include/linux/platform_data/lp855x.h?format=TEXT",
+      "sha256": "4cc36483a8144af9c0d258dc37f4f1e28343d1e87724e2840220ee08456d6887",
+      "bytes": 4055
+    },
+    {
+      "file": "ack-mtk_ddp_comp.h",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/gpu/drm/mediatek/mtk_ddp_comp.h?format=TEXT",
+      "sha256": "2295097a26d1267027cf7b540c0a6860d6493b08bd349fbf52738f148509f63c",
+      "bytes": 10358
+    },
+    {
+      "file": "donor-mtk_disp_gamma.c",
+      "url": "https://github.com/bengris32/linux-f/blob/20951722df6ae1f6fecbfcea0a7d585118a06f3f/drivers/gpu/drm/mediatek/mtk_disp_gamma.c",
+      "sha256": "d129e817eba1530266dcddc0f2fb466639d6e0a088f2301d3f871cbf8a35a5c4",
+      "bytes": 9953
+    },
+    {
+      "file": "donor-mtk-mutex.c",
+      "url": "https://github.com/bengris32/linux-f/blob/20951722df6ae1f6fecbfcea0a7d585118a06f3f/drivers/soc/mediatek/mtk-mutex.c",
+      "sha256": "dcf44aa9999296d408f6cdd961caca7038aad753a35a23d3a3328a0764096e04",
+      "bytes": 45212
+    }
+  ],
+  "drm_master_input": {
+    "file": "ack-with-dsi-mtk_drm_drv.c",
+    "sha256": "fd7af1b187b34d4caf99a329354fe7b11da78d19c20ffc5c30a0a6bc5e24c3fd",
+    "derived_from": "evidence/dsi-source/mtk_drm_drv.c with the existing projects/firetabs-android/kernel/dsi-port/mt8163-dsi.patch master-file hunk only"
+  },
+  "observed_panel": {
+    "vendor": "TPV",
+    "build": "MP",
+    "source": "Allowlisted nt35521 panel variant from existing saved working boot DT; raw boot arguments remain private",
+    "power_gpio": 43,
+    "reset_gpio": 83,
+    "regulator": "mt6323 VGP3",
+    "backlight": "LP8557 at I2C0 address0x2c, REGISTER_BASED control",
+    "legacy_device_control": 71,
+    "eprom_table_property_mismatch": "Working board spells epprom_data; working driver reads eeprom_data, so that table is not loaded. Do not silently activate those writes.",
+    "backlight_i2c_pins": [
+      75,
+      76
+    ]
+  },
+  "hardware_execution": false,
+  "dsi_host_input": {
+    "file": "ack-with-dsi-mtk_dsi.c",
+    "sha256": "64b67ab57d171d171f1638cae1676c82ec3be6bbfe3ae4b66e055abd9dbd753b",
+    "derived_from": "evidence/dsi-source/ack-mtk_dsi.c with the existing dsi-port patch DSI-file hunks only"
+  }
+}

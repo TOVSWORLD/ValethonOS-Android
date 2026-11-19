@@ -1,0 +1,64 @@
+{
+  "scope": "Generic enforcing policy/filesystem regression on exact unmodified display Image; no physical display qualification",
+  "image_sha256": "25392d2aecafca17d14632261a1e015ef871d1208a96c8c37a3e6832e88ae22d",
+  "hardware_execution": false,
+  "physical_pixels_confirmed": false,
+  "vm_modes": {
+    "off": {
+      "passed": true,
+      "virtualization": "off",
+      "selinux_enforcing": true,
+      "policy_sha256": "bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd",
+      "probe_source_sha256": "8f684f2564d86deea24d831e6ad4a046b403291f5eab1982463ecf90ce60ac2d",
+      "runner_sha256": "4ef8c82735969fb8f0ce4500eea001f9fe1150eb060aaf8097e873fdf41d9d76",
+      "values": {
+        "VM_LABELS": 0,
+        "VM_PROC": 0,
+        "VM_SYS": 0,
+        "VM_DOMAIN": 0,
+        "VM_KMSG_OPEN": 3,
+        "VM_KMSG_READ": 64,
+        "VM_GENERIC_FLAGS_OPEN": -22,
+        "VM_UDC_DIR": 3,
+        "VM_CONFIGFS": 0,
+        "VM_NAMESPACE_BEFORE": 0,
+        "VM_REAL_CONFIGFS_SETUP_WITHOUT_BIND": 0,
+        "VM_REAL_CONFIGFS_CLEANUP": 0,
+        "VM_NAMESPACE_AFTER": 0
+      },
+      "ram_mib": 1536,
+      "cpu_count": 1,
+      "disk_attached": false,
+      "network_attached": false,
+      "tablet_commands": false
+    },
+    "on": {
+      "passed": true,
+      "virtualization": "on",
+      "selinux_enforcing": true,
+      "policy_sha256": "bb81388f3817c91e1f0590c67a208d83224c2d3a20f7cc00f4401553f8a0bacd",
+      "probe_source_sha256": "8f684f2564d86deea24d831e6ad4a046b403291f5eab1982463ecf90ce60ac2d",
+      "runner_sha256": "4ef8c82735969fb8f0ce4500eea001f9fe1150eb060aaf8097e873fdf41d9d76",
+      "values": {
+        "VM_LABELS": 0,
+        "VM_PROC": 0,
+        "VM_SYS": 0,
+        "VM_DOMAIN": 0,
+        "VM_KMSG_OPEN": 3,
+        "VM_KMSG_READ": 64,
+        "VM_GENERIC_FLAGS_OPEN": -22,
+        "VM_UDC_DIR": 3,
+        "VM_CONFIGFS": 0,
+        "VM_NAMESPACE_BEFORE": 0,
+        "VM_REAL_CONFIGFS_SETUP_WITHOUT_BIND": 0,
+        "VM_REAL_CONFIGFS_CLEANUP": 0,
+        "VM_NAMESPACE_AFTER": 0
+      },
+      "ram_mib": 1536,
+      "cpu_count": 1,
+      "disk_attached": false,
+      "network_attached": false,
+      "tablet_commands": false
+    }
+  }
+}

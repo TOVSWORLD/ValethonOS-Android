@@ -1,0 +1,11 @@
+{
+  "scope": "display-direct-fbfix-2",
+  "candidate_sha256": "c0fc6394d3bae58e2d4fb3318c6fdfbca508f95887b29fedd52de061fe1c5e40",
+  "nonce_sha256": "e8e11ec1d5daf9080e8a81051fc81b0e74de8947b9abff457fb6aad79e208ac6",
+  "runner_sha256": "805a41b6ab8044030f625218629bc1553a14410d346e04204f203c4919e6ffcd",
+  "owner_approved": false,
+  "maximum_candidate_writes": 1,
+  "maximum_original_restore_writes": 1,
+  "recovery_writes_allowed": false,
+  "automatic_trial_retry": false
+}

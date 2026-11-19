@@ -1,0 +1,54 @@
+{
+  "scope": "Known-working backlight path correction; not maintained-display acceptance",
+  "working_revision": "72940eb733af8df948cc216cb977cd8be9cba5a9",
+  "working_os_read_only_observation": {
+    "lp8557_node_present": true,
+    "lp8557_driver_bound": false,
+    "led_class": "lcd-backlight",
+    "platform_driver": "leds-mt65xx"
+  },
+  "saved_working_dtb": {
+    "node": "/soc/led@6",
+    "compatible": "mediatek,lcd-backlight",
+    "led_mode": 5,
+    "gpio": 43
+  },
+  "source_call_path": [
+    "MT65XX_LED_MODE_CUST_BLS_PWM = 5",
+    "disp_bls_set_backlight",
+    "disp_pwm_set_backlight",
+    "DISP_PWM0"
+  ],
+  "source_period_counts": 1024,
+  "source_divider": 0,
+  "maintained_backlight_pwm_config": "m",
+  "mandatory_lp8557_dependency_disproved": true,
+  "maintained_display_passed": false,
+  "sources": [
+    {
+      "file": "working-mtk_leds_drv.c",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/leds/mtk_leds_drv.c",
+      "sha256": "310f3e13fbbdd9cfaff7d4c735ba957d8ea486c1c5b609e7ca1b92b16533c791"
+    },
+    {
+      "file": "working-mt8163-leds.c",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/leds/mt8163/mtk_leds.c",
+      "sha256": "28cbf5d867ecc0400f2ca2a908f97c7a7ff892fbe8b15ca36e7dc41c81588b09"
+    },
+    {
+      "file": "working-mt8163-leds-sw.h",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/leds/mt8163/mtk_leds_sw.h",
+      "sha256": "b50bf899bc21e81229829459307f154cbdfa0a43385a7afa0cffc4447621bd3b"
+    },
+    {
+      "file": "working-ddp_pwm.c",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/video/mt8163/dispsys/ddp_pwm.c",
+      "sha256": "a699b6272cc2fbb39fa4d1093ddd00cc244ecd338b9aa8e4fa6e621806976052"
+    },
+    {
+      "file": "working-ddp_pwm.h",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/video/mt8163/dispsys/ddp_pwm.h",
+      "sha256": "159eaf3bb03cda9367a96147cd5542e087033c37ca99a1f772ddb5f75a155c75"
+    }
+  ]
+}

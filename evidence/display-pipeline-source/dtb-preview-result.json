@@ -1,0 +1,32 @@
+{
+  "scope": "Offline display DT preview only; no boot bundle or device action",
+  "offline_preview": true,
+  "physical_execution_admitted": false,
+  "source_sha256": "c9ba8f1e4e447f138a08e6afae68ed343daa7abc3d978b9062ece04116573e87",
+  "dtb_sha256": "449c7cdca4ca1479cfe3e344a80ca91f6670e84805dfb50eda85c7eb0afff3a8",
+  "resources": {
+    "mmsys": "/soc/syscon@14000000",
+    "ovl": "/soc/ovl@14007000",
+    "rdma": "/soc/rdma@14009000",
+    "color": "/soc/color@1400c000",
+    "ccorr": "/soc/ccorr@1400d000",
+    "aal": "/soc/aal@1400e000",
+    "gamma": "/soc/gamma@1400f000",
+    "dither": "/soc/dither@14010000",
+    "ufoe": "/soc/ufoe@14011000",
+    "dsi": "/soc/dsi@14012000",
+    "pwm": "/soc/pwm@14014000",
+    "mutex": "/soc/mutex@14015000",
+    "larb": "/soc/larb@14016000",
+    "smi": "/soc/smi@14017000",
+    "phy": "/soc/dsi-phy@10215000",
+    "iommu": "/soc/iommu@10205000",
+    "i2c": "/soc/i2c@11007000",
+    "gpio": "/soc/pinctrl@1000b000",
+    "vddio": "/soc/pwrap@1000d000/pmic/regulators/ldo_vgp3"
+  },
+  "edits": 79,
+  "panel_variant": "TPV/MP",
+  "memory_reservations_preserved": true,
+  "kernel_log_transfer_required": false
+}

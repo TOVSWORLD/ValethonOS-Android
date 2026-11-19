@@ -5,11 +5,14 @@ import json
 from pathlib import Path
 import subprocess
 USB_PATHS={'scripts/apply_usb_port.py','scripts/select_kernel_build_scope.py'}
-MODES={'first-draft','lab-retained','lab-log','clocks','clocks-pinctrl','providers','usb-providers','usb-acm-diagnostic','diagnostic','sym827-provider','mipi-provider','dsi-provider','pwm-provider'}
+MODES={'display-provider','first-draft','lab-retained','lab-log','clocks','clocks-pinctrl','providers','usb-providers','usb-acm-diagnostic','diagnostic','sym827-provider','mipi-provider','dsi-provider','pwm-provider'}
 
 
 def choose(event,changed=(),mode='diagnostic',argument_profile='none',emulated_boot=False):
     if event=='pull_request':
+        display=any(p in {'scripts/apply_display_port.py','scripts/install_douglas_tpv_panel.py','scripts/generate_douglas_tpv_sequence.py','scripts/build_display_provider.sh'} or p.startswith('projects/firetabs-android/kernel/display-port/') for p in changed)
+        if display:
+            return {'mode':'display-provider','argument_profile':'none','qemu':False}
         pwm=any(p in {'scripts/apply_pwm_port.py','scripts/build_pwm_provider.sh'} or p.startswith('projects/firetabs-android/kernel/pwm-port/') for p in changed)
         if pwm:
             if any(p.startswith('projects/firetabs-android/kernel/usb-port/') or p.startswith('projects/firetabs-android/kernel/usb-acm/') or p in {'scripts/apply_usb_port.py','scripts/usb_acm_config.py'} for p in changed):raise ValueError('Mixed USB/PWM source scope requires separate builds')

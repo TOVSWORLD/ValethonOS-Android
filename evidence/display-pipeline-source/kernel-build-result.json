@@ -1,0 +1,16 @@
+{
+  "workflow_passed": true,
+  "source_commit": "90655a3f1aacc013391e550a4f3e417cd6b03048",
+  "workflow_run": 44253355044,
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "workflow_repository_revision": "04824fb0b0d1214413005af1eb122570defb6072",
+  "manifest_sha256": "c46ba6717c7dc4e31a37349b1190a249fefeb5701d81a05e29ba64fcb9b5a543",
+  "image_sha256": "25392d2aecafca17d14632261a1e015ef871d1208a96c8c37a3e6832e88ae22d",
+  "config_sha256": "e4c37fb77d1da4e14eeb8fcba4974ee8c205eb8f931e71f8adcf23ec1f162fd6",
+  "system_map_sha256": "bfe4206f7b3e405c9fc806ac77e59e32b81c6634faedca3b2d05c4838ef5cba3",
+  "target_release": "6.18.34-valethon-draft1+",
+  "artifact_id": 14405831875,
+  "artifact_zip_sha256": "1cc69eb86c97165641ff807d80423c4179c490faa0fa23c074b90b276c3d7072",
+  "hardware_execution": false,
+  "display_pixels_qualified": false
+}

@@ -3,6 +3,9 @@
 #define _start unused_lab_start
 #include "lab_init.c"
 #undef _start
+#if VM_DISPLAY_ERRORS
+#include "display_errors.h"
+#endif
 static void note(struct ft_acm_io *io,const char *p){unsigned long n=0;while(p[n])n++;lab_note(io,p,n);}
 static void value(struct ft_acm_io *io,const char *name,long r){note(io,name);char out[]="+0000000000\n";out[0]=r<0?'-':'+';unsigned long v=r<0?0UL-(unsigned long)r:(unsigned long)r;for(int i=10;i>=1;i--){out[i]='0'+v%10;v/=10;}lab_note(io,out,sizeof(out)-1);}
 static int vm_write(void *ctx,const char *path,const char *data,unsigned long n){
@@ -29,6 +32,13 @@ __attribute__((noreturn))void _start(void){
  {struct ft_acm_state gadget={0};struct ft_acm_ops ops={ft_fs_mkdir,vm_write,ft_fs_link,ft_fs_unlink,ft_fs_rmdir};
  r=ft_acm_setup(&ops,&io,&gadget,"vm-probe-only","0x1209","0x0001",1);value(&io,"VM_REAL_CONFIGFS_SETUP_WITHOUT_BIND=",r);
  value(&io,"VM_REAL_CONFIGFS_CLEANUP=",ft_acm_cleanup(&ops,&io,&gadget));}
- value(&io,"VM_NAMESPACE_AFTER=",ll_usb_namespace(&io));note(&io,"VM_FILESYSTEM_PROBE_DONE\n");
+ value(&io,"VM_NAMESPACE_AFTER=",ll_usb_namespace(&io));
+#if VM_DISPLAY_ERRORS
+ {struct ll_context ctx={&io,-1,-1,0,0};ctx.deadline_ms=ll_now(&ctx)+2000;
+  struct de_result capture={0};de_snapshot(&ctx,&capture);
+  value(&io,"VM_DISPLAY_KMSG_ERROR=",capture.error);value(&io,"VM_DISPLAY_KMSG_FLAGS=",capture.flags);
+  value(&io,"VM_DISPLAY_KMSG_BYTES=",capture.bytes);value(&io,"VM_DISPLAY_KMSG_RECORDS=",capture.records);}
+#endif
+ note(&io,"VM_FILESYSTEM_PROBE_DONE\n");
  idle:for(;;){long ts[2]={60,0};ft_call(&io,101,(long)ts,0,0,0,0,0);}
 }

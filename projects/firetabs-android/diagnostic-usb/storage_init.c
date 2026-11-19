@@ -8,6 +8,12 @@
 #include "lab_labels.h"
 #include "lab_domain.h"
 #include "storage_readonly.h"
+#ifdef VALETHON_DISPLAY_TEST
+#include "display_status.h"
+#ifdef VALETHON_DISPLAY_ERRORS
+#include "display_errors.h"
+#endif
+#endif
 #include "lab_inputs.h" /* Builder-generated immutable policy blob and fresh nonce. */
 static long lab_call(void *ctx,long nr,long a,long b,long c,long d,long e,long f) {
  (void)ctx;
@@ -80,11 +86,25 @@ static int lab_run(struct ft_acm_io *io,int *stage) {
   struct ll_context context={io,serial.fd,-1,0,0};unsigned long now=ll_now(&context);
   if(!now||now>~0UL-20000){result=-110;goto finish;}
   context.deadline_ms=now+15000;
+#ifdef VALETHON_DISPLAY_TEST
+  struct fd_result status={0};(void)fd_probe(&context,&status);
+  unsigned char packet[FD_PACKET_BYTES];fd_packet(packet,lab_trial_nonce,&status);
+#else
   struct fs_result status={0};(void)fs_probe(&context,&status);
   unsigned char packet[FS_PACKET_BYTES];fs_packet(packet,lab_trial_nonce,&status);
+#endif
   now=ll_now(&context);if(!now||now>~0UL-4000){result=-110;goto finish;}
   context.deadline_ms=now+4000;
   *stage=11;result=ll_send(&context,packet,sizeof(packet));
+#ifdef VALETHON_DISPLAY_ERRORS
+  if(!result){
+   struct de_result diagnostics={0};now=ll_now(&context);
+   if(now&&now<=~0UL-2000){context.deadline_ms=now+2000;de_snapshot(&context,&diagnostics);}
+   else {diagnostics.error=-110;diagnostics.flags=8;}
+   now=ll_now(&context);
+   if(now&&now<=~0UL-4000){context.deadline_ms=now+4000;(void)de_send(&context,lab_trial_nonce,&diagnostics);}
+  }
+#endif
   /* Keep the owned endpoint alive until reset; no transfer ACK dependency. */
   if(!result)for(;;){const long ts[2]={1,0};ft_call(io,FT_SERIAL_NANOSLEEP,(long)ts,0,0,0,0,0);}
  }

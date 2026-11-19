@@ -1,0 +1,13 @@
+{
+  "ack_commit": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "targets": {
+    "drivers/gpu/drm/panel/Kconfig": "771736ce5ce2dfcdbab0743ed800be57984946999a025939baff91d42875e659",
+    "drivers/gpu/drm/panel/Makefile": "711e270b1a7c41f0be3d629f3fc3323478afb24cac5f54376dd58023db4f3da7"
+  },
+  "sources_sha256": {
+    "panel/douglas_tpv_core.h": "ef7da219bca101b5e79baded0297cd6ddc673aed19c18abc28028ebdbb591b0e",
+    "panel/douglas_tpv_sequence.h": "3211055fe20be791c4744a75f767c7860d51758771d4eb83c6947facd2f85922",
+    "panel/panel-amazon-douglas-tpv.c": "8756f5313381556ba1d8c33463eb809cf82f8b9891f1729a03a6bd30e00b55fb",
+    "include/drm/mediatek/mtk_dsi_mt8163.h": "49896c1d927410ca712d8f6d6bece8a28e167966a40fee1b28d7c0ba8fd87fe0"
+  }
+}

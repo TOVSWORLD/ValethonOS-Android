@@ -1,10 +1,103 @@
 # Douglas hardware and kernel implementation contract
 
+## Visible display/backlight achieved; touch/input next — November18,2026
+
+Corrected direct scope2 ran once after explicit staging/test approval. Owner
+confirmed VALETHON DISPLAY TEST and labelled red/green/blue bands physically
+visible. Maintained kernel/PID1 reached the actual display test. Carry this
+foundation forward; do not demand another screen or logging proof before touch.
+Some small error text was reported but unreadable; do not invent its contents.
+Target USB endpoint appeared five times about65.6–65.8s apart. Captured120 bytes
+fail the display-status header; no valid USB status or kernel snapshot. Physical
+visual evidence is affirmative; the packet is NOT a valid nonce-bound proof.
+Repeated boot resets, their cause, stable operation, brightness endpoints and
+suspend/resume remain unqualified; full#329 acceptance is not closed.
+One candidate p5 write/readback and one direct boot request; full300s observation.
+Afterward original helper ran once, original TWRP returned, original p5 restored
+once/full readback, p6 unchanged. Original Android boot/config/recovery, fresh
+completed boot and normal ADB verified. Current installation is original Android.
+No recovery/bootstrap/bootloader write, test replay or active capture/helper.
+Receipt direct-fbfix-runtime-result.json; private checkpoint out/display-direct-fbfix-2.
+Next agreed implementation is#330 Goodix touch/input: working source declares
+I2C0x5d, reset46, IRQ35. Check active controller/config/orientation before porting;
+current maintained GOODIX is modular, INPUT_EVDEV/I2C_MT65XX builtin. Prepare
+visual touch feedback on the achieved display, then one fresh qualified test.
+Alongside that, inspect inherited watchdog handling for repeated resets. Current
+Image has MEDIATEK_WATCHDOG builtin and boot-enabled handoff support, but the RAM
+bootstrap-derived DT disables watchdog@10007000. Historical watchdog candidate3
+predated observed kernel entry; reuse its source/VM findings, not its old test.
+Watchdog reset cause is not established and no watchdog-only/logging trial is
+selected. Keep invalid USB packet tracked separately; do not reopen logging gate.
+
+## Concrete direct-loader framebuffer-node collision fixed — November18,2026
+
+The direct input DT already contains fb-reserved-memory@98600000, imported from
+the live OS reservation map. Exact original LK callback25c54 unconditionally
+adds fb-reserved-memory. Its libfdt name lookup also matches unit-address suffixes;
+add returns-2/EXISTS, callback returns1, caller3dfe4 branches to failure return,
+and wrapper3ec20 loops before kernel handoff. This is a deterministic violated
+contract on that selected path, not proof it was the sole physical reset cause.
+Exact pinned LK callback AND libfdt instruction emulation reproduce failure on
+the tested DT. Renaming the preserved node to fw-reserved-memory@98600000 passes
+(return0); reg/no-map/compatible survive the callback unchanged. Removal is only
+a negative/control fixture, never the candidate fix. Runtime globals are modeled,
+not measured firmware state; receipt direct-loader-fb-collision-audit.json.
+Implemented a one-byte input node-name change in direct packaging. No reservation,
+RAM exclusion, phandle, panel setting, kernel, policy or capture is removed/changed.
+Builder verifies every other board property. Fresh unchanged enforcing PID1 built;
+1031 regression tests pass and all three exact-code callback controls pass.
+Fresh corrected package and exact-LK static loader audit passed; offline device
+guard accepts exact inputs under a disposable test authorization fixture, rejects
+unapproved templates and consumed scope1. Scope display-direct-fbfix-2 is ready
+locally for fresh owner attendance/approval, not staged to the lab. No new tablet
+action or test approval. Original Android remains verified restored.
+Receipt direct-fbfix-preparation.json; private checkpoint out/display-direct-fbfix-2.
+Consumed first direct test and unknown owner visual result stay historical.
+
 Current consolidation: November 17, 2026. Target: Amazon Fire HD 8 (2017),
 douglas/KFDOWI, MT8163; maintained-kernel candidate is the pinned ACK 6.18.34
 Image. This is the central hardware reference for implementation and test
-selection. It brings the existing source audits together; it does not claim that
-all board facts are known or that the maintained kernel boots on this tablet.
+selection. It brings the existing source audits together. Maintained-kernel/PID1/USB and
+read-only eMMC are now observed on this tablet; display remains unqualified.
+The current OS loading animation is a working display/backlight/graphics
+reference. Use its pinned board/driver setup when comparing the maintained path.
+
+## Pin configuration compatibility — November18,2026
+
+Scope10 reached DRM component matching/IOMMU attachment, then failed group43
+pin configuration. The working4.9 driver uses PIN_CONFIG_SLEW_RATE as a GPIO
+output-direction alias via mtk_pconf_set_direction; it does not program a
+pad-slew register. output-low/high already select output direction. Maintained
+ACK maps those properties to PIN_CONFIG_LEVEL, which is supported, but rejects
+SLEW_RATE. Actual working dispatcher/helper and ACK dispatcher C tests prove
+removing the redundant alias preserves final output level/direction on43/83.
+Keep the known-working behavior; do not invent a new slew setting or port a
+register write the working handler never made. Same Image/PWM/MM0/policy/capture.
+
+## Active multimedia-domain ancestry correction — November18,2026
+
+Scope9's actual DT still disabled /soc/syscon@10006000, inherited from the
+bootstrap DISABLED list. Its power-controller child supplies domain0/MM to
+display. Corrected recipe enables the parent/controller and MM0 only, disables
+the other seven domains, validates MM_SEL51 and checks selected-resource
+ancestors. Pinned provider probes only available domain children. Kernel Image,
+policy and capture are unchanged; scope10 tests/seven controls/final offline
+validation pass. Corrected physical display remains pending.
+
+## Active backlight correction — November18,2026
+
+Runtime/saved-DT/source comparison disproves the earlier assumption that the
+LP8557 node must drive this board. Returned working Android leaves0-002c unbound
+and uses lcd-backlight/leds-mt65xx; actual working DT led_mode5 maps to
+CUST_BLS_PWM/disp_bls_set_backlight/DISP_PWM0. The declared LP8557 DT node is not
+evidence of an active driver. Candidate's mandatory LP8557 backlight phandle
+therefore blocks panel registration unnecessarily. Correct to the working PWM
+path, retaining panel power ownership and source-backed timing. Maintained
+The previous Image had BACKLIGHT_PWM modular; new source616de189/run44273014513
+builds it builtin. Corrected DT connects PWM0, pin59 function1, period39385ns
+(1024 clocks at the declared26MHz main clock, divider0). Panel owns GPIO43.
+Compiled-image VM and offline DT checks pass; physical display is still pending.
+[Source and read-only binding proof](../../evidence/display-pipeline-source/working-backlight-path-correction.json).
 
 ## How to use this reference
 
@@ -270,10 +363,16 @@ See [IOMMU/SMI](../../projects/firetabs-android/kernel/dtb/IOMMU-SMI-BINDINGS.md
 ## 12. Display panel, DSI and backlight
 
 Legacy panel driver is NT35521 Douglas,800×1280, four DSI lanes, RGB888. It contains
-vendor-ID-dependent timing and command tables, GPIO110 rail control and GPIO65
-reset sequencing. Do not flatten its variants into one timing or assume a
-framebuffer address implements the panel. Legacy board also declares LP855x
-backlight at I2C0x2c; a PWM driver compile is not proof of the exact backlight path.
+vendor-ID-dependent timing and command tables. Its GPIO110/65 comments are
+stale: pinned working4.9 board pinctrl and saved live DT use GPIO43 for panel
+power and GPIO83 for reset. This tablet's already captured panel variant is
+TPV/MP; preserve that specific sequence and VGP3 I/O supply. Do not flatten its variants into one timing or assume a
+framebuffer address implements the panel. The working board declares LP8557
+backlight at I2C0x2c; its active driver uses REGISTER_BASED brightness with config
+0x47. A PWM driver compile is not proof of that backlight path. The working DTS
+epprom_data spelling does not match its driver's eeprom_data lookup, so the ROM
+table is not loaded. Do not silently activate these settings during the port.
+[Exact public source pins](../../evidence/display-pipeline-source/sources.json).
 
 Required implementation: panel identification, regulator/reset/delay/DSI commands,
 MIPI PHY, DSI host, MMSYS route, DRM graph, backlight and scanout. Preserve source

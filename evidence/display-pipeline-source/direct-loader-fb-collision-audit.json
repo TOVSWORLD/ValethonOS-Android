@@ -1,0 +1,65 @@
+{
+  "scope": "Exact LK memory-fixup callback/libfdt emulation; conditional offline proof, not observed hardware cause",
+  "lk_sha256": "7637da8754a7494f8907d07c7b25532476959956d1cfea856ab8ea6940176056",
+  "input_dtb_sha256": "7b155342305bc000672386000862df6b2631b0202d014c09a8f4448ad1cba769",
+  "audit_script_sha256": "d1792b76fdcc8a678d7c9ad247f17134371613307eb0dc1b4736ffa247a98677",
+  "host_fixture_library_sha256": "acc0c054ab193dc6de4674ec0d69bdd2245ff7fb2858726bf3aa38c266230272",
+  "host_library_role": "FDT fixture preparation/property comparison; LK callback/libfdt instructions run in emulator",
+  "fix_changed_bytes": 1,
+  "cases": [
+    {
+      "returned": true,
+      "instructions": 1011925,
+      "add_subnode_return": [
+        -2
+      ],
+      "mode": "original",
+      "callback_return": 1
+    },
+    {
+      "returned": true,
+      "instructions": 1029019,
+      "add_subnode_return": [
+        27256
+      ],
+      "mode": "preserved_rename",
+      "callback_return": 0,
+      "reservation_properties_retained_after_callback": true
+    },
+    {
+      "returned": true,
+      "instructions": 1025773,
+      "add_subnode_return": [
+        27256
+      ],
+      "mode": "removal_control_only",
+      "callback_return": 0
+    }
+  ],
+  "synthetic_runtime_globals": true,
+  "firmware_hardware_executed": false,
+  "hardware_reset_cause_proven": false,
+  "all_controls_passed": true,
+  "windows": [
+    {
+      "offset": "0x25c54",
+      "bytes": 424,
+      "sha256": "db38847d8a4e32b438b7064d96982de5aa2d395d1addc3a50544fe61c6da13e7"
+    },
+    {
+      "offset": "0x46d48",
+      "bytes": 214,
+      "sha256": "3772c25a0efeeb3115766ae7d2a5cd6cd0ce1b339bf9f01d3c54be582d014d44"
+    },
+    {
+      "offset": "0x3dfd4",
+      "bytes": 20,
+      "sha256": "4a9f8369a9ffd802fa4d664b4f23c3100a59f1392a412a7dcc89def969b48106"
+    },
+    {
+      "offset": "0x3ec10",
+      "bytes": 18,
+      "sha256": "8547576a339192134a0392d4da16763bda7a029735fbab0dc7140c2c68c7540b"
+    }
+  ]
+}
