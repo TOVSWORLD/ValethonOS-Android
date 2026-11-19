@@ -1,0 +1,53 @@
+{
+  "scope": "Observed working driver identity plus source-backed touch integration contract; no maintained touch test",
+  "device": "douglas",
+  "working_binding": {
+    "i2c_bus": 0,
+    "address": "0x5d",
+    "compatible": "goodix,gt9xx",
+    "driver": "Goodix-TS",
+    "input_name": "goodix-ts"
+  },
+  "working_input_axes": {
+    "x_max_inclusive": 800,
+    "y_max_inclusive": 1280,
+    "slots_max_inclusive": 15
+  },
+  "working_cached_configuration": {
+    "bytes": 186,
+    "sha256": "a9242d29e3f9cfcaffbe71445c3446f0adf69f3738bcfa226cad7ac7703079e7",
+    "public_equivalent_groups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sensor_id_known": false,
+    "live_read_all_zero_unusable": true,
+    "native_size": [
+      800,
+      1280
+    ],
+    "contacts": 10,
+    "interrupt_trigger_index": 1
+  },
+  "pins": {
+    "reset_gpio": 46,
+    "irq_gpio": 35,
+    "irq_eint_line": 46,
+    "irq_type": 2,
+    "swap_xy_in_working_driver": false
+  },
+  "supplies": {
+    "analog": "vgp2",
+    "analog_microvolts": 3000000,
+    "io": "vio18",
+    "io_microvolts": 1800000
+  },
+  "maintained_driver": "Existing pinned Goodix with legacy-compatible alias only; runtime chip-ID selection retained",
+  "maintained_config_blob": "Public source186-byte table, exact cached working profile, goodix/douglas-gt9xx.cfg",
+  "firmware_flash_update_enabled": false,
+  "test_plan": "Builtin Goodix, source-backed DT and visual3x3 touch grid; inherited watchdog handling alongside it",
+  "hardware_test_run": false,
+  "source_manifest": "evidence/touch-input-source/sources.json"
+}

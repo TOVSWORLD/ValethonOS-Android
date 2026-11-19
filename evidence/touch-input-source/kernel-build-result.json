@@ -1,0 +1,29 @@
+{
+  "scope": "Authenticated hosted touch-provider build; no physical touch qualification",
+  "workflow_passed": true,
+  "workflow_run": 44438104081,
+  "source_commit": "1525308e981f48a6abd4a8122093f478053382a0",
+  "source_tree": "eb50c4dc0f637ee573f067a8d838023cc4328bf7",
+  "workflow_repository_revision": "ccb8f413cb657d31e2110d0296736982ee25d03f",
+  "workflow_merge_parents": [
+    "3c366f982d0d17a133e2746ca7c6e9af2cdb0ef1",
+    "1525308e981f48a6abd4a8122093f478053382a0"
+  ],
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "artifact_id": 14490621714,
+  "artifact_sha256": "bab7e19db17e34d939b0ed15ea5e10cfe45b4c3b1c4d4d796d3c69ffc58db0bb",
+  "manifest_sha256": "95e68eb99a278554e186d8e3b252521429522abb456d3b8d4f9ea96560afbca5",
+  "image_sha256": "d93f2ed5dad7f60abe032fef48fa05f93901bb493a02211d399c7d5b779ec27f",
+  "config_sha256": "7bb4a41ded2ea26879c4376aad786a9f27c34ccf194901c3c8472c17069ca7fe",
+  "config_difference_from_observed_display": {
+    "CONFIG_TOUCHSCREEN_GOODIX": [
+      "m",
+      "y"
+    ]
+  },
+  "target_release": "6.18.34-valethon-draft1+",
+  "manifest_files_verified": 14,
+  "goodix_alias_present": true,
+  "goodix_linked": true,
+  "physical_touch_verified": false
+}

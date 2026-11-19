@@ -1,5 +1,81 @@
 # Next milestone execution plan
 
+## Touch grid achieved; remain in TWRP for graphics test — November 18, 2026
+
+Owner confirmed all nine touch panels turned green and that the green grid was
+still displayed after the full five-minute window. One candidate write/full
+readback and one direct boot ran. The original recovery helper ran once/exited0.
+The original-boot restore preflight stopped at a recovery read-size check before
+any write or operation receipt. Subsequent exact bounded full reads verified the
+touch candidate on p5 and unchanged original p6. Owner then explicitly directed:
+"Just work on the next test and load that." Keep original TWRP running and the
+qualified touch candidate on p5; do not reboot to Android or perform the deferred
+original restoration. Original rollback image remains ready. All helper/restore
+workers have stopped. Power-untouched confirmation was not explicitly supplied.
+
+The physical display/touch foundations are achieved. Full pixel-edge accuracy,
+simultaneous contacts and suspend/wake acceptance remain open; do not close#330.
+Next outcome is#331 Android graphics/userspace: source-match Mali-T720 resources,
+Panfrost/Mesa and DRM display composition, build one coherent visible rendering
+candidate, qualify it offline, then use the existing TWRP for its installation.
+Keep current display/touch and original rollback; no repeat touch-only or logging
+proof gate. No next graphics candidate is qualified or loaded yet. Receipt:
+evidence/touch-input-source/touch-runtime-result.json. Private current device and
+execution state: out/touch-input-1/test-case-1/parked-twrp-state-private.json.
+
+## Touch candidate built; exact-kernel VM checks passed — November 18, 2026
+
+The maintained Goodix kernel build succeeded in GitHub run 44438104081.
+Source 1525308e981f48a6abd4a8122093f478053382a0 and workflow merge commit
+ccb8f413cb657d31e2110d0296736982ee25d03f have the same tree. The downloaded
+artifact digest and all 14 manifest files verified. Goodix is the only kernel
+configuration change from the observed display baseline: module to builtin.
+The source-backed DT uses GPIO35/EINT46, reset46, I2C0 pads75/76 and VGP2 at
+3.0V with VIO18 at1.8V. RAM reservations and the corrected loader framebuffer
+node survive. Enable the existing watchdog driver for inherited heartbeat;
+this does not establish the prior reset cause or stable hardware operation.
+
+The enforcing touch component compiled in the approved isolated lab directory.
+All 1,041 repository tests pass in the final source regression run.
+All16 forbidden-privilege compiler controls passed. On the exact new kernel,
+both virtualization modes pass real virtual-evdev read-only open/idle-read,
+denied ioctl, denied relabel and denied write-open checks. The first VM fixture
+incorrectly assumed no virtual input device; its failed result is retained.
+These results are VM policy checks, not physical Goodix qualification.
+
+A fresh direct touch package is prepared offline. Static original-loader audit
+and disposable authorization-fixture checks pass; missing approval and the
+historical display scope are rejected. No real owner authorization file was
+created and no tablet command was run. Original Android remains restored.
+The visible acceptance is all nine large blue panels turning green as the owner
+touches them. USB display status is sent before the touch window, its send result
+does not gate the grid, and it cannot prove touch. No raw events are stored.
+Next: publish the exact preparation, obtain fresh attendance/staging/test
+approval, run one direct test, then restore and verify original Android.
+No new logging proof gate. Receipts: evidence/touch-input-source/
+kernel-build-result.json and touch-preparation-result.json.
+
+## Touch/input source integration started — November18,2026
+
+Work moved to codex/issue-330-touch-input, stacked on observed display foundation.
+Read-only restored-OS metadata confirms Goodix-TS at I2C0x5d/goodix,gt9xx and
+input goodix-ts; capability axes800/1280, direct multitouch. Cached186-byte
+configuration exactly matches pinned public hvt groups0-3. Sensor/chip ID is not
+claimed from the all-zero live-read section; it is unusable evidence.
+Pinned working driver/DTS and maintained Goodix source retained. GPIO35 maps to
+EINT46 (not IRQ35); resetGPIO46, falling edge from profile. Working driver sets
+VGP2 analog3.0V; IO1.8V. Preserve source profile, not guessed coordinates/config.
+Minimal maintained driver change adds legacy goodix,gt9xx compatible alias; its
+runtime chip-ID selection remains. Dedicated touch-provider build keeps observed
+display setup and makes GOODIX builtin, retaining Goodix/watchdog object evidence.
+Public configuration generator reproduces the known cached186-byte profile and
+rejects changes. All1035 tests pass; no new Image build or touch hardware pass yet.
+Next run exact touch kernel build while preparing DT/supplies/EINT, enforcing
+read-only evdev access and large visual3x3 feedback. Handle inherited watchdog
+alongside this test; no new logging proof gate or physical test authorized.
+Original Android remains restored; raw working-OS metadata private in out/touch-input-1.
+Source contract: projects/firetabs-android/kernel/touch-port/contract.json.
+
 ## Visible display/backlight achieved; touch/input next — November18,2026
 
 Corrected direct scope2 ran once after explicit staging/test approval. Owner

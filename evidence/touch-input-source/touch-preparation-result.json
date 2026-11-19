@@ -1,0 +1,97 @@
+{
+  "scope": "Offline touch candidate qualification; physical execution not admitted",
+  "kernel_build_receipt": "evidence/touch-input-source/kernel-build-result.json",
+  "kernel_image_sha256": "d93f2ed5dad7f60abe032fef48fa05f93901bb493a02211d399c7d5b779ec27f",
+  "policy_sha256": "86a082ac70ddc1778aa6242b364c3d6c24620321196bd92952f5fcedd745252c",
+  "negative_privilege_controls": {
+    "enforcement_toggle": true,
+    "policy_reload": true,
+    "block_read": true,
+    "reboot_capability": true,
+    "pid1_fork": true,
+    "pid1_domain_escape": true,
+    "block_write": true,
+    "block_ioctl": true,
+    "block_create": true,
+    "block_relabel": true,
+    "other_block_open": true,
+    "input_write": true,
+    "input_ioctl": true,
+    "input_create": true,
+    "input_relabel": true,
+    "input_block_open": true
+  },
+  "component_artifacts": {
+    "init": {
+      "bytes": 61008,
+      "sha256": "e23c2cd828160a5935cf76e9aeb067cba7e8c6bf312ab0452b0fc799861acda1"
+    },
+    "initramfs.cpio.gz": {
+      "bytes": 18905,
+      "sha256": "7306c2560bb4fb6763c98d8b860a5ac47e00856c16402fb5a8bc51e926568801"
+    }
+  },
+  "touch_config_sha256": "a9242d29e3f9cfcaffbe71445c3446f0adf69f3738bcfa226cad7ac7703079e7",
+  "dtb_sha256": "ad1f3a69cc837468861a9b1c389cfa5c6698f41679f3473b450a0391caf46f73",
+  "boot_partition_image_sha256": "cd53313a70f5471ac5f033f145340f1c0766a797e41cace1aee3f248561d44af",
+  "direct_loader_static_audit_passed": true,
+  "memory_reservations_preserved": true,
+  "watchdog_enabled_in_dt": true,
+  "watchdog_reset_cause_claimed": false,
+  "virtual_machines": [
+    {
+      "scope": "Enforcing static evdev-node VM policy only",
+      "passed": true,
+      "failure": null,
+      "virtualization": "off",
+      "kernel_sha256": "d93f2ed5dad7f60abe032fef48fa05f93901bb493a02211d399c7d5b779ec27f",
+      "policy_sha256": "86a082ac70ddc1778aa6242b364c3d6c24620321196bd92952f5fcedd745252c",
+      "vm_initramfs_sha256": "b8f2f71d7c1230def1aa054c623b26626c67dded3efc305797838a3a3d9c17b0",
+      "boot_log_sha256": "e23b05cc895aafe8e38cbfa6edb47e84d669fd210d5f9f43e2d532a8eec0ec70",
+      "vm_only": true,
+      "physical_touch_verified": false,
+      "virtual_evdev_idle_read_verified": true,
+      "network_attached": false,
+      "tablet_commands": false,
+      "elapsed_seconds": 5.836
+    },
+    {
+      "scope": "Enforcing static evdev-node VM policy only",
+      "passed": true,
+      "failure": null,
+      "virtualization": "on",
+      "kernel_sha256": "d93f2ed5dad7f60abe032fef48fa05f93901bb493a02211d399c7d5b779ec27f",
+      "policy_sha256": "86a082ac70ddc1778aa6242b364c3d6c24620321196bd92952f5fcedd745252c",
+      "vm_initramfs_sha256": "b8f2f71d7c1230def1aa054c623b26626c67dded3efc305797838a3a3d9c17b0",
+      "boot_log_sha256": "a09e129a3044420530a41bb050273ee905de2702a83a39f1adaf849a356fe993",
+      "vm_only": true,
+      "physical_touch_verified": false,
+      "virtual_evdev_idle_read_verified": true,
+      "network_attached": false,
+      "tablet_commands": false,
+      "elapsed_seconds": 5.897
+    }
+  ],
+  "initial_vm_fixture_failure": {
+    "cause": "Fixture wrongly assumed virt had no evdev device; actual read-only open succeeded",
+    "correction": "Check virtual evdev open, idle nonblocking read, and denied ioctl/relabel; both modes pass",
+    "physical_test_run": false
+  },
+  "guard_controls": {
+    "exact_package_under_disposable_authorization_fixture": true,
+    "missing_authorization_rejected": true,
+    "historical_display_scope_rejected": true,
+    "device_commands_executed": false
+  },
+  "physical_touch_verified": false,
+  "raw_input_events_stored": false,
+  "new_tablet_test_authorized": false,
+  "original_android_state": "Restored and verified after preceding display test; no touch test started",
+  "remaining": [
+    "Publish and review exact source/candidate",
+    "Fresh attended direct-test staging authorization",
+    "One direct touch boot, owner tests all nine panels",
+    "Restore original boot and verify original Android"
+  ],
+  "repository_tests_passed": 1041
+}
