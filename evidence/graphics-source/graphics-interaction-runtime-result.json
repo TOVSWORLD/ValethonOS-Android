@@ -15,8 +15,8 @@
   "interaction_window_seconds": 300,
   "owner_observation_pending": false,
   "interaction_qualified": true,
-  "return_to_twrp_verified": false,
-  "return_helper_armed": true,
+  "return_to_twrp_verified": true,
+  "return_helper_armed": false,
   "original_android_restoration_requested": false,
   "owner_observation": "No TAP TO START prompt seen; cube moving and responding to taps and dragging",
   "prompt_observed": false,
@@ -26,14 +26,21 @@
   "interaction_observed": true,
   "observation_window_finished": true,
   "limits": [
-    "Owner confirms actual animation and tap/drag response; no frame-rate or full-duration stability measurement claimed.",
+    "Owner confirms actual animation and tap/drag response; no frame-rate, full-duration stability or API-conformance measurement claimed.",
     "Prompt was not seen; its disappearance/start timing is unresolved and non-blocking.",
     "USB stayed connected; disconnected portable operation was not exercised.",
-    "Original TWRP return remains pending."
+    "Android composer and maintained Android setup/home remain unqualified."
   ],
   "usb_disconnected_during_test": false,
   "owner_confirmed_usb_stayed_connected": true,
   "qualification_scope": "Owner-observed standalone GPU cube animation and tap/drag response; not Android composer/API conformance or broad stability",
   "host_observation_seconds_after_owner_report": 300,
-  "continuous_animation_duration_verified": false
+  "continuous_animation_duration_verified": false,
+  "original_recovery_unchanged_after_return": true,
+  "retained_graphics_image_verified_after_return": true,
+  "return_helper_complete": true,
+  "return_helper_launches": 1,
+  "return_helper_exit_code": 0,
+  "active_workers": 0,
+  "test_complete": true
 }

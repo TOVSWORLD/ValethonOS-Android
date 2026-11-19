@@ -1,5 +1,67 @@
 # Next milestone execution plan
 
+## Three grouped work packages to maintained Android setup/home — November 19, 2026
+
+Owner explicitly requested grouping the remaining steps. The next major outcome
+is333: maintained Android setup/home on the observed kernel, usable display/touch,
+enforcing SELinux, USB/ADB and verified recovery. Standalone animated GPU/touch
+is achieved and original TWRP/retained exact p5/original p6 are verified.
+
+1. INTEGRATE ONE ANDROID STACK (active331, feeding333): pin platform/device/ABI,
+   Binder, firmware/HAL sources; connect allocator/composer/EGL, Android init/adbd
+   and enforcing policy to the working maintained kernel. Resolve the documented
+   T720 API compatibility limits in this integration, preserving working hardware.
+   Exit: a coherent pinned source/device configuration and buildable integration.
+2. BUILD AND QUALIFY ONE COMPLETE CANDIDATE: reproducible Android/kernel images,
+   artifact/source manifest, offline/package/interface checks and concrete exact
+   storage/backup/rollback procedure. Establish actual host capacity before bulk
+   source downloads/builds. Exit: a reviewable integrated test package; obtain any
+   necessary concrete resource/device-write approval only after preparation.
+3. RUN THE INTEGRATED SETUP/HOME TEST: one attended end-to-end candidate attempt,
+   checking setup/home, touch/graphics, SELinux enforcing, USB/ADB and recovery.
+   Fix failures within these packages and repeat only when a concrete change needs
+   physical qualification. Exit: recorded major outcome, or explicit remaining
+   failures. Full release/update/security/peripheral/soak acceptance remains open.
+
+These are three work packages, not a promise of three physical tests or dates.
+Source changes, builds and offline checks stay internal to the packages; do not
+turn each provider or repair into a new owner milestone. No repeat standalone
+cube/logging proof for achieved hardware. Record new findings in existing331/333
+and preserve prior failed experiments. Primary active PR456/331 remains open for
+Android composer/API integration; do not claim333 or stable release complete.
+
+## Interactive GPU milestone achieved; original TWRP verified — November 19, 2026
+
+Owner confirms animated cube responds to taps and dragging on exact maintained
+kernel candidate628a164112f5c4d09d7c55478b7e57b991933f10eb406945bf1f4502d946a34b.
+The installed program rejects non-T720/software renderers and validates GPU
+pixels before scanout. USB stayed connected; portable unplugged operation was
+not exercised. Start prompt was not seen; record that UX detail without another
+cube-only test. This qualifies standalone functional GPU interaction, not full
+API conformance, measured frame rate, broad stability or Android composition.
+
+One candidate write/full readback and one software-requested test boot ran.
+The300second host observation after owner report finished. Original recovery
+helper ran exactly once/exited0. Selected original TWRP3.3.1-0, retained exact
+interaction p5 and unchanged original p6 verified by full bounded reads. All
+workers ended. Original Android restoration remains deferred by owner direction;
+no more Power steps or additional test selected. Receipt:
+evidence/graphics-source/graphics-interaction-runtime-result.json.
+Private final state: out/graphics-source-preparation-1/test-case-3/.
+
+NEXT MAJOR: maintained Android boots to usable setup/home on this kernel with
+working display/touch, enforcing SELinux, USB/ADB and verified recovery (#333).
+Next engineering work stays within331 graphics/userspace integration: pin the
+Android source/device/ABI/Binder/firmware/HAL inputs against existing audits;
+integrate allocator/composer/EGL and Android init/adbd/enforcing policy; build
+reproducible artifacts and a concrete storage/rollback plan; then qualify one
+integrated setup/home candidate. Resolve documented T720 GLES2 limitations
+against actual Android rendering/declared compatibility, without pretending the
+standalone demo passes Android API/composer requirements. Carry achieved kernel,
+read-only storage, display, touch and GPU forward. No repeat cube/logging-proof
+gate, old-kernel detour or new standalone hardware milestone. Broader330/331 and
+full333 release/update/security acceptance stay open.
+
 ## Interactive GPU rendering achieved; recovery return armed — November 19, 2026
 
 Owner confirms cube animation and tap/drag response on exact candidate628a1641...
