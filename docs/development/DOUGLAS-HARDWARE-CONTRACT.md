@@ -18,7 +18,10 @@ Pinned RenderEngine has GLES2 fallback; select skiaglthreaded/Ganesh GL and adve
 GLES2 only. Keep enforcing SELinux and authenticated ADB. VINTF/HAL closure, memory,
 image fit and integrated Android execution remain unqualified.
 
-The source-only kernel build is active. Integration includes BinderFS, built-in
+The source-only kernel build is active. Isolated Kconfig preflight resolved all
+requested Android/APEX features; pinned NFS Kconfig explains its existing pNFS
+helper promotion when device-mapper becomes built-in. This is not final compile
+or hardware execution. Integration includes BinderFS, built-in
 FUSE/FunctionFS and source-derived loop/dm-verity/EROFS APEX requirements. Preserve
 the working hardware configuration and check the resolved bounded delta. No new
 tablet test or writes have occurred. Next: finish kernel compile, validate the full

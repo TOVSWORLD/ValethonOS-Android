@@ -9,7 +9,7 @@ class KernelDelta(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    parent=Path(d)/'parent';result=Path(d)/'result'
    def write(path,values):path.write_text(''.join(k+'='+v+'\n' for k,v in values.items()))
-   write(parent,hardware);write(result,hardware|required)
+   write(parent,hardware|{'CONFIG_PNFS_BLOCK':'m'});write(result,hardware|required|{'CONFIG_PNFS_BLOCK':'y'})
    self.assertIn('CONFIG_DM_VERITY',module.check(parent,result))
    for changes in [{'CONFIG_SECURITY_SELINUX':'n'},{'CONFIG_DRM_PANFROST':'m'},{'CONFIG_DEBUG_KERNEL':'y'},{'CONFIG_ANDROID_BINDERFS':'n'}]:
     write(result,hardware|required|changes)
