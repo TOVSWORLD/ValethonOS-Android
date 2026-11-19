@@ -1,5 +1,87 @@
 # Current milestone — interactive GPU achieved; next maintained Android setup/home, November19,2026
 
+## Expanded product published; continuity publication approved — November 19, 2026
+
+Implementation commit a979499ddd09f09595fa315fa2a6c3b517fd4b4f is published in
+PR456; all 34 implementation/artwork/evidence/test/plan file hashes were verified.
+Issue333 and the PR reflect actual contents. The build source archive derives
+from that published commit and all source/graphics/kernel input hashes match.
+
+Owner explicitly approved the four historical continuity-document updates after
+automatic review objected to their old operational/device history. Private local
+execution paths, process identifiers and address-assignment patterns have been
+sanitized; dated outcomes, failed experiments, source/artifact hashes and public
+evidence links remain. Publication permission for these files is resolved.
+
+Full Android product graph/image and tablet runtime remain unqualified. Next is
+complete product graph and image work, not another standalone kernel/logging test.
+
+## Publication authorized — November 19, 2026
+
+Owner explicitly approved publishing the38staged source/artwork/test/documentation
+files to existing draft PR456 after automatic review rejected the earlier upload.
+That publication approval is resolved; do not ask for it again. Private runner
+operations remain outside the payload. Full Android build has not launched.
+The expanded candidate source and local checks are recorded below.
+
+## Expanded candidate source prepared — November 19, 2026
+
+Explicitly selected webview and useful apps/tools; added ordinary, manually
+launched permission-free offline Valethon Readiness app (HTML/JS/touch/keyboard).
+Pinned trunk_staging selects WebView145.0.7632.218 with an ARM APK in the locked
+source; actual product graph/APK/provider loading remains unqualified. Canonical
+intercom animation now regenerates from hash-checked artwork during staging,
+so stale generated ZIPs cannot silently enter the candidate.
+
+Storage decision documented: retain volatile /data, preserve original userdata.
+Compiled parent lacks FS_ENCRYPTION/DM_CRYPT and secure key integration is absent;
+no pretend persistent-data switch. See android-integration/PRODUCT-CONTENTS.md
+and STORAGE-DECISION.md. Added actual-build installed-output/provider and expanded
+sparse-image-size audit; source declarations alone cannot pass it.
+
+Local checks: 1,078 tests, nine skipped, no failures; readiness Java compiles
+against local SDK36 and manifest/assets link, JS nine-tile behavior passes, fresh
+product staging passes. This is not a full Android17 Soong build or tablet boot.
+Next: freeze/publish exact updated source and run complete product graph/image
+work with the new audit; no repeat kernel/logging-only or standalone cube test.
+
+## Public product summary synchronized — November 19, 2026
+
+Owner explicitly approved publishing the product-content and canonical animation
+summary to public issue #333. Direct GitHub update and exact readback passed;
+all previous issue history is retained. No infrastructure/cost details included.
+Animation implementation remains local, with packaging/staging checks passed;
+full Android build and tablet playback are still pending.
+
+## Canonical intercom animation — November 19, 2026
+
+Owner approved expanded contents preparation and requested the actual Valethon
+G3 intercom background plus canonical brand guides, with smooth sequential
+construction inspired by Lineage. Found ChatGPT chat **Valethon G3 Background
+Design** and the matching downloaded artwork; exact source is now retained in
+android-integration/branding with provenance hashes. Supersedes improvised logo.
+Source-integrated interruptible 24-fps reveal/activity animation preserves the
+real logo; approximately 10.3 MiB archive and 35.2 MiB decoded RGBA frame payload
+before overhead. Product staging includes it. Full build, memory fit and tablet
+playback remain unqualified; verify in grouped T1, no extra standalone boot.
+
+## Expanded first-build scope — owner direction November 19, 2026
+
+Include known useful later components when they do not jeopardize build/boot or
+existing diagnostics. Track the concrete inclusion, optional-service isolation,
+WebView, app tooling, branding, persistence decision and fit requirements in
+[BUILD-CONTENTS-PLAN.md](../../projects/firetabs-android/android-integration/BUILD-CONTENTS-PLAN.md).
+This is expanded preparation scope, not a compiled image or resource launch
+approval. Keep unresolved hardware honest and optional applications off the
+critical boot path; no repeat standalone logging/kernel proof gate.
+
+Current owner direction: review actual first Android image contents and bundle
+known future requirements before building. Check WebView provider, ARM32 apps,
+network integration and persistent-data strategy against product inclusion/fit;
+do not confuse source-manifest entries with shipped functionality. First-home
+profile currently uses volatile /data. Keep grouped tests; full build approval
+is pending content review, not granted by the completed infrastructure test.
+
 ## Integrated Android kernel compiled; complete Android image next — November 19, 2026
 
 The ACK6.18 kernel with BinderFS, built-in FUSE/ADB FunctionFS and APEX
@@ -104,7 +186,7 @@ interaction p5 and unchanged original p6 verified by full bounded reads. All
 workers ended. Original Android restoration remains deferred by owner direction;
 no more Power steps or additional test selected. Receipt:
 evidence/graphics-source/graphics-interaction-runtime-result.json.
-Private final state: out/graphics-source-preparation-1/test-case-3/.
+Private final state: [private execution receipt retained locally]
 
 NEXT MAJOR: maintained Android boots to usable setup/home on this kernel with
 working display/touch, enforcing SELinux, USB/ADB and verified recovery (#333).
@@ -133,7 +215,7 @@ integration toward333 setup/home, not another cube/logging-proof gate.
 Original recovery helper armed once after window; owner instructed to unplugUSB,
 hold onlyPower40seconds, release/wait5seconds/reconnect same lab cable. TWRP
 return/p5/p6 verification pending. No Android restore or extra test selected.
-Private active return supervisor77420, out/graphics-source-preparation-1/test-case-3/.
+Private active return supervisor [private process identifier], [private execution receipt retained locally]
 
 ## Animated GPU cube responds to touch; USB stayed connected — November 19, 2026
 
@@ -149,8 +231,8 @@ verify retained exact interaction p5 and original p6 in original TWRP. No Androi
 restoration, automatic test retry or repeated cube/logging-proof gate.
 Do not call full stability/API/Android composer qualified. Next is Android
 userspace/composer integration toward333 setup/home, carrying working hardware
-forward within331. Raw state: out/graphics-source-preparation-1/test-case-3/;
-active controller93075. Signal first-tap-observed-private already created.
+forward within331. Raw state: [private execution receipt retained locally];
+active controller [private process identifier]. Signal first-tap-observed-private already created.
 
 ## First-tap desk test installed; waiting for owner tap — November 19, 2026
 
@@ -165,7 +247,7 @@ Do not create first-tap-observed-private until owner confirms actual first tap.
 Screen/prompt/animation/touch reports are pending; no interaction pass claimed.
 No recovery helper is armed; wait for owner to reconnect same lab cable before
 arming one return helper and giving Power instructions. No Android restoration.
-Private case: out/graphics-source-preparation-1/test-case-3/; active controller
+Private case: [private execution receipt retained locally]; active controller
 session93075. Previous corrected cube case is fully returned/verified in TWRP.
 
 ## GPU cube observed; original TWRP verified; desk interaction test ready — November 19, 2026
@@ -187,7 +269,7 @@ observed cube. Fresh scope graphics-direct-3 expects exact retained741696e2...
 Both exact-kernel VM modes and all1051 repository tests pass; original-LK,
 partition/RAM checks and fresh-scope guard controls pass. Payload15,007,744B.
 
-Prepared private package/controllers under out/graphics-source-preparation-1/
+Prepared private package/controllers under [private execution receipt retained locally]
 {direct-interaction-package-1,test-case-3,first-tap-lab-results}/. No actual next
 owner authorization, private staging, candidate write or boot has run. Next:
 obtain attendance/staging/test approval; install once from existing TWRP; owner
@@ -219,8 +301,8 @@ Owner reported restart done and booting; lab still observed experimental USB
 1209:0001. Original TWRP/p5/p6 return is not verified. Existing renewed listener
 is waiting; no additional software boot/install or Android restoration. Asked
 owner current screen. Inspect private execution/helper receipt before acting:
-out/graphics-source-preparation-1/test-case-2/ (renewed supervisor session36331).
-First-tap component/VM copies: out/graphics-source-preparation-1/first-tap-lab-results/.
+[private execution receipt retained locally] (renewed supervisor session36331).
+First-tap component/VM copies: [private execution receipt retained locally]
 Receipts: graphics-power-runtime-result.json and first-tap-preparation-result.json
 under evidence/graphics-source/. No logging-proof gate.
 
@@ -241,7 +323,7 @@ are running. No next image has been prepared/staged or installed yet.
 Next procedure allows unplugging USB after the prompt to carry the tablet to
 the desk; graphics has no USB dependency after startup. Begin host interaction
 observation when owner taps, not at boot; reconnect for original TWRP return.
-Private build: out/graphics-source-preparation-1/component-6-build-private.log.
+Private build: [private execution receipt retained locally]
 
 ## GPU cube observed; animation/touch timing unresolved — November 19, 2026
 
@@ -268,7 +350,7 @@ with a15-minute wait. Owner was instructed to note the screen, then unplugUSB,
 hold onlyPower40seconds, release/wait5seconds/reconnect same cable. Screen result,
 Power-untouched confirmation and selected original TWRP return are pending.
 Do not install/reboot another candidate or restore Android while awaiting this.
-Private helper/session state: out/graphics-source-preparation-1/test-case-2/.
+Private helper/session state: [private execution receipt retained locally]
 Public pending receipt: evidence/graphics-source/graphics-power-runtime-result.json.
 Next: collect owner result, finish/inspect existing helper, verify exact retained
 corrected p5 and original p6 in original TWRP, then update result. No logging gate.
@@ -282,7 +364,7 @@ was written once; full p5 readback, unchanged original recovery and RAM staging
 cleanup verified. One direct boot requested after WATCH NOW. The five-minute
 cube/touch window is running; owner observation pending. No hardware graphics
 pass claimed. Return to original TWRP afterward, no Android round trip.
-Private execution: out/graphics-source-preparation-1/test-case-2/.
+Private execution: [private execution receipt retained locally]
 
 ## GPU power-domain correction qualified; next attended test ready — November 19, 2026
 
@@ -314,7 +396,7 @@ window, then return to TWRP. No Android round trip or logging-proof gate.
 Hardware rendering, Android composer/setup/home remain unqualified. Receipts:
 evidence/graphics-source/power-domain-correction.json and
 evidence/graphics-source/direct-power-preparation-result.json. Local exact state:
-out/graphics-source-preparation-1/{direct-power-package-1,power-lab-results}/.
+[private execution receipt retained locally]
 
 ## Graphics test complete; original TWRP verified — November 19, 2026
 
@@ -368,7 +450,7 @@ Selected original TWRP and exact retained touch p5/original p6 preflight passed.
 First installation stopped before any partition write: ExactReadAdb admitted
 partitions but omitted the existing installer RAM staging file. The durable
 receipt confirms write_started=false. Preserve that receipt. The read guard now
-also admits only the installer's exact /tmp/valethonos-rollback-<32 hex>/boot.img
+also admits only the installer's exact [private staging path retained locally]
 path and full16MiB read; unrelated paths remain rejected. All9 graphics tests
 pass, including full/short RAM reads and invalid-path rejection. The graphics
 image itself is unchanged. The corrected installation and one attended direct
@@ -408,7 +490,7 @@ Next: publish final source/receipt, stage/install once from TWRP, say watch now,
 run one direct graphics test, then return to TWRP without an Android round trip.
 No logging proof gate. Receipts: evidence/graphics-source/kernel-build-result.json
 and direct-preparation-result.json. Private qualified package/component/VM state:
-out/graphics-source-preparation-1/. Primary task#331 / draft PR#456.
+[private execution receipt retained locally] Primary task#331 / draft PR#456.
 
 ## Touch grid achieved; remain in TWRP for graphics test — November 18, 2026
 
@@ -431,7 +513,7 @@ candidate, qualify it offline, then use the existing TWRP for its installation.
 Keep current display/touch and original rollback; no repeat touch-only or logging
 proof gate. No next graphics candidate is qualified or loaded yet. Receipt:
 evidence/touch-input-source/touch-runtime-result.json. Private current device and
-execution state: out/touch-input-1/test-case-1/parked-twrp-state-private.json.
+execution state: [private execution receipt retained locally]
 
 ## Touch candidate built; exact-kernel VM checks passed — November 18, 2026
 
@@ -483,7 +565,7 @@ rejects changes. All1035 tests pass; no new Image build or touch hardware pass y
 Next run exact touch kernel build while preparing DT/supplies/EINT, enforcing
 read-only evdev access and large visual3x3 feedback. Handle inherited watchdog
 alongside this test; no new logging proof gate or physical test authorized.
-Original Android remains restored; raw working-OS metadata private in out/touch-input-1.
+Original Android remains restored; raw working-OS metadata private in [private execution receipt retained locally]
 Source contract: projects/firetabs-android/kernel/touch-port/contract.json.
 
 ## Visible display/backlight achieved; touch/input next — November18,2026
@@ -503,7 +585,7 @@ Afterward original helper ran once, original TWRP returned, original p5 restored
 once/full readback, p6 unchanged. Original Android boot/config/recovery, fresh
 completed boot and normal ADB verified. Current installation is original Android.
 No recovery/bootstrap/bootloader write, test replay or active capture/helper.
-Receipt direct-fbfix-runtime-result.json; private checkpoint out/display-direct-fbfix-2.
+Receipt direct-fbfix-runtime-result.json; private checkpoint [private execution receipt retained locally]
 Next agreed implementation is#330 Goodix touch/input: working source declares
 I2C0x5d, reset46, IRQ35. Check active controller/config/orientation before porting;
 current maintained GOODIX is modular, INPUT_EVDEV/I2C_MT65XX builtin. Prepare
@@ -537,7 +619,7 @@ guard accepts exact inputs under a disposable test authorization fixture, reject
 unapproved templates and consumed scope1. Scope display-direct-fbfix-2 is ready
 locally for fresh owner attendance/approval, not staged to the lab. No new tablet
 action or test approval. Original Android remains verified restored.
-Receipt direct-fbfix-preparation.json; private checkpoint out/display-direct-fbfix-2.
+Receipt direct-fbfix-preparation.json; private checkpoint [private execution receipt retained locally]
 Consumed first direct test and unknown owner visual result stay historical.
 
 ## Direct test complete; original Android restored and verified — November18,2026
@@ -561,7 +643,7 @@ No more owner power steps needed. Current installation is original Android.
 Next compare direct-loader runtime entry/DT/initrd fixups with working boot and
 successful RAM-entry contracts; find a concrete discrepancy before another test.
 Do not repeat unchanged candidate, guess panel timings or reopen logging as a gate.
-Receipt direct-boot-runtime-result.json; private checkpoint out/display-direct-1.
+Receipt direct-boot-runtime-result.json; private checkpoint [private execution receipt retained locally]
 
 ## Direct-loader test prepared; lab staging approval pending — November18,2026
 
@@ -579,7 +661,7 @@ No recovery/bootstrap/bootloader write and no automatic trial retry.
 Automatic review rejected transferring images, nonce, selector/config and recovery
 tools to the isolated existing SSH lab because that payload/destination required
 specific user approval. Approval requested; no staging, reboot or tablet write.
-Local prepared package out/display-direct-boot-1; controller out/display-direct-1.
+Local prepared package [private execution receipt retained locally]; controller [private execution receipt retained locally]
 Receipt evidence/display-pipeline-source/direct-boot-preparation.json. Never flash
 the earlier consumed-nonce offline comparison in display-direct-boot-review-1.
 
@@ -594,7 +676,7 @@ Current Image fits selected original LK capacity; an offline16MiB Android boot
 package round-trips the same Image/initramfs and relocates chosen initrd pointers
 to the existing direct-loader layout, with required DT alignment. This is only
 packaging feasibility, NOT loader execution, a fresh test candidate or admission.
-Private comparison: out/display-direct-boot-review-1. It reuses a consumed nonce
+Private comparison: [private execution receipt retained locally] It reuses a consumed nonce
 for offline comparison only and must never be flashed as a new experiment.
 Direct boot bypasses the native trampoline and its31s deadline. Automatic return
 to original Android is NOT qualified: original p5 must be restored before normal
@@ -619,7 +701,7 @@ Next audit existing packet provenance and active display DMA/resource behavior
 against working source; establish a concrete cause before another candidate.
 Do not redesign logging or repeat an unchanged experiment.
 Receipt: evidence/display-pipeline-source/pinconf-runtime-result.json.
-Raw data: out/display-pinconf-trial-runtime-1/jump (private).
+Raw data: [private execution receipt retained locally] (private).
 
 Boot sequence explained to owner: Amazon -> Lineage/source Android boot ->
 protected original-boot restore -> RAM jump (no Amazon logo) -> test display
@@ -648,7 +730,7 @@ package and load-only client built; all 1021 tests and seven entry/VM controls
 passed. Exact unchanged Image VM proofs reused. Final offline controller
 validation passed. Scope11 ready, unapproved/unconsumed; scope10 consumed.
 No new tablet action/approval. Raw scope10 capture/inspection stays under
-out/display-mm-power-trial-runtime-1. Receipts mm-power-runtime-result.json
+[private execution receipt retained locally] Receipts mm-power-runtime-result.json
 and pinconf-correction-preparation.json preserve result and source proof.
 
 ## Scope9 result and MM-power ancestry correction — November18,2026
@@ -669,7 +751,7 @@ fresh nonce/component and scope10 package/control qualification passed:1018
 tests, seven controls, final offline validation and load-only client compiled.
 Fresh scope10 is ready for owner availability, unapproved/unconsumed.
 No new tablet action or approval. Raw scope9 logs private under
-out/display-pwm-trial-runtime-1/inspection-private. Receipt pwm-runtime-result.json.
+[private execution receipt retained locally] Receipt pwm-runtime-result.json.
 
 ## PWM correction implementation — November18,2026
 
@@ -684,12 +766,12 @@ passed; pwm_bl.o and its Image/config/map hashes are verified against the
 GitHub artifact digest. Only compiled config delta is BACKLIGHT_PWM=m -> y.
 Corrected DT built with actual new config preserves RAM/reservations. Both
 enforcing VM modes passed on the new Image;1016 tests pass without skips.
-Fresh unchanged capture PID1 with new nonce built in out/display-pwm-initramfs-1.
+Fresh unchanged capture PID1 with new nonce built in [private execution receipt retained locally]
 All seven entry/VM controls and exact final offline controller validation pass;
 load-only client compiled. Corrected scope9 candidate is ready for owner
 availability. Do not use old scope8 package/approval.
 Fresh scope9 only; scopes7/8 consumed. No new tablet action or approval.
-Private checkpoint: out/display-pwm-1/resume-private.json.
+Private checkpoint: [private execution receipt retained locally]
 
 ## Actual scope8 display diagnosis — November18,2026
 
@@ -703,7 +785,7 @@ Source boot/restore passed; original Android returned with boot/config/recovery
 and normal ADB checks passing. Owner confirmed Power untouched and no banner/bands; automatic return observed.
 Scope8 consumed; one source boot/restore and one load/jump, no recovery write
 or automatic retry. New trial requires concrete correction/fresh qualification.
-Private runtime out/display-errors-trial-runtime-1; parsed errors in its
+Private runtime [private execution receipt retained locally]; parsed errors in its
 inspection-private directory. Public receipt error-capture-runtime-result.json.
 Read-only returned-OS check:0-002c device exists but has NO bound driver.
 lcd-backlight instead binds leds-mt65xx. Saved actual working DT led_mode=5;
@@ -731,7 +813,7 @@ tests pass without skips. All seven entry/VM controls and final offline
 two-stage controller validation passed; load-only client compiled. Candidate
 is ready for fresh owner availability.
 Fresh scope8 only; scope7 stays consumed, no new hardware action/approval yet.
-Private inputs: out/display-errors-{1,initramfs-1,bundle-1,client-1}.
+Private inputs: [private execution receipt retained locally]
 
 ## Display runtime result — November18,2026
 
@@ -743,7 +825,7 @@ Android returned; original boot/config/recovery and normal ADB checks passed.
 Owner confirmed no banner/bands and Power untouched throughout; automatic
 Android return observed. No recovery write or automatic retry.
 Receipt: evidence/display-pipeline-source/functional-runtime-result.json.
-Private trial: out/display-functional-trial-runtime-1. Do not replay scope7 or
+Private trial: [private execution receipt retained locally] Do not replay scope7 or
 repeat logging/storage. Next source work audits display component/provider
 binding and dependency closure; require a concrete fix before another trial.
 
@@ -764,7 +846,7 @@ streaming remains non-blocking; no logging-only re-proof or repeated storage
 milestone. Read-only known-p5 integrity does not qualify general/writable
 filesystems or Android UI. Earlier preparation:985 tests,14 qualification controls,
 11 compiler negatives and four VM checks passed. Source at d6f3c5a; raw trial
-private under out/recovery-linux-pivot/ack-storage-readonly-trial-runtime-1.
+private under [private execution receipt retained locally]
 
 ## Active first intermediate outcome — display/backlight
 
@@ -790,9 +872,9 @@ Fresh final RAM bundle3 passes seven integrity/deadline/both-VM controls.
 Actual display C metadata/short-write tests and controller visual-pending test
 pass. Fresh unapproved display scope7 template prepared; final offline controller
 validation/publishing underway before the attended visual test.
-Current private inputs: out/display-kernel-1, out/display-initramfs-1,
-out/display-functional-bundle-3 (current; earlier1/2 superseded). Build lab
-/tmp/firetabs-display-functional-build-20261118-1/out/init-2. No tablet action,
+Current private inputs: [private execution receipt retained locally] [private execution receipt retained locally]
+[private execution receipt retained locally] (current; earlier1/2 superseded). Build lab
+/tmp/firetabs-display-functional-build-20261118-1/[private execution receipt retained locally] No tablet action,
 no fresh authorization, no display hardware pass. Issues18/329 updated directly.
 Next is visible VALETHON DISPLAY TEST plus labelled RGB bands and protected
 Android return; no repeated storage or complete-log prerequisite.
@@ -1603,7 +1685,7 @@ this capture approach and reassess the boot route rather than repeat it unchange
 
 Local decoder:
 ```sh
-out/loader-audit-venv/bin/python scripts/decode_loader_screen_photo.py \
+[private execution receipt retained locally] scripts/decode_loader_screen_photo.py \
   --image /absolute/path/to/frame.png --token d73d \
   --quad TL_X TL_Y TR_X TR_Y BR_X BR_Y BL_X BL_Y
 ```
@@ -1683,7 +1765,7 @@ See [actual result](../../evidence/independent-recovery/first-draft-trial-result
 Completed first kernel draft: **6.18.34-valethon-draft1+**. Combined build
 42091153900 succeeded at dfdd080; enforcing VM and independent final package
 checks passed. The complete16MiB boot image and private delivery archive are in
-out/valethon-first-draft-1. The source receipt is
+[private execution receipt retained locally] The source receipt is
 [evidence/independent-recovery/first-kernel-draft-result.json](../../evidence/independent-recovery/first-kernel-draft-result.json).
 USB streaming and retained boot-tail logs are included; no automatic-recovery
 engineering was added. No tablet boot/logging acceptance, installation or trial
