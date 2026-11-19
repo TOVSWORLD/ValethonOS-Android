@@ -5,11 +5,14 @@ import json
 from pathlib import Path
 import subprocess
 USB_PATHS={'scripts/apply_usb_port.py','scripts/select_kernel_build_scope.py'}
-MODES={'touch-provider','display-provider','first-draft','lab-retained','lab-log','clocks','clocks-pinctrl','providers','usb-providers','usb-acm-diagnostic','diagnostic','sym827-provider','mipi-provider','dsi-provider','pwm-provider'}
+MODES={'graphics-provider','touch-provider','display-provider','first-draft','lab-retained','lab-log','clocks','clocks-pinctrl','providers','usb-providers','usb-acm-diagnostic','diagnostic','sym827-provider','mipi-provider','dsi-provider','pwm-provider'}
 
 
 def choose(event,changed=(),mode='diagnostic',argument_profile='none',emulated_boot=False):
     if event=='pull_request':
+        graphics=any(p=='scripts/build_graphics_provider.sh' or p.startswith('projects/firetabs-android/kernel/graphics-port/') for p in changed)
+        if graphics:
+            return {'mode':'graphics-provider','argument_profile':'none','qemu':False}
         touch=any(p in {'scripts/apply_goodix_board_port.py','scripts/build_touch_provider.sh'} for p in changed)
         if touch:
             return {'mode':'touch-provider','argument_profile':'none','qemu':False}
