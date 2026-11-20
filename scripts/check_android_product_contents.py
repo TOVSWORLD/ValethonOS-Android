@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -27,12 +28,28 @@ def audit(aosp_root, product_out, module_info, aapt2):
             raise ValueError('Required module has no installed output: ' + name)
         files = []
         for entry in installed:
-            path = (root / entry).resolve()
+            installed_path = Path(os.path.abspath(root / entry))
+            if not installed_path.is_relative_to(product):
+                raise ValueError('Missing or out-of-product installed output: ' + name)
+            path = installed_path
+            link = None
+            if path.is_symlink():
+                link = os.readlink(path)
+                target = Path(link)
+                # Android image-root symlinks are not paths on the build host.
+                if target.is_absolute():
+                    if not target.is_relative_to('/system'):
+                        raise ValueError('Out-of-product installed symlink: ' + name)
+                    path = product / target.relative_to('/')
+            path = path.resolve()
             if not path.is_relative_to(product) or not path.is_file():
                 raise ValueError('Missing or out-of-product installed output: ' + name)
-            files.append({'path': str(path.relative_to(product)),
-                          'bytes': path.stat().st_size,
-                          'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+            row = {'path': str(installed_path.relative_to(product)),
+                   'bytes': path.stat().st_size,
+                   'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+            if link is not None:
+                row.update(symlink_target=link, resolved_path=str(path.relative_to(product)))
+            files.append(row)
         packages[name] = files
     provider_apks = [product / row['path'] for row in packages['webview']
                      if row['path'].endswith('.apk')]

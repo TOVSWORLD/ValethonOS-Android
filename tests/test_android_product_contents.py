@@ -52,6 +52,24 @@ class ProductContentsAudit(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'out-of-product'):
             self.run_audit()
 
+    def test_android_system_root_symlink_resolves_inside_built_image(self):
+        target = self.product / 'system/product/lib/libjni_latinime.so'
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b'built device library')
+        link = self.product / 'system/app/LatinIME/libjni_latinime.so'
+        link.symlink_to('/system/product/lib/libjni_latinime.so')
+        self.modules['LatinIME']['installed'].append(str(link.relative_to(self.root)))
+        result = self.run_audit()
+        self.assertEqual(result['packages']['LatinIME'][-1]['resolved_path'],
+                         'system/product/lib/libjni_latinime.so')
+
+    def test_installed_symlink_cannot_use_host_file(self):
+        link = self.product / 'system/app/LatinIME/host'
+        link.symlink_to('/etc/hosts')
+        self.modules['LatinIME']['installed'].append(str(link.relative_to(self.root)))
+        with self.assertRaisesRegex(ValueError, 'Out-of-product installed symlink'):
+            self.run_audit()
+
     def test_sparse_size_uses_expanded_not_small_file_size(self):
         header = struct.pack('<IHHHHIIII', 0xed26ff3a, 1, 0, 28, 12, 4096,
                              contents.LIMIT // 4096 + 1, 1, 0)

@@ -1,0 +1,32 @@
+{
+  "scope": "Compiled system and ramdisk plus actual installed-output audit; no tablet runtime",
+  "product_source_commit": "282bf5c80ca1f9aa64d8fe6d1a5b1495ce975a36",
+  "postbuild_audit_repair": "Resolve absolute Android /system symlinks inside built image root; reject host paths",
+  "product_graph_passed": true,
+  "systemimage_ramdisk_compile_passed": true,
+  "installed_output_audit_passed_after_repair": true,
+  "required_module_count": 13,
+  "webview_package": "com.android.webview",
+  "webview_version": "145.0.7632.218",
+  "artifacts": {
+    "system.img": {
+      "bytes": 1144623528,
+      "sha256": "9f83aab66ab87c3e3e56d448a55c5276314e2547da639274cc8782b3389cfe50"
+    },
+    "ramdisk.img": {
+      "bytes": 1575142,
+      "sha256": "a7582a85a4201e912586dab0e4fe6351896e51ec7558c0e4b089ff15d67c5c01"
+    }
+  },
+  "expanded_system_bytes": 1692925952,
+  "partition_limit_bytes": 1692925952,
+  "filesystem_free_space_verified": false,
+  "boot_container_qualified": false,
+  "tablet_runtime_verified": false,
+  "remaining": [
+    "Measured ext4 reserve/free space",
+    "Android ramdisk/boot-v0/RAM checks",
+    "Original system backup verification",
+    "One owner-approved grouped T1 boot/UI/Enforcing/ADB/recovery session"
+  ]
+}
