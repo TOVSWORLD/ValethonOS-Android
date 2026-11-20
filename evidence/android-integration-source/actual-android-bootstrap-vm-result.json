@@ -71,5 +71,40 @@
   "full_android_rebuild_performed": false,
   "tablet_test_performed": false,
   "tablet_failure_cause_established": false,
-  "raw_vm_logs_kept_private": true
+  "raw_vm_logs_kept_private": true,
+  "identified_late_failure": {
+    "keystore_abort_cause": "No default KeyMint/Keymaster instance installed",
+    "observed_errors": [
+      "Failed to construct mandatory security level TEE",
+      "Does the device have a /default Keymaster or KeyMint instance?"
+    ],
+    "image_contains_security_hal_service": false,
+    "image_contains_security_hal_vintf_fragment": false,
+    "vold_waits_for_keystore_maintenance": true,
+    "critical_reboot_after_repeated_abort": true,
+    "raw_logcat_records_private": true
+  },
+  "identified_lmkd_failure": {
+    "reason": "No kernel PSI monitor support",
+    "kernel_psi_enabled": false,
+    "lmkd_exits_repeatedly": true
+  },
+  "selected_grouped_repairs": [
+    "Legacy cpuset support (compiled and A/B VM bootstrap-verified)",
+    "Kernel PSI support (compilation in progress)",
+    "AIDL Rust nonsecure KeyMint service for engineering profile (source selected, not yet built)",
+    "AIDL Rust nonsecure Gatekeeper APEX (source selected, not yet built)",
+    "Uncompressed system APEXes to preserve volatile-data RAM"
+  ],
+  "compressed_apex_resource_check": {
+    "compressed_bytes": 144003072,
+    "decompressed_apex_bytes": 183853056,
+    "data_tmpfs_bytes": 268435456,
+    "additional_system_bytes_if_uncompressed": 39849984,
+    "runtime_out_of_space_observed": false
+  },
+  "engineering_security_only": true,
+  "hardware_backed_security_qualified": false,
+  "native_security_build_started": false,
+  "paid_resources_created_for_followup": false
 }

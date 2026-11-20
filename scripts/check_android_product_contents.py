@@ -11,7 +11,8 @@ import subprocess
 REQUIRED = ('webview', 'Browser2', 'LatinIME', 'Settings', 'DocumentsUI',
             'DownloadProvider', 'DownloadProviderUi', 'PackageInstaller',
             'CertInstaller', 'Launcher3QuickStep', 'Provision', 'com.android.adbd',
-            'ValethonReadiness')
+            'ValethonReadiness', 'android.hardware.security.keymint-service.nonsecure',
+            'com.android.hardware.gatekeeper.rust.nonsecure')
 LIMIT = 1692925952
 
 
@@ -67,6 +68,8 @@ def audit(aosp_root, product_out, module_info, aapt2):
     for artifact in (animation, image, ramdisk):
         if not artifact.is_file():
             raise ValueError('Missing built artifact: ' + artifact.name)
+    if list((product / 'system/apex').glob('*.capex')):
+        raise ValueError('Compressed APEX payload would consume volatile data RAM')
     # Sparse ext4 images must be measured by expanded blocks, not compressed length.
     with image.open('rb') as stream:
         header = stream.read(28)

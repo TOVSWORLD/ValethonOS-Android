@@ -9,3 +9,5 @@ CONFIG_USB_CONFIGFS_F_FS=y
 # Android cgroups.json mounts cpuset v1 before initializing the v2 process tree.
 # Without this, SetupCgroups aborts and ueventd/apexd-bootstrap cannot start.
 CONFIG_CPUSETS_V1=y
+# The shipped lmkd initializes PSI monitors; without PSI it exits repeatedly.
+CONFIG_PSI=y

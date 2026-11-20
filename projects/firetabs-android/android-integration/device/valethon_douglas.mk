@@ -21,11 +21,20 @@ PRODUCT_BUILD_PRODUCT_IMAGE := false
 PRODUCT_BUILD_SYSTEM_EXT_IMAGE := false
 PRODUCT_BUILD_USERDATA_IMAGE := false
 PRODUCT_BUILD_CACHE_IMAGE := false
+# Keep APEX payloads on read-only system rather than spending volatile /data RAM.
+# The first image would expand ~175 MiB of CAPEX into a 256-MiB data tmpfs.
+PRODUCT_COMPRESSED_APEX := false
 
 # Android boot container is assembled separately using the qualified LK path.
 # Original recovery is never replaced by this product.
 # Device adbd is provided by the inherited com.android.adbd APEX.
 PRODUCT_PACKAGES += Launcher3QuickStep Provision
+# First-home engineering profile: keystore2 requires a default KeyMint instance.
+# Reference services are software-only; no hardware-backed keystore is claimed.
+# AIDL Gatekeeper avoids reintroducing an otherwise absent HIDL service stack.
+PRODUCT_PACKAGES += \
+    android.hardware.security.keymint-service.nonsecure \
+    com.android.hardware.gatekeeper.rust.nonsecure
 # Do not rely on the absent optional frameworks/webview/chromium/chromium.mk.
 # external/chromium-webview supplies the pinned ARM32 provider and required JNI.
 # These ordinary apps have no new boot service, privileged grant or device-owner role.
@@ -41,7 +50,6 @@ PRODUCT_PACKAGES += \
     CertInstaller \
     ValethonReadiness
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.hardware=douglas \
     ro.sf.lcd_density=160 \
     ro.opengles.version=131072 \
     ro.zygote=zygote32 \

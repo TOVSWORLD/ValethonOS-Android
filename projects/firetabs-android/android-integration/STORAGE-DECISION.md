@@ -45,3 +45,15 @@ actual /data usage, low-memory behavior and package/provider startup in T1. If i
 is insufficient, adjust from evidence without consuming unbounded RAM. Preinstalled
 WebView/readiness assets in read-only system avoid reinstalling them after every
 reset, but do not make their settings persistent.
+
+## First-home security-service dependency correction — November 20, 2026
+
+The actual Android VM revealed that keystore2 aborts without a default
+KeyMint/Keymaster instance. The first image did not install one. Add the pinned
+AIDL nonsecure KeyMint reference service and AIDL Rust nonsecure Gatekeeper APEX
+for the volatile-data engineering profile. They are software implementations,
+not evidence of hardware-backed key isolation, CDD compliance, persistent
+credential protection or release security qualification. Original userdata and
+recovery remain excluded. Do not suppress keystore's critical-service failure or
+weaken SELinux to manufacture first-home success. Qualify the actual services in
+the real Android VM before the next grouped tablet session.

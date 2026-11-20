@@ -41,6 +41,25 @@ class ProductContentsAudit(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'no installed output'):
             self.run_audit()
 
+    def test_security_service_graph_entry_without_actual_file_is_rejected(self):
+        name = 'android.hardware.security.keymint-service.nonsecure'
+        path = self.root / self.modules[name]['installed'][0]
+        path.unlink()
+        with self.assertRaisesRegex(ValueError, 'Missing or out-of-product'):
+            self.run_audit()
+
+    def test_gatekeeper_package_is_required_for_the_grouped_profile(self):
+        self.modules['com.android.hardware.gatekeeper.rust.nonsecure']['installed'] = []
+        with self.assertRaisesRegex(ValueError, 'no installed output'):
+            self.run_audit()
+
+    def test_compressed_apex_cannot_consume_volatile_data_budget(self):
+        path = self.product / 'system/apex/unexpected.capex'
+        path.parent.mkdir(parents=True)
+        path.write_bytes(b'fixture')
+        with self.assertRaisesRegex(ValueError, 'Compressed APEX'):
+            self.run_audit()
+
     def test_host_adbd_does_not_substitute_for_device_apex(self):
         self.modules['com.android.adbd']['installed'] = []
         self.modules['adbd'] = {'installed': ['out/host/linux-x86/bin/adbd']}

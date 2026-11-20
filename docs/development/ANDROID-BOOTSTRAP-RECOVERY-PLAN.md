@@ -20,13 +20,24 @@ No tablet action or new cloud/full-Android build is authorized by this document.
    all four bootstrap APEX packages activate and apexd-bootstrap exits zero.
    A later keystore critical-service abort remains. A VM-only early data-directory
    ordering experiment did not remove it and is excluded from the candidate.
-   Existing Android logcat in an isolated VM console is identifying that abort. Do not send a known generic startup failure to the tablet.
+   Existing Android logs identify the actual abort: no default KeyMint/Keymaster
+   service is installed. Include the pinned AIDL Rust nonsecure KeyMint service
+   and AIDL Rust nonsecure Gatekeeper APEX for the volatile-data engineering
+   profile; do not claim hardware-backed protection. Add kernel PSI support:
+   the shipped lmkd otherwise exits because its PSI monitor cannot initialize.
+   Keep APEXes uncompressed on system: the first image's CAPEX payloads would use
+   183,853,056 of the 268,435,456 volatile-data bytes; placing their originals on
+   system adds 39,849,984 bytes before new native dependencies. Runtime ENOSPC was
+   not observed, so this is a measured resource-risk reduction, not a panic cause. Do not send a known generic startup failure to the tablet.
    Record VM hardware limitations separately; a VM success is not tablet boot.
 4. **Prepare one corrected hardware candidate.** Reuse the existing Android
    binaries, original RAM/DT/loader path and original Android init. Include only
    confirmed compatibility repairs. If a text init repair is required, validate
    the modified filesystem, labels, exact block delta and full resulting digest;
-   avoid another complete Android build unless new native components are needed.
+   New security-service binaries are required. Build that selected native/image
+   update from the saved workspace rather than syncing/compiling Android afresh.
+   Operational resource/budget/cache details remain in the private build project.
+   No paid follow-up has started; its new resource allowance needs owner review.
    Keep original recovery/userdata excluded and original rollback available.
 5. **Run one grouped attended test.** Check Android startup, Valethon animation,
    setup/home, touch/display and available authenticated USB/Enforcing evidence
