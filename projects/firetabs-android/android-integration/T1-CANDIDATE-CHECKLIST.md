@@ -2,7 +2,7 @@
 
 This prepares one grouped Android session under docs/development/STAGED-TEST-PLAN.md.
 It is not installation authorization or evidence that unfinished images pass.
-The complete image build is active. No standalone display, cube or logging test.
+The complete image build and installed-output audit pass. No standalone display, cube or logging test.
 
 ## Finish T0 when artifacts exist
 
@@ -65,8 +65,37 @@ pass/fail/not_run. Main milestone requires usable Android UI, display/touch,
 Enforcing SELinux, authorized USB/ADB and verified recovery. A build, animation,
 app launch or successful restore alone does not complete it.
 
-## Not yet ready
+## Current prepared package — November20
 
-Final image hashes, actual ext4 free space, ramdisk/container/RAM measurements,
-original p14 backup verification, candidate-specific install/restore commands and
-owner-approved test window await artifacts and preflight. Do not mark T0 or T1 passed.
+The compiled system/ramdisk and retained Android-support kernel are packaged.
+Existing original-loader roundtrip and RAM checks pass. The boot payload is
+10,909,696bytes inside the original16MiB partition; Android cpio expands to
+2,683,392bytes and is re-encoded losslessly for the working XZ path. Only chosen
+boot arguments/initrd/identity fields change; hardware nodes and reservation map
+are unchanged. Header and DT select hardware douglas and enforcing SELinux.
+
+Official simg2img independently matches the prepared raw system image. Read-only
+e2fsck returns0; actual free space522,743,808bytes exceeds the16MiB margin.
+The original system partition has a full independently verified backup and a
+second verified local copy. The selected original TWRP boot/recovery/system
+read-only preflight passes. Exact candidate identities and source checks are in
+evidence/android-integration-source/android-t1-preparation-result.json.
+
+The guarded installer stages8MiB chunks in verified recovery tmpfs, writes only
+the exact existing system partition, verifies its full digest, then writes boot
+last through the existing checked boot writer. An incomplete system transfer
+cannot advance to the boot write. Recovery and original userdata are excluded.
+Owner authorization binds exact boot/system/backup, nonce, runner/support files,
+case manifest and selected return configuration. Default preflight writes nothing.
+
+One boot is separate from installation so the owner receives “watch now” first.
+Keep USB connected through installation. Observe actual animation/setup/home,
+touch/drag, keyboard, readiness app and authorized ADB/Enforcing state. The return
+helper cannot arm until the five-minute boot observation has elapsed; it admits
+only one original recovery-entry call on the selected physical port. Return once
+to original TWRP and verify candidate/recovery state. Retain candidate there for
+follow-up if successful; exact original boot/system rollback is prepared if needed.
+
+Remaining: owner availability and exact test authorization, the physical Android
+boot/UI/Enforcing/authorized-ADB checkpoints, and final recovery verification.
+No physical Android pass, automatic rollback, extra boot or new full build is claimed.

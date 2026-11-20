@@ -1,7 +1,8 @@
 # First integrated Android candidate contents
 
-November 19, 2026. These are verified source selections, not a resolved AOSP
-graph, built image inventory or tablet runtime pass.
+November20,2026. Product graph, complete system/ramdisk compilation and actual
+installed-output audit pass. Offline container/filesystem checks and read-only
+recovery preflight pass; actual tablet Android runtime remains pending.
 
 ## Explicit selections
 
