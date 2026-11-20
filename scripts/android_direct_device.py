@@ -26,9 +26,15 @@ def inputs(case):
 def authorization(case,m):
     a=json.loads((case/'owner-authorization-private.json').read_text())
     if a.get('owner_approved') is not True:raise ValueError('Exact candidate owner authorization required')
-    expected={'scope':'android-t1-1','owner_approved':True,'boot_sha256':m['files']['boot']['sha256'],'system_sha256':m['files']['system']['sha256'],'original_system_sha256':m['files']['original_system']['sha256'],'nonce_sha256':m['nonce_sha256'],'runner_sha256':sha(Path(__file__).read_bytes()),'return_config_sha256':sha((case/'return-config-private.json').read_bytes()),'return_runner_sha256':sha((Path(__file__).parent/'run_android_t1_return.py').read_bytes()),'case_manifest_sha256':sha((case/'case-manifest-private.json').read_bytes()),'support_sha256':{n:sha((Path(__file__).parent/n).read_bytes()) for n in ['restore_diagnostic_boot.py','display_direct_device.py']},'maximum_boot_writes':1,'maximum_system_writes':1,'maximum_original_restore_writes':1,'recovery_writes_allowed':False,'userdata_writes_allowed':False,'automatic_trial_retry':False}
+    expected={'scope':'android-t1-1','owner_approved':True,'boot_sha256':m['files']['boot']['sha256'],'system_sha256':m['files']['system']['sha256'],'original_system_sha256':m['files']['original_system']['sha256'],'nonce_sha256':m['nonce_sha256'],'runner_sha256':sha(Path(__file__).read_bytes()),'selector_file_sha256':sha((case/'selector-private.json').read_bytes()),'return_config_sha256':sha((case/'return-config-private.json').read_bytes()),'return_runner_sha256':sha((Path(__file__).parent/'run_android_t1_return.py').read_bytes()),'case_manifest_sha256':sha((case/'case-manifest-private.json').read_bytes()),'support_sha256':{n:sha((Path(__file__).parent/n).read_bytes()) for n in ['restore_diagnostic_boot.py','display_direct_device.py']},'maximum_boot_writes':1,'maximum_system_writes':1,'maximum_original_restore_writes':1,'recovery_writes_allowed':False,'userdata_writes_allowed':False,'automatic_trial_retry':False}
     if any(type(a.get(k)) is not type(v) or a.get(k)!=v for k,v in expected.items()):raise ValueError('Exact candidate owner authorization required')
     return a
+def load_selector(case,path):
+    expected=case/'selector-private.json'
+    if path.is_symlink() or expected.is_symlink() or path.resolve()!=expected.resolve():raise ValueError('Only the case-bound selected device file is admitted')
+    selected=json.loads(expected.read_text())['selector']
+    if not isinstance(selected,str) or not selected or selected.startswith('-'):raise ValueError('Pinned selector required')
+    return selected
 class AndroidAdb(Adb):
     def digest(self,node):
         allowed={SYSTEM,BOOT,RECOVERY}
@@ -102,7 +108,6 @@ def run(case,adb,action):
     return {'action':action,'verified':True,'rebooted':False,'recovery_written':False,'userdata_written':False}
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--case',type=Path,required=True);p.add_argument('--selector-file',type=Path,required=True);p.add_argument('action',choices=['preflight','verify-installed','install','boot','rollback']);a=p.parse_args()
-    selector=json.loads(a.selector_file.read_text())['selector']
-    if not isinstance(selector,str) or not selector or selector.startswith('-'):raise ValueError('Pinned selector required')
+    selector=load_selector(a.case,a.selector_file)
     lock=(a.case/'.device-operation.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     print(json.dumps(run(a.case,AndroidAdb('adb',selector),a.action)))

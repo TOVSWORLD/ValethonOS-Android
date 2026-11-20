@@ -21,11 +21,11 @@
   "pretest_system_backup_independent_digest_matches": true,
   "second_local_backup_verified": true,
   "selected_recovery_readonly_preflight_passed": true,
-  "android_integration_tests_passed": 29,
+  "android_integration_tests_passed": 30,
   "boot_restore_and_recovery_helper_tests_passed": 15,
   "source_sha256": {
     "prepare_android_direct_boot.py": "5c0ec9a7f1fce58c15c992c85e923ab42f0baf65ac75eb3adeb51503934503c6",
-    "android_direct_device.py": "c1e77c46c672348219328adb4acd500c17de978641b7b4c4d7deec4c10e8eba4",
+    "android_direct_device.py": "c9421cf8d74f544ee303210e2aa2228038fd4a15ecf91c588c567cb9bb687a59",
     "run_android_t1_return.py": "7999085a5173e2b55dfac4501d93305a2ed06ec0d4ee76c15e22facb19328253"
   },
   "ready_for_owner_review": true,

@@ -37,3 +37,12 @@ class AndroidInstallSafety(unittest.TestCase):
    root=Path(folder);image=root/'image';image.write_bytes(b'x'*4096);p=root/'receipt';log={};d.receipt(p,log);adb=Adb()
    with patch.object(d,'chunks',return_value=[(0,4096)]),self.assertRaisesRegex(ValueError,'RAM chunk'):d.write_system(adb,image,'a'*64,log,p)
    self.assertFalse(any('dd' in args for args in adb.calls))
+
+ def test_cli_selector_must_be_the_case_bound_file(self):
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);case=root/'case';case.mkdir();selected=case/'selector-private.json';selected.write_text(json.dumps({'selector':'test-only-selector'}))
+   self.assertEqual(d.load_selector(case,selected),'test-only-selector')
+   other=root/'other.json';other.write_text(selected.read_text())
+   with self.assertRaisesRegex(ValueError,'case-bound'):d.load_selector(case,other)
+   selected.unlink();selected.symlink_to(other)
+   with self.assertRaisesRegex(ValueError,'case-bound'):d.load_selector(case,selected)
