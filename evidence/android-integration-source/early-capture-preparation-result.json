@@ -1,0 +1,58 @@
+{
+  "scope": "Combined early-capture preparation; no tablet execution",
+  "date": "2026-11-20",
+  "owner_requested_combined_retry": true,
+  "kernel_config_delta": {
+    "CONFIG_U_SERIAL_CONSOLE": [
+      "n",
+      "y"
+    ],
+    "CONFIG_USB_F_SERIAL": [
+      null,
+      "y"
+    ],
+    "CONFIG_USB_F_OBEX": [
+      null,
+      "y"
+    ],
+    "CONFIG_USB_G_SERIAL": [
+      "n",
+      "y"
+    ]
+  },
+  "kernel_artifacts": {
+    "arch/arm64/boot/Image": "9f98244c971f516bec4ca22e23dcc3d6151d520fdb320c9f7506cc180d18ace2",
+    "arch/arm64/boot/Image.gz": "e9ce6eb5736cf98f5327918e35919317efd3030d5f476f0195c5217a1f02a53d",
+    ".config": "46dac451829c550cc0384be0ffb4803ce26626619937da9ca9fdd55b6cb78d8c",
+    "System.map": "fca1e6c228c88c36570b33090cea4cbcdd0f3fac2f17d800d27a4a0729b7537a"
+  },
+  "boot_sha256": "4a1ecf108c515f0a0ba2d9e79aaa4eff5c6da82b214d617e1e20eb06d2557c9d",
+  "boot_payload_bytes": 10979328,
+  "original_android_init_unchanged": true,
+  "system_rewrite_required": false,
+  "original_loader_roundtrip_passed": true,
+  "vm_preinit_handoff": {
+    "scope": "VM preinit-to-original-init handoff only; not tablet boot",
+    "passed": true,
+    "preinit_seen": true,
+    "android_init_exec_seen": true,
+    "usb_present_required": false
+  },
+  "focused_android_tests": 39,
+  "retained_mailbox_tests": 6,
+  "selected_recovery_read_only_preflight_passed": true,
+  "ramoops_region": {
+    "address": 1145110528,
+    "bytes": 917504,
+    "console_bytes": 65536,
+    "record_bytes": 65536
+  },
+  "retention_qualified": false,
+  "panic_delivery_guaranteed": false,
+  "diagnostic_serial_owns_usb": true,
+  "android_adb_qualified": false,
+  "tablet_executed": false,
+  "system_writes": 0,
+  "recovery_writes": 0,
+  "userdata_writes": 0
+}
