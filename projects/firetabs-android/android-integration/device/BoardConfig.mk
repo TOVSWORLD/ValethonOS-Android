@@ -1,9 +1,9 @@
 # ARM32 userspace on the physically qualified arm64 maintained kernel.
 TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
+# Cortex-A53 uses the ARMv8 instruction set in 32-bit execution mode.
+TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_ABI := armeabi-v7a
-TARGET_USES_64_BIT_BINDER := true
 TARGET_BOARD_PLATFORM := mt8163
 TARGET_BOOTLOADER_BOARD_NAME := douglas
 TARGET_NO_BOOTLOADER := true

@@ -7,7 +7,9 @@ graph, built image inventory or tablet runtime pass.
 
 The Douglas product now selects `webview`, `Browser2`, `LatinIME`, `Settings`,
 `DocumentsUI`, `DownloadProvider`, `DownloadProviderUi`, `PackageInstaller`,
-`CertInstaller` and `ValethonReadiness`, alongside launcher, Provision and adbd.
+`CertInstaller` and `ValethonReadiness`, alongside launcher, Provision and the inherited `com.android.adbd` device APEX.
+The standalone `adbd` module is host-only in this product graph; do not add it
+to PRODUCT_PACKAGES or accept its host binary as the device ADB output.
 Most tools are inherited already; explicitly selecting them makes the required
 scope visible. Make package lists tolerate repeated module names. Provider loader
 and platform-support libraries are required by the pinned webview module itself.

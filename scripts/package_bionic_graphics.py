@@ -97,9 +97,10 @@ def package(prefix,destination,patchelf):
         if not license_count:raise ValueError('libdrm per-file source notices missing')
         (destination/'NOTICE').write_text('\n\n'.join(notices))
         bp=['// Generated from hash-verified Bionic build outputs; do not disable ELF checks.',
+            'soong_namespace {}',
             'package { default_applicable_licenses: ["valethon_bionic_graphics_license"], }',
             'license { name: "valethon_bionic_graphics_license", license_kinds: ["SPDX-license-identifier-MIT", "SPDX-license-identifier-Apache-2.0"], license_text: ["NOTICE"], }',
-            'soong_namespace {}','']
+            '']
         for name,info in sorted(infos.items()):
             module=name.removesuffix('.so');dependencies=[x.removesuffix('.so') for x in info['needed']]
             bp+=['cc_prebuilt_library_shared {',f'    name: "{module}",','    vendor: true,','    compile_multilib: "32",',f'    srcs: ["arm/{name}"],',('    relative_install_path: "egl",' if name!='libgallium_dri.so' else '    // Gallium dependency uses the standard vendor library search path.'),'    strip: { none: true },',f'    shared_libs: {json.dumps(dependencies)},','    check_elf_files: true,','}', '']

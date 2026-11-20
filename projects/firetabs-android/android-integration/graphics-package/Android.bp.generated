@@ -1,7 +1,7 @@
 // Generated from hash-verified Bionic build outputs; do not disable ELF checks.
+soong_namespace {}
 package { default_applicable_licenses: ["valethon_bionic_graphics_license"], }
 license { name: "valethon_bionic_graphics_license", license_kinds: ["SPDX-license-identifier-MIT", "SPDX-license-identifier-Apache-2.0"], license_text: ["NOTICE"], }
-soong_namespace {}
 
 cc_prebuilt_library_shared {
     name: "libEGL_valethon",

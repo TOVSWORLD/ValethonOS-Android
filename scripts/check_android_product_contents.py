@@ -9,7 +9,7 @@ import subprocess
 
 REQUIRED = ('webview', 'Browser2', 'LatinIME', 'Settings', 'DocumentsUI',
             'DownloadProvider', 'DownloadProviderUi', 'PackageInstaller',
-            'CertInstaller', 'Launcher3QuickStep', 'Provision', 'adbd',
+            'CertInstaller', 'Launcher3QuickStep', 'Provision', 'com.android.adbd',
             'ValethonReadiness')
 LIMIT = 1692925952
 

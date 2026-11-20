@@ -41,6 +41,12 @@ class ProductContentsAudit(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'no installed output'):
             self.run_audit()
 
+    def test_host_adbd_does_not_substitute_for_device_apex(self):
+        self.modules['com.android.adbd']['installed'] = []
+        self.modules['adbd'] = {'installed': ['out/host/linux-x86/bin/adbd']}
+        with self.assertRaisesRegex(ValueError, 'com.android.adbd'):
+            self.run_audit()
+
     def test_installed_path_outside_product_is_rejected(self):
         self.modules['webview']['installed'] = ['../../outside.apk']
         with self.assertRaisesRegex(ValueError, 'out-of-product'):

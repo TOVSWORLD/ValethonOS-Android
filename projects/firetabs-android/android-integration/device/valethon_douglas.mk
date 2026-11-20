@@ -24,7 +24,8 @@ PRODUCT_BUILD_CACHE_IMAGE := false
 
 # Android boot container is assembled separately using the qualified LK path.
 # Original recovery is never replaced by this product.
-PRODUCT_PACKAGES += Launcher3QuickStep Provision adbd
+# Device adbd is provided by the inherited com.android.adbd APEX.
+PRODUCT_PACKAGES += Launcher3QuickStep Provision
 # Do not rely on the absent optional frameworks/webview/chromium/chromium.mk.
 # external/chromium-webview supplies the pinned ARM32 provider and required JNI.
 # These ordinary apps have no new boot service, privileged grant or device-owner role.
