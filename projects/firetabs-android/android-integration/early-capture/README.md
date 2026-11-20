@@ -51,3 +51,16 @@ is hash-checked but never written. After at least five minutes, the original
 FACTORYM helper may be armed once. Recovery readout preserves the full boot
 privately, validates immutable prefix and bounded mailbox records, and checks
 unchanged recovery/system. No original case is reused.
+
+## Tablet result — November 20, 2026
+
+One approved boot-only install/readback and one explicit boot request completed.
+Owner observed repeated Amazon/black/Amazon cycles, then TWRP. The 300-second USB
+receiver captured zero bytes without receiver errors. Recovery collection found
+only the preinstalled sequence-one host control, no kernel-written snapshot.
+Existing recovery retention interfaces contained no fresh trial identity.
+Original TWRP return and unchanged recovery/system/immutable boot prefix verify.
+This does not prove fresh Linux/init execution or establish a panic/reset cause.
+The consumed attempt, private raw records and rollback are preserved; candidate
+is left in TWRP. No automatic retry or collection-only boot was performed.
+See `evidence/android-integration-source/early-capture-runtime-result.json`.
