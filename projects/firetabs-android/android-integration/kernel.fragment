@@ -1,0 +1,13 @@
+# Integrated Android init requires binderfs (system/core 545d2487... rootdir/init.rc).
+CONFIG_ANDROID_BINDER_IPC=y
+CONFIG_ANDROID_BINDERFS=y
+# Android emulated storage must not depend on an unshipped FUSE kernel module.
+CONFIG_FUSE_FS=y
+# Android adbd uses FunctionFS; the achieved ACM-only console does not provide it.
+CONFIG_USB_F_FS=y
+CONFIG_USB_CONFIGFS_F_FS=y
+# Android cgroups.json mounts cpuset v1 before initializing the v2 process tree.
+# Without this, SetupCgroups aborts and ueventd/apexd-bootstrap cannot start.
+CONFIG_CPUSETS_V1=y
+# The shipped lmkd initializes PSI monitors; without PSI it exits repeatedly.
+CONFIG_PSI=y

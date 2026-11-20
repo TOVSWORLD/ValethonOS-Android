@@ -1,0 +1,110 @@
+{
+  "scope": "Actual Android userspace VM comparison; not tablet boot qualification",
+  "date": "2026-11-20",
+  "baseline": {
+    "kernel_sha256": "c83baf995268af14e0a4ba3faac683ee2ee4d6d1c4717a675d7eaccea20337b6",
+    "compiled_android_init_unchanged": true,
+    "system_sha256": "e3a8b1bd6ae08d15abcb81d1fe5bb6de717c2ceb1fd4281d13563cefc1e1b538",
+    "first_stage_started": true,
+    "system_mounted": true,
+    "selinux_policy_loaded": true,
+    "second_stage_started": true,
+    "apex_bootstrap_reboot": true
+  },
+  "identified_failure_chain": [
+    "Image requests legacy cpuset controller",
+    "Kernel CPUSETS=y but CPUSETS_V1 disabled",
+    "SetupCgroups aborts before initializing v2 process hierarchy",
+    "ueventd and apexd-bootstrap createProcessGroup fail",
+    "init requests bootstrap-apexd-failed reboot"
+  ],
+  "kernel_fix": {
+    "config_delta": {
+      "CONFIG_CPUSETS_V1": [
+        "n",
+        "y"
+      ],
+      "CONFIG_PROC_PID_CPUSET": [
+        null,
+        "y"
+      ]
+    },
+    "artifacts": {
+      "arch/arm64/boot/Image": "00607a18874212e82cd4b99a1013af771b322d6b64e79688d20bd130e6e63e4b",
+      "arch/arm64/boot/Image.gz": "410be9a52a68209626b087b3782902b6f97a29088c8fba588ea3c26968a6f9d2",
+      ".config": "16a6e7a22877ac6d487d376ba6b1af2dbbd75df57b0ebed9a6fec6173af9a5ca",
+      "System.map": "6d9b7c70f903024c6286cfb5a6b98f93df69efa2c3f0e6226d3e6d75dbbeb1ed"
+    },
+    "unrelated_kernel_changes": false
+  },
+  "fixed_original_system_vm": {
+    "scope": "Actual compiled Android init/system VM bootstrap; not tablet Linux/Android qualification",
+    "first_stage_started": true,
+    "second_stage_started": true,
+    "system_mounted": true,
+    "selinux_policy_load_reached": true,
+    "legacy_cpuset_setup_failed": false,
+    "apex_bootstrap_exited_zero": true,
+    "bootstrap_failure_reboot": false,
+    "kernel_panic": false,
+    "passed": true,
+    "kernel_sha256": "00607a18874212e82cd4b99a1013af771b322d6b64e79688d20bd130e6e63e4b",
+    "android_ramdisk_sha256": "ed3338bfbc597e79fdc56e0db339a9bc8231f0b619cd211787583adc094bf845",
+    "system_sha256": "e3a8b1bd6ae08d15abcb81d1fe5bb6de717c2ceb1fd4281d13563cefc1e1b538",
+    "vm_ramdisk_sha256": "a6b6c2d0a7d758e69eda16bc1897165cf90d5ad20318775c3a780e129d182d13",
+    "vm_only_modification": {
+      "changed_entry": "fstab.douglas",
+      "change": "mmcblk0p14 -> vda",
+      "original_android_init_sha256": "10fa322131b1ff4ef3adaf11f664d911eca131a8f13b22e51eb6008ed5cb9380",
+      "original_android_init_unchanged": true
+    },
+    "system_read_only": true,
+    "selinux_enforcing_requested": true,
+    "network_attached": false,
+    "virtualization": "on",
+    "elapsed_seconds": 89.198,
+    "log_sha256": "5fa1e5e7b73c1f04271095ede16f2417e8d0d3d598cc16911d46552cfdfe21f4",
+    "critical_service_abort": true,
+    "late_failure": "keystore2 repeatedly aborts; init requests bootloader reboot"
+  },
+  "later_data_ordering_repair": "VM-only experiment failed to remove keystore abort; not selected for deployment",
+  "full_android_rebuild_performed": false,
+  "tablet_test_performed": false,
+  "tablet_failure_cause_established": false,
+  "raw_vm_logs_kept_private": true,
+  "identified_late_failure": {
+    "keystore_abort_cause": "No default KeyMint/Keymaster instance installed",
+    "observed_errors": [
+      "Failed to construct mandatory security level TEE",
+      "Does the device have a /default Keymaster or KeyMint instance?"
+    ],
+    "image_contains_security_hal_service": false,
+    "image_contains_security_hal_vintf_fragment": false,
+    "vold_waits_for_keystore_maintenance": true,
+    "critical_reboot_after_repeated_abort": true,
+    "raw_logcat_records_private": true
+  },
+  "identified_lmkd_failure": {
+    "reason": "No kernel PSI monitor support",
+    "kernel_psi_enabled": false,
+    "lmkd_exits_repeatedly": true
+  },
+  "selected_grouped_repairs": [
+    "Legacy cpuset support (compiled and A/B VM bootstrap-verified)",
+    "Kernel PSI support (compilation in progress)",
+    "AIDL Rust nonsecure KeyMint service for engineering profile (source selected, not yet built)",
+    "AIDL Rust nonsecure Gatekeeper APEX (source selected, not yet built)",
+    "Uncompressed system APEXes to preserve volatile-data RAM"
+  ],
+  "compressed_apex_resource_check": {
+    "compressed_bytes": 144003072,
+    "decompressed_apex_bytes": 183853056,
+    "data_tmpfs_bytes": 268435456,
+    "additional_system_bytes_if_uncompressed": 39849984,
+    "runtime_out_of_space_observed": false
+  },
+  "engineering_security_only": true,
+  "hardware_backed_security_qualified": false,
+  "native_security_build_started": false,
+  "paid_resources_created_for_followup": false
+}

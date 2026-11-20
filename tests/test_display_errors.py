@@ -136,7 +136,7 @@ int main(void){
         root=Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
             p=Path(directory);(p/'probe.c').write_text(source)
-            subprocess.run([shutil.which('clang') or 'cc','-std=c11','-fsanitize=address,undefined',
+            subprocess.run([shutil.which('clang') or 'cc','-std=c11','-fsanitize=address,undefined','-DFT_ACM_HOST_TEST=1',
                             '-I',str(root/'projects/firetabs-android/diagnostic-usb'),str(p/'probe.c'),
                             '-o',str(p/'probe')],check=True,capture_output=True)
             subprocess.run([str(p/'probe')],check=True,capture_output=True)

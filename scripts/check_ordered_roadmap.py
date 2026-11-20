@@ -28,7 +28,25 @@ def validate(plan):
  if not any('outcome must be GO' in c for c in by[347]['conditions']):raise ValueError('Closed NO-GO must not unblock physical entry')
  first=plan['first_critical_path_issue']
  if by[first]['kind']!='decision' or by[first]['order']!=10:raise ValueError('Critical path must start with the entry decision')
- return {'passed':True,'tasks':len(tasks),'hardware_groups':len(groups),'first_critical_path_issue':first,'max_active_implementation_tasks':1,'runtime_qualification_inferred':False}
+ execution=plan.get('test_execution',{});stages=execution.get('stages',[]);stage_by={s['id']:s for s in stages}
+ if len(stage_by)!=len(stages) or not {'T0','T1','T2A','T2B','T2C','T3'}.issubset(stage_by):raise ValueError('Shared test stages missing or duplicated')
+ if execution.get('major_exit_stage')!='T1':raise ValueError('First Android home must not wait for peripheral/release stages')
+ for key in ['preserve_issue_acceptance','one_install_per_candidate_session','one_final_recovery_per_session','defer_final_recovery_until_session_end','record_unready_checkpoints_as_not_run']:
+  if execution.get(key) is not True:raise ValueError('Shared-session contract missing: '+key)
+ if execution.get('all_hardware_ready_required') is not False or execution.get('physical_action_authorized_by_plan') is not False:raise ValueError('Test grouping cannot require all hardware or authorize a physical action')
+ if contract.get('shared_stage_runtime_coqualification') is not True:raise ValueError('Shared runtime evidence must not be blocked by serial physical tests')
+ positions={s['id']:i for i,s in enumerate(stages)}
+ for stage in stages:
+  if not stage['checkpoints'] or not stage['issues'] or any(n not in by for n in stage['issues']):raise ValueError('Shared stage needs known issues and checkpoints')
+  if any(dep not in positions or positions[dep]>=positions[stage['id']] for dep in stage['depends_on']):raise ValueError('Shared-stage dependency is forward or cyclic')
+  if stage['required_for_first_android_home'] != (stage['id'] in ['T0','T1']):raise ValueError('Peripheral/release scope cannot block first Android home')
+ if stage_by['T0']['kind']!='offline' or stage_by['T0']['owner_device_action'] is not False:raise ValueError('Offline candidate gate cannot request a tablet test')
+ if stage_by['T2C'].get('additional_runtime_prerequisites')!=[335]:raise ValueError('Suspend tests require qualified power/thermal prerequisites')
+ for task in tasks:
+  expected=[stage['id'] for stage in stages if task['issue'] in stage['issues']]
+  if task.get('test_stages')!=expected:raise ValueError('Task/shared-stage mapping differs')
+  if task['hardware_group'] and not expected:raise ValueError('Hardware issue missing shared-stage checkpoint')
+ return {'passed':True,'tasks':len(tasks),'hardware_groups':len(groups),'first_critical_path_issue':first,'max_active_implementation_tasks':1,'runtime_qualification_inferred':False,'shared_test_stages':len(stages),'first_home_exit_stage':execution['major_exit_stage']}
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('path',type=Path,nargs='?',default=ROOT/'docs/development/ordered-roadmap.json');a=p.parse_args();print(json.dumps(validate(json.loads(a.path.read_text())),indent=2))
 if __name__=='__main__':main()

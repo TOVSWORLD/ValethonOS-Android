@@ -1,0 +1,2 @@
+# Existing system partition only. No userdata/cache/metadata mount or format entry.
+/dev/block/mmcblk0p14 /system ext4 ro,barrier=1 wait,first_stage_mount

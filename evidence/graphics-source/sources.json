@@ -1,0 +1,41 @@
+{
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "sources": [
+    {
+      "path": "drivers/gpu/drm/panfrost/panfrost_drv.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/gpu/drm/panfrost/panfrost_drv.c?format=TEXT",
+      "bytes": 26662,
+      "sha256": "c69b99df086670f4879d87ed4db923598f0e65798c2ad736e97d93af00695edd",
+      "retained_path": "evidence/graphics-source/panfrost_drv.c"
+    },
+    {
+      "path": "drivers/gpu/drm/panfrost/panfrost_device.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/gpu/drm/panfrost/panfrost_device.c?format=TEXT",
+      "bytes": 13614,
+      "sha256": "8f29acb21bebe242e3941a685f03bbb3927efa6670e84ae2456dbd6ff5c3bbc2",
+      "retained_path": "evidence/graphics-source/panfrost_device.c"
+    },
+    {
+      "path": "drivers/gpu/drm/panfrost/panfrost_devfreq.c",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/drivers/gpu/drm/panfrost/panfrost_devfreq.c?format=TEXT",
+      "bytes": 7118,
+      "sha256": "5520884dea470eee238492ab3b2e5063d5313ed283aa9e6bb70a2902105d864e",
+      "retained_path": "evidence/graphics-source/panfrost_devfreq.c"
+    },
+    {
+      "path": "Documentation/devicetree/bindings/gpu/arm,mali-midgard.yaml",
+      "url": "https://android.googlesource.com/kernel/common/+/d9318bdb4c34e8b2d997b4f67ced56b120b22b87/Documentation/devicetree/bindings/gpu/arm,mali-midgard.yaml?format=TEXT",
+      "bytes": 4674,
+      "sha256": "29cc039197bf174115d4889bc449e6c6070cafee35a0337fed658eb2eeb5182e",
+      "retained_path": "evidence/graphics-source/arm,mali-midgard.yaml"
+    },
+    {
+      "path": "drivers/misc/mediatek/base/power/mt8163/mtk_gpufreq.c",
+      "retained_path": "evidence/graphics-source/working-mtk_gpufreq.c",
+      "url": "https://github.com/amazon-oss/android_kernel_amazon_mt8163/blob/72940eb733af8df948cc216cb977cd8be9cba5a9/drivers/misc/mediatek/base/power/mt8163/mtk_gpufreq.c",
+      "bytes": 53921,
+      "sha256": "872fe4dd20c062142a7c69b34d765cac35cd03bea3d6d5c645a0cb774977c72d"
+    }
+  ],
+  "scope": "Public pinned source only; no graphics qualification"
+}

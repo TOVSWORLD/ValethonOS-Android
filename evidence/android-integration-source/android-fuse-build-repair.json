@@ -1,0 +1,39 @@
+{
+  "scope": "Kernel source compile failure and repair; no tablet execution",
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "successful_graphics_parent_image": {
+    "bytes": 26601984,
+    "sha256": "d95be28c8227987c6231e8cafd61fdc1828f42c3202424f162e82428dd9fda1c"
+  },
+  "failed_attempt": {
+    "stage": "First integrated builtin FUSE compile",
+    "file": "fs/fuse/dir.c",
+    "function": "fuse_dentry_release",
+    "error": "struct fuse_dentry incomplete in ARM64 without CONFIG_FUSE_BPF",
+    "exit_status": 2,
+    "downstream_apex_followup": "Stopped because prerequisite build failed"
+  },
+  "repair": {
+    "before_sha256": "eb418bedbd82e70bb58162faead79d2e225ed2fa0a62dccd738f205d9c5861d5",
+    "after_sha256": "7ee5e69d51e4ddf2f71cf3bf978cb1e950ddb7b93ec9e34673dd17ec5800d77a",
+    "allocation_and_cleanup_guard": "BITS_PER_LONG < 64 || defined(CONFIG_FUSE_BPF)",
+    "bpf_fields_guard": "CONFIG_FUSE_BPF",
+    "enabled_fuse_bpf": false,
+    "hardware_changes": false,
+    "retained_ack618_dentry_time_initialization": true,
+    "reference": "https://android.googlesource.com/kernel/common/+/refs/tags/android16-6.12-2025-06_r17/fs/fuse/dir.c",
+    "reference_scope": "Earlier ACK FUSE cleanup uses the allocation condition and a separate BPF field guard; retain the newer 6.18 d_time initialization."
+  },
+  "validation": {
+    "actual_cleanup_c_conditional_configurations_tested": 4,
+    "null_cleanup_tested": true,
+    "unpinned_input_rejected": true,
+    "exact_patched_source_resume_verified": true,
+    "repository_tests_run": 1074,
+    "repository_tests_skipped": 9,
+    "repository_tests_failed": 0,
+    "final_integrated_kernel_compile": "passed",
+    "final_image_sha256": "c83baf995268af14e0a4ba3faac683ee2ee4d6d1c4717a675d7eaccea20337b6",
+    "local_artifact_hash_config_size_gzip_verification": "passed"
+  }
+}

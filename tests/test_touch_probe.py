@@ -40,5 +40,5 @@ int main(void){struct ft_acm_io io={mock,0};interrupts=1;
     def compile_run(self,code):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp);(p/'test.c').write_text(code)
-            subprocess.run([shutil.which('clang') or 'cc','-std=c11','-fsanitize=address,undefined','-I',str(ROOT/'projects/firetabs-android/diagnostic-usb'),str(p/'test.c'),'-o',str(p/'test')],capture_output=True,check=True)
+            subprocess.run([shutil.which('clang') or 'cc','-std=c11','-fsanitize=address,undefined','-DFT_ACM_HOST_TEST=1','-I',str(ROOT/'projects/firetabs-android/diagnostic-usb'),str(p/'test.c'),'-o',str(p/'test')],capture_output=True,check=True)
             subprocess.run([str(p/'test')],capture_output=True,check=True)

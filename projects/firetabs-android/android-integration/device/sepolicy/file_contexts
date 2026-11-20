@@ -1,0 +1,4 @@
+/vendor/lib/egl/libEGL_valethon\.so u:object_r:same_process_hal_file:s0
+/vendor/lib/egl/libGLESv1_CM_valethon\.so u:object_r:same_process_hal_file:s0
+/vendor/lib/egl/libGLESv2_valethon\.so u:object_r:same_process_hal_file:s0
+/vendor/lib/libgallium_dri\.so u:object_r:same_process_hal_file:s0

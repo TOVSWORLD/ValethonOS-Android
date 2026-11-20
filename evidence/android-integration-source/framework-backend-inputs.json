@@ -1,0 +1,26 @@
+[
+  {
+    "path": "libs/renderengine/include/renderengine/RenderEngine.h",
+    "project_path": "frameworks/native",
+    "revision": "ae266dcb706d083868578cfedce381ef44488a07",
+    "url": "https://android.googlesource.com/platform/frameworks/native/+/ae266dcb706d083868578cfedce381ef44488a07/libs/renderengine/include/renderengine/RenderEngine.h?format=TEXT",
+    "sha256": "9fd76a5e2211c9c02619e8a3de0b71ff9bde1520007d890c183bab93080a8985",
+    "bytes": 18515,
+    "captured_file": "upstream/frameworks/native/libs/renderengine/include/renderengine/RenderEngine.h"
+  },
+  {
+    "path": "services/surfaceflinger/SurfaceFlinger.cpp",
+    "project_path": "frameworks/native",
+    "revision": "ae266dcb706d083868578cfedce381ef44488a07",
+    "url": "https://android.googlesource.com/platform/frameworks/native/+/ae266dcb706d083868578cfedce381ef44488a07/services/surfaceflinger/SurfaceFlinger.cpp?format=TEXT",
+    "sha256": "13b03a5c51750456a169ab8801efe933ecc18a966421b8821043b37c321b7fb2",
+    "bytes": 495363,
+    "excerpt_file": "surfaceflinger-backend-selection.txt",
+    "excerpt_lines": [
+      888,
+      919
+    ],
+    "excerpt_sha256": "a9c2b2e46be4b8974d38749694dd18a535fa1aa19f3e104fda8fb48e410bde6e",
+    "full_file_captured_publicly": false
+  }
+]

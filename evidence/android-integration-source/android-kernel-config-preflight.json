@@ -1,0 +1,88 @@
+{
+  "scope": "Isolated Kconfig preflight with pinned build tools; not final hardware config or compile",
+  "required_resolved": true,
+  "changes": {
+    "CONFIG_DM_VERITY": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_ZIP": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_ANDROID_BINDERFS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_BACKED_BY_FILE": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_XATTR": [
+      "n",
+      "y"
+    ],
+    "CONFIG_FUSE_FS": [
+      "m",
+      "y"
+    ],
+    "CONFIG_USB_CONFIGFS_F_FS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_PNFS_BLOCK": [
+      "m",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_POSIX_ACL": [
+      "n",
+      "y"
+    ],
+    "CONFIG_BLK_DEV_DM": [
+      "m",
+      "y"
+    ],
+    "CONFIG_BLK_DEV_LOOP_MIN_COUNT": [
+      "n",
+      "8"
+    ],
+    "CONFIG_USB_F_FS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_BLK_DEV_LOOP": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_SECURITY": [
+      "n",
+      "y"
+    ],
+    "CONFIG_FS_VERITY": [
+      "n",
+      "y"
+    ],
+    "CONFIG_DM_BUFIO": [
+      "n",
+      "y"
+    ]
+  },
+  "device_access": false,
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "hardware_execution": false,
+  "final_integrated_kernel_compiled": false,
+  "source_dependency": {
+    "path": "fs/nfs/Kconfig",
+    "symbol": "PNFS_BLOCK",
+    "depends_on": "NFS_V4_1 && BLK_DEV_DM",
+    "default": "NFS_V4",
+    "observed_transition": [
+      "m",
+      "y"
+    ]
+  }
+}

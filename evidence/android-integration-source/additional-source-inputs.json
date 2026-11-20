@@ -1,0 +1,112 @@
+[
+  {
+    "project_path": "superproject",
+    "path": ".supermanifest",
+    "url": "https://android.googlesource.com/platform/superproject/+/d6985d7ea38e602e9b1c94e2ebcbafacd7cc9892/.supermanifest?format=TEXT",
+    "status": "captured",
+    "bytes": 87,
+    "sha256": "0d74447b0bd492544e8c558f6e7d5bad188ff10a4ab555f757152b2cc9aa7513"
+  },
+  {
+    "project_path": "superproject",
+    "path": ".gitmodules",
+    "url": "https://android.googlesource.com/platform/superproject/+/d6985d7ea38e602e9b1c94e2ebcbafacd7cc9892/.gitmodules?format=TEXT",
+    "status": "captured",
+    "bytes": 152803,
+    "sha256": "b2f76614dd3968b774f9426c2444867b624f6192ebfc44633abc39a814be2102"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "README.aosp.md",
+    "status": "not_captured",
+    "error": "HTTPError"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "meson.options",
+    "url": "https://android.googlesource.com/platform/external/mesa3d/+/875160ed32cc5bc32777fa04870a0a57ed38c987/meson.options?format=TEXT",
+    "status": "captured",
+    "bytes": 21641,
+    "sha256": "f8a4ed75778a5efcbef55e60c0cc5f0148603865a9353afa7f9470ae8c5a64bb"
+  },
+  {
+    "project_path": "external/minigbm",
+    "path": "cros_gralloc/aidl/Android.bp",
+    "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/cros_gralloc/aidl/Android.bp?format=TEXT",
+    "status": "captured",
+    "bytes": 1875,
+    "sha256": "cbd94a8c126fe7dfdb0941063930c6dcb20d77ac136ec5d0cae088f66fc38288"
+  },
+  {
+    "project_path": "external/minigbm",
+    "path": "cros_gralloc/mapper_stablec/Android.bp",
+    "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/cros_gralloc/mapper_stablec/Android.bp?format=TEXT",
+    "status": "captured",
+    "bytes": 1603,
+    "sha256": "58e34acc9a0e0152d5f4414ea4c712eac265644aa2f4d094fc04a4c34da15ce0"
+  },
+  {
+    "project_path": "external/minigbm",
+    "path": "drv.c",
+    "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/drv.c?format=TEXT",
+    "status": "captured",
+    "bytes": 19460,
+    "sha256": "0bca874fb74e25fa21b96cf099fb359a4499467006dd59ae59bf38e614fec50e"
+  },
+  {
+    "project_path": "external/minigbm",
+    "path": "mediatek.c",
+    "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/mediatek.c?format=TEXT",
+    "status": "captured",
+    "bytes": 24791,
+    "sha256": "e7f6012eb435c8ae689d177060acebc7162be1359534d8206e1cd02851b56e5d"
+  },
+  {
+    "project_path": "external/drm_hwcomposer",
+    "path": "hwc3/hwc3-drm.xml",
+    "url": "https://android.googlesource.com/platform/external/drm_hwcomposer/+/87daba89b05fabc7f1e9316e3f283f19fd0c45cd/hwc3/hwc3-drm.xml?format=TEXT",
+    "status": "captured",
+    "bytes": 289,
+    "sha256": "64ff8da2dacb864a03e6b26ae9032eeb6e8734002e200115777a26fba2d1dc7c"
+  },
+  {
+    "project_path": "external/drm_hwcomposer",
+    "path": "hwc3/hwc3-drm.rc",
+    "url": "https://android.googlesource.com/platform/external/drm_hwcomposer/+/87daba89b05fabc7f1e9316e3f283f19fd0c45cd/hwc3/hwc3-drm.rc?format=TEXT",
+    "status": "captured",
+    "bytes": 325,
+    "sha256": "4dc24ee1cd109644dbebcc0e4b4ef60bee2dda2c9f21ca38bbfc4a5de085a0a9"
+  },
+  {
+    "project_path": "external/drm_hwcomposer",
+    "path": "bufferinfo/legacy/BufferInfoLibdrm.cpp",
+    "url": "https://android.googlesource.com/platform/external/drm_hwcomposer/+/87daba89b05fabc7f1e9316e3f283f19fd0c45cd/bufferinfo/legacy/BufferInfoLibdrm.cpp?format=TEXT",
+    "status": "captured",
+    "bytes": 7411,
+    "sha256": "3b982703f94608dd66ac77a384cfcee8bd79635a36c225c6e9521bc000c3b62e"
+  },
+  {
+    "project_path": "build/make",
+    "path": "target/product/handheld_system.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/handheld_system.mk?format=TEXT",
+    "status": "captured",
+    "bytes": 4249,
+    "sha256": "b8ea2fca821d12abaceecfd63a7e1efbaac9b798b9f7b889177b0f8a8c148a84"
+  },
+  {
+    "project_path": "build/make",
+    "path": "target/product/generic_system.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/generic_system.mk?format=TEXT",
+    "status": "captured",
+    "bytes": 4315,
+    "sha256": "dde2b17c455668de2f884e96df9bccabaac0233fd0d94c43f2412f0b1cecb179"
+  },
+  {
+    "project_path": "build/make",
+    "path": "target/board/BoardConfigGsiCommon.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/board/BoardConfigGsiCommon.mk?format=TEXT",
+    "status": "captured",
+    "bytes": 3505,
+    "sha256": "8c15b36a409647a5fa7b26553588e6028226e4ed8f9b04c5c3a3dffed7a8cd2f"
+  }
+]

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>Valethon offline readiness</title>
+<style>
+body{background:#020617;color:#f7f9fc;font:20px sans-serif;margin:20px}
+h1{font-size:26px} #grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+button{min-height:80px;background:#344972;color:white;border:2px solid #1fb6ff;border-radius:12px;font-size:24px}
+button.done{background:#106c51} input{box-sizing:border-box;width:100%;padding:16px;font:20px sans-serif;margin-top:20px}
+#pulse{height:6px;background:#1fb6ff;transform-origin:left;animation:pulse 2s ease-in-out infinite alternate;margin-bottom:20px}
+@keyframes pulse{from{transform:scaleX(.15)}to{transform:scaleX(1)}}
+</style>
+<h1>Valethon · offline app check</h1>
+<p id="state">HTML rendered. JavaScript has not run.</p><div id="pulse"></div>
+<div id="grid"></div>
+<label for="typing">Keyboard check</label><input id="typing" placeholder="Tap here and type" autocomplete="off">
+<p>This checks local rendering/input only. It does not qualify networking, storage persistence, security or the GPU renderer.</p>
+<script>
+const state=document.getElementById('state'), grid=document.getElementById('grid');
+let count=0;
+state.textContent='JavaScript running · 0 / 9 tiles tapped';
+for(let i=1;i<=9;i++){
+ const button=document.createElement('button');button.textContent=i;
+ button.onclick=()=>{if(!button.classList.contains('done')){button.classList.add('done');count++;state.textContent=`JavaScript running · ${count} / 9 tiles tapped`;}};
+ grid.appendChild(button);
+}
+</script></html>

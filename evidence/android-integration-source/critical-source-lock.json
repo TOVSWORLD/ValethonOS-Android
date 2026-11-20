@@ -1,0 +1,202 @@
+{
+  "superproject_commit": "d6985d7ea38e602e9b1c94e2ebcbafacd7cc9892",
+  "scope": "Critical Android integration project pins; not full manifest closure or build qualification",
+  "projects": [
+    {
+      "path": "build/make",
+      "project": "platform/build",
+      "revision": "5ce6f787337d0223710bf7d4a16dbe6d2a35f777",
+      "files": [
+        {
+          "path": "target/product/aosp_arm.mk",
+          "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/aosp_arm.mk?format=TEXT",
+          "sha256": "b75778a9977b9231f4953fb2f0de15154dbaf8eab54c3bdee9edb49e88b55735",
+          "bytes": 2166,
+          "status": "captured"
+        },
+        {
+          "path": "target/board/generic/BoardConfig.mk",
+          "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/board/generic/BoardConfig.mk?format=TEXT",
+          "sha256": "bca69458bb6378357f74cc7ee444acedaabedf0a703861ad6b2b3b0d9158dfd3",
+          "bytes": 1341,
+          "status": "captured"
+        },
+        {
+          "path": "target/product/core_32_bit.mk",
+          "status": "not_captured",
+          "error": "HTTPError"
+        },
+        {
+          "path": "target/product/base_system.mk",
+          "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/base_system.mk?format=TEXT",
+          "sha256": "1846bed2dc61a52b90db0bfaaabc1cc24a2326113ff9c3069af649bfde1dcd12",
+          "bytes": 16444,
+          "status": "captured"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "device/generic/armv7-a-neon",
+      "project": "platform/device/generic/armv7-a-neon",
+      "revision": "b7153cb57f487ce183df8a3719248242765dbb31",
+      "files": [
+        {
+          "path": "AndroidProducts.mk",
+          "status": "not_captured",
+          "error": "HTTPError"
+        },
+        {
+          "path": "aosp_arm.mk",
+          "status": "not_captured",
+          "error": "HTTPError"
+        },
+        {
+          "path": "BoardConfig.mk",
+          "status": "not_captured",
+          "error": "HTTPError"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "external/mesa3d",
+      "project": "platform/external/mesa3d",
+      "revision": "875160ed32cc5bc32777fa04870a0a57ed38c987",
+      "files": [
+        {
+          "path": "Android.bp",
+          "url": "https://android.googlesource.com/platform/external/mesa3d/+/875160ed32cc5bc32777fa04870a0a57ed38c987/Android.bp?format=TEXT",
+          "sha256": "43fc74c16a3ff4c54d1c2becab88a442d78eed5362b4365aaf93f37531b3771d",
+          "bytes": 18486,
+          "status": "captured"
+        },
+        {
+          "path": "android/Android.mk",
+          "status": "not_captured",
+          "error": "HTTPError"
+        },
+        {
+          "path": "meson_options.txt",
+          "status": "not_captured",
+          "error": "HTTPError"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "external/minigbm",
+      "project": "platform/external/minigbm",
+      "revision": "ce79bbee67b3e2ea7abb110e1415e9ceceaa6471",
+      "files": [
+        {
+          "path": "Android.bp",
+          "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/Android.bp?format=TEXT",
+          "sha256": "4986717eef05b7aa5c139de384d8be2b832b41bdc6300f826e39e9aeef24ba6a",
+          "bytes": 7662,
+          "status": "captured"
+        },
+        {
+          "path": "cros_gralloc/mapper_stablec/mapper.cpp",
+          "status": "not_captured",
+          "error": "HTTPError"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "external/drm_hwcomposer",
+      "project": "platform/external/drm_hwcomposer",
+      "revision": "87daba89b05fabc7f1e9316e3f283f19fd0c45cd",
+      "files": [
+        {
+          "path": "Android.bp",
+          "url": "https://android.googlesource.com/platform/external/drm_hwcomposer/+/87daba89b05fabc7f1e9316e3f283f19fd0c45cd/Android.bp?format=TEXT",
+          "sha256": "35c3d950a5f66b4ced0cd05c95ef60557bdb032e844eb7ffb761372d9cce1e60",
+          "bytes": 11739,
+          "status": "captured"
+        },
+        {
+          "path": "hwc3/Composer.cpp",
+          "url": "https://android.googlesource.com/platform/external/drm_hwcomposer/+/87daba89b05fabc7f1e9316e3f283f19fd0c45cd/hwc3/Composer.cpp?format=TEXT",
+          "sha256": "e03facac5bed3953ae9f4580653c022e5df54f137a64349d61974c14fd4d422c",
+          "bytes": 2614,
+          "status": "captured"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "system/core",
+      "project": "platform/system/core",
+      "revision": "545d2487e38192a2ce25040897ced877cf6b4f53",
+      "files": [
+        {
+          "path": "rootdir/init.rc",
+          "url": "https://android.googlesource.com/platform/system/core/+/545d2487e38192a2ce25040897ced877cf6b4f53/rootdir/init.rc?format=TEXT",
+          "sha256": "8b8d9d9c2c17fcb1f907b0a369aae03632976dff8f4cf603b1d5ef83cad78225",
+          "bytes": 56559,
+          "status": "captured"
+        },
+        {
+          "path": "rootdir/ueventd.rc",
+          "url": "https://android.googlesource.com/platform/system/core/+/545d2487e38192a2ce25040897ced877cf6b4f53/rootdir/ueventd.rc?format=TEXT",
+          "sha256": "7a26df7521ecba3b3fd66df438b4e5d1b5e8fa6fc5ea1a73c2c93eed803f985e",
+          "bytes": 3834,
+          "status": "captured"
+        },
+        {
+          "path": "init/first_stage_mount.cpp",
+          "url": "https://android.googlesource.com/platform/system/core/+/545d2487e38192a2ce25040897ced877cf6b4f53/init/first_stage_mount.cpp?format=TEXT",
+          "sha256": "61cb5340967316c1c2b0cd0a49bc48c6f54c1a86a73bbd789ff4b1a899701e68",
+          "bytes": 19561,
+          "status": "captured"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "system/sepolicy",
+      "project": "platform/system/sepolicy",
+      "revision": "e066568e98d86db31a9346d30977f3632fa7073c",
+      "files": [
+        {
+          "path": "private/init.te",
+          "url": "https://android.googlesource.com/platform/system/sepolicy/+/e066568e98d86db31a9346d30977f3632fa7073c/private/init.te?format=TEXT",
+          "sha256": "926636301c22c73f6c0513740e75e298d74a0ce5c052c51c1bea0415d42fca1a",
+          "bytes": 28048,
+          "status": "captured"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "frameworks/native",
+      "project": "platform/frameworks/native",
+      "revision": "ae266dcb706d083868578cfedce381ef44488a07",
+      "files": [
+        {
+          "path": "services/surfaceflinger/Android.bp",
+          "url": "https://android.googlesource.com/platform/frameworks/native/+/ae266dcb706d083868578cfedce381ef44488a07/services/surfaceflinger/Android.bp?format=TEXT",
+          "sha256": "d379fadc9e876248dfd86c4d97c400fd4846651d98308b5e640a0c6739e20d12",
+          "bytes": 14899,
+          "status": "captured"
+        }
+      ],
+      "status": "pinned"
+    },
+    {
+      "path": "hardware/interfaces",
+      "project": "platform/hardware/interfaces",
+      "revision": "0162af698935100a590b7359581ac8b1b80693e5",
+      "files": [
+        {
+          "path": "graphics/composer/aidl/default/Android.bp",
+          "status": "not_captured",
+          "error": "HTTPError"
+        }
+      ],
+      "status": "pinned"
+    }
+  ]
+}

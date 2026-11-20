@@ -1,0 +1,13 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "ValethonReadiness",
+    sdk_version: "current",
+    srcs: ["src/**/*.java"],
+    resource_dirs: [],
+    asset_dirs: ["assets"],
+    manifest: "AndroidManifest.xml",
+    product_specific: true,
+}

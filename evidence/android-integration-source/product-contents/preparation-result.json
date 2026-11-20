@@ -1,0 +1,26 @@
+{
+  "scope": "Local source, SDK36 Java/resource and negative output-audit checks only; not full Android17 Soong compile or tablet execution",
+  "checks": {
+    "java_javac17_sdk36": "passed",
+    "manifest_assets_aapt2_sdk36": "passed",
+    "output_audit_regressions": 4,
+    "existing_product_guards": 4,
+    "repository_tests": 1078,
+    "repository_skipped": 9,
+    "readiness_javascript_nine_tiles": "passed",
+    "fresh_product_staging": "passed",
+    "changed_checkout_overwrite_guard": "correctly refused stale control tree",
+    "staged_files": 22
+  },
+  "webview": {
+    "module": "webview",
+    "framework_package": "com.android.webview",
+    "pinned_trunk_staging_version": "145.0.7632.218",
+    "arm_apk_git_blob": "35c7ea359566544997dffe1daf58afcccf8ecb1f",
+    "actual_built_apk_inspected": false
+  },
+  "storage_decision": "volatile-data; persistent encryption/key management/write qualification remains open",
+  "full_android_graph_passed": false,
+  "tablet_runtime_verified": false,
+  "first_aapt2_attempt": "failed: used unsupported --assets option; corrected to -A and passed"
+}

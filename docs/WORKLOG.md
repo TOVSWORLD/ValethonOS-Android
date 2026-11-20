@@ -34,7 +34,7 @@
   inherited workaround semantics still require review and hardware tests.
 - Added restore, offline source checks, patch probe and host preflight scripts;
   pinned dependency manifests and an unbuilt Linux container recipe.
-- User confirmed Fire OS 5.7.1.0, 12.33 GB internal capacity (16 GB SKU), separate
+- User confirmed Fire OS [private network address], 12.33 GB internal capacity (16 GB SKU), separate
   30 GB SD card, CP4 lab on latest firmware, and full Home functionality required.
 
 ## Validation and limits
@@ -508,7 +508,7 @@ schema validation remain. No tablet access or runtime result claimed.
 
 ## 2026-10-25 — Bounded stock OTA model/boot-image inspection (#46/#21)
 
-Found discovery index HD8/HD10 5.7.1.0 links swapped; verified actual package
+Found discovery index HD8/HD10 [private network address] links swapped; verified actual package
 identity from CRC-checked properties, rejecting suez/KFSUWI and selecting
 candidate douglas/KFDOWI/MT8163 build659664620. Marketing-version/installed-build
 match remains unverified (embedded Fire OS property says5.3.7.3). Initial two
@@ -2306,7 +2306,7 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
   No vendor code imported/executed. Metadata receipt records reconstruction
   assumptions, compacted empty slots and lack of original-sector comparison.
 - Approved original attachment normal GET: curl --fail --location --max-time30
-  --max-filesize19000000 to ignored out/recovery-originals: HTTP403, no saved
+  --max-filesize19000000 to ignored [private execution receipt retained locally]: HTTP403, no saved
   ZIP. Browser/client bypass not attempted. Next original archive acquisition
   and independently reachable restore; no hardware/runtime gate closed.
 
@@ -2328,7 +2328,7 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
 
 - Reparsed cached stock boot SHA2568982fa50193acc764be69ee51027ee92e83614cee4b8235b07439d1f9e2db363;
   bounded gzip/newc walk under16MiB, decoded cpio2,917,376bytes. Own inspection
-  command retained at ignored out/stock-log-lifecycle/inspect.py and report.json.
+  command retained at ignored [private execution receipt retained locally] and report.json.
 - Matched packaged file hashes to prior stock-log-access receipt. Assigned each
   declaration to its actual on-trigger: removal post-fs, copy post-fs-data.
   Traced packaged import declarations; no runtime property/event order inferred.
@@ -2346,7 +2346,7 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
   callback can return success later. Callback/init banners cannot independently
   prove successful reservation. No runtime failure inferred or gate closed.
 - Prior static config/candidate-region comparison receipt retained privately at
-  out/stock-log-config/reservation-crosscheck.json. Original archives still absent.
+  [private execution receipt retained locally] Original archives still absent.
   Next actual reservation/retention evidence and original package verification;
   no helper/firmware/device execution or source-tree mutation occurred.
 
@@ -2471,7 +2471,7 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
   signed prefix907,704,179bytes. OpenSSL4.1.0 CMS -verify -binary -inform DER
   -content /dev/stdin -noverify:success; no PKI trust inferred. Stream-only one-byte
   mutation correctly failed(exit4); original file unchanged. Own scripts and exact
-  local receipts under ignored out/stock-return/signature/.
+  local receipts under ignored [private execution receipt retained locally]
 - Compared original return-recovery res/keys material to embedded signer:
   modulus/exponent3 and SHA1 profile match, n0inv/RR consistent. Bounded16MiB
   gzip/newc read; no image code execution. Candidate/installed trust kept distinct.
@@ -2529,7 +2529,7 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
 - Updated pending observation expectations: owner screen labels/ordinary return,
   no sideload/update selection or policy weakening to manufacture shell access.
   Raw static file data and private inspection script retained under ignored
-  out/stock-return/recovery-inspection; public receipt is normalized metadata.
+  [private execution receipt retained locally]; public receipt is normalized metadata.
   No recovery/adbd/firmware/helper execution and no physical gate closed.
 
 ## 2026-10-27 — owner-observed stock recovery entry and ordinary return (#346/#347/#348)
@@ -2882,8 +2882,8 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
   contract alone does not justify capability changes. Moved immediately to cached
   transition/clock analysis and safe ABI evidence; no root/reboot/helper/flash.
 - Next queued source scope: #347 trace actual candidate DTB selection/handoff
-  from cached LK/FDT/load artifacts (out/lk-instruction-audit, out/lk-fastboot-review,
-  out/lk-bootargs), identifying exact artifact/revision and image/address/trust
+  from cached LK/FDT/load artifacts ([private execution receipt retained locally] [private execution receipt retained locally]
+  [private execution receipt retained locally]), identifying exact artifact/revision and image/address/trust
   boundaries; do not equate original-route source with installed LK3. No execution.
   #20 wakeup equivalence awaits the pinned ACK genpd implementation, not just its
   header. Actual matching DTB handoff, independent failure return and logs stay open.
@@ -3251,7 +3251,7 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
 - PR416 merged6ef265b37da10f329f3a4d3b961791ce2b55ac2a after five distinct
   final-head checks (successful reruns included), exact dad8de0 USB-enabled
   run40813924079/job123250444675. MUSB/T-PHY objects/config/Image pass;
-  no QEMU/device test. Raw log ignored out/usb-analog-build-40813924079.log;
+  no QEMU/device test. Raw log ignored [private execution receipt retained locally];
   hashes/run/config receipt evidence/usb-analog-policy/build-result.json.
 - Replaced locked T-PHY proposal with MT8163-only eye-vrt/eye-term const7;
   absent properties allowed, eye-src forbidden, other SoCs/constraints preserved.
@@ -3335,7 +3335,7 @@ No device/helper execution. Existing tasks updated; no audit micro-issue created
 - PR419 merged37256b14f619b34018817ed0ac1fb11a7c5d6451 after six exact-head
   checks at93e62f84cc2d93b1970c755d543740f55c6c4c5f; run40822461567 actual
   MUSB/T-PHY objects/config/Image passed. No physical rollback/runtime/QEMU proof.
-  Raw log ignored out/usb-role-build-40822461567.log; public source/artifact receipt
+  Raw log ignored [private execution receipt retained locally]; public source/artifact receipt
   evidence/usb-role-errors/build-result.json (object hashes pre-Image W=1).
 - Added actual opt-in usb-acm-diagnostic apply/check/build mode: builtin configfs/
   libcomposite/ACM/u_serial, other configfs functions/Android uevents disabled.
@@ -3433,7 +3433,7 @@ evidence/usb-acm-profile/build-result.json. Prior failures remain historical.
 - Queue audited: #340 requires actual integrated candidate/return/log qualification;
   no cached Image found and no new download attempted. #18 explicitly depends on
   unmatched AUDSYS contract under#27. Cached integrated parent/binding/DTS leads
-  pinned ignored out/audsys-next-source.json; next actual source acceptance must
+  pinned ignored [private execution receipt retained locally]; next actual source acceptance must
   establish parent probe/resource/child ownership before schema extension. Do not
   blindly reuse MT2701 audio child or suppress current failed corpus diagnostics.
 - Recovery items' obsolete watchdog-next delivery fields corrected; loading/return/
@@ -3769,7 +3769,7 @@ implementation task, and explicit GO before physical entry. NO-GO completion is
 not runtime admission. Replaced the operational queue and archived its old source
 history. First real next task is#439 after roadmap#438 acceptance; no unrelated
 peripheral bypass when blocked. Full30/24 and all physical/boot/log/beta gates remain
-open. Raw board/API/build captures stay ignored under out/.
+open. Raw board/API/build captures stay ignored under [private execution receipt retained locally]
 
 ## 2026-10-29 — #439 first recoverable boot NO-GO decision
 
@@ -3796,7 +3796,7 @@ page47 reports, Rortiz2 LineageOS17.1 and newly linked18.1 author threads in bro
 after web502. Opening is explicitly not a normal installation prerequisite; it
 is a possible failure fallback. Cached external brick9820 script directs minimal
 BootROM whereas author's warning requires full for external brick scripts. Recent
-reports describe this wrong pairing and failures, not controlled causation;5.7.1.0
+reports describe this wrong pairing and failures, not controlled causation;[private network address]
 question on reviewed page has no answer. Existing branch maxima are not whole-
 route exclusion.18.1 maintainer requires prior unlock/TWRP and points to amazon-oss.
 
@@ -4597,7 +4597,7 @@ slots; fullp5 unchanged candidate6, no kernel record.
 
 Bootstrap restore PRECHECK stopped before write on different current hash. Preserved
 readback was exact ORIGINAL. Unchanged recovery image's fix-bootpatch.sh source and
-actual matching /tmp/restore_bootpatch.log prove existing TWRP repair reported
+actual matching [private staging path retained locally]
 copying recovery bootstrap to normal bootstrap. Both original ranges/headers
 verified; agent needed no second bootstrap write. Approved fulloriginalp5 restored
 once/currenthashbound, fullp5+p6/RAMcleanup verified, TWRP left running/no reboot.
@@ -5302,7 +5302,7 @@ this capture approach and reassess the boot route rather than repeat it unchange
 
 Local decoder:
 ```sh
-out/loader-audit-venv/bin/python scripts/decode_loader_screen_photo.py \
+[private execution receipt retained locally] scripts/decode_loader_screen_photo.py \
   --image /absolute/path/to/frame.png --token d73d \
   --quad TL_X TL_Y TR_X TR_Y BR_X BR_Y BL_X BL_Y
 ```
@@ -5328,7 +5328,7 @@ The next decision is whether to change the boot/observability approach or end th
 modern-kernel port effort. This failed capture is not proof that the hardware is
 incapable of a port. No further physical test is selected.
 
-[Actual trial receipt](../../evidence/independent-recovery/loader-copy-control3-trial-result.json).
+[Actual trial receipt](../evidence/independent-recovery/loader-copy-control3-trial-result.json).
 
 ## New investigation: Linux-to-Linux handoff, November 7, 2026
 
@@ -5367,7 +5367,7 @@ also explicitly requires custom TF-A/U-Boot/OP-TEE for its Echo Dot target; it i
 not a drop-in douglas firmware alternative. Do not transplant its firmware or
 reserved memory to this tablet.
 
-[Read-only source/compatibility receipt](../../evidence/independent-recovery/recovery-linux-kexec-route.json).
+[Read-only source/compatibility receipt](../evidence/independent-recovery/recovery-linux-kexec-route.json).
 
 ## Linux-to-Linux stage1 probe built — November 7, 2026
 
@@ -5400,8 +5400,8 @@ approved boot of existing LineageOS and one probe load/unload, then a matched ke
 port using the observed compatibility report. The initial probe cannot establish
 DMA shutdown, stopped secondary CPUs, firmware entry or target logging.
 
-[Build receipt](../../evidence/independent-recovery/kexec-probe-build-result.json).
-[Source and concrete review](../../projects/firetabs-android/kexec-probe/README.md).
+[Build receipt](../evidence/independent-recovery/kexec-probe-build-result.json).
+[Source and concrete review](../projects/firetabs-android/kexec-probe/README.md).
 
 ## Actual Linux compatibility probe succeeded — November 8, 2026
 
@@ -5427,7 +5427,7 @@ Next source stage: adapt a matched4.9 kexec loader, keeping execution disabled
 until allocation, CPU/DMA shutdown and entry contracts are independently reviewed.
 Do not reuse the probe approval for a handoff or an additional module execution.
 
-[Actual hardware receipt](../../evidence/independent-recovery/kexec-probe-runtime-result.json).
+[Actual hardware receipt](../evidence/independent-recovery/kexec-probe-runtime-result.json).
 
 ## Prepare-only kexec loader port built — November 8, 2026
 
@@ -5458,8 +5458,8 @@ a direct Linux Image branch therefore needs the appropriate DTB-carrying entry
 trampoline. CPU parking, EL/HVC behavior, device/DMA shutdown and clean filesystem
 quiescing still require explicit handoff contracts. No new jump binary selected.
 
-[Build review receipt](../../evidence/independent-recovery/kexec-stage-build-result.json).
-[Exact module/client/procedure](../../projects/firetabs-android/kexec-stage/README.md).
+[Build review receipt](../evidence/independent-recovery/kexec-stage-build-result.json).
+[Exact module/client/procedure](../projects/firetabs-android/kexec-stage/README.md).
 
 ## Prepare-only staging passed on hardware — November 9, 2026
 
@@ -5488,7 +5488,7 @@ upstream false stuck-CPU stub. DTB/x0 trampoline, Image placement, cache/MMU,
 device/DMA shutdown and filesystem quiescing remain open. Source ADB ends at
 handoff; no target early/failure log or retention route is yet qualified.
 
-[Actual hardware staging receipt](../../evidence/independent-recovery/kexec-stage-runtime-result.json).
+[Actual hardware staging receipt](../evidence/independent-recovery/kexec-stage-runtime-result.json).
 
 ## Linux Image entry candidate implemented — November 9, 2026
 
@@ -5521,8 +5521,8 @@ relocation and preserve source-memory ownership until every secondary is proven
 released. Cache/MMU/EL, DMA/device/filesystem shutdown and independent target
 logging/failure retrieval remain open. No CPU hotplug, firmware call or jump ran.
 
-[Entry build/validation receipt](../../evidence/independent-recovery/kexec-entry-build-result.json).
-[Live CPU/source audit](../../evidence/independent-recovery/kexec-cpu-shutdown-audit.json).
+[Entry build/validation receipt](../evidence/independent-recovery/kexec-entry-build-result.json).
+[Live CPU/source audit](../evidence/independent-recovery/kexec-cpu-shutdown-audit.json).
 
 ## Bounded MT8163 secondary-off candidate compiled — November 9, 2026
 
@@ -5558,7 +5558,7 @@ or clock callback, nor bound the entire generic cpu_down lifecycle. A working
 replacement source-kernel build/qualification remains necessary; this patch is not
 an approved runtime module for the existing kernel. No kernel jump admitted.
 
-[Compile/source/fault-test receipt](../../evidence/independent-recovery/kexec-cpu-off-build-result.json).
+[Compile/source/fault-test receipt](../evidence/independent-recovery/kexec-cpu-off-build-result.json).
 
 ## Legacy firmware affinity prerequisite — November 9, 2026
 
@@ -5613,7 +5613,7 @@ call could require a physical power cycle; a host timeout cannot interrupt it.
 Query success alone does not prove secondary shutdown, retained logs, independent
 recovery or handoff. Those gates remain open under #346/#348.
 
-[Exact build/emulation/preflight receipt](../../evidence/independent-recovery/kexec-affinity-development-result.json).
+[Exact build/emulation/preflight receipt](../evidence/independent-recovery/kexec-affinity-development-result.json).
 
 ## Live affinity query accepted — November 9, 2026
 
@@ -5626,7 +5626,7 @@ on the installed firmware; it does not qualify active secondary shutdown or
 power-controller readback. Module unloaded, RAM file removed and normal UID2000
 ADB shell restored. No CPU hotplug, reboot, flash or jump. Approval consumed;
 no automatic rerun. Private source logs archived with hashes in the sanitized
-[kernel query runtime receipt](../../evidence/independent-recovery/kexec-affinity-runtime-result.json).
+[kernel query runtime receipt](../evidence/independent-recovery/kexec-affinity-runtime-result.json).
 
 Next source integration is the corrected legacy affinity binding, followed by
 CPU-off/final-gate integration and recovery/logging contracts. Attempt to transfer
@@ -5666,7 +5666,7 @@ build; that combined build did not execute. Await explicit approval for the
 combined offline build. Hotplug serialization/final gate wiring, partial-shutdown
 recovery and independent target/failure logging #348 remain open.
 
-[Binding compile and validation receipt](../../evidence/independent-recovery/kexec-legacy-affinity-build-result.json).
+[Binding compile and validation receipt](../evidence/independent-recovery/kexec-legacy-affinity-build-result.json).
 
 ## Combined source kernel Image built and retained — November 9, 2026
 
@@ -5709,7 +5709,7 @@ has no handoff caller. Full compilation alone cannot veto generic restart paths 
 admit this Image to a hardware boot/handoff test. Independent failed-load recovery
 remains open under #346.
 
-[Full build, failed-attempt trail and retained-artifact receipt](../../evidence/independent-recovery/kexec-source-integration-build-result.json).
+[Full build, failed-attempt trail and retained-artifact receipt](../evidence/independent-recovery/kexec-source-integration-build-result.json).
 
 ## Existing-kernel console survives orderly reboot — November 10, 2026
 
@@ -5730,4 +5730,22 @@ under serialization, partial-shutdown recovery/readout, and preservation of this
 existing writer region in source/target RAM layouts alongside DMA/cache/MMU/EL
 and early logging contracts. No new hardware test selected by this result.
 
-[Actual retained-marker result](../../evidence/independent-recovery/pstore-warm-reboot-runtime-result.json).
+[Actual retained-marker result](../evidence/independent-recovery/pstore-warm-reboot-runtime-result.json).
+
+## 2026-11-19 — expanded integrated Android contents and canonical animation
+
+Owner requested broad useful first-image contents while preserving boot and
+diagnostic independence. Explicit ARM32 WebView/browser/keyboard/app/file tools
+and a manually launched offline readiness app are source-integrated. Exact
+intercom artwork replaces the improvised logo, with interruptible Android
+reveal/activity animation generated during staging from hash-checked source.
+Pinned release flag selects WebView145.0.7632.218; actual built provider remains
+pending. Volatile /data remains explicit; encryption/key management/write
+qualification prevents silently adopting original userdata.
+
+Added actual installed-output/provider and sparse-image-expanded-size audit.
+1,078 repository tests pass, nine skipped; local SDK36 Java/resource, JS and fresh
+staging checks pass. First aapt2 command used an unsupported --assets flag; -A
+corrects it. The prior staging tree correctly rejected changed product inputs;
+fresh staging passed without weakening overwrite checks. No full Android image
+or tablet runtime pass, new kernel test or device action is claimed.

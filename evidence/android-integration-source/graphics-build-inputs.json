@@ -1,0 +1,80 @@
+[
+  {
+    "project_path": "external/mesa3d",
+    "path": "src/egl/Android.bp",
+    "status": "not_captured",
+    "error": "HTTPError"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "src/gallium/targets/dri/Android.bp",
+    "status": "not_captured",
+    "error": "HTTPError"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "src/gallium/drivers/panfrost/Android.bp",
+    "status": "not_captured",
+    "error": "HTTPError"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "src/gbm/Android.bp",
+    "status": "not_captured",
+    "error": "HTTPError"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "src/mapi/shared-glapi/Android.bp",
+    "status": "not_captured",
+    "error": "HTTPError"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "src/egl/drivers/dri2/platform_android.c",
+    "url": "https://android.googlesource.com/platform/external/mesa3d/+/875160ed32cc5bc32777fa04870a0a57ed38c987/src/egl/drivers/dri2/platform_android.c?format=TEXT",
+    "status": "captured",
+    "bytes": 41771,
+    "sha256": "192fa5b5c245b92834f0643b26d343a9c41795c0b296ce32e81d4baa3d7a6bee"
+  },
+  {
+    "project_path": "external/minigbm",
+    "path": "cros_gralloc/gralloc4/Android.bp",
+    "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/cros_gralloc/gralloc4/Android.bp?format=TEXT",
+    "status": "captured",
+    "bytes": 4770,
+    "sha256": "81a04e0a4d738a097e2312c55692fc6ad7b46b94460ab4966fbbd2d6fd9f8404"
+  },
+  {
+    "project_path": "external/minigbm",
+    "path": "cros_gralloc/mapper_stablec/Mapper.cpp",
+    "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/cros_gralloc/mapper_stablec/Mapper.cpp?format=TEXT",
+    "status": "captured",
+    "bytes": 34501,
+    "sha256": "1654d05e943bf07040285904173af8ca8adf710771fc2ecc79f7fa87a169a482"
+  },
+  {
+    "project_path": "external/minigbm",
+    "path": "cros_gralloc/aidl/allocator.xml",
+    "url": "https://android.googlesource.com/platform/external/minigbm/+/ce79bbee67b3e2ea7abb110e1415e9ceceaa6471/cros_gralloc/aidl/allocator.xml?format=TEXT",
+    "status": "captured",
+    "bytes": 290,
+    "sha256": "84c750101c40305411b6ef10fc608352e7751972b51f2273a37f172f2e5ee160"
+  },
+  {
+    "project_path": "build/make",
+    "path": "target/product/aosp_base.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/aosp_base.mk?format=TEXT",
+    "status": "captured",
+    "bytes": 664,
+    "sha256": "4dc3562de185c9aad5581b35f644d939205c56c0613760b1c1b1cdefb901e5ee"
+  },
+  {
+    "project_path": "external/mesa3d",
+    "path": "README.aosp.md",
+    "url": "https://android.googlesource.com/platform/external/mesa3d/+/875160ed32cc5bc32777fa04870a0a57ed38c987/README.aosp.md?format=TEXT",
+    "status": "captured",
+    "bytes": 466,
+    "sha256": "277539cb5e6331361fca793c1811fc5c19a9d3b10f1995e5f7ce18c2a8873bcc"
+  }
+]

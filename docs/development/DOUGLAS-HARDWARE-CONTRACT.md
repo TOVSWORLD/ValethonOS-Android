@@ -1,5 +1,415 @@
 # Douglas hardware and kernel implementation contract
 
+## Integrated Android kernel compiled; complete Android image next — November 19, 2026
+
+The ACK6.18 kernel with BinderFS, built-in FUSE/ADB FunctionFS and APEX
+loop/device-mapper/dm-verity/EROFS/FS-verity support compiled and linked.
+Downloaded artifacts passed independent hashes, parent/config-delta checks,
+ARM64 header/footprint checks and exact gzip round-trip. Raw Image: 27,083,264
+bytes; gzip: 9,556,029 bytes; runtime footprint: 28,573,696 bytes. Raw output
+fits the existing 28-MiB LK decode capacity with 2,276,864 bytes spare.
+Image SHA256: c83baf995268af14e0a4ba3faac683ee2ee4d6d1c4717a675d7eaccea20337b6.
+Evidence: evidence/android-integration-source/android-kernel-build-result.json.
+This is a completed kernel source build, not a full Android image or tablet boot.
+
+The first integrated compile exposed an ACK FUSE cleanup conditional error on
+ARM64 without FUSE_BPF. Exact-source repair preserves allocation lifetime and the
+newer d_time initialization, guards BPF-only fields separately and keeps BPF off.
+The failed attempt/source hashes and successful repair are retained in
+android-fuse-build-repair.json. C cleanup tests cover 32/64-bit with BPF on/off
+and null cleanup; exact patched-source resume passed. Repository suite: 1,074
+tests, nine skipped, no failures. Existing hardware configuration is preserved;
+no new tablet operation or repeated cube/logging proof occurred.
+
+Real ARM32 Bionic EGL/GLES/Panfrost is compiled/packaged with strict ELF checks.
+Douglas product/init/fstab plus verified graphics package staged in a control
+tree; full AOSP checkout/product graph/system+ramdisk build remains pending.
+The candidate uses bounded p14 system with co-located vendor/product/system_ext,
+volatile /data, GLES2, enforcing SELinux and authenticated ADB; original userdata
+and recovery are excluded. HAL/VINTF/policy closure, image fit, memory and actual
+Android setup/home remain unqualified. Next is the full Android build discussion
+and product graph/image work, then one prepared grouped T1 with backup/rollback.
+Build operations/resources/caches remain private; reuse this completed kernel.
+
+## Private build infrastructure — November 19, 2026
+
+Owner directed runner provisioning, costs, caches and build operations to a separate
+private GitLab project. Keep those operational issues and infrastructure details
+out of this public repository. Continue Android T0 source/device integration here;
+full Android build has not started. No repeat standalone GPU/logging test.
+
+## Shared staged testing — November 19, 2026
+
+Owner requested grouping issues into staged tests to reduce work time. The
+[shared test plan](STAGED-TEST-PLAN.md) and ordered-roadmap.json now map every
+hardware issue to candidate checkpoints. T0 offline integration/package gate
+feeds T1 one integrated Android boot/UI session. Selected ready T2 connectivity,
+media/input/storage and lifecycle checks can run on that same image before one
+final recovery. T3 full release validation follows later. The next first-home
+milestone needs T0/T1, not all peripheral/soak/release gates.
+
+Source/offline implementation readiness remains serial with one active primary
+task/PR. Runtime acceptance can be co-qualified in one approved session; no
+one-issue-one-boot requirement or circular331-runtime-before333-source gate.
+Preserve acceptance and actual prerequisites (including335 before suspend443),
+record unready checks as not_run/blocked, and do not close issues without their
+actual evidence. Current standalone animated GPU/touch and original TWRP return
+are verified; all helpers stopped. Next is Android userspace/composer integration
+and one complete candidate, no repeat standalone cube/logging-proof gate.
+
+## Three grouped work packages to maintained Android setup/home — November 19, 2026
+
+Owner explicitly requested grouping the remaining steps. The next major outcome
+is333: maintained Android setup/home on the observed kernel, usable display/touch,
+enforcing SELinux, USB/ADB and verified recovery. Standalone animated GPU/touch
+is achieved and original TWRP/retained exact p5/original p6 are verified.
+
+1. INTEGRATE ONE ANDROID STACK (active331, feeding333): pin platform/device/ABI,
+   Binder, firmware/HAL sources; connect allocator/composer/EGL, Android init/adbd
+   and enforcing policy to the working maintained kernel. Resolve the documented
+   T720 API compatibility limits in this integration, preserving working hardware.
+   Exit: a coherent pinned source/device configuration and buildable integration.
+2. BUILD AND QUALIFY ONE COMPLETE CANDIDATE: reproducible Android/kernel images,
+   artifact/source manifest, offline/package/interface checks and concrete exact
+   storage/backup/rollback procedure. Establish actual host capacity before bulk
+   source downloads/builds. Exit: a reviewable integrated test package; obtain any
+   necessary concrete resource/device-write approval only after preparation.
+3. RUN THE INTEGRATED SETUP/HOME TEST: one attended end-to-end candidate attempt,
+   checking setup/home, touch/graphics, SELinux enforcing, USB/ADB and recovery.
+   Fix failures within these packages and repeat only when a concrete change needs
+   physical qualification. Exit: recorded major outcome, or explicit remaining
+   failures. Full release/update/security/peripheral/soak acceptance remains open.
+
+These are three work packages, not a promise of three physical tests or dates.
+Source changes, builds and offline checks stay internal to the packages; do not
+turn each provider or repair into a new owner milestone. No repeat standalone
+cube/logging proof for achieved hardware. Record new findings in existing331/333
+and preserve prior failed experiments. Primary active PR456/331 remains open for
+Android composer/API integration; do not claim333 or stable release complete.
+
+## Interactive GPU milestone achieved; original TWRP verified — November 19, 2026
+
+Owner confirms animated cube responds to taps and dragging on exact maintained
+kernel candidate628a164112f5c4d09d7c55478b7e57b991933f10eb406945bf1f4502d946a34b.
+The installed program rejects non-T720/software renderers and validates GPU
+pixels before scanout. USB stayed connected; portable unplugged operation was
+not exercised. Start prompt was not seen; record that UX detail without another
+cube-only test. This qualifies standalone functional GPU interaction, not full
+API conformance, measured frame rate, broad stability or Android composition.
+
+One candidate write/full readback and one software-requested test boot ran.
+The300second host observation after owner report finished. Original recovery
+helper ran exactly once/exited0. Selected original TWRP3.3.1-0, retained exact
+interaction p5 and unchanged original p6 verified by full bounded reads. All
+workers ended. Original Android restoration remains deferred by owner direction;
+no more Power steps or additional test selected. Receipt:
+evidence/graphics-source/graphics-interaction-runtime-result.json.
+Private final state: out/graphics-source-preparation-1/test-case-3/.
+
+NEXT MAJOR: maintained Android boots to usable setup/home on this kernel with
+working display/touch, enforcing SELinux, USB/ADB and verified recovery (#333).
+Next engineering work stays within331 graphics/userspace integration: pin the
+Android source/device/ABI/Binder/firmware/HAL inputs against existing audits;
+integrate allocator/composer/EGL and Android init/adbd/enforcing policy; build
+reproducible artifacts and a concrete storage/rollback plan; then qualify one
+integrated setup/home candidate. Resolve documented T720 GLES2 limitations
+against actual Android rendering/declared compatibility, without pretending the
+standalone demo passes Android API/composer requirements. Carry achieved kernel,
+read-only storage, display, touch and GPU forward. No repeat cube/logging-proof
+gate, old-kernel detour or new standalone hardware milestone. Broader330/331 and
+full333 release/update/security acceptance stay open.
+
+## Interactive GPU rendering achieved; recovery return armed — November 19, 2026
+
+Owner confirms cube animation and tap/drag response on exact candidate628a1641...
+This qualifies the standalone functional GPU interaction foundation. USB stayed
+connected; portable unplugged operation was not tested. TAP TO START was not
+seen; do not invent a cause or require another cube test for that UX detail.
+The300second host observation after owner report finished. It is not a measured
+frame-rate/full-duration stability proof; broad stability/API/Android composer
+remain open. Existing kernel/display/touch/GPU should move into Android userspace
+integration toward333 setup/home, not another cube/logging-proof gate.
+
+Original recovery helper armed once after window; owner instructed to unplugUSB,
+hold onlyPower40seconds, release/wait5seconds/reconnect same lab cable. TWRP
+return/p5/p6 verification pending. No Android restore or extra test selected.
+Private active return supervisor77420, out/graphics-source-preparation-1/test-case-3/.
+
+## Animated GPU cube responds to touch; USB stayed connected — November 19, 2026
+
+Owner confirms moving cube responds to taps and dragging. This is observed
+functional animated/touch-controlled GPU rendering on exact candidate628a1641...
+Program rejects non-T720/software renderers and validates first-frame pixels.
+TAP TO START was not seen; record without inferring its disappearance cause.
+Owner explicitly says USB was never unplugged; desk-disconnected operation is
+not qualified and no reconnect trip is required. Owner first-tap report started
+controller's300second observation. No recovery helper is armed yet. Finish the
+window, then arm exactly one original recovery helper before Power instructions;
+verify retained exact interaction p5 and original p6 in original TWRP. No Android
+restoration, automatic test retry or repeated cube/logging-proof gate.
+Do not call full stability/API/Android composer qualified. Next is Android
+userspace/composer integration toward333 setup/home, carrying working hardware
+forward within331. Raw state: out/graphics-source-preparation-1/test-case-3/;
+active controller93075. Signal first-tap-observed-private already created.
+
+## First-tap desk test installed; waiting for owner tap — November 19, 2026
+
+Owner approved staging and one attended graphics-direct-3 test. Exact selected
+TWRP/retained corrected graphics p5/original recovery preflight passed. Candidate
+628a164112f5c4d09d7c55478b7e57b991933f10eb406945bf1f4502d946a34b
+was installed once/full readback verified; original recovery unchanged and RAM
+cleanup verified. One direct boot requested after WATCH NOW. Controller waits
+up to15minutes for owner's first-tap report before starting300second observation.
+Owner may unplug USB after TAP TO START, carry tablet to desk, tap/drag there.
+Do not create first-tap-observed-private until owner confirms actual first tap.
+Screen/prompt/animation/touch reports are pending; no interaction pass claimed.
+No recovery helper is armed; wait for owner to reconnect same lab cable before
+arming one return helper and giving Power instructions. No Android restoration.
+Private case: out/graphics-source-preparation-1/test-case-3/; active controller
+session93075. Previous corrected cube case is fully returned/verified in TWRP.
+
+## GPU cube observed; original TWRP verified; desk interaction test ready — November 19, 2026
+
+Owner confirmed purple/orange cube after arriving late. Exact tested program
+rejects non-T720/software renderers and checks rendered pixels before scanout:
+first-frame GPU rendering is observed. Animation/touch/stability are unqualified
+because old demo deliberately idles after90seconds and owner did not watch then.
+Original TWRP3.3.1-0, exact corrected graphics p5 and original p6 are now verified.
+Initial recovery wait expired with zero calls; renewed waiting preserved that
+receipt and one-call limit. Helper subsequently ran once/exited0. All workers
+finished; no Android restoration requested and no more Power steps needed.
+
+Next first-tap candidate628a164112f5c4d09d7c55478b7e57b991933f10eb406945bf1f4502d946a34b
+is qualified offline. TAP TO START waiting frame, up to15minutes arrival with no
+repeated GPU rendering; first valid touch starts five-minute animation/input.
+All hardware DT properties, kernel/libraries/enforcing policy unchanged from
+observed cube. Fresh scope graphics-direct-3 expects exact retained741696e2...
+Both exact-kernel VM modes and all1051 repository tests pass; original-LK,
+partition/RAM checks and fresh-scope guard controls pass. Payload15,007,744B.
+
+Prepared private package/controllers under out/graphics-source-preparation-1/
+{direct-interaction-package-1,test-case-3,first-tap-lab-results}/. No actual next
+owner authorization, private staging, candidate write or boot has run. Next:
+obtain attendance/staging/test approval; install once from existing TWRP; owner
+may disconnect USB after TAP TO START and carry tablet to desk; first tap/report
+starts interaction observation. USB loss does not gate rendering. Reconnect to
+same lab cable before arming recovery helper and requesting restart, avoiding
+an expired helper while owner is away. Return to original TWRP. No logging gate.
+Receipts: evidence/graphics-source/graphics-power-runtime-result.json,
+first-tap-preparation-result.json and direct-interaction-preparation-result.json.
+Android composer/setup/home remain open; do not close331 or broader330.
+
+## GPU frame confirmed; first-tap demo compiled; recovery pending — November 19, 2026
+
+Owner observed purple/orange cube after walking over late, without watching the
+first90seconds. This supports first-frame GPU rendering beyond GBM2. Old demo
+intentionally idles after90seconds, so late still/no-touch is not a demonstrated
+animation/touch failure. Full interactive rendering remains unqualified.
+First-tap demo now shows TAP TO START, waits up to15minutes with one rendered
+waiting frame, then runs animation/input for five minutes from first valid tap.
+Component6 compiled; both exact-kernel VM modes and ten graphics tests passed.
+Unchanged kernel/libraries/enforcing policy and corrected two-domain DT remain
+selected. Next package/controller needs fresh scope and must start observation
+on owner tap, permit USB disconnect after startup for desk use, reconnect for
+recovery. No next boot image is qualified/staged/installed yet.
+
+Current recovery: initial listener timed out with zero helper launches. Renewed
+only the waiting window, preserved timeout receipt, same maximum one helper call.
+Owner reported restart done and booting; lab still observed experimental USB
+1209:0001. Original TWRP/p5/p6 return is not verified. Existing renewed listener
+is waiting; no additional software boot/install or Android restoration. Asked
+owner current screen. Inspect private execution/helper receipt before acting:
+out/graphics-source-preparation-1/test-case-2/ (renewed supervisor session36331).
+First-tap component/VM copies: out/graphics-source-preparation-1/first-tap-lab-results/.
+Receipts: graphics-power-runtime-result.json and first-tap-preparation-result.json
+under evidence/graphics-source/. No logging-proof gate.
+
+## Late cube observation clarified; next demo waits for first tap — November 19, 2026
+
+Owner clarified they walked over just before reporting and did not watch the
+first90seconds. The purple/orange cube was observed after the full five-minute
+host window, when the old program deliberately idles. This confirms visible
+first-frame rendering; it is not evidence of failed animation or broken touch.
+Animation/touch/stability remain unqualified. Current original-TWRP return is
+still pending; keep existing helper/owner instructions, no further tablet boot.
+
+Fixed demo.c now draws the initial cube with large TAP TO START text, waits up
+to15minutes for a valid first touch without repeatedly rendering, then animates
+and handles touch for five minutes from that touch. Component6 compiled in the
+existing approved lab; ten graphics tests passed. Both exact-kernel VM checks
+are running. No next image has been prepared/staged or installed yet.
+Next procedure allows unplugging USB after the prompt to carry the tablet to
+the desk; graphics has no USB dependency after startup. Begin host interaction
+observation when owner taps, not at boot; reconnect for original TWRP return.
+Private build: out/graphics-source-preparation-1/component-6-build-private.log.
+
+## GPU cube observed; animation/touch timing unresolved — November 19, 2026
+
+Owner reports a purple/orange cube, still and not movable. Exact installed
+program rejects non-T720/software renderers and validates GPU pixels before
+scanout, so this supports first-frame GPU rendering beyond the former GBM2
+failure. Animation/interaction is not qualified. Critically, demo.c deliberately
+stops its rendering/input loop after90seconds and retains the last frame. Owner
+observation timing is unknown; a late static frame does not establish a hang.
+Asked owner to clarify timing and complete the already-instructed restart to
+original TWRP. Existing one-shot return helper was armed; inspect its receipt
+and selected device before further action. Do not run another test or restore
+Android. Next functional test design must keep touch/animation active for the
+entire owner observation window and visibly mark completion; no logging gate.
+
+## Corrected graphics window finished; owner action pending — November 19, 2026
+
+Corrected candidate741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf
+was installed once/full-readback verified and booted once. Original recovery
+remained unchanged and RAM staging cleanup verified. Full five-minute window
+finished. Owner screen report has not arrived, so cube/GPU result is unknown;
+no graphics pass is claimed. Original recovery return helper was armed once
+with a15-minute wait. Owner was instructed to note the screen, then unplugUSB,
+hold onlyPower40seconds, release/wait5seconds/reconnect same cable. Screen result,
+Power-untouched confirmation and selected original TWRP return are pending.
+Do not install/reboot another candidate or restore Android while awaiting this.
+Private helper/session state: out/graphics-source-preparation-1/test-case-2/.
+Public pending receipt: evidence/graphics-source/graphics-power-runtime-result.json.
+Next: collect owner result, finish/inspect existing helper, verify exact retained
+corrected p5 and original p6 in original TWRP, then update result. No logging gate.
+
+## Corrected graphics test installed and running — November 19, 2026
+
+Owner approved staging and one attended graphics-direct-2 test. Selected
+original TWRP and exact previous graphics p5/original p6 preflight passed.
+Corrected candidate741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf
+was written once; full p5 readback, unchanged original recovery and RAM staging
+cleanup verified. One direct boot requested after WATCH NOW. The five-minute
+cube/touch window is running; owner observation pending. No hardware graphics
+pass claimed. Return to original TWRP afterward, no Android round trip.
+Private execution: out/graphics-source-preparation-1/test-case-2/.
+
+## GPU power-domain correction qualified; next attended test ready — November 19, 2026
+
+The failed graphics DT enabled GPU but left MFG_ASYNC6 and nested MFG7 disabled.
+Pinned mtk-pm-domains.c scpsys_probe iterates available top-level children, so
+it skips6 and never registers its7 child requested by GPU. This is a concrete
+source-established omission consistent with GBM failure2, not proof that no
+additional faults exist. The corrected preview enables just those two domains.
+Direct comparison with the failed candidate confirms exactly two hardware
+property changes; display MM0, touch, memory and every other hardware property
+are unchanged. The exact kernel, renderer, dynamic libraries and enforcing
+policy are unchanged. Fresh identity; both exact-kernel VM modes pass, all20
+policy denial controls retained, all1051 repository tests pass, original-LK
+roundtrip and RAM/partition placement checks pass. Payload15,007,744B fits16MiB.
+
+Qualified corrected candidate SHA256:
+741696e2b5c0ea6152e3ed7e65218158808d5790d629111ae3e0002aaf1b4faf.
+Fresh scope graphics-direct-2 expects previous graphics p5 a09bbb9f..., never
+touch/original p5. Disposable offline controls accept exact candidate and reject
+consumed graphics scope, wrong predecessor, unapproved or missing authorization.
+No actual next-test owner authorization, staging or tablet command has run.
+Tablet last verified original TWRP with old graphics p5 and unchanged original p6;
+owner may have disconnected/moved it. Original rollback ready; all workers ended.
+
+Next: owner attendance/reconnect, stage corrected package and recovery tools in
+existing SSH lab, preflight exact retained graphics p5 and original recovery,
+install once, say WATCH NOW, test actual rotating T720 cube/touch for one bounded
+window, then return to TWRP. No Android round trip or logging-proof gate.
+Hardware rendering, Android composer/setup/home remain unqualified. Receipts:
+evidence/graphics-source/power-domain-correction.json and
+evidence/graphics-source/direct-power-preparation-result.json. Local exact state:
+out/graphics-source-preparation-1/{direct-power-package-1,power-lab-results}/.
+
+## Graphics test complete; original TWRP verified — November 19, 2026
+
+One attended direct graphics attempt displayed the orange failure screen with
+large2 (GBM device creation/surface setup), as reported by the owner. No cube or
+accelerated rendering pass. Candidate a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042
+was written once/full-readback verified and booted once. The full five-minute
+window ended; original recovery helper ran once/exited0. Selected original
+TWRP3.3.1-0, retained exact graphics p5 and unchanged original p6 were verified
+with full bounded reads. Original Android restoration remains deferred by owner
+instruction. All observation/return workers ended. Owner may disconnect/move the
+tablet. Power-untouched confirmation remains unknown; do not invent it.
+
+Next: narrow the GBM device-versus-surface return using the exact shipped source;
+check MediaTek-to-Panfrost render-node discovery and the actual GPU probe before
+changing clocks, kernel or policy. Stage2 alone does not identify the cause.
+Keep proven display/touch and original rollback. Any next image needs fresh exact
+qualification and attended execution; no repeat logging-proof gate. Published
+runtime receipt: evidence/graphics-source/graphics-runtime-result.json.
+
+## First physical graphics test stopped at GBM stage 2 — November 19, 2026
+
+Owner observed an orange screen with a large2 and error text. No cube appeared;
+GPU rendering and touch-controlled rendering are not achieved. This maps to GBM
+device creation or surface setup, before EGL/shaders. Exact Mesa source shows
+MediaTek display GBM creation must discover a compatible Panfrost render node.
+Do not claim which subcall failed until evidence distinguishes them. Preserve
+working display/touch and unchanged graphics kernel while narrowing this path.
+One candidate write/full readback and one boot ran. Full five-minute window
+finished. Existing USB receiver selected/opened endpoint but retained zero bytes;
+that does not negate the observed stage or create a logging-proof gate.
+Original recovery return helper is armed for one call. Owner was instructed to
+restart/reconnect; return to TWRP is pending, no Android restoration requested.
+
+## Graphics candidate installed; attended boot running — November 19, 2026
+
+One graphics candidate write completed and its full16MiB readback matched
+SHA256 a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042.
+Original recovery hash remained unchanged and temporary RAM staging cleanup
+verified. One direct reboot from original TWRP was requested after the owner's
+watch cue. The five-minute observation window is running; physical cube/touch
+result is pending. No hardware graphics pass is claimed. Return to original
+TWRP after the window; no Android round trip or original restoration is planned.
+
+## Attended graphics test authorized — November 19, 2026
+
+Owner explicitly approved private staging and one attended graphics test in the
+existing SSH lab direct-test-1 directory. Build/VM approval had previously been
+insufficient for private test staging; no transfer bypass was attempted.
+Selected original TWRP and exact retained touch p5/original p6 preflight passed.
+First installation stopped before any partition write: ExactReadAdb admitted
+partitions but omitted the existing installer RAM staging file. The durable
+receipt confirms write_started=false. Preserve that receipt. The read guard now
+also admits only the installer's exact /tmp/valethonos-rollback-<32 hex>/boot.img
+path and full16MiB read; unrelated paths remain rejected. All9 graphics tests
+pass, including full/short RAM reads and invalid-path rejection. The graphics
+image itself is unchanged. The corrected installation and one attended direct
+boot remain the current execution; no test reboot has occurred yet.
+
+## Graphics candidate qualified offline; ready to load from TWRP — November 18, 2026
+
+The next functional test is a colored GPU-rendered cube that rotates and moves
+with touch. Actual non-T720/software renderers are rejected. Large failure digits
+1-7 identify the failed stage without asking the owner to read tiny kernel text.
+Kernel run44451450892 passed at source4d534e81905130dd496e0eba2f3034aca4beca2f.
+Image c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5;
+only Panfrost/DRM scheduler/shmem move from modules to builtin versus proven touch.
+The authenticated artifact, all17 manifest files and source merge tree verified.
+Initial kernel compilation succeeded but export requested a nonexistent combined
+panfrost.o; retaining three actual builtin translation units fixed it.
+
+Mesa26.2.7/libdrm2.4.133 host tools and AArch64 runtime compiled. Mesa26.2 uses a
+unified libgallium and gbm/dri_gbm.so, not per-driver DRI files; packing follows
+that actual layout. All20 enforcing-policy denial controls passed, preserving
+PID1 fork denial. Both virtualization modes pass the final exact kernel/component:
+real EGL/Gallium/GBM loading, shared-memory RW, and denied executable memory,
+fork, input write and block write. All1049 repository tests pass.
+The30.2MB runtime compresses to5.6MB with kernel-supported XZ/8MB dictionary/CRC32.
+The separate graphics packer places it at0x46000000 and checks the full compressed
+kernel staging span, raw archive span and every observed reservation. Existing
+small diagnostic packers stay unchanged. Complete payload15,007,744B fits16MiB p5.
+Original-LK static audit and disposable authorization-guard controls pass.
+
+Current tablet is original TWRP with the exact successful touch candidate on p5;
+original p6 is unchanged and rollback is ready. The owner explicitly requested
+preparing/loading the next test rather than returning to Android between tests.
+No graphics candidate has been written or booted yet. Use new graphics-direct-1
+scope; the guard expects the retained touch SHA, never assumes original p5.
+Reads check exact sysfs partition size and bounded full bytes/hash, with no trim.
+Next: publish final source/receipt, stage/install once from TWRP, say watch now,
+run one direct graphics test, then return to TWRP without an Android round trip.
+No logging proof gate. Receipts: evidence/graphics-source/kernel-build-result.json
+and direct-preparation-result.json. Private qualified package/component/VM state:
+out/graphics-source-preparation-1/. Primary task#331 / draft PR#456.
+
 ## Touch grid achieved; remain in TWRP for graphics test — November 18, 2026
 
 Owner confirmed all nine touch panels turned green and that the green grid was

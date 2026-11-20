@@ -1,0 +1,11 @@
+# ARM32 graphics runtime built from pinned Mesa sources.
+PRODUCT_SOONG_NAMESPACES += vendor/valethon/graphics
+PRODUCT_PACKAGES += libEGL_valethon \
+    libGLESv1_CM_valethon \
+    libGLESv2_valethon \
+    libgallium_dri \
+    gralloc.minigbm \
+    mapper.minigbm \
+    android.hardware.graphics.allocator-service.minigbm \
+    android.hardware.composer.hwc3-service.drm
+PRODUCT_VENDOR_PROPERTIES += ro.hardware.egl=valethon ro.hardware.gralloc=minigbm

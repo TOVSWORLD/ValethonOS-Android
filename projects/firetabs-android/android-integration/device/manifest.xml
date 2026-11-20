@@ -1,0 +1,2 @@
+<!-- The installed allocator/mapper/composer modules supply their pinned HAL fragments. -->
+<manifest version="1.0" type="device" />

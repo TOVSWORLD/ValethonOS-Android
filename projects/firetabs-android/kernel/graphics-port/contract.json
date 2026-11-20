@@ -1,0 +1,73 @@
+{
+  "scope": "Graphics source/preparation contract; no device admission",
+  "predecessor_runtime": "evidence/graphics-source/graphics-runtime-result.json",
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "gpu": {
+    "compatible": [
+      "mediatek,mt8163-mali",
+      "arm,mali-t720"
+    ],
+    "register_address": "0x13040000",
+    "register_bytes": 16384,
+    "gic_spi_interrupts": {
+      "job": 227,
+      "mmu": 226,
+      "gpu": 225
+    },
+    "interrupt_flags": 8,
+    "clock_gate": "CLK_MFG_BG3D",
+    "power_domain": "MT8163_POWER_DOMAIN_MFG",
+    "supply_microvolts": 1150000,
+    "candidate_fixed_rate_hz": 416000000,
+    "candidate_clock_parent": "CLK_TOP_UNIV_416M",
+    "clock_parent_id": 9,
+    "opp_table_to_detach_for_first_fixed_rate_candidate": true,
+    "clock_policy_reason": "The original donor assigns MMPLL and dynamic OPP changes can propagate clock rates. Keep the tested display clocks intact; first candidate uses the source-listed416MHz fixed parent and no GPU DVFS. This candidate choice is not hardware-qualified.",
+    "power_domain_hierarchy": [
+      {
+        "id": 6,
+        "name": "MFG_ASYNC",
+        "parent": "power-controller",
+        "required_status": "okay"
+      },
+      {
+        "id": 7,
+        "name": "MFG",
+        "parent": 6,
+        "required_status": "okay"
+      }
+    ]
+  },
+  "kernel_builtin": [
+    "DRM_PANFROST",
+    "DRM_SCHED",
+    "DRM_GEM_SHMEM_HELPER"
+  ],
+  "userspace": {
+    "mesa_version": "26.2.7",
+    "release_date": "2026-11-11",
+    "release_notes": "https://docs.mesa3d.org/relnotes/26.2.7.html",
+    "archive_url": "https://archive.mesa3d.org/mesa-26.2.7.tar.xz",
+    "archive_sha256": "04294f75d22e9f61cd1e050206bc48b3d39366e788f1803a3368e3d5a872ce18",
+    "t720_documented_opengl_es": "2.0",
+    "t720_documented_opengl": "2.1",
+    "vulkan_supported": false,
+    "api_reference": "https://docs.mesa3d.org/drivers/panfrost.html",
+    "required_stack": [
+      "Panfrost",
+      "EGL/GLES2",
+      "GBM/libdrm",
+      "MediaTek DRM/KMS display"
+    ],
+    "software_rendering_is_gpu_pass": false,
+    "android_composer_compatibility_qualified": false
+  },
+  "remaining": [
+    "Integrate pinned Android allocator/composer/EGL and platform userspace on the observed kernel foundation",
+    "Qualify supported API/ABI limitations and maintained Android setup/home",
+    "Complete broader release stability and update/security requirements"
+  ],
+  "physical_graphics_verified": true,
+  "physical_graphics_verified_scope": "Owner-observed standalone T720 cube animation with tap/drag response; not Android composition or API conformance",
+  "hardware_runtime_receipt": "evidence/graphics-source/graphics-interaction-runtime-result.json"
+}

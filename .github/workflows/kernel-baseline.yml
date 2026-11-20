@@ -5,7 +5,7 @@ on:
       mode:
         description: Compile integration scope
         type: choice
-        options: [touch-provider, display-provider, first-draft, lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
+        options: [graphics-provider, touch-provider, display-provider, first-draft, lab-retained, lab-log, clocks, clocks-pinctrl, providers, usb-providers, usb-acm-diagnostic, sym827-provider, mipi-provider, dsi-provider, pwm-provider, diagnostic]
         default: diagnostic
       entry_checkpoint:
         description: Private earliest-entry checkpoint (lab-retained only)
@@ -29,6 +29,8 @@ on:
       - scripts/install_douglas_tpv_panel.py
       - scripts/generate_douglas_tpv_sequence.py
       - scripts/build_display_provider.sh
+      - scripts/build_graphics_provider.sh
+      - projects/firetabs-android/kernel/graphics-port/**
       - scripts/build_touch_provider.sh
       - scripts/apply_goodix_board_port.py
       - projects/firetabs-android/kernel/clock-port/**
@@ -98,7 +100,9 @@ jobs:
           ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
           ARGUMENT_PROFILE: ${{ steps.scope.outputs.argument_profile }}
         run: |
-          if [ "$BUILD_MODE" = touch-provider ]; then
+          if [ "$BUILD_MODE" = graphics-provider ]; then
+            bash scripts/build_graphics_provider.sh
+          elif [ "$BUILD_MODE" = touch-provider ]; then
             bash scripts/build_touch_provider.sh
           elif [ "$BUILD_MODE" = display-provider ]; then
             bash scripts/build_display_provider.sh
@@ -115,7 +119,7 @@ jobs:
           fi
 
       - name: Retain diagnostic kernel bytes and provenance
-        if: steps.scope.outputs.mode == 'touch-provider' || steps.scope.outputs.mode == 'display-provider' || steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
+        if: steps.scope.outputs.mode == 'graphics-provider' || steps.scope.outputs.mode == 'touch-provider' || steps.scope.outputs.mode == 'display-provider' || steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
         env:
           ENTRY_CHECKPOINT_PROFILE: ${{ inputs.entry_checkpoint || 'none' }}
         run: |
@@ -129,8 +133,8 @@ jobs:
                                ('output/arch/arm64/boot/Image.gz', 'Image.gz'),
                                ('output/.config', 'resolved.config'),
                                ('output/System.map', 'System.map'),
-                               ('display-image-size-report.json' if '${{ steps.scope.outputs.mode }}' in ('display-provider','touch-provider') else 'image-size-report.json', 'image-size-report.json')]
-          if '${{ steps.scope.outputs.mode }}' in ('display-provider','touch-provider'):
+                               ('display-image-size-report.json' if '${{ steps.scope.outputs.mode }}' in ('display-provider','touch-provider','graphics-provider') else 'image-size-report.json', 'image-size-report.json')]
+          if '${{ steps.scope.outputs.mode }}' in ('display-provider','touch-provider','graphics-provider'):
               sources += [('display-build-result.json', 'display-build-result.json')]
               sources += [(f'output/{path}', pathlib.Path(path).name) for path in [
                   'drivers/gpu/drm/panel/panel-amazon-douglas-tpv.o',
@@ -139,9 +143,11 @@ jobs:
                   'drivers/soc/mediatek/mtk-mutex.o',
                   'drivers/video/backlight/lp855x_bl.o',
                   'drivers/video/backlight/pwm_bl.o']]
-          if '${{ steps.scope.outputs.mode }}' == 'touch-provider':
+          if '${{ steps.scope.outputs.mode }}' in ('touch-provider','graphics-provider'):
               sources += [(f'output/{path}', pathlib.Path(path).name) for path in [
                   'drivers/input/touchscreen/goodix.o', 'drivers/watchdog/mtk_wdt.o']]
+          if '${{ steps.scope.outputs.mode }}' == 'graphics-provider':
+              sources += [('output/drivers/gpu/drm/panfrost/'+n, n) for n in ['panfrost_drv.o','panfrost_device.o','panfrost_gpu.o']]
           if '${{ steps.scope.outputs.mode }}' in ('lab-retained','first-draft'):
               sources += [('output/drivers/misc/valethon_mailbox.o', 'valethon_mailbox.o'),
                           ('output/drivers/mmc/host/mtk-sd.o', 'mtk-sd.o')]
@@ -170,7 +176,7 @@ jobs:
           (destination / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
           PY
       - name: Upload diagnostic kernel compile outputs
-        if: steps.scope.outputs.mode == 'touch-provider' || steps.scope.outputs.mode == 'display-provider' || steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
+        if: steps.scope.outputs.mode == 'graphics-provider' || steps.scope.outputs.mode == 'touch-provider' || steps.scope.outputs.mode == 'display-provider' || steps.scope.outputs.mode == 'diagnostic' || (steps.scope.outputs.mode == 'lab-log' || steps.scope.outputs.mode == 'lab-retained' || steps.scope.outputs.mode == 'first-draft')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: diagnostic-kernel-${{ github.sha }}-${{ github.run_attempt }}

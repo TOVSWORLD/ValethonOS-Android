@@ -1,0 +1,11 @@
+# First-home candidate: volatile data; leave original userdata/cache untouched.
+on early-fs
+    mount tmpfs tmpfs /data nosuid nodev mode=0771,uid=1000,gid=1000,size=268435456,rootcontext=u:object_r:system_data_root_file:s0
+    restorecon /data
+    setprop ro.crypto.state unencrypted
+
+# Existing MediaTek MUSB UDC, using the platform's authenticated adbd/configfs flow.
+on boot
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller musb-hdrc.0.auto
+    setprop sys.usb.config adb

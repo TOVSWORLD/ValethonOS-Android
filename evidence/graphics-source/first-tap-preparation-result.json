@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-19",
+  "scope": "Compiled first-tap graphics component; next tablet package not prepared",
+  "compiled": true,
+  "ready_for_tablet_test": false,
+  "kernel_image_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+  "runtime_libraries_and_policy_unchanged": true,
+  "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+  "source_sha256": {
+    "projects/firetabs-android/graphics/demo.c": "39ae283fa76115a7d0112b7faf540fc0363510088cb322d9295bb474d06a1717",
+    "projects/firetabs-android/graphics/runtime-contract.json": "3878d7bda8749103fe3383cdef689fa01641c71c963fa20a4155007cee5331fd"
+  },
+  "component_report_sha256": "393930aa5bb6dff516c27c464454c2612de89c26b78503e19855887e63383911",
+  "physical_archive": {
+    "bytes": 5641332,
+    "sha256": "1645cdd25403844c8bc9e4e22e7a862e037fd1d999572345ad207d54a55a7f19",
+    "unpacked_bytes": 30212096,
+    "unpacked_sha256": "dfbc352dca9754235835ff40fd6b3b36475d6b935b8836e6603e8288965b08f6",
+    "compression": "xz-lzma2-8m-crc32"
+  },
+  "vm_archive": {
+    "bytes": 5635416,
+    "sha256": "17489f3f70b6806667f251197f98e6ad390525f0b045011ba98803ada305c35d",
+    "unpacked_bytes": 30198272,
+    "unpacked_sha256": "8d15ed9872820549a7799431269ed1c5e97592ba198d52dd0e4bf268b00598aa",
+    "compression": "xz-lzma2-8m-crc32"
+  },
+  "vm_reports": [
+    {
+      "scope": "VM graphics loader/policy only; no physical renderer qualification",
+      "passed": true,
+      "failure": null,
+      "kernel_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+      "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+      "component_report_sha256": "393930aa5bb6dff516c27c464454c2612de89c26b78503e19855887e63383911",
+      "vm_archive_sha256": "17489f3f70b6806667f251197f98e6ad390525f0b045011ba98803ada305c35d",
+      "virtualization": "off",
+      "vm_only": true,
+      "network_attached": false,
+      "physical_graphics_verified": false,
+      "boot_log_sha256": "1fa7e1534882f09181f08ea689ac7d682e995756438e10854e447b1a4b12fd28",
+      "elapsed_seconds": 11.956
+    },
+    {
+      "scope": "VM graphics loader/policy only; no physical renderer qualification",
+      "passed": true,
+      "failure": null,
+      "kernel_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+      "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+      "component_report_sha256": "393930aa5bb6dff516c27c464454c2612de89c26b78503e19855887e63383911",
+      "vm_archive_sha256": "17489f3f70b6806667f251197f98e6ad390525f0b045011ba98803ada305c35d",
+      "virtualization": "on",
+      "vm_only": true,
+      "network_attached": false,
+      "physical_graphics_verified": false,
+      "boot_log_sha256": "f2706f68841a63fb886fa84554e5f5b77c3f93ccdccd4229442674050212f0d2",
+      "elapsed_seconds": 11.945
+    }
+  ],
+  "targeted_graphics_tests_passed": 10,
+  "start_trigger": "First valid touch",
+  "arrival_wait_seconds": 900,
+  "active_seconds": 300,
+  "prompt": "TAP TO START",
+  "waiting_rendering": "One GPU frame then input polling",
+  "planned_procedure": "Owner can disconnect USB after startup and carry tablet to desk before first tap; reconnect for recovery",
+  "physical_graphics_interaction_verified": false,
+  "remaining": [
+    "Obtain attendance/staging/test approval",
+    "Run first-tap desk interaction and verify original TWRP return"
+  ],
+  "qualified_boot_package_receipt": "evidence/graphics-source/direct-interaction-preparation-result.json",
+  "current_original_twrp_return_verified": true
+}

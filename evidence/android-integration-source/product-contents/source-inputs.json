@@ -1,0 +1,139 @@
+[
+  {
+    "project": "build/make",
+    "revision": "5ce6f787337d0223710bf7d4a16dbe6d2a35f777",
+    "path": "target/product/generic_no_telephony.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/generic_no_telephony.mk?format=TEXT",
+    "sha256": "34749a2faaea40ad322afa0f602e2ed8dcbae53697119b6a738128a10ed3e570",
+    "status": "captured"
+  },
+  {
+    "project": "build/make",
+    "revision": "5ce6f787337d0223710bf7d4a16dbe6d2a35f777",
+    "path": "target/product/handheld_product.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/handheld_product.mk?format=TEXT",
+    "sha256": "a450148917a5d5affd30d7b75f1bffb56a6b78678ba6bd4ed4472fae9da21c7a",
+    "status": "captured"
+  },
+  {
+    "project": "build/make",
+    "revision": "5ce6f787337d0223710bf7d4a16dbe6d2a35f777",
+    "path": "target/product/generic_system.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/generic_system.mk?format=TEXT",
+    "sha256": "dde2b17c455668de2f884e96df9bccabaac0233fd0d94c43f2412f0b1cecb179",
+    "status": "captured"
+  },
+  {
+    "project": "build/make",
+    "revision": "5ce6f787337d0223710bf7d4a16dbe6d2a35f777",
+    "path": "target/product/go_defaults_common.mk",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/go_defaults_common.mk?format=TEXT",
+    "sha256": "8b6b4205948ada24e8c6c6cdf54712ee77fe9e01d6354dbb8f1211e8b2b2e240",
+    "status": "captured"
+  },
+  {
+    "project": "frameworks/base",
+    "revision": "94b4c163b7dfe5ce3607f7bb8456f9573f7de57d",
+    "path": "core/res/res/xml/config_webview_packages.xml",
+    "url": "https://android.googlesource.com/platform/frameworks/base/+/94b4c163b7dfe5ce3607f7bb8456f9573f7de57d/core/res/res/xml/config_webview_packages.xml?format=TEXT",
+    "sha256": "0e622fc5bbc810020c5f11d5877ce34489213480bfe21272f9858759498842cf",
+    "status": "captured"
+  },
+  {
+    "project": "frameworks/webview",
+    "path": "chromium/chromium.mk",
+    "status": "missing_manifest_project"
+  },
+  {
+    "project": "frameworks/webview",
+    "path": "chromium/Android.bp",
+    "status": "missing_manifest_project"
+  },
+  {
+    "project": "external/chromium-webview",
+    "revision": "04e0e02c9aac0d05b99d2c20c19b74b5b3577728",
+    "path": "Android.bp",
+    "url": "https://android.googlesource.com/platform/external/chromium-webview/+/04e0e02c9aac0d05b99d2c20c19b74b5b3577728/Android.bp?format=TEXT",
+    "sha256": "8ec492978569029e303011478eecaf101379e375a337fd2744432f5a31aac746",
+    "status": "captured"
+  },
+  {
+    "project": "external/chromium-webview",
+    "path": "README",
+    "status": "HTTPError"
+  },
+  {
+    "project": "external/chromium-webview",
+    "path": "prebuilt/arm/Android.bp",
+    "status": "HTTPError"
+  },
+  {
+    "project": "packages/inputmethods/LatinIME",
+    "revision": "afe0d5c261c3a0c88b38894981a7b332da93e7dd",
+    "path": "java/Android.bp",
+    "url": "https://android.googlesource.com/platform/packages/inputmethods/LatinIME/+/afe0d5c261c3a0c88b38894981a7b332da93e7dd/java/Android.bp?format=TEXT",
+    "sha256": "1abf050ddb9996de3fbb3f8c06b33e37bc3391be292babcff5878aa37d1779ef",
+    "status": "captured"
+  },
+  {
+    "project": "build/make",
+    "path": "target/product/handheld_system_ext.mk",
+    "revision": "5ce6f787337d0223710bf7d4a16dbe6d2a35f777",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/handheld_system_ext.mk?format=TEXT",
+    "sha256": "9e548dc57becae4dddea2ef93a6a3eaa831396de205fabc35b6a063adcb284c8",
+    "status": "captured"
+  },
+  {
+    "project": "build/make",
+    "path": "target/product/base_product.mk",
+    "revision": "5ce6f787337d0223710bf7d4a16dbe6d2a35f777",
+    "url": "https://android.googlesource.com/platform/build/+/5ce6f787337d0223710bf7d4a16dbe6d2a35f777/target/product/base_product.mk?format=TEXT",
+    "sha256": "3b45b7967b09066044259415a7aa3d6e1ed147c2970a275b885607442d3bc40d",
+    "status": "captured"
+  },
+  {
+    "project": "packages/apps/Browser2",
+    "path": "Android.bp",
+    "revision": "2f85dbea14947e3ee7194e95efb254f4464c41b4",
+    "url": "https://android.googlesource.com/platform/packages/apps/Browser2/+/2f85dbea14947e3ee7194e95efb254f4464c41b4/Android.bp?format=TEXT",
+    "sha256": "327fb12326a945b73b56ba47a7a8828ada7488cf906d6b34e05f6b53dde1b0b9",
+    "status": "captured"
+  },
+  {
+    "project": "frameworks/native",
+    "path": "data/etc/go_handheld_core_hardware.xml",
+    "revision": "ae266dcb706d083868578cfedce381ef44488a07",
+    "url": "https://android.googlesource.com/platform/frameworks/native/+/ae266dcb706d083868578cfedce381ef44488a07/data/etc/go_handheld_core_hardware.xml?format=TEXT",
+    "sha256": "710b2c1b9ff4a3a3f4e2d4a653848c73cc695d7ab0fbf7a216efb6973fc9bf35",
+    "status": "captured"
+  },
+  {
+    "project": "external/chromium-webview",
+    "path": "README.version",
+    "status": "HTTPError"
+  },
+  {
+    "project": "build/release",
+    "revision": "c85f4aebe46714235599a9bd6430a0fe30c6e8d5",
+    "path": "flag_declarations/RELEASE_PACKAGE_WEBVIEW_VERSION.textproto",
+    "url": "https://android.googlesource.com/platform/build/release/+/c85f4aebe46714235599a9bd6430a0fe30c6e8d5/flag_declarations/RELEASE_PACKAGE_WEBVIEW_VERSION.textproto?format=TEXT",
+    "sha256": "701e0243d7bcfb9e87ee1d067e3aca2dd1cc5d80c3aa0cc2581cf8e5a30e63a3",
+    "status": "captured"
+  },
+  {
+    "project": "build/release",
+    "revision": "c85f4aebe46714235599a9bd6430a0fe30c6e8d5",
+    "path": "release_configs/trunk_staging.textproto",
+    "url": "https://android.googlesource.com/platform/build/release/+/c85f4aebe46714235599a9bd6430a0fe30c6e8d5/release_configs/trunk_staging.textproto?format=TEXT",
+    "sha256": "58956fe0c695a9bfa11159afecbb6ecdb48e57cae50864bbf2b6c3ea8ca0d880",
+    "status": "captured"
+  },
+  {
+    "project": "build/release",
+    "revision": "c85f4aebe46714235599a9bd6430a0fe30c6e8d5",
+    "path": "flag_values/trunk_staging/RELEASE_PACKAGE_WEBVIEW_VERSION.textproto",
+    "url": "https://android.googlesource.com/platform/build/release/+/c85f4aebe46714235599a9bd6430a0fe30c6e8d5/flag_values/trunk_staging/RELEASE_PACKAGE_WEBVIEW_VERSION.textproto?format=TEXT",
+    "sha256": "faac976b6aaa360a29da97bbe98d9e3b9e665c0c2bcafa98ac584fc8eff76d5a",
+    "status": "captured"
+  }
+]

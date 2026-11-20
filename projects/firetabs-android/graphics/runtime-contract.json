@@ -1,0 +1,24 @@
+{
+  "scope": "Standalone graphics trial, not Android setup/home acceptance",
+  "mesa_version": "26.2.7",
+  "libdrm_version": "2.4.133",
+  "layout": [
+    "lib/libgallium-26.2.7.so",
+    "lib/gbm/dri_gbm.so"
+  ],
+  "ramdisk_compression": "XZ LZMA2 8MiB dictionary CRC32",
+  "initramfs_address": "0x46000000",
+  "maximum_raw_bytes": 31457280,
+  "maximum_compressed_bytes": 7340032,
+  "pid1_fork_allowed": false,
+  "gallium_threading": false,
+  "mesa_glthread": false,
+  "disk_shader_cache": false,
+  "test_duration_seconds": 300,
+  "observation_window_seconds": 300,
+  "physical_graphics_verified": false,
+  "arrival_timeout_seconds": 900,
+  "start_trigger": "First valid touchscreen contact after the initial GPU cube and TAP TO START prompt",
+  "waiting_gpu_rendering": "One initial frame; then input polling without repeated rendering",
+  "observation_window_starts": "Owner confirms first tap/animation, not kernel boot"
+}

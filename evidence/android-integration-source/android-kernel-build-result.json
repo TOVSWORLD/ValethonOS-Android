@@ -1,0 +1,175 @@
+{
+  "scope": "Integrated Android kernel compile only; no device execution",
+  "ack_revision": "d9318bdb4c34e8b2d997b4f67ced56b120b22b87",
+  "source_fixes": [
+    {
+      "path": "fs/fuse/dir.c",
+      "before_sha256": "eb418bedbd82e70bb58162faead79d2e225ed2fa0a62dccd738f205d9c5861d5",
+      "after_sha256": "7ee5e69d51e4ddf2f71cf3bf978cb1e950ddb7b93ec9e34673dd17ec5800d77a",
+      "scope": "Conditional cleanup only; no FUSE BPF enablement or hardware changes"
+    }
+  ],
+  "config_changes": {
+    "CONFIG_PNFS_BLOCK": [
+      "m",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_SECURITY": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_FUSE_FS": [
+      "m",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_ZIP": [
+      "n",
+      "y"
+    ],
+    "CONFIG_ANDROID_BINDERFS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_USB_F_FS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_USB_CONFIGFS_F_FS": [
+      "n",
+      "y"
+    ],
+    "CONFIG_BLK_DEV_LOOP": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_XATTR": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_BACKED_BY_FILE": [
+      "n",
+      "y"
+    ],
+    "CONFIG_DM_BUFIO": [
+      "n",
+      "y"
+    ],
+    "CONFIG_FS_VERITY": [
+      "n",
+      "y"
+    ],
+    "CONFIG_DM_VERITY": [
+      "n",
+      "y"
+    ],
+    "CONFIG_EROFS_FS_POSIX_ACL": [
+      "n",
+      "y"
+    ],
+    "CONFIG_BLK_DEV_DM": [
+      "m",
+      "y"
+    ],
+    "CONFIG_BLK_DEV_LOOP_MIN_COUNT": [
+      "n",
+      "8"
+    ]
+  },
+  "size": {
+    "scope": "File lengths/header memory requirement only; no board placement or boot qualification",
+    "image_bytes": 27083264,
+    "image_sha256": "c83baf995268af14e0a4ba3faac683ee2ee4d6d1c4717a675d7eaccea20337b6",
+    "gzip_bytes": 9556029,
+    "gzip_sha256": "72090f6814b0cdc0f10059a181063c6a2617841dfc6235226c4e7a9e586d6ca7",
+    "gzip_header_hex": "1f8b0800000000000203",
+    "gzip_round_trip_verified": true,
+    "text_offset": 0,
+    "image_size": 28573696,
+    "flags": 10,
+    "declared_runtime_bytes_beyond_file": 1490432,
+    "lk_checked_output_capacity_bytes": 29360128,
+    "decoded_file_fits_lk_capacity": true,
+    "lk_output_capacity_margin_bytes": 2276864,
+    "appended_dt_bytes": null,
+    "placement_base_alignment_bytes": 2097152,
+    "physical_destination_selected": false,
+    "boot_verified": false,
+    "script_sha256": "bde4a6ae3136c0340c2819113b7d66ef3b87fe179003e7b8103e7704ab2331cf"
+  },
+  "hardware_execution": false,
+  "android_boot_qualified": false,
+  "artifacts": {
+    "arch/arm64/boot/Image": {
+      "bytes": 27083264,
+      "sha256": "c83baf995268af14e0a4ba3faac683ee2ee4d6d1c4717a675d7eaccea20337b6"
+    },
+    "arch/arm64/boot/Image.gz": {
+      "bytes": 9556029,
+      "sha256": "72090f6814b0cdc0f10059a181063c6a2617841dfc6235226c4e7a9e586d6ca7"
+    },
+    ".config": {
+      "bytes": 183373,
+      "sha256": "21b854852c533213cbb9e10d3bcffef2f242dbab20981935b696784eacad3d0b"
+    },
+    "System.map": {
+      "bytes": 5536284,
+      "sha256": "0565358fc25d5d7e78c4ece1fc990f978634b4c4bf6d63093fd3d2763a0f3df3"
+    }
+  },
+  "independent_verification": {
+    "scope": "Independent completed kernel artifact/config/source verification; no device execution",
+    "artifact_hashes_verified": true,
+    "graphics_parent_config_verified": true,
+    "bounded_config_delta_verified": true,
+    "patched_fuse_source_sha256": "7ee5e69d51e4ddf2f71cf3bf978cb1e950ddb7b93ec9e34673dd17ec5800d77a",
+    "linked_elf": {
+      "class": "ELF64",
+      "machine": "AArch64",
+      "bytes": 293304608,
+      "sha256": "154462e7d99607543976600330ece4bda61de4f956d3c963ed7423fa8ffead3b"
+    },
+    "compiled_feature_objects": {
+      "drivers/android/binderfs.o": {
+        "bytes": 327800,
+        "sha256": "ab1694c0bf9c96fd589fe0aecbc48450e4c2200e6b266e10a1695a9e52bba8ef"
+      },
+      "drivers/usb/gadget/function/f_fs.o": {
+        "bytes": 518688,
+        "sha256": "e3488bf0183a09c1d94d990df6a33805e05ad122c97f7d28d210afe20c3397c7"
+      },
+      "fs/fuse/dir.o": {
+        "bytes": 530896,
+        "sha256": "4453060be5202e25c1fcdf492ce6776971d45478b28f1bdc764144ad73d9c188"
+      },
+      "drivers/block/loop.o": {
+        "bytes": 382248,
+        "sha256": "9b19e5c9dbba8b8beb9893efb0c6cae9ce9c9d014afefa69e8bce1813362de86"
+      },
+      "drivers/md/dm-verity-target.o": {
+        "bytes": 382464,
+        "sha256": "22596b73fa63a0a363f9c364c683cf3b0a44f019259bbbb06f70f7d1fc470750"
+      },
+      "fs/erofs/super.o": {
+        "bytes": 444960,
+        "sha256": "7a854e48d729e1181944f8fd5f4ff22758b53c68f6854bb456f46af07f6d63dd"
+      },
+      "fs/verity/enable.o": {
+        "bytes": 176144,
+        "sha256": "0f8d7c16a10e6c0f9d5137240eff03e9250b29002af3a83a725a571597e41052"
+      }
+    },
+    "producer_scripts": {
+      "build_android_provider.sh": "a95990226c09bc611299d70a36d2a1f49bc9df0c4b5e5974801512030ebd68c3",
+      "check_android_kernel_delta.py": "ab091d2451d9c8148558ccb1d2ee10be296239c63c231935f942e356512b424f",
+      "apply_android_fuse_guard.py": "8dbaeccca9284aa5339942ba3486076e6c9efec091e0736df3d31db0dd351730"
+    },
+    "hardware_execution": false,
+    "downloaded_artifact_hashes_verified": true,
+    "local_gzip_header_and_roundtrip_verified": true,
+    "local_bounded_delta_verified": true
+  }
+}

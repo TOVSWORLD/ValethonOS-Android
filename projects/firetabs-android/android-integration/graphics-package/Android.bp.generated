@@ -1,0 +1,48 @@
+// Generated from hash-verified Bionic build outputs; do not disable ELF checks.
+soong_namespace {}
+package { default_applicable_licenses: ["valethon_bionic_graphics_license"], }
+license { name: "valethon_bionic_graphics_license", license_kinds: ["SPDX-license-identifier-MIT", "SPDX-license-identifier-Apache-2.0"], license_text: ["NOTICE"], }
+
+cc_prebuilt_library_shared {
+    name: "libEGL_valethon",
+    vendor: true,
+    compile_multilib: "32",
+    srcs: ["arm/libEGL_valethon.so"],
+    relative_install_path: "egl",
+    strip: { none: true },
+    shared_libs: ["libc", "libdl", "libgallium_dri", "libhardware", "liblog", "libm", "libnativewindow", "libsync"],
+    check_elf_files: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libGLESv1_CM_valethon",
+    vendor: true,
+    compile_multilib: "32",
+    srcs: ["arm/libGLESv1_CM_valethon.so"],
+    relative_install_path: "egl",
+    strip: { none: true },
+    shared_libs: ["libc", "libgallium_dri"],
+    check_elf_files: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libGLESv2_valethon",
+    vendor: true,
+    compile_multilib: "32",
+    srcs: ["arm/libGLESv2_valethon.so"],
+    relative_install_path: "egl",
+    strip: { none: true },
+    shared_libs: ["libc", "libgallium_dri"],
+    check_elf_files: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgallium_dri",
+    vendor: true,
+    compile_multilib: "32",
+    srcs: ["arm/libgallium_dri.so"],
+    // Gallium dependency uses the standard vendor library search path.
+    strip: { none: true },
+    shared_libs: ["libc", "libdl", "liblog", "libm", "libsync"],
+    check_elf_files: true,
+}

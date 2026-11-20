@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-19",
+  "scope": "Source-established omission in first physical graphics DT; correction untested on hardware",
+  "failed_candidate_sha256": "a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042",
+  "observed_failure_digit": 2,
+  "disabled_power_domain_ids_in_failed_dt": [
+    6,
+    7
+  ],
+  "gpu_requested_power_domain": 7,
+  "source_mechanism": "scpsys_probe iterates available top-level children; disabled MFG_ASYNC6 is skipped, so its MFG7 child is not registered. GPU references provider domain7.",
+  "correction": "Enable exact MFG_ASYNC6 and nested MFG7; retain active MM0 and all unrelated node properties",
+  "kernel_or_runtime_change_required": false,
+  "hardware_correction_verified": false,
+  "source_sha256": {
+    "evidence/power-port/ack/drivers/pmdomain/mediatek/mtk-pm-domains.c": "fc86b8c8e12931b337ab98fff4678cc93300f807a6d9d2ae813c12135f9e1ecd",
+    "projects/firetabs-android/kernel/power-port/overlay/include/dt-bindings/power/mediatek,mt8163-power-controller.h": "bca573acd8fe88a4d526edb8587e6f117cb7510701849e663628c856edd5ee21",
+    "scripts/graphics_dtb_profile.py": "5d739b5124f3fbe395f87656b13ed449f672ebcf77039c9485317735aec2e656",
+    "projects/firetabs-android/kernel/power-port/provider.patch": "b049213320b01b3d4a8e3dea4ac45d8996eaf89900e947ce7a3b8d6b80a249eb"
+  },
+  "limits": [
+    "Disabled parent prevents domain registration by source; it does not establish absence of all additional GPU/runtime faults.",
+    "VM loader/policy controls do not exercise MT8163 power transitions."
+  ]
+}

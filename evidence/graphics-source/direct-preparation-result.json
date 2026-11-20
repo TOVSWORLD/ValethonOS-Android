@@ -1,0 +1,110 @@
+{
+  "scope": "Qualified offline graphics test preparation; not a hardware rendering pass",
+  "ready_for_attended_test": true,
+  "candidate_sha256": "a09bbb9fa8f0be11a25233510dc4dd49fc93e41f251ff975bd8ca1ca928ad042",
+  "payload_bytes": 15007744,
+  "partition_bytes": 16777216,
+  "kernel_image_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+  "kernel_build_receipt": "evidence/graphics-source/kernel-build-result.json",
+  "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+  "policy_negative_controls": {
+    "enforcement_toggle": true,
+    "policy_reload": true,
+    "block_read": true,
+    "reboot_capability": true,
+    "pid1_fork": true,
+    "pid1_domain_escape": true,
+    "block_write": true,
+    "block_ioctl": true,
+    "block_create": true,
+    "block_relabel": true,
+    "other_block_open": true,
+    "input_write": true,
+    "input_ioctl": true,
+    "input_create": true,
+    "input_relabel": true,
+    "input_block_open": true,
+    "graphics_memory_execute": true,
+    "graphics_node_create": true,
+    "graphics_node_relabel": true,
+    "graphics_block_open": true
+  },
+  "physical_archive": {
+    "bytes": 5640964,
+    "sha256": "ce782d019436a1c2c5ead88f19ef376b48b55b9c41b9322ffa9bb144f58c9af8",
+    "unpacked_bytes": 30211072,
+    "unpacked_sha256": "364cebcd33b649905fd982d866d6b33144fc6cb349072a4c0b03be7ea178a93d",
+    "compression": "xz-lzma2-8m-crc32"
+  },
+  "vm_archive": {
+    "bytes": 5634956,
+    "sha256": "bfa8529317ddd47ac7a012f7cd15f913d18f643f6cb93cf913397a6f3dbe2876",
+    "unpacked_bytes": 30198272,
+    "unpacked_sha256": "f77da629be5a507ff87d78b1c22ef0bd2d8d02023d058d9b1ba008fa26ab18b2",
+    "compression": "xz-lzma2-8m-crc32"
+  },
+  "ramdisk_address": "0x46000000",
+  "compressed_kernel_staging_and_all_reservations_checked": true,
+  "original_loader_static_audit_passed": true,
+  "vm_reports": [
+    {
+      "scope": "VM graphics loader/policy only; no physical renderer qualification",
+      "passed": true,
+      "failure": null,
+      "kernel_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+      "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+      "component_report_sha256": "94edddfd06c40f637b2a199526e048c9344cbdb1263ec3ef3f252991302466ce",
+      "vm_archive_sha256": "bfa8529317ddd47ac7a012f7cd15f913d18f643f6cb93cf913397a6f3dbe2876",
+      "virtualization": "off",
+      "vm_only": true,
+      "network_attached": false,
+      "physical_graphics_verified": false,
+      "boot_log_sha256": "a226d14f5612164a0f2bad2920c9a626d84e4b2c95e5ad919907a87846a11231",
+      "elapsed_seconds": 11.956
+    },
+    {
+      "scope": "VM graphics loader/policy only; no physical renderer qualification",
+      "passed": true,
+      "failure": null,
+      "kernel_sha256": "c8fd42b8cad42b75246a5d757b3de80b151076fa4a6a344fcc278fe0912880f5",
+      "policy_sha256": "3fd6a3e483182690961c897916464d0b98d3d5cc584f6be3649a9123c02fb043",
+      "component_report_sha256": "94edddfd06c40f637b2a199526e048c9344cbdb1263ec3ef3f252991302466ce",
+      "vm_archive_sha256": "bfa8529317ddd47ac7a012f7cd15f913d18f643f6cb93cf913397a6f3dbe2876",
+      "virtualization": "on",
+      "vm_only": true,
+      "network_attached": false,
+      "physical_graphics_verified": false,
+      "boot_log_sha256": "48b69ba14c018acf223560f484ec760f5bc4400ae691cbf274bf19ad39bb6e70",
+      "elapsed_seconds": 11.876
+    }
+  ],
+  "repository_tests_passed": 1049,
+  "expected_current_boot_sha256": "cd53313a70f5471ac5f033f145340f1c0766a797e41cace1aee3f248561d44af",
+  "current_state": "Original TWRP with exact observed touch candidate on p5; original rollback ready",
+  "owner_selected_stay_in_twrp": true,
+  "physical_graphics_verified": false,
+  "acceptance": "Colored hardware-rendered cube rotates and moves with touch; other/software renderers rejected",
+  "readable_failure_stage_digits": {
+    "1": "Display discovery",
+    "2": "GBM buffers",
+    "3": "EGL initialization",
+    "4": "T720 renderer identity",
+    "5": "GPU shader compilation",
+    "6": "Touch input",
+    "7": "GPU rendering and scanout"
+  },
+  "preparation_history": [
+    "First hosted kernel compiled; artifact export assumed module aggregate panfrost.o. Fixed to retain three builtin translation units; next run succeeded.",
+    "First Mesa configure lacked Python packaging/venv search path; isolated pinned tools fixed it.",
+    "First library pack assumed older per-driver DRI layout; corrected to Mesa26.2 unified Gallium and GBM backend.",
+    "Measured runtime exceeds old1MiB archive and gzip partition budgets; existing kernel XZ support packages the actual30.2MB runtime into5.6MB. Separate graphics packer preserves old small-image recipe and checks relocated0x46000000 raw/XZ spans and full kernel staging.",
+    "Graphics-source transfer approval was obtained explicitly before the final source payload was sent."
+  ],
+  "offline_guard_controls": {
+    "qualified_candidate_with_disposable_fixture_accepted": true,
+    "missing_owner_authorization_rejected": true,
+    "consumed_touch_scope_rejected": true,
+    "original_p5_assumption_rejected": true,
+    "tablet_commands_executed": false
+  }
+}
