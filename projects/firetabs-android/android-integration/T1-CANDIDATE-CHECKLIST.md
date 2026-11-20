@@ -1,5 +1,25 @@
 # Integrated Android T1 candidate and rollback checklist
 
+## First attended attempt — November20
+
+The approved candidate was installed in one system-image pass, verified in full,
+then boot was written and verified. One test boot was requested. Owner observed
+a Linux console with a kernel panic; no usable Android UI or authorized Android
+ADB was observed. Cause/initialization stage are not established.
+
+After the five-minute window, the original return helper ran once and succeeded.
+Owner reported TWRP was already present on returning; a manual Power sequence was
+not reported and the reset mechanism is unproven. Actual post-return boot/system
+digests and unchanged original recovery pass. Candidate is retained in TWRP;
+original backups remain ready. Scope android-t1-1 is consumed: no automatic retry.
+
+See android-t1-runtime-result.json. Existing retained console data do not identify
+the fresh panic. Preserve the owner's panic photo if available, identify the exact
+failure, then prepare a correction. Reuse the verified system image when possible;
+do not repeat a full build, full system write, or old logging proof without cause.
+Preparation details below describe this consumed attempt, not permission to rerun.
+
+
 This prepares one grouped Android session under docs/development/STAGED-TEST-PLAN.md.
 It is not installation authorization or evidence that unfinished images pass.
 The complete image build and installed-output audit pass. No standalone display, cube or logging test.
